@@ -5,8 +5,6 @@ import { createDate, createRandomToken, sendError } from "~utils/helpers";
 import { newPasswordTemplate } from "~services/templates";
 import { Mail, User } from "~models";
 
-const { LOCALHOST } = process.env;
-
 passport.use(
   "reset-token",
   new LocalStrategy(
@@ -32,7 +30,6 @@ passport.use(
           sendDate: createDate().toDate(),
           subject: "Password Reset Confirmation",
           message: newPasswordTemplate(
-            LOCALHOST,
             existingUser.firstName,
             existingUser.lastName,
             token

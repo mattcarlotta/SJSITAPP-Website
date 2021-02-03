@@ -12,8 +12,6 @@ import { createDate, createRandomToken, sendError } from "~utils/helpers";
 import { newUserTemplate } from "~services/templates";
 import { User, Mail, Token } from "~models";
 
-const { LOCALHOST } = process.env;
-
 passport.use(
   "local-signup",
   new LocalStrategy(
@@ -63,11 +61,7 @@ passport.use(
           sendFrom: "San Jose Sharks Ice Team <noreply@sjsiceteam.com>",
           sendDate: createDate().toDate(),
           subject: "Welcome to the San Jose Sharks Ice Team!",
-          message: newUserTemplate(
-            LOCALHOST,
-            newUser.firstName,
-            newUser.lastName
-          )
+          message: newUserTemplate(newUser.firstName, newUser.lastName)
         });
 
         return done(null, newUser);

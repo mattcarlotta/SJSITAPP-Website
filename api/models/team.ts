@@ -1,8 +1,14 @@
 import mongoosePaginate from "mongoose-paginate-v2";
-import { Schema, model, models } from "mongoose";
+import { Document, Schema, model } from "mongoose";
+
+export interface ITeamDocument extends Document {
+  seasonId: string;
+  startDate: Date;
+  endDate: Date;
+}
 
 // NHL/AHL teams
-const teamSchema = new Schema({
+const teamSchema = new Schema<ITeamDocument>({
   league: { type: String, required: true },
   team: { type: String, unique: true },
   name: { type: String, unique: true, lowercase: true }
@@ -10,4 +16,6 @@ const teamSchema = new Schema({
 
 teamSchema.plugin(mongoosePaginate);
 
-export default models.Team || model("Team", teamSchema);
+const TeamModel = model<ITeamDocument>("Team", teamSchema);
+
+export default TeamModel;

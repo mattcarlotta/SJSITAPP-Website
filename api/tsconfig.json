@@ -9,7 +9,6 @@
     "target": "es5",
     "paths": {
       "~logger": ["logger/index"],
-      "~apitypes": ["api/apitypes/index"],
       "~controllers/*": ["api/controllers/*"],
       "~database/*": ["api/database/*"],
       "~database": ["api/database/index"],

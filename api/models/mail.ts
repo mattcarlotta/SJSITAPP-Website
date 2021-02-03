@@ -1,8 +1,17 @@
 import mongoosePaginate from "mongoose-paginate-v2";
-import { Schema, model, models } from "mongoose";
+import { Document, Schema, model } from "mongoose";
+
+export interface IMailDocument extends Document {
+  message: string;
+  sendTo: Array<string>;
+  sendFrom: string;
+  sendDate: Date;
+  status: string;
+  subject: string;
+}
 
 // email
-const mailSchema = new Schema({
+const mailSchema = new Schema<IMailDocument>({
   message: { type: String, required: true },
   sendTo: [{ type: String, required: true }],
   sendFrom: { type: String, required: true },
@@ -16,4 +25,6 @@ const mailSchema = new Schema({
 
 mailSchema.plugin(mongoosePaginate);
 
-export default models.Mail || model("Mail", mailSchema);
+const MailModel = model<IMailDocument>("Mail", mailSchema);
+
+export default MailModel;

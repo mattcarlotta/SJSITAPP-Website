@@ -1,22 +1,28 @@
 import mongoosePaginate from "mongoose-paginate-v2";
-import { Document, Schema, model, models } from "mongoose";
+import { Document, Model, Schema, model, Types } from "mongoose";
 import bcrypt from "bcryptjs";
 
-export interface User extends Document {
+export interface IUserDocument extends Document {
+  _id?: Types.ObjectId;
   avatar?: string;
   email: string;
-  role: string;
-  status: string;
+  role?: string;
+  status?: string;
   firstName: string;
   lastName: string;
   password: string;
-  registered: string;
+  registered?: Date;
   token: string;
-  emailReminders: boolean;
+  emailReminders?: boolean;
+}
+
+export interface IUserModel extends Model<IUserDocument> {
+  createPassword: (password: string) => Promise<string>;
+  comparePassword: (password: string) => Promise<boolean>;
 }
 
 // admin, staff, employee
-const userSchema = new Schema<User>({
+const userSchema = new Schema<IUserDocument>({
   avatar: { type: String, default: "" },
   email: {
     type: String,
@@ -47,16 +53,16 @@ userSchema.statics.createPassword = async function createNewPassword(
   password: string
 ) {
   const salt = await bcrypt.genSalt(12);
-  const newPassword = await bcrypt.hash(password, salt);
-  return newPassword;
+  return bcrypt.hash(password, salt);
 };
 
 // Set a compare password method on the model
-userSchema.methods.comparePassword = async function compareNewPassword(
-  incomingPassword: string
+userSchema.methods.comparePassword = function compareNewPassword(
+  password: string
 ) {
-  const isMatch = await bcrypt.compare(incomingPassword, this.password);
-  return isMatch;
+  return bcrypt.compare(password, this.password);
 };
 
-export default models.User || model("User", userSchema);
+const UserModel = model<IUserDocument, IUserModel>("User", userSchema);
+
+export default UserModel;

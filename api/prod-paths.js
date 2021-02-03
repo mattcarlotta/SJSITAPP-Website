@@ -7,10 +7,13 @@ tsconfigpaths.register({
     "~controllers/*": ["api/controllers/*"],
     "~database/*": ["api/database/*"],
     "~database": ["api/database/index"],
-    "~models": ["api/models/index"],
+    "~helpers": ["api/helpers/index"],
+    "~messages/*": ["api/messages/*"],
     "~middlewares": ["api/middlewares/index"],
     "~models/*": ["api/models/*"],
     "~routes/*": ["api/routes/*"],
-    "~routes": ["api/routes/index"]
+    "~routes": ["api/routes/index"],
+    "~services/*": ["api/services/*"],
+    "~test/*": ["api/test/*"]
   }
 });

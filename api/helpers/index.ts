@@ -14,7 +14,6 @@ import {
 moment.tz.setDefault("America/Los_Angeles");
 
 const { ObjectId } = Types;
-const { LOCALHOST } = process.env;
 
 const responseTypes = [
   "I want to work.",
@@ -60,12 +59,8 @@ const createAuthMail = (
       isEmployee ? "Congratulations" : "Welcome"
     }, you have been invited to join the San Jose Sharks Ice Team!`,
     message: isEmployee
-      ? newAuthorizationKeyTemplate(
-          LOCALHOST as string,
-          token,
-          expiration.calendar()
-        )
-      : newStaffTemplate(LOCALHOST as string, token, expiration.calendar())
+      ? newAuthorizationKeyTemplate(token, expiration.calendar())
+      : newStaffTemplate(token, expiration.calendar())
   };
 };
 
@@ -85,10 +80,10 @@ const createMemberAvailabilityAverage = ({
   eventResponses: Array<{
     responses: Array<string>;
   }>;
-}): any =>
-  eventResponses.reduce(({ responses }) => {
-    let avail = 0;
-    let unavail = 0;
+}): Array<{ id: string; label: string; value: number }> => {
+  let avail = 0;
+  let unavail = 0;
+  eventResponses.forEach(({ responses }) => {
     responses.forEach(response => {
       if (available.includes(response)) {
         avail += 1;
@@ -96,20 +91,21 @@ const createMemberAvailabilityAverage = ({
         unavail += 1;
       }
     });
-
-    return [
-      {
-        id: "available",
-        label: "available",
-        value: toAverage(avail, eventCounts)
-      },
-      {
-        id: "unavailable",
-        label: "unavailable",
-        value: toAverage(unavail, eventCounts)
-      }
-    ];
   });
+
+  return [
+    {
+      id: "available",
+      label: "available",
+      value: toAverage(avail, eventCounts)
+    },
+    {
+      id: "unavailable",
+      label: "unavailable",
+      value: toAverage(unavail, eventCounts)
+    }
+  ];
+};
 
 /**
  * Helper function to generate all user event availability based upon their responses.

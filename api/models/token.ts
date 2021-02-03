@@ -1,8 +1,16 @@
 import mongoosePaginate from "mongoose-paginate-v2";
-import { Schema, model, models } from "mongoose";
+import { Document, Schema, model } from "mongoose";
+
+export interface ISeasonDocument extends Document {
+  token: string;
+  authorizedEmail: string;
+  email: string;
+  role: string;
+  expiration: Date;
+}
 
 // token templates
-const tokenSchema = new Schema({
+const tokenSchema = new Schema<ISeasonDocument>({
   token: { type: String, required: true, unique: true },
   authorizedEmail: { type: String, lowercase: true, unique: true },
   email: { type: String, lowercase: true },
@@ -15,4 +23,6 @@ const tokenSchema = new Schema({
 
 tokenSchema.plugin(mongoosePaginate);
 
-export default models.Token || model("Token", tokenSchema);
+const TokenModel = model<ISeasonDocument>("Token", tokenSchema);
+
+export default TokenModel;

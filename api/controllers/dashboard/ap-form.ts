@@ -1,6 +1,6 @@
+import type { Request, Response } from "express";
 import Form from "~models/form";
 import { createDate, getEventCounts, sendError } from "~helpers";
-import { Request, Response } from "~apitypes";
 
 /**
  * Retrieves an existing A/P form for viewing/editing.

@@ -1,7 +1,7 @@
 import mongoosePaginate from "mongoose-paginate-v2";
-import { Document, Schema, model, models } from "mongoose";
+import { Document, Schema, model } from "mongoose";
 
-export interface Event extends Document {
+export interface IEventDocument extends Document {
   eventType: string;
   eventDate: string;
   location: string;
@@ -26,7 +26,7 @@ export interface Event extends Document {
 }
 
 // event
-const eventSchema = new Schema<Event>({
+const eventSchema = new Schema<IEventDocument>({
   eventType: { type: String, default: "Game", required: true },
   eventDate: { type: Date, required: true },
   location: { type: String, default: "SAP Center at San Jose" },
@@ -68,4 +68,6 @@ eventSchema.pre("save", function saveSchedule(next) {
   next();
 });
 
-export default models.Event || model("Event", eventSchema);
+const EventModel = model<IEventDocument>("Event", eventSchema);
+
+export default EventModel;

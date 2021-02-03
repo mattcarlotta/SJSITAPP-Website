@@ -21,6 +21,9 @@ build
 # codecov token
 .cc_token
 
+# envs
+.env.*
+
 # misc
 .DS_Store
 

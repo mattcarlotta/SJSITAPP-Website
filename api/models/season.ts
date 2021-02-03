@@ -1,8 +1,14 @@
 import mongoosePaginate from "mongoose-paginate-v2";
-import { Schema, model, models } from "mongoose";
+import { Document, Schema, model } from "mongoose";
+
+export interface ISeasonDocument extends Document {
+  seasonId: string;
+  startDate: Date;
+  endDate: Date;
+}
 
 // current season year
-const seasonSchema = new Schema({
+const seasonSchema = new Schema<ISeasonDocument>({
   seasonId: { type: String, unique: true, lowercase: true },
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true }
@@ -10,4 +16,6 @@ const seasonSchema = new Schema({
 
 seasonSchema.plugin(mongoosePaginate);
 
-export default models.Season || model("Season", seasonSchema);
+const SeasonModel = model<ISeasonDocument>("Season", seasonSchema);
+
+export default SeasonModel;

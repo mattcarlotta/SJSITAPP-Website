@@ -1,11 +1,16 @@
 // Since this is being utilized by "jest.json", paths must be relative
-
 import "snackables";
 import mongoose from "mongoose";
 import { connectToDB, createConnectionToDatabase } from "../index";
 import { logErrorMessage, logInfoMessage } from "../../../logger";
 import User from "../../models/user";
-import seeds from "./seeds";
+import seedEvents from "./events";
+import seedForms from "./forms";
+import seedMail from "./mail";
+import seedSeasons from "./seasons";
+import seedTeams from "./teams";
+import seedTokens from "./tokens";
+import seedUsers, { admin } from "./users";
 
 const { DATABASE, EXIT, SEED } = process.env;
 
@@ -20,12 +25,23 @@ const seedDB = async (): Promise<any> => {
   try {
     await connectToDB();
     const db = await createConnectionToDatabase();
-    const databaseExists = User.findOne({
-      email: "thefifthelement@example.com"
-    });
+
+    const databaseExists = User.findOne({ email: admin.email });
     if (databaseExists) await db.dropDatabase();
 
-    await User.insertMany(seeds);
+    const currentSeason = await seedSeasons();
+
+    await seedTokens();
+
+    const scheduledUser = await seedUsers();
+
+    await seedEvents(currentSeason, scheduledUser);
+
+    await seedTeams();
+
+    await seedForms(currentSeason);
+
+    await seedMail();
 
     await db.close();
 
@@ -33,9 +49,9 @@ const seedDB = async (): Promise<any> => {
       `\x1b[2mutils/\x1b[0m\x1b[1mseedDB.js\x1b[0m (${DATABASE})\n`
     );
 
-    if (EXIT) process.exit(0);
-
     mongoose.connection.close();
+
+    if (EXIT) process.exit(0);
 
     return null;
   } catch (err) {
