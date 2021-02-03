@@ -700,9 +700,8 @@ const parseSession = (req: Request): string | undefined =>
  * @param res - res object
  * @returns
  */
-const sendError = (err: string, statusCode: number, res: Response): void => {
+const sendError = (err: string, statusCode: number, res: Response): Response =>
   res.status(statusCode).json({ err: err.toString() });
-};
 
 /**
  * Helper function to sort a schedule list based upon last name.

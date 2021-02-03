@@ -6,10 +6,10 @@ import { createDate, getEventCounts, sendError } from "~helpers";
  * Retrieves an existing A/P form for viewing/editing.
  *
  * @function getAPForm
- * @returns {object} - apform: { existingForm, eventCounts }
+ * @returns {Response} apform: { existingForm, eventCounts }
  * @throws {string}
  */
-const getAPForm = async (_: Request, res: Response): Promise<any> => {
+const getAPForm = async (_: Request, res: Response): Promise<Response> => {
   try {
     const currentDate = createDate().add(1, "months").toDate();
 
@@ -38,9 +38,9 @@ const getAPForm = async (_: Request, res: Response): Promise<any> => {
       existingForm.endMonth
     );
 
-    res.status(200).json({ apform: { ...existingForm, eventCounts } });
+    return res.status(200).json({ apform: { ...existingForm, eventCounts } });
   } catch (err) {
-    sendError(err, 400, res);
+    return sendError(err, 400, res);
   }
 };
 
