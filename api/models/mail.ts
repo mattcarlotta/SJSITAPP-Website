@@ -1,7 +1,8 @@
 import mongoosePaginate from "mongoose-paginate-v2";
-import { Document, Schema, model } from "mongoose";
+import { Document, Schema, model, Types } from "mongoose";
 
 export interface IMailDocument extends Document {
+  _id?: Types.ObjectId;
   message: string;
   sendTo: Array<string>;
   sendFrom: string;

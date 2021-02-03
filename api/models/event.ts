@@ -1,12 +1,13 @@
 import mongoosePaginate from "mongoose-paginate-v2";
-import { Document, Schema, model } from "mongoose";
+import { Document, Schema, model, Types } from "mongoose";
 
 export interface IEventDocument extends Document {
+  _id?: Types.ObjectId;
   eventType: string;
   eventDate: string;
-  location: string;
+  location?: string;
   employeeResponses: Array<{
-    _id: Schema.Types.ObjectId;
+    _id: Types.ObjectId;
     response: string;
     notes?: string;
   }>;
@@ -15,14 +16,14 @@ export interface IEventDocument extends Document {
     title?: string;
     employeeIds: Array<string>;
   }>;
-  scheduledIds: Array<string>;
+  scheduledIds?: Array<string>;
   seasonId: string;
   team: string;
   opponent?: string;
   callTimes: Array<string>;
-  uniform: string;
+  uniform?: string;
   notes?: string;
-  sentEmailReminders: boolean;
+  sentEmailReminders?: boolean;
 }
 
 // event

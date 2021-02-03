@@ -3,8 +3,9 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import morgan from "morgan";
 import compression from "compression";
+import session from "cookie-session";
 
-const { CLIENT, inStaging, NODE_ENV } = process.env;
+const { CLIENT, inStaging, cookieKey, DOMAIN, NODE_ENV } = process.env;
 const inTesting = NODE_ENV === "test";
 const inProduction = NODE_ENV === "production";
 
@@ -27,6 +28,18 @@ const middlewares = (app: Express): void => {
       })
     );
   }
+  app.use(
+    session({
+      path: "/",
+      keys: [cookieKey as string],
+      name: "SJSITApp",
+      maxAge: 2592000000,
+      httpOnly: true,
+      domain: DOMAIN,
+      secure: inProduction && !inStaging,
+      sameSite: inProduction && !inStaging
+    })
+  );
   app.use(
     cors({
       origin: CLIENT

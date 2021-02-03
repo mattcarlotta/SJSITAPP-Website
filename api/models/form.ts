@@ -1,14 +1,15 @@
 import mongoosePaginate from "mongoose-paginate-v2";
-import { Document, Schema, model } from "mongoose";
+import { Document, Schema, model, Types } from "mongoose";
 
 export interface IFormDocument extends Document {
+  _id?: Types.ObjectId;
   startMonth: Date;
   endMonth: Date;
   expirationDate: Date;
   seasonId: string;
   sendEmailNotificationsDate: Date;
-  sentEmails: boolean;
-  notes: string;
+  sentEmails?: boolean;
+  notes?: string;
 }
 
 // monthly form

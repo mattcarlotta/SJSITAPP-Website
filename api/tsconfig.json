@@ -4,6 +4,7 @@
     "checkJs": false,
     "noEmit": false,
     "noEmitOnError": true,
+    "downlevelIteration": true,
     "module": "commonjs",
     "outDir": "../build",
     "target": "es5",

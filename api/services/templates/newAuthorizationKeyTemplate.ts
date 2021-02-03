@@ -1,3 +1,5 @@
+const { LOCALHOST } = process.env;
+
 export default (
   token: string,
   expiration: string
@@ -8,7 +10,7 @@ export default (
     You have been invited to join the San Jose Sharks Ice Team!
   </h2>
   <p style="font-size: 16px; color: #000000;">
-    To register, please click the <strong>button below</strong>, or you may visit <a href="${process.env.LOCALHOST}/employee/signup" target="_blank" rel="noopener noreferrer">San Jose Sharks Ice Team Registration</a> and sign up with this Authorization Key:
+    To register, please click the <strong>button below</strong>, or you may visit <a href="${LOCALHOST}/employee/signup" target="_blank" rel="noopener noreferrer">San Jose Sharks Ice Team Registration</a> and sign up with this Authorization Key:
   </p>
   <p style="font-size:16px; margin-bottom:30px; color:#000000; padding:5px; border: 1px solid #9E9E9E; background: #ebebeb; text-align: center;word-break: break-word;">
     <strong>
@@ -24,9 +26,9 @@ export default (
     <span style="font-style: italic;">The San Jose Sharks Ice Team</span>
   </p>
   <div style="margin-bottom: 20px; text-align: center">
-    <a style="font-size: 18px;text-decoration: none;line-height: 40px;width: 200px;color: #FFFFFF;background: linear-gradient(90deg,#194048 0%,#0f7888 50%,#194048 100%);border-radius: 4px;display: inline-block;border: 2px solid #04515d;" href="${process.env.LOCALHOST}/employee/signup/verify?token=${token}" target="_blank" rel="noopener noreferrer">Sign Up</a>
+    <a style="font-size: 18px;text-decoration: none;line-height: 40px;width: 200px;color: #FFFFFF;background: linear-gradient(90deg,#194048 0%,#0f7888 50%,#194048 100%);border-radius: 4px;display: inline-block;border: 2px solid #04515d;" href="${LOCALHOST}/employee/signup/verify?token=${token}" target="_blank" rel="noopener noreferrer">Sign Up</a>
   </div>
   <div style="color:#999999;font-size:11px;text-align:center;margin-top: 10px;">
     Or click on this link:
-    <a style="color: #999999; text-decoration: underline; margin-left: 2px;" href="${process.env.LOCALHOST}/employee/signup/verify?token=${token}" target="_blank" rel="noopener noreferrer">${process.env.LOCALHOST}/employee/signup/verify?token=${token}</a>
+    <a style="color: #999999; text-decoration: underline; margin-left: 2px;" href="${LOCALHOST}/employee/signup/verify?token=${token}" target="_blank" rel="noopener noreferrer">${LOCALHOST}/employee/signup/verify?token=${token}</a>
   </div>`;

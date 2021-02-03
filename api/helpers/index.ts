@@ -1,3 +1,4 @@
+import type { Request, Response } from "express";
 import get from "lodash.get";
 import isEmpty from "lodash.isempty";
 import random from "lodash.random";
@@ -11,9 +12,9 @@ import {
   newStaffTemplate
 } from "~services/templates";
 
-moment.tz.setDefault("America/Los_Angeles");
+const toMongooseId = Types.ObjectId;
 
-const { ObjectId } = Types;
+moment.tz.setDefault("America/Los_Angeles");
 
 const responseTypes = [
   "I want to work.",
@@ -118,22 +119,29 @@ const createMemberAvailabilityAverages = ({
   eventCounts,
   eventResponses,
   members
-}) =>
-  members.reduce((acc, member) => {
-    const hasResponse =
-      !isEmpty(eventResponses) &&
-      eventResponses.find(doc => doc._id.equals(member._id));
+}: {
+  eventCounts: number;
+  eventResponses: Array<{ _id: Types.ObjectId; availability: number }>;
+  members: Array<{ _id: Types.ObjectId; name: string }>;
+}): any =>
+  members.reduce(
+    (acc: Array<any>, member: { _id: Types.ObjectId; name: string }) => {
+      const hasResponse =
+        !isEmpty(eventResponses) &&
+        eventResponses.find(doc => doc._id.equals(member._id));
 
-    return [
-      ...acc,
-      {
-        id: member.name,
-        availability: hasResponse
-          ? toAverage(hasResponse.availability, eventCounts)
-          : 0
-      }
-    ];
-  }, []);
+      return [
+        ...acc,
+        {
+          id: member.name,
+          availability: hasResponse
+            ? toAverage(hasResponse.availability, eventCounts)
+            : 0
+        }
+      ];
+    },
+    []
+  );
 
 /**
  * Helper function to generate a unique token.
@@ -141,7 +149,7 @@ const createMemberAvailabilityAverages = ({
  * @function
  * @returns {token}
  */
-const tokenGenerator = (str, tlen) => {
+const tokenGenerator = (str: string, tlen: number): string => {
   const arr = [...str];
   const max = arr.length - 1;
   let token = "";
@@ -161,7 +169,12 @@ const tokenGenerator = (str, tlen) => {
  * @param {string} err
  * @returns {response}
  */
-const clearSession = (req, res, status, err) => {
+const clearSession = (
+  req: Request,
+  res: Response,
+  status: number,
+  err: string
+): void => {
   req.session = null;
 
   res.status(status).json({ role: "guest", err });
@@ -248,7 +261,7 @@ const createMemberResponseCount = eventResponses =>
  * @function createRandomToken
  * @returns {String}
  */
-const createRandomToken = () =>
+const createRandomToken = (): string =>
   tokenGenerator(
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$/.",
     64
@@ -261,7 +274,9 @@ const createRandomToken = () =>
  * @param callTimes - an array of dates
  * @returns {object}
  */
-const createSchedule = callTimes =>
+const createSchedule = (
+  callTimes: Array<string>
+): Array<{ _id: string; employeeIds: Array<any> }> =>
   callTimes.map(time => ({
     _id: time,
     employeeIds: []
@@ -293,17 +308,17 @@ const createUserSchedule = ({ event, members }) => [
  * Helper function to generate a mongo ObjectId.
  *
  * @function convertId
- * @returns {ObjectId}
+ * @returns {Types.ObjectId}
  */
-const convertId = id => ObjectId(id);
+const convertId = (id: string): Types.ObjectId => toMongooseId(id);
 
 /**
  * Helper function to strip and convert template names to snaked lowercase name.
  *
  * @function
- * @returns {String}
+ * @returns {string}
  */
-const createUniqueName = name =>
+const createUniqueName = (name: string): string =>
   name
     .trim()
     .toLowerCase()
@@ -314,9 +329,9 @@ const createUniqueName = name =>
  * Helper function to create a 64 length random string.
  *
  * @function createSignupToken
- * @returns {String}
+ * @returns {string}
  */
-const createSignupToken = () =>
+const createSignupToken = (): string =>
   tokenGenerator(
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
     64
@@ -328,7 +343,8 @@ const createSignupToken = () =>
  * @function
  * @returns {month}
  */
-const expirationDate = () => moment().add(90, "days").endOf("day");
+const expirationDate = (): moment.Moment =>
+  moment().add(90, "days").endOf("day");
 
 /**
  *Helper function to generate table filters.
@@ -338,7 +354,7 @@ const expirationDate = () => moment().add(90, "days").endOf("day");
  * @returns {object}
  */
 const format = "MM-DD-YYYY";
-const generateFilters = query =>
+const generateFilters = (query: Record<string, unknown>) =>
   !isEmpty(query)
     ? Object.keys(query).reduce((acc, item) => {
         switch (item) {
@@ -439,9 +455,9 @@ const generateFilters = query =>
  *
  * @function getEndOfDay
  * @param date
- * @returns {object}
+ * @returns {string}
  */
-const getEndOfDay = () => moment().endOf("day").format();
+const getEndOfDay = (): string => moment().endOf("day").format();
 
 /**
  * Helper function to get event counts.
@@ -451,7 +467,7 @@ const getEndOfDay = () => moment().endOf("day").format();
  * @param endMonth
  * @returns {object}
  */
-const getEventCounts = (startMonth, endMonth) =>
+const getEventCounts = (startMonth: Date | string, endMonth: Date | string) =>
   Event.countDocuments({
     eventDate: {
       $gte: moment(startMonth).toDate(),
@@ -464,9 +480,11 @@ const getEventCounts = (startMonth, endMonth) =>
  *
  * @function getMonthDateRange
  * @param date
- * @returns {object}
+ * @returns {object} The startOfMonth and endOfMonth
  */
-const getMonthDateRange = date => {
+const getMonthDateRange = (
+  date: Date | string
+): { startOfMonth: Date; endOfMonth: Date } => {
   const startOfMonth = moment(date).startOf("month").toDate();
   const endOfMonth = moment(date).endOf("month").toDate();
 
@@ -478,20 +496,26 @@ const getMonthDateRange = date => {
  *
  * @function getStartOfDay
  * @param date
- * @returns {object}
+ * @returns {string}
  */
-const getStartOfDay = () => moment().startOf("day").format();
+const getStartOfDay = (): string => moment().startOf("day").format();
 
 /**
  * Helper function to generate a date range.
  *
  * @function getUsers
- * @param role - user role
+ * @param match - user role
  * @param project - projected data structure
- * @returns {array}
+ * @returns {Promise} An array of members sorted by last name
  */
-const getUsers = async ({ match, project }) => {
-  const members = await User.aggregate([
+const getUsers = async ({
+  match,
+  project
+}: {
+  match: Record<string, unknown>;
+  project: Record<string, unknown>;
+}): Promise<Array<Record<string, unknown>>> =>
+  User.aggregate([
     {
       $match: match
     },
@@ -501,27 +525,24 @@ const getUsers = async ({ match, project }) => {
     }
   ]);
 
-  return members;
-};
-
 /**
  * Helper function to find an event by id.
  *
  * @function findEventById
- * @returns {function}
+ * @param _id
+ * @returns {(object|undefined)}
  */
-const findEventById = async _id => {
-  const existingEvent = await Event.findOne({ _id }, { __v: 0 });
-  return existingEvent;
-};
+const findEventById = (_id: string): Record<string, unknown> =>
+  Event.findOne({ _id }, { __v: 0 });
 
 /**
  * Find a single member.
  *
  * @function findMember
- * @returns {object} - existingMember
+ * @param _id
+ * @returns {(object|undefined)}
  */
-const findMember = _id =>
+const findMember = (_id: string): Record<string, unknown> =>
   User.findOne({ _id }, { password: 0, token: 0, __v: 0 });
 
 /**
@@ -667,7 +688,8 @@ const findMemberEvents = async (existingMember, selectedDate) => {
  * @function parseSession
  * @returns {string}
  */
-const parseSession = req => get(req, ["session", "user", "id"]);
+const parseSession = (req: Request): string | undefined =>
+  get(req, ["session", "user", "id"]);
 
 /**
  * Helper function to send an error to the LOCALHOST.
@@ -676,9 +698,9 @@ const parseSession = req => get(req, ["session", "user", "id"]);
  * @param err - error message
  * @param statusCode - status code error
  * @param res - res object
- * @returns {function}
+ * @returns
  */
-const sendError = (err, statusCode, res) => {
+const sendError = (err: string, statusCode: number, res: Response): void => {
   res.status(statusCode).json({ err: err.toString() });
 };
 
@@ -701,9 +723,10 @@ const sortScheduledUsersByLastName = events =>
  * Helper function to check if an array contains duplicate values.
  *
  * @function
- * @returns {bool}
+ * @returns {boolean}
  */
-const uniqueArray = arr => arr.length === new Set(arr).size;
+const uniqueArray = (arr: Array<any>): boolean =>
+  arr.length === new Set(arr).size;
 
 /**
  * Helper function to convert stringified ids to objectids.
