@@ -1,22 +1,38 @@
 import mongoosePaginate from "mongoose-paginate-v2";
 import { Document, Schema, model, Types } from "mongoose";
 
+type TId = Types.ObjectId | string;
+
+export type TEventAggResponses = Array<{
+  _id: TId;
+  responses: Array<string>;
+}>;
+
+export type TEventMemberAvailability = Array<{
+  _id: TId;
+  availability: number;
+}>;
+
+export type TEventSchedule = Array<{
+  _id: string;
+  title?: string;
+  employeeIds: Array<TId>;
+}>;
+
+export type TEventResponses = Array<{
+  _id: Types.ObjectId;
+  response: string;
+  notes?: string;
+}>;
+
 export interface IEventDocument extends Document {
   _id?: Types.ObjectId;
   eventType: string;
   eventDate: string;
   location?: string;
-  employeeResponses: Array<{
-    _id: Types.ObjectId;
-    response: string;
-    notes?: string;
-  }>;
-  schedule: Array<{
-    _id: string;
-    title?: string;
-    employeeIds: Array<Types.ObjectId | string>;
-  }>;
-  scheduledIds: Array<string>;
+  employeeResponses?: TEventResponses;
+  schedule: TEventSchedule;
+  scheduledIds?: Array<any>;
   seasonId: string;
   team: string;
   opponent?: string;

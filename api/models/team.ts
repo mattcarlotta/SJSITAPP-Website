@@ -3,9 +3,9 @@ import { Document, Schema, model, Types } from "mongoose";
 
 export interface ITeamDocument extends Document {
   _id?: Types.ObjectId;
-  seasonId: string;
-  startDate: Date;
-  endDate: Date;
+  league: string;
+  team: string;
+  name: string;
 }
 
 // NHL/AHL teams

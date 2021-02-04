@@ -2,8 +2,17 @@ import mongoosePaginate from "mongoose-paginate-v2";
 import { Document, Model, Schema, model, Types } from "mongoose";
 import bcrypt from "bcryptjs";
 
-export interface IUserDocument extends Document {
+export type TActiveMembers = Array<{
   _id: Types.ObjectId;
+  name: string;
+}>;
+
+export type TScheduledEventsForMember = Array<{
+  _id: Types.ObjectId;
+  eventCount: number;
+}>;
+export interface IUserDocument extends Document {
+  _id?: Types.ObjectId;
   avatar?: string;
   email: string;
   role?: string;

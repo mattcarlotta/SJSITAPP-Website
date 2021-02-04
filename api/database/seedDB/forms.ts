@@ -80,8 +80,8 @@ export const seedForms = async (currentSeason: string): Promise<void> => {
 
   const form8 = {
     expirationDate: new Date("2099-08-10T07:00:00.000Z"),
-    startMonth: moment().startOf("month").format(),
-    endMonth: moment().endOf("month").format(),
+    startMonth: moment().startOf("month").toDate(),
+    endMonth: moment().endOf("month").toDate(),
     notes: "Todays Form",
     seasonId: currentSeason,
     sendEmailNotificationsDate: new Date("2099-11-31T07:00:00.000Z"),
@@ -90,8 +90,8 @@ export const seedForms = async (currentSeason: string): Promise<void> => {
 
   const form9 = {
     expirationDate: new Date("2099-08-10T07:00:00.000Z"),
-    startMonth: moment().add(1, "months").startOf("month").format(),
-    endMonth: moment().add(1, "months").endOf("month").format(),
+    startMonth: moment().add(1, "months").startOf("month").toDate(),
+    endMonth: moment().add(1, "months").endOf("month").toDate(),
     notes: "Next Months Form",
     seasonId: currentSeason,
     sendEmailNotificationsDate: new Date("2099-11-31T07:00:00.000Z"),

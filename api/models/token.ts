@@ -5,7 +5,7 @@ export interface ISeasonDocument extends Document {
   _id?: Types.ObjectId;
   token: string;
   authorizedEmail: string;
-  email: string;
+  email?: string;
   role: string;
   expiration: Date;
 }
@@ -14,7 +14,7 @@ export interface ISeasonDocument extends Document {
 const tokenSchema = new Schema<ISeasonDocument>({
   token: { type: String, required: true, unique: true },
   authorizedEmail: { type: String, lowercase: true, unique: true },
-  email: { type: String, required: true, lowercase: true },
+  email: { type: String, lowercase: true },
   role: { type: String, required: true },
   expiration: {
     type: Date,

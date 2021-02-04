@@ -6,7 +6,7 @@ export interface IMailDocument extends Document {
   message: string;
   sendTo: Array<string>;
   sendFrom: string;
-  sendDate: Date;
+  sendDate: Date | string;
   status: string;
   subject: string;
 }

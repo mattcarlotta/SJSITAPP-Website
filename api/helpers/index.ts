@@ -5,8 +5,17 @@ import random from "lodash.random";
 import sortBy from "lodash.sortby";
 import { Types } from "mongoose";
 import moment from "moment-timezone";
-import Event, { IEventDocument } from "~models/event";
-import User, { IUserDocument } from "~models/user";
+import Event, {
+  IEventDocument,
+  TEventAggResponses,
+  TEventMemberAvailability,
+  TEventSchedule
+} from "~models/event";
+import User, {
+  IUserDocument,
+  TActiveMembers,
+  TScheduledEventsForMember
+} from "~models/user";
 import {
   newAuthorizationKeyTemplate,
   newStaffTemplate
@@ -78,9 +87,7 @@ const createMemberAvailabilityAverage = ({
   eventResponses
 }: {
   eventCounts: number;
-  eventResponses: Array<{
-    responses: Array<string>;
-  }>;
+  eventResponses: TEventAggResponses;
 }): Array<{ id: string; label: string; value: number }> => {
   let avail = 0;
   let unavail = 0;
@@ -121,14 +128,16 @@ const createMemberAvailabilityAverages = ({
   members
 }: {
   eventCounts: number;
-  eventResponses: Array<{ _id: Types.ObjectId; availability: number }>;
-  members: Array<{ _id: Types.ObjectId; name: string }>;
+  eventResponses: TEventMemberAvailability;
+  members: TActiveMembers;
 }): any =>
   members.reduce(
     (acc: Array<any>, member: { _id: Types.ObjectId; name: string }) => {
       const hasResponse =
         !isEmpty(eventResponses) &&
-        eventResponses.find(doc => doc._id.equals(member._id));
+        eventResponses.find(
+          doc => typeof doc._id === "object" && doc._id!.equals(member._id)
+        );
 
       return [
         ...acc,
@@ -197,16 +206,18 @@ const createColumnSchedule = ({
 }): Array<{
   _id: string;
   title: string;
-  employeeIds: Array<Types.ObjectId | string>;
+  employeeIds: Array<any>;
 }> => [
   {
     _id: "employees",
     title: "Employees",
     employeeIds: members.reduce((result, member) => {
-      const isScheduled = event.scheduledIds.some(id => member._id.equals(id));
+      const isScheduled = event.scheduledIds!.some(
+        id => typeof member._id === "object" && member._id.equals(id)
+      );
 
       return !isScheduled ? [...result, member._id] : result;
-    }, [] as Array<Types.ObjectId>)
+    }, [] as Array<any>)
   },
   ...event.schedule.map(
     ({
@@ -240,7 +251,13 @@ const createDate = (date?: string): moment.Moment =>
  * @param memberEventCounts - an array of members and their eventCount
  * @returns {array}
  */
-const createMemberEventCount = ({ members, memberEventCounts }) =>
+const createMemberEventCount = ({
+  members,
+  memberEventCounts
+}: {
+  members: TActiveMembers;
+  memberEventCounts: TScheduledEventsForMember;
+}): Array<{ name: string; "Event Count": number }> =>
   members.map(member => {
     const hasEventCount =
       !isEmpty(memberEventCounts) &&
@@ -259,7 +276,16 @@ const createMemberEventCount = ({ members, memberEventCounts }) =>
  * @param eventResponses - an array of responses
  * @returns {array}
  */
-const createMemberResponseCount = eventResponses =>
+type TAccumulatedEventResponses = Array<{
+  id: string;
+  label: string;
+  color: string;
+  value: number;
+}>;
+
+const createMemberResponseCount = (
+  eventResponses: TEventAggResponses
+): TAccumulatedEventResponses =>
   eventResponses.reduce((acc, { responses }) => {
     responseTypes.forEach((rspType, index) => {
       acc.push({
@@ -271,7 +297,7 @@ const createMemberResponseCount = eventResponses =>
     });
 
     return acc;
-  }, []);
+  }, [] as TAccumulatedEventResponses);
 
 /**
  * Helper function to create a 64 length random string.
@@ -308,10 +334,16 @@ const createSchedule = (
  * @param members - an array of members
  * @returns {array}
  */
-const createUserSchedule = ({ event, members }) => [
+const createUserSchedule = ({
+  event,
+  members
+}: {
+  event: IEventDocument;
+  members: Array<IUserDocument>;
+}): Array<any> => [
   ...members.map(member => {
-    const eventResponse = event.employeeResponses.find(response =>
-      response._id.equals(member._id)
+    const eventResponse = event.employeeResponses!.find(response =>
+      response._id.equals(member._id!.toString())
     );
 
     return {
@@ -566,7 +598,7 @@ const findEventById = (_id: string): Record<string, unknown> =>
  * @param _id
  * @returns {(object|undefined)}
  */
-const findMember = (_id: string): Record<string, unknown> =>
+const findMember = (_id: string): Promise<Record<string, unknown>> =>
   User.findOne({ _id }, { password: 0, token: 0, __v: 0 });
 
 /**
@@ -765,20 +797,10 @@ const uniqueArray = (arr: Array<any>): boolean =>
  * @param schedule - an array of ids
  * @returns {array}
  */
-const updateScheduleIds = (
-  schedule: Array<{
-    _id: string;
-    title?: string;
-    employeeIds: Array<string>;
-  }>
-): Array<{
-  _id: string;
-  title?: string;
-  employeeIds: Array<Types.ObjectId | string>;
-}> =>
+const updateScheduleIds = (schedule: TEventSchedule): TEventSchedule =>
   schedule.map(({ employeeIds, ...rest }) => ({
     ...rest,
-    employeeIds: employeeIds.map(id => toMongooseId(id))
+    employeeIds: employeeIds.map(id => toMongooseId(id.toString()))
   }));
 
 export {

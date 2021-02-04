@@ -38,8 +38,8 @@ export const seedSeasons = async (): Promise<string> => {
 
   const currentYear = {
     seasonId: currentSeason,
-    startDate: moment().startOf("year").format(),
-    endDate: moment().add(1, "year").endOf("year").format()
+    startDate: moment().startOf("year").toDate(),
+    endDate: moment().add(1, "year").endOf("year").toDate()
   };
 
   await Season.insertMany([
