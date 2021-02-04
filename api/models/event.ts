@@ -13,10 +13,15 @@ export type TEventMemberAvailability = Array<{
   availability: number;
 }>;
 
+export type TEventMemberAvailabilityAvg = Array<{
+  id: string;
+  availability: number;
+}>;
+
 export type TEventSchedule = Array<{
   _id: string;
   title?: string;
-  employeeIds: Array<TId>;
+  employeeIds: Array<Types.ObjectId>;
 }>;
 
 export type TEventResponses = Array<{

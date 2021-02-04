@@ -9,6 +9,7 @@ import Event, {
   IEventDocument,
   TEventAggResponses,
   TEventMemberAvailability,
+  TEventMemberAvailabilityAvg,
   TEventSchedule
 } from "~models/event";
 import User, {
@@ -116,7 +117,7 @@ const createMemberAvailabilityAverage = ({
 };
 
 /**
- * Helper function to generate all user event availability based upon their responses.
+ * Helper function to generate all user event availability based upon their responses and combine the results by their first and last name.
  *
  * @function createMemberAvailabilityAverages
  * @param object -  eventCounts: number, eventResponses: [_id, availability], members: [_id, name]
@@ -130,27 +131,24 @@ const createMemberAvailabilityAverages = ({
   eventCounts: number;
   eventResponses: TEventMemberAvailability;
   members: TActiveMembers;
-}): any =>
-  members.reduce(
-    (acc: Array<any>, member: { _id: Types.ObjectId; name: string }) => {
-      const hasResponse =
-        !isEmpty(eventResponses) &&
-        eventResponses.find(
-          doc => typeof doc._id === "object" && doc._id!.equals(member._id)
-        );
+}): TEventMemberAvailabilityAvg =>
+  members.reduce((acc, member) => {
+    const hasResponse =
+      !isEmpty(eventResponses) &&
+      eventResponses.find(
+        doc => typeof doc._id === "object" && doc._id!.equals(member._id)
+      );
 
-      return [
-        ...acc,
-        {
-          id: member.name,
-          availability: hasResponse
-            ? toAverage(hasResponse.availability, eventCounts)
-            : 0
-        }
-      ];
-    },
-    []
-  );
+    return [
+      ...acc,
+      {
+        id: member.name,
+        availability: hasResponse
+          ? toAverage(hasResponse.availability, eventCounts)
+          : 0
+      }
+    ];
+  }, [] as TEventMemberAvailabilityAvg);
 
 /**
  * Helper function to generate a unique token.
@@ -205,8 +203,8 @@ const createColumnSchedule = ({
   members: Array<IUserDocument>;
 }): Array<{
   _id: string;
-  title: string;
-  employeeIds: Array<any>;
+  title?: string;
+  employeeIds: Array<Types.ObjectId>;
 }> => [
   {
     _id: "employees",
@@ -219,19 +217,11 @@ const createColumnSchedule = ({
       return !isScheduled ? [...result, member._id] : result;
     }, [] as Array<any>)
   },
-  ...event.schedule.map(
-    ({
-      _id,
-      employeeIds
-    }: {
-      _id: string;
-      employeeIds: Array<Types.ObjectId | string>;
-    }) => ({
-      _id,
-      title: moment(_id).format("hh:mm a"),
-      employeeIds
-    })
-  )
+  ...event.schedule.map(({ _id, employeeIds }) => ({
+    _id,
+    title: moment(_id).format("hh:mm a"),
+    employeeIds
+  }))
 ];
 
 /**
