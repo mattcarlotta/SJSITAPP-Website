@@ -12,7 +12,7 @@ export type TScheduledEventsForMember = Array<{
   eventCount: number;
 }>;
 export interface IUserDocument extends Document {
-  _id?: Types.ObjectId;
+  // _id?: Types.ObjectId;
   avatar?: string;
   email: string;
   role?: string;

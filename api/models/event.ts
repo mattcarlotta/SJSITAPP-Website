@@ -31,7 +31,7 @@ export type TEventResponses = Array<{
 }>;
 
 export interface IEventDocument extends Document {
-  _id?: Types.ObjectId;
+  // _id?: Types.ObjectId;
   eventType: string;
   eventDate: string;
   location?: string;

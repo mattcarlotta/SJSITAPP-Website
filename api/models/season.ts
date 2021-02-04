@@ -1,8 +1,8 @@
 import mongoosePaginate from "mongoose-paginate-v2";
-import { Document, Schema, model, Types } from "mongoose";
+import { Document, Schema, model } from "mongoose";
 
 export interface ISeasonDocument extends Document {
-  _id?: Types.ObjectId;
+  // _id?: Types.ObjectId;
   seasonId: string;
   startDate: Date;
   endDate: Date;
