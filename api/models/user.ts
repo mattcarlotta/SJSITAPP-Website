@@ -3,7 +3,7 @@ import { Document, Model, Schema, model, Types } from "mongoose";
 import bcrypt from "bcryptjs";
 
 export interface IUserDocument extends Document {
-  _id?: Types.ObjectId;
+  _id: Types.ObjectId;
   avatar?: string;
   email: string;
   role?: string;

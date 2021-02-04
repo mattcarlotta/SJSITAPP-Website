@@ -5,8 +5,8 @@ import random from "lodash.random";
 import sortBy from "lodash.sortby";
 import { Types } from "mongoose";
 import moment from "moment-timezone";
-import Event from "~models/event";
-import User from "~models/user";
+import Event, { IEventDocument } from "~models/event";
+import User, { IUserDocument } from "~models/user";
 import {
   newAuthorizationKeyTemplate,
   newStaffTemplate
@@ -188,7 +188,17 @@ const clearSession = (
  * @param members - an array of members
  * @returns {array}
  */
-const createColumnSchedule = ({ event, members }) => [
+const createColumnSchedule = ({
+  event,
+  members
+}: {
+  event: IEventDocument;
+  members: Array<IUserDocument>;
+}): Array<{
+  _id: string;
+  title: string;
+  employeeIds: Array<Types.ObjectId | string>;
+}> => [
   {
     _id: "employees",
     title: "Employees",
@@ -196,13 +206,21 @@ const createColumnSchedule = ({ event, members }) => [
       const isScheduled = event.scheduledIds.some(id => member._id.equals(id));
 
       return !isScheduled ? [...result, member._id] : result;
-    }, [])
+    }, [] as Array<Types.ObjectId>)
   },
-  ...event.schedule.map(({ _id, employeeIds }) => ({
-    _id,
-    title: moment(_id).format("hh:mm a"),
-    employeeIds
-  }))
+  ...event.schedule.map(
+    ({
+      _id,
+      employeeIds
+    }: {
+      _id: string;
+      employeeIds: Array<Types.ObjectId | string>;
+    }) => ({
+      _id,
+      title: moment(_id).format("hh:mm a"),
+      employeeIds
+    })
+  )
 ];
 
 /**
@@ -467,13 +485,19 @@ const getEndOfDay = (): string => moment().endOf("day").format();
  * @param endMonth
  * @returns {object}
  */
-const getEventCounts = (startMonth: Date | string, endMonth: Date | string) =>
-  Event.countDocuments({
-    eventDate: {
-      $gte: moment(startMonth).toDate(),
-      $lte: moment(endMonth).toDate()
-    }
-  });
+const getEventCounts = (
+  startMonth: Date | string,
+  endMonth: Date | string
+): Promise<number> =>
+  Event.countDocuments(
+    {
+      eventDate: {
+        $gte: moment(startMonth).toDate().toString(),
+        $lte: moment(endMonth).toDate().toString()
+      }
+    },
+    (_, count) => count
+  );
 
 /**
  * Helper function to generate a date range.
@@ -484,9 +508,9 @@ const getEventCounts = (startMonth: Date | string, endMonth: Date | string) =>
  */
 const getMonthDateRange = (
   date: Date | string
-): { startOfMonth: Date; endOfMonth: Date } => {
-  const startOfMonth = moment(date).startOf("month").toDate();
-  const endOfMonth = moment(date).endOf("month").toDate();
+): { startOfMonth: string; endOfMonth: string } => {
+  const startOfMonth = moment(date).startOf("month").toDate().toString();
+  const endOfMonth = moment(date).endOf("month").toDate().toString();
 
   return { startOfMonth, endOfMonth };
 };
@@ -609,15 +633,18 @@ const findMemberAvailabilty = async (existingMember, selectedDate, res) => {
     }
   ]);
 
-  const scheduledCount = await Event.countDocuments({
-    eventDate: {
-      $gte: startOfMonth,
-      $lte: endOfMonth
+  const scheduledCount = await Event.countDocuments(
+    {
+      eventDate: {
+        $gte: startOfMonth,
+        $lte: endOfMonth
+      },
+      scheduledIds: {
+        $in: [existingMember.id]
+      }
     },
-    scheduledIds: {
-      $in: [existingMember.id]
-    }
-  });
+    (_, count) => count
+  );
 
   res.status(200).json({
     eventAvailability: createMemberAvailabilityAverage({
@@ -644,10 +671,13 @@ const findMemberAvailabilty = async (existingMember, selectedDate, res) => {
  * @function findMemberEvents
  * @returns {object} - events
  */
-const findMemberEvents = async (existingMember, selectedDate) => {
+const findMemberEvents = async (
+  existingMember: IUserDocument,
+  selectedDate: Date | string
+): Promise<Array<Record<string, unknown>>> => {
   const { startOfMonth, endOfMonth } = getMonthDateRange(selectedDate);
 
-  const events = await Event.aggregate([
+  return Event.aggregate([
     {
       $match: {
         eventDate: {
@@ -679,7 +709,6 @@ const findMemberEvents = async (existingMember, selectedDate) => {
     },
     { $project: { _id: 0, eventResponses: 1 } }
   ]);
-  return events;
 };
 
 /**
@@ -704,13 +733,15 @@ const sendError = (err: string, statusCode: number, res: Response): Response =>
   res.status(statusCode).json({ err: err.toString() });
 
 /**
- * Helper function to sort a schedule list based upon last name.
+ * Helper function to sort a scheduled ids list based upon last name.
  *
  * @function sortScheduledUsersByLastName
- * @param event - an object containing event details
+ * @param event - an array containing event details
  * @returns {array}
  */
-const sortScheduledUsersByLastName = events =>
+const sortScheduledUsersByLastName = (
+  events: Array<IEventDocument>
+): Array<IEventDocument | any> =>
   !isEmpty(events)
     ? events.map(({ scheduledIds, ...rest }) => ({
         ...rest,
@@ -734,14 +765,21 @@ const uniqueArray = (arr: Array<any>): boolean =>
  * @param schedule - an array of ids
  * @returns {array}
  */
-const updateScheduleIds = schedule =>
-  schedule.reduce(
-    (result, { employeeIds }) => [
-      ...result,
-      ...employeeIds.map(id => ObjectId(id))
-    ],
-    []
-  );
+const updateScheduleIds = (
+  schedule: Array<{
+    _id: string;
+    title?: string;
+    employeeIds: Array<string>;
+  }>
+): Array<{
+  _id: string;
+  title?: string;
+  employeeIds: Array<Types.ObjectId | string>;
+}> =>
+  schedule.map(({ employeeIds, ...rest }) => ({
+    ...rest,
+    employeeIds: employeeIds.map(id => toMongooseId(id))
+  }));
 
 export {
   clearSession,

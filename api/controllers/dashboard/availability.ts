@@ -29,7 +29,6 @@ const getAvailability = async (
 
     const currentDate = createDate().add(1, "months").toDate();
     const eventAvailability: Array<Record<string, unknown>> = [];
-    let months: Array<Date> = [];
 
     const existingForm = await Form.findOne(
       {
@@ -49,11 +48,11 @@ const getAvailability = async (
     ).lean();
     /* istanbul ignore next */
     if (!existingForm)
-      return res.status(200).json({ eventAvailability, months });
+      return res.status(200).json({ eventAvailability, months: [] });
 
     const startOfMonth = moment(existingForm.startMonth).toDate();
     const endOfMonth = moment(existingForm.endMonth).toDate();
-    months = [startOfMonth, endOfMonth];
+    const months = [startOfMonth, endOfMonth];
 
     const eventCounts = await getEventCounts(startOfMonth, endOfMonth);
     /* istanbul ignore next */

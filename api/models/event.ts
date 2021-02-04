@@ -14,9 +14,9 @@ export interface IEventDocument extends Document {
   schedule: Array<{
     _id: string;
     title?: string;
-    employeeIds: Array<string>;
+    employeeIds: Array<Types.ObjectId | string>;
   }>;
-  scheduledIds?: Array<string>;
+  scheduledIds: Array<string>;
   seasonId: string;
   team: string;
   opponent?: string;
