@@ -1,6 +1,5 @@
 import type { Request, Response } from "express";
-import Event from "~models/event";
-import Form from "~models/form";
+import { Event, Form } from "~models";
 import {
   createDate,
   createMemberAvailabilityAverage,

@@ -184,11 +184,11 @@ const clearSession = (
   req: Request,
   res: Response,
   status: number,
-  err: string
-): void => {
+  err?: string
+): Response => {
   req.session = null;
 
-  res.status(status).json({ role: "guest", err });
+  return res.status(status).json({ role: "guest", err });
 };
 
 /**
@@ -233,7 +233,7 @@ const createColumnSchedule = ({
  * @function
  * @returns {Date}
  */
-const createDate = (date?: string): moment.Moment =>
+const createDate = (date?: Date | string): moment.Moment =>
   moment(date || Date.now()).tz("America/Los_Angeles");
 
 /**

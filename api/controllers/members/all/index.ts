@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import get from "lodash.get";
-import User from "~models/user";
+import { User } from "~models";
 import { generateFilters, sendError } from "~helpers";
 /**
  * Retrieves all members for ViewMembers page.
@@ -32,10 +32,10 @@ const getAllMembers = async (
       }
     );
 
-    const members = get(results, ["docs"]);
-    const totalDocs = get(results, ["totalDocs"]);
-
-    return res.status(200).json({ members, totalDocs });
+    return res.status(200).json({
+      members: get(results, ["docs"]),
+      totalDocs: get(results, ["totalDocs"])
+    });
   } catch (err) {
     return sendError(err, 400, res);
   }

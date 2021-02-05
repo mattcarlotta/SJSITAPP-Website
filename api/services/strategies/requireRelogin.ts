@@ -1,13 +1,19 @@
-import { parseSession, clearSession } from "~utils/helpers";
+import type { NextFunction, Request, Response } from "express";
+import { parseSession, clearSession } from "~helpers";
 import { User } from "~models";
 
 /**
  * Middleware function to check if a user is logged into a session and the session is valid.
  *
- * @function
+ * @function requireAuth
  * @returns {function}
+ * @throws {Error}
  */
-export default next => async (req, res) => {
+const requireRelogin = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<Response | void> => {
   try {
     const _id = parseSession(req);
     if (!_id) throw String("No previous session detected.");
@@ -19,6 +25,7 @@ export default next => async (req, res) => {
     if (!existingUser || existingUser.status === "suspended")
       throw String("Not a valid user.");
 
+    // @ts-ignore
     req.user = {
       id: existingUser._id,
       avatar: existingUser.avatar,
@@ -28,8 +35,10 @@ export default next => async (req, res) => {
       role: existingUser.role
     };
 
-    return next(req, res);
+    return next();
   } catch (err) {
     return clearSession(req, res, 200);
   }
 };
+
+export default requireRelogin;

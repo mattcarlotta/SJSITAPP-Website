@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { Types } from "mongoose";
 import isEmpty from "lodash.isempty";
-import Event from "~models/event";
+import { Event } from "~models";
 import {
   createColumnSchedule,
   createUserSchedule,

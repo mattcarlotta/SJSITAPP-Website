@@ -1,7 +1,6 @@
 import type { Request, Response } from "express";
 import isEmpty from "lodash.isempty";
-import Event from "~models/event";
-import Season from "~models/season";
+import { Event, Season } from "~models";
 import { moment, sendError, uniqueArray } from "~helpers";
 import {
   invalidCreateEventRequest,

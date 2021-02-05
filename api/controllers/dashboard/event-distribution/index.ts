@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import isEmpty from "lodash.isempty";
-import Event from "~models/event";
+import { Event } from "~models";
 import { createMemberEventCount, getUsers, moment, sendError } from "~helpers";
 import { missingDates } from "~messages/errors";
 import type { TActiveMembers } from "~models/user";

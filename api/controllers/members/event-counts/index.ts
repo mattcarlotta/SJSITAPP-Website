@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import isEmpty from "lodash.isempty";
-import Event from "~models/event";
+import { Event } from "~models";
 import {
   createMemberEventCount,
   getMonthDateRange,
@@ -25,7 +25,7 @@ const getMemberEventCounts = async (
     const { id } = req.params;
     if (!id) throw missingEventId;
 
-    const members = await getUsers({
+    const activeMembers = await getUsers({
       match: {
         role: { $eq: "employee" },
         status: "active"
@@ -36,7 +36,7 @@ const getMemberEventCounts = async (
       }
     });
     /* istanbul ignore next */
-    if (isEmpty(members)) return res.status(200).json({ members: [] });
+    if (isEmpty(activeMembers)) return res.status(200).json({ members: [] });
 
     const existingEvent = await Event.findOne({ _id: id }, { __v: 0 }).lean();
     if (!existingEvent) throw unableToLocateEvent;
@@ -67,12 +67,10 @@ const getMemberEventCounts = async (
         }
       }
     ]);
-    if (isEmpty(memberEventCounts))
-      return res.status(200).json({ members: [] });
 
     return res.status(200).json({
       members: createMemberEventCount({
-        members: members as TActiveMembers,
+        members: activeMembers as TActiveMembers,
         memberEventCounts
       })
     });

@@ -1,8 +1,6 @@
 import type { Request, Response } from "express";
 import isEmpty from "lodash.isempty";
-import Event from "~models/event";
-import Form from "~models/form";
-import User from "~models/user";
+import { Event, Form, User } from "~models";
 import {
   createDate,
   createMemberAvailabilityAverages,

@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import Form from "~models/form";
+import { Form } from "~models";
 import { createDate, getEventCounts, sendError } from "~helpers";
 
 /**

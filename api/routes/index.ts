@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { signedin, signin, signout, signup } from "~controllers/auth";
 import {
   getAPForm,
   getAvailability,
@@ -20,8 +21,15 @@ import {
   getMemberEventCounts,
   getAllMemberNames
 } from "~controllers/members";
+import { localLogin, localSignup, requireRelogin } from "~services/strategies";
 
 const router = Router();
+
+// AUTH
+router.post("/signin", localLogin, signin);
+router.get("/signedin", requireRelogin, signedin);
+router.get("/signout", signout);
+router.post("/signup", localSignup, signup);
 
 // DASHBOARD
 router.get("/dashboard/ap-form", /* requireAuth */ getAPForm);

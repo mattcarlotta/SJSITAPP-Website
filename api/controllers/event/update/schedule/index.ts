@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import isEmpty from "lodash.isempty";
-import Event from "~models/event";
+import { Event } from "~models";
 import { sendError, updateScheduleIds } from "~helpers";
 import {
   invalidUpdateEventRequest,
@@ -22,11 +22,13 @@ const updateEventSchedule = async (
     const { _id, schedule } = req.body;
     if (!_id || isEmpty(schedule)) throw invalidUpdateEventRequest;
 
-    const existingEvent = await Event.updateOne(
+    const existingEvent = await Event.findOne({ _id });
+    if (!existingEvent) throw unableToLocateEvent;
+
+    await Event.updateOne(
       { _id },
       { $set: { schedule, scheduledIds: updateScheduleIds(schedule) } }
-    ).lean();
-    if (!existingEvent) throw unableToLocateEvent;
+    );
 
     return res
       .status(201)

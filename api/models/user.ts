@@ -42,6 +42,8 @@ export interface IUserDocument extends Document {
   registered?: Date;
   token: string;
   emailReminders?: boolean;
+  createPassword: (password: string) => Promise<string>;
+  comparePassword: (password: string) => Promise<boolean>;
 }
 
 // TODO Fix paginate typings
@@ -77,10 +79,6 @@ const userSchema = new Schema<IUserDocument>({
 });
 
 userSchema.plugin(mongoosePaginate);
-
-userSchema.statics.createUser = function newUser(user) {
-  return this.create(user);
-};
 
 // Generate a salt, password, then run callback
 userSchema.statics.createPassword = async function createNewPassword(

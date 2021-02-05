@@ -269,7 +269,7 @@ export const seedUsers = async (): Promise<IUserDocument> => {
     email: scheduledMember.email
   });
 
-  return scheduledUser;
+  return scheduledUser!;
 };
 
 export default seedUsers;

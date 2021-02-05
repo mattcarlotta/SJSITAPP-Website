@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import Event from "~models/event";
+import { Event } from "~models";
 import { sendError } from "~helpers";
 import { missingEventId, unableToLocateEvent } from "~messages/errors";
 
@@ -20,11 +20,10 @@ const resendEventEmail = async (
     const { id: _id } = req.query;
     if (!_id) throw missingEventId;
 
-    const existingEvent = await Event.updateOne(
-      { _id },
-      { sentEmailReminders: false }
-    );
+    const existingEvent = Event.findOne({ _id });
     if (!existingEvent) throw unableToLocateEvent;
+
+    await Event.updateOne({ _id }, { sentEmailReminders: false });
 
     return res.status(200).json({
       message:

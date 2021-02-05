@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import Event from "~models/event";
+import { Event } from "~models";
 import { sendError } from "~helpers";
 import { missingEventId, unableToLocateEvent } from "~messages/errors";
 
