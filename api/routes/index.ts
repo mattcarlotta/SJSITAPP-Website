@@ -1,23 +1,52 @@
 import { Router } from "express";
-import { getAllMembers } from "~controllers/members";
+import {
+  getAPForm,
+  getAvailability,
+  getEventDistribution,
+  getSelectedEvents,
+  getAvailabilityForAllMembers
+} from "~controllers/dashboard";
+import {
+  createEvent,
+  deleteEvent,
+  getEventForViewing,
+  resendEventEmail,
+  getEventForScheduling,
+  updateEventSchedule,
+  updateEvent
+} from "~controllers/event";
+import {
+  getAllMembers,
+  getMemberEventCounts,
+  getAllMemberNames
+} from "~controllers/members";
 
 const router = Router();
 
 // DASHBOARD
-// router.get("/dashboard/ap-form", getAPForm)
-// router.get("/dashboard/availability", getAvailability)
-// router.get("/dashboard/event-distribution", getEventDistribution)
-// router.get("/dashboard/events/:id", getEventDistribution)
-// router.get("/dashboard/members-availability", getAvailabilityForAllMembers)
+router.get("/dashboard/ap-form", /* requireAuth */ getAPForm);
+router.get("/dashboard/availability", /* requireAuth */ getAvailability);
+router.get(
+  "/dashboard/event-distribution",
+  /* requireAuth */ getEventDistribution
+);
+router.get("/dashboard/events/:id", /* requireAuth */ getSelectedEvents);
+router.get(
+  "/dashboard/members-availability",
+  /* requireAuth */ getAvailabilityForAllMembers
+);
 
 // EVENT
-// router.post("/event/create", createEvent)
-// router.delete("/event/delete/:id", deleteEvent)
-// router.get("/event/edit/:id", getEventForViewing)
-// router.put("/event/resend-email/:id", resendEventEmail)
-// router.get("/event/review/:id", getEventForScheduling)
-// router.put("/event/update/schedule", updateEventSchedule)
-// router.put("/event/update", updateEvent)
+router.post("/event/create", /* requireStaffRole */ createEvent);
+router.delete("/event/delete/:id", /* requireStaffRole */ deleteEvent);
+router.get("/event/edit/:id", /* requireStaffRole */ getEventForViewing);
+router.put("/event/resend-email/:id", /* requireStaffRole */ resendEventEmail);
+router.get("/event/review/:id", /* requireStaffRole */ getEventForScheduling);
+router.put(
+  "/event/update/schedule",
+  /* requireStaffRole */ updateEventSchedule
+);
+router.put("/event/update", /* requireStaffRole */ updateEvent);
 
 // EVENTS
 // router.get("/events/all", getAllEvents)
@@ -50,6 +79,11 @@ const router = Router();
 // router.delete("/mails/delete-many", deleteManyMails)
 
 // MEMBERS
-router.get("/members/all", /* requiresStaffCredentials */ getAllMembers);
+router.get("/members/all", /* requireStaffRole */ getAllMembers);
+router.get(
+  "/members/event-counts/:id",
+  /* requireStaffRole */ getMemberEventCounts
+);
+router.get("/members/names", /* requireStaffRole */ getAllMemberNames);
 
 export default router;

@@ -16,8 +16,8 @@ import { missingMemberId } from "~messages/errors";
  * Retrieves a members availabilty for a percentage chart.
  *
  * @function getAvailability
- * @returns {object} - eventAvailability: { eventCounts, eventResponses }), months (start month, endmonth),
- * @throws {string}
+ * @returns {Response} - eventAvailability: { eventCounts, eventResponses }), months (start month, endmonth) }
+ * @throws {Error}
  */
 const getAvailability = async (
   req: Request,

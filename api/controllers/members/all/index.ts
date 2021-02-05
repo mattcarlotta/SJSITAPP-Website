@@ -14,7 +14,7 @@ const getAllMembers = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const { page, role } = req.query;
+    const { page, role } = req.body;
 
     const filters = generateFilters(req.query);
 

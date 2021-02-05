@@ -19,8 +19,7 @@ import Event, {
 import User, {
   IUserDocument,
   TActiveMembers,
-  TScheduledEventsForMember,
-  UserSchedule
+  TScheduledEventsForMember
 } from "~models/user";
 import {
   newAuthorizationKeyTemplate,
@@ -205,18 +204,21 @@ const createColumnSchedule = ({
   members
 }: {
   event: IEvent;
-  members: Array<IUserDocument>;
+  members: Array<Record<"_id", Types.ObjectId>>;
 }): TEventSchedule => [
   {
     _id: "employees",
     title: "Employees",
-    employeeIds: members.reduce((result, member) => {
-      const isScheduled = event.scheduledIds!.some(
-        id => typeof member._id === "object" && member._id.equals(id)
-      );
+    employeeIds: members.reduce(
+      (result, member: Record<"_id", Types.ObjectId>) => {
+        const isScheduled = event.scheduledIds!.some(
+          id => typeof member._id === "object" && member._id.equals(id)
+        );
 
-      return !isScheduled ? [...result, member._id] : result;
-    }, [] as Array<Types.ObjectId>)
+        return !isScheduled ? [...result, member._id] : result;
+      },
+      [] as Array<Types.ObjectId>
+    )
   },
   ...event.schedule.map(({ _id, employeeIds }) => ({
     _id,
@@ -322,8 +324,8 @@ const createUserSchedule = ({
   members
 }: {
   event: IEvent;
-  members: Array<IUserDocument>;
-}): Array<UserSchedule> => [
+  members: Array<Record<"_id", Types.ObjectId>>;
+}): Array<{ _id: Types.ObjectId; response: string; notes?: string }> => [
   ...members.map(member => {
     const eventResponse = event.employeeResponses!.find(response =>
       response._id.equals(member._id!.toString())
@@ -542,9 +544,9 @@ const getEventCounts = (
  */
 const getMonthDateRange = (
   date: Date | string
-): { startOfMonth: string; endOfMonth: string } => {
-  const startOfMonth = moment(date).startOf("month").toDate().toString();
-  const endOfMonth = moment(date).endOf("month").toDate().toString();
+): { startOfMonth: Date; endOfMonth: Date } => {
+  const startOfMonth = moment(date).startOf("month").toDate();
+  const endOfMonth = moment(date).endOf("month").toDate();
 
   return { startOfMonth, endOfMonth };
 };
@@ -673,8 +675,8 @@ const findMemberAvailabilty = async (
 
   const scheduledCount: number = await Event.countDocuments({
     eventDate: {
-      $gte: startOfMonth,
-      $lte: endOfMonth
+      $gte: startOfMonth.toString(),
+      $lte: endOfMonth.toString()
     },
     scheduledIds: {
       $in: [existingMember.id]
