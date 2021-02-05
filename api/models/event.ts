@@ -3,9 +3,26 @@ import { Document, Schema, model, Types } from "mongoose";
 
 type TId = Types.ObjectId | string;
 
+export type TEventAccResponses = Array<{
+  id: string;
+  label: string;
+  color: string;
+  value: number;
+}>;
+
 export type TEventAggResponses = Array<{
   _id: TId;
   responses: Array<string>;
+}>;
+
+export type TEventEmptySchedule = Array<{
+  _id: string;
+  employeeIds: Array<never>;
+}>;
+
+export type TEventCountForMember = Array<{
+  name: string;
+  "Event Count": number;
 }>;
 
 export type TEventMemberAvailability = Array<{
@@ -14,6 +31,12 @@ export type TEventMemberAvailability = Array<{
 }>;
 
 export type TEventMemberAvailabilityAvg = Array<{
+  id: string;
+  label: string;
+  value: number;
+}>;
+
+export type TEventMemberAvailabilityAvgs = Array<{
   id: string;
   availability: number;
 }>;
@@ -29,6 +52,23 @@ export type TEventResponses = Array<{
   response: string;
   notes?: string;
 }>;
+
+export interface IEvent {
+  // _id?: Types.ObjectId;
+  eventType: string;
+  eventDate: string;
+  location?: string;
+  employeeResponses?: TEventResponses;
+  schedule: TEventSchedule;
+  scheduledIds?: Array<any>;
+  seasonId: string;
+  team: string;
+  opponent?: string;
+  callTimes: Array<string>;
+  uniform?: string;
+  notes?: string;
+  sentEmailReminders?: boolean;
+}
 
 export interface IEventDocument extends Document {
   // _id?: Types.ObjectId;
