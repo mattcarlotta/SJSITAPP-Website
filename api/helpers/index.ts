@@ -393,8 +393,30 @@ const expirationDate = (): moment.Moment =>
  * @param {object} - query
  * @returns {object}
  */
+
+interface Query {
+  authorizedEmail?: { $regex: any; $options: string };
+  email?: { $regex: any; $options: string };
+  endDate?: Date | string;
+  eventDate?: Record<string, unknown>;
+  endMonth?: Record<string, unknown>;
+  eventType: Record<string, unknown>;
+  expirationDate?: Record<string, unknown>;
+  firstName?: { $regex: any; $options: string };
+  lastName?: { $regex: any; $options: string };
+  opponent?: { $regex: any; $options: string };
+  seasonId?: { $regex: any; $options: string };
+  sendDate?: Record<string, unknown>;
+  sentEmails?: any;
+  sentEmailReminders?: any;
+  startDate?: Record<string, unknown>;
+  startMonth?: Record<string, unknown>;
+  status?: { $eq: any };
+  team?: { $regex: any; $options: string };
+  type?: { $regex: any; $options: string };
+}
 const format = "MM-DD-YYYY";
-const generateFilters = (query: Record<string, unknown>) =>
+const generateFilters = (query: Query): any =>
   !isEmpty(query)
     ? Object.keys(query).reduce((acc, item) => {
         switch (item) {
@@ -487,7 +509,7 @@ const generateFilters = (query: Record<string, unknown>) =>
           }
         }
         return acc;
-      }, {})
+      }, {} as Query)
     : {};
 
 /**
@@ -599,7 +621,11 @@ const findMember = (_id: string): Promise<Record<string, unknown>> =>
     eventAvailability: { eventCounts, eventResponses }, memberResponseCount, memberScheduleEvents: [
      { id: "scheduled", events: scheduledCount }, { id: "available", events: eventCounts }]
  */
-const findMemberAvailabilty = async (existingMember, selectedDate, res) => {
+const findMemberAvailabilty = async (
+  existingMember: IUserDocument,
+  selectedDate: string,
+  res: Response
+): Promise<Response> => {
   const { startOfMonth, endOfMonth } = getMonthDateRange(selectedDate);
 
   const eventCounts = await getEventCounts(startOfMonth, endOfMonth);
@@ -668,7 +694,7 @@ const findMemberAvailabilty = async (existingMember, selectedDate, res) => {
     (_, count) => count
   );
 
-  res.status(200).json({
+  return res.status(200).json({
     eventAvailability: createMemberAvailabilityAverage({
       eventCounts,
       eventResponses
