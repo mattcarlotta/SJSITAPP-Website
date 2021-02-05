@@ -1,13 +1,5 @@
 import { Router } from "express";
-import {
-  createUser,
-  deleteUser,
-  dropDB,
-  getUsers,
-  seedDB,
-  updateUser,
-  viewUser
-} from "~controllers/users";
+import { getAllMembers } from "~controllers/members";
 
 const router = Router();
 
@@ -57,18 +49,7 @@ const router = Router();
 // MAILS
 // router.delete("/mails/delete-many", deleteManyMails)
 
-router.post("/users/create", createUser);
-
-router.get("/users", getUsers);
-
-router.post("/users/seed", seedDB);
-
-router.post("/users/drop", dropDB);
-
-router.get("/users/view/:id", viewUser);
-
-router.put("/users/update/:id", updateUser);
-
-router.delete("/users/delete/:id", deleteUser);
+// MEMBERS
+router.get("/members/all", /* requiresStaffCredentials */ getAllMembers);
 
 export default router;

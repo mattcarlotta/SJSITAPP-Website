@@ -19,6 +19,7 @@
     "strict": true,
     "target": "es6",
     "paths": {
+      "~root/*": ["*"],
       "~logger": ["logger/index"],
       "~controllers/*": ["api/controllers/*"],
       "~database/*": ["api/database/*"],

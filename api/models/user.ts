@@ -44,9 +44,15 @@ export interface IUserDocument extends Document {
   emailReminders?: boolean;
 }
 
+// TODO Fix paginate typings
 export interface IUserModel extends Model<IUserDocument> {
   createPassword: (password: string) => Promise<string>;
   comparePassword: (password: string) => Promise<boolean>;
+  paginate(
+    query?: any,
+    options?: any,
+    callback?: (err: any, result: any) => void
+  ): Promise<any>;
 }
 
 // admin, staff, employee

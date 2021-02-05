@@ -525,16 +525,13 @@ const getEndOfDay = (): string => moment().endOf("day").format();
 const getEventCounts = (
   startMonth: Date | string,
   endMonth: Date | string
-): Promise<number> =>
-  Event.countDocuments(
-    {
-      eventDate: {
-        $gte: moment(startMonth).toDate().toString(),
-        $lte: moment(endMonth).toDate().toString()
-      }
-    },
-    (_, count) => count
-  );
+): any =>
+  Event.countDocuments({
+    eventDate: {
+      $gte: moment(startMonth).toDate().toString(),
+      $lte: moment(endMonth).toDate().toString()
+    }
+  });
 
 /**
  * Helper function to generate a date range.
@@ -593,8 +590,8 @@ const getUsers = async ({
  * @param _id
  * @returns {(object|undefined)}
  */
-const findEventById = (_id: string): Record<string, unknown> =>
-  Event.findOne({ _id }, { __v: 0 });
+// const findEventById = (_id: string): any =>
+//   Event.findOne({ _id }, { __v: 0 }).lean();
 
 /**
  * Find a single member.
@@ -603,8 +600,8 @@ const findEventById = (_id: string): Record<string, unknown> =>
  * @param _id
  * @returns {(object|undefined)}
  */
-const findMember = (_id: string): Record<string, unknown> =>
-  User.findOne({ _id }, { password: 0, token: 0, __v: 0 });
+// const findMember = (_id: string): Record<string, unknown> =>
+//   User.findOne({ _id }, { password: 0, token: 0, __v: 0 });
 
 /**
  * Find all member availability between a date range.
@@ -674,18 +671,15 @@ const findMemberAvailabilty = async (
     }
   ]);
 
-  const scheduledCount: number = await Event.countDocuments(
-    {
-      eventDate: {
-        $gte: startOfMonth,
-        $lte: endOfMonth
-      },
-      scheduledIds: {
-        $in: [existingMember.id]
-      }
+  const scheduledCount: number = await Event.countDocuments({
+    eventDate: {
+      $gte: startOfMonth,
+      $lte: endOfMonth
     },
-    (_, count) => count
-  );
+    scheduledIds: {
+      $in: [existingMember.id]
+    }
+  });
 
   return res.status(200).json({
     eventAvailability: createMemberAvailabilityAverage({
@@ -826,8 +820,8 @@ export {
   createSignupToken,
   createUniqueName,
   expirationDate,
-  findEventById,
-  findMember,
+  // findEventById,
+  // findMember,
   findMemberAvailabilty,
   findMemberEvents,
   generateFilters,
