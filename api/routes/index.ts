@@ -1,5 +1,12 @@
 import { Router } from "express";
-import { signedin, signin, signout, signup } from "~controllers/auth";
+import {
+  sendEmailResetToken,
+  signedin,
+  signin,
+  signout,
+  signup,
+  updatePassword
+} from "~controllers/auth";
 import {
   getAPForm,
   getAvailability,
@@ -21,11 +28,19 @@ import {
   getMemberEventCounts,
   getAllMemberNames
 } from "~controllers/members";
-import { localLogin, localSignup, requireRelogin } from "~services/strategies";
+import {
+  localLogin,
+  localSignup,
+  newPassword,
+  requireRelogin,
+  resetToken
+} from "~services/strategies";
 
 const router = Router();
 
 // AUTH
+router.put("/reset-password", resetToken, sendEmailResetToken);
+router.put("/new-password", newPassword, updatePassword);
 router.post("/signin", localLogin, signin);
 router.get("/signedin", requireRelogin, signedin);
 router.get("/signout", signout);

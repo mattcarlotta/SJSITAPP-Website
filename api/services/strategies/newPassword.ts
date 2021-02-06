@@ -44,7 +44,7 @@ export const updatePassword = async (
     );
 
     // @ts-ignore
-    req.user = existingUser;
+    req.user = existingUser.email;
 
     return next();
   } catch (err) {
