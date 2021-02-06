@@ -24,7 +24,7 @@ import {
  *  event,
  *  users: { ...member, response: string, notes: string }
  * }
- * @throws {Error}
+ * @throws {ResponseError}
  */
 const getEventForScheduling = async (
   req: Request,

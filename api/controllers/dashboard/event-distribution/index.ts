@@ -10,7 +10,7 @@ import type { TActiveMembers } from "~models/user";
  *
  * @function getEventDistribution
  * @returns {Response} - members: { members, memberEventCounts }
- * @throws {Error}
+ * @throws {ResponseError}
  */
 const getEventDistribution = async (
   req: Request,

@@ -14,7 +14,7 @@ import {
  *
  * @function createEvent
  * @returns {Response} - message
- * @throws {Error}
+ * @throws {ResponseError}
  */
 const createEvent = async (req: Request, res: Response): Promise<Response> => {
   try {

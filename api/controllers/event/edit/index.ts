@@ -8,7 +8,7 @@ import { missingEventId, unableToLocateEvent } from "~messages/errors";
  *
  * @function getEventForViewing
  * @returns {Response} - event
- * @throws {Error}
+ * @throws {ResponseError}
  */
 const getEventForViewing = async (
   req: Request,

@@ -8,7 +8,7 @@ import { missingEventId, unableToLocateEvent } from "~messages/errors";
  *
  * @function deleteEvent
  * @returns {Response} - message
- * @throws {Error}
+ * @throws {ResponseError}
  */
 const deleteEvent = async (req: Request, res: Response): Promise<Response> => {
   try {

@@ -1,75 +1,56 @@
 import { Router } from "express";
-import {
-  sendEmailResetToken,
-  signedin,
-  signin,
-  signout,
-  signup,
-  updatePassword
-} from "~controllers/auth";
-import {
-  getAPForm,
-  getAvailability,
-  getEventDistribution,
-  getSelectedEvents,
-  getAvailabilityForAllMembers
-} from "~controllers/dashboard";
-import {
-  createEvent,
-  deleteEvent,
-  getEventForViewing,
-  resendEventEmail,
-  getEventForScheduling,
-  updateEventSchedule,
-  updateEvent
-} from "~controllers/event";
-import {
-  getAllMembers,
-  getMemberEventCounts,
-  getAllMemberNames
-} from "~controllers/members";
-import {
-  localLogin,
-  localSignup,
-  newPassword,
-  requireRelogin,
-  resetToken
-} from "~services/strategies";
+import * as auth from "~controllers/auth";
+import * as dashboard from "~controllers/dashboard";
+import * as event from "~controllers/event";
+import * as members from "~controllers/members";
+// import { requireAuth, requireStaffRole } from "~services/strategies";
 
 const router = Router();
 
 // AUTH
-router.put("/reset-password", resetToken, sendEmailResetToken);
-router.put("/new-password", newPassword, updatePassword);
-router.post("/signin", localLogin, signin);
-router.get("/signedin", requireRelogin, signedin);
-router.get("/signout", signout);
-router.post("/signup", localSignup, signup);
+router.put("/reset-password", auth.sendEmailResetToken);
+router.put("/new-password", auth.updatePassword);
+router.post("/signin", auth.signin);
+router.get("/signedin", auth.signedin);
+router.get("/signout", auth.signout);
+router.post("/signup", auth.signup);
 
 // DASHBOARD
-router.get("/dashboard/ap-form", /* requireAuth */ getAPForm);
-router.get("/dashboard/availability", /* requireAuth */ getAvailability);
+router.get("/dashboard/ap-form", /* requireAuth */ dashboard.getAPForm);
+router.get(
+  "/dashboard/availability",
+  /* requireAuth */ dashboard.getAvailability
+);
 router.get(
   "/dashboard/event-distribution",
-  /* requireAuth */ getEventDistribution
+  /* requireAuth */ dashboard.getEventDistribution
 );
-router.get("/dashboard/events/:id", /* requireAuth */ getSelectedEvents);
+router.get(
+  "/dashboard/events/:id",
+  /* requireAuth */ dashboard.getSelectedEvents
+);
 router.get(
   "/dashboard/members-availability",
-  /* requireAuth */ getAvailabilityForAllMembers
+  /* requireAuth */ dashboard.getAvailabilityForAllMembers
 );
 
 // EVENT
-router.post("/event/create", /* requireStaffRole */ createEvent);
-router.delete("/event/delete/:id", /* requireStaffRole */ deleteEvent);
-router.get("/event/edit/:id", /* requireStaffRole */ getEventForViewing);
-router.put("/event/resend-email/:id", /* requireStaffRole */ resendEventEmail);
-router.get("/event/review/:id", /* requireStaffRole */ getEventForScheduling);
+router.post("/event/create", /* requireStaffRole */ event.createEvent);
+router.delete("/event/delete/:id", /* requireStaffRole */ event.deleteEvent);
+router.get("/event/edit/:id", /* requireStaffRole */ event.getEventForViewing);
+router.put(
+  "/event/resend-email/:id",
+  /* requireStaffRole */ event.resendEventEmail
+);
+router.get(
+  "/event/review/:id",
+  /* requireStaffRole */ event.getEventForScheduling
+);
 router.put(
   "/event/update/schedule",
-  /* requireStaffRole */ updateEventSchedule
+  /* requireStaffRole */ event.updateEventSchedule
 );
-router.put("/event/update", /* requireStaffRole */ updateEvent);
+router.put("/event/update", /* requireStaffRole */ event.updateEvent);
 
 // EVENTS
 // router.get("/events/all", getAllEvents)
@@ -102,11 +83,11 @@ router.put("/event/update", /* requireStaffRole */ updateEvent);
 // router.delete("/mails/delete-many", deleteManyMails)
 
 // MEMBERS
-router.get("/members/all", /* requireStaffRole */ getAllMembers);
+router.get("/members/all", /* requireStaffRole */ members.getAllMembers);
 router.get(
   "/members/event-counts/:id",
-  /* requireStaffRole */ getMemberEventCounts
+  /* requireStaffRole */ members.getMemberEventCounts
 );
-router.get("/members/names", /* requireStaffRole */ getAllMemberNames);
+router.get("/members/names", /* requireStaffRole */ members.getAllMemberNames);
 
 export default router;

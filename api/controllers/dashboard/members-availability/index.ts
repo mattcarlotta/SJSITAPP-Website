@@ -14,7 +14,7 @@ import {
  *
  * @function getAvailability
  * @returns {Response} - membersAvailability: { eventCounts, eventResponses, members }), months (start month, endmonth),
- * @throws {Error}
+ * @throws {ResponseError}
  */
 const getAvailabilityForAllMembers = async (
   _: Request,

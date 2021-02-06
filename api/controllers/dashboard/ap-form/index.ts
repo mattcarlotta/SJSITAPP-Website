@@ -7,7 +7,7 @@ import { createDate, getEventCounts, sendError } from "~helpers";
  *
  * @function getAPForm
  * @returns {Response} apform: { existingForm, eventCounts }
- * @throws {Error}
+ * @throws {ResponseError}
  */
 const getAPForm = async (_: Request, res: Response): Promise<Response> => {
   try {

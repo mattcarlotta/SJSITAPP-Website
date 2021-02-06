@@ -5,7 +5,7 @@ import { clearSession } from "~helpers";
  * Allows a user to log out of the application (removes cookie).
  *
  * @function signout
- * @returns {string}
+ * @returns {Response}
  */
 const signout = (req: Request, res: Response): Response =>
   clearSession(req, res, 200);

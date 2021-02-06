@@ -12,7 +12,7 @@ import {
  *
  * @function updateEventSchedule
  * @returns {Response} - message
- * @throws {Error}
+ * @throws {ResponseError}
  */
 const updateEventSchedule = async (
   req: Request,

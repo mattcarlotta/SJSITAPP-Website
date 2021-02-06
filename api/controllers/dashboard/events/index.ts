@@ -15,7 +15,7 @@ import { missingMemberId } from "~messages/errors";
  *
  * @function getSelectedEvents
  * @returns {Response} - populated events
- * @throws {string}
+ * @throws {ResponseError}
  */
 const getSelectedEvents = async (
   req: Request,

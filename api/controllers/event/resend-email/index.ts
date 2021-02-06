@@ -10,7 +10,7 @@ import { missingEventId, unableToLocateEvent } from "~messages/errors";
  * @arg req - Request
  * @arg res - Response
  * @returns {Response} message
- * @throws {Error}
+ * @throws {ResponseError}
  */
 const resendEventEmail = async (
   req: Request,

@@ -14,7 +14,7 @@ import {
  *
  * @function updateEvent
  * @returns {string} - message
- * @throws {string}
+ * @throws {ResponseError}
  */
 const updateEvent = async (req: Request, res: Response): Promise<Response> => {
   try {

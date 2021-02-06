@@ -16,7 +16,7 @@ import { missingMemberId } from "~messages/errors";
  *
  * @function getAvailability
  * @returns {Response} - eventAvailability: { eventCounts, eventResponses }), months (start month, endmonth) }
- * @throws {Error}
+ * @throws {ResponseError}
  */
 const getAvailability = async (
   req: Request,
