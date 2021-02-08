@@ -30,7 +30,7 @@ const sendEmailResetToken = async (
     if (!existingUser) throw missingEmailCreds;
 
     // add token to user
-    await User.updateOne({ email }, { token });
+    await existingUser.update({ token });
 
     // creates an email template for a password reset
     await Mail.create({

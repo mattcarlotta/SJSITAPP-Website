@@ -4,6 +4,7 @@ import {
   getMemberEventCounts,
   getAllMemberNames
 } from "~controllers/members";
+// import { requireAuth, requireStaffRole } from "~services/strategies";
 
 const memberRoutes = (router: Router): void => {
   router.get("/members/all", /* requireStaffRole */ getAllMembers);

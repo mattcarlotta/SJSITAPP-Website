@@ -13,6 +13,7 @@ import {
   deleteManyEvents,
   getScheduledEvents
 } from "~controllers/events";
+// import { requireAuth, requireStaffRole } from "~services/strategies";
 
 const eventRoutes = (router: Router): void => {
   router.post("/event/create", /* requireStaffRole */ createEvent);

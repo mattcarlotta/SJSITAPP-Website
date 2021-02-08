@@ -2,6 +2,7 @@ import { Router } from "express";
 import authRoutes from "./auth";
 import dashboardRoutes from "./dashboard";
 import eventRoutes from "./event";
+import formRoutes from "./form";
 import memberRoutes from "./member";
 // import { requireAuth, requireStaffRole } from "~services/strategies";
 
@@ -10,6 +11,7 @@ const router = Router();
 authRoutes(router);
 dashboardRoutes(router);
 eventRoutes(router);
+formRoutes(router);
 memberRoutes(router);
 // EVENT
 

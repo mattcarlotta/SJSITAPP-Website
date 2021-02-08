@@ -18,7 +18,7 @@ const deleteEvent = async (req: Request, res: Response): Promise<Response> => {
     const existingEvent = await Event.findOne({ _id });
     if (!existingEvent) throw unableToLocateEvent;
 
-    await Event.deleteOne({ _id });
+    await existingEvent.delete();
 
     return res.status(200).json({ message: "Successfully deleted the event." });
   } catch (err) {

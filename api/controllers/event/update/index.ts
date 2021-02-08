@@ -51,22 +51,19 @@ const updateEvent = async (req: Request, res: Response): Promise<Response> => {
     const schedule = createSchedule(callTimes);
     const scheduleUnchanged = isEqual(existingEvent.callTimes, callTimes);
 
-    await Event.updateOne(
-      { _id },
-      {
-        callTimes,
-        eventDate,
-        eventType,
-        location,
-        notes,
-        opponent,
-        seasonId,
-        team,
-        uniform,
-        schedule: scheduleUnchanged ? existingEvent.schedule : schedule,
-        scheduledIds: scheduleUnchanged ? existingEvent.scheduledIds : []
-      }
-    );
+    await existingEvent.update({
+      callTimes,
+      eventDate,
+      eventType,
+      location,
+      notes,
+      opponent,
+      seasonId,
+      team,
+      uniform,
+      schedule: scheduleUnchanged ? existingEvent.schedule : schedule,
+      scheduledIds: scheduleUnchanged ? existingEvent.scheduledIds : []
+    });
 
     return res.status(201).json({ message: "Successfully updated the event." });
   } catch (err) {

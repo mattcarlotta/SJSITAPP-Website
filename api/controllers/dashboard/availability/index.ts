@@ -24,7 +24,7 @@ const getAvailability = async (
 ): Promise<Response> => {
   try {
     const _id = parseSession(req);
-    if (!_id) throw String(missingMemberId);
+    if (!_id) throw missingMemberId;
 
     const currentDate = createDate().add(1, "months").toDate();
     const eventAvailability: Array<Record<string, unknown>> = [];

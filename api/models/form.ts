@@ -8,7 +8,7 @@ export interface IFormDocument extends Document {
   endMonth: Date;
   expirationDate: Date;
   seasonId: string;
-  sendEmailNotificationsDate: Date;
+  sendEmailNotificationsDate: Date | string;
   sentEmails?: boolean;
   notes?: string;
 }

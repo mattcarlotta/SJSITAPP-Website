@@ -6,6 +6,7 @@ import {
   getSelectedEvents,
   getAvailabilityForAllMembers
 } from "~controllers/dashboard";
+// import { requireAuth } from "~services/strategies";
 
 const dashboardRoutes = (router: Router): void => {
   router.get("/dashboard/ap-form", /* requireAuth */ getAPForm);

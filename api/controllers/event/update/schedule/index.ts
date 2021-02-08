@@ -25,10 +25,9 @@ const updateEventSchedule = async (
     const existingEvent = await Event.findOne({ _id });
     if (!existingEvent) throw unableToLocateEvent;
 
-    await Event.updateOne(
-      { _id },
-      { $set: { schedule, scheduledIds: updateScheduleIds(schedule) } }
-    );
+    await existingEvent.update({
+      $set: { schedule, scheduledIds: updateScheduleIds(schedule) }
+    });
 
     return res
       .status(201)

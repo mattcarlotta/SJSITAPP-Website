@@ -17,13 +17,13 @@ const resendEventEmail = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const { id: _id } = req.query;
+    const { id: _id } = req.params;
     if (!_id) throw missingEventId;
 
     const existingEvent = Event.findOne({ _id });
     if (!existingEvent) throw unableToLocateEvent;
 
-    await Event.updateOne({ _id }, { sentEmailReminders: false });
+    await existingEvent.update({ sentEmailReminders: false });
 
     return res.status(200).json({
       message:
