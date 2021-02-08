@@ -20,9 +20,7 @@ const signin = async (req: Request, res: Response): Promise<Response> => {
     if (existingUser.status !== "active") throw invalidStatus;
 
     // compare password to existingUser password
-    const validPassword = await existingUser.comparePassword(
-      existingUser.password
-    );
+    const validPassword = await existingUser.comparePassword(password);
     if (!validPassword) throw badCredentials;
 
     req.session!.user = {

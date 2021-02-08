@@ -84,7 +84,7 @@ userSchema.statics.createPassword = async function createNewPassword(
 };
 
 // Set a compare password method on the model
-userSchema.methods.comparePassword = function compareNewPassword(
+userSchema.methods.comparePassword = function comparePassword(
   password: string
 ) {
   return bcrypt.compare(password, this.password);
