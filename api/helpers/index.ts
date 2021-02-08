@@ -54,7 +54,7 @@ const toAverage = (num: number, total: number) =>
  * @returns {object}
  */
 const createAuthMail = (
-  authorizedEmail: Array<string>,
+  authorizedEmail: string,
   token: string,
   expiration: moment.Moment,
   role: string

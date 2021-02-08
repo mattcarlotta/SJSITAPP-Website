@@ -1,0 +1,38 @@
+import type { Request, Response } from "express";
+import get from "lodash.get";
+import { Mail } from "~models";
+import { generateFilters, sendError } from "~helpers";
+
+/**
+ * Retrieves all events for ViewEvents page.
+ *
+ * @function getAllMail
+ * @returns {Response} - mail and total mail documents
+ * @throws {ResponseError}
+ */
+const getAllMail = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const { page } = req.query;
+
+    const filters = generateFilters(req.query);
+
+    const results = await Mail.paginate(
+      { ...filters },
+      {
+        sort: { sendDate: -1 },
+        page: parseInt(String(page), 10),
+        limit: 10,
+        select: "-notes -__v"
+      }
+    );
+
+    const mail = get(results, ["docs"]);
+    const totalDocs = get(results, ["totalDocs"]);
+
+    return res.status(200).json({ mail, totalDocs });
+  } catch (err) {
+    return sendError(err, 400, res);
+  }
+};
+
+export default getAllMail;

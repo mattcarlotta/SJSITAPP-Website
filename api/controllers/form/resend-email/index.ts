@@ -15,13 +15,13 @@ const resendFormEmail = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const { id: _id } = req.query;
+    const { id: _id } = req.params;
     if (!_id) throw missingFormId;
 
     const existingForm = await Form.findOne({ _id }, { __v: 0 });
     if (!existingForm) throw unableToLocateForm;
 
-    await existingForm.update({
+    await existingForm.updateOne({
       sendEmailNotificationsDate: createDate().toDate(),
       sentEmails: false
     });

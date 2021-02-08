@@ -38,7 +38,7 @@ const updatePassword = async (
     const newPassword = await User.createPassword(password);
 
     // update user's password
-    await existingUser.update({ $set: { password: newPassword } });
+    await existingUser.updateOne({ $set: { password: newPassword } });
 
     return res
       .status(200)

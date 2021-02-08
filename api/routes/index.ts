@@ -3,8 +3,11 @@ import authRoutes from "./auth";
 import dashboardRoutes from "./dashboard";
 import eventRoutes from "./event";
 import formRoutes from "./form";
+import mailRoutes from "./mail";
 import memberRoutes from "./member";
-// import { requireAuth, requireStaffRole } from "~services/strategies";
+import seasonRoutes from "./season";
+import teamRoutes from "./team";
+import tokenRoutes from "./token";
 
 const router = Router();
 
@@ -12,32 +15,10 @@ authRoutes(router);
 dashboardRoutes(router);
 eventRoutes(router);
 formRoutes(router);
+mailRoutes(router);
 memberRoutes(router);
-// EVENT
-
-// FORM
-// router.post("/form/create", createForm)
-// router.delete("/form/delete/:id", deleteForm)
-// router.get("/form/edit/:id", getFormForViewing)
-// router.put("/form/resend-email/:id", resendFormEmails)
-// router.put("/form/update/ap", updateApForm)
-// router.put("/form/update", updateForm)
-// router.get("/form/view/:id", viewApForm)
-
-// FORMS
-// router.get("/forms/all", getAllForms)
-// router.delete("/forms/delete-many", deleteManyEvents)
-
-// MAIL
-// router.get("/mail/all", getAllMail)
-// router.post("/mail/create", createMail)
-// router.post("/mail/contact", contactUs)
-// router.delete("/mail/delete/:id", deleteMail)
-// router.get("/mail/edit/:id", getMailForViewing)
-// router.put("/mail/resend/:id", resendMail)
-// router.put("/mail/update", updateMail)
-
-// MAILS
-// router.delete("/mails/delete-many", deleteManyMails)
+seasonRoutes(router);
+teamRoutes(router);
+tokenRoutes(router);
 
 export default router;

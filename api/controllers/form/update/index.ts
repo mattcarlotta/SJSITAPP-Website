@@ -64,7 +64,7 @@ const updateForm = async (req: Request, res: Response): Promise<Response> => {
     const emailNotificationStatus =
       incomingSendEmailsDate === currentSendEmailsDate && sentEmails;
 
-    await formExists.update({
+    await formExists.updateOne({
       seasonId,
       startMonth,
       endMonth,

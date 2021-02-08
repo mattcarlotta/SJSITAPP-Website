@@ -51,7 +51,7 @@ const updateEvent = async (req: Request, res: Response): Promise<Response> => {
     const schedule = createSchedule(callTimes);
     const scheduleUnchanged = isEqual(existingEvent.callTimes, callTimes);
 
-    await existingEvent.update({
+    await existingEvent.updateOne({
       callTimes,
       eventDate,
       eventType,

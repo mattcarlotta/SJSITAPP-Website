@@ -23,7 +23,7 @@ const resendEventEmail = async (
     const existingEvent = Event.findOne({ _id });
     if (!existingEvent) throw unableToLocateEvent;
 
-    await existingEvent.update({ sentEmailReminders: false });
+    await existingEvent.updateOne({ sentEmailReminders: false });
 
     return res.status(200).json({
       message:
