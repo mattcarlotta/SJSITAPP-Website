@@ -12,9 +12,9 @@ import { getAllTokens, deleteManyTokens } from "~controllers/tokens";
 const tokenRoutes = (router: Router): void => {
   router.post("/token/create", /* requireStaffRole */ createToken);
   router.delete("/token/delete/:id", /* requireStaffRole */ deleteToken);
-  router.get("/form/edit/:id", /* requireStaffRole */ getTokenForViewing);
-  router.put("/form/resend-email/:id", /* requireStaffRole */ resendToken);
-  router.put("/form/update/ap", /* requireAuth */ updateToken);
+  router.get("/token/edit/:id", /* requireStaffRole */ getTokenForViewing);
+  router.put("/token/resend-email/:id", /* requireStaffRole */ resendToken);
+  router.put("/token/update", /* requireAuth */ updateToken);
 
   router.get("/tokens/all", /* requireStaffRole */ getAllTokens);
   router.delete("/tokens/delete-many", /* requireStaffRole */ deleteManyTokens);
