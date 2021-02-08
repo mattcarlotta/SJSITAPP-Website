@@ -1,5 +1,6 @@
 import mongoosePaginate from "mongoose-paginate-v2";
 import { Document, Schema, model } from "mongoose";
+import { PaginateModel } from "./pagination";
 
 export interface IMailDocument extends Document {
   // _id?: Types.ObjectId;
@@ -10,6 +11,8 @@ export interface IMailDocument extends Document {
   status: string;
   subject: string;
 }
+
+export type TMailModel = PaginateModel<IMailDocument>;
 
 // email
 const mailSchema = new Schema<IMailDocument>({
@@ -26,6 +29,6 @@ const mailSchema = new Schema<IMailDocument>({
 
 mailSchema.plugin(mongoosePaginate);
 
-const MailModel = model<IMailDocument>("Mail", mailSchema);
+const MailModel = model<IMailDocument, TMailModel>("Mail", mailSchema);
 
 export default MailModel;

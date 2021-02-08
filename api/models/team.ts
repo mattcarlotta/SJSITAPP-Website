@@ -1,5 +1,6 @@
 import mongoosePaginate from "mongoose-paginate-v2";
 import { Document, Schema, model } from "mongoose";
+import { PaginateModel } from "./pagination";
 
 export interface ITeamDocument extends Document {
   // _id?: Types.ObjectId;
@@ -7,6 +8,8 @@ export interface ITeamDocument extends Document {
   team: string;
   name: string;
 }
+
+export type TTeamModel = PaginateModel<ITeamDocument>;
 
 // NHL/AHL teams
 const teamSchema = new Schema<ITeamDocument>({
@@ -17,6 +20,6 @@ const teamSchema = new Schema<ITeamDocument>({
 
 teamSchema.plugin(mongoosePaginate);
 
-const TeamModel = model<ITeamDocument>("Team", teamSchema);
+const TeamModel = model<ITeamDocument, TTeamModel>("Team", teamSchema);
 
 export default TeamModel;

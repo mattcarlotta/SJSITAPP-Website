@@ -10,6 +10,7 @@ tsconfigpaths.register({
     "~helpers": ["api/helpers/index"],
     "~messages/*": ["api/messages/*"],
     "~middlewares": ["api/middlewares/index"],
+    "~models": ["api/models/index"],
     "~models/*": ["api/models/*"],
     "~routes/*": ["api/routes/*"],
     "~routes": ["api/routes/index"],

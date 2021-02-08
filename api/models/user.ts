@@ -1,6 +1,7 @@
 import mongoosePaginate from "mongoose-paginate-v2";
-import { Document, Model, Schema, model, Types } from "mongoose";
+import { Document, Schema, model, Types } from "mongoose";
 import bcrypt from "bcryptjs";
+import { PaginateModel } from "./pagination";
 
 export type TActiveMembers = Array<{
   _id: Types.ObjectId;
@@ -46,15 +47,9 @@ export interface IUserDocument extends Document {
   comparePassword: (password: string) => Promise<boolean>;
 }
 
-// TODO Fix paginate typings
-export interface IUserModel extends Model<IUserDocument> {
+export interface IUserModel extends PaginateModel<IUserDocument> {
   createPassword: (password: string) => Promise<string>;
   comparePassword: (password: string) => Promise<boolean>;
-  paginate(
-    query?: any,
-    options?: any,
-    callback?: (err: any, result: any) => void
-  ): Promise<any>;
 }
 
 // admin, staff, employee

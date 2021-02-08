@@ -8,8 +8,8 @@ import { User } from "~models";
  * Middleware function to check if a user is an admin/staff and the session is valid.
  *
  * @function requireStaffRole
- * @returns {function}
- * @throws {Error}
+ * @returns {Promise}
+ * @throws {ResponseError}
  */
 const requireStaffRole = async (
   req: Request,

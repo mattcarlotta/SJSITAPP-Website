@@ -1,5 +1,6 @@
 import mongoosePaginate from "mongoose-paginate-v2";
 import { Document, Schema, model, Types } from "mongoose";
+import { PaginateModel } from "./pagination";
 
 type TId = Types.ObjectId | string;
 
@@ -87,6 +88,8 @@ export interface IEventDocument extends Document {
   sentEmailReminders?: boolean;
 }
 
+export type TEventModel = PaginateModel<IEventDocument>;
+
 // event
 const eventSchema = new Schema<IEventDocument>({
   eventType: { type: String, default: "Game", required: true },
@@ -130,6 +133,6 @@ eventSchema.pre("save", function saveSchedule(next) {
   next();
 });
 
-const EventModel = model<IEventDocument>("Event", eventSchema);
+const EventModel = model<IEventDocument, TEventModel>("Event", eventSchema);
 
 export default EventModel;

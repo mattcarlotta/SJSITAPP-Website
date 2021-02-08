@@ -1,5 +1,6 @@
 import mongoosePaginate from "mongoose-paginate-v2";
 import { Document, Schema, model } from "mongoose";
+import { PaginateModel } from "./pagination";
 
 export interface IFormDocument extends Document {
   // _id?: Types.ObjectId;
@@ -11,6 +12,8 @@ export interface IFormDocument extends Document {
   sentEmails?: boolean;
   notes?: string;
 }
+
+export type TFormModel = PaginateModel<IFormDocument>;
 
 // monthly form
 const formSchema = new Schema<IFormDocument>({
@@ -28,6 +31,6 @@ const formSchema = new Schema<IFormDocument>({
 
 formSchema.plugin(mongoosePaginate);
 
-const FormModel = model<IFormDocument>("Form", formSchema);
+const FormModel = model<IFormDocument, TFormModel>("Form", formSchema);
 
 export default FormModel;

@@ -1,6 +1,6 @@
 const { LOCALHOST } = process.env;
 
-export default (
+const newPasswordTemplate = (
   firstName: string,
   lastName: string,
   token: string
@@ -25,3 +25,5 @@ export default (
     Or click on this link:
     <a style="color: #999999; text-decoration: underline; margin-left: 2px;" href="${LOCALHOST}/employee/new-password/verify?token=${token}" target="_blank" rel="noopener noreferrer">${LOCALHOST}/employee/new-password/verify?token=${token}</a>
   </div>`;
+
+export default newPasswordTemplate;

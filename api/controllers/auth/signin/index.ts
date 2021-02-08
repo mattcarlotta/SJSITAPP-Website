@@ -1,5 +1,4 @@
 import type { Request, Response } from "express";
-import bcrypt from "bcryptjs";
 import { User } from "~models";
 import { sendError } from "~helpers";
 import { badCredentials, invalidStatus } from "~messages/errors";
@@ -21,7 +20,9 @@ const signin = async (req: Request, res: Response): Promise<Response> => {
     if (existingUser.status !== "active") throw invalidStatus;
 
     // compare password to existingUser password
-    const validPassword = await bcrypt.compare(password, existingUser.password);
+    const validPassword = await existingUser.comparePassword(
+      existingUser.password
+    );
     if (!validPassword) throw badCredentials;
 
     req.session!.user = {

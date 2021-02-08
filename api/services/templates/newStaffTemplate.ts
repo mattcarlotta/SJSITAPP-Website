@@ -1,6 +1,6 @@
 const { LOCALHOST } = process.env;
 
-export default (
+const newStaffTemplate = (
   token: string,
   expiration: string
 ): string => `<h1 style="margin: 0; text-align: center; font-size: 26px; color: #025f6d;">
@@ -32,3 +32,5 @@ export default (
     Or click on this link:
     <a style="color: #999999; text-decoration: underline; margin-left: 2px;" href="${LOCALHOST}/employee/signup/verify?token=${token}" target="_blank" rel="noopener noreferrer">${LOCALHOST}/employee/signup/verify?token=${token}</a>
   </div>`;
+
+export default newStaffTemplate;

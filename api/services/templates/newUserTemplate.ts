@@ -1,6 +1,6 @@
 const { LOCALHOST } = process.env;
 
-export default (
+const newUserTemplate = (
   firstName: string,
   lastName: string
 ): string => `<h2 style="margin-bottom: 30px; color: #025f6d;text-align: center;">
@@ -21,3 +21,5 @@ export default (
     Or click on this link:
     <a style="color: #999999; text-decoration: underline; margin-left: 2px;" href="${LOCALHOST}/employee/login" target="_blank" rel="noopener noreferrer">${LOCALHOST}/employee/login</a>
   </div>`;
+
+export default newUserTemplate;

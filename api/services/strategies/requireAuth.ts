@@ -7,8 +7,8 @@ import { User } from "~models";
  * Middleware function to check if a user is logged into a session.
  *
  * @function requireAuth
- * @returns {function}
- * @throws {Error}
+ * @returns {Promise}
+ * @throws {ResonseError}
  */
 const requireAuth = async (
   req: Request,
