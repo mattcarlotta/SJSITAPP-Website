@@ -53,7 +53,7 @@ describe("Reset Password Controller", () => {
       });
   });
 
-  it("accepts requests to request reset passwords", async done => {
+  it("accepts requests to reset passwords", async done => {
     await app()
       .put("/api/reset-password")
       .send({ email: user.email })

@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import { connectToDB, createConnectionToDatabase } from "../index";
 import { logErrorMessage, logInfoMessage } from "../../../logger";
 
-const { DATABASE, DROP, EXIT } = process.env;
+const { DATABASE, DROP, EXIT, inTesting } = process.env;
 
 /**
  * Function to tear down the testing Mongo database.
@@ -20,7 +20,7 @@ const { DATABASE, DROP, EXIT } = process.env;
 
 const teardownDB = async (): Promise<any> => {
   try {
-    await connectToDB();
+    if (!inTesting) await connectToDB();
     const db = await createConnectionToDatabase();
     await db.dropDatabase();
     await db.close();
@@ -29,7 +29,7 @@ const teardownDB = async (): Promise<any> => {
       `\x1b[2mutils/\x1b[0m\x1b[1mteardownDB.js\x1b[0m (${DATABASE})\n`
     );
 
-    mongoose.connection.close();
+    if (!inTesting) mongoose.connection.close();
 
     if (EXIT) process.exit(0);
 

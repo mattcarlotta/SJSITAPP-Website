@@ -9,7 +9,7 @@ import { User } from "~models";
  * @returns - { id: string, avatar: string, email: string, firstName: string, lastName: string, role: string }
  * @return {ResponseError}
  */
-const signin = async (req: Request, res: Response): Promise<Response> => {
+const signedin = async (req: Request, res: Response): Promise<Response> => {
   try {
     const _id = parseSession(req);
     if (!_id) throw String("No previous session detected.");
@@ -31,4 +31,4 @@ const signin = async (req: Request, res: Response): Promise<Response> => {
   }
 };
 
-export default signin;
+export default signedin;

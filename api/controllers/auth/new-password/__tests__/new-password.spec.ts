@@ -80,7 +80,7 @@ describe("New Password Controller", () => {
       });
   });
 
-  it("accepts requests to set new passwords unique users", async done => {
+  it("accepts requests to set new passwords", async done => {
     await app()
       .put("/api/new-password")
       .send({ token: user.token, password: "newpassword1234" })
