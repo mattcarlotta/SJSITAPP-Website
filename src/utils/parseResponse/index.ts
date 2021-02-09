@@ -1,5 +1,19 @@
 import get from "lodash.get";
-import { NextApiResponse } from "~types";
+import { NextApiRequest, NextApiResponse } from "~types";
+
+/**
+ * Helper function to parse a cookie from an API request.
+ *
+ * @function parseCookie
+ * @param {obj} req - an API request.
+ * @returns {obj} - a object with a cookie from req.headers.cookie.
+ */
+export function parseCookie(
+  req: NextApiRequest
+): { headers: { cookie: any } } | undefined {
+  const cookie = get(req, ["headers", "cookie"]);
+  return cookie ? { headers: { cookie } } : undefined;
+}
 
 /**
  * Helper function to parse a message from an API response.
