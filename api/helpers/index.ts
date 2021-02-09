@@ -15,16 +15,16 @@ import Event, {
   TEventMemberAvailabilityAvg,
   TEventMemberAvailabilityAvgs,
   TEventSchedule
-} from "~models/event";
+} from "../models/event";
 import User, {
   IUserDocument,
   TActiveMembers,
   TScheduledEventsForMember
-} from "~models/user";
+} from "../models/user";
 import {
   newAuthorizationKeyTemplate,
   newStaffTemplate
-} from "~services/templates";
+} from "../services/templates";
 
 const toMongooseId = Types.ObjectId;
 

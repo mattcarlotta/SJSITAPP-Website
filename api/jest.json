@@ -7,13 +7,18 @@
     "~logger": "<rootDir>../logger",
     "~api/(.*)$": "<rootDir>$1",
     "~controllers/(.*)$": "<rootDir>controllers/$1",
-    "~database": "<rootDir>database",
     "~database/(.*)$": "<rootDir>database/$1",
+    "~database": "<rootDir>database",
+    "~helpers": "<rootDir>helpers",
+    "~messages/(.*)$": "<rootDir>messages/$1",
     "~middlewares": "<rootDir>middlewares",
     "~models/(.*)$": "<rootDir>models/$1",
-    "~routes": "<rootDir>routes/index",
+    "~models": "<rootDir>models",
     "~routes/(.*)$": "<rootDir>routes/$1",
-    "~test/(.*)$": "<rootDir>test/$1"
+    "~routes": "<rootDir>routes/index",
+    "~services/(.*)$": "<rootDir>services/$1",
+    "~test/(.*)$": "<rootDir>test/$1",
+    "~utils": "<rootDir>../utils/$1"
   },
   "transform": {
     "^.+\\.(ts|js)$": "babel-jest"

@@ -3,9 +3,8 @@
 const passwordResetSuccess = (email: string): string =>
   `The password has been reset for ${email}. Please sign into your account with your new password.`;
 
-const passwordResetToken = (email: string): { message: string } => ({
-  message: `The password reset request has been accepted. Your request is being processed. Please check ${email} for a confirmation link to set up a new password.`
-});
+const passwordResetToken = (email: string): string =>
+  `The password reset request has been accepted. Your request is being processed. Please check ${email} for a confirmation link to set up a new password.`;
 
 const thanksForReg = (
   firstName: string,

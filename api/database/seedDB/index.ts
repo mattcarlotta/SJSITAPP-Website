@@ -49,9 +49,10 @@ const seedDB = async (): Promise<any> => {
       `\x1b[2mutils/\x1b[0m\x1b[1mseedDB.js\x1b[0m (${DATABASE})\n`
     );
 
-    mongoose.connection.close();
-
-    if (EXIT) process.exit(0);
+    if (EXIT) {
+      mongoose.connection.close();
+      process.exit(0);
+    }
 
     return null;
   } catch (err) {
@@ -59,7 +60,7 @@ const seedDB = async (): Promise<any> => {
 
     mongoose.connection.close();
 
-    if (EXIT) process.exit(0);
+    process.exit(0);
   }
 };
 

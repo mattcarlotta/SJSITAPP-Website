@@ -31,7 +31,12 @@ export interface UserSchedule extends IUser {
   response: string;
   notes?: string;
 }
-export interface IUserDocument extends Document {
+
+interface IUserModelProperties {
+  createPassword: (password: string) => Promise<string>;
+  comparePassword: (password: string) => Promise<boolean>;
+}
+export interface IUserDocument extends Document, IUserModelProperties {
   // _id?: Types.ObjectId;
   avatar?: string;
   email: string;
@@ -43,14 +48,9 @@ export interface IUserDocument extends Document {
   registered?: Date;
   token: string;
   emailReminders?: boolean;
-  createPassword: (password: string) => Promise<string>;
-  comparePassword: (password: string) => Promise<boolean>;
 }
 
-export interface IUserModel extends PaginateModel<IUserDocument> {
-  createPassword: (password: string) => Promise<string>;
-  comparePassword: (password: string) => Promise<boolean>;
-}
+export type TUserModel = PaginateModel<IUserDocument> & IUserModelProperties;
 
 // admin, staff, employee
 const userSchema = new Schema<IUserDocument>({
@@ -90,6 +90,6 @@ userSchema.methods.comparePassword = function comparePassword(
   return bcrypt.compare(password, this.password);
 };
 
-const UserModel = model<IUserDocument, IUserModel>("User", userSchema);
+const UserModel = model<IUserDocument, TUserModel>("User", userSchema);
 
 export default UserModel;

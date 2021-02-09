@@ -21,10 +21,8 @@ const updatePassword = async (
 ): Promise<Response> => {
   try {
     const { token, password } = req.body;
-
     if (!token) throw invalidToken;
     if (!password) throw emptyPassword;
-    req.body.email = token;
 
     // check to see if email exists in the db
     const existingUser = await User.findOne({ token });

@@ -1,9 +1,9 @@
 import type { Request, Response } from "express";
-import get from "lodash.get";
+// import get from "lodash.get";
 import { Event, Token, User } from "~models";
 import { sendError } from "~helpers";
 import { missingMemberId, unableToDeleteMember } from "~messages/errors";
-import { avatarAPI } from "~utils/axiosConfig";
+// import { avatarAPI } from "~utils/axiosConfig";
 
 /**
  * Deletes a member.
@@ -20,9 +20,9 @@ const deleteMember = async (req: Request, res: Response): Promise<Response> => {
     const existingUser = await User.findOne({ _id });
     if (!existingUser) throw unableToDeleteMember;
 
-    await avatarAPI.delete(`delete/${_id}`, {
-      headers: { cookie: get(req, ["headers", "cookie"]) }
-    });
+    // await avatarAPI.delete(`delete/${_id}`, {
+    //   headers: { cookie: get(req, ["headers", "cookie"]) }
+    // });
 
     await existingUser.delete();
     await Token.deleteOne({ email: existingUser.email });

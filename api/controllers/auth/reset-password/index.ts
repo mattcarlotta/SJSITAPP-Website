@@ -18,8 +18,6 @@ const sendEmailResetToken = async (
 ): Promise<Response> => {
   try {
     const { email } = req.body;
-    req.body.password = "reset-password";
-
     if (!email) throw missingEmailCreds;
 
     // create a new token for email reset
@@ -45,7 +43,9 @@ const sendEmailResetToken = async (
       )
     });
 
-    return res.status(200).json(passwordResetToken(existingUser.email));
+    return res
+      .status(200)
+      .json({ message: passwordResetToken(existingUser.email) });
   } catch (err) {
     return sendError(err, 404, res);
   }
