@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export { default as createForm } from "./create";
 export { default as deleteForm } from "./delete";
 export { default as getFormForViewing } from "./edit";

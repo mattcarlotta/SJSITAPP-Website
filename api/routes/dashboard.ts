@@ -6,19 +6,21 @@ import {
   getSelectedEvents,
   getAvailabilityForAllMembers
 } from "~controllers/dashboard";
-// import { requireAuth } from "~services/strategies";
+import { requireAuth } from "~services/strategies";
 
 const dashboardRoutes = (router: Router): void => {
-  router.get("/dashboard/ap-form", /* requireAuth */ getAPForm);
-  router.get("/dashboard/availability", /* requireAuth */ getAvailability);
+  router.get("/dashboard/ap-form", requireAuth, getAPForm);
+  router.get("/dashboard/availability", requireAuth, getAvailability);
   router.get(
     "/dashboard/event-distribution",
-    /* requireAuth */ getEventDistribution
+    requireAuth,
+    getEventDistribution
   );
-  router.get("/dashboard/events/:id", /* requireAuth */ getSelectedEvents);
+  router.get("/dashboard/events/:id", requireAuth, getSelectedEvents);
   router.get(
     "/dashboard/members-availability",
-    /* requireAuth */ getAvailabilityForAllMembers
+    requireAuth,
+    getAvailabilityForAllMembers
   );
 };
 

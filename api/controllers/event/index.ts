@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export { default as createEvent } from "./create";
 export { default as deleteEvent } from "./delete";
 export { default as getEventForViewing } from "./edit";

@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export { default as getMemberAvailability } from "./availability";
 export { default as deleteMember } from "./delete";
 export { default as getMemberEvents } from "./events";

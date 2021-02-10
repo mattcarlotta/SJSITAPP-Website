@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export { default as updatePassword } from "./new-password";
 export { default as sendEmailResetToken } from "./reset-password";
 export { default as signedin } from "./signedin";

@@ -22,7 +22,6 @@ import { Mail, Token, User } from "~models";
 const createUser = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { email, firstName, lastName, password, token } = req.body;
-
     if (!email || !firstName || !lastName || !password || !token)
       throw missingSignupCreds;
 
@@ -69,7 +68,7 @@ const createUser = async (req: Request, res: Response): Promise<Response> => {
 
     return res
       .status(201)
-      .json(thanksForReg(newUser.firstName, newUser.lastName));
+      .json({ message: thanksForReg(newUser.firstName, newUser.lastName) });
   } catch (err) {
     return sendError(err, 403, res);
   }

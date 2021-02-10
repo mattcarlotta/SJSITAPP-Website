@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export { default as getAllMail } from "./all";
 export { default as contactUs } from "./contact";
 export { default as createMail } from "./create";
