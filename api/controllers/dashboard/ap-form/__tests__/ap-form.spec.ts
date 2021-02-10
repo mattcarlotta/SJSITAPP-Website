@@ -19,8 +19,8 @@ describe("Dashboard AP Form Controller", () => {
   it("accepts requests to retrieve AP form information", done => {
     app()
       .get("/api/dashboard/ap-form")
-      .expect("Content-Type", /json/)
       .set("Cookie", res.header["set-cookie"])
+      .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
         expect(res.body.apform).toEqual({

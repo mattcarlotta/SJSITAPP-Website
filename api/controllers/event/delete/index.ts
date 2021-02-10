@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { Event } from "~models";
 import { sendError } from "~helpers";
-import { missingEventId, unableToLocateEvent } from "~messages/errors";
+import { unableToLocateEvent } from "~messages/errors";
 
 /**
  * Deletes an event.
@@ -13,7 +13,6 @@ import { missingEventId, unableToLocateEvent } from "~messages/errors";
 const deleteEvent = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { id: _id } = req.params;
-    if (!_id) throw missingEventId;
 
     const existingEvent = await Event.findOne({ _id });
     if (!existingEvent) throw unableToLocateEvent;

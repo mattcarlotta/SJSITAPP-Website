@@ -223,7 +223,7 @@ const createColumnSchedule = ({
   },
   ...event.schedule.map(({ _id, employeeIds }) => ({
     _id,
-    title: moment(_id).format("hh:mm a"),
+    title: moment(_id, "hh:mm a").format("hh:mm a"),
     employeeIds
   }))
 ];
@@ -625,7 +625,10 @@ const findMemberAvailabilty = async (
 ): Promise<Response> => {
   const { startOfMonth, endOfMonth } = getMonthDateRange(selectedDate);
 
-  const eventCounts = await getEventCounts(startOfMonth, endOfMonth);
+  const eventCounts = await getEventCounts(
+    startOfMonth.toDate(),
+    endOfMonth.toDate()
+  );
   /* instanbul ignore next */
   if (eventCounts === 0) {
     return res.status(200).send({});

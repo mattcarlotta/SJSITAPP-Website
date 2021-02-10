@@ -8,11 +8,7 @@ import {
   getUsers,
   sendError
 } from "~helpers";
-import {
-  missingEventId,
-  unableToLocateEvent,
-  unableToLocateMembers
-} from "~messages/errors";
+import { unableToLocateEvent, unableToLocateMembers } from "~messages/errors";
 
 /**
  * Retrieves a single event for scheduling form.
@@ -32,7 +28,6 @@ const getEventForScheduling = async (
 ): Promise<Response> => {
   try {
     const { id: _id } = req.params;
-    if (!_id) throw missingEventId;
 
     const event = await Event.findOne({ _id }, { __v: 0 }).lean();
     if (!event) throw unableToLocateEvent;

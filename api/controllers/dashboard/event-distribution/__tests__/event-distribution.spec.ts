@@ -23,8 +23,8 @@ describe("Dashboard Event Distribution Controller", () => {
   it("rejects requests without start and end month dates", done => {
     app()
       .get("/api/dashboard/event-distribution")
-      .expect("Content-Type", /json/)
       .set("Cookie", res.header["set-cookie"])
+      .expect("Content-Type", /json/)
       .expect(400)
       .then(res => {
         expect(res.body.err).toEqual(missingDates);
@@ -40,8 +40,8 @@ describe("Dashboard Event Distribution Controller", () => {
       .get(
         `/api/dashboard/event-distribution?startDate=${startDate}&endDate=${endDate}`
       )
-      .expect("Content-Type", /json/)
       .set("Cookie", res.header["set-cookie"])
+      .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
         expect(res.body.members).toEqual([]);
@@ -60,8 +60,8 @@ describe("Dashboard Event Distribution Controller", () => {
           format
         )}&endDate=${endDate.format(format)}`
       )
-      .expect("Content-Type", /json/)
       .set("Cookie", res.header["set-cookie"])
+      .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
         expect(res.body.members).toEqual(

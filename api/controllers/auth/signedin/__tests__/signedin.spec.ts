@@ -48,8 +48,8 @@ describe("Signed In Controller", () => {
 
     await app()
       .get("/api/signedin")
-      .expect("Content-Type", /json/)
       .set("Cookie", res.header["set-cookie"])
+      .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
         expect(res.body).toEqual({ role: "guest" });
@@ -64,8 +64,8 @@ describe("Signed In Controller", () => {
 
     await app()
       .get("/api/signedin")
-      .expect("Content-Type", /json/)
       .set("Cookie", res.header["set-cookie"])
+      .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
         expect(res.body).toEqual({

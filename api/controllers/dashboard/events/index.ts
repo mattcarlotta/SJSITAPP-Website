@@ -8,7 +8,6 @@ import {
   parseSession,
   sendError
 } from "~helpers";
-import { missingMemberId } from "~messages/errors";
 
 /**
  * Retrieves today or upcoming events.
@@ -23,18 +22,16 @@ const getSelectedEvents = async (
 ): Promise<Response> => {
   try {
     const _id = parseSession(req);
-    if (!_id) throw String(missingMemberId);
-    const { selectedEvent } = req.params;
+    const { id } = req.params;
 
-    const isEventToday = selectedEvent === "today";
-    const currentDate = getStartOfDay();
+    const isEventToday = id === "today";
     const endOfDay = getEndOfDay();
     const withinAWeek = moment().add(7, "days").endOf("day").format();
 
     const filters = isEventToday
       ? {
           eventDate: {
-            $gte: currentDate,
+            $gte: getStartOfDay(),
             $lte: endOfDay
           }
         }
@@ -44,7 +41,7 @@ const getSelectedEvents = async (
             $lte: withinAWeek
           },
           scheduledIds: {
-            $in: [convertId(_id)]
+            $in: [convertId(_id!)]
           }
         };
 
@@ -71,6 +68,7 @@ const getSelectedEvents = async (
 
     return res.status(200).json({ events });
   } catch (err) {
+    /* istanbul ignore next */
     return sendError(err, 400, res);
   }
 };

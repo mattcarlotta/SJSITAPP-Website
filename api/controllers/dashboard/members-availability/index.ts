@@ -113,6 +113,7 @@ const getAvailabilityForAllMembers = async (
       months
     });
   } catch (err) {
+    /* istanbul ignore next */
     return sendError(err, 400, res);
   }
 };

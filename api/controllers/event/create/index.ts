@@ -70,7 +70,7 @@ const createEvent = async (req: Request, res: Response): Promise<Response> => {
       uniform
     });
 
-    return res.status(202).json({
+    return res.status(201).json({
       message: `Successfully added a new event to the ${seasonId} season.`
     });
   } catch (err) {
