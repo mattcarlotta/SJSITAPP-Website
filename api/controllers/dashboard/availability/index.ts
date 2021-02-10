@@ -9,7 +9,6 @@ import {
   sendError,
   moment
 } from "~helpers";
-import { missingMemberId } from "~messages/errors";
 
 /**
  * Retrieves a members availabilty for a percentage chart.
@@ -24,7 +23,6 @@ const getAvailability = async (
 ): Promise<Response> => {
   try {
     const _id = parseSession(req);
-    if (!_id) throw missingMemberId;
 
     const currentDate = createDate().add(1, "months").toDate();
     const eventAvailability: Array<Record<string, unknown>> = [];
@@ -75,7 +73,7 @@ const getAvailability = async (
                 $filter: {
                   input: "$employeeResponses",
                   cond: {
-                    $eq: ["$$this._id", convertId(_id)]
+                    $eq: ["$$this._id", convertId(_id!)]
                   }
                 }
               },
@@ -113,6 +111,7 @@ const getAvailability = async (
       months
     });
   } catch (err) {
+    /* istanbul ignore next */
     return sendError(err, 400, res);
   }
 };

@@ -40,6 +40,7 @@ const getAPForm = async (_: Request, res: Response): Promise<Response> => {
 
     return res.status(200).json({ apform: { ...existingForm, eventCounts } });
   } catch (err) {
+    /* istanbul ignore next */
     return sendError(err, 400, res);
   }
 };

@@ -3,10 +3,11 @@ import get from "lodash.get";
 import isEmpty from "lodash.isempty";
 import random from "lodash.random";
 import sortBy from "lodash.sortby";
-import { Types } from "mongoose";
+import mongoose from "mongoose";
 import moment from "moment-timezone";
 import Event, {
   IEvent,
+  IEventDocument,
   TEventAccResponses,
   TEventAggResponses,
   TEventCountForMember,
@@ -26,7 +27,7 @@ import {
   newStaffTemplate
 } from "../services/templates";
 
-const toMongooseId = Types.ObjectId;
+const toMongooseId = mongoose.Types.ObjectId;
 
 moment.tz.setDefault("America/Los_Angeles");
 
@@ -204,20 +205,20 @@ const createColumnSchedule = ({
   members
 }: {
   event: IEvent;
-  members: Array<Record<"_id", Types.ObjectId>>;
+  members: Array<Record<"_id", mongoose.Types.ObjectId>>;
 }): TEventSchedule => [
   {
     _id: "employees",
     title: "Employees",
     employeeIds: members.reduce(
-      (result, member: Record<"_id", Types.ObjectId>) => {
+      (result, member: Record<"_id", mongoose.Types.ObjectId>) => {
         const isScheduled = event.scheduledIds!.some(
           id => typeof member._id === "object" && member._id.equals(id)
         );
 
         return !isScheduled ? [...result, member._id] : result;
       },
-      [] as Array<Types.ObjectId>
+      [] as Array<mongoose.Types.ObjectId>
     )
   },
   ...event.schedule.map(({ _id, employeeIds }) => ({
@@ -324,8 +325,12 @@ const createUserSchedule = ({
   members
 }: {
   event: IEvent;
-  members: Array<Record<"_id", Types.ObjectId>>;
-}): Array<{ _id: Types.ObjectId; response: string; notes?: string }> => [
+  members: Array<Record<"_id", mongoose.Types.ObjectId>>;
+}): Array<{
+  _id: mongoose.Types.ObjectId;
+  response: string;
+  notes?: string;
+}> => [
   ...members.map(member => {
     const eventResponse = event.employeeResponses!.find(response =>
       response._id.equals(member._id!.toString())
@@ -345,7 +350,7 @@ const createUserSchedule = ({
  * @function convertId
  * @returns {Types.ObjectId}
  */
-const convertId = (id: string): Types.ObjectId => toMongooseId(id);
+const convertId = (id: string): mongoose.Types.ObjectId => toMongooseId(id);
 
 /**
  * Helper function to strip and convert template names to snaked lowercase name.
@@ -527,7 +532,7 @@ const getEndOfDay = (): string => moment().endOf("day").format();
 const getEventCounts = (
   startMonth: Date | string,
   endMonth: Date | string
-): any =>
+): mongoose.Query<number, IEventDocument> =>
   Event.countDocuments({
     eventDate: {
       $gte: moment(startMonth).toDate().toString(),
@@ -544,9 +549,9 @@ const getEventCounts = (
  */
 const getMonthDateRange = (
   date: Date | string
-): { startOfMonth: Date; endOfMonth: Date } => {
-  const startOfMonth = moment(date).startOf("month").toDate();
-  const endOfMonth = moment(date).endOf("month").toDate();
+): { startOfMonth: moment.Moment; endOfMonth: moment.Moment } => {
+  const startOfMonth = moment(date).startOf("month");
+  const endOfMonth = moment(date).endOf("month");
 
   return { startOfMonth, endOfMonth };
 };

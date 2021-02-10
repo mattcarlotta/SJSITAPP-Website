@@ -17,7 +17,7 @@ const getEventDistribution = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const { startDate, endDate } = req.params;
+    const { startDate, endDate } = req.query;
     if (!startDate || !endDate) throw String(missingDates);
 
     const members = await getUsers({
@@ -37,8 +37,8 @@ const getEventDistribution = async (
       {
         $match: {
           eventDate: {
-            $gte: moment(startDate as string).toDate(),
-            $lte: moment(endDate as string).toDate()
+            $gte: moment(String(startDate), "MM/DD/YYYY").toDate(),
+            $lte: moment(String(endDate), "MM/DD/YYYY").toDate()
           }
         }
       },
@@ -65,6 +65,7 @@ const getEventDistribution = async (
       })
     });
   } catch (err) {
+    /* istanbul ignore next */
     return sendError(err, 400, res);
   }
 };
