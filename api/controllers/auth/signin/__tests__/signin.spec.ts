@@ -1,20 +1,19 @@
 import mongoose from "mongoose";
-import { createConnectionToDatabase } from "~database";
+import { connectToDB } from "~database";
 import { badCredentials, invalidStatus } from "~messages/errors";
 import app from "~test/utils/testServer";
 
 describe("Sign In Controller", () => {
-  let db: mongoose.Connection;
   beforeAll(async () => {
-    db = await createConnectionToDatabase();
+    await connectToDB();
   });
 
   afterAll(async () => {
-    await db.close();
+    await mongoose.connection.close();
   });
 
-  it("rejects requests where the email and password is missing", async done => {
-    await app()
+  it("rejects requests where the email and password is missing", done => {
+    app()
       .post("/api/signin")
       .expect("Content-Type", /json/)
       .send({ email: "", password: "" })
@@ -25,8 +24,8 @@ describe("Sign In Controller", () => {
       });
   });
 
-  it("rejects requests where the email is invalid", async done => {
-    await app()
+  it("rejects requests where the email is invalid", done => {
+    app()
       .post("/api/signin")
       .expect("Content-Type", /json/)
       .send({ email: "bad@email.com", password: "123456" })
@@ -37,8 +36,8 @@ describe("Sign In Controller", () => {
       });
   });
 
-  it("rejects requests where the account is suspended", async done => {
-    await app()
+  it("rejects requests where the account is suspended", done => {
+    app()
       .post("/api/signin")
       .expect("Content-Type", /json/)
       .send({ email: "suspended.employee@example.com", password: "password" })
@@ -49,8 +48,8 @@ describe("Sign In Controller", () => {
       });
   });
 
-  it("rejects requests where the password is invalid", async done => {
-    await app()
+  it("rejects requests where the password is invalid", done => {
+    app()
       .post("/api/signin")
       .expect("Content-Type", /json/)
       .send({ email: "staffmember@example.com", password: "invalid" })
@@ -61,8 +60,8 @@ describe("Sign In Controller", () => {
       });
   });
 
-  it("accepts requests where the user session is valid", async done => {
-    await app()
+  it("accepts requests where the user session is valid", done => {
+    app()
       .post("/api/signin")
       .expect("Content-Type", /json/)
       .send({ email: "staffmember@example.com", password: "password" })

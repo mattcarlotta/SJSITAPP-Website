@@ -30,7 +30,6 @@
     "<rootDir>/database",
     "<rootDir>/middlewares"
   ],
-  "setupFilesAfterEnv": ["<rootDir>test/utils/setupTests/index.ts"],
   "globalSetup": "<rootDir>database/seedDB/index.ts",
   "globalTeardown": "<rootDir>database/teardownDB/index.ts"
 }

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { createConnectionToDatabase } from "~database";
+import { connectToDB } from "~database";
 import User, { IUserDocument } from "~models/user";
 import app from "~test/utils/testServer";
 
@@ -17,20 +17,19 @@ const newUser = {
 };
 
 describe("Signed In Controller", () => {
-  let db: mongoose.Connection;
   let user: IUserDocument;
   beforeAll(async () => {
-    db = await createConnectionToDatabase();
+    await connectToDB();
     const password = await User.createPassword(textPassword);
     user = await User.create({ ...newUser, password });
   });
 
   afterAll(async () => {
-    await db.close();
+    await mongoose.connection.close();
   });
 
-  it("rejects requests where the user session is missing", async done => {
-    await app()
+  it("rejects requests where the user session is missing", done => {
+    app()
       .get("/api/signedin")
       .expect("Content-Type", /json/)
       .expect(200)

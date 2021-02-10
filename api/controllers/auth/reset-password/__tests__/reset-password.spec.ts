@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { createConnectionToDatabase } from "~database";
+import { connectToDB } from "~database";
 import User, { IUserDocument } from "~models/user";
 import { passwordResetToken } from "~messages/success";
 import { missingEmailCreds } from "~messages/errors";
@@ -17,20 +17,19 @@ const newUser = {
 };
 
 describe("Reset Password Controller", () => {
-  let db: mongoose.Connection;
   let user: IUserDocument;
   beforeAll(async () => {
-    db = await createConnectionToDatabase();
+    await connectToDB();
     const password = await User.createPassword(textPassword);
     user = await User.create({ ...newUser, password });
   });
 
   afterAll(async () => {
-    await db.close();
+    await mongoose.connection.close();
   });
 
-  it("rejects requests where the email is missing", async done => {
-    await app()
+  it("rejects requests where the email is missing", done => {
+    app()
       .put("/api/reset-password")
       .send({ email: "" })
       .expect("Content-Type", /json/)
@@ -41,8 +40,8 @@ describe("Reset Password Controller", () => {
       });
   });
 
-  it("rejects requests where the email doesn't exist", async done => {
-    await app()
+  it("rejects requests where the email doesn't exist", done => {
+    app()
       .put("/api/reset-password")
       .send({ email: "doesntexist@oops.com" })
       .expect("Content-Type", /json/)
@@ -53,8 +52,8 @@ describe("Reset Password Controller", () => {
       });
   });
 
-  it("accepts requests to reset passwords", async done => {
-    await app()
+  it("accepts requests to reset passwords", done => {
+    app()
       .put("/api/reset-password")
       .send({ email: user.email })
       .expect("Content-Type", /json/)

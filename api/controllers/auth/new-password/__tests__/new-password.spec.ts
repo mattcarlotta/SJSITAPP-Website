@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { createConnectionToDatabase } from "~database";
+import { connectToDB } from "~database";
 import User, { IUserDocument } from "~models/user";
 import { passwordResetSuccess } from "~messages/success";
 import {
@@ -21,20 +21,19 @@ const newUser = {
 };
 
 describe("New Password Controller", () => {
-  let db: mongoose.Connection;
   let user: IUserDocument;
   beforeAll(async () => {
-    db = await createConnectionToDatabase();
+    await connectToDB();
     const password = await User.createPassword(textPassword);
     user = await User.create({ ...newUser, password });
   });
 
   afterAll(async () => {
-    await db.close();
+    await mongoose.connection.close();
   });
 
-  it("rejects requests where the token is missing", async done => {
-    await app()
+  it("rejects requests where the token is missing", done => {
+    app()
       .put("/api/new-password")
       .expect("Content-Type", /json/)
       .expect(404)
@@ -44,8 +43,8 @@ describe("New Password Controller", () => {
       });
   });
 
-  it("rejects requests where the token is missing", async done => {
-    await app()
+  it("rejects requests where the token is missing", done => {
+    app()
       .put("/api/new-password")
       .send({ token: "123464647", password: "test" })
       .expect("Content-Type", /json/)
@@ -56,8 +55,8 @@ describe("New Password Controller", () => {
       });
   });
 
-  it("rejects requests where the password is missing", async done => {
-    await app()
+  it("rejects requests where the password is missing", done => {
+    app()
       .put("/api/new-password")
       .send({ token: user.token, password: "" })
       .expect("Content-Type", /json/)
@@ -68,8 +67,8 @@ describe("New Password Controller", () => {
       });
   });
 
-  it("rejects requests where the password is the same", async done => {
-    await app()
+  it("rejects requests where the password is the same", done => {
+    app()
       .put("/api/new-password")
       .send({ token: user.token, password: textPassword })
       .expect("Content-Type", /json/)
@@ -80,8 +79,8 @@ describe("New Password Controller", () => {
       });
   });
 
-  it("accepts requests to set new passwords", async done => {
-    await app()
+  it("accepts requests to set new passwords", done => {
+    app()
       .put("/api/new-password")
       .send({ token: user.token, password: "newpassword1234" })
       .expect("Content-Type", /json/)

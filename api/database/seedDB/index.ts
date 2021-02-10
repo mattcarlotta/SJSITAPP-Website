@@ -12,7 +12,7 @@ import seedTeams from "./teams";
 import seedTokens from "./tokens";
 import seedUsers, { admin } from "./users";
 
-const { DATABASE, EXIT, SEED, inTesting } = process.env;
+const { DATABASE, EXIT, SEED } = process.env;
 
 /**
  * Function to seed the testing Mongo database.
@@ -49,7 +49,7 @@ const seedDB = async (): Promise<any> => {
       `\x1b[2mutils/\x1b[0m\x1b[1mseedDB.js\x1b[0m (${DATABASE})\n`
     );
 
-    if (!inTesting) mongoose.connection.close();
+    await mongoose.connection.close();
 
     if (EXIT) process.exit(0);
 
