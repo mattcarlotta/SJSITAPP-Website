@@ -58,7 +58,6 @@ describe("Event Update Controller", () => {
   });
 
   it("rejects requests where the callTimes aren't unique", done => {
-    const today = createDate().format();
     app()
       .put("/api/event/update")
       .set("Cookie", res.header["set-cookie"])
