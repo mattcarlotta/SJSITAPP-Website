@@ -42,6 +42,12 @@ export type TEventMemberAvailabilityAvgs = Array<{
   availability: number;
 }>;
 
+export type TEventScheduleIds = Array<{
+  _id: string;
+  title?: string;
+  employeeIds: Array<string>;
+}>;
+
 export type TEventSchedule = Array<{
   _id: string;
   title?: string;

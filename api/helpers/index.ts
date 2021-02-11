@@ -15,7 +15,8 @@ import Event, {
   TEventMemberAvailability,
   TEventMemberAvailabilityAvg,
   TEventMemberAvailabilityAvgs,
-  TEventSchedule
+  TEventSchedule,
+  TEventScheduleIds
 } from "../models/event";
 import User, {
   IUserDocument,
@@ -40,6 +41,10 @@ const responseTypes = [
 ];
 
 const COLORS = ["#247BA0", "#2A9D8F", "#F4A261", "#FF8060", "#BFBFBF"];
+
+const arraysEqual = (a: Array<any>, b: Array<any>): boolean =>
+  // eslint-disable-next-line
+  JSON.stringify(a) == JSON.stringify(b);
 
 const toAverage = (num: number, total: number) =>
   parseInt(((num / total) * 100).toFixed(2), 10);
@@ -808,13 +813,17 @@ const uniqueArray = (arr: Array<any>): boolean =>
  * @param schedule - an array of ids
  * @returns {array}
  */
-const updateScheduleIds = (schedule: TEventSchedule): TEventSchedule =>
-  schedule.map(({ employeeIds, ...rest }) => ({
-    ...rest,
-    employeeIds: employeeIds.map(id => toMongooseId(id.toString()))
-  }));
+const updateScheduleIds = (schedule: TEventScheduleIds): TEventSchedule =>
+  schedule.reduce(
+    (result, { employeeIds }) => [
+      ...result,
+      ...employeeIds.map(id => toMongooseId(id))
+    ],
+    [] as any
+  );
 
 export {
+  arraysEqual,
   clearSession,
   convertId,
   createAuthMail,
@@ -844,6 +853,7 @@ export {
   parseSession,
   sendError,
   sortScheduledUsersByLastName,
+  toMongooseId,
   uniqueArray,
   updateScheduleIds
 };

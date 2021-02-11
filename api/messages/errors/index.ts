@@ -82,7 +82,7 @@ const invalidToken =
   "There was a problem authenticating your request. The authorized key and/or email that was supplied was invalid.";
 
 const invalidUpdateEventRequest =
-  "You must inclide all fields to update an exisiting event.";
+  "You must include all fields to update an exisiting event.";
 
 const missingDates = "You must supply a start date and end date.";
 

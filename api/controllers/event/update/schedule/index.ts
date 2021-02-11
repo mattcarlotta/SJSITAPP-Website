@@ -30,7 +30,7 @@ const updateEventSchedule = async (
     });
 
     return res
-      .status(201)
+      .status(200)
       .json({ message: "Successfully updated the event's schedule." });
   } catch (err) {
     return sendError(err, 400, res);

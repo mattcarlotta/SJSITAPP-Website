@@ -1,8 +1,8 @@
 import type { Request, Response } from "express";
 import isEmpty from "lodash.isempty";
-import isEqual from "lodash.isequal";
+// import isEqual from "lodash.isequal";
 import { Event } from "~models";
-import { createSchedule, sendError, uniqueArray } from "~helpers";
+import { arraysEqual, createSchedule, sendError, uniqueArray } from "~helpers";
 import {
   invalidUpdateEventRequest,
   mustContainUniqueCallTimes,
@@ -49,7 +49,7 @@ const updateEvent = async (req: Request, res: Response): Promise<Response> => {
     if (!existingEvent) throw unableToLocateEvent;
 
     const schedule = createSchedule(callTimes);
-    const scheduleUnchanged = isEqual(existingEvent.callTimes, callTimes);
+    const scheduleUnchanged = arraysEqual(existingEvent.callTimes, callTimes);
 
     await existingEvent.updateOne({
       callTimes,
@@ -65,7 +65,7 @@ const updateEvent = async (req: Request, res: Response): Promise<Response> => {
       scheduledIds: scheduleUnchanged ? existingEvent.scheduledIds : []
     });
 
-    return res.status(201).json({ message: "Successfully updated the event." });
+    return res.status(200).json({ message: "Successfully updated the event." });
   } catch (err) {
     return sendError(err, 400, res);
   }
