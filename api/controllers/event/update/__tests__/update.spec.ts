@@ -13,7 +13,7 @@ import app from "~test/utils/testServer";
 const today = createDate().format();
 
 const newEvent = {
-  callTimes: [today],
+  callTimes: ["2001-06-01T02:00:00.000+00:00"],
   eventDate: new Date(2001, 7, 1),
   eventType: "Game",
   location: "Any",
@@ -103,7 +103,7 @@ describe("Event Update Controller", () => {
       .set("Cookie", res.header["set-cookie"])
       .send({
         ...game,
-        eventType: "Game"
+        callTimes: [today]
       })
       .expect("Content-Type", /json/)
       .expect(200)

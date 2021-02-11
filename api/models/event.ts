@@ -123,7 +123,7 @@ const eventSchema = new Schema<IEventDocument>({
   seasonId: { type: String, required: true },
   team: { type: String, required: true },
   opponent: String,
-  callTimes: { type: Array, of: Date, required: true },
+  callTimes: { type: Array, of: String, required: true },
   uniform: { type: String, default: "Sharks Teal Jersey" },
   notes: String,
   sentEmailReminders: { type: Boolean, default: false }
