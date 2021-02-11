@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { Form } from "~models";
 import { createDate, sendError } from "~helpers";
-import { missingFormId, unableToLocateForm } from "~messages/errors";
+import { unableToLocateForm } from "~messages/errors";
 
 /**
  * Resend all form reminder emails.
@@ -16,7 +16,6 @@ const resendFormEmail = async (
 ): Promise<Response> => {
   try {
     const { id: _id } = req.params;
-    if (!_id) throw missingFormId;
 
     const existingForm = await Form.findOne({ _id }, { __v: 0 });
     if (!existingForm) throw unableToLocateForm;

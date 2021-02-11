@@ -22,9 +22,9 @@ const eventRoutes = (router: Router): void => {
   router.put("/event/resend-email/:id", requireStaffRole, resendEventEmail);
   router.get("/event/review/:id", requireStaffRole, getEventForScheduling);
   router.put("/event/update/schedule", requireStaffRole, updateEventSchedule);
-  router.put("/event/update", /* requireStaffRole, */ updateEvent);
+  router.put("/event/update", requireStaffRole, updateEvent);
 
-  router.get("/events/all", requireStaffRole, getAllEvents);
+  router.get("/events/viewall", requireStaffRole, getAllEvents);
   router.delete("/events/delete-many", requireStaffRole, deleteManyEvents);
   router.get("/events/schedule", requireAuth, getScheduledEvents);
 };

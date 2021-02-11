@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { Form } from "~models";
 import { sendError } from "~helpers";
-import { missingFormId, unableToDeleteForm } from "~messages/errors";
+import { unableToDeleteForm } from "~messages/errors";
 
 /**
  * Deletes a form.
@@ -13,7 +13,6 @@ import { missingFormId, unableToDeleteForm } from "~messages/errors";
 const deleteForm = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { id: _id } = req.params;
-    if (!_id) throw missingFormId;
 
     const existingForm = await Form.findOne({ _id });
     if (!existingForm) throw unableToDeleteForm;

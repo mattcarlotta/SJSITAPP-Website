@@ -25,7 +25,7 @@ const getAllEvents = async (req: Request, res: Response): Promise<Response> => {
       {
         lean: true,
         sort: { eventDate: -1 },
-        page: parseInt(String(page), 10),
+        page: parseInt(String(page || "1"), 10),
         limit: 10,
         select: "-schedule -__v",
         populate: {
@@ -42,6 +42,7 @@ const getAllEvents = async (req: Request, res: Response): Promise<Response> => {
       .status(200)
       .json({ events: sortScheduledUsersByLastName(events), totalDocs });
   } catch (err) {
+    /* istanbul ignore next */
     return sendError(err, 400, res);
   }
 };

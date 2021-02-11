@@ -25,6 +25,7 @@ const deleteManyEvents = async (
       .status(200)
       .json({ message: "Successfully deleted the events." });
   } catch (err) {
+    /* istanbul ignore next */
     return sendError(err, 400, res);
   }
 };

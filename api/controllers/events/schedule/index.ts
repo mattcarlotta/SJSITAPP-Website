@@ -26,21 +26,21 @@ const getScheduledEvents = async (
     const selectedId = id || parseSession(req);
 
     const { startOfMonth, endOfMonth } = getMonthDateRange(
-      String(selectedDate)
+      selectedDate as string
     );
 
     const filters =
       selected === "All Games"
         ? {
             eventDate: {
-              $gte: startOfMonth.toString(),
-              $lte: endOfMonth.toString()
+              $gte: startOfMonth.format(),
+              $lte: endOfMonth.format()
             }
           }
         : {
             eventDate: {
-              $gte: startOfMonth.toString(),
-              $lte: endOfMonth.toString()
+              $gte: startOfMonth.format(),
+              $lte: endOfMonth.format()
             },
             scheduledIds: {
               $in: [convertId(String(selectedId))]
@@ -65,6 +65,7 @@ const getScheduledEvents = async (
 
     return res.status(200).json({ events });
   } catch (err) {
+    /* istanbul ignore next */
     return sendError(err, 400, res);
   }
 };
