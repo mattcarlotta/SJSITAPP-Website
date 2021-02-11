@@ -2,11 +2,8 @@ import type { Request, Response } from "express";
 import isEmpty from "lodash.isempty";
 import { Event, Form } from "~models";
 import { convertId, parseSession, moment, sendError } from "~helpers";
-
 import {
   expiredForm,
-  missingFormId,
-  missingMemberId,
   unableToLocateEvents,
   unableToLocateForm
 } from "~messages/errors";
@@ -21,10 +18,7 @@ import {
 const viewApForm = async (req: Request, res: Response): Promise<Response> => {
   try {
     const userId = parseSession(req);
-    if (!userId) throw missingMemberId;
-
     const { id: _id } = req.params;
-    if (!_id) throw missingFormId;
 
     const existingForm = await Form.findOne({ _id }, { __v: 0, seasonId: 0 });
     if (!existingForm) throw unableToLocateForm;
@@ -63,13 +57,14 @@ const viewApForm = async (req: Request, res: Response): Promise<Response> => {
             $filter: {
               input: "$employeeResponses",
               as: "employeeResponse",
-              cond: { $eq: ["$$employeeResponse._id", convertId(userId)] }
+              cond: {
+                $eq: ["$$employeeResponse._id", convertId(String(userId))]
+              }
             }
           }
         }
       }
     ]);
-
     if (isEmpty(events))
       throw unableToLocateEvents(startMonth.format("L"), endMonth.format("L"));
 

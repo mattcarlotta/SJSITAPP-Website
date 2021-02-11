@@ -21,7 +21,7 @@ const formRoutes = (router: Router): void => {
   router.get("/form/view/:id", requireAuth, viewApForm);
 
   // FORMS
-  router.get("/forms/all", requireStaffRole, getAllForms);
+  router.get("/forms/viewall", requireStaffRole, getAllForms);
   router.delete("/forms/delete-many", requireStaffRole, deleteManyForms);
 };
 

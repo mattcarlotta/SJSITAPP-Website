@@ -74,7 +74,7 @@ const updateForm = async (req: Request, res: Response): Promise<Response> => {
       sentEmails: emailNotificationStatus
     });
 
-    return res.status(201).json({ message: "Successfully updated the form!" });
+    return res.status(200).json({ message: "Successfully updated the form!" });
   } catch (err) {
     return sendError(err, 400, res);
   }

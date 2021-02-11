@@ -54,6 +54,13 @@ export type TEventSchedule = Array<{
   employeeIds: Array<Types.ObjectId>;
 }>;
 
+export type TEventResponse = {
+  id: string;
+  value: string;
+  notes?: string;
+  updateEvent: boolean;
+};
+
 export type TEventResponses = Array<{
   _id: Types.ObjectId;
   response: string;

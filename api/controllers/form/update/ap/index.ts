@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { FilterQuery } from "mongoose";
-import { Event, Form } from "~models";
+import { Form } from "~models";
+import Event, { TEventResponse } from "~models/event";
 import { parseSession, sendError } from "~helpers";
 import { unableToLocateForm, unableToUpdateApForm } from "~messages/errors";
 
@@ -13,7 +14,10 @@ import { unableToLocateForm, unableToUpdateApForm } from "~messages/errors";
  */
 const updateApForm = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const { _id, responses } = req.body;
+    const {
+      _id,
+      responses
+    }: { _id: string; responses: Array<TEventResponse> } = req.body;
     if (!_id || !responses) throw unableToUpdateApForm;
 
     const formExists = await Form.findOne({ _id });
@@ -22,57 +26,50 @@ const updateApForm = async (req: Request, res: Response): Promise<Response> => {
     const userId = parseSession(req);
 
     await Event.bulkWrite(
-      responses.map(
-        (response: {
-          id: string;
-          value: string;
-          notes: string;
-          updateEvent: boolean;
-        }): {
-          updateOne: {
-            update: FilterQuery<any>;
-            filter: {
-              _id: string;
-              "employeeResponses._id"?: string;
-            };
+      responses.map((response): {
+        updateOne: {
+          update: FilterQuery<any>;
+          filter: {
+            _id: string;
+            "employeeResponses._id"?: string;
           };
-        } => {
-          const { id: eventId, value, notes, updateEvent } = response;
+        };
+      } => {
+        const { id: eventId, value, notes, updateEvent } = response;
 
-          const filter = updateEvent
-            ? {
-                _id: eventId,
-                "employeeResponses._id": userId
-              }
-            : {
-                _id: eventId
-              };
-
-          const update = updateEvent
-            ? {
-                $set: {
-                  "employeeResponses.$.response": value,
-                  "employeeResponses.$.notes": notes
-                }
-              }
-            : {
-                $push: {
-                  employeeResponses: {
-                    _id: userId,
-                    response: value,
-                    notes
-                  }
-                }
-              };
-
-          return {
-            updateOne: {
-              filter,
-              update
+        const filter = updateEvent
+          ? {
+              _id: eventId,
+              "employeeResponses._id": userId
             }
-          };
-        }
-      )
+          : {
+              _id: eventId
+            };
+
+        const update = updateEvent
+          ? {
+              $set: {
+                "employeeResponses.$.response": value,
+                "employeeResponses.$.notes": notes
+              }
+            }
+          : {
+              $push: {
+                employeeResponses: {
+                  _id: userId,
+                  response: value,
+                  notes
+                }
+              }
+            };
+
+        return {
+          updateOne: {
+            filter,
+            update
+          }
+        };
+      })
     );
 
     return res
