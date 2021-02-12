@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import request from "supertest";
 import { connectToDB } from "~database";
 import {
   invalidUpdateEventRequest,
@@ -9,6 +8,7 @@ import Event, { IEventDocument } from "~models/event";
 import User, { IUserDocument } from "~models/user";
 import { moment } from "~helpers";
 import app from "~test/utils/testServer";
+import { staffSignIn } from "~test/utils/signIn";
 
 const newEvent = {
   callTimes: ["2001-05-31T17:30:00-07:00"],
@@ -23,7 +23,7 @@ const newEvent = {
 };
 
 describe("Event Update Schedule Controller", () => {
-  let res: request.Response;
+  let cookie: string;
   let game: IEventDocument;
   let user: IUserDocument | null;
   let schedule: any;
@@ -39,9 +39,7 @@ describe("Event Update Schedule Controller", () => {
         employeeIds: []
       }
     ];
-    res = await app()
-      .post("/api/signin")
-      .send({ email: "staffmember@example.com", password: "password" });
+    cookie = await staffSignIn();
   });
 
   afterAll(async () => {
@@ -51,7 +49,7 @@ describe("Event Update Schedule Controller", () => {
   it("rejects requests where the event id and schedule are missing", done => {
     app()
       .put("/api/event/update/schedule")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .send({ _id: "", schedule: [] })
       .expect("Content-Type", /json/)
       .expect(400)
@@ -64,7 +62,7 @@ describe("Event Update Schedule Controller", () => {
   it("rejects requests where the event id is invalid", done => {
     app()
       .put("/api/event/update/schedule")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .send({ _id: "601dc43483adb35b1ca678ea", schedule })
       .expect("Content-Type", /json/)
       .expect(400)
@@ -77,7 +75,7 @@ describe("Event Update Schedule Controller", () => {
   it("accepts requests to update an event's scheduled ids", done => {
     app()
       .put("/api/event/update/schedule")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .send({
         _id: game._id,
         schedule: [

@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import request from "supertest";
 import { connectToDB } from "~database";
 import {
   formAlreadyExists,
@@ -9,6 +8,7 @@ import {
   unableToLocateSeason
 } from "~messages/errors";
 import { moment } from "~helpers";
+import { staffSignIn } from "~test/utils/signIn";
 import app from "~test/utils/testServer";
 
 const newForm = {
@@ -24,12 +24,10 @@ const newForm = {
 };
 
 describe("Create Form Controller", () => {
-  let res: request.Response;
+  let cookie: string;
   beforeAll(async () => {
     await connectToDB();
-    res = await app()
-      .post("/api/signin")
-      .send({ email: "staffmember@example.com", password: "password" });
+    cookie = await staffSignIn();
   });
 
   afterAll(async () => {
@@ -39,7 +37,7 @@ describe("Create Form Controller", () => {
   it("rejects requests where the form fields are missing", done => {
     app()
       .post("/api/form/create")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
       .then(res => {
@@ -51,7 +49,7 @@ describe("Create Form Controller", () => {
   it("rejects requests where the seasonId is valid", done => {
     app()
       .post("/api/form/create")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({ ...newForm, seasonId: "10001001" })
       .expect(400)
@@ -64,7 +62,7 @@ describe("Create Form Controller", () => {
   it("rejects requests where the form already exists", done => {
     app()
       .post("/api/form/create")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({
         ...newForm,
@@ -83,7 +81,7 @@ describe("Create Form Controller", () => {
   it("rejects requests where the form expiration date has already past", done => {
     app()
       .post("/api/form/create")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .send({ ...newForm, expirationDate: new Date(1800, 1, 1) })
       .expect("Content-Type", /json/)
       .expect(400)
@@ -96,7 +94,7 @@ describe("Create Form Controller", () => {
   it("rejects requests where the form expiration send emial date has already past", done => {
     app()
       .post("/api/form/create")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .send({ ...newForm, sendEmailNotificationsDate: new Date(1800, 1, 1) })
       .expect("Content-Type", /json/)
       .expect(400)
@@ -109,7 +107,7 @@ describe("Create Form Controller", () => {
   it("accepts requests to create an form", done => {
     app()
       .post("/api/form/create")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .send(newForm)
       .expect("Content-Type", /json/)
       .expect(201)

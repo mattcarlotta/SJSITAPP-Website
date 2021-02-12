@@ -1,15 +1,13 @@
 import mongoose from "mongoose";
-import request from "supertest";
 import { connectToDB } from "~database";
+import { memberSignIn } from "~test/utils/signIn";
 import app from "~test/utils/testServer";
 
 describe("Dashboard AP Form Controller", () => {
-  let res: request.Response;
+  let cookie: string;
   beforeAll(async () => {
     await connectToDB();
-    res = await app()
-      .post("/api/signin")
-      .send({ email: "scheduledmember@test.com", password: "password" });
+    cookie = await memberSignIn();
   });
 
   afterAll(async () => {
@@ -19,7 +17,7 @@ describe("Dashboard AP Form Controller", () => {
   it("accepts requests to retrieve AP form information", done => {
     app()
       .get("/api/dashboard/ap-form")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {

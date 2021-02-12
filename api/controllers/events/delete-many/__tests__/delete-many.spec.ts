@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-import request from "supertest";
 import { connectToDB } from "~database";
 import { missingIds } from "~messages/errors";
 import Event, { IEventDocument } from "~models/event";
+import { staffSignIn } from "~test/utils/signIn";
 import app from "~test/utils/testServer";
 
 const newEvent = {
@@ -24,16 +24,14 @@ const newEvent2 = {
 };
 
 describe("Delete Many Events Controller", () => {
-  let res: request.Response;
+  let cookie: string;
   let game1: IEventDocument;
   let game2: IEventDocument;
   beforeAll(async () => {
     await connectToDB();
     game1 = await Event.create(newEvent);
     game2 = await Event.create(newEvent2);
-    res = await app()
-      .post("/api/signin")
-      .send({ email: "staffmember@example.com", password: "password" });
+    cookie = await staffSignIn();
   });
 
   afterAll(async () => {
@@ -43,7 +41,7 @@ describe("Delete Many Events Controller", () => {
   it("rejects requests where the event ids are missing", done => {
     app()
       .delete("/api/events/delete-many")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
       .then(res => {
@@ -55,7 +53,7 @@ describe("Delete Many Events Controller", () => {
   it("accepts requests to delete an event", done => {
     app()
       .delete("/api/events/delete-many")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .send({ ids: [game1._id, game2._id] })
       .expect("Content-Type", /json/)
       .expect(200)

@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import request from "supertest";
 import { connectToDB } from "~database";
 import {
   invalidUpdateEventRequest,
@@ -9,6 +8,7 @@ import {
 import Event, { IEventDocument } from "~models/event";
 import { createDate } from "~helpers";
 import app from "~test/utils/testServer";
+import { staffSignIn } from "~test/utils/signIn";
 
 const today = createDate().format();
 
@@ -30,15 +30,13 @@ const updatedEvent = {
 };
 
 describe("Event Update Controller", () => {
-  let res: request.Response;
+  let cookie: string;
   let game: IEventDocument;
   beforeAll(async () => {
     await connectToDB();
     const createdEvent = await Event.create(newEvent);
     game = await Event.findOne({ _id: createdEvent._id }).lean();
-    res = await app()
-      .post("/api/signin")
-      .send({ email: "staffmember@example.com", password: "password" });
+    cookie = await staffSignIn();
   });
 
   afterAll(async () => {
@@ -48,7 +46,7 @@ describe("Event Update Controller", () => {
   it("rejects requests where the event properties are missing", done => {
     app()
       .put("/api/event/update")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
       .then(res => {
@@ -60,7 +58,7 @@ describe("Event Update Controller", () => {
   it("rejects requests where the callTimes aren't unique", done => {
     app()
       .put("/api/event/update")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({ ...updatedEvent, _id: game._id, callTimes: [today, today] })
       .expect(400)
@@ -73,7 +71,7 @@ describe("Event Update Controller", () => {
   it("rejects requests where the event id property is invalid", done => {
     app()
       .put("/api/event/update")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .send({ ...updatedEvent, _id: "601dc43483adb35b1ca678ea" })
       .expect("Content-Type", /json/)
       .expect(400)
@@ -86,7 +84,7 @@ describe("Event Update Controller", () => {
   it("accepts requests to updates an event, but keeps the schedule intact", done => {
     app()
       .put("/api/event/update")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .send({ ...updatedEvent, _id: game._id })
       .expect("Content-Type", /json/)
       .expect(200)
@@ -99,7 +97,7 @@ describe("Event Update Controller", () => {
   it("accepts requests to update an event, but overrides the schedule", done => {
     app()
       .put("/api/event/update")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .send({
         ...game,
         callTimes: [today]

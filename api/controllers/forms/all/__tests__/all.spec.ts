@@ -1,15 +1,13 @@
 import mongoose from "mongoose";
-import request from "supertest";
 import { connectToDB } from "~database";
+import { staffSignIn } from "~test/utils/signIn";
 import app from "~test/utils/testServer";
 
 describe("Retrieve All Forms Controller", () => {
-  let res: request.Response;
+  let cookie: string;
   beforeAll(async () => {
     await connectToDB();
-    res = await app()
-      .post("/api/signin")
-      .send({ email: "staffmember@example.com", password: "password" });
+    cookie = await staffSignIn();
   });
 
   afterAll(async () => {
@@ -19,7 +17,7 @@ describe("Retrieve All Forms Controller", () => {
   it("accepts requests to retrieve all forms for pagination", done => {
     app()
       .get("/api/forms/viewall")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {

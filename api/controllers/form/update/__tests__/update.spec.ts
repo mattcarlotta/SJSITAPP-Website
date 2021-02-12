@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import request from "supertest";
 import { connectToDB } from "~database";
 import {
   formAlreadyExists,
@@ -9,6 +8,7 @@ import {
 } from "~messages/errors";
 import Form, { IFormDocument } from "~models/form";
 import { moment } from "~helpers";
+import { staffSignIn } from "~test/utils/signIn";
 import app from "~test/utils/testServer";
 
 const newForm = {
@@ -41,16 +41,14 @@ const updatedForm = {
 };
 
 describe("Update Form Controller", () => {
-  let res: request.Response;
+  let cookie: string;
   let form: IFormDocument | null;
   beforeAll(async () => {
     await connectToDB();
     await Form.create(existingForm);
     const createdForm = await Form.create(newForm);
     form = await Form.findOne({ _id: createdForm._id }).lean();
-    res = await app()
-      .post("/api/signin")
-      .send({ email: "staffmember@example.com", password: "password" });
+    cookie = await staffSignIn();
   });
 
   afterAll(async () => {
@@ -60,7 +58,7 @@ describe("Update Form Controller", () => {
   it("rejects requests where the form properties are missing", done => {
     app()
       .put("/api/form/update")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
       .then(res => {
@@ -72,7 +70,7 @@ describe("Update Form Controller", () => {
   it("rejects requests where the seasonId isn't valid", done => {
     app()
       .put("/api/form/update")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({ ...updatedForm, _id: form!._id, seasonId: "0000000" })
       .expect(400)
@@ -85,7 +83,7 @@ describe("Update Form Controller", () => {
   it("rejects requests where the form id isn't valid", done => {
     app()
       .put("/api/form/update")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({ ...updatedForm, _id: "a01dc43483adb35b1ca678ea" })
       .expect(400)
@@ -98,7 +96,7 @@ describe("Update Form Controller", () => {
   it("rejects requests where the form already exists", done => {
     app()
       .put("/api/form/update")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .send({ ...updatedForm, _id: form!._id, enrollMonth })
       .expect("Content-Type", /json/)
       .expect(400)
@@ -111,7 +109,7 @@ describe("Update Form Controller", () => {
   it("accepts requests to updates form while keeping the email sent status", done => {
     app()
       .put("/api/form/update")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .send({ ...updatedForm, _id: form!._id })
       .expect("Content-Type", /json/)
       .expect(200)
@@ -124,7 +122,7 @@ describe("Update Form Controller", () => {
   it("accepts requests to updates form while resetting the email sent status", done => {
     app()
       .put("/api/form/update")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .send({
         ...updatedForm,
         _id: form!._id,

@@ -1,19 +1,17 @@
 import mongoose from "mongoose";
-import request from "supertest";
 import { connectToDB } from "~database";
 import { createDate, getMonthDateRange, moment } from "~helpers";
 import { missingDates } from "~messages/errors";
+import { memberSignIn } from "~test/utils/signIn";
 import app from "~test/utils/testServer";
 
 const format = "MM/DD/YYYY";
 
 describe("Dashboard Event Distribution Controller", () => {
-  let res: request.Response;
+  let cookie: string;
   beforeAll(async () => {
     await connectToDB();
-    res = await app()
-      .post("/api/signin")
-      .send({ email: "scheduledmember@test.com", password: "password" });
+    cookie = await memberSignIn();
   });
 
   afterAll(async () => {
@@ -23,7 +21,7 @@ describe("Dashboard Event Distribution Controller", () => {
   it("rejects requests without start and end month dates", done => {
     app()
       .get("/api/dashboard/event-distribution")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
       .then(res => {
@@ -40,7 +38,7 @@ describe("Dashboard Event Distribution Controller", () => {
       .get(
         `/api/dashboard/event-distribution?startDate=${startDate}&endDate=${endDate}`
       )
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
@@ -60,7 +58,7 @@ describe("Dashboard Event Distribution Controller", () => {
           format
         )}&endDate=${endDate.format(format)}`
       )
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {

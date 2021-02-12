@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
-import request from "supertest";
 import { connectToDB } from "~database";
 import { unableToLocateForm, unableToUpdateApForm } from "~messages/errors";
 import Event, { TEventResponse } from "~models/event";
 import Form, { IFormDocument } from "~models/form";
 import { moment } from "~helpers";
+import { memberSignIn } from "~test/utils/signIn";
 import app from "~test/utils/testServer";
 
 describe("Update AP Schedule Controller", () => {
-  let res: request.Response;
+  let cookie: string;
   let form: IFormDocument | null;
   let responses: Array<TEventResponse>;
   beforeAll(async () => {
@@ -35,9 +35,7 @@ describe("Update AP Schedule Controller", () => {
       notes: "",
       updateEvent: false
     }));
-    res = await app()
-      .post("/api/signin")
-      .send({ email: "scheduledmember@test.com", password: "password" });
+    cookie = await memberSignIn();
   });
 
   afterAll(async () => {
@@ -47,7 +45,7 @@ describe("Update AP Schedule Controller", () => {
   it("rejects requests where the event id and responses are missing", done => {
     app()
       .put("/api/form/update/ap")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
       .then(res => {
@@ -59,7 +57,7 @@ describe("Update AP Schedule Controller", () => {
   it("rejects requests where the form id is invalid", done => {
     app()
       .put("/api/form/update/ap")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({
         _id: "a01dc43483adb35b1ca678ea",
@@ -75,7 +73,7 @@ describe("Update AP Schedule Controller", () => {
   it("accepts requests to insert events' employee responses", done => {
     app()
       .put("/api/form/update/ap")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .send({
         _id: form!._id,
         responses
@@ -93,7 +91,7 @@ describe("Update AP Schedule Controller", () => {
   it("accepts requests to update events' employee responses", done => {
     app()
       .put("/api/form/update/ap")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .send({
         _id: form!._id,
         responses: responses.map(response => ({

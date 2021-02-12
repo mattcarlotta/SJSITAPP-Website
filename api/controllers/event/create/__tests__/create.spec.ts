@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import request from "supertest";
 import { connectToDB } from "~database";
 import { Season } from "~models";
 import {
@@ -10,6 +9,7 @@ import {
 } from "~messages/errors";
 import { createDate, moment } from "~helpers";
 import app from "~test/utils/testServer";
+import { staffSignIn } from "~test/utils/signIn";
 
 const newEvent = {
   callTimes: [new Date(2001, 1, 1)],
@@ -24,12 +24,10 @@ const newEvent = {
 };
 
 describe("Create Event Controller", () => {
-  let res: request.Response;
+  let cookie: string;
   beforeAll(async () => {
     await connectToDB();
-    res = await app()
-      .post("/api/signin")
-      .send({ email: "staffmember@example.com", password: "password" });
+    cookie = await staffSignIn();
   });
 
   afterAll(async () => {
@@ -39,7 +37,7 @@ describe("Create Event Controller", () => {
   it("rejects requests where the event fields are missing", done => {
     app()
       .post("/api/event/create")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
       .then(res => {
@@ -52,7 +50,7 @@ describe("Create Event Controller", () => {
     const today = createDate().format();
     app()
       .post("/api/event/create")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({ ...newEvent, callTimes: [today, today] })
       .expect(400)
@@ -65,7 +63,7 @@ describe("Create Event Controller", () => {
   it("rejects requests where the seasonId is invalid", done => {
     app()
       .post("/api/event/create")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({ ...newEvent, seasonId: "18001801" })
       .expect(400)
@@ -83,7 +81,7 @@ describe("Create Event Controller", () => {
 
     await app()
       .post("/api/event/create")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .send({ ...newEvent, eventDate: new Date(1800, 1, 1) })
       .expect("Content-Type", /json/)
       .expect(400)
@@ -98,7 +96,7 @@ describe("Create Event Controller", () => {
   it("accepts requests to create an event", done => {
     app()
       .post("/api/event/create")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .send(newEvent)
       .expect("Content-Type", /json/)
       .expect(201)

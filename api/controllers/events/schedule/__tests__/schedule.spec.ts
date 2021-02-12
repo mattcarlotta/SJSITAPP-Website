@@ -1,18 +1,16 @@
 import mongoose from "mongoose";
-import request from "supertest";
 import { connectToDB } from "~database";
 import User, { IUserDocument } from "~models/user";
+import { staffSignIn } from "~test/utils/signIn";
 import app from "~test/utils/testServer";
 
 describe("Retrieve All Events For Schedule Controller", () => {
-  let res: request.Response;
+  let cookie: string;
   let user: IUserDocument | null;
   beforeAll(async () => {
     await connectToDB();
     user = await User.findOne({ email: "scheduledmember@test.com" });
-    res = await app()
-      .post("/api/signin")
-      .send({ email: "staffmember@example.com", password: "password" });
+    cookie = await staffSignIn();
   });
 
   afterAll(async () => {
@@ -22,7 +20,7 @@ describe("Retrieve All Events For Schedule Controller", () => {
   it("accepts requests to retrieve all events for the month", done => {
     app()
       .get("/api/events/schedule")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
@@ -50,7 +48,7 @@ describe("Retrieve All Events For Schedule Controller", () => {
   it("accepts requests to retrieve all events for pagination via query", done => {
     app()
       .get(`/api/events/schedule?id=${user!._id}&selectedGames=My+Games`)
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {

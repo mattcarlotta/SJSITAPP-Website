@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-import request from "supertest";
 import { connectToDB } from "~database";
 import { unableToLocateForm } from "~messages/errors";
 import Form, { IFormDocument } from "~models/form";
+import { staffSignIn } from "~test/utils/signIn";
 import { moment } from "~helpers";
 import app from "~test/utils/testServer";
 
@@ -17,14 +17,12 @@ const newForm = {
 };
 
 describe("Edit Form Controller", () => {
-  let res: request.Response;
+  let cookie: string;
   let form: IFormDocument;
   beforeAll(async () => {
     await connectToDB();
     form = await Form.create(newForm);
-    res = await app()
-      .post("/api/signin")
-      .send({ email: "staffmember@example.com", password: "password" });
+    cookie = await staffSignIn();
   });
 
   afterAll(async () => {
@@ -34,7 +32,7 @@ describe("Edit Form Controller", () => {
   it("rejects requests where the form id is invalid", done => {
     app()
       .get("/api/form/edit/601dc43483adb35b1ca678ea")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
       .then(res => {
@@ -46,7 +44,7 @@ describe("Edit Form Controller", () => {
   it("accepts requests to retrieve an form for editing", done => {
     app()
       .get(`/api/form/edit/${form._id}`)
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {

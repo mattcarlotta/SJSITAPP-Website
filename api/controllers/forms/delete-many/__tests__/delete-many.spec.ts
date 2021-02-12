@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-import request from "supertest";
 import { connectToDB } from "~database";
 import { missingIds } from "~messages/errors";
 import Form, { IFormDocument } from "~models/form";
+import { staffSignIn } from "~test/utils/signIn";
 import app from "~test/utils/testServer";
 
 const newForm = {
@@ -28,16 +28,14 @@ const newForm2 = {
 };
 
 describe("Delete Many forms Controller", () => {
-  let res: request.Response;
+  let cookie: string;
   let form: IFormDocument;
   let form2: IFormDocument;
   beforeAll(async () => {
     await connectToDB();
     form = await Form.create(newForm);
     form2 = await Form.create(newForm2);
-    res = await app()
-      .post("/api/signin")
-      .send({ email: "staffmember@example.com", password: "password" });
+    cookie = await staffSignIn();
   });
 
   afterAll(async () => {
@@ -47,7 +45,7 @@ describe("Delete Many forms Controller", () => {
   it("rejects requests where the form ids are missing", done => {
     app()
       .delete("/api/forms/delete-many")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
       .then(res => {
@@ -59,7 +57,7 @@ describe("Delete Many forms Controller", () => {
   it("accepts requests to delete an form", done => {
     app()
       .delete("/api/forms/delete-many")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .send({ ids: [form._id, form2._id] })
       .expect("Content-Type", /json/)
       .expect(200)

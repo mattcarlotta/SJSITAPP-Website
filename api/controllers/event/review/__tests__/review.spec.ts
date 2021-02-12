@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-import request from "supertest";
 import { connectToDB } from "~database";
 import { unableToLocateEvent } from "~messages/errors";
 import Event, { IEventDocument } from "~models/event";
+import { staffSignIn } from "~test/utils/signIn";
 import app from "~test/utils/testServer";
 
 const newEvent = {
@@ -18,14 +18,12 @@ const newEvent = {
 };
 
 describe("Review Event Controller", () => {
-  let res: request.Response;
+  let cookie: string;
   let game: IEventDocument;
   beforeAll(async () => {
     await connectToDB();
     game = await Event.create(newEvent);
-    res = await app()
-      .post("/api/signin")
-      .send({ email: "staffmember@example.com", password: "password" });
+    cookie = await staffSignIn();
   });
 
   afterAll(async () => {
@@ -35,7 +33,7 @@ describe("Review Event Controller", () => {
   it("rejects requests where the event id is invalid", done => {
     app()
       .get("/api/event/review/601dc43483adb35b1ca678ea")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
       .then(res => {
@@ -47,7 +45,7 @@ describe("Review Event Controller", () => {
   it("accepts requests to retrieve an event for scheduling", done => {
     app()
       .get(`/api/event/review/${game._id}`)
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
