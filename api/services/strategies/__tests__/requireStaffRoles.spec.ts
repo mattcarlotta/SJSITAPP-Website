@@ -23,9 +23,7 @@ describe("Require Staff Authentication Middleware", () => {
   });
 
   it("handles invalid requests requiring staff privileges", async done => {
-    const req = mockRequest();
-
-    await requireStaffRole(req, res, next);
+    await requireStaffRole(mockRequest(), res, next);
 
     expect(res.status).toHaveBeenCalledWith(403);
     expect(res.json).toHaveBeenCalledWith({ err: accessDenied });
@@ -44,9 +42,7 @@ describe("Require Staff Authentication Middleware", () => {
       }
     };
 
-    const req = mockRequest(session);
-
-    await requireStaffRole(req, res, next);
+    await requireStaffRole(mockRequest(session), res, next);
     expect(res.status).toHaveBeenCalledWith(403);
     expect(res.json).toHaveBeenCalledWith({ err: badCredentials });
     done();
@@ -60,9 +56,7 @@ describe("Require Staff Authentication Middleware", () => {
       }
     };
 
-    const req = mockRequest(session);
-
-    await requireStaffRole(req, res, next);
+    await requireStaffRole(mockRequest(session), res, next);
     expect(res.status).toHaveBeenCalledWith(403);
     expect(res.json).toHaveBeenCalledWith({ err: badCredentials });
     done();
@@ -80,9 +74,7 @@ describe("Require Staff Authentication Middleware", () => {
       }
     };
 
-    const req = mockRequest(session);
-
-    await requireStaffRole(req, res, next);
+    await requireStaffRole(mockRequest(session), res, next);
     expect(next).toHaveBeenCalledTimes(1);
     done();
   });

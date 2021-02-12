@@ -39,9 +39,7 @@ describe("Require Authentication Middleware", () => {
       }
     };
 
-    const req = mockRequest(session);
-
-    await requireAuth(req, res, next);
+    await requireAuth(mockRequest(session), res, next);
     expect(res.status).toHaveBeenCalledWith(403);
     expect(res.json).toHaveBeenCalledWith({
       err: badCredentials
@@ -60,9 +58,7 @@ describe("Require Authentication Middleware", () => {
       }
     };
 
-    const req = mockRequest(session);
-
-    await requireAuth(req, res, next);
+    await requireAuth(mockRequest(session), res, next);
     expect(res.status).toHaveBeenCalledWith(403);
     expect(res.json).toHaveBeenCalledWith({
       err: invalidStatus
@@ -81,9 +77,7 @@ describe("Require Authentication Middleware", () => {
       }
     };
 
-    const req = mockRequest(session);
-
-    await requireAuth(req, res, next);
+    await requireAuth(mockRequest(session), res, next);
     expect(next).toHaveBeenCalledTimes(1);
     done();
   });
