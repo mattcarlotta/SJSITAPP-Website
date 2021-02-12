@@ -540,8 +540,8 @@ const getEventCounts = (
 ): mongoose.Query<number, IEventDocument> =>
   Event.countDocuments({
     eventDate: {
-      $gte: moment(startMonth).toDate().toString(),
-      $lte: moment(endMonth).toDate().toString()
+      $gte: moment(startMonth).format(),
+      $lte: moment(endMonth).format()
     }
   });
 
@@ -643,8 +643,8 @@ const findMemberAvailabilty = async (
     {
       $match: {
         eventDate: {
-          $gte: startOfMonth,
-          $lte: endOfMonth
+          $gte: startOfMonth.toDate(),
+          $lte: endOfMonth.toDate()
         }
       }
     },
@@ -779,7 +779,7 @@ const parseSession = (req: Request): string | undefined =>
  * @param res - res object
  * @returns
  */
-const sendError = (err: string, statusCode: number, res: Response): Response =>
+const sendError = (err: Error, statusCode: number, res: Response): Response =>
   res.status(statusCode).json({ err: err.toString() });
 
 /**

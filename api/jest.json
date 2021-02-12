@@ -17,8 +17,7 @@
     "~routes/(.*)$": "<rootDir>routes/$1",
     "~routes": "<rootDir>routes/index",
     "~services/(.*)$": "<rootDir>services/$1",
-    "~test/(.*)$": "<rootDir>test/$1",
-    "~utils": "<rootDir>../utils/$1"
+    "~test/(.*)$": "<rootDir>test/$1"
   },
   "transform": {
     "^.+\\.(ts|js)$": "babel-jest"

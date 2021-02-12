@@ -15,7 +15,6 @@ tsconfigpaths.register({
     "~routes/*": ["api/routes/*"],
     "~routes": ["api/routes/index"],
     "~services/*": ["api/services/*"],
-    "~test/*": ["api/test/*"],
-    "~utils/*": ["src/utils/*"]
+    "~test/*": ["api/test/*"]
   }
 });

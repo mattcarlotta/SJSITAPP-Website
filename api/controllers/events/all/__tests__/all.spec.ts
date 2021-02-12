@@ -21,8 +21,8 @@ describe("Retrieve All Events Controller", () => {
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
-        expect(res.body.events).toEqual(
-          expect.arrayContaining([
+        expect(res.body).toEqual({
+          events: expect.arrayContaining([
             expect.objectContaining({
               _id: expect.any(String),
               callTimes: expect.any(Array),
@@ -38,8 +38,9 @@ describe("Retrieve All Events Controller", () => {
               team: expect.any(String),
               uniform: expect.any(String)
             })
-          ])
-        );
+          ]),
+          totalDocs: expect.any(Number)
+        });
         done();
       });
   });
@@ -51,8 +52,8 @@ describe("Retrieve All Events Controller", () => {
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
-        expect(res.body.events).toEqual(
-          expect.arrayContaining([
+        expect(res.body).toEqual({
+          events: expect.arrayContaining([
             expect.objectContaining({
               _id: expect.any(String),
               callTimes: expect.any(Array),
@@ -68,8 +69,9 @@ describe("Retrieve All Events Controller", () => {
               team: expect.any(String),
               uniform: expect.any(String)
             })
-          ])
-        );
+          ]),
+          totalDocs: expect.any(Number)
+        });
         done();
       });
   });

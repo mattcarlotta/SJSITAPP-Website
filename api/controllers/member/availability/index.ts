@@ -22,7 +22,7 @@ const getMemberAvailability = async (
     const existingMember = await User.findOne({ _id });
     if (!existingMember) throw unableToLocateMember;
 
-    await findMemberAvailabilty(existingMember, String(selectedDate), res);
+    await findMemberAvailabilty(existingMember, selectedDate as string, res);
   } catch (err) {
     return sendError(err, 400, res);
   }

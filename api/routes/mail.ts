@@ -12,7 +12,7 @@ import {
 import { requireAuth, requireStaffRole } from "~services/strategies";
 
 const mailRoutes = (router: Router): void => {
-  router.get("/mail/all", requireStaffRole, getAllMail);
+  router.get("/mail/viewall", requireStaffRole, getAllMail);
   router.post("/mail/create", requireStaffRole, createMail);
   router.post("/mail/contact", requireAuth, contactUs);
   router.delete("/mail/delete-many", requireStaffRole, deleteManyMails);
