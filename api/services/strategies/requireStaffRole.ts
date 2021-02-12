@@ -20,12 +20,11 @@ const requireStaffRole = async (
     const user = get(req, ["session", "user"]);
     const role = get(user, ["role"]);
 
-    if (!user || (role !== "admin" && role !== "staff"))
-      throw String(accessDenied);
+    if (!user || (role !== "admin" && role !== "staff")) throw accessDenied;
 
     const existingUser = await User.findOne({ _id: user.id });
     if (!existingUser || existingUser.status === "suspended")
-      throw String(badCredentials);
+      throw badCredentials;
 
     return next();
   } catch (err) {

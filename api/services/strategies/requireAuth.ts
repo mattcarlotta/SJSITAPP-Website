@@ -17,11 +17,11 @@ const requireAuth = async (
 ): Promise<Response | void> => {
   try {
     const _id = parseSession(req);
-    if (!_id) throw String(badCredentials);
+    if (!_id) throw badCredentials;
 
     const existingUser = await User.findOne({ _id });
-    if (!existingUser) throw String(badCredentials);
-    if (existingUser.status === "suspended") throw String(invalidStatus);
+    if (!existingUser) throw badCredentials;
+    if (existingUser.status === "suspended") throw invalidStatus;
 
     return next();
   } catch (error) {
