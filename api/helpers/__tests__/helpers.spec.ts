@@ -47,7 +47,7 @@ describe("Helpers", () => {
   });
 
   it("builds a column for scheduling", async () => {
-    const format = "hh:mm a";
+    const format = "MM-DD-YYYY hh:mm a";
     const callTimeId = moment("2001-05-31T19:00:00-07:00", format);
 
     const event = {
