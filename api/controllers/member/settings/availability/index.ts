@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { User } from "~models";
 import { findMemberAvailabilty, parseSession, sendError } from "~helpers";
-import { missingMemberId, unableToLocateMember } from "~messages/errors";
+import { unableToLocateMember } from "~messages/errors";
 
 /**
  * Retrieves a single member's settings availability.
@@ -17,13 +17,14 @@ const getMemberSettingsAvailability = async (
   try {
     const { selectedDate } = req.query;
     const _id = parseSession(req);
-    if (!_id) throw missingMemberId;
 
     const existingMember = await User.findOne({ _id });
+    /* istanbul ignore next */
     if (!existingMember) throw unableToLocateMember;
 
-    await findMemberAvailabilty(existingMember, String(selectedDate), res);
+    await findMemberAvailabilty(existingMember, selectedDate as string, res);
   } catch (err) {
+    /* istanbul ignore next */
     return sendError(err, 400, res);
   }
 };

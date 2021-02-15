@@ -20,7 +20,7 @@ const getAllMail = async (req: Request, res: Response): Promise<Response> => {
       { ...filters },
       {
         sort: { sendDate: -1 },
-        page: parseInt(String(page), 10),
+        page: parseInt((page as string) || "1", 10),
         limit: 10,
         select: "-notes -__v"
       }

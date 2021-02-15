@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { User } from "~models";
 import { findMemberEvents, parseSession, sendError } from "~helpers";
-import { missingMemberId, unableToLocateMember } from "~messages/errors";
+import { unableToLocateMember } from "~messages/errors";
 
 /**
  * Retrieves a single member's settings events schedule.
@@ -17,15 +17,19 @@ const getMemberSettingsEvents = async (
   try {
     const { selectedDate } = req.query;
     const _id = parseSession(req);
-    if (!_id) throw missingMemberId;
 
     const existingMember = await User.findOne({ _id });
+    /* istanbul ignore next */
     if (!existingMember) throw unableToLocateMember;
 
-    const events = await findMemberEvents(existingMember, String(selectedDate));
+    const events = await findMemberEvents(
+      existingMember,
+      selectedDate as string
+    );
 
     return res.status(200).json({ ...events[0] });
   } catch (err) {
+    /* istanbul ignore next */
     return sendError(err, 400, res);
   }
 };

@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { User } from "~models";
 import { parseSession, sendError } from "~helpers";
-import { missingMemberId, unableToLocateMember } from "~messages/errors";
+import { unableToLocateMember } from "~messages/errors";
 
 /**
  * Retrieves a single member's settings.
@@ -16,13 +16,17 @@ const getMemberSettings = async (
 ): Promise<Response> => {
   try {
     const _id = parseSession(req);
-    if (!_id) throw missingMemberId;
 
-    const existingMember = await User.findOne({ _id });
+    const existingMember = await User.findOne(
+      { _id },
+      { password: 0, token: 0, __v: 0 }
+    ).lean();
+    /* istanbul ignore next */
     if (!existingMember) throw unableToLocateMember;
 
     return res.status(200).json({ member: existingMember });
   } catch (err) {
+    /* istanbul ignore next */
     return sendError(err, 400, res);
   }
 };

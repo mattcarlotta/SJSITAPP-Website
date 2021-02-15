@@ -731,8 +731,8 @@ const findMemberEvents = async (
     {
       $match: {
         eventDate: {
-          $gte: startOfMonth,
-          $lte: endOfMonth
+          $gte: startOfMonth.toDate(),
+          $lte: endOfMonth.toDate()
         }
       }
     },

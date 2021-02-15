@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { Mail } from "~models";
 import { sendError } from "~helpers";
-import { missingMailId, unableToLocateMail } from "~messages/errors";
+import { unableToLocateMail } from "~messages/errors";
 
 /**
  * Retrieves a single email for editing/viewing.
@@ -16,7 +16,6 @@ const getMailForViewing = async (
 ): Promise<Response> => {
   try {
     const { id: _id } = req.params;
-    if (!_id) throw missingMailId;
 
     const existingEmail = await Mail.findOne({ _id }, { __v: 0 });
     if (!existingEmail) throw unableToLocateMail;

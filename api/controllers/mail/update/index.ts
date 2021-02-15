@@ -32,7 +32,7 @@ const updateMail = async (req: Request, res: Response): Promise<Response> => {
       sendError: ""
     });
 
-    return res.status(201).json({
+    return res.status(200).json({
       message: `Successfully updated the email and it will be sent ${
         sendEmailDate.format() >= currentDay
           ? sendEmailDate.format("MMMM Do YYYY @ hh:mm a")

@@ -14,19 +14,19 @@ const getAllMembers = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const { page, role } = req.body;
+    const { page, role } = req.query;
 
     const filters = generateFilters(req.query);
 
     const roleFilter = role
-      ? { $regex: role, $options: "i" }
+      ? { $regex: role as string, $options: "i" }
       : { $ne: "admin" };
 
     const results = await User.paginate(
       { ...filters, role: roleFilter },
       {
         sort: { lastName: 1 },
-        page,
+        page: parseInt((page as string) || "1", 10),
         limit: 10,
         select: "role status registered email emailReminders firstName lastName"
       }
@@ -37,6 +37,7 @@ const getAllMembers = async (
       totalDocs: get(results, ["totalDocs"])
     });
   } catch (err) {
+    /* istanbul ignore next */
     return sendError(err, 400, res);
   }
 };

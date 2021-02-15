@@ -23,10 +23,10 @@ export const staffSignIn = async (): Promise<string> => {
  * @function staffSignIn
  * @returns {string} cookie
  */
-export const memberSignIn = async (): Promise<string> => {
+export const memberSignIn = async (email?: string): Promise<string> => {
   const res = await app()
     .post("/api/signin")
-    .send({ email: "scheduledmember@test.com", password });
+    .send({ email: email || "scheduledmember@test.com", password });
 
   return get(res, ["header", "set-cookie"]);
 };

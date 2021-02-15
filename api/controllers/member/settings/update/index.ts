@@ -3,7 +3,6 @@ import { User } from "~models";
 import { parseSession, sendError } from "~helpers";
 import {
   emailAlreadyTaken,
-  missingMemberId,
   missingUpdateMemberParams,
   unableToLocateMember,
   usernameAlreadyTaken
@@ -23,7 +22,6 @@ const updateMemberSettings = async (
   try {
     let updatedEmail = false;
     const _id = parseSession(req);
-    if (!_id) throw missingMemberId;
 
     const { email, emailReminders, firstName, lastName } = req.body;
     if (
@@ -35,6 +33,7 @@ const updateMemberSettings = async (
       throw missingUpdateMemberParams;
 
     const existingMember = await User.findOne({ _id });
+    /* istanbul ignore next */
     if (!existingMember) throw unableToLocateMember;
 
     if (existingMember.email !== email) {
@@ -57,7 +56,7 @@ const updateMemberSettings = async (
       lastName
     });
 
-    return res.status(201).json({
+    return res.status(200).json({
       message: updatedEmail
         ? "Your profile has been updated. Please re-log into your account with your new email address."
         : "Successfully updated your settings."

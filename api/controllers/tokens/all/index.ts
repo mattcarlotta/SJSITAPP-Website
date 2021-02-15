@@ -21,14 +21,14 @@ const getAllTokens = async (req: Request, res: Response): Promise<Response> => {
       : {};
 
     const roleFilter = role
-      ? { $regex: String(role), $options: "i" }
+      ? { $regex: role as string, $options: "i" }
       : { $ne: "admin" };
 
     const results = await Token.paginate(
       { ...filters, ...emailFilter, role: roleFilter },
       {
         sort: { expiration: -1 },
-        page: parseInt(String(page), 10),
+        page: parseInt((page as string) || "1", 10),
         limit: 10,
         select: "-__v"
       }

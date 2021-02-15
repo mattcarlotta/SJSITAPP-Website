@@ -24,7 +24,10 @@ const getMemberEvents = async (
     const existingMember = await User.findOne({ _id });
     if (!existingMember) throw unableToLocateMember;
 
-    const events = await findMemberEvents(existingMember, String(selectedDate));
+    const events = await findMemberEvents(
+      existingMember,
+      selectedDate as string
+    );
 
     return res.status(200).json({ ...events[0] });
   } catch (err) {

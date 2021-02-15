@@ -38,7 +38,7 @@ const memberRoutes = (router: Router): void => {
   router.put("/member/update", requireStaffRole, updateMember);
   router.put("/member/update-status", requireStaffRole, updateMemberStatus);
 
-  router.get("/members/all", requireStaffRole, getAllMembers);
+  router.get("/members/viewall", requireStaffRole, getAllMembers);
   router.get(
     "/members/event-counts/:id",
     requireStaffRole,

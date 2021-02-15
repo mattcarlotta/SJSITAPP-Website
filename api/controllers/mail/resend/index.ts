@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { Mail } from "~models";
 import { createDate, sendError } from "~helpers";
-import { missingMailId, unableToLocateMail } from "~messages/errors";
+import { unableToLocateMail } from "~messages/errors";
 
 /**
  * Resends an email.
@@ -13,7 +13,6 @@ import { missingMailId, unableToLocateMail } from "~messages/errors";
 const resendMail = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { id: _id } = req.params;
-    if (!_id) throw missingMailId;
 
     const existingEmail = await Mail.findOne({ _id }, { __v: 0 });
     if (!existingEmail) throw unableToLocateMail;

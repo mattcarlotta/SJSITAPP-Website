@@ -21,7 +21,7 @@ const getAllSeasons = async (
       {},
       {
         sort: { startDate: -1 },
-        page: parseInt(String(page), 10),
+        page: parseInt((page as string) || "1", 10),
         limit: 10,
         select: "seasonId startDate endDate"
       }

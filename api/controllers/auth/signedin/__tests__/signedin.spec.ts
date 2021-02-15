@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 import { connectToDB } from "~database";
 import User, { IUserDocument } from "~models/user";
+import { memberSignIn, staffSignIn } from "~test/utils/signIn";
 import app from "~test/utils/testServer";
 
-const email = "staffmember@example.com";
 const susendedEmail = "goingtobesuspended@example.com";
 const textPassword = "password";
 
@@ -40,15 +40,13 @@ describe("Signed In Controller", () => {
   });
 
   it("rejects requests where the user has been suspended", async done => {
-    const res = await app()
-      .post("/api/signin")
-      .send({ email: susendedEmail, password: textPassword });
+    const cookie = await memberSignIn(susendedEmail);
 
     await User.updateOne({ _id: user._id }, { status: "suspended" });
 
     await app()
       .get("/api/signedin")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
@@ -58,13 +56,11 @@ describe("Signed In Controller", () => {
   });
 
   it("accepts requests where the user session is valid", async done => {
-    const res = await app()
-      .post("/api/signin")
-      .send({ email, password: "password" });
+    const cookie = await staffSignIn();
 
     await app()
       .get("/api/signedin")
-      .set("Cookie", res.header["set-cookie"])
+      .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {

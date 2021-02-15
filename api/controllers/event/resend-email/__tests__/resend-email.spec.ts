@@ -43,7 +43,7 @@ describe("Event Resend Email Controller", () => {
       });
   });
 
-  it("accepts requests to retrieve an event for editing", done => {
+  it("accepts requests to resend an event email", done => {
     app()
       .put(`/api/event/resend-email/${game._id}`)
       .set("Cookie", cookie)
