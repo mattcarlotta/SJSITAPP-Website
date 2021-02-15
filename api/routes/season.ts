@@ -18,7 +18,7 @@ const seasonRoutes = (router: Router): void => {
   router.get("/season/edit/:id", requireStaffRole, getSeasonForViewing);
   router.put("/season/update", requireStaffRole, updateSeason);
 
-  router.get("/seasons/all", requireStaffRole, getAllSeasons);
+  router.get("/seasons/viewall", requireStaffRole, getAllSeasons);
   router.get("/seasons/all/ids", requireStaffRole, getAllSeasonIds);
   router.delete("/seasons/delete-many", requireStaffRole, deleteManySeasons);
 };

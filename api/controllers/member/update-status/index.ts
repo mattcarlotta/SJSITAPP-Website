@@ -42,7 +42,7 @@ const updateMemberStatus = async (
       );
     }
 
-    return res.status(201).json({
+    return res.status(200).json({
       message: `Member has been ${wasSuspended ? "suspended" : "reactivated"}.`
     });
   } catch (err) {

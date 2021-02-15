@@ -7,7 +7,7 @@ import {
   getUsers,
   sendError
 } from "~helpers";
-import { missingEventId, unableToLocateEvent } from "~messages/errors";
+import { unableToLocateEvent } from "~messages/errors";
 import type { TActiveMembers } from "~models/user";
 
 /**
@@ -23,7 +23,6 @@ const getMemberEventCounts = async (
 ): Promise<Response> => {
   try {
     const { id } = req.params;
-    if (!id) throw missingEventId;
 
     const activeMembers = await getUsers({
       match: {

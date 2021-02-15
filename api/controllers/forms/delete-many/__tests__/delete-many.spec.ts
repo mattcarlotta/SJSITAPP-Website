@@ -54,7 +54,7 @@ describe("Delete Many forms Controller", () => {
       });
   });
 
-  it("accepts requests to delete an form", done => {
+  it("accepts requests to delete many forms", done => {
     app()
       .delete("/api/forms/delete-many")
       .set("Cookie", cookie)

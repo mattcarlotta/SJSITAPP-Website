@@ -26,6 +26,7 @@ const getAllSeasonIds = async (
 
     return res.status(200).json({ seasonIds: seasons[0].seasonIds });
   } catch (err) {
+    /* istanbul ignore next */
     return sendError(err, 400, res);
   }
 };

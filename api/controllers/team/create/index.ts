@@ -34,5 +34,3 @@ const createTeam = async (req: Request, res: Response): Promise<Response> => {
 };
 
 export default createTeam;
-
-//

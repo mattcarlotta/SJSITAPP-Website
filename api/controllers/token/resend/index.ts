@@ -6,11 +6,7 @@ import {
   expirationDate,
   sendError
 } from "~helpers";
-import {
-  missingTokenId,
-  unableToLocateToken,
-  unableToUpdateToken
-} from "~messages/errors";
+import { unableToLocateToken, unableToUpdateToken } from "~messages/errors";
 
 /**
  * Resend token emails.
@@ -22,7 +18,6 @@ import {
 const resendToken = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { id: _id } = req.params;
-    if (!_id) throw missingTokenId;
 
     const existingToken = await Token.findOne({ _id }, { __v: 0, token: 0 });
     if (!existingToken) throw unableToLocateToken;

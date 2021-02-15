@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { Season } from "~models";
 import { sendError } from "~helpers";
-import { missingSeasonId, unableToLocateSeason } from "~messages/errors";
+import { unableToLocateSeason } from "~messages/errors";
 
 /**
  * Retrieves a single season for editing/viewing.
@@ -15,10 +15,9 @@ const getSeasonForViewing = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const { id: _id } = req.query;
-    if (!_id) throw missingSeasonId;
+    const { id: _id } = req.params;
 
-    const existingSeason = await Season.findOne({ _id });
+    const existingSeason = await Season.findOne({ _id }, { __v: 0 }).lean();
     if (!existingSeason) throw unableToLocateSeason;
 
     return res.status(200).json({ season: existingSeason });

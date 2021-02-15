@@ -1,11 +1,7 @@
 import type { Request, Response } from "express";
 import { Token } from "~models";
 import { sendError } from "~helpers";
-import {
-  missingTokenId,
-  unableToLocateToken,
-  unableToUpdateToken
-} from "~messages/errors";
+import { unableToLocateToken, unableToUpdateToken } from "~messages/errors";
 
 /**
  * Retrieves a single token (authorization key) for editing/viewing.
@@ -20,7 +16,6 @@ const getTokenForViewing = async (
 ): Promise<Response> => {
   try {
     const { id: _id } = req.params;
-    if (!_id) throw missingTokenId;
 
     const existingToken = await Token.findOne({ _id }, { __v: 0, token: 0 });
     if (!existingToken) throw unableToLocateToken;

@@ -17,7 +17,6 @@ import {
 const updateSeason = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { _id, seasonId, seasonDuration } = req.body;
-
     if (!_id || !seasonId || !seasonDuration) throw unableToUpdateSeason;
 
     const existingSeason = await Season.findOne({ _id });
@@ -37,7 +36,7 @@ const updateSeason = async (req: Request, res: Response): Promise<Response> => {
     await Form.updateMany({ seasonId: existingSeason.seasonId }, { seasonId });
 
     return res
-      .status(201)
+      .status(200)
       .json({ message: "Successfully updated the season." });
   } catch (err) {
     return sendError(err, 400, res);

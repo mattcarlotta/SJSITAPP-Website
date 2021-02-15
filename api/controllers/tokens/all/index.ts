@@ -39,6 +39,7 @@ const getAllTokens = async (req: Request, res: Response): Promise<Response> => {
 
     return res.status(200).json({ tokens, totalDocs });
   } catch (err) {
+    /* istanbul ignore next */
     return sendError(err, 400, res);
   }
 };

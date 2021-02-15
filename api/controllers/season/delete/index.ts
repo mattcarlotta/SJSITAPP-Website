@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { Event, Form, Season } from "~models";
 import { sendError } from "~helpers";
-import { missingSeasonId, unableToDeleteSeason } from "~messages/errors";
+import { unableToDeleteSeason } from "~messages/errors";
 
 /**
  * Deletes a season.
@@ -13,7 +13,6 @@ import { missingSeasonId, unableToDeleteSeason } from "~messages/errors";
 const deleteSeason = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { id: _id } = req.params;
-    if (!_id) throw missingSeasonId;
 
     const existingSeason = await Season.findOne({ _id });
     if (!existingSeason) throw unableToDeleteSeason;

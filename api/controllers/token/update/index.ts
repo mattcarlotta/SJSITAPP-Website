@@ -57,7 +57,7 @@ const updateToken = async (req: Request, res: Response): Promise<Response> => {
 
     await Mail.create(createAuthMail(authorizedEmail, token, expiration, role));
 
-    return res.status(201).json({
+    return res.status(200).json({
       message: `Successfully updated and sent a new authorization key to ${authorizedEmail}.`
     });
   } catch (err) {

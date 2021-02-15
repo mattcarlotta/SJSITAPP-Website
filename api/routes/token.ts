@@ -16,7 +16,7 @@ const tokenRoutes = (router: Router): void => {
   router.put("/token/resend-email/:id", requireStaffRole, resendToken);
   router.put("/token/update", requireStaffRole, updateToken);
 
-  router.get("/tokens/all", requireStaffRole, getAllTokens);
+  router.get("/tokens/viewall", requireStaffRole, getAllTokens);
   router.delete("/tokens/delete-many", requireStaffRole, deleteManyTokens);
 };
 

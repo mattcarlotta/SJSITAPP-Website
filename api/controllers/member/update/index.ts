@@ -65,7 +65,7 @@ const updateMember = async (req: Request, res: Response): Promise<Response> => {
     });
 
     return res
-      .status(201)
+      .status(200)
       .json({ message: "Successfully updated the member profile." });
   } catch (err) {
     return sendError(err, 400, res);

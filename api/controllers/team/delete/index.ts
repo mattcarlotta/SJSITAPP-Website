@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { Team } from "~models";
 import { sendError } from "~helpers";
-import { missingTeamId, unableToDeleteTeam } from "~messages/errors";
+import { unableToDeleteTeam } from "~messages/errors";
 
 /**
  * Deletes an event.
@@ -13,7 +13,6 @@ import { missingTeamId, unableToDeleteTeam } from "~messages/errors";
 const deleteTeam = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { id: _id } = req.params;
-    if (!_id) throw missingTeamId;
 
     const existingTeam = await Team.findOne({ _id });
     if (!existingTeam) throw unableToDeleteTeam;
