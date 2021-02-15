@@ -12,7 +12,7 @@ export type TEventAccResponses = Array<{
 }>;
 
 export type TEventAggResponses = Array<{
-  _id: TId;
+  // _id: TId;
   responses: Array<string>;
 }>;
 

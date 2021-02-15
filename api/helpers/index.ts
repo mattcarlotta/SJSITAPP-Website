@@ -42,9 +42,9 @@ const responseTypes = [
 
 const COLORS = ["#247BA0", "#2A9D8F", "#F4A261", "#FF8060", "#BFBFBF"];
 
-const arraysEqual = (a: Array<any>, b: Array<any>): boolean =>
-  // eslint-disable-next-line
-  JSON.stringify(a) == JSON.stringify(b);
+// const arraysEqual = (a: Array<any>, b: Array<any>): boolean =>
+//   // eslint-disable-next-line
+//   JSON.stringify(a) == JSON.stringify(b);
 
 const toAverage = (num: number, total: number) =>
   parseInt(((num / total) * 100).toFixed(2), 10);
@@ -217,8 +217,8 @@ const createColumnSchedule = ({
     title: "Employees",
     employeeIds: members.reduce(
       (result, member: Record<"_id", mongoose.Types.ObjectId>) => {
-        const isScheduled = event.scheduledIds!.some(
-          id => typeof member._id === "object" && member._id.equals(id)
+        const isScheduled = event.scheduledIds!.some(id =>
+          member._id.equals(id)
         );
 
         return !isScheduled ? [...result, member._id] : result;
@@ -399,6 +399,28 @@ const expirationDate = (): moment.Moment =>
  * @returns {object}
  */
 
+interface Filters {
+  authorizedEmail?: string;
+  email?: string;
+  endDate?: Date | string;
+  eventDate?: Date | string;
+  endMonth?: Date | string;
+  eventType?: string;
+  expirationDate?: Date | string;
+  firstName?: string;
+  lastName?: string;
+  opponent?: string;
+  seasonId?: string;
+  sendDate?: string;
+  sentEmails?: any;
+  sentEmailReminders?: any;
+  startDate?: Date | string;
+  startMonth?: Date | string;
+  status?: string;
+  team?: string;
+  type?: string;
+}
+
 interface Query {
   authorizedEmail?: { $regex: any; $options: string };
   email?: { $regex: any; $options: string };
@@ -421,7 +443,7 @@ interface Query {
   type?: { $regex: any; $options: string };
 }
 const format = "MM-DD-YYYY";
-const generateFilters = (query: Query): Query =>
+const generateFilters = (query: Filters): Query =>
   !isEmpty(query)
     ? Object.keys(query).reduce((acc, item) => {
         switch (item) {
@@ -823,7 +845,7 @@ const updateScheduleIds = (schedule: TEventScheduleIds): TEventSchedule =>
   );
 
 export {
-  arraysEqual,
+  // arraysEqual,
   clearSession,
   convertId,
   createAuthMail,
