@@ -1,7 +1,6 @@
 import * as React from "react";
 import Router from "next/router";
 import { useSelector } from "react-redux";
-import Center from "~components/Layout/Center";
 import Spinner from "~components/Layout/Spinner";
 import Header from "~components/Navigation/Header";
 import { NextPage } from "~types";
@@ -15,10 +14,7 @@ const Home: NextPage = () => {
   const isLoggedin = role !== "guest";
 
   return (
-    <Center
-      data-testid="home-page"
-      style={{ height: "100%", color: "#0076ff" }}
-    >
+    <>
       <Header title="Home" url="/" />
       <Spinner>
         {!isLoading && (
@@ -35,7 +31,7 @@ const Home: NextPage = () => {
           </button>
         )}
       </Spinner>
-    </Center>
+    </>
   );
 };
 

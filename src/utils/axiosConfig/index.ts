@@ -2,10 +2,8 @@
 import get from "lodash.get";
 import axios from "axios";
 
-const { baseURL, IMAGEAPI } = process.env;
-
 export const app = axios.create({
-  baseURL
+  baseURL: process.env.NEXT_PUBLIC_BASEURL
 });
 
 app.interceptors.response.use(
@@ -15,7 +13,7 @@ app.interceptors.response.use(
 );
 
 export const avatarAPI = axios.create({
-  baseURL: `${IMAGEAPI}/api/avatar/`,
+  baseURL: `${process.env.NEXT_PUBLIC_IMAGEAPI}/api/avatar/`,
   withCredentials: true
 });
 

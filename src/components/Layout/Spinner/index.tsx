@@ -28,7 +28,7 @@ const SpinnerComponent: FC<ISpinnerProps> = ({ className, children }) => {
     const isEdge = !isIE && !!window.StyleMedia;
 
     setState({ isMounted: true, isIE, isEdge });
-  });
+  }, []);
 
   return (
     <div data-test="spinner" className={className}>
