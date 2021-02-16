@@ -10,7 +10,7 @@ const Header = ({
   url
 }: HeaderProps): JSX.Element => (
   <Head>
-    <title>{title} - NextJS SSR Kit</title>
+    <title>{title} - San Jose Sharks Ice Team</title>
     <link rel="canonical" href={`${CLIENT}${url}`} />
     <meta name="description" content={description} />
     <meta property="og:description" content={description} />
@@ -20,7 +20,7 @@ const Header = ({
 );
 
 Header.defaultProps = {
-  description: "A fullstack MERN SSR boilerplate.",
+  description: "Official website for the Sharks Ice Team.",
   type: "website"
 };
 

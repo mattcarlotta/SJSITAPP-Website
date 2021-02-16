@@ -7,6 +7,7 @@ import {
   CSSProperties,
   FC,
   FormEvent,
+  ReactElement,
   ReactNode
 } from "react";
 import { AnyAction, Store } from "redux";
@@ -14,6 +15,15 @@ import { SagaIterator } from "redux-saga";
 import * as actions from "../actions/Users";
 
 /// ACTIONS ///
+
+export type AuthData = {
+  id?: string;
+  avatar?: string;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  role: string;
+};
 
 export type UserData = {
   _id: string;
@@ -229,16 +239,6 @@ export interface SagaStore extends Store {
   sagaTask: Task;
 }
 
-export type ServerReducerState = {
-  error: string;
-  message: string;
-};
-
-export type UserReducerState = {
-  data: [];
-  isLoading: boolean;
-};
-
 export type ReducerState = {
   server: ServerReducerState;
   users: UserReducerState;
@@ -271,6 +271,7 @@ export {
   NextApiRequest,
   NextApiResponse,
   NextPage,
+  ReactElement,
   ReactNode,
   SagaIterator
 };

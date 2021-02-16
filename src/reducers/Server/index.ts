@@ -1,8 +1,13 @@
 import { HYDRATE } from "next-redux-wrapper";
 import * as constants from "~constants";
-import { AnyAction, ServerReducerState } from "~types";
+import { AnyAction } from "~types";
 
-export const initialState: ServerReducerState = {
+export interface IServerReducerState {
+  error: string;
+  message: string;
+}
+
+export const initialState: IServerReducerState = {
   error: "",
   message: ""
 };
@@ -11,16 +16,16 @@ export const initialState: ServerReducerState = {
  * @function serverReducer
  * @param {object} state - an object containing error or server messages.
  * @param {object} action - type and payload to be reduced.
- * @returns {ServerReducerState} new server state.
+ * @returns {IServerReducerState} { error:string, message: string }.
  */
 const serverReducer = (
-  state: ServerReducerState = initialState,
+  state: IServerReducerState = initialState,
   { payload, type }: AnyAction
-): ServerReducerState => {
+): IServerReducerState => {
   switch (type) {
     case HYDRATE:
       return { ...state, ...payload.server };
-    case constants.RESET_SERVER_MESSAGES:
+    case constants.SERVER_RESET:
       return initialState;
     case constants.SERVER_ERROR:
       return { ...state, error: payload };

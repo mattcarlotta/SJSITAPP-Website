@@ -1,4 +1,5 @@
 import { put, call } from "redux-saga/effects";
+import { appLoaded } from "~actions/App";
 import { setError } from "~actions/Server";
 import toast from "~components/App/Toast";
 import { SagaIterator } from "~types";
@@ -8,10 +9,12 @@ import { SagaIterator } from "~types";
  *
  * @generator
  * @param {string} message - an API error response message.
+ * @yields {action} - A redux action to set app loading state to loaded.
  * @yields {action} - A redux action to set server messages to redux state.
  * @yields {function} - A function to trigger an error toast with the server message.
  */
 function* showError(message: string): SagaIterator {
+  yield put(appLoaded());
   yield put(setError(message));
   yield call(toast, { type: "error", message });
 }

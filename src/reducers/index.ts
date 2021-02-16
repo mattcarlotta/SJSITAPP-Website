@@ -1,10 +1,16 @@
 import { combineReducers } from "redux";
-import userReducer from "./Users";
+import appReducer from "./App";
+import authReducer from "./Auth";
 import serverReducer from "./Server";
 
 const reducers = {
-  server: serverReducer,
-  users: userReducer
+  app: appReducer,
+  auth: authReducer,
+  server: serverReducer
 };
 
-export default combineReducers(reducers);
+const RootReducer = combineReducers(reducers);
+
+export type RootState = ReturnType<typeof RootReducer>;
+
+export default RootReducer;

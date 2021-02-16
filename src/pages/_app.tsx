@@ -1,14 +1,18 @@
 import * as React from "react";
 import Head from "next/head";
+import { useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import GlobalStylesheet from "~styles/globalStylesheet";
+import { appLoading } from "~actions/App";
 import { wrapper } from "~store";
-import "react-toastify/dist/ReactToastify.css";
+import GlobalStylesheet from "~styles/globalStylesheet";
 import { AppProps, FC } from "~types";
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
-  // React.useEffect(() => {
-  // }, []);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(appLoading());
+  }, []);
 
   return (
     <>
