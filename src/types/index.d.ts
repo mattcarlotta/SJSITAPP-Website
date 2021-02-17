@@ -155,7 +155,7 @@ export type HeaderProps = {
   description: string;
   title: string;
   type: string;
-  url: string;
+  url?: string;
 };
 
 export type InputProps = ComponentProps;
@@ -164,6 +164,7 @@ export type LinkProps = {
   children: ReactNode;
   className?: string;
   href: string;
+  style?: CSSProperties;
 };
 
 export type LoadingUsersProps = {

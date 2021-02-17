@@ -28,10 +28,11 @@ const Home: NextPage = () => {
       <Spinner>
         <Button
           tertiary
+          uppercase
           type="button"
           marginRight="0px"
-          width="175px"
-          style={{ margin: "20px auto 0" }}
+          width="260px"
+          style={{ margin: "20px auto 0", fontWeight: 400 }}
           onClick={() =>
             Router.push(isLoggedin ? "/employee/dashboard" : "/employee/login")
           }
@@ -41,12 +42,12 @@ const Home: NextPage = () => {
           ) : isLoggedin ? (
             <span>
               <MdDashboard />
-              Dashboard
+              View Dashboard
             </span>
           ) : (
             <span>
               <FaSignInAlt />
-              Login
+              Employee Login
             </span>
           )}
         </Button>

@@ -50,7 +50,7 @@ const Button = styled(StyledButton)<StyledButtonProps>`
   display: ${({ display }) => display || "block"};
   color: ${props => {
     if (props.primary || props.danger) return "#025f6d";
-    if (props.tertiary) return "#3794a5";
+    if (props.tertiary) return "#e4e3e3";
     return "#fff";
   }};
   background: ${props => {
@@ -67,12 +67,10 @@ const Button = styled(StyledButton)<StyledButtonProps>`
     if (props.capitalize) return "capitalize";
     return "none";
   }};
-  text-shadow: 1px 2px 2px #000000;
   text-decoration: none;
   margin-right: ${({ marginRight }) => marginRight || "20px"};
-  transition: color 0.2s ease-in-out, background 0.2s ease-in-out,
-    border 0.2s ease-in-out;
-  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+  border-radius: 50px;
   border: 2px solid
     ${props => {
       if (props.primary) return "#04515d";
@@ -87,7 +85,8 @@ const Button = styled(StyledButton)<StyledButtonProps>`
 
   &:hover {
     color: ${props => {
-      if (props.primary || props.danger || props.tertiary) return "#e4e3e3";
+      if (props.primary || props.danger) return "#e4e3e3";
+      if (props.tertiary) return "#fff";
       return "#04515d";
     }};
     border: 2px solid
@@ -97,6 +96,8 @@ const Button = styled(StyledButton)<StyledButtonProps>`
         if (props.tertiary) return "#3794a5";
         return "transparent";
       }};
+    box-shadow: ${({ tertiary }) => tertiary && "0px 0px 14px -2px #14d3e2"};
+    background: ${({ tertiary }) => tertiary && "#025f6d"};
   }
 
   &:focus {

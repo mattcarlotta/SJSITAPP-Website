@@ -2,17 +2,12 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
 const open = require("opener");
 
-const { analyze, baseURL, CLIENT, PORT, NODE_ENV } = process.env;
+const { analyze, CLIENT, INDEVELOPMENT } = process.env;
 
 /* opens a browser window */
-if (NODE_ENV === "development") setTimeout(() => open(CLIENT), 5000);
+if (INDEVELOPMENT) setTimeout(() => open(CLIENT), 5000);
 
 module.exports = {
-  env: {
-    baseURL,
-    CLIENT,
-    PORT
-  },
   webpack(config, { isServer }) {
     /* adds custom plugins to client and server */
     config.plugins.push(
