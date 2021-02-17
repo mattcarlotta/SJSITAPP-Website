@@ -5,7 +5,7 @@ import morgan from "morgan";
 import compression from "compression";
 import session from "cookie-session";
 
-const { CLIENT, inStaging, COOKIEKEY, NODE_ENV } = process.env; // DOMAIN
+const { CLIENT, inStaging, COOKIEKEY, DOMAIN, NODE_ENV } = process.env;
 const inTesting = NODE_ENV === "test";
 const inProduction = NODE_ENV === "production";
 
@@ -34,15 +34,16 @@ const middlewares = (app: Express): void => {
       keys: [COOKIEKEY as string],
       name: "SJSITApp",
       maxAge: 2592000000,
-      httpOnly: true
-      // domain: DOMAIN
-      // secure: inProduction && !inStaging,
-      // sameSite: inProduction && !inStaging
+      httpOnly: true,
+      domain: DOMAIN,
+      secure: inProduction && !inStaging,
+      sameSite: inProduction && !inStaging
     })
   );
   app.use(
     cors({
-      origin: CLIENT
+      origin: CLIENT,
+      credentials: true
     })
   ); // allows receiving of cookies/tokens from front-end
   app.use(bodyParser.json()); // parses header requests (req.body)

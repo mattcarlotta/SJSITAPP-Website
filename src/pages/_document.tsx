@@ -7,7 +7,7 @@ import Document, {
   NextScript
 } from "next/document";
 import { ServerStyleSheets } from "@material-ui/core/styles";
-import { version } from "~root/package.json";
+import { version } from "../../package.json";
 
 class CustomDocument extends Document {
   static async getInitialProps(ctx: DocumentContext): Promise<any> {

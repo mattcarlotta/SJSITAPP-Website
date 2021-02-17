@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { parseSession, clearSession } from "~helpers";
+import { clearSession, parseSession } from "~helpers";
 import { User } from "~models";
 
 /**

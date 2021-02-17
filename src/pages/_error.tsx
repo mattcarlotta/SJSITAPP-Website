@@ -1,3 +1,4 @@
+import * as React from "react";
 import { FaHeartBroken } from "react-icons/fa";
 import BlackBackground from "~components/Layout/BlackBackground";
 import Center from "~components/Layout/Center";

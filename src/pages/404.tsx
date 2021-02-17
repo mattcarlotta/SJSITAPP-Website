@@ -1,3 +1,4 @@
+import * as React from "react";
 import BlackBackground from "~components/Layout/BlackBackground";
 import Center from "~components/Layout/Center";
 import ErrorMessage from "~components/Layout/ErrorMessage";

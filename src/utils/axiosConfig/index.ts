@@ -3,7 +3,8 @@ import get from "lodash.get";
 import axios from "axios";
 
 export const app = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASEURL
+  baseURL: process.env.NEXT_PUBLIC_BASEURL,
+  withCredentials: true
 });
 
 app.interceptors.response.use(
