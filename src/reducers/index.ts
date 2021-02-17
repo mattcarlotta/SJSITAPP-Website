@@ -11,6 +11,6 @@ const reducers = {
 
 const RootReducer = combineReducers(reducers);
 
-export type RootState = ReturnType<typeof RootReducer>;
+export type TRootState = ReturnType<typeof RootReducer>;
 
 export default RootReducer;

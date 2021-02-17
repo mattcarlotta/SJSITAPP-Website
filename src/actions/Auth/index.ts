@@ -1,10 +1,10 @@
 import isEmpty from "lodash.isempty";
 import * as constants from "~constants";
-import { AuthData } from "~types";
+import { TAuthData } from "~types";
 
 export interface SigninAction {
   type: typeof constants.USER_SIGNIN;
-  payload: AuthData;
+  payload: TAuthData;
 }
 
 export interface SignoutAction {
@@ -62,10 +62,10 @@ export interface SignoutAction {
  * Sets current signed in user (can be guest) to redux state
  *
  * @function signin
- * @param {object} data - contains user session data (id, email, first/last name, and role).
+ * @param {TAuthData} data - contains user session data (id, email, first/last name, and role).
  * @returns {object}
  */
-export const signin = (data: AuthData): SigninAction => ({
+export const signin = (data: TAuthData): SigninAction => ({
   type: constants.USER_SIGNIN,
   payload: !isEmpty(data) ? data : { role: "guest" }
 });

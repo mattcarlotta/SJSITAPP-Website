@@ -16,7 +16,7 @@ import * as actions from "../actions/Users";
 
 /// ACTIONS ///
 
-export type AuthData = {
+export type TAuthData = {
   id?: string;
   avatar?: string;
   email?: string;
@@ -84,14 +84,16 @@ export interface CardProps {
   deleteUser: (id: string) => ReturnType<typeof actions.deleteUser>;
 }
 
-type ComponentProps = {
+export type ComponentProps = {
   className?: string;
   children?: any;
+  dataTestId?: string;
   errors?: string;
   name?: string;
   placeholder?: string;
   label?: string;
   onChange?: (event: ChangeEvent<any>) => void;
+  onClick?: (event: ChangeEvent<any>) => void;
   type?: string;
   value?: string;
   style?: CSSProperties;
@@ -103,16 +105,6 @@ export type ContainerProps = {
   innerStyle?: CSSProperties;
   style?: CSSProperties;
 };
-
-export interface ButtonProps extends ComponentProps {
-  dataTestId?: string;
-  disabled?: boolean;
-  danger?: boolean;
-  padding?: string;
-  primary?: boolean;
-  onClick?: (event: any) => void;
-  type: "button" | "submit" | "reset" | undefined;
-}
 
 export interface DeleteButtonProps extends ActionButtonProps {
   onClick: () => ReturnType<typeof actions.deleteUser>;

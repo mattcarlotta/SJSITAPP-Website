@@ -65,6 +65,29 @@ export const GlobalStylesheet = (): JSX.Element => (
         background: #ed1700;
       }
 
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes pop {
+        0% {
+          top: 6px;
+          height: 46px;
+        }
+
+        50%,
+        100% {
+          top: 19px;
+          height: 21px;
+        }
+      }
+
       ::-moz-focus-inner {
         border: 0;
       }
