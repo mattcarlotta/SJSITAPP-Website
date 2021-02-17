@@ -1,13 +1,13 @@
-import { css } from "@emotion/react";
+import BlackBackground from "~components/Layout/BlackBackground";
 import Center from "~components/Layout/Center";
 import ErrorMessage from "~components/Layout/ErrorMessage";
 import ErrorStatus from "~components/Layout/ErrorStatus";
-import Flex from "~components/Layout/Flex";
+import ErrorTitle from "~components/Layout/ErrorTitle";
 import HomeIcon from "~components/Layout/HomeIcon";
+import Flex from "~components/Layout/Flex";
 import Head from "~components/Navigation/Header";
 import Link from "~components/Navigation/Link";
 import { NextPage } from "~types";
-import BlackBackground from "../components/Layout/BlackBackground";
 
 const NotFound: NextPage = () => (
   <BlackBackground>
@@ -20,14 +20,7 @@ const NotFound: NextPage = () => (
     >
       <Head title="Page Not Found" />
       <img src="/logo_192x192.png" alt="Logo.png" />
-      <div
-        css={css`
-          color: #025f6d;
-          margin-bottom: 10px;
-        `}
-      >
-        The San Jose Sharks Ice Team
-      </div>
+      <ErrorTitle>The San Jose Sharks Ice Team</ErrorTitle>
       <Center>
         <ErrorStatus>Page Not Found</ErrorStatus>
         <ErrorMessage>

@@ -1,5 +1,4 @@
 import "react-redux";
-
 import { TRootState } from "../reducers";
 
 declare module "react-redux" {
