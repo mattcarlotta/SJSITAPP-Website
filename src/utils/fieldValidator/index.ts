@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import isEmpty from "lodash.isempty";
-import { BaseFieldProps } from "~types";
+import { TBaseFieldProps } from "~types";
 
 /**
  * Helper function to validate form fields.
@@ -24,7 +24,7 @@ const fieldValidator = <T extends any[]>(
         type,
         value,
         required
-      }: Pick<BaseFieldProps, "type" | "value" | "required"> = field;
+      }: Pick<TBaseFieldProps, "type" | "value" | "required"> = field;
       if ((!value && required) || (isEmpty(value) && required)) {
         errors = "Required.";
       } else if (

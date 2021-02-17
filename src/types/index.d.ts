@@ -12,6 +12,7 @@ import {
 } from "react";
 import { AnyAction, Store } from "redux";
 import { SagaIterator } from "redux-saga";
+import moment from "moment-timezone";
 import * as actions from "../actions/Users";
 
 /// ACTIONS ///
@@ -25,6 +26,12 @@ export type TAuthData = {
   role: string;
 };
 
+export type TLoginData = {
+  email: string;
+  password: string;
+};
+
+/// OLD
 export type UserData = {
   _id: string;
   email?: string;
@@ -57,11 +64,12 @@ export type ActionButtonProps = {
   style?: CSSProperties;
 };
 
-export type BaseFieldProps = {
+export type TBaseFieldProps = {
   name: string;
   type: string;
   label: string;
-  value?: string;
+  value?: string | Array<moment.Moment>;
+  icon?: string;
   required: boolean;
   placeholder?: string;
   errors?: string;
@@ -83,6 +91,7 @@ export interface CardProps {
   handleEditClick: (id: string) => void;
   deleteUser: (id: string) => ReturnType<typeof actions.deleteUser>;
 }
+/// OLD ///
 
 export type ComponentProps = {
   className?: string;
@@ -160,13 +169,6 @@ export type HeaderProps = {
 
 export type InputProps = ComponentProps;
 
-export type LinkProps = {
-  children: ReactNode;
-  className?: string;
-  href: string;
-  style?: CSSProperties;
-};
-
 export type LoadingUsersProps = {
   className?: string;
   duration?: string;
@@ -196,7 +198,7 @@ export type ToastProps = {
   message: string;
 };
 
-export interface UserFormFields extends BaseFieldProps {
+export interface UserFormFields extends TBaseFieldProps {
   disabled?: boolean;
   readOnly?: boolean;
 }

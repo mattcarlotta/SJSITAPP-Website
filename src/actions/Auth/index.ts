@@ -1,13 +1,18 @@
 import isEmpty from "lodash.isempty";
 import * as constants from "~constants";
-import { TAuthData } from "~types";
+import { TAuthData, TLoginData } from "~types";
 
-export interface SigninAction {
+export interface ISigninAction {
   type: typeof constants.USER_SIGNIN;
   payload: TAuthData;
 }
 
-export interface SignoutAction {
+export interface ISigninAttemptAction {
+  type: typeof constants.USER_SIGNIN_ATTEMPT;
+  props: TLoginData;
+}
+
+export interface ISignoutAction {
   type: typeof constants.USER_SIGNOUT_SESSION;
 }
 
@@ -65,7 +70,7 @@ export interface SignoutAction {
  * @param {TAuthData} data - contains user session data (id, email, first/last name, and role).
  * @returns {object}
  */
-export const signin = (data: TAuthData): SigninAction => ({
+export const signin = (data: TAuthData): ISigninAction => ({
   type: constants.USER_SIGNIN,
   payload: !isEmpty(data) ? data : { role: "guest" }
 });
@@ -74,13 +79,13 @@ export const signin = (data: TAuthData): SigninAction => ({
  * Attempts to sign user into a new session via login form.
  *
  * @function signinUser
- * @param {object} props - contains user session data (id, email, first/last name, and role).
+ * @param {object} props - contains user's email and password.
  * @returns {object}
  */
-// export const signinUser = props => ({
-//   type: constants.USER_SIGNIN_ATTEMPT,
-//   props
-// });
+export const signinUser = (props: TLoginData): ISigninAttemptAction => ({
+  type: constants.USER_SIGNIN_ATTEMPT,
+  props
+});
 
 /**
  * Attempts to signs user out of current session.
@@ -88,7 +93,7 @@ export const signin = (data: TAuthData): SigninAction => ({
  * @function signoutUser
  * @returns {object}
  */
-export const signoutUser = (): SignoutAction => ({
+export const signoutUser = (): ISignoutAction => ({
   type: constants.USER_SIGNOUT_SESSION
 });
 

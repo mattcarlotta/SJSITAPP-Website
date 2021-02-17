@@ -1,8 +1,15 @@
 import NextLink from "next/link";
 import styled from "@emotion/styled";
-import { LinkProps } from "~types";
+import { CSSProperties, ReactNode } from "~types";
 
-const LinkComponent = ({ children, className, href, ...rest }: LinkProps) => (
+export interface ILinkProps {
+  children: ReactNode;
+  className?: string;
+  href: string;
+  style?: CSSProperties;
+}
+
+const LinkComponent = ({ children, className, href, ...rest }: ILinkProps) => (
   <NextLink href={href} prefetch={false} passHref>
     <a data-testid="link" {...rest} className={className}>
       {children}

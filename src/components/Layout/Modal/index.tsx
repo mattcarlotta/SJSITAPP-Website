@@ -1,70 +1,54 @@
-import { useEffect } from "react";
-import { createPortal } from "react-dom";
+import React from "react";
+import Router from "next/router";
 import { FaTimes } from "react-icons/fa";
-import Flex from "~components/Layout/Flex";
 import FlexEnd from "~components/Layout/FlexEnd";
-import FlexStart from "~components/Layout/FlexStart";
 import BackgroundOverlay from "./BackgroundOverlay";
+import Center from "./Center";
 import CloseModalButton from "./CloseModalButton";
+import ClickHandler from "./ClickHandler";
 import ModalContent from "./ModalContent";
 import ModalContainer from "./ModalContainer";
-import ModalRoot from "./ModalRoot";
-import ModalTitle from "./ModalTitle";
 import WindowContainer from "./WindowContainer";
-import { ModalProps } from "~types";
 
-const Modal = ({
+export interface IModalProps {
+  children: JSX.Element | JSX.Element[];
+  dataTestId: string;
+  disableClickHandler?: boolean;
+  isOpen: boolean;
+  maxWidth?: string;
+  onClick?: () => void;
+}
+
+export const Modal = ({
   children,
+  dataTestId,
+  disableClickHandler,
   maxWidth,
-  onClick,
-  title
-}: ModalProps): JSX.Element => {
-  /* istanbul ignore next */
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    const appEl = document.getElementById("app");
-    if (appEl) appEl.className = "blurred";
-
-    return () => {
-      document.body.style.overflow = "visible";
-      if (appEl) appEl.className = "";
-    };
-  }, []);
-
-  return createPortal(
-    <div data-testid="modal-overlay">
-      <BackgroundOverlay />
-      <WindowContainer>
-        <ModalRoot>
-          <ModalContainer data-testid="modal-container" maxWidth={maxWidth}>
-            <ModalContent data-testid="modal-content">
-              <Flex
-                data-testid="modal-header"
-                style={{ padding: 15, width: "auto", background: "#0076ff" }}
-              >
-                <FlexStart>
-                  <ModalTitle data-testid="modal-title">{title}</ModalTitle>
-                </FlexStart>
-                <FlexEnd>
-                  <CloseModalButton
-                    data-testid="close-modal"
-                    aria-label="close modal"
-                    onClick={onClick}
-                  >
-                    <FaTimes />
-                  </CloseModalButton>
-                </FlexEnd>
-              </Flex>
-              <div data-testid="modal-body" style={{ padding: "20px" }}>
-                {children}
-              </div>
+  onClick
+}: IModalProps): JSX.Element => (
+  <>
+    <BackgroundOverlay />
+    <WindowContainer>
+      <ModalContainer>
+        <Center maxWidth={maxWidth}>
+          <ClickHandler closeModal={!disableClickHandler ? onClick : undefined}>
+            <ModalContent data-test={dataTestId} maxWidth={maxWidth}>
+              <FlexEnd>
+                <CloseModalButton
+                  id="close-modal"
+                  aria-label="close modal"
+                  onClick={() => (onClick ? onClick() : Router.push("/"))}
+                >
+                  <FaTimes />
+                </CloseModalButton>
+              </FlexEnd>
+              {children}
             </ModalContent>
-          </ModalContainer>
-        </ModalRoot>
-      </WindowContainer>
-    </div>,
-    document.body
-  );
-};
+          </ClickHandler>
+        </Center>
+      </ModalContainer>
+    </WindowContainer>
+  </>
+);
 
 export default Modal;
