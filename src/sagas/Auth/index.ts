@@ -1,4 +1,4 @@
-// import Router from "next/router";
+import Router from "next/router";
 import { all, put, call, takeLatest } from "redux-saga/effects";
 import app from "~utils/axiosConfig"; // { avatarAPI }
 import * as actions from "~actions/Auth"; // setUserAvatar, signout
@@ -144,8 +144,8 @@ export function* signinUser({
     const data: TAuthData = yield call(parseData, res);
 
     yield put(actions.signin(data));
-    // yield call(Router.push, "/employee/dashboard");
-    // yield call(Router.push, "/");
+
+    yield call(Router.replace, "/employee/dashboard");
   } catch (e) {
     yield call(showError, e.toString());
   }
