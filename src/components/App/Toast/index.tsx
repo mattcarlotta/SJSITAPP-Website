@@ -1,12 +1,9 @@
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  BsCheckBox,
-  BsFillExclamationOctagonFill,
-  BsFillExclamationTriangleFill,
-  BsInfoSquareFill,
-  BsQuestionSquareFill
-} from "react-icons/bs";
+import { BsCheckBox, BsQuestionSquareFill } from "react-icons/bs";
+import { FiPaperclip } from "react-icons/fi";
+import { GoRadioTower } from "react-icons/go";
+import { FaRegTimesCircle } from "react-icons/fa";
 import AlertContainer from "./AlertContainer";
 import AlertMessage from "./AlertMessage";
 import AlertType from "./AlertType";
@@ -21,16 +18,16 @@ export interface IToastMessage {
   ({ type, message }: IToastProps): ReactText;
 }
 
-export const displayIcon = (type: string | undefined): JSX.Element => {
+export const displayIcon = (type?: string): JSX.Element => {
   switch (type) {
     case "success":
       return <BsCheckBox />;
     case "info":
-      return <BsInfoSquareFill />;
+      return <FiPaperclip />;
     case "error":
-      return <BsFillExclamationOctagonFill />;
+      return <FaRegTimesCircle />;
     case "warning":
-      return <BsFillExclamationTriangleFill />;
+      return <GoRadioTower />;
     default:
       return <BsQuestionSquareFill />;
   }

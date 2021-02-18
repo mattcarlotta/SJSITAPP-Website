@@ -1,5 +1,5 @@
 import * as React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 // import Router, { withRouter } from "next/router";
 import { useRouter } from "next/router";
 import toast from "~components/App/Toast";
@@ -8,7 +8,6 @@ import toast from "~components/App/Toast";
 import Spinner from "~components/Layout/Spinner";
 import FadeIn from "~components/Layout/FadeIn";
 import { ComponentType, FC } from "~types";
-import { TRootState } from "~reducers";
 
 export interface IRequireAuthProps {
   email: string;
@@ -18,8 +17,9 @@ export interface IRequireAuthProps {
 const requiresBasicCredentials = (
   WrappedComponent: ComponentType<any>
 ): ComponentType<any> => {
-  const RequiresAuthentication: FC<IRequireAuthProps> = ({ email, role }) => {
+  const RequiresAuthentication: FC = () => {
     const router = useRouter();
+    const { email, role } = useSelector(({ auth }) => auth);
     const isGuest = role && role === "guest";
 
     React.useEffect(() => {
@@ -43,14 +43,8 @@ const requiresBasicCredentials = (
     );
   };
 
-  /* istanbul ignore next */
-  const mapStateToProps = (state: TRootState) => ({
-    email: state.auth.email,
-    role: state.auth.role
-  });
-
   // { signoutUser }
-  return connect(mapStateToProps)(RequiresAuthentication);
+  return RequiresAuthentication;
 };
 
 export default requiresBasicCredentials;

@@ -11,11 +11,8 @@ import Header from "~components/Navigation/Header";
 import { NextPage } from "~types";
 
 const Home: NextPage = () => {
-  const { role } = useSelector(({ auth }) => ({
-    role: auth.role
-  }));
-
-  const isLoggedin = role !== "guest";
+  const { role } = useSelector(({ auth }) => auth);
+  const hasSession = role !== "guest";
 
   return (
     <IconContext.Provider
@@ -28,26 +25,27 @@ const Home: NextPage = () => {
         <Button
           tertiary
           uppercase
+          disabled={!role}
           type="button"
           marginRight="0px"
           width="260px"
-          style={{ margin: "20px auto 0", fontWeight: 400 }}
+          style={{ margin: "20px auto 0" }}
           onClick={() =>
-            Router.push(isLoggedin ? "/employee/dashboard" : "/employee/login")
+            Router.push(hasSession ? "/employee/dashboard" : "/employee/login")
           }
         >
           {!role ? (
             <Submitting style={{ height: "25px" }} />
-          ) : isLoggedin ? (
-            <span>
+          ) : hasSession ? (
+            <>
               <MdDashboard />
               View Dashboard
-            </span>
+            </>
           ) : (
-            <span>
+            <>
               <FaSignInAlt />
               Employee Login
-            </span>
+            </>
           )}
         </Button>
       </Spinner>

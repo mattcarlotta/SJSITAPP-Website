@@ -26,7 +26,7 @@ export interface ILoginFormProps {
   signinUser: typeof signinUser;
 }
 
-const LoginForm: FC<ILoginFormProps> = ({ serverError, signinUser }) => {
+export const LoginForm: FC<ILoginFormProps> = ({ serverError, signinUser }) => {
   const [state, setState] = React.useState<ILoginFormState>({
     fields,
     errors: false,

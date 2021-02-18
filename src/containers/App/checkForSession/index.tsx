@@ -32,7 +32,6 @@ const checkForSession = (WrappedComponent: ComponentType<any>): any => {
 
   /* istanbul ignore next */
   const mapStateToProps = (state: TRootState) => ({
-    isLoading: state.app.isLoading,
     role: state.auth.role
   });
 
