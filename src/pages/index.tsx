@@ -11,9 +11,8 @@ import Header from "~components/Navigation/Header";
 import { NextPage } from "~types";
 
 const Home: NextPage = () => {
-  const { role, isLoading } = useSelector(({ app, auth }) => ({
-    role: auth.role,
-    isLoading: app.isLoading
+  const { role } = useSelector(({ auth }) => ({
+    role: auth.role
   }));
 
   const isLoggedin = role !== "guest";
@@ -37,7 +36,7 @@ const Home: NextPage = () => {
             Router.push(isLoggedin ? "/employee/dashboard" : "/employee/login")
           }
         >
-          {isLoading ? (
+          {!role ? (
             <Submitting style={{ height: "25px" }} />
           ) : isLoggedin ? (
             <span>

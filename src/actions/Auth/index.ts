@@ -1,9 +1,21 @@
 import isEmpty from "lodash.isempty";
 import * as constants from "~constants";
-import { TAuthData, TLoginData, TSignupData } from "~types";
+import { TAuthData, TLoginData, TResetPasswordData, TSignupData } from "~types";
 
-export interface ISigninAction {
-  type: typeof constants.USER_SIGNIN;
+export interface ICheckForSessionAction {
+  type: typeof constants.USER_CHECK_SESSION;
+}
+export interface IRemoveSessionAction {
+  type: typeof constants.USER_REMOVE_SESSION;
+}
+
+export interface IResetPasswordAction {
+  type: typeof constants.USER_PASSWORD_RESET;
+  props: TResetPasswordData;
+}
+
+export interface ISigninSessionAction {
+  type: typeof constants.USER_SET_SESSION;
   payload: TAuthData;
 }
 
@@ -12,7 +24,7 @@ export interface ISigninAttemptAction {
   props: TLoginData;
 }
 
-export interface ISignoutAction {
+export interface ISignoutUserSessionAction {
   type: typeof constants.USER_SIGNOUT_SESSION;
 }
 
@@ -20,6 +32,16 @@ export interface ISignupAction {
   type: typeof constants.USER_SIGNUP;
   props: TSignupData;
 }
+
+/**
+ * Checks for an active session on initial app load.
+ *
+ * @function checkForActiveSession
+ * @returns {object}
+ */
+export const checkForActiveSession = (): ICheckForSessionAction => ({
+  type: constants.USER_CHECK_SESSION
+});
 
 /**
  * Deletes current user avatar.
@@ -34,16 +56,28 @@ export interface ISignupAction {
 // });
 
 /**
+ * Removes user out of current redux session.
+ *
+ * @function removeSession
+ * @returns {object}
+ */
+export const removeSession = (): IRemoveSessionAction => ({
+  type: constants.USER_REMOVE_SESSION
+});
+
+/**
  * Creates a user password request via passwordreset form.
  *
  * @function resetPassword
  * @param {object} props - props just contain an email field.
  * @returns {object}
  */
-// export const resetPassword = props => ({
-// 	type: constants.USER_PASSWORD_RESET,
-// 	props,
-// });
+export const resetPassword = (
+  props: TResetPasswordData
+): IResetPasswordAction => ({
+  type: constants.USER_PASSWORD_RESET,
+  props
+});
 
 /**
  * Persists sidebar state.
@@ -71,12 +105,12 @@ export interface ISignupAction {
 /**
  * Sets current signed in user (can be guest) to redux state
  *
- * @function signin
+ * @function signinSession
  * @param {TAuthData} data - contains user session data (id, email, first/last name, and role).
  * @returns {object}
  */
-export const signin = (data: TAuthData): ISigninAction => ({
-  type: constants.USER_SIGNIN,
+export const signinSession = (data: TAuthData): ISigninSessionAction => ({
+  type: constants.USER_SET_SESSION,
   payload: !isEmpty(data) ? data : { role: "guest" }
 });
 
@@ -98,19 +132,9 @@ export const signinUser = (props: TLoginData): ISigninAttemptAction => ({
  * @function signoutUser
  * @returns {object}
  */
-export const signoutUser = (): ISignoutAction => ({
+export const signoutUserSession = (): ISignoutUserSessionAction => ({
   type: constants.USER_SIGNOUT_SESSION
 });
-
-/**
- * Signs user out of current session.
- *
- * @function signout
- * @returns {object}
- */
-// export const signout = () => ({
-// 	type: constants.USER_SIGNOUT,
-// });
 
 /**
  * Sign up user via signup form.

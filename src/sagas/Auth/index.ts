@@ -2,7 +2,6 @@ import Router from "next/router";
 import { all, put, call, takeLatest } from "redux-saga/effects";
 import toast from "~components/App/Toast";
 import * as actions from "~actions/Auth"; // setUserAvatar, signout
-import { appLoaded } from "~actions/App";
 // import { fetchMemberSettings } from "~actions/Members";
 import { resetMessage } from "~actions/Server"; // setMessage
 import * as constants from "~constants";
@@ -27,8 +26,7 @@ export function* checkForActiveSession(): SagaIterator {
     const res = yield call(app.get, "signedin");
     const data: TAuthData = yield call(parseData, res);
 
-    yield put(actions.signin(data));
-    yield put(appLoaded());
+    yield put(actions.signinSession(data));
   } catch (e) {
     yield call(showError, e.toString());
   }
@@ -43,17 +41,17 @@ export function* checkForActiveSession(): SagaIterator {
  * @yields {action} - A redux action to push to a URL.
  * @throws {action} - A redux action to display a server message by type.
  */
-// export function* signoutUserSession() {
-//   try {
-//     yield call(app.get, "signout");
+export function* signoutUserSession(): SagaIterator {
+  try {
+    yield call(app.get, "signout");
 
-//     yield put(signout());
+    yield put(actions.removeSession());
 
-//     yield call(Router.push, "/employee/login");
-//   } catch (e) {
-//     yield call(setError, e.toString());
-//   }
-// }
+    yield call(Router.push, "/employee/login");
+  } catch (e) {
+    yield call(showError, e.toString());
+  }
+}
 
 /**
  * Attempts to delete a user avatar.
@@ -74,7 +72,7 @@ export function* checkForActiveSession(): SagaIterator {
 //     yield put(resetMessage());
 
 //     const res = yield call(avatarAPI.delete, `delete/${id}`);
-//     const message = yield call(parseMessage, res);
+//     const message: string = yield call(parseMessage, res);
 
 //     yield put(
 //       setServerMessage({
@@ -86,7 +84,7 @@ export function* checkForActiveSession(): SagaIterator {
 //     yield put(setUserAvatar({ avatar: "" }));
 //     yield put(fetchMemberSettings());
 //   } catch (e) {
-//     yield call(setError, e.toString());
+//      yield call(showError, e.toString());
 //   }
 // }
 
@@ -103,25 +101,22 @@ export function* checkForActiveSession(): SagaIterator {
  * @yields {action} - A redux action to sign the user out of any sessions.
  * @throws {action} - A redux action to display a server message by type.
  */
-// export function* resetPassword({ props }) {
-//   try {
-//     yield put(resetMessage());
+export function* resetPassword({
+  props
+}: ReturnType<typeof actions.resetPassword>): SagaIterator {
+  try {
+    yield put(resetMessage());
 
-//     const res = yield call(app.put, "reset-password", { ...props });
-//     const message = yield call(parseMessage, res);
+    const res = yield call(app.put, "reset-password", { ...props });
+    const message: string = yield call(parseMessage, res);
 
-//     yield put(
-//       setServerMessage({
-//         message
-//       })
-//     );
-//     yield call(toast, { type: "info", message });
+    yield call(toast, { type: "info", message });
 
-//     yield call(signoutUserSession);
-//   } catch (e) {
-//     yield call(setError, e.toString());
-//   }
-// }
+    yield call(signoutUserSession);
+  } catch (e) {
+    yield call(showError, e.toString());
+  }
+}
 
 /**
  * Attempts to sign user in to a new session.
@@ -144,7 +139,7 @@ export function* signinUser({
     const res = yield call(app.post, "signin", { ...props });
     const data: TAuthData = yield call(parseData, res);
 
-    yield put(actions.signin(data));
+    yield put(actions.signinSession(data));
 
     yield call(Router.replace, "/employee/dashboard");
   } catch (e) {
@@ -216,7 +211,7 @@ export function* signupUser({
 //     yield put(setUserAvatar({ avatar }));
 //     yield put(fetchMemberSettings());
 //   } catch (e) {
-//     yield call(setError, e.toString());
+//      yield call(showError, e.toString());
 //   }
 // }
 
@@ -238,7 +233,7 @@ export function* signupUser({
 //     yield put(resetMessage());
 
 //     const res = yield call(app.put, "new-password", { ...props });
-//     const message = yield call(parseMessage, res);
+//      const message: string = yield call(parseMessage, res);
 
 //     yield put(
 //       setServerMessage({
@@ -249,7 +244,7 @@ export function* signupUser({
 
 //     yield call(signoutUserSession);
 //   } catch (e) {
-//     yield call(setError, e.toString());
+//      yield call(showError, e.toString());
 //   }
 // }
 
@@ -262,11 +257,11 @@ export function* signupUser({
  */
 export default function* authSagas(): SagaIterator {
   yield all([
-    takeLatest(constants.APP_LOADING, checkForActiveSession),
+    takeLatest(constants.USER_CHECK_SESSION, checkForActiveSession),
     // takeLatest(constants.USER_DELETE_AVATAR, deleteUserAvatar),
-    // takeLatest(constants.USER_PASSWORD_RESET, resetPassword),
+    takeLatest(constants.USER_PASSWORD_RESET, resetPassword),
     takeLatest(constants.USER_SIGNIN_ATTEMPT, signinUser),
-    // takeLatest(constants.USER_SIGNOUT_SESSION, signoutUserSession),
+    takeLatest(constants.USER_SIGNOUT_SESSION, signoutUserSession),
     takeLatest(constants.USER_SIGNUP, signupUser)
     // takeLatest(constants.USER_UPDATE_AVATAR, updateUserAvatar),
     // takeLatest(constants.USER_PASSWORD_UPDATE, updateUserPassword)

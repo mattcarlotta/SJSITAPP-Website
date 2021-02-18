@@ -1,10 +1,8 @@
 import { combineReducers } from "redux";
-import appReducer from "./App";
 import authReducer from "./Auth";
 import serverReducer from "./Server";
 
 const reducers = {
-  app: appReducer,
   auth: authReducer,
   server: serverReducer
 };

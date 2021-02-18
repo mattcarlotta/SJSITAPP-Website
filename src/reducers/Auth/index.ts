@@ -39,12 +39,12 @@ const authReducer = (
     case types.USER_SET_SIDEBAR_STATE: {
       return { ...state, isCollapsed: !state.isCollapsed };
     }
-    case types.USER_UPDATE:
+    case types.USER_UPDATE_SESSION:
     case types.USER_SET_AVATAR:
-    case types.USER_SIGNIN: {
+    case types.USER_SET_SESSION: {
       return { ...state, ...payload };
     }
-    case types.USER_SIGNOUT: {
+    case types.USER_REMOVE_SESSION: {
       return { ...initialState, role: "guest" };
     }
     default: {

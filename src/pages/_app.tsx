@@ -2,7 +2,7 @@ import * as React from "react";
 import Head from "next/head";
 import { useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import { appLoading } from "~actions/App";
+import { checkForActiveSession } from "~actions/Auth";
 import { wrapper } from "~store";
 import GlobalStylesheet from "~styles/globalStylesheet";
 import { AppProps, FC } from "~types";
@@ -11,11 +11,10 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(appLoading());
+    dispatch(checkForActiveSession());
+
     const jssStyles = document.querySelector("#jss-server-side");
-    if (jssStyles) {
-      jssStyles.parentElement?.removeChild(jssStyles);
-    }
+    if (jssStyles) jssStyles.parentElement?.removeChild(jssStyles);
   }, []);
 
   return (

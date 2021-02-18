@@ -25,9 +25,9 @@ const serverReducer = (
   switch (type) {
     case HYDRATE:
       return { ...state, ...payload.server };
-    case constants.SERVER_RESET:
+    case constants.SERVER_RESET_MESSAGE:
       return initialState;
-    case constants.SERVER_ERROR:
+    case constants.SERVER_ERROR_MESSAGE:
       return { ...state, error: payload };
     case constants.SERVER_MESSAGE:
       return { ...state, message: payload };

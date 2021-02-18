@@ -6,7 +6,7 @@ import { AnyAction } from "~types";
  * @returns {AnyAction} a redux action
  */
 export const resetMessage = (): AnyAction => ({
-  type: constants.SERVER_RESET
+  type: constants.SERVER_RESET_MESSAGE
 });
 
 /**
@@ -23,6 +23,6 @@ export const setMessage = (message: string): AnyAction => ({
  * @returns {AnyAction} a redux action
  */
 export const setError = (err: string): AnyAction => ({
-  type: constants.SERVER_ERROR,
+  type: constants.SERVER_ERROR_MESSAGE,
   payload: err
 });

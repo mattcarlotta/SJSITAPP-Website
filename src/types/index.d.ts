@@ -9,7 +9,8 @@ import {
   FC,
   FormEvent,
   ReactElement,
-  ReactNode
+  ReactNode,
+  ReactText
 } from "react";
 import { AnyAction, Store } from "redux";
 import { SagaIterator } from "redux-saga";
@@ -38,6 +39,10 @@ export type TSignupData = {
   lastName: string;
   password: string;
   token: string;
+};
+
+export type TResetPasswordData = {
+  email: string;
 };
 
 export type EventTarget = {
@@ -211,11 +216,6 @@ export interface TextAreaProps extends ComponentProps {
   rows?: number;
 }
 
-export type ToastProps = {
-  type: "success" | "info" | "error" | "warning";
-  message: string;
-};
-
 export interface UserFormFields extends TBaseFieldProps {
   disabled?: boolean;
   readOnly?: boolean;
@@ -287,5 +287,6 @@ export {
   NextRouter,
   ReactElement,
   ReactNode,
+  ReactText,
   SagaIterator
 };

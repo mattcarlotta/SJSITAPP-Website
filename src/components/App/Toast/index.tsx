@@ -1,4 +1,3 @@
-import * as React from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -11,7 +10,16 @@ import {
 import AlertContainer from "./AlertContainer";
 import AlertMessage from "./AlertMessage";
 import AlertType from "./AlertType";
-import { ToastProps } from "~types";
+import { ReactText } from "~types";
+
+export interface IToastProps {
+  type: "success" | "info" | "error" | "warning";
+  message: string;
+}
+
+export interface IToastMessage {
+  ({ type, message }: IToastProps): ReactText;
+}
 
 export const displayIcon = (type: string | undefined): JSX.Element => {
   switch (type) {
@@ -28,15 +36,12 @@ export const displayIcon = (type: string | undefined): JSX.Element => {
   }
 };
 
-const ToastMessage = ({ type, message }: ToastProps): null => {
+const ToastMessage: IToastMessage = ({ type, message }) =>
   toast[type](
     <AlertContainer data-testid="modal-alert">
       <AlertType data-testid="modal-alert-type">{displayIcon(type)}</AlertType>
       <AlertMessage data-testid="modal-message">{message}</AlertMessage>
     </AlertContainer>
   );
-
-  return null;
-};
 
 export default ToastMessage;

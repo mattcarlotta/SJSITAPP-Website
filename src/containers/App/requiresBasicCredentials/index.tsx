@@ -12,34 +12,29 @@ import { TRootState } from "~reducers";
 
 export interface IRequireAuthProps {
   email: string;
-  isLoading: boolean;
   role: string;
 }
 
 const requiresBasicCredentials = (
   WrappedComponent: ComponentType<any>
 ): ComponentType<any> => {
-  const RequiresAuthentication: FC<IRequireAuthProps> = ({
-    email,
-    isLoading,
-    role
-  }) => {
+  const RequiresAuthentication: FC<IRequireAuthProps> = ({ email, role }) => {
     const router = useRouter();
     const isGuest = role && role === "guest";
 
     React.useEffect(() => {
-      if (!isLoading && isGuest) {
+      if (isGuest) {
         toast({
           type: "error",
           message:
-            "Your access to the requested page was denied. You do not have the correct account permissions."
+            "Your access to the requested page was denied. You do not have the correct account permissions to view that page."
         });
 
         router.replace("/employee/login");
       }
-    }, [isLoading]);
+    }, [isGuest]);
 
-    return !isLoading && email && !isGuest ? (
+    return email && !isGuest ? (
       <WrappedComponent />
     ) : (
       <FadeIn style={{ height: "100%" }} timing="1.5s">
@@ -51,7 +46,6 @@ const requiresBasicCredentials = (
   /* istanbul ignore next */
   const mapStateToProps = (state: TRootState) => ({
     email: state.auth.email,
-    isLoading: state.app.isLoading,
     role: state.auth.role
   });
 
