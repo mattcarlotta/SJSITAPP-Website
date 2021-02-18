@@ -2,7 +2,7 @@
 import isEmpty from "lodash.isempty";
 import moment from "moment-timezone";
 
-export interface Fields {
+export interface IFields {
   callTimes?: Array<moment.Moment>;
   date?: moment.Moment;
   range?: Array<moment.Moment>;
@@ -17,6 +17,14 @@ export interface Fields {
   password?: string;
 }
 
+export type TFieldProps = {
+  name: string;
+  type: string;
+  value: string | moment.Moment | Array<moment.Moment>;
+  notes: string;
+  updateEvent: boolean;
+};
+
 /**
  * Helper function to parse a fields' [name]: value from an array into an object.
  *
@@ -25,24 +33,26 @@ export interface Fields {
  * @returns {ParseFieldsResult} an object of parsed fields with [name]: value.
  * @throws {error}
  */
-const parseFields = <T extends Array<any>, U>(fields: T): U => {
+const parseFields = <T>(fields: Array<any>): T => {
   try {
     if (isEmpty(fields)) throw new Error("You must supply an array of fields!");
 
     const parsedFields = fields.reduce(
-      (acc, { name, type, value, notes, updateEvent }) => {
+      (acc, { name, type, value, notes, updateEvent }: TFieldProps) => {
         switch (type) {
           case "time": {
             acc["callTimes"] = acc["callTimes"] || [];
-            if (value) acc["callTimes"].push(value.format());
+            if (value && moment.isMoment(value))
+              acc["callTimes"].push(value.format());
             break;
           }
           case "date": {
-            acc[name] = value ? value.format() : "";
+            acc[name] = value && moment.isMoment(value) ? value.format() : "";
             break;
           }
           case "range": {
-            const values = value.map((val: moment.Moment) => val.format());
+            const values =
+              Array.isArray(value) && value.map(val => val.format());
             acc[name] = values;
             break;
           }

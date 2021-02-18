@@ -1,4 +1,6 @@
 import * as React from "react";
+import get from "lodash.get";
+import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { FaUnlockAlt } from "react-icons/fa";
 import Center from "~components/Layout/Center";
@@ -10,25 +12,36 @@ import NavLink from "~components/Navigation/NavLink";
 import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
-import { signinUser } from "~actions/Auth";
+import { signupUser } from "~actions/Auth";
 import fields from "./Fields";
 import { TRootState } from "~reducers";
-import { EventTarget, FC, FormEvent, TLoginData } from "~types";
+import {
+  EventTarget,
+  FC,
+  FormEvent,
+  TBaseFieldProps,
+  TSignupData
+} from "~types";
 
-export interface ILoginFormState {
-  fields: typeof fields;
+export interface ISignupFormState {
+  fields: Array<TBaseFieldProps>;
   errors: boolean;
   isSubmitting: boolean;
 }
 
-export interface ILoginFormProps {
+export interface ISignupFormProps {
   serverError?: string;
-  signinUser: typeof signinUser;
+  signupUser: typeof signupUser;
 }
 
-const LoginForm: FC<ILoginFormProps> = ({ serverError, signinUser }) => {
-  const [state, setState] = React.useState<ILoginFormState>({
-    fields,
+export const SignupForm: FC<ISignupFormProps> = ({
+  serverError,
+  signupUser
+}) => {
+  const router = useRouter();
+  const token = get(router, ["query", "token"]);
+  const [state, setState] = React.useState({
+    fields: fields(),
     errors: false,
     isSubmitting: false
   });
@@ -59,21 +72,25 @@ const LoginForm: FC<ILoginFormProps> = ({ serverError, signinUser }) => {
   );
 
   React.useEffect(() => {
+    setState(prevState => ({ ...prevState, fields: fields(token as string) }));
+  }, [token]);
+
+  React.useEffect(() => {
     if (state.isSubmitting && serverError)
       setState(prevState => ({ ...prevState, isSubmitting: false }));
   }, [serverError]);
 
   React.useEffect(() => {
     if (state.isSubmitting && !state.errors)
-      signinUser(parseFields<TLoginData>(state.fields));
-  }, [parseFields, signinUser, state]);
+      signupUser(parseFields<TSignupData>(state.fields));
+  }, [parseFields, signupUser, state]);
 
   return (
-    <Modal isOpen dataTestId="login-form">
+    <Modal dataTestId="signup-form" isOpen maxWidth="700px">
       <FormTitle
-        header="Login"
-        title="Welcome!"
-        description="Login into your account below."
+        header="Signup"
+        title="Signup"
+        description="Fill out all the fields below to register."
       />
       <form onSubmit={handleSubmit}>
         <FieldGenerator fields={state.fields} onChange={handleChange} />
@@ -90,7 +107,7 @@ const LoginForm: FC<ILoginFormProps> = ({ serverError, signinUser }) => {
         </Center>
         <SubmitButton
           isSubmitting={state.isSubmitting}
-          title="Login"
+          title="Register"
           style={{ width: "300px", margin: "0 auto" }}
           submitBtnStyle={{
             background: "#010404",
@@ -99,14 +116,14 @@ const LoginForm: FC<ILoginFormProps> = ({ serverError, signinUser }) => {
         />
       </form>
       <Center style={{ marginTop: 10 }}>
-        <span>Don&#39;t have an account?</span> &nbsp;
+        Already have an account? &nbsp;
         <NavLink
+          dataTestId="login-link"
           blue
-          dataTestId="sign-up-link"
           style={{ padding: 0, margin: 0 }}
-          href="/employee/signup"
+          href="/employee/login"
         >
-          Signup
+          Login
         </NavLink>
       </Center>
     </Modal>
@@ -120,7 +137,7 @@ const mapStateToProps = (state: TRootState) => ({
 
 /* istanbul ignore next */
 const mapDispatchToProps = {
-  signinUser
+  signupUser
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);

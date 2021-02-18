@@ -1,6 +1,6 @@
 import isEmpty from "lodash.isempty";
 import * as constants from "~constants";
-import { TAuthData, TLoginData } from "~types";
+import { TAuthData, TLoginData, TSignupData } from "~types";
 
 export interface ISigninAction {
   type: typeof constants.USER_SIGNIN;
@@ -14,6 +14,11 @@ export interface ISigninAttemptAction {
 
 export interface ISignoutAction {
   type: typeof constants.USER_SIGNOUT_SESSION;
+}
+
+export interface ISignupAction {
+  type: typeof constants.USER_SIGNUP;
+  props: TSignupData;
 }
 
 /**
@@ -114,10 +119,10 @@ export const signoutUser = (): ISignoutAction => ({
  * @param {object} props - contains a token, an email, first/last name, and a password.
  * @returns {object}
  */
-// export const signupUser = props => ({
-// 	type: constants.USER_SIGNUP,
-// 	props,
-// });
+export const signupUser = (props: TSignupData): ISignupAction => ({
+  type: constants.USER_SIGNUP,
+  props
+});
 
 /**
  * Updates current signed in user first and last name.

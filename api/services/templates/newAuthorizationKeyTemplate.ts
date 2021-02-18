@@ -26,11 +26,11 @@ const newAuthorizationKeyTemplate = (
     <span style="font-style: italic;">The San Jose Sharks Ice Team</span>
   </p>
   <div style="margin-bottom: 20px; text-align: center">
-    <a style="font-size: 18px;text-decoration: none;line-height: 40px;width: 200px;color: #FFFFFF;background: linear-gradient(90deg,#194048 0%,#0f7888 50%,#194048 100%);border-radius: 4px;display: inline-block;border: 2px solid #04515d;" href="${LOCALHOST}/employee/signup/verify?token=${token}" target="_blank" rel="noopener noreferrer">Sign Up</a>
+    <a style="font-size: 18px;text-decoration: none;line-height: 40px;width: 200px;color: #FFFFFF;background: linear-gradient(90deg,#194048 0%,#0f7888 50%,#194048 100%);border-radius: 4px;display: inline-block;border: 2px solid #04515d;" href="${LOCALHOST}/employee/signup?token=${token}" target="_blank" rel="noopener noreferrer">Sign Up</a>
   </div>
   <div style="color:#999999;font-size:11px;text-align:center;margin-top: 10px;">
     Or click on this link:
-    <a style="color: #999999; text-decoration: underline; margin-left: 2px;" href="${LOCALHOST}/employee/signup/verify?token=${token}" target="_blank" rel="noopener noreferrer">${LOCALHOST}/employee/signup/verify?token=${token}</a>
+    <a style="color: #999999; text-decoration: underline; margin-left: 2px;" href="${LOCALHOST}/employee/signup?token=${token}" target="_blank" rel="noopener noreferrer">${LOCALHOST}/employee/signup?token=${token}</a>
   </div>`;
 
 export default newAuthorizationKeyTemplate;

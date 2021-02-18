@@ -1,5 +1,6 @@
 /* istanbul ignore file */
 import { NextApiRequest, NextApiResponse, NextPage } from "next";
+import { NextRouter } from "next/router";
 import { AppProps } from "next/app";
 import {
   ComponentType,
@@ -29,6 +30,21 @@ export type TAuthData = {
 export type TLoginData = {
   email: string;
   password: string;
+};
+
+export type TSignupData = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  token: string;
+};
+
+export type EventTarget = {
+  target: {
+    name: string;
+    value: string;
+  };
 };
 
 /// OLD
@@ -70,8 +86,10 @@ export type TBaseFieldProps = {
   label: string;
   value?: string | Array<moment.Moment>;
   icon?: string;
+  disabled?: boolean;
   required: boolean;
   placeholder?: string;
+  tooltip?: string;
   errors?: string;
   onChange?: (event: ChangeEvent<any>) => void;
   style?: CSSProperties;
@@ -266,6 +284,7 @@ export {
   NextApiRequest,
   NextApiResponse,
   NextPage,
+  NextRouter,
   ReactElement,
   ReactNode,
   SagaIterator

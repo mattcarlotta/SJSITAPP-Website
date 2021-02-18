@@ -1,13 +1,14 @@
 import Router from "next/router";
 import { all, put, call, takeLatest } from "redux-saga/effects";
-import app from "~utils/axiosConfig"; // { avatarAPI }
+import toast from "~components/App/Toast";
 import * as actions from "~actions/Auth"; // setUserAvatar, signout
 import { appLoaded } from "~actions/App";
 // import { fetchMemberSettings } from "~actions/Members";
-import { resetMessage } from "~actions/Server"; // setServerMessage
-import { parseData } from "~utils/parseResponse"; // parseMessage
-import showError from "~utils/showError";
+import { resetMessage } from "~actions/Server"; // setMessage
 import * as constants from "~constants";
+import app from "~utils/axiosConfig"; // { avatarAPI }
+import { parseData, parseMessage } from "~utils/parseResponse";
+import showError from "~utils/showError";
 import { SagaIterator, TAuthData } from "~types";
 
 /**
@@ -164,25 +165,22 @@ export function* signinUser({
  * @yields {action} - Navigates user to route.
  * @throws {action} - A redux action to display a server message by type.
  */
-// export function* signupUser({ props }) {
-//   try {
-//     yield put(resetMessage());
+export function* signupUser({
+  props
+}: ReturnType<typeof actions.signupUser>): SagaIterator {
+  try {
+    yield put(resetMessage());
 
-//     const res = yield call(app.post, "signup", { ...props });
-//     const message = yield call(parseMessage, res);
+    const res = yield call(app.post, "signup", { ...props });
+    const message: string = yield call(parseMessage, res);
 
-//     yield put(
-//       setServerMessage({
-//         message
-//       })
-//     );
-//     yield call(toast, { type: "success", message });
+    yield call(toast, { type: "success", message });
 
-//     yield call(Router.push, "/employee/login");
-//   } catch (e) {
-//     yield call(setError, e.toString());
-//   }
-// }
+    yield call(Router.push, "/employee/login");
+  } catch (e) {
+    yield call(showError, e.toString());
+  }
+}
 
 /**
  * Attempts to update a user avatar.
@@ -267,9 +265,9 @@ export default function* authSagas(): SagaIterator {
     takeLatest(constants.APP_LOADING, checkForActiveSession),
     // takeLatest(constants.USER_DELETE_AVATAR, deleteUserAvatar),
     // takeLatest(constants.USER_PASSWORD_RESET, resetPassword),
-    takeLatest(constants.USER_SIGNIN_ATTEMPT, signinUser)
+    takeLatest(constants.USER_SIGNIN_ATTEMPT, signinUser),
     // takeLatest(constants.USER_SIGNOUT_SESSION, signoutUserSession),
-    // takeLatest(constants.USER_SIGNUP, signupUser),
+    takeLatest(constants.USER_SIGNUP, signupUser)
     // takeLatest(constants.USER_UPDATE_AVATAR, updateUserAvatar),
     // takeLatest(constants.USER_PASSWORD_UPDATE, updateUserPassword)
   ]);

@@ -42,6 +42,7 @@ const NavLink = styled(NavLinkComponent)<{ blue?: boolean }>`
 
   &:hover {
     color: ${({ blue }) => (blue ? "#40a9ff" : "#62c0ce")};
+    text-decoration: underline;
   }
 
   &:focus {
