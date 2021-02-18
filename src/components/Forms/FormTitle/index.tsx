@@ -18,8 +18,8 @@ const FormTitle = ({
   <>
     <Head title={header} />
     <Center style={{ borderBottom: "1px solid #e8edf2", marginBottom: "25px" }}>
-      <Title style={{ color: "#025f6d" }}>{title}</Title>
-      <Paragraph style={{ color: "#69727d" }}>{description}</Paragraph>
+      <Title style={{ color: "#010404", marginBottom: 5 }}>{title}</Title>
+      <Paragraph style={{ color: "#010404" }}>{description}</Paragraph>
     </Center>
   </>
 );

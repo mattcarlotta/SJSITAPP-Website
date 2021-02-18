@@ -1,69 +1,147 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import FieldError from "~components/Forms/FieldError";
 import Label from "~components/Forms/Label";
-import { InputProps } from "~types";
+import Errors from "~components/Forms/Errors";
+import Icon, { TIconType } from "~components/Layout/Icon";
+import ClickHandler from "./ClickHandler";
+import { ChangeEvent, CSSProperties } from "~types";
 
-const InputField = styled.input<{ errors?: string }>`
-  text-indent: 10px;
-  height: 40px;
-  width: 100%;
-  background: #f5f5f5;
-  color: #3a3a3a;
-  border: 1px solid ${({ errors }) => (errors ? "#d03916" : "#d3d3d3")};
-  border-radius: 4px;
-  transition: 0.2s ease-in-out;
-  transition-property: color, border;
-
-  ::placeholder {
-    color: #919191;
-  }
-
-  :focus {
-    outline: 0;
-    border: 1px solid #028ddf;
-    box-shadow: 0 4px 14px 0 rgba(130, 130, 130, 0.19);
-  }
-`;
+export interface IInputComponentProps {
+  className?: string;
+  containerStyle: CSSProperties;
+  errors?: string;
+  disabled?: boolean;
+  icon?: TIconType;
+  inputStyle?: CSSProperties;
+  label: string;
+  name: string;
+  onChange: (e: ChangeEvent<any>) => void;
+  placeholder?: string;
+  readOnly?: boolean;
+  type: "text" | "password" | "email";
+  tooltip?: string;
+  value: string;
+}
 
 const InputComponent = ({
   className,
-  onChange,
+  containerStyle,
   errors,
+  disabled,
+  icon,
+  inputStyle,
   label,
   name,
+  onChange,
   placeholder,
+  readOnly,
   type,
-  value,
-  style
-}: InputProps) => (
-  <div data-testid="input-container" style={style} className={className}>
-    <Label htmlFor={name}>{label}</Label>
-    <InputField
-      aria-label={name}
-      data-testid={name}
-      errors={errors}
-      placeholder={placeholder}
-      name={name}
-      onChange={onChange}
-      type={type}
-      tabIndex={0}
-      value={value}
-    />
-    <FieldError errors={errors} />
+  tooltip,
+  value
+}: IInputComponentProps): JSX.Element => (
+  <div className={className} style={containerStyle}>
+    <ClickHandler>
+      {({ isFocused, handleBlur, handleFocus }) => (
+        <div
+          className={[
+            isFocused && "focused",
+            errors && "error",
+            disabled && "disabled-input"
+          ]
+            .filter(c => !!c)
+            .join(" ")}
+        >
+          {label && <Label name={name} label={label} tooltip={tooltip} />}
+          <div style={{ display: "flex", alignItems: "center" }}>
+            {icon && <Icon dataTestId={name} type={icon} />}
+            <input
+              aria-label={name}
+              tabIndex={0}
+              type={type}
+              name={name}
+              onBlur={handleBlur}
+              onChange={onChange}
+              onFocus={handleFocus}
+              placeholder={placeholder}
+              value={value}
+              style={inputStyle}
+              disabled={disabled}
+              readOnly={readOnly}
+            />
+          </div>
+          {errors && <Errors data-test="errors">{errors}</Errors>}
+        </div>
+      )}
+    </ClickHandler>
   </div>
 );
 
 const Input = styled(InputComponent)`
-  @media (max-width: 768px) {
-    display: block !important;
-    width: 100% !important;
+  position: relative;
+  display: inline-block;
+  height: 117px;
+  width: 100%;
+
+  input {
+    position: relative;
+    padding: ${({ icon }) => `10px 0 10px ${icon ? 48 : 17}px`};
+    width: 100%;
+    font-size: 20px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    transition: border 0.2s ease-in-out;
+
+    &:hover {
+      border: 1px solid #bfbebe;
+    }
+
+    &::placeholder {
+      color: #d3dce6;
+    }
+
+    &:focus {
+      outline: 0;
+    }
   }
 
-  height: 105px;
-  padding: 0 10px;
-  display: flex;
-  flex-direction: column;
+  .focused {
+    svg {
+      color: #1e90ff;
+    }
+
+    input {
+      border: 1px solid #1e90ff;
+    }
+  }
+
+  .error {
+    svg {
+      color: #d14023 !important;
+    }
+
+    input {
+      border: 1px solid #d14023 !important;
+    }
+  }
+
+  .disabled-input {
+    & .icon > svg {
+      cursor: not-allowed;
+      color: rgba(0, 0, 0, 0.25);
+    }
+
+    input {
+      cursor: not-allowed;
+      color: rgba(0, 0, 0, 0.25);
+      background: #f5f5f5;
+      border: 1px solid #e6d8d8;
+
+      &:hover {
+        border: 1px solid #e6d8d8;
+      }
+    }
+  }
 `;
 
 export default Input;

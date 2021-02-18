@@ -19,16 +19,16 @@ const SubmitButton = ({
   style,
   submitBtnStyle
 }: ISubmitButtonProps): JSX.Element => (
-  <ButtonContainer style={{ marginTop: 10, ...style }} primary>
+  <ButtonContainer style={{ marginTop: 10, ...style }}>
     {isSubmitting ? (
       <Submitting style={{ ...submitBtnStyle }} />
     ) : (
       <Button
+        tertiary
         dataTestId="submit-button"
         style={{ ...style, minHeight: 54 }}
         className="submit"
         disabled={disabled}
-        primary
         fontSize="22px"
         padding="8.5px 18px"
         type="submit"

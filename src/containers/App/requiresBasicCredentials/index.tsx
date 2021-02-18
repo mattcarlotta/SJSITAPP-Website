@@ -18,7 +18,7 @@ export interface IRequireAuthProps {
 
 const requiresBasicCredentials = (
   WrappedComponent: ComponentType<any>
-): any => {
+): ComponentType<any> => {
   const RequiresAuthentication: FC<IRequireAuthProps> = ({
     email,
     isLoading,

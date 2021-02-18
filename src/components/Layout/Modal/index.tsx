@@ -11,6 +11,7 @@ import ModalContainer from "./ModalContainer";
 import WindowContainer from "./WindowContainer";
 
 export interface IModalProps {
+  background?: string;
   children: JSX.Element | JSX.Element[];
   dataTestId: string;
   disableClickHandler?: boolean;
@@ -20,6 +21,7 @@ export interface IModalProps {
 }
 
 export const Modal = ({
+  background,
   children,
   dataTestId,
   disableClickHandler,
@@ -32,7 +34,11 @@ export const Modal = ({
       <ModalContainer>
         <Center maxWidth={maxWidth}>
           <ClickHandler closeModal={!disableClickHandler ? onClick : undefined}>
-            <ModalContent data-test={dataTestId} maxWidth={maxWidth}>
+            <ModalContent
+              data-test={dataTestId}
+              maxWidth={maxWidth}
+              background={background}
+            >
               <FlexEnd>
                 <CloseModalButton
                   id="close-modal"

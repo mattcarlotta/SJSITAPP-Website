@@ -43,6 +43,7 @@ export interface StyledButtonProps {
   width?: string;
   padding?: string;
   fontSize?: string;
+  noGlow?: boolean;
 }
 
 const Button = styled(StyledButton)<StyledButtonProps>`
@@ -58,7 +59,7 @@ const Button = styled(StyledButton)<StyledButtonProps>`
       return "linear-gradient(90deg,#194048 0%,#0f7888 50%,#194048 100%)";
     if (props.danger)
       return "linear-gradient(90deg,#8a4133 0%,#f56342 50%,#8a4133 100%)";
-    if (props.tertiary) return "transparent";
+    if (props.tertiary) return "#010404";
     return "transparent";
   }};
   text-transform: ${props => {
@@ -96,7 +97,8 @@ const Button = styled(StyledButton)<StyledButtonProps>`
         if (props.tertiary) return "#3794a5";
         return "transparent";
       }};
-    box-shadow: ${({ tertiary }) => tertiary && "0px 0px 14px -2px #14d3e2"};
+    box-shadow: ${({ tertiary, noGlow }) =>
+      tertiary && !noGlow && "0px 0px 14px -2px #14d3e2"};
     background: ${({ tertiary }) => tertiary && "#025f6d"};
   }
 

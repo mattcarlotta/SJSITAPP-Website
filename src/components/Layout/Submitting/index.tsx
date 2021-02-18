@@ -15,8 +15,9 @@ const Submitting = styled(SubmittingComponent)`
   justify-content: center;
   align-items: center;
   height: 54px;
-  -webkit-animation: fadeIn 1s 0s ease-in-out forwards;
-  animation: fadeIn 1s 0s ease-in-out forwards;
+  border-radius: 50px;
+  cursor: wait;
+  animation: fadeIn 0.5s 0s ease-in-out forwards;
 
   & > div {
     width: 10px;
@@ -26,19 +27,16 @@ const Submitting = styled(SubmittingComponent)`
 
   & .bar1 {
     background-color: #0798af;
-    -webkit-animation-delay: -0.24s;
     animation-delay: -0.24s;
   }
 
   & .bar2 {
     background-color: #f2d40d;
-    -webkit-animation-delay: -0.12s;
     animation-delay: -0.12s;
   }
 
   & .bar3 {
     background-color: #f58311;
-    -webkit-animation-delay: 0s;
     animation-delay: 0s;
   }
 `;

@@ -61,7 +61,7 @@ const LoginForm: FC<ILoginFormProps> = ({ serverError, signinUser }) => {
   );
 
   React.useEffect(() => {
-    if (state.isSubmitting)
+    if (state.isSubmitting && serverError)
       setState(prevState => ({ ...prevState, isSubmitting: false }));
   }, [serverError]);
 
@@ -75,22 +75,32 @@ const LoginForm: FC<ILoginFormProps> = ({ serverError, signinUser }) => {
       <FormTitle
         header="Log In"
         title="Welcome!"
-        description="Sign into your account below."
+        description="Login into your account below."
       />
       <form onSubmit={handleSubmit}>
         <FieldGenerator fields={state.fields} onChange={handleChange} />
-        <NavLink
-          blue
-          dataTestId="reset-password-link"
-          style={{ padding: 0, margin: 0, fontSize: 16 }}
-          href="/employee/reset-password"
-        >
-          <FaUnlockAlt />
-          &nbsp; Forgot your password?
-        </NavLink>
-        <SubmitButton isSubmitting={state.isSubmitting} title="Log In" />
+        <Center style={{ marginBottom: 8 }}>
+          <NavLink
+            blue
+            dataTestId="reset-password-link"
+            style={{ padding: 0, margin: "0", fontSize: 16 }}
+            href="/employee/reset-password"
+          >
+            <FaUnlockAlt />
+            &nbsp; Forgot your password?
+          </NavLink>
+        </Center>
+        <SubmitButton
+          isSubmitting={state.isSubmitting}
+          title="Login"
+          style={{ width: "300px", margin: "0 auto" }}
+          submitBtnStyle={{
+            background: "#010404",
+            border: "2px solid #2e7c8a"
+          }}
+        />
       </form>
-      <Center style={{ marginTop: 20 }}>
+      <Center style={{ marginTop: 10 }}>
         <span>Don&#39;t have an account?</span> &nbsp;
         <NavLink
           blue
