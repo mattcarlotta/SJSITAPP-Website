@@ -102,6 +102,8 @@ export type TBaseFieldProps = {
   placeholder?: string;
   tooltip?: string;
   errors?: string;
+  notes?: string;
+  updateEvent?: boolean;
   onChange?: (event: ChangeEvent<any>) => void;
   style?: CSSProperties;
 };

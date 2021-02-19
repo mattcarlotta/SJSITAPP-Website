@@ -1,15 +1,12 @@
 import * as constants from "~constants";
-import {
-  IResetMessageAction,
-  ISetMessageAction,
-  ISetErrorAction
-} from "./types";
 
 /**
  * @function resetMessage - resets all server messages.
  * @returns SERVER_RESET_MESSAGE
  */
-export const resetMessage: IResetMessageAction = () => ({
+export const resetMessage = (): {
+  type: typeof constants.SERVER_RESET_MESSAGE;
+} => ({
   type: constants.SERVER_RESET_MESSAGE
 });
 
@@ -18,7 +15,12 @@ export const resetMessage: IResetMessageAction = () => ({
  * @param message - a `message` returned from the API server
  * @returns constants.SERVER_MESSAGE and payload
  */
-export const setMessage: ISetMessageAction = message => ({
+export const setMessage = (
+  message: string
+): {
+  type: typeof constants.SERVER_MESSAGE;
+  payload: string;
+} => ({
   type: constants.SERVER_MESSAGE,
   payload: message
 });
@@ -28,7 +30,12 @@ export const setMessage: ISetMessageAction = message => ({
  * @param err - an `err` message returned from the API server
  * @returns constants.SERVER_ERROR_MESSAGE and payload
  */
-export const setError: ISetErrorAction = err => ({
+export const setError = (
+  err: string
+): {
+  type: typeof constants.SERVER_ERROR_MESSAGE;
+  payload: string;
+} => ({
   type: constants.SERVER_ERROR_MESSAGE,
   payload: err
 });

@@ -11,9 +11,9 @@ import { TBaseFieldProps } from "~types";
  * @throws {error}
  */
 
-const fieldValidator = <T extends any[]>(
-  fields: T
-): { validatedFields: T; errors: number } => {
+const fieldValidator = (
+  fields: Array<TBaseFieldProps>
+): { validatedFields: Array<TBaseFieldProps>; errors: number } => {
   try {
     if (isEmpty(fields)) throw new Error("You must supply an array of fields!");
     let errorCount = 0;
@@ -29,7 +29,7 @@ const fieldValidator = <T extends any[]>(
         errors = "Required.";
       } else if (
         type === "email" &&
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(field.value)
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(field.value as string)
       ) {
         errors = "Invalid email.";
       }
@@ -37,7 +37,7 @@ const fieldValidator = <T extends any[]>(
       if (errors) errorCount += 1;
 
       return { ...field, errors };
-    }) as T;
+    });
 
     return { validatedFields, errors: errorCount };
   } catch (err) {

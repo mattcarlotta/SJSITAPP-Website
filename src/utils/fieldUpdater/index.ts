@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import isEmpty from "lodash.isempty";
+import { TBaseFieldProps } from "~types";
 
 /**
  * Helper function to update form fields.
@@ -11,24 +12,24 @@ import isEmpty from "lodash.isempty";
  * @returns {array} - updated fields.
  * @throws {error}
  */
-const fieldUpdater = <T extends any[]>(
-  fields: T,
+const fieldUpdater = (
+  fields: Array<TBaseFieldProps>,
   name: string,
   value?: string
-): T => {
+): Array<TBaseFieldProps> => {
   try {
-    if (isEmpty(fields) || !name) {
-      throw new Error(
+    if (isEmpty(fields) || !name)
+      throw String(
         "You must supply a field array with a name of the field to update!"
       );
-    }
+
     const updatedFields = fields.map(field =>
       field.name === name ? { ...field, value, errors: "" } : field
-    ) as T;
+    );
 
     return updatedFields;
   } catch (err) {
-    throw String(err);
+    throw new Error(err);
   }
 };
 

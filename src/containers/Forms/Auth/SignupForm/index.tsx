@@ -131,8 +131,8 @@ export const SignupForm: FC<ISignupFormProps> = ({
 };
 
 /* istanbul ignore next */
-const mapStateToProps = (state: TRootState) => ({
-  serverError: state.server.error
+const mapStateToProps = ({ server }: Pick<TRootState, "server">) => ({
+  serverError: server.error
 });
 
 /* istanbul ignore next */

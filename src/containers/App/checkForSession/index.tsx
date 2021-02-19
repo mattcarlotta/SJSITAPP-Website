@@ -30,8 +30,8 @@ const checkForSession = (WrappedComponent: ComponentType<any>): any => {
   };
 
   /* istanbul ignore next */
-  const mapStateToProps = (state: TRootState) => ({
-    role: state.auth.role
+  const mapStateToProps = ({ auth }: Pick<TRootState, "auth">) => ({
+    role: auth.role
   });
 
   // { signoutUser }

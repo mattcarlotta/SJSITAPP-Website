@@ -1,29 +1,7 @@
 /* eslint-disable no-console */
 import isEmpty from "lodash.isempty";
 import moment from "moment-timezone";
-
-export interface IFields {
-  callTimes?: Array<moment.Moment>;
-  date?: moment.Moment;
-  range?: Array<moment.Moment>;
-  radiogroup?: any;
-  responses?: Array<{
-    id: string;
-    value: string;
-    notes?: string;
-    updateEvent?: boolean;
-  }>;
-  email?: string;
-  password?: string;
-}
-
-export type TFieldProps = {
-  name: string;
-  type: string;
-  value: string | moment.Moment | Array<moment.Moment>;
-  notes: string;
-  updateEvent: boolean;
-};
+import { TBaseFieldProps } from "~types";
 
 /**
  * Helper function to parse a fields' [name]: value from an array into an object.
@@ -33,12 +11,12 @@ export type TFieldProps = {
  * @returns {ParseFieldsResult} an object of parsed fields with [name]: value.
  * @throws {error}
  */
-const parseFields = <T>(fields: Array<any>): T => {
+const parseFields = <T>(fields: Array<TBaseFieldProps>): T => {
   try {
     if (isEmpty(fields)) throw new Error("You must supply an array of fields!");
 
     const parsedFields = fields.reduce(
-      (acc, { name, type, value, notes, updateEvent }: TFieldProps) => {
+      (acc: any, { name, type, value, notes, updateEvent }) => {
         switch (type) {
           case "time": {
             acc["callTimes"] = acc["callTimes"] || [];

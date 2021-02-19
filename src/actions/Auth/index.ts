@@ -1,15 +1,12 @@
 import isEmpty from "lodash.isempty";
 import * as constants from "~constants";
 import {
-  ICheckForSessionAction,
-  IRemoveSessionAction,
-  IResetPasswordAction,
-  ISigninSessionAction,
-  ISigninAttemptAction,
-  ISignoutUserSessionAction,
-  ISignupAction,
-  IUpdateUserPasswordAction
-} from "./types";
+  TAuthData,
+  TLoginData,
+  TNewPasswordData,
+  TResetPasswordData,
+  TSignupData
+} from "~types";
 
 /**
  * Checks for an active session on initial app load.
@@ -17,7 +14,9 @@ import {
  * @function checkForActiveSession
  * @returns constants.USER_CHECK_SESSION
  */
-export const checkForActiveSession: ICheckForSessionAction = () => ({
+export const checkForActiveSession = (): {
+  type: typeof constants.USER_CHECK_SESSION;
+} => ({
   type: constants.USER_CHECK_SESSION
 });
 
@@ -40,7 +39,9 @@ export const checkForActiveSession: ICheckForSessionAction = () => ({
  * @param (none)
  * @returns constants.USER_REMOVE_SESSION
  */
-export const removeSession: IRemoveSessionAction = () => ({
+export const removeSession = (): {
+  type: typeof constants.USER_REMOVE_SESSION;
+} => ({
   type: constants.USER_REMOVE_SESSION
 });
 
@@ -51,7 +52,12 @@ export const removeSession: IRemoveSessionAction = () => ({
  * @param props - props just contain an `email` field.
  * @returns constants.USER_PASSWORD_RESET and props
  */
-export const resetPassword: IResetPasswordAction = props => ({
+export const resetPassword = (
+  props: TResetPasswordData
+): {
+  type: typeof constants.USER_PASSWORD_RESET;
+  props: TResetPasswordData;
+} => ({
   type: constants.USER_PASSWORD_RESET,
   props
 });
@@ -86,7 +92,12 @@ export const resetPassword: IResetPasswordAction = props => ({
  * @param data - contains user session data: `id`, `email`, `firstName`, `lastName`, and `role`.
  * @returns constants.USER_SET_SESSION and data
  */
-export const signinSession: ISigninSessionAction = data => ({
+export const signinSession = (
+  data: TAuthData
+): {
+  type: typeof constants.USER_SET_SESSION;
+  payload: TAuthData;
+} => ({
   type: constants.USER_SET_SESSION,
   payload: !isEmpty(data) ? data : { role: "guest" }
 });
@@ -98,7 +109,12 @@ export const signinSession: ISigninSessionAction = data => ({
  * @param props - contains user's `email` and `password`.
  * @returns constants.USER_SIGNIN_ATTEMPT, email, and password
  */
-export const signinUser: ISigninAttemptAction = props => ({
+export const signinUser = (
+  props: TLoginData
+): {
+  type: typeof constants.USER_SIGNIN_ATTEMPT;
+  props: TLoginData;
+} => ({
   type: constants.USER_SIGNIN_ATTEMPT,
   props
 });
@@ -109,7 +125,9 @@ export const signinUser: ISigninAttemptAction = props => ({
  * @function signoutUser
  * @returns constants.USER_SIGNOUT_SESSION
  */
-export const signoutUserSession: ISignoutUserSessionAction = () => ({
+export const signoutUserSession = (): {
+  type: typeof constants.USER_SIGNOUT_SESSION;
+} => ({
   type: constants.USER_SIGNOUT_SESSION
 });
 
@@ -120,7 +138,12 @@ export const signoutUserSession: ISignoutUserSessionAction = () => ({
  * @param props - contains a `token`, an `email`, `firstName`, `lastName`, and a `password`.
  * @returns constants.USER_SIGNUP, props
  */
-export const signupUser: ISignupAction = props => ({
+export const signupUser = (
+  props: TSignupData
+): {
+  type: typeof constants.USER_SIGNUP;
+  props: TSignupData;
+} => ({
   type: constants.USER_SIGNUP,
   props
 });
@@ -158,7 +181,12 @@ export const signupUser: ISignupAction = props => ({
  * @param props - contains a `token` and `password`.
  * @returns  constants.USER_PASSWORD_UPDATE and props
  */
-export const updateUserPassword: IUpdateUserPasswordAction = props => ({
+export const updateUserPassword = (
+  props: TNewPasswordData
+): {
+  type: typeof constants.USER_PASSWORD_UPDATE;
+  props: TNewPasswordData;
+} => ({
   type: constants.USER_PASSWORD_UPDATE,
   props
 });
