@@ -17,6 +17,7 @@ const Avatar: FC<TAvatarProps> = ({ avatar, style, width }) => {
       css={css`
         width: ${avatarWidth};
         display: inline-block;
+        color: #025f6d;
       `}
     >
       {avatar ? (

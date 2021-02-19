@@ -18,7 +18,6 @@ const ServerError: NextPage = () => (
       direction="column"
       justify="center"
       style={{ height: "90vh" }}
-      id="server-error"
     >
       <Head title="Server Error" />
       <img src="/logo_192x192.png" alt="Logo.png" />

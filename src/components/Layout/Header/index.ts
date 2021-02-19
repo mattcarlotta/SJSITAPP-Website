@@ -10,7 +10,7 @@ const Header = styled.header`
   display: flex;
   height: 56px;
   background: #fff;
-  box-shadow: 2px 2px 0 3px rgba(35, 207, 234, 0.3);
+  box-shadow: 2px 2px 0px 2px rgba(35, 207, 234, 0.15);
   z-index: 2;
   padding: 0 30px;
 `;

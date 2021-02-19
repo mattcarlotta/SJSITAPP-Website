@@ -17,7 +17,6 @@ const NotFound: NextPage = () => (
       direction="column"
       justify="center"
       style={{ height: "90vh" }}
-      id="notfound"
     >
       <Head title="Page Not Found" />
       <img src="/logo_192x192.png" alt="Logo.png" />

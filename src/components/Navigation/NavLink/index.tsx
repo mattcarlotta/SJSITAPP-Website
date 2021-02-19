@@ -31,14 +31,20 @@ const NavLinkComponent = ({
   </Link>
 );
 
-const NavLink = styled(NavLinkComponent)<{ blue?: boolean }>`
+const NavLink = styled(NavLinkComponent)<{
+  blue?: boolean;
+  marginRight?: string;
+  padding?: string;
+  fontSize?: string;
+}>`
   color: ${({ blue }) => (blue ? "#0075e0" : "#fff")};
   white-space: nowrap;
   text-decoration: none;
-  margin-right: 20px;
-  padding: 8px 16px;
+  margin-right: ${({ marginRight }) => marginRight || "20px"};
+  padding: ${({ padding }) => padding || "8px 16px"};
   transition: all 0.2s ease-in-out;
   border-radius: 4px;
+  font-size: ${({ fontSize }) => fontSize || "18px"};
 
   &:hover {
     color: ${({ blue }) => (blue ? "#40a9ff" : "#62c0ce")};

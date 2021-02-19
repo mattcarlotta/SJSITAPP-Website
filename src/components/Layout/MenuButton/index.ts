@@ -8,7 +8,9 @@ const MenuButton = styled.button<{ hoverable?: boolean }>`
     border 0.2s ease-in-out;
   border-radius: 50px;
   border: 2px solid transparent;
-  padding: 6px;
+  padding: 8px;
+  font-size: 15px;
+  text-align: left;
 
   :hover {
     color: #025f6d;
