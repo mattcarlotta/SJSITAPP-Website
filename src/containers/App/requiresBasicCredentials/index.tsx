@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 // import Router, { withRouter } from "next/router";
 import { useRouter } from "next/router";
 import toast from "~components/App/Toast";
-// import AppLayout from "~components/App";
+import AppLayout from "~components/App/Layout";
 // import { signoutUser } from "~actions/Auth";
-import Spinner from "~components/Layout/Spinner";
+// import Spinner from "~components/Layout/Spinner";
 import FadeIn from "~components/Layout/FadeIn";
 import { ComponentType, FC } from "~types";
 
@@ -35,10 +35,12 @@ const requiresBasicCredentials = (
     }, [isGuest]);
 
     return email && !isGuest ? (
-      <WrappedComponent />
+      <AppLayout>
+        <WrappedComponent />
+      </AppLayout>
     ) : (
-      <FadeIn style={{ height: "100%" }} timing="1.5s">
-        <Spinner />
+      <FadeIn height="100%" timing="1.5s">
+        <div>Loading...</div>
       </FadeIn>
     );
   };

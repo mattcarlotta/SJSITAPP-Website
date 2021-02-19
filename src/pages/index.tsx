@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import { FaSignInAlt } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import { MdDashboard } from "react-icons/md";
-import Submitting from "~components/Layout/Submitting";
 import Button from "~components/Layout/Button";
 import Spinner from "~components/Layout/Spinner";
+import Submitting from "~components/Layout/Submitting";
 import Header from "~components/Navigation/Header";
 import { NextPage } from "~types";
 

@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { updateUserPassword } from "~actions/Auth";
 import FieldGenerator from "~components/Forms/FieldGenerator";
 import FormTitle from "~components/Forms/FormTitle";
+import BlackBackground from "~components/Layout/BlackBackground";
 import Modal from "~components/Layout/Modal";
 import SubmitButton from "~components/Layout/SubmitButton";
 import fieldValidator from "~utils/fieldValidator";
@@ -88,25 +89,27 @@ export const NewPasswordForm: FC<ISignupFormProps> = ({
   }, [parseFields, updateUserPassword, state]);
 
   return (
-    <Modal dataTestId="signup-form" isOpen>
-      <FormTitle
-        header="Update Password"
-        title="Update Password"
-        description="Enter a new password to update your current password."
-      />
-      <form onSubmit={handleSubmit}>
-        <FieldGenerator fields={state.fields} onChange={handleChange} />
-        <SubmitButton
-          isSubmitting={state.isSubmitting}
-          title="Reset"
-          style={{ width: "300px", margin: "0 auto" }}
-          submitBtnStyle={{
-            background: "#010404",
-            border: "2px solid #2e7c8a"
-          }}
+    <BlackBackground>
+      <Modal dataTestId="signup-form" isOpen>
+        <FormTitle
+          header="Update Password"
+          title="Update Password"
+          description="Enter a new password to update your current password."
         />
-      </form>
-    </Modal>
+        <form onSubmit={handleSubmit}>
+          <FieldGenerator fields={state.fields} onChange={handleChange} />
+          <SubmitButton
+            isSubmitting={state.isSubmitting}
+            title="Reset"
+            style={{ width: "300px", margin: "0 auto" }}
+            submitBtnStyle={{
+              background: "#010404",
+              border: "2px solid #2e7c8a"
+            }}
+          />
+        </form>
+      </Modal>
+    </BlackBackground>
   );
 };
 

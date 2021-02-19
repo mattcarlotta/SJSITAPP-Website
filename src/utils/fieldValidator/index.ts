@@ -20,11 +20,7 @@ const fieldValidator = (
 
     const validatedFields = fields.map(field => {
       let errors = "";
-      const {
-        type,
-        value,
-        required
-      }: Pick<TBaseFieldProps, "type" | "value" | "required"> = field;
+      const { type, value, required } = field;
       if ((!value && required) || (isEmpty(value) && required)) {
         errors = "Required.";
       } else if (

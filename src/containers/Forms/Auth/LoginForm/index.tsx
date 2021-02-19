@@ -1,16 +1,17 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { FaUnlockAlt } from "react-icons/fa";
+import { signinUser } from "~actions/Auth";
+import FieldGenerator from "~components/Forms/FieldGenerator";
+import FormTitle from "~components/Forms/FormTitle";
+import BlackBackground from "~components/Layout/BlackBackground";
 import Center from "~components/Layout/Center";
 import Modal from "~components/Layout/Modal";
 import SubmitButton from "~components/Layout/SubmitButton";
-import FieldGenerator from "~components/Forms/FieldGenerator";
-import FormTitle from "~components/Forms/FormTitle";
 import NavLink from "~components/Navigation/NavLink";
 import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
-import { signinUser } from "~actions/Auth";
 import fields from "./Fields";
 import { EventTarget, FC, FormEvent, TLoginData, TRootState } from "~types";
 
@@ -68,47 +69,49 @@ export const LoginForm: FC<ILoginFormProps> = ({ serverError, signinUser }) => {
   }, [parseFields, signinUser, state]);
 
   return (
-    <Modal isOpen dataTestId="login-form">
-      <FormTitle
-        header="Login"
-        title="Welcome!"
-        description="Login into your account below."
-      />
-      <form onSubmit={handleSubmit}>
-        <FieldGenerator fields={state.fields} onChange={handleChange} />
-        <Center style={{ marginBottom: 8 }}>
+    <BlackBackground>
+      <Modal isOpen dataTestId="login-form">
+        <FormTitle
+          header="Login"
+          title="Welcome!"
+          description="Login into your account below."
+        />
+        <form onSubmit={handleSubmit}>
+          <FieldGenerator fields={state.fields} onChange={handleChange} />
+          <Center style={{ marginBottom: 8 }}>
+            <NavLink
+              blue
+              dataTestId="reset-password-link"
+              style={{ padding: 0, margin: "0", fontSize: 16 }}
+              href="/employee/reset-password"
+            >
+              <FaUnlockAlt />
+              &nbsp; Forgot your password?
+            </NavLink>
+          </Center>
+          <SubmitButton
+            isSubmitting={state.isSubmitting}
+            title="Login"
+            style={{ width: "300px", margin: "0 auto" }}
+            submitBtnStyle={{
+              background: "#010404",
+              border: "2px solid #2e7c8a"
+            }}
+          />
+        </form>
+        <Center style={{ marginTop: 10 }}>
+          <span>Don&#39;t have an account?</span> &nbsp;
           <NavLink
             blue
-            dataTestId="reset-password-link"
-            style={{ padding: 0, margin: "0", fontSize: 16 }}
-            href="/employee/reset-password"
+            dataTestId="sign-up-link"
+            style={{ padding: 0, margin: 0 }}
+            href="/employee/signup"
           >
-            <FaUnlockAlt />
-            &nbsp; Forgot your password?
+            Signup
           </NavLink>
         </Center>
-        <SubmitButton
-          isSubmitting={state.isSubmitting}
-          title="Login"
-          style={{ width: "300px", margin: "0 auto" }}
-          submitBtnStyle={{
-            background: "#010404",
-            border: "2px solid #2e7c8a"
-          }}
-        />
-      </form>
-      <Center style={{ marginTop: 10 }}>
-        <span>Don&#39;t have an account?</span> &nbsp;
-        <NavLink
-          blue
-          dataTestId="sign-up-link"
-          style={{ padding: 0, margin: 0 }}
-          href="/employee/signup"
-        >
-          Signup
-        </NavLink>
-      </Center>
-    </Modal>
+      </Modal>
+    </BlackBackground>
   );
 };
 

@@ -33,7 +33,11 @@ const SpinnerComponent: FC<ISpinnerProps> = ({ className, children }) => {
   return (
     <div data-test="spinner" className={className}>
       {!isMounted ? null : isIE || isEdge ? (
-        <FlexCenter style={{ height: "100%" }} direction="column">
+        <FlexCenter
+          style={{ height: "100%" }}
+          justify="center"
+          direction="column"
+        >
           <HomeLogo />
           {children}
         </FlexCenter>

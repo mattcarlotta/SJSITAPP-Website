@@ -45,9 +45,9 @@ export function* signoutUserSession(): SagaIterator {
   try {
     yield call(app.get, "signout");
 
-    yield put(actions.removeSession());
-
     yield call(Router.push, "/employee/login");
+
+    yield put(actions.removeSession());
   } catch (e) {
     yield call(showError, e.toString());
   }

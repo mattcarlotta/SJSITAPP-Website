@@ -37,7 +37,7 @@ export const GlobalStylesheet = (): JSX.Element => (
       body,
       html {
         height: 100vh;
-        background: #010404;
+        background: #f0f2f5;
       }
 
       html,

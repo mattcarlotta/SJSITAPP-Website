@@ -9,17 +9,17 @@ export interface ILinkProps {
   style?: CSSProperties;
 }
 
-const LinkComponent = ({ children, className, href, ...rest }: ILinkProps) => (
+const LinkComponent = ({ children, className, href }: ILinkProps) => (
   <NextLink href={href} prefetch={false} passHref>
-    <a data-testid="link" {...rest} className={className}>
+    <a data-testid="link" className={className}>
       {children}
     </a>
   </NextLink>
 );
 
-const Link = styled(LinkComponent)<{ padding?: string }>`
+const Link = styled(LinkComponent)<{ padding?: string; primary?: boolean }>`
   cursor: pointer;
-  color: #fff;
+  color: ${props => (props.primary ? "#025f6d" : "#fff")};
   font-size: 18px;
   text-align: center;
   transition: all 0.2s ease-in-out;
