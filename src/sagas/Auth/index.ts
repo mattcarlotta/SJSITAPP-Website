@@ -223,30 +223,26 @@ export function* signupUser({
  * @param {object} props - props contain a token and (new) password fields.
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to set a server message by type.
  * @yields {action} - A redux action to display a toast message by type.
  * @yields {action} - A redux action to push to sign the user out of any sessions.
  * @throws {action} - A redux action to display a server message by type.
  */
-// export function* updateUserPassword({ props }) {
-//   try {
-//     yield put(resetMessage());
+export function* updateUserPassword({
+  props
+}: ReturnType<typeof actions.updateUserPassword>): SagaIterator {
+  try {
+    yield put(resetMessage());
 
-//     const res = yield call(app.put, "new-password", { ...props });
-//      const message: string = yield call(parseMessage, res);
+    const res = yield call(app.put, "new-password", { ...props });
+    const message: string = yield call(parseMessage, res);
 
-//     yield put(
-//       setServerMessage({
-//         message
-//       })
-//     );
-//     yield call(toast, { type: "success", message });
+    yield call(toast, { type: "success", message });
 
-//     yield call(signoutUserSession);
-//   } catch (e) {
-//      yield call(showError, e.toString());
-//   }
-// }
+    yield call(signoutUserSession);
+  } catch (e) {
+    yield call(showError, e.toString());
+  }
+}
 
 /**
  * Creates watchers for all generators.
@@ -262,8 +258,8 @@ export default function* authSagas(): SagaIterator {
     takeLatest(constants.USER_PASSWORD_RESET, resetPassword),
     takeLatest(constants.USER_SIGNIN_ATTEMPT, signinUser),
     takeLatest(constants.USER_SIGNOUT_SESSION, signoutUserSession),
-    takeLatest(constants.USER_SIGNUP, signupUser)
+    takeLatest(constants.USER_SIGNUP, signupUser),
     // takeLatest(constants.USER_UPDATE_AVATAR, updateUserAvatar),
-    // takeLatest(constants.USER_PASSWORD_UPDATE, updateUserPassword)
+    takeLatest(constants.USER_PASSWORD_UPDATE, updateUserPassword)
   ]);
 }

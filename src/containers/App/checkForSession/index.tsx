@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import FadeIn from "~components/Layout/FadeIn";
 import Spinner from "~components/Layout/Spinner";
-import { ComponentType, FC } from "~types";
-import { TRootState } from "~reducers";
+import { ComponentType, FC, TRootState } from "~types";
 
 export interface IRequireAuthProps {
   email: string;

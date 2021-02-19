@@ -15,7 +15,8 @@ import {
 import { AnyAction, Store } from "redux";
 import { SagaIterator } from "redux-saga";
 import moment from "moment-timezone";
-import * as actions from "../actions/Users";
+import * as actions from "~actions/Users";
+import { TRootState } from "~reducers";
 
 /// ACTIONS ///
 
@@ -37,6 +38,11 @@ export type TSignupData = {
   email: string;
   firstName: string;
   lastName: string;
+  password: string;
+  token: string;
+};
+
+export type TNewPasswordData = {
   password: string;
   token: string;
 };
@@ -288,5 +294,6 @@ export {
   ReactElement,
   ReactNode,
   ReactText,
-  SagaIterator
+  SagaIterator,
+  TRootState
 };

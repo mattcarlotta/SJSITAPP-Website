@@ -11,13 +11,13 @@ import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
 import fields from "./Fields";
-import { TRootState } from "~reducers";
 import {
   EventTarget,
   FC,
   FormEvent,
   TBaseFieldProps,
-  TResetPasswordData
+  TResetPasswordData,
+  TRootState
 } from "~types";
 
 export interface ISignupFormState {

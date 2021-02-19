@@ -793,7 +793,7 @@ const parseSession = (req: Request): string | undefined =>
   get(req, ["session", "user", "id"]);
 
 /**
- * Helper function to send an error to the LOCALHOST.
+ * Helper function to send an error to the CLIENT.
  *
  * @function
  * @param err - error message

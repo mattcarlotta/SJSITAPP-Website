@@ -1,28 +1,34 @@
 import * as constants from "~constants";
-import { AnyAction } from "~types";
+import {
+  IResetMessageAction,
+  ISetMessageAction,
+  ISetErrorAction
+} from "./types";
 
 /**
  * @function resetMessage - resets all server messages.
- * @returns {AnyAction} a redux action
+ * @returns SERVER_RESET_MESSAGE
  */
-export const resetMessage = (): AnyAction => ({
+export const resetMessage: IResetMessageAction = () => ({
   type: constants.SERVER_RESET_MESSAGE
 });
 
 /**
  * @function setMessage - adds a new server message.
- * @returns {AnyAction} a redux action
+ * @param message - a `message` returned from the API server
+ * @returns constants.SERVER_MESSAGE and payload
  */
-export const setMessage = (message: string): AnyAction => ({
+export const setMessage: ISetMessageAction = message => ({
   type: constants.SERVER_MESSAGE,
   payload: message
 });
 
 /**
  * @function setError - adds a new server error message.
- * @returns {AnyAction} a redux action
+ * @param err - an `err` message returned from the API server
+ * @returns constants.SERVER_ERROR_MESSAGE and payload
  */
-export const setError = (err: string): AnyAction => ({
+export const setError: ISetErrorAction = err => ({
   type: constants.SERVER_ERROR_MESSAGE,
   payload: err
 });

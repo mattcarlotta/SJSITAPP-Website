@@ -1,33 +1,46 @@
 import * as React from "react";
+import get from "lodash.get";
+import { useRouter } from "next/router";
 import { connect } from "react-redux";
-import { FaUnlockAlt } from "react-icons/fa";
-import Center from "~components/Layout/Center";
-import Modal from "~components/Layout/Modal";
-import SubmitButton from "~components/Layout/SubmitButton";
+import { updateUserPassword } from "~actions/Auth";
 import FieldGenerator from "~components/Forms/FieldGenerator";
 import FormTitle from "~components/Forms/FormTitle";
-import NavLink from "~components/Navigation/NavLink";
+import Modal from "~components/Layout/Modal";
+import SubmitButton from "~components/Layout/SubmitButton";
 import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
-import { signinUser } from "~actions/Auth";
 import fields from "./Fields";
-import { EventTarget, FC, FormEvent, TLoginData, TRootState } from "~types";
+import {
+  EventTarget,
+  FC,
+  FormEvent,
+  TBaseFieldProps,
+  TNewPasswordData,
+  TRootState
+} from "~types";
 
-export interface ILoginFormState {
-  fields: typeof fields;
+export interface ISignupFormState {
+  fields: Array<TBaseFieldProps>;
+  token: string;
   errors: boolean;
   isSubmitting: boolean;
 }
 
-export interface ILoginFormProps {
+export interface ISignupFormProps {
   serverError?: string;
-  signinUser: typeof signinUser;
+  updateUserPassword: typeof updateUserPassword;
 }
 
-export const LoginForm: FC<ILoginFormProps> = ({ serverError, signinUser }) => {
-  const [state, setState] = React.useState<ILoginFormState>({
+export const NewPasswordForm: FC<ISignupFormProps> = ({
+  serverError,
+  updateUserPassword
+}) => {
+  const router = useRouter();
+  const token = get(router, ["query", "token"]);
+  const [state, setState] = React.useState({
     fields,
+    token: "",
     errors: false,
     isSubmitting: false
   });
@@ -58,38 +71,34 @@ export const LoginForm: FC<ILoginFormProps> = ({ serverError, signinUser }) => {
   );
 
   React.useEffect(() => {
+    setState(prevState => ({ ...prevState, token: token as string }));
+  }, [token]);
+
+  React.useEffect(() => {
     if (state.isSubmitting && serverError)
       setState(prevState => ({ ...prevState, isSubmitting: false }));
   }, [serverError]);
 
   React.useEffect(() => {
     if (state.isSubmitting && !state.errors)
-      signinUser(parseFields<TLoginData>(state.fields));
-  }, [parseFields, signinUser, state]);
+      updateUserPassword({
+        ...parseFields<Pick<TNewPasswordData, "password">>(state.fields),
+        token: state.token
+      });
+  }, [parseFields, updateUserPassword, state]);
 
   return (
-    <Modal isOpen dataTestId="login-form">
+    <Modal dataTestId="signup-form" isOpen>
       <FormTitle
-        header="Login"
-        title="Welcome!"
-        description="Login into your account below."
+        header="Update Password"
+        title="Update Password"
+        description="Enter a new password to update your current password."
       />
       <form onSubmit={handleSubmit}>
         <FieldGenerator fields={state.fields} onChange={handleChange} />
-        <Center style={{ marginBottom: 8 }}>
-          <NavLink
-            blue
-            dataTestId="reset-password-link"
-            style={{ padding: 0, margin: "0", fontSize: 16 }}
-            href="/employee/reset-password"
-          >
-            <FaUnlockAlt />
-            &nbsp; Forgot your password?
-          </NavLink>
-        </Center>
         <SubmitButton
           isSubmitting={state.isSubmitting}
-          title="Login"
+          title="Reset"
           style={{ width: "300px", margin: "0 auto" }}
           submitBtnStyle={{
             background: "#010404",
@@ -97,17 +106,6 @@ export const LoginForm: FC<ILoginFormProps> = ({ serverError, signinUser }) => {
           }}
         />
       </form>
-      <Center style={{ marginTop: 10 }}>
-        <span>Don&#39;t have an account?</span> &nbsp;
-        <NavLink
-          blue
-          dataTestId="sign-up-link"
-          style={{ padding: 0, margin: 0 }}
-          href="/employee/signup"
-        >
-          Signup
-        </NavLink>
-      </Center>
     </Modal>
   );
 };
@@ -119,7 +117,7 @@ const mapStateToProps = (state: TRootState) => ({
 
 /* istanbul ignore next */
 const mapDispatchToProps = {
-  signinUser
+  updateUserPassword
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(NewPasswordForm);
