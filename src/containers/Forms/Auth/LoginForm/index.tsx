@@ -82,7 +82,8 @@ export const LoginForm: FC<ILoginFormProps> = ({ serverError, signinUser }) => {
             <NavLink
               blue
               dataTestId="reset-password-link"
-              style={{ padding: 0, margin: "0", fontSize: 16 }}
+              marginRight="0px"
+              padding="0px"
               href="/employee/reset-password"
             >
               <FaUnlockAlt />
@@ -100,11 +101,13 @@ export const LoginForm: FC<ILoginFormProps> = ({ serverError, signinUser }) => {
           />
         </form>
         <Center style={{ marginTop: 10 }}>
-          <span>Don&#39;t have an account?</span> &nbsp;
+          <span style={{ color: "#010404" }}>Don&#39;t have an account?</span>
+          &nbsp;
           <NavLink
             blue
             dataTestId="sign-up-link"
-            style={{ padding: 0, margin: 0 }}
+            marginRight="0px"
+            padding="0px"
             href="/employee/signup"
           >
             Signup

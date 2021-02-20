@@ -1,5 +1,26 @@
-import { SIDEMENU_EXPANDED_TABS, SIDEMENU_SELECTED_TABS } from "~constants";
+import {
+  SIDEMENU_EXPANDED_TABS,
+  SIDEMENU_SELECTED_TABS,
+  SIDEMENU_TOGGLE
+} from "~constants";
 import { TSideMenuNodeIds } from "~types";
+
+/**
+ * Sets expanded tabs for the side menu.
+ *
+ * @function setExpandedTabs
+ * @param payload - contains active side menu `nodeIds`.
+ * @returns constants.SIDEMENU_EXPANDED_TABS, payload
+ */
+export const setExpandedTabs = (
+  payload: TSideMenuNodeIds
+): {
+  type: typeof SIDEMENU_EXPANDED_TABS;
+  payload: TSideMenuNodeIds;
+} => ({
+  type: SIDEMENU_EXPANDED_TABS,
+  payload
+});
 
 /**
  * Sets the selected tabs for the side menu.
@@ -19,18 +40,13 @@ export const setSelectedTabs = (
 });
 
 /**
- * Sets expanded tabs for the side menu.
+ * Toggles side menu collapsing.
  *
  * @function setExpandedTabs
- * @param payload - contains active side menu `nodeIds`.
- * @returns constants.SIDEMENU_EXPANDED_TABS, payload
+ * @returns constants.SIDEMENU_TOGGLE, payload
  */
-export const setExpandedTabs = (
-  payload: TSideMenuNodeIds
-): {
-  type: typeof SIDEMENU_EXPANDED_TABS;
-  payload: TSideMenuNodeIds;
+export const toggleSideNav = (): {
+  type: typeof SIDEMENU_TOGGLE;
 } => ({
-  type: SIDEMENU_EXPANDED_TABS,
-  payload
+  type: SIDEMENU_TOGGLE
 });

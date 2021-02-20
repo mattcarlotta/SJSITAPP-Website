@@ -21,7 +21,7 @@ const LinkComponent = ({ children, className, href, replace }: ILinkProps) => (
 const Link = styled(LinkComponent)<{ padding?: string; primary?: boolean }>`
   cursor: pointer;
   color: ${props => (props.primary ? "#025f6d" : "#fff")};
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
   transition: all 0.2s ease-in-out;
   text-decoration: none;

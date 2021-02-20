@@ -3,11 +3,13 @@ import * as types from "~constants";
 import { AnyAction } from "~types";
 
 export interface ISidemenuReducerState {
+  collapsed: boolean;
   expandedNodeIds: Array<string>;
   selectedNodeIds: Array<string>;
 }
 
 export const initialState: ISidemenuReducerState = {
+  collapsed: false,
   expandedNodeIds: [""],
   selectedNodeIds: [""]
 };
@@ -31,6 +33,9 @@ const sidemenuReducer = (
     }
     case types.SIDEMENU_SELECTED_TABS: {
       return { ...state, selectedNodeIds: payload };
+    }
+    case types.SIDEMENU_TOGGLE: {
+      return { ...state, collapsed: !state.collapsed };
     }
     default: {
       return state;

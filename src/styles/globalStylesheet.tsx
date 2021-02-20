@@ -37,11 +37,6 @@ export const GlobalStylesheet = (): JSX.Element => (
       body,
       html {
         height: 100vh;
-        background: #f0f2f5;
-      }
-
-      html,
-      body {
         width: 100%;
         margin: 0;
         padding: 0;
@@ -52,6 +47,8 @@ export const GlobalStylesheet = (): JSX.Element => (
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         color: #025f6d;
+        background: #f0f2f5;
+        font-size: 16px;
       }
 
       .Toastify__toast--info {

@@ -79,14 +79,14 @@ const InputComponent = ({
 const Input = styled(InputComponent)`
   position: relative;
   display: inline-block;
-  height: 117px;
+  height: 87px;
   width: 100%;
 
   input {
     position: relative;
     padding: ${({ icon }) => `10px 0 10px ${icon ? 48 : 17}px`};
     width: 100%;
-    font-size: 20px;
+    font-size: 16px;
     background: #fff;
     border: 1px solid #e5e5e5;
     border-radius: 4px;

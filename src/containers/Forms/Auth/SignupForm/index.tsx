@@ -88,7 +88,7 @@ export const SignupForm: FC<ISignupFormProps> = ({
 
   return (
     <BlackBackground>
-      <Modal dataTestId="signup-form" isOpen maxWidth="700px">
+      <Modal dataTestId="signup-form" isOpen maxWidth="600px">
         <form onSubmit={handleSubmit}>
           <FormTitle
             header="Signup"
@@ -100,7 +100,8 @@ export const SignupForm: FC<ISignupFormProps> = ({
             <NavLink
               blue
               dataTestId="reset-password-link"
-              style={{ padding: 0, margin: "0", fontSize: 16 }}
+              padding="0px"
+              marginRight="0px"
               href="/employee/reset-password"
             >
               <FaUnlockAlt />
@@ -122,7 +123,8 @@ export const SignupForm: FC<ISignupFormProps> = ({
           <NavLink
             dataTestId="login-link"
             blue
-            style={{ padding: 0, margin: 0 }}
+            padding="0px"
+            marginRight="0px"
             href="/employee/login"
           >
             Login

@@ -33,26 +33,44 @@ const NavLinkComponent = ({
 
 const NavLink = styled(NavLinkComponent)<{
   blue?: boolean;
+  green?: boolean;
   marginRight?: string;
+  nounderline?: boolean;
   padding?: string;
   fontSize?: string;
+  width?: string;
 }>`
-  color: ${({ blue }) => (blue ? "#0075e0" : "#fff")};
+  color: ${({ blue, green }) => {
+    if (blue) return "#0075e0";
+    if (green) return "#025f6d";
+    return "#fff";
+  }};
   white-space: nowrap;
   text-decoration: none;
+  display: block;
   margin-right: ${({ marginRight }) => marginRight || "20px"};
   padding: ${({ padding }) => padding || "8px 16px"};
   transition: all 0.2s ease-in-out;
   border-radius: 4px;
-  font-size: ${({ fontSize }) => fontSize || "18px"};
+  font-size: ${({ fontSize }) => fontSize || "16px"};
+  width: ${({ width }) => width || "auto"};
 
   &:hover {
-    color: ${({ blue }) => (blue ? "#40a9ff" : "#62c0ce")};
-    text-decoration: underline;
+    color: ${({ blue, green }) => {
+      if (blue) return "#40a9ff";
+      if (green) return "#025f6d";
+      return "#62c0ce";
+    }};
+    text-decoration: ${({ nounderline }) =>
+      nounderline ? "none" : "underline"};
   }
 
   &:focus {
-    color: ${({ blue }) => (blue ? "#40a9ff" : "#62c0ce")};
+    color: ${({ blue, green }) => {
+      if (blue) return "#40a9ff";
+      if (green) return "#025f6d";
+      return "#62c0ce";
+    }};
     outline: none;
     border: 0;
   }

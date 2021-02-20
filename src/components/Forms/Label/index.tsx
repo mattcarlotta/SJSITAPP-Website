@@ -58,10 +58,10 @@ const LabelComponent: FC<ILabelProps> = ({
 const Label = styled(LabelComponent)`
   color: #010404;
   display: block;
-  margin-bottom: 15px;
-  height: 15px;
-  line-height: 20px;
-  font-size: 20px;
+  margin-bottom: 10px;
+  height: 12px;
+  line-height: 16px;
+  font-size: 16px;
 
   & .tooltip {
     margin-left: 5px;

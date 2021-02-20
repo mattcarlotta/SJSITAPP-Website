@@ -1,5 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { BsPeopleCircle } from "react-icons/bs";
 import { resetPassword } from "~actions/Auth";
 import FieldGenerator from "~components/Forms/FieldGenerator";
 import FormTitle from "~components/Forms/FormTitle";
@@ -88,19 +89,17 @@ export const ResetPasswordForm: FC<IResetPasswordFormProps> = ({
         <form onSubmit={handleSubmit}>
           <FieldGenerator fields={state.fields} onChange={handleChange} />
           <Center style={{ marginBottom: 8 }}>
-            <p
-              style={{ margin: 0, padding: 0, fontSize: 16, display: "inline" }}
-            >
-              Already have an account?
-            </p>
-            &nbsp;
             <NavLink
               blue
               dataTestId="login-link"
-              style={{ padding: 0, margin: 0, fontSize: 16 }}
+              padding="0px"
+              marginRight="0px"
               href="/employee/login"
             >
-              Log in
+              <BsPeopleCircle
+                style={{ position: "relative", top: 2, fontSize: 18 }}
+              />
+              &nbsp; Already have an account?
             </NavLink>
           </Center>
           <SubmitButton
@@ -114,11 +113,13 @@ export const ResetPasswordForm: FC<IResetPasswordFormProps> = ({
           />
         </form>
         <Center style={{ marginTop: 20 }}>
-          <span>Don&#39;t have an account?</span> &nbsp;
+          <span style={{ color: "#010404" }}>Don&#39;t have an account?</span>
+          &nbsp;
           <NavLink
             blue
             dataTestId="signup-link"
-            style={{ padding: 0, margin: 0 }}
+            padding="0px"
+            marginRight="0px"
             href="/employee/signup"
           >
             Sign up
