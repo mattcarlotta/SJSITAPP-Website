@@ -35,21 +35,23 @@ const SideMenuComponent: FC<SideMenuComponentProps> = ({ className }) => {
   );
 };
 
-const SideMenu = styled(SideMenuComponent)`
+const SideMenu = styled(SideMenuComponent)<{ width?: string }>`
   @media (max-width: 1200px) {
     display: none;
   }
 
   overflow: auto;
-  padding: 5px;
-  width: 266px;
+  padding: ${({ width }) => width || "5px"};
+  width: ${({ width }) => width || "266px"};
   background: #fff;
-  box-shadow: 2px 2px 0px 2px rgba(35, 207, 234, 0.15);
+  box-shadow: ${({ width }) =>
+    width ? "none" : "2px 2px 0px 2px rgba(35, 207, 234, 0.15)"};
   transition: all 0.2s;
   min-height: 100vh;
   position: fixed;
   top: 60px;
   z-index: 3;
+  transition: 350ms;
 `;
 
 export default SideMenu;
