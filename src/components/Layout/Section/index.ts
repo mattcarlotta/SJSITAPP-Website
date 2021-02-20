@@ -6,7 +6,7 @@ const Section = styled.section<{ direction?: string; hideOverflowX?: boolean }>`
   display: flex;
   flex: auto;
   min-height: 0;
-  background: #f0f2f5;
+  background: #f9f9f9;
   ${({ hideOverflowX }) => hideOverflowX && "overflow-x: hidden"};
 `;
 

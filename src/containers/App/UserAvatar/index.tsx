@@ -9,6 +9,7 @@ import { MdHelpOutline } from "react-icons/md";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { signoutUserSession } from "~actions/Auth";
 import Avatar from "~components/Layout/Avatar";
+import Divider from "~components/Layout/Divider";
 import Flex from "~components/Layout/Flex";
 import MenuButton from "~components/Layout/MenuButton";
 import MenuItem from "~components/Layout/MenuItem";
@@ -129,12 +130,7 @@ const UserAvatar: FC<TUserAvatarProps> = ({
                 Settings
               </MenuLink>
             </MenuItem>
-            <hr
-              css={css`
-                margin: 0;
-                opacity: 0.2;
-              `}
-            />
+            <Divider />
             <MenuItem>
               <MenuButton
                 type="button"

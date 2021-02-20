@@ -31,7 +31,7 @@ const SpinnerComponent: FC<ISpinnerProps> = ({ className, children }) => {
   }, []);
 
   return (
-    <div data-test="spinner" className={className}>
+    <div data-testid="spinner" className={className}>
       {!isMounted ? null : isIE || isEdge ? (
         <FlexCenter
           style={{ height: "100%" }}
@@ -107,7 +107,7 @@ const Spinner = styled(SpinnerComponent)`
     position: relative;
     user-select: none;
 
-    &::before {
+    ::before {
       content: attr(data-text);
       position: absolute;
       filter: blur(0.02em);

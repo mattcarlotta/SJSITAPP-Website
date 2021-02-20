@@ -51,6 +51,7 @@ export const GlobalStylesheet = (): JSX.Element => (
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        color: #025f6d;
       }
 
       .Toastify__toast--info {

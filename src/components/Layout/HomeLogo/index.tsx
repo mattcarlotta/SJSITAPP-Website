@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 const HomeLogoComponent = ({ className }: { className?: string }) => (
   <img
     className={className}
-    src="/images/staticIceTeamLogo.jpg"
+    src="/images/staticIceTeamLogo.png"
     alt="StaticIceTeamLogo.png"
   />
 );

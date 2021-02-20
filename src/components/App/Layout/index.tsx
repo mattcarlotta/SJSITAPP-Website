@@ -29,20 +29,11 @@ const AppLayout: FC<AppLayoutProps> = ({ children }) => {
       <Header>
         <FlexCenter>
           <FlexStart>
-            <MenuLink
-              dataTestId="logo-dashboard-link"
-              href="/"
-              hoverable
-              fontSize="20px"
-              padding="6px 18px"
-              width="auto"
-            >
-              SHARKS ICE TEAM
-            </MenuLink>
             <MenuButton
               data-testid="hamburger-menu"
               hoverable
               onClick={handleCollapse}
+              style={{ margin: "0 10px 0 5px" }}
             >
               <IconContext.Provider
                 value={{
@@ -54,13 +45,23 @@ const AppLayout: FC<AppLayoutProps> = ({ children }) => {
                 {collapseSideMenu ? <RiMenuUnfoldLine /> : <RiMenuFoldLine />}
               </IconContext.Provider>
             </MenuButton>
+            <MenuLink
+              dataTestId="logo-dashboard-link"
+              href="/"
+              hoverable
+              fontSize="20px"
+              padding="6px 12px"
+              width="auto"
+            >
+              SHARKS ICE TEAM
+            </MenuLink>
           </FlexStart>
           <FlexEnd>
             <UserAvatar />
           </FlexEnd>
         </FlexCenter>
       </Header>
-      <SideMenu width={collapseSideMenu ? "0px" : undefined}>Menu</SideMenu>
+      <SideMenu width={collapseSideMenu ? "0px" : undefined} />
       <Section direction="row" hideOverflowX>
         <Main stretch={collapseSideMenu}>{children}</Main>
       </Section>

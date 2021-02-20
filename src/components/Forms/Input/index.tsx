@@ -69,7 +69,7 @@ const InputComponent = ({
               readOnly={readOnly}
             />
           </div>
-          {errors && <Errors data-test="errors">{errors}</Errors>}
+          {errors && <Errors data-testid="errors">{errors}</Errors>}
         </div>
       )}
     </ClickHandler>

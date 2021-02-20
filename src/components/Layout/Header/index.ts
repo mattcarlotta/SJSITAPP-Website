@@ -12,7 +12,8 @@ const Header = styled.header`
   background: #fff;
   box-shadow: 2px 2px 0px 2px rgba(35, 207, 234, 0.15);
   z-index: 2;
-  padding: 0 30px;
+  padding-right: 30px;
+  padding-left: 5px;
 `;
 
 export default Header;

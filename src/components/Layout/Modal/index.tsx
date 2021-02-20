@@ -35,7 +35,7 @@ export const Modal = ({
         <Center maxWidth={maxWidth}>
           <ClickHandler closeModal={!disableClickHandler ? onClick : undefined}>
             <ModalContent
-              data-test={dataTestId}
+              data-testid={dataTestId}
               maxWidth={maxWidth}
               background={background}
             >
