@@ -1,7 +1,7 @@
 import * as React from "react";
-import styled from "@emotion/styled";
 import moment from "moment";
-import Router from "next/router";
+import { useRouter } from "next/router";
+import { connect } from "react-redux";
 import TreeView from "@material-ui/lab/TreeView";
 import TreeItem from "@material-ui/lab/TreeItem";
 import {
@@ -33,87 +33,196 @@ import {
   FaUserPlus,
   FaUsers
 } from "react-icons/fa";
+import { setSelectedTabs, setExpandedTabs } from "~actions/Sidemenu";
 import Divider from "~components/Layout/Divider";
 import Legal from "~components/Layout/Legal";
-import { FC } from "~types";
+import Tree from "~components/Layout/Tree";
+import { expandedIds, selectedTab } from "./Tabs";
+import { FC, TRootState, TSideMenuNodeIds } from "~types";
 
-export type SideMenuComponentProps = {
-  className?: string;
+export type TSideMenuProps = {
+  collapse: boolean;
+  expandedNodeIds: TSideMenuNodeIds;
+  selectedNodeIds: TSideMenuNodeIds;
+  setSelectedTabs: typeof setSelectedTabs;
+  setExpandedTabs: typeof setExpandedTabs;
 };
 
-const SideMenuComponent: FC<SideMenuComponentProps> = ({ className }) => {
-  const handlePushToRoute = React.useCallback((route: string) => {
-    Router.push(`/employee/${route}`);
+const SideMenu: FC<TSideMenuProps> = ({
+  collapse,
+  expandedNodeIds,
+  selectedNodeIds,
+  setSelectedTabs,
+  setExpandedTabs
+}) => {
+  const router = useRouter();
+  const handleToggle = React.useCallback((_, nodeIds: TSideMenuNodeIds) => {
+    setExpandedTabs(nodeIds);
+  }, []);
+
+  const handleSelect = React.useCallback((_, nodeIds: TSideMenuNodeIds) => {
+    setSelectedTabs(nodeIds);
+  }, []);
+
+  const handlePushToRoute = React.useCallback(
+    (route: string) => {
+      router.push(`/employee/${route}`);
+    },
+    [router]
+  );
+
+  React.useEffect(() => {
+    setExpandedTabs(expandedIds(router.pathname));
+    setSelectedTabs(selectedTab(router.pathname));
   }, []);
 
   return (
-    <aside className={className}>
+    <Tree collapse={collapse}>
       <TreeView
         defaultCollapseIcon={<MdExpandMore />}
         defaultExpandIcon={<MdChevronRight />}
+        expanded={expandedNodeIds}
+        selected={selectedNodeIds}
+        onNodeToggle={handleToggle}
+        onNodeSelect={handleSelect}
       >
-        <TreeItem icon={<MdDashboard />} nodeId="1" label="Dashboard" />
-        <TreeItem icon={<MdEvent />} nodeId="2" label="Events">
-          <TreeItem icon={<FaCalendarPlus />} nodeId="3" label="Create Event" />
-          <TreeItem icon={<MdEventNote />} nodeId="4" label="View Events" />
+        <TreeItem
+          icon={<MdDashboard />}
+          onLabelClick={() => handlePushToRoute("dashboard")}
+          nodeId="dashboard"
+          label="Dashboard"
+        />
+        <TreeItem icon={<MdEvent />} nodeId="events" label="Events">
+          <TreeItem
+            icon={<FaCalendarPlus />}
+            onLabelClick={() => handlePushToRoute("events/create")}
+            nodeId="events/create"
+            label="Create Event"
+          />
+          <TreeItem
+            icon={<MdEventNote />}
+            onLabelClick={() => handlePushToRoute("events/viewall?page=1")}
+            nodeId="events/viewall"
+            label="View Events"
+          />
         </TreeItem>
-        <TreeItem icon={<FaFileSignature />} nodeId="5" label="Forms">
-          <TreeItem icon={<MdNoteAdd />} nodeId="6" label="Create Forms" />
-          <TreeItem icon={<FaFileAlt />} nodeId="7" label="View Forms" />
+        <TreeItem icon={<FaFileSignature />} nodeId="forms" label="Forms">
+          <TreeItem
+            icon={<MdNoteAdd />}
+            onLabelClick={() => handlePushToRoute("forms/create")}
+            nodeId="forms/create"
+            label="Create Forms"
+          />
+          <TreeItem
+            icon={<FaFileAlt />}
+            onLabelClick={() => handlePushToRoute("forms/viewall?page=1")}
+            nodeId="forms/viewall"
+            label="View Forms"
+          />
         </TreeItem>
-        <TreeItem icon={<FaEnvelope />} nodeId="8" label="Mail">
-          <TreeItem icon={<FaPaperPlane />} nodeId="9" label="Send Mail" />
-          <TreeItem icon={<FaMailBulk />} nodeId="10" label="View Mail" />
+        <TreeItem icon={<FaEnvelope />} nodeId="mail" label="Mail">
+          <TreeItem
+            icon={<FaPaperPlane />}
+            onLabelClick={() => handlePushToRoute("mail/create")}
+            nodeId="mail/create"
+            label="Send Mail"
+          />
+          <TreeItem
+            icon={<FaMailBulk />}
+            onLabelClick={() => handlePushToRoute("mail/viewall?page=1")}
+            nodeId="mail/viewall"
+            label="View Mail"
+          />
         </TreeItem>
-        <TreeItem icon={<FaUserFriends />} nodeId="11" label="Members">
-          <TreeItem icon={<FaUserPlus />} nodeId="12" label="Create Member" />
-          <TreeItem icon={<FaKey />} nodeId="13" label="View Authorizations" />
-          <TreeItem icon={<FaUsers />} nodeId="14" label="View Members" />
+        <TreeItem icon={<FaUserFriends />} nodeId="members" label="Members">
+          <TreeItem
+            icon={<FaUserPlus />}
+            onLabelClick={() => handlePushToRoute("members/create")}
+            nodeId="members/create"
+            label="Create Member"
+          />
+          <TreeItem
+            icon={<FaKey />}
+            onLabelClick={() =>
+              handlePushToRoute("members/authorizations/viewall?page=1")
+            }
+            nodeId="members/authorizations/viewall"
+            label="View Authorizations"
+          />
+          <TreeItem
+            icon={<FaUsers />}
+            onLabelClick={() => handlePushToRoute("members/viewall?page=1")}
+            nodeId="members/viewall"
+            label="View Members"
+          />
         </TreeItem>
-        <TreeItem icon={<FaCalendar />} nodeId="15" label="Schedule" />
-        <TreeItem icon={<FaFolder />} nodeId="16" label="Seasons">
-          <TreeItem icon={<FaFolderPlus />} nodeId="17" label="Create Season" />
-          <TreeItem icon={<FaFolderOpen />} nodeId="18" label="View Seasons" />
+        <TreeItem
+          icon={<FaCalendar />}
+          onLabelClick={() => handlePushToRoute("schedule")}
+          nodeId="schedule"
+          label="Schedule"
+        />
+        <TreeItem icon={<FaFolder />} nodeId="seasons" label="Seasons">
+          <TreeItem
+            icon={<FaFolderPlus />}
+            onLabelClick={() => handlePushToRoute("seasons/create")}
+            nodeId="seasons/create"
+            label="Create Season"
+          />
+          <TreeItem
+            icon={<FaFolderOpen />}
+            onLabelClick={() => handlePushToRoute("seasons/viewall?page=1")}
+            nodeId="seasons/viewall"
+            label="View Seasons"
+          />
         </TreeItem>
         <Divider margin="20px 0 20px -20px" />
         <TreeItem
-          nodeId="19"
+          nodeId="settings"
           label="Settings"
           icon={<FaCogs />}
           onLabelClick={() => handlePushToRoute("settings")}
         />
-        <TreeItem icon={<FaQuestionCircle />} nodeId="20" label="Help" />
-        <TreeItem icon={<FaConciergeBell />} nodeId="21" label="Contact Us" />
+        <TreeItem
+          icon={<FaQuestionCircle />}
+          onLabelClick={() => handlePushToRoute("help")}
+          nodeId="help"
+          label="Help"
+        />
+        <TreeItem
+          icon={<FaConciergeBell />}
+          onLabelClick={() => handlePushToRoute("contact-us")}
+          nodeId="contact-us"
+          label="Contact Us"
+        />
         <TreeItem
           icon={<FaBalanceScale />}
-          nodeId="22"
+          onLabelClick={() => handlePushToRoute("privacy")}
+          nodeId="privacy"
           label="Privacy Policy"
         />
-        <TreeItem icon={<FaCopyright />} nodeId="23" label="Licensing" />
+        <TreeItem
+          icon={<FaCopyright />}
+          onLabelClick={() => handlePushToRoute("licensing")}
+          nodeId="licensing"
+          label="Licensing"
+        />
       </TreeView>
       <Legal>© 2019-{moment().format("YYYY")} Matt Carlotta</Legal>
-    </aside>
+    </Tree>
   );
 };
 
-const SideMenu = styled(SideMenuComponent)<{ width?: string }>`
-  @media (max-width: 1200px) {
-    display: none;
-  }
+/* istanbul ignore next */
+const mapStateToProps = ({ sidemenu }: Pick<TRootState, "sidemenu">) => ({
+  expandedNodeIds: sidemenu.expandedNodeIds,
+  selectedNodeIds: sidemenu.selectedNodeIds
+});
 
-  overflow: ${({ width }) => (width ? "hidden" : "auto")};
-  padding: ${({ width }) => width || "5px 0 5px 20px"};
-  width: ${({ width }) => width || "266px"};
-  white-space: nowrap;
-  background: #fff;
-  box-shadow: ${({ width }) =>
-    width ? "none" : "2px 2px 0px 2px rgba(35, 207, 234, 0.15)"};
-  transition: all 0.2s;
-  min-height: 100vh;
-  position: fixed;
-  top: 60px;
-  z-index: 3;
-  transition: 350ms;
-`;
+/* istanbul ignore next */
+const mapDispatchToProps = {
+  setSelectedTabs,
+  setExpandedTabs
+};
 
-export default SideMenu;
+export default connect(mapStateToProps, mapDispatchToProps)(SideMenu);

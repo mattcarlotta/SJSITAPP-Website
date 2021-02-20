@@ -36,7 +36,6 @@ export const checkForActiveSession = (): {
  * Removes user out of current redux session.
  *
  * @function removeSession
- * @param (none)
  * @returns constants.USER_REMOVE_SESSION
  */
 export const removeSession = (): {

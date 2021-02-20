@@ -61,7 +61,7 @@ const AppLayout: FC<AppLayoutProps> = ({ children }) => {
           </FlexEnd>
         </FlexCenter>
       </Header>
-      <SideMenu width={collapseSideMenu ? "0px" : undefined} />
+      <SideMenu collapse={collapseSideMenu} />
       <Section direction="row" hideOverflowX>
         <Main stretch={collapseSideMenu}>{children}</Main>
       </Section>

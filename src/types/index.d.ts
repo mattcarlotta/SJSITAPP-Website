@@ -52,6 +52,8 @@ export type TResetPasswordData = {
   email: string;
 };
 
+export type TSideMenuNodeIds = Array<string>;
+
 export type EventTarget = {
   target: {
     name: string;

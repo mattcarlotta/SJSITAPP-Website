@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
 import authReducer from "./Auth";
 import serverReducer from "./Server";
+import sidemenuReducer from "./Sidemenu";
 
 const reducers = {
   auth: authReducer,
-  server: serverReducer
+  server: serverReducer,
+  sidemenu: sidemenuReducer
 };
 
 const RootReducer = combineReducers(reducers);
