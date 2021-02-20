@@ -1,11 +1,12 @@
 import * as React from "react";
 import { css } from "@emotion/react";
 import Popover from "@material-ui/core/Popover";
-import Router from "next/router";
 import { connect } from "react-redux";
 import { IconContext } from "react-icons";
-import { FaCogs, FaConciergeBell, FaSignOutAlt } from "react-icons/fa";
+import { FaCogs } from "react-icons/fa";
+import { BsChatQuote } from "react-icons/bs";
 import { MdHelpOutline } from "react-icons/md";
+import { RiLogoutBoxLine } from "react-icons/ri";
 import { signoutUserSession } from "~actions/Auth";
 import Avatar from "~components/Layout/Avatar";
 import Flex from "~components/Layout/Flex";
@@ -13,8 +14,9 @@ import MenuButton from "~components/Layout/MenuButton";
 import MenuItem from "~components/Layout/MenuItem";
 import UserDetails from "~components/Layout/UserDetails";
 import Username from "~components/Layout/Username";
+import MenuLink from "~components/Navigation/MenuLink";
 import NavLink from "~components/Navigation/NavLink";
-import { FC, TRootState } from "~types";
+import { FC, MouseEvent, TRootState } from "~types";
 
 export type TUserAvatarProps = {
   avatar?: string;
@@ -34,7 +36,7 @@ const UserAvatar: FC<TUserAvatarProps> = ({
   );
 
   const handleClick = React.useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
+    (event: MouseEvent<HTMLButtonElement>) => {
       setAnchorEl(event.currentTarget);
     },
     []
@@ -45,7 +47,7 @@ const UserAvatar: FC<TUserAvatarProps> = ({
   }, []);
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
+  const id = open ? "user-settings" : undefined;
 
   return (
     <>
@@ -101,45 +103,38 @@ const UserAvatar: FC<TUserAvatarProps> = ({
           <IconContext.Provider
             value={{
               style: {
-                position: "relative",
-                top: 2,
-                marginRight: 10
+                marginRight: 10,
+                fontSize: 17
               }
             }}
           >
             <MenuItem>
-              <MenuButton
-                type="button"
-                data-testid="contact-us-link"
-                style={{ width: "100%" }}
-                onClick={() => Router.push("/employee/contact-us")}
+              <MenuLink
+                dataTestId="contact-us-link"
+                href="/employee/contact-us"
               >
-                <FaConciergeBell />
+                <BsChatQuote />
                 Contact Us
-              </MenuButton>
+              </MenuLink>
             </MenuItem>
             <MenuItem>
-              <MenuButton
-                type="button"
-                ddata-testid="help-link"
-                style={{ width: "100%" }}
-                onClick={() => Router.push("/employee/help")}
-              >
+              <MenuLink dataTestId="help-link" href="/employee/help">
                 <MdHelpOutline />
                 Help
-              </MenuButton>
+              </MenuLink>
             </MenuItem>
             <MenuItem>
-              <MenuButton
-                type="button"
-                data-testid="settings-link"
-                style={{ width: "100%" }}
-                onClick={() => Router.push("/employee/settings")}
-              >
+              <MenuLink dataTestId="settings-link" href="/employee/settings">
                 <FaCogs />
                 Settings
-              </MenuButton>
+              </MenuLink>
             </MenuItem>
+            <hr
+              css={css`
+                margin: 0;
+                opacity: 0.2;
+              `}
+            />
             <MenuItem>
               <MenuButton
                 type="button"
@@ -147,7 +142,7 @@ const UserAvatar: FC<TUserAvatarProps> = ({
                 style={{ width: "100%" }}
                 onClick={signoutUserSession}
               >
-                <FaSignOutAlt />
+                <RiLogoutBoxLine />
                 Signout
               </MenuButton>
             </MenuItem>

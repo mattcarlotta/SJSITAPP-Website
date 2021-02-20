@@ -51,9 +51,6 @@ export const GlobalStylesheet = (): JSX.Element => (
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        font-family: "Karla Regular", -apple-system, BlinkMacSystemFont,
-          "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans",
-          "Droid Sans", "Helvetica Neue", sans-serif !important;
       }
 
       .Toastify__toast--info {
@@ -94,6 +91,9 @@ export const GlobalStylesheet = (): JSX.Element => (
       *,
       ::after,
       ::before {
+        font-family: "Karla", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
+          "Helvetica Neue", sans-serif;
         box-sizing: border-box;
       }
     `}

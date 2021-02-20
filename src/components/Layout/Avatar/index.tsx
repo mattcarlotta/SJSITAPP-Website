@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
-import { FaUserCircle } from "react-icons/fa";
+// import { FaUserCircle } from "react-icons/fa";
+import { BsPeopleCircle } from "react-icons/bs";
 import { CSSProperties, FC } from "~types";
 
 export type TAvatarProps = {
@@ -31,7 +32,7 @@ const Avatar: FC<TAvatarProps> = ({ avatar, style, width }) => {
           style={style}
         />
       ) : (
-        <FaUserCircle
+        <BsPeopleCircle
           style={{ verticalAlign: "middle", fontSize: avatarWidth }}
         />
       )}

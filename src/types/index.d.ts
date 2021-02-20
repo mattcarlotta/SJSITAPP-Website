@@ -8,6 +8,7 @@ import {
   CSSProperties,
   FC,
   FormEvent,
+  MouseEvent,
   ReactElement,
   ReactNode,
   ReactText
@@ -289,6 +290,7 @@ export {
   CSSProperties,
   FC,
   FormEvent,
+  MouseEvent,
   NextApiRequest,
   NextApiResponse,
   NextPage,

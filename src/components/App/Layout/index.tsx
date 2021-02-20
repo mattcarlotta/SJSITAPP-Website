@@ -6,6 +6,7 @@ import Header from "~components/Layout/Header";
 import Main from "~components/Layout/Main";
 import Section from "~components/Layout/Section";
 import SideMenu from "~components/Layout/SideMenu";
+import MenuLink from "~components/Navigation/MenuLink";
 import UserAvatar from "~containers/App/UserAvatar";
 import { ReactElement, FC } from "~types";
 
@@ -18,7 +19,18 @@ const AppLayout: FC<AppLayoutProps> = ({ children }) => {
     <Section direction="column">
       <Header>
         <FlexCenter>
-          <FlexStart>Logo</FlexStart>
+          <FlexStart>
+            <MenuLink
+              dataTestId="logo-dashboard-link"
+              href="/"
+              hoverable
+              fontSize="20px"
+              padding="6px 18px"
+              width="auto"
+            >
+              SHARKS ICE TEAM
+            </MenuLink>
+          </FlexStart>
           <FlexEnd>
             <UserAvatar />
           </FlexEnd>

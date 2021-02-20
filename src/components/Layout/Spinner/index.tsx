@@ -103,7 +103,6 @@ const Spinner = styled(SpinnerComponent)`
     background-color: black;
     color: white;
     font-weight: bold;
-    font-family: sans-serif;
     text-transform: uppercase;
     position: relative;
     user-select: none;

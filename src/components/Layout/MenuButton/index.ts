@@ -11,6 +11,8 @@ const MenuButton = styled.button<{ hoverable?: boolean }>`
   padding: 8px;
   font-size: 15px;
   text-align: left;
+  display: flex;
+  align-items: center;
 
   :hover {
     color: #025f6d;
