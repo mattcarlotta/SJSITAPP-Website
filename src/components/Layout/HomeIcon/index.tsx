@@ -1,4 +1,4 @@
-import { BsFillHouseFill } from "@react-icons/all-files/bs/BsFillHouseFill";
+import { BsFillHouseFill } from "~icons";
 import { FC } from "~types";
 
 const HomeIcon: FC = () => (

@@ -1,5 +1,4 @@
 import * as React from "react";
-import { FaHeartBroken } from "@react-icons/all-files/fa/FaHeartBroken";
 import BlackBackground from "~components/Layout/BlackBackground";
 import Center from "~components/Layout/Center";
 import ErrorMessage from "~components/Layout/ErrorMessage";
@@ -9,6 +8,7 @@ import HomeIcon from "~components/Layout/HomeIcon";
 import Flex from "~components/Layout/Flex";
 import Head from "~components/Navigation/Header";
 import Link from "~components/Navigation/Link";
+import { FaHeartBroken } from "~icons";
 import { NextPage } from "~types";
 
 const ServerError: NextPage = () => (

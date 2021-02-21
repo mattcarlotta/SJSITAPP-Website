@@ -1,8 +1,5 @@
 import * as React from "react";
 import { useRouter } from "next/router";
-import { IconContext } from "@react-icons/all-files";
-import { RiMenuFoldLine } from "@react-icons/all-files/ri/RiMenuFoldLine";
-import { RiMenuUnfoldLine } from "@react-icons/all-files/ri/RiMenuUnfoldLine";
 import { connect } from "react-redux";
 import * as actions from "~actions/Sidemenu";
 import FlexCenter from "~components/Layout/FlexCenter";
@@ -15,6 +12,7 @@ import Section from "~components/Layout/Section";
 import SideMenu from "~components/Navigation/SideMenu";
 import MenuLink from "~components/Navigation/MenuLink";
 import UserAvatar from "~containers/App/UserAvatar";
+import { IconContext, RiMenuFoldLine, RiMenuUnfoldLine } from "~icons";
 import { expandedIds, selectedTab } from "./Tabs";
 import { ReactElement, FC, TSideMenuNodeIds, TRootState } from "~types";
 

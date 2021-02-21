@@ -2,11 +2,6 @@ import * as React from "react";
 import { css } from "@emotion/react";
 import Popover from "@material-ui/core/Popover";
 import { connect } from "react-redux";
-import { IconContext } from "@react-icons/all-files";
-import { FaCogs } from "@react-icons/all-files/fa/FaCogs";
-import { BsChatQuote } from "@react-icons/all-files/bs/BsChatQuote";
-import { MdHelpOutline } from "@react-icons/all-files/md/MdHelpOutline";
-import { RiLogoutBoxLine } from "@react-icons/all-files/ri/RiLogoutBoxLine";
 import { signoutUserSession } from "~actions/Auth";
 import Avatar from "~components/Layout/Avatar";
 import Divider from "~components/Layout/Divider";
@@ -17,6 +12,13 @@ import UserDetails from "~components/Layout/UserDetails";
 import Username from "~components/Layout/Username";
 import MenuLink from "~components/Navigation/MenuLink";
 import NavLink from "~components/Navigation/NavLink";
+import {
+  IconContext,
+  FaCogs,
+  BsChatQuote,
+  MdHelpOutline,
+  RiLogoutBoxLine
+} from "~icons";
 import { FC, MouseEvent, TRootState } from "~types";
 
 export type TUserAvatarProps = {

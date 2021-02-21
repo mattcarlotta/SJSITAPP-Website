@@ -1,6 +1,5 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { FaUnlockAlt } from "@react-icons/all-files/fa/FaUnlockAlt";
 import { signinUser } from "~actions/Auth";
 import FieldGenerator from "~components/Forms/FieldGenerator";
 import FormTitle from "~components/Forms/FormTitle";
@@ -9,6 +8,7 @@ import Center from "~components/Layout/Center";
 import Modal from "~components/Layout/Modal";
 import SubmitButton from "~components/Layout/SubmitButton";
 import NavLink from "~components/Navigation/NavLink";
+import { FaUnlockAlt } from "~icons";
 import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";

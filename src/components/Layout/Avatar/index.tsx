@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
-// import { FaUserCircle } from "@react-icons/all-files/fa/FaUserCircle";
-import { BsPeopleCircle } from "@react-icons/all-files/bs/BsPeopleCircle";
+// import { FaUserCircle } from "~icons";
+import { BsPeopleCircle } from "~icons";
 import { CSSProperties, FC } from "~types";
 
 export type TAvatarProps = {

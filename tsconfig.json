@@ -36,6 +36,7 @@
       "~components/*": ["src/components/*"],
       "~constants": ["src/constants/index"],
       "~containers/*": ["src/containers/*"],
+      "~icons": ["src/icons/index"],
       "~pages/*": ["src/pages/*"],
       "~reducers/*": ["src/reducers/*"],
       "~reducers": ["src/reducers/index"],

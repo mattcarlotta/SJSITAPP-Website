@@ -1,12 +1,10 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { IconContext } from "@react-icons/all-files";
-import { FaSignInAlt } from "@react-icons/all-files/fa/FaSignInAlt";
-import { MdDashboard } from "@react-icons/all-files/md/MdDashboard";
 import Spinner from "~components/Layout/Spinner";
 import Link from "~components/Navigation/Link";
 import Submitting from "~components/Layout/Submitting";
 import Header from "~components/Navigation/Header";
+import { IconContext, FaSignInAlt, MdDashboard } from "~icons";
 import { NextPage } from "~types";
 
 const Home: NextPage = () => {

@@ -2,36 +2,38 @@ import * as React from "react";
 import moment from "moment";
 import TreeView from "@material-ui/lab/TreeView";
 import TreeItem from "@material-ui/lab/TreeItem";
-import { MdDashboard } from "@react-icons/all-files/md/MdDashboard";
-import { MdExpandMore } from "@react-icons/all-files/md/MdExpandMore";
-import { MdChevronRight } from "@react-icons/all-files/md/MdChevronRight";
-import { MdEvent } from "@react-icons/all-files/md/MdEvent";
-import { MdEventNote } from "@react-icons/all-files/md/MdEventNote";
-import { MdNoteAdd } from "@react-icons/all-files/md/MdNoteAdd";
-import { FaBalanceScale } from "@react-icons/all-files/fa/FaBalanceScale";
-import { FaCalendar } from "@react-icons/all-files/fa/FaCalendar";
-import { FaCalendarPlus } from "@react-icons/all-files/fa/FaCalendarPlus";
-import { FaCogs } from "@react-icons/all-files/fa/FaCogs";
-import { FaConciergeBell } from "@react-icons/all-files/fa/FaConciergeBell";
-import { FaCopyright } from "@react-icons/all-files/fa/FaCopyright";
-import { FaEnvelope } from "@react-icons/all-files/fa/FaEnvelope";
-import { FaFileAlt } from "@react-icons/all-files/fa/FaFileAlt";
-import { FaFileSignature } from "@react-icons/all-files/fa/FaFileSignature";
-import { FaFolder } from "@react-icons/all-files/fa/FaFolder";
-import { FaFolderOpen } from "@react-icons/all-files/fa/FaFolderOpen";
-import { FaFolderPlus } from "@react-icons/all-files/fa/FaFolderPlus";
-import { FaKey } from "@react-icons/all-files/fa/FaKey";
-import { FaMailBulk } from "@react-icons/all-files/fa/FaMailBulk";
-import { FaPaperPlane } from "@react-icons/all-files/fa/FaPaperPlane";
-import { FaQuestionCircle } from "@react-icons/all-files/fa/FaQuestionCircle";
-import { FaUserFriends } from "@react-icons/all-files/fa/FaUserFriends";
-import { FaUserPlus } from "@react-icons/all-files/fa/FaUserPlus";
-import { FaUsers } from "@react-icons/all-files/fa/FaUsers";
 import Divider from "~components/Layout/Divider";
 import Legal from "~components/Layout/Legal";
 import Tree from "~components/Layout/Tree";
 import NavLink from "~components/Navigation/NavLink";
 import NavTitle from "~components/Navigation/NavTitle";
+import {
+  FaBalanceScale,
+  FaCalendar,
+  FaCalendarPlus,
+  FaCogs,
+  FaConciergeBell,
+  FaCopyright,
+  FaEnvelope,
+  FaFileAlt,
+  FaFileSignature,
+  FaFolder,
+  FaFolderOpen,
+  FaFolderPlus,
+  FaKey,
+  FaMailBulk,
+  FaPaperPlane,
+  FaQuestionCircle,
+  FaUserFriends,
+  FaUserPlus,
+  FaUsers,
+  MdDashboard,
+  MdExpandMore,
+  MdChevronRight,
+  MdEvent,
+  MdEventNote,
+  MdNoteAdd
+} from "~icons";
 import { FC, TSideMenuNodeIds } from "~types";
 
 export type TSideMenuProps = {
