@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { BsPeopleCircle } from "react-icons/bs";
+import { BsPeopleCircle } from "@react-icons/all-files/bs/BsPeopleCircle";
 import { resetPassword } from "~actions/Auth";
 import FieldGenerator from "~components/Forms/FieldGenerator";
 import FormTitle from "~components/Forms/FormTitle";

@@ -1,11 +1,9 @@
 import { mount, ReactWrapper } from "enzyme";
-import {
-  BsCheckBox,
-  BsFillExclamationOctagonFill,
-  BsFillExclamationTriangleFill,
-  BsInfoSquareFill,
-  BsQuestionSquareFill
-} from "react-icons/bs";
+import { BsCheckBox } from "@react-icons/all-files/bs/BsCheckBox";
+import { BsFillExclamationOctagonFill } from "@react-icons/all-files/bs/BsFillExclamationOctagonFill";
+import { BsFillExclamationTriangleFill } from "@react-icons/all-files/bs/BsFillExclamationTriangleFill";
+import { BsInfoSquareFill } from "@react-icons/all-files/bs/BsInfoSquareFill";
+import { BsQuestionSquareFill } from "@react-icons/all-files/bs/BsQuestionSquareFill";
 import { ToastContainer } from "react-toastify";
 import Toast, { displayIcon } from "../index";
 

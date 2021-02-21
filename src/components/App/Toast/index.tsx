@@ -1,9 +1,10 @@
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { BsCheckBox, BsQuestionSquareFill } from "react-icons/bs";
-import { FiPaperclip } from "react-icons/fi";
-import { GoRadioTower } from "react-icons/go";
-import { FaRegTimesCircle } from "react-icons/fa";
+import { BsCheckBox } from "@react-icons/all-files/bs/BsCheckBox";
+import { BsQuestionSquareFill } from "@react-icons/all-files/bs/BsQuestionSquareFill";
+import { GoRadioTower } from "@react-icons/all-files/go/GoRadioTower";
+import { FiPaperclip } from "@react-icons/all-files/fi/FiPaperclip";
+import { FaRegTimesCircle } from "@react-icons/all-files/fa/FaRegTimesCircle";
 import AlertContainer from "./AlertContainer";
 import AlertMessage from "./AlertMessage";
 import AlertType from "./AlertType";

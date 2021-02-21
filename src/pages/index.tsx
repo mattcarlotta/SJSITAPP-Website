@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { FaSignInAlt } from "react-icons/fa";
-import { IconContext } from "react-icons";
-import { MdDashboard } from "react-icons/md";
+import { IconContext } from "@react-icons/all-files";
+import { FaSignInAlt } from "@react-icons/all-files/fa/FaSignInAlt";
+import { MdDashboard } from "@react-icons/all-files/md/MdDashboard";
 import Spinner from "~components/Layout/Spinner";
 import Link from "~components/Navigation/Link";
 import Submitting from "~components/Layout/Submitting";

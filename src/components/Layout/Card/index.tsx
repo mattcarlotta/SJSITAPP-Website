@@ -1,6 +1,8 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { BsPencilSquare, BsThreeDots, BsTrash } from "react-icons/bs";
+import { BsPencilSquare } from "@react-icons/all-files/bs/BsPencilSquare";
+import { BsThreeDots } from "@react-icons/all-files/bs/BsThreeDots";
+import { BsTrash } from "@react-icons/all-files/bs/BsTrash";
 import Avatar from "~components/Layout/Avatar";
 import Dropdown from "~components/Layout/Dropdown";
 import Flex from "~components/Layout/Flex";

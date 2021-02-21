@@ -1,7 +1,8 @@
 import * as React from "react";
 import { useRouter } from "next/router";
-import { IconContext } from "react-icons";
-import { RiMenuFoldLine, RiMenuUnfoldLine } from "react-icons/ri";
+import { IconContext } from "@react-icons/all-files";
+import { RiMenuFoldLine } from "@react-icons/all-files/ri/RiMenuFoldLine";
+import { RiMenuUnfoldLine } from "@react-icons/all-files/ri/RiMenuUnfoldLine";
 import { connect } from "react-redux";
 import * as actions from "~actions/Sidemenu";
 import FlexCenter from "~components/Layout/FlexCenter";

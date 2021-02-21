@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { FaUnlockAlt } from "react-icons/fa";
+import { FaUnlockAlt } from "@react-icons/all-files/fa/FaUnlockAlt";
 import { signinUser } from "~actions/Auth";
 import FieldGenerator from "~components/Forms/FieldGenerator";
 import FormTitle from "~components/Forms/FormTitle";

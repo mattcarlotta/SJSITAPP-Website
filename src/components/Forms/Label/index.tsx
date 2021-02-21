@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { makeStyles } from "@material-ui/core/styles"; // Theme
 import Tooltip from "@material-ui/core/Tooltip";
-import { GoQuestion } from "react-icons/go";
+import { GoQuestion } from "@react-icons/all-files/go/GoQuestion";
 import TooltipText from "~components/Layout/TooltipText";
 import { CSSProperties, FC } from "~types";
 

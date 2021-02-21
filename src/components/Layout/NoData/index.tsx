@@ -1,4 +1,4 @@
-import { FaChartArea } from "react-icons/fa";
+import { FaChartArea } from "@react-icons/all-files/fa/FaChartArea";
 import Container from "~components/Layout/Container";
 import Flex from "~components/Layout/Flex";
 import { CSSProperties, FC } from "~types";

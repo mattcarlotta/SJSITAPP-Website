@@ -1,6 +1,6 @@
 import React from "react";
 import Router from "next/router";
-import { FaTimes } from "react-icons/fa";
+import { FaTimes } from "@react-icons/all-files/fa/FaTimes";
 import FlexEnd from "~components/Layout/FlexEnd";
 import BackgroundOverlay from "./BackgroundOverlay";
 import Center from "./Center";

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FaHeartBroken } from "react-icons/fa";
+import { FaHeartBroken } from "@react-icons/all-files/fa/FaHeartBroken";
 import BlackBackground from "~components/Layout/BlackBackground";
 import Center from "~components/Layout/Center";
 import ErrorMessage from "~components/Layout/ErrorMessage";
