@@ -20,7 +20,7 @@ import { ChangeEvent, TBaseFieldProps } from "~types";
  */
 
 const FieldGenerator = <
-  T extends TBaseFieldProps[],
+  T extends Array<TBaseFieldProps>,
   K extends (e: ChangeEvent<HTMLInputElement>) => void
 >({
   fields,
@@ -35,10 +35,24 @@ const FieldGenerator = <
         case "text":
         case "email":
         case "password": {
-          return <Input {...props} key={props.name} onChange={onChange} />;
+          return (
+            <Input
+              {...props}
+              key={props.name}
+              value={props.value as string}
+              onChange={onChange}
+            />
+          );
         }
         case "textarea": {
-          return <TextArea {...props} key={props.name} onChange={onChange} />;
+          return (
+            <TextArea
+              {...props}
+              value={props.value as string}
+              key={props.name}
+              onChange={onChange}
+            />
+          );
         }
         default:
           return <div>Not a valid component</div>;

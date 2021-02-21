@@ -60,7 +60,8 @@ export type EventTarget = {
   };
 };
 
-export type TInputType = "text" | "password" | "email";
+export type TInputType = "text" | "password" | "email" | string;
+export type TTextAreaType = "textarea";
 
 export type TIconType =
   | "calander"
@@ -77,57 +78,28 @@ export type TIconType =
   | "search"
   | "tshirt"
   | "user"
-  | "usertag";
-
-/// OLD
-export type UserData = {
-  _id: string;
-  email?: string;
-  firstName?: string;
-  lastName?: string;
-  userName?: string;
-  backgroundInfo?: string;
-  address?: {
-    street?: string;
-    state?: string;
-    suite?: string;
-    city?: string;
-    zipCode?: string;
-  };
-};
-
-export type UserProps = {
-  props: UserData;
-};
-
-export interface UpdatedUserProps extends UserProps {
-  id: string;
-}
+  | "usertag"
+  | string;
 
 /// COMPONENTS ///
-
-export type ActionButtonProps = {
-  className?: string;
-  dataTestId?: string;
-  style?: CSSProperties;
-};
-
 export type TBaseFieldProps = {
-  name: string;
-  type: any;
-  label: string;
-  value: any;
-  icon?: TIconType;
-  disabled?: boolean;
-  required: boolean;
-  placeholder?: string;
-  tooltip?: string;
-  errors?: string;
-  notes?: string;
-  updateEvent?: boolean;
-  onChange?: (event: ChangeEvent<any>) => void;
   containerStyle?: CSSProperties;
+  disabled?: boolean;
+  errors?: string;
+  icon?: TIconType;
+  inputStyle?: CSSProperties;
+  label: string;
+  name: string;
+  onChange?: (event: ChangeEvent<any>) => void;
+  placeholder?: string;
+  required: boolean;
+  readOnly?: boolean;
+  notes?: string;
   style?: CSSProperties;
+  type: string;
+  tooltip?: string;
+  value?: string | Array<moment.Moment>;
+  updateEvent?: boolean;
 };
 
 export interface CardProps {
@@ -168,23 +140,6 @@ export type ContainerProps = {
   style?: CSSProperties;
 };
 
-export interface DeleteButtonProps extends ActionButtonProps {
-  onClick: () => ReturnType<typeof actions.deleteUser>;
-}
-export interface DisplayUserListProps {
-  data: any[];
-  isEditingID?: string;
-  deleteUser: (id: string) => ReturnType<typeof actions.deleteUser>;
-  handleCloseModal: (event: any) => void;
-  handleEditClick: (id: string) => void;
-  handleResetEditClick: (event: any) => void;
-  resetMessage: () => void;
-  updateUser: ({
-    props: UserData,
-    id: string
-  }) => ReturnType<typeof actions.updateUser>;
-}
-
 export type DropdownProps = {
   children: ReactNode;
   menu: ReactNode;
@@ -203,10 +158,6 @@ export type DropdownClickHandlerProps = {
 export type DropdownClickHandlerState = {
   isVisible: boolean;
 };
-
-export interface EditButtonProps extends ActionButtonProps {
-  onClick: (event: any) => void;
-}
 
 export type FieldErrorProps = {
   className?: string;
@@ -249,19 +200,6 @@ export interface TextAreaProps extends ComponentProps {
 export interface UserFormFields extends TBaseFieldProps {
   disabled?: boolean;
   readOnly?: boolean;
-}
-
-export interface UserFormProps extends UserData {
-  _id?: string;
-  resetMessage: () => void;
-  serverError?: string;
-  serverMessage?: string;
-  resetForm: (event?: any) => void;
-  cancelForm?: (event: any) => void;
-  submitAction: ({
-    props: UserData,
-    id: string
-  }) => ReturnType<typeof actions.createUser | typeof actions.updateUser>;
 }
 
 export interface UserFormState {

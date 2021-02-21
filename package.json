@@ -153,7 +153,6 @@
     "jest-enzyme": "^7.1.2",
     "jsdom": "^16.4.0",
     "lint-staged": "^10.5.4",
-    "moment-locales-webpack-plugin": "^1.2.0",
     "nodemon": "^2.0.7",
     "opener": "^1.5.2",
     "prettier": "^2.2.1",
