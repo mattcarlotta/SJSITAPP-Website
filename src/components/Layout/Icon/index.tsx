@@ -18,24 +18,7 @@ import {
   FaTimesCircle
 } from "react-icons/fa";
 import { MdPersonPin } from "react-icons/md";
-import { ChangeEvent, CSSProperties, FC } from "~types";
-
-export type TIconType =
-  | "calander"
-  | "erase"
-  | "id"
-  | "key"
-  | "location"
-  | "lock"
-  | "mail"
-  | "note"
-  | "person"
-  | "puck"
-  | "remove"
-  | "search"
-  | "tshirt"
-  | "user"
-  | "usertag";
+import { ChangeEvent, CSSProperties, FC, TIconType } from "~types";
 
 export interface IIconProps {
   className?: string;

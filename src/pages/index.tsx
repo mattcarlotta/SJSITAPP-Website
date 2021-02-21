@@ -1,11 +1,10 @@
 import * as React from "react";
-import Router from "next/router";
 import { useSelector } from "react-redux";
 import { FaSignInAlt } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import { MdDashboard } from "react-icons/md";
-import Button from "~components/Layout/Button";
 import Spinner from "~components/Layout/Spinner";
+import Link from "~components/Navigation/Link";
 import Submitting from "~components/Layout/Submitting";
 import Header from "~components/Navigation/Header";
 import { NextPage } from "~types";
@@ -13,6 +12,11 @@ import { NextPage } from "~types";
 const Home: NextPage = () => {
   const { role } = useSelector(({ auth }) => auth);
   const hasSession = role !== "guest";
+  const pushHref = !role
+    ? ""
+    : hasSession
+    ? "/employee/dashboard"
+    : "/employee/login";
 
   return (
     <IconContext.Provider
@@ -22,20 +26,17 @@ const Home: NextPage = () => {
     >
       <Header title="Home" url="/" />
       <Spinner>
-        <Button
-          tertiary
-          uppercase
-          disabled={!role}
-          type="button"
-          marginRight="0px"
+        <Link
+          hideShadow
+          href={pushHref}
+          borderRadius="50px"
+          fontSize="18px"
+          margin="5px 0 0 0"
+          padding="13px 18px"
           width="260px"
-          style={{ margin: "20px auto 0" }}
-          onClick={() =>
-            Router.push(hasSession ? "/employee/dashboard" : "/employee/login")
-          }
         >
           {!role ? (
-            <Submitting style={{ height: "25px" }} />
+            <Submitting style={{ height: "24px" }} />
           ) : hasSession ? (
             <>
               <MdDashboard />
@@ -47,7 +48,7 @@ const Home: NextPage = () => {
               Employee Login
             </>
           )}
-        </Button>
+        </Link>
       </Spinner>
     </IconContext.Provider>
   );

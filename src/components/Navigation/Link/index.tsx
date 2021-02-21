@@ -18,21 +18,31 @@ const LinkComponent = ({ children, className, href, replace }: ILinkProps) => (
   </NextLink>
 );
 
-const Link = styled(LinkComponent)<{ padding?: string; primary?: boolean }>`
+const Link = styled(LinkComponent)<{
+  borderRadius?: string;
+  fontSize?: string;
+  hideShadow?: boolean;
+  margin?: string;
+  padding?: string;
+  primary?: boolean;
+  width?: string;
+}>`
   cursor: pointer;
   color: ${props => (props.primary ? "#025f6d" : "#fff")};
-  font-size: 16px;
+  font-size: ${({ fontSize }) => fontSize || "16px"};
   text-align: center;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
   text-transform: uppercase;
   background-color: transparent;
   border: 2px solid #025f6d;
-  box-shadow: 0 4px 14px 0 rgba(2, 95, 109, 0.39);
+  box-shadow: ${({ hideShadow }) =>
+    !hideShadow && "0 4px 14px 0 rgba(2, 95, 109, 0.39)"};
   padding: ${({ padding }) => padding || "13px 18px"};
-  border-radius: 10px;
-  margin: 0;
+  border-radius: ${({ borderRadius }) => borderRadius || "10px"};
+  margin: ${({ margin }) => margin || "0px"};
   letter-spacing: 1px;
+  width: ${({ width }) => width || "auto"};
 
   :hover {
     background: #025f6d;

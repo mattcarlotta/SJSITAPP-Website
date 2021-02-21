@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-const MenuButton = styled.button<{ hoverable?: boolean }>`
+const MenuButton = styled.button<{ hoverable?: boolean; margin?: string }>`
   cursor: pointer;
   color: #025f6d;
   background-color: transparent;
@@ -13,6 +13,7 @@ const MenuButton = styled.button<{ hoverable?: boolean }>`
   text-align: left;
   display: flex;
   align-items: center;
+  margin: ${({ margin }) => margin || "0px"};
 
   :hover {
     color: #025f6d;

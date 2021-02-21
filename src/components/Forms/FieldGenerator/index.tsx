@@ -1,7 +1,7 @@
 import * as React from "react";
 import Input from "~components/Forms/Input";
 import TextArea from "~components/Forms/TextArea";
-import { ChangeEvent, BaseFieldProps } from "~types";
+import { ChangeEvent, TBaseFieldProps } from "~types";
 
 /**
  * Reusable function that converts an object of properties into a React form components.
@@ -20,7 +20,7 @@ import { ChangeEvent, BaseFieldProps } from "~types";
  */
 
 const FieldGenerator = <
-  T extends BaseFieldProps[],
+  T extends TBaseFieldProps[],
   K extends (e: ChangeEvent<HTMLInputElement>) => void
 >({
   fields,
@@ -40,6 +40,8 @@ const FieldGenerator = <
         case "textarea": {
           return <TextArea {...props} key={props.name} onChange={onChange} />;
         }
+        default:
+          return <div>Not a valid component</div>;
       }
     })}
   </>

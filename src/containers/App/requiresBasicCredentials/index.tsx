@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import AppLayout from "~components/App/Layout";
+import AppLayout from "~containers/App/Layout";
 // import Spinner from "~components/Layout/Spinner";
 import FadeIn from "~components/Layout/FadeIn";
 import { ComponentType } from "~types";

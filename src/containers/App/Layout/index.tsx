@@ -3,11 +3,7 @@ import { useRouter } from "next/router";
 import { IconContext } from "react-icons";
 import { RiMenuFoldLine, RiMenuUnfoldLine } from "react-icons/ri";
 import { connect } from "react-redux";
-import {
-  setSelectedTabs,
-  setExpandedTabs,
-  toggleSideNav
-} from "~actions/Sidemenu";
+import * as actions from "~actions/Sidemenu";
 import FlexCenter from "~components/Layout/FlexCenter";
 import FlexEnd from "~components/Layout/FlexEnd";
 import FlexStart from "~components/Layout/FlexStart";
@@ -26,12 +22,12 @@ interface AppLayoutProps {
   collapsed: boolean;
   expandedNodeIds: TSideMenuNodeIds;
   selectedNodeIds: TSideMenuNodeIds;
-  toggleSideNav: typeof toggleSideNav;
-  setSelectedTabs: typeof setSelectedTabs;
-  setExpandedTabs: typeof setExpandedTabs;
+  toggleSideNav: typeof actions.toggleSideNav;
+  setSelectedTabs: typeof actions.setSelectedTabs;
+  setExpandedTabs: typeof actions.setExpandedTabs;
 }
 
-const AppLayout: FC<AppLayoutProps> = ({
+export const AppLayout: FC<AppLayoutProps> = ({
   children,
   collapsed,
   expandedNodeIds,
@@ -63,7 +59,7 @@ const AppLayout: FC<AppLayoutProps> = ({
               data-testid="hamburger-menu"
               hoverable
               onClick={toggleSideNav}
-              style={{ margin: "0 10px 0 5px" }}
+              margin="0 10px 0 5px"
             >
               <IconContext.Provider
                 value={{
@@ -79,7 +75,7 @@ const AppLayout: FC<AppLayoutProps> = ({
               dataTestId="logo-dashboard-link"
               href="/"
               hoverable
-              fontSize="20px"
+              fontSize="17px"
               padding="6px 12px"
               width="auto"
             >
@@ -114,9 +110,7 @@ const mapStateToProps = ({ sidemenu }: Pick<TRootState, "sidemenu">) => ({
 
 /* istanbul ignore next */
 const mapDispatchToProps = {
-  setSelectedTabs,
-  setExpandedTabs,
-  toggleSideNav
+  ...actions
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppLayout);

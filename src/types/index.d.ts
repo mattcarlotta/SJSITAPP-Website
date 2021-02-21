@@ -15,7 +15,6 @@ import {
 } from "react";
 import { AnyAction, Store } from "redux";
 import { SagaIterator } from "redux-saga";
-import moment from "moment-timezone";
 import * as actions from "~actions/Users";
 import { TRootState } from "~reducers";
 
@@ -61,6 +60,25 @@ export type EventTarget = {
   };
 };
 
+export type TInputType = "text" | "password" | "email";
+
+export type TIconType =
+  | "calander"
+  | "erase"
+  | "id"
+  | "key"
+  | "location"
+  | "lock"
+  | "mail"
+  | "note"
+  | "person"
+  | "puck"
+  | "remove"
+  | "search"
+  | "tshirt"
+  | "user"
+  | "usertag";
+
 /// OLD
 export type UserData = {
   _id: string;
@@ -96,10 +114,10 @@ export type ActionButtonProps = {
 
 export type TBaseFieldProps = {
   name: string;
-  type: string;
+  type: any;
   label: string;
-  value?: string | Array<moment.Moment>;
-  icon?: string;
+  value: any;
+  icon?: TIconType;
   disabled?: boolean;
   required: boolean;
   placeholder?: string;
@@ -108,6 +126,7 @@ export type TBaseFieldProps = {
   notes?: string;
   updateEvent?: boolean;
   onChange?: (event: ChangeEvent<any>) => void;
+  containerStyle?: CSSProperties;
   style?: CSSProperties;
 };
 

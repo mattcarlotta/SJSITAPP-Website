@@ -40,7 +40,7 @@ const TextAreaComponent = ({
   style
 }: TextAreaProps) => (
   <div data-testid="textarea-container" className={className} style={style}>
-    <Label htmlFor={name}>{label}</Label>
+    <Label name={name}>{label}</Label>
     <TextAreaField
       aria-label={name}
       data-testid={name}

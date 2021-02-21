@@ -2,13 +2,13 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import Label from "~components/Forms/Label";
 import Errors from "~components/Forms/Errors";
-import Icon, { TIconType } from "~components/Layout/Icon";
+import Icon from "~components/Layout/Icon";
 import ClickHandler from "./ClickHandler";
-import { ChangeEvent, CSSProperties } from "~types";
+import { ChangeEvent, CSSProperties, TIconType, TInputType } from "~types";
 
 export interface IInputComponentProps {
   className?: string;
-  containerStyle: CSSProperties;
+  containerStyle?: CSSProperties;
   errors?: string;
   disabled?: boolean;
   icon?: TIconType;
@@ -18,7 +18,7 @@ export interface IInputComponentProps {
   onChange: (e: ChangeEvent<any>) => void;
   placeholder?: string;
   readOnly?: boolean;
-  type: "text" | "password" | "email";
+  type: TInputType;
   tooltip?: string;
   value: string;
 }
