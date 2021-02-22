@@ -39,16 +39,14 @@ import { FC, TSideMenuNodeIds } from "~types";
 export type TSideMenuProps = {
   collapsed: boolean;
   expandedNodeIds: TSideMenuNodeIds;
-  handleSelect: (_: any, nodeIds: TSideMenuNodeIds) => void;
   handleToggle: (_: any, nodeIds: TSideMenuNodeIds) => void;
   selectedNodeIds: TSideMenuNodeIds;
 };
 
 const SideMenu: FC<TSideMenuProps> = ({
   collapsed,
-  handleSelect,
-  handleToggle,
   expandedNodeIds,
+  handleToggle,
   selectedNodeIds
 }) => (
   <Tree collapsed={collapsed}>
@@ -58,7 +56,6 @@ const SideMenu: FC<TSideMenuProps> = ({
       expanded={expandedNodeIds}
       selected={selectedNodeIds}
       onNodeToggle={handleToggle}
-      onNodeSelect={handleSelect}
     >
       <TreeItem
         icon={<MdDashboard />}

@@ -32,7 +32,7 @@ const ServerError: NextPage = () => (
         <ErrorMessage>
           Please wait a few moments before reloading the page.
         </ErrorMessage>
-        <Link href="/" padding="13px 26px">
+        <Link dataTestId="go-home-link" href="/" padding="13px 26px">
           <HomeIcon />
           <span>Go Home</span>
         </Link>

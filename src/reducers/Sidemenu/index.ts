@@ -10,8 +10,8 @@ export interface ISidemenuReducerState {
 
 export const initialState: ISidemenuReducerState = {
   collapsed: false,
-  expandedNodeIds: [""],
-  selectedNodeIds: [""]
+  expandedNodeIds: [],
+  selectedNodeIds: []
 };
 
 /**

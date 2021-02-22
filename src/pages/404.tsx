@@ -26,7 +26,7 @@ const NotFound: NextPage = () => (
         <ErrorMessage>
           We&#39;re sorry, the page you&#39;ve requested could not be located.
         </ErrorMessage>
-        <Link href="/" padding="13px 26px">
+        <Link dataTestId="go-home-link" href="/" padding="13px 26px">
           <HomeIcon />
           <span>Go Home</span>
         </Link>

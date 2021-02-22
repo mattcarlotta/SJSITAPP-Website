@@ -5,14 +5,21 @@ import { CSSProperties, ReactNode } from "~types";
 export interface ILinkProps {
   children: ReactNode;
   className?: string;
+  dataTestId: string;
   href: string;
   replace?: boolean;
   style?: CSSProperties;
 }
 
-const LinkComponent = ({ children, className, href, replace }: ILinkProps) => (
+const LinkComponent = ({
+  dataTestId,
+  children,
+  className,
+  href,
+  replace
+}: ILinkProps) => (
   <NextLink href={href} prefetch={false} replace={replace} passHref>
-    <a data-testid="link" className={className}>
+    <a data-testid={dataTestId} className={className}>
       {children}
     </a>
   </NextLink>

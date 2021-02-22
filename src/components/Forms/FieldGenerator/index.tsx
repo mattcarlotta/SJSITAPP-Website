@@ -21,7 +21,7 @@ import { ChangeEvent, TBaseFieldProps } from "~types";
 
 const FieldGenerator = <
   T extends Array<TBaseFieldProps>,
-  K extends (e: ChangeEvent<HTMLInputElement>) => void
+  K extends (e: ChangeEvent<any>) => void
 >({
   fields,
   onChange
@@ -30,16 +30,18 @@ const FieldGenerator = <
   onChange: K;
 }): JSX.Element => (
   <>
-    {fields.map(props => {
-      switch (props.type) {
+    {fields.map(({ name, value, type, ...rest }) => {
+      switch (type) {
         case "text":
         case "email":
         case "password": {
           return (
             <Input
-              {...props}
-              key={props.name}
-              value={props.value as string}
+              {...rest}
+              key={name}
+              name={name}
+              type={type}
+              value={value as string}
               onChange={onChange}
             />
           );
@@ -47,9 +49,10 @@ const FieldGenerator = <
         case "textarea": {
           return (
             <TextArea
-              {...props}
-              value={props.value as string}
-              key={props.name}
+              {...rest}
+              key={name}
+              name={name}
+              value={value as string}
               onChange={onChange}
             />
           );

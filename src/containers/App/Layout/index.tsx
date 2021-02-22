@@ -36,12 +36,9 @@ export const AppLayout: FC<AppLayoutProps> = ({
   toggleSideNav
 }) => {
   const router = useRouter();
+
   const handleToggle = React.useCallback((_, nodeIds: TSideMenuNodeIds) => {
     setExpandedTabs(nodeIds);
-  }, []);
-
-  const handleSelect = React.useCallback((_, nodeIds: TSideMenuNodeIds) => {
-    setSelectedTabs(nodeIds);
   }, []);
 
   React.useEffect(() => {
@@ -90,7 +87,6 @@ export const AppLayout: FC<AppLayoutProps> = ({
         collapsed={collapsed}
         expandedNodeIds={expandedNodeIds}
         handleToggle={handleToggle}
-        handleSelect={handleSelect}
         selectedNodeIds={selectedNodeIds}
       />
       <Section direction="row" hideOverflowX>

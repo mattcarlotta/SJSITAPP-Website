@@ -25,11 +25,12 @@ const Home: NextPage = () => {
       <Header title="Home" url="/" />
       <Spinner>
         <Link
+          dataTestId="home-link"
           hideShadow
           href={pushHref}
           borderRadius="50px"
           fontSize="18px"
-          margin="5px 0 0 0"
+          margin="10px 0 0 0"
           padding="13px 18px"
           width="260px"
         >

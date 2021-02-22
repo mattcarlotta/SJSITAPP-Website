@@ -120,7 +120,7 @@ const Spinner = styled(SpinnerComponent)`
   }
 
   & .iceteam {
-    font-size: 7.75vw;
+    font-size: 8.75vw;
   }
 
   & .gradient {

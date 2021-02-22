@@ -22,7 +22,13 @@ const AppPageNotFound: NextPage = () => (
       <ErrorMessage>
         We&#39;re sorry, the page you&#39;ve requested could not be located.
       </ErrorMessage>
-      <Link primary replace href="/employee/dashboard" padding="13px 26px">
+      <Link
+        primary
+        replace
+        dataTestId="dashboard-link"
+        href="/employee/dashboard"
+        padding="13px 26px"
+      >
         <HomeIcon />
         <span>Dashboard</span>
       </Link>

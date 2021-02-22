@@ -121,8 +121,9 @@ export const SignupForm: FC<ISignupFormProps> = ({
         <Center style={{ marginTop: 10 }}>
           Already have an account? &nbsp;
           <NavLink
-            dataTestId="login-link"
             blue
+            dataTestId="login-link"
+            display="inline-block"
             padding="0px"
             marginRight="0px"
             href="/employee/login"

@@ -1,3 +1,1 @@
-import LoginForm from "~containers/Forms/Auth/LoginForm";
-
-export default LoginForm;
+export { default as default } from "~containers/Forms/Auth/LoginForm";

@@ -33,6 +33,7 @@ const NavLinkComponent = ({
 
 const NavLink = styled(NavLinkComponent)<{
   blue?: boolean;
+  display?: string;
   green?: boolean;
   marginRight?: string;
   nounderline?: boolean;
@@ -47,7 +48,7 @@ const NavLink = styled(NavLinkComponent)<{
   }};
   white-space: nowrap;
   text-decoration: none;
-  display: block;
+  display: ${({ display }) => display || "block"};
   margin-right: ${({ marginRight }) => marginRight || "20px"};
   padding: ${({ padding }) => padding || "8px 16px"};
   transition: all 0.2s ease-in-out;

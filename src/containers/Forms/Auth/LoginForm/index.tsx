@@ -105,6 +105,7 @@ export const LoginForm: FC<ILoginFormProps> = ({ serverError, signinUser }) => {
           &nbsp;
           <NavLink
             blue
+            display="inline-block"
             dataTestId="sign-up-link"
             marginRight="0px"
             padding="0px"

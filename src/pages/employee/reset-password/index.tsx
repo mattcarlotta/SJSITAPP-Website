@@ -1,3 +1,1 @@
-import ResetPasswordForm from "~containers/Forms/Auth/ResetPasswordForm";
-
-export default ResetPasswordForm;
+export { default as default } from "~containers/Forms/Auth/ResetPasswordForm";

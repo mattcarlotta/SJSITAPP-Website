@@ -117,6 +117,7 @@ export const ResetPasswordForm: FC<IResetPasswordFormProps> = ({
           &nbsp;
           <NavLink
             blue
+            display="inline-block"
             dataTestId="signup-link"
             padding="0px"
             marginRight="0px"
