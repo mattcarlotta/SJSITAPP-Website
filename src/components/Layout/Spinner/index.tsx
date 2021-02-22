@@ -15,7 +15,10 @@ export interface ISpinnerProps {
   children?: ReactElement<any> | boolean;
 }
 
-const SpinnerComponent: FC<ISpinnerProps> = ({ className, children }) => {
+export const SpinnerComponent: FC<ISpinnerProps> = ({
+  className,
+  children
+}) => {
   const [state, setState] = React.useState<ISpinnerState>({
     isMounted: false,
     isIE: false,
@@ -38,7 +41,10 @@ const SpinnerComponent: FC<ISpinnerProps> = ({ className, children }) => {
           justify="center"
           direction="column"
         >
-          <HomeLogo />
+          <HomeLogo
+            src="/images/staticIceTeamLogo.png"
+            alt="StaticIceTeamLogo.png"
+          />
           {children}
         </FlexCenter>
       ) : (

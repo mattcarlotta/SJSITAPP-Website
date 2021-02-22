@@ -11,15 +11,16 @@ export interface ILinkProps {
   style?: CSSProperties;
 }
 
-const LinkComponent = ({
+export const LinkComponent = ({
   dataTestId,
   children,
   className,
   href,
-  replace
+  replace,
+  style
 }: ILinkProps) => (
   <NextLink href={href} prefetch={false} replace={replace} passHref>
-    <a data-testid={dataTestId} className={className}>
+    <a data-testid={dataTestId} className={className} style={style}>
       {children}
     </a>
   </NextLink>

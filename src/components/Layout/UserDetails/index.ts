@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import styled from "@emotion/styled";
 
 const UserDetails = styled.div`

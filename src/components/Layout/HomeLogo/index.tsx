@@ -1,14 +1,7 @@
+/* istanbul ignore file */
 import styled from "@emotion/styled";
 
-const HomeLogoComponent = ({ className }: { className?: string }) => (
-  <img
-    className={className}
-    src="/images/staticIceTeamLogo.png"
-    alt="StaticIceTeamLogo.png"
-  />
-);
-
-const HomeLogo = styled(HomeLogoComponent)`
+const HomeLogo = styled.img`
   @media (max-width: 650px) {
     max-width: 250px;
   }

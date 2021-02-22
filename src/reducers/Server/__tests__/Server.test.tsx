@@ -38,7 +38,7 @@ describe("Server Reducer", () => {
 
   it("sets an error", () => {
     const state = serverReducer(undefined, {
-      type: constants.SERVER_ERROR,
+      type: constants.SERVER_ERROR_MESSAGE,
       payload: error
     });
 
@@ -55,7 +55,7 @@ describe("Server Reducer", () => {
     });
 
     state = serverReducer(state, {
-      type: constants.RESET_SERVER_MESSAGES
+      type: constants.SERVER_RESET_MESSAGE
     });
 
     expect(state).toEqual(initialState);

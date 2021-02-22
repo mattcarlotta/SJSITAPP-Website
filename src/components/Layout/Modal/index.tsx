@@ -20,7 +20,7 @@ export interface IModalProps {
   onClick?: () => void;
 }
 
-export const Modal = ({
+const Modal = ({
   background,
   children,
   dataTestId,

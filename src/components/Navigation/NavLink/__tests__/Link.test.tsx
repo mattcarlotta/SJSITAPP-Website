@@ -23,10 +23,10 @@ describe("Styled Link", () => {
   it("initially displays as white with a light teal hover", () => {
     expect(StyledLink).toHaveStyleRule("color", "#fff");
     expect(StyledLink).toHaveStyleRule("color", "#62c0ce", {
-      modifier: ":hover"
+      target: ":hover"
     });
     expect(StyledLink).toHaveStyleRule("color", "#62c0ce", {
-      modifier: ":focus"
+      target: ":focus"
     });
   });
 
@@ -36,10 +36,10 @@ describe("Styled Link", () => {
 
     expect(StyledLink).toHaveStyleRule("color", "#0075e0");
     expect(StyledLink).toHaveStyleRule("color", "#40a9ff", {
-      modifier: ":hover"
+      target: ":hover"
     });
     expect(StyledLink).toHaveStyleRule("color", "#40a9ff", {
-      modifier: ":focus"
+      target: ":focus"
     });
   });
 });

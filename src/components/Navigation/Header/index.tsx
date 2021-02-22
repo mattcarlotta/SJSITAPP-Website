@@ -1,12 +1,18 @@
 import Head from "next/head";
-import { HeaderProps } from "~types";
+
+export type THeaderProps = {
+  description: string;
+  title: string;
+  type: string;
+  url?: string;
+};
 
 const Header = ({
   description,
   title,
   type,
   url
-}: HeaderProps): JSX.Element => (
+}: THeaderProps): JSX.Element => (
   <Head>
     <title>{title} - San Jose Sharks Ice Team</title>
     <link rel="canonical" href={`${process.env.NEXT_PUBLIC_CLIENT}${url}`} />

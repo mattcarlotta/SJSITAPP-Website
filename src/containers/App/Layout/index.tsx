@@ -98,9 +98,7 @@ export const AppLayout: FC<AppLayoutProps> = ({
 
 /* istanbul ignore next */
 const mapStateToProps = ({ sidemenu }: Pick<TRootState, "sidemenu">) => ({
-  collapsed: sidemenu.collapsed,
-  expandedNodeIds: sidemenu.expandedNodeIds,
-  selectedNodeIds: sidemenu.selectedNodeIds
+  ...sidemenu
 });
 
 /* istanbul ignore next */

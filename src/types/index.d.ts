@@ -164,13 +164,6 @@ export type FieldErrorProps = {
   errors?: string;
 };
 
-export type HeaderProps = {
-  description: string;
-  title: string;
-  type: string;
-  url?: string;
-};
-
 export type InputProps = ComponentProps;
 
 export type LoadingUsersProps = {

@@ -1,12 +1,12 @@
-import { mount, ReactWrapper } from "enzyme";
+import { mount } from "enzyme";
 import ClickHandler from "../index";
 
-const eventListener = {};
-document.addEventListener = (evt, cb) => (eventListener[evt] = cb);
+const eventListener: any = {};
+document.addEventListener = (evt: any, cb: any) => (eventListener[evt] = cb);
 document.removeEventListener = jest.fn();
 
 describe("Click Handler", () => {
-  let wrapper: ReactWrapper;
+  let wrapper: any;
   beforeEach(() => {
     wrapper = mount(
       <div>
