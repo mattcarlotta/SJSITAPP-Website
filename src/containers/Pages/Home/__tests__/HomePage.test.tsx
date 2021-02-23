@@ -14,7 +14,7 @@ describe("Home Page", () => {
   });
 
   it("initially renders a spinner for the link", () => {
-    expect(wrapper.find("[data-testid='loading']")).toExist();
+    expect(wrapper.find("[data-testid='submitting']")).toExist();
   });
 
   it("renders an 'Employee Login' link for guests", () => {

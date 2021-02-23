@@ -1,5 +1,4 @@
 import { css } from "@emotion/react";
-// import { FaUserCircle } from "~icons";
 import { BsPeopleCircle } from "~icons";
 import { CSSProperties, FC } from "~types";
 
@@ -14,7 +13,7 @@ const Avatar: FC<TAvatarProps> = ({ avatar, style, width }) => {
 
   return (
     <div
-      id="display-avatar"
+      data-testid="avatar"
       css={css`
         width: ${avatarWidth};
         display: inline-block;
@@ -23,7 +22,7 @@ const Avatar: FC<TAvatarProps> = ({ avatar, style, width }) => {
     >
       {avatar ? (
         <img
-          css={`
+          css={css`
             width: ${avatarWidth};
             border-radius: 50%;
           `}

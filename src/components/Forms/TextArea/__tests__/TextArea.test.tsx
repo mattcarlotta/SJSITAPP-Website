@@ -29,7 +29,9 @@ describe("TextArea", () => {
     wrapper.setProps({ errors: "Required!" });
 
     // expect(wrapper).toHaveStyleRule("border", "1px solid #d03916");
-    expect(wrapper.find("[data-testid='errors']")).toHaveText("Required!");
+    expect(wrapper.find("[data-testid='errors']").first()).toHaveText(
+      "Required!"
+    );
   });
 
   it("calls onChange when the input is updated", () => {

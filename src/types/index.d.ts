@@ -26,7 +26,7 @@ export type TAuthData = {
   email?: string;
   firstName?: string;
   lastName?: string;
-  role: string;
+  role?: string;
 };
 
 export type TLoginData = {
@@ -57,6 +57,15 @@ export type EventTarget = {
   target: {
     name: string;
     value: string;
+  };
+};
+
+export type EventTargetDataset = {
+  target: {
+    dataset: {
+      name: string;
+      value: string;
+    };
   };
 };
 
@@ -101,6 +110,8 @@ export type TBaseFieldProps = {
   value?: string | Array<moment.Moment>;
   updateEvent?: boolean;
 };
+
+///
 
 export interface CardProps {
   _id: string;

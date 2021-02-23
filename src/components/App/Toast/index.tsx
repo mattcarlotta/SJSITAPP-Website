@@ -10,7 +10,7 @@ import {
 import AlertContainer from "./AlertContainer";
 import AlertMessage from "./AlertMessage";
 import AlertType from "./AlertType";
-import { ReactText } from "~types";
+import { FC, ReactText } from "~types";
 
 export interface IToastProps {
   type: "success" | "info" | "error" | "warning";
@@ -36,12 +36,15 @@ export const displayIcon = (type?: string): JSX.Element => {
   }
 };
 
-const ToastMessage: IToastMessage = ({ type, message }) =>
+const ToastMessage: FC<IToastProps> = ({ type, message }) => {
   toast[type](
     <AlertContainer data-testid="modal-alert">
       <AlertType data-testid="modal-alert-type">{displayIcon(type)}</AlertType>
       <AlertMessage data-testid="modal-message">{message}</AlertMessage>
     </AlertContainer>
   );
+
+  return null;
+};
 
 export default ToastMessage;

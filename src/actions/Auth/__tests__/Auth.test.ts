@@ -42,6 +42,15 @@ describe("Auth Actions", () => {
     expect(value).toEqual({ type: constants.USER_SET_SESSION, payload });
   });
 
+  it("signinSession returns USER_SET_SESSION with guest details as payload", () => {
+    const value = actions.signinSession({});
+
+    expect(value).toEqual({
+      type: constants.USER_SET_SESSION,
+      payload: { role: "guest" }
+    });
+  });
+
   it("signinUser returns USER_SIGNIN_ATTEMPT with email and password as props", () => {
     const props = { email: user.email, password };
 

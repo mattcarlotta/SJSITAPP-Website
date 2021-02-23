@@ -58,7 +58,11 @@ const FieldGenerator = <
           );
         }
         default:
-          return <div>Not a valid component</div>;
+          return (
+            <div key={name} data-testid="invalid-component">
+              Not a valid component
+            </div>
+          );
       }
     })}
   </>

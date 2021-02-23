@@ -45,6 +45,7 @@ export { FaMinusCircle } from "@react-icons/all-files/fa/FaMinusCircle";
 export { FaPaperPlane } from "@react-icons/all-files/fa/FaPaperPlane";
 export { FaQuestionCircle } from "@react-icons/all-files/fa/FaQuestionCircle";
 export { FaSearch } from "@react-icons/all-files/fa/FaSearch";
+export { FaSearchLocation } from "@react-icons/all-files/fa/FaSearchLocation";
 export { FaSignInAlt } from "@react-icons/all-files/fa/FaSignInAlt";
 export { FaStickyNote } from "@react-icons/all-files/fa/FaStickyNote";
 export { FaStreetView } from "@react-icons/all-files/fa/FaStreetView";
