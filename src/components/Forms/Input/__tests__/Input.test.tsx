@@ -48,8 +48,8 @@ describe("Input", () => {
       tooltip: "Your password must be longer than 5 characters."
     });
 
-    expect(wrapper.find("Tooltip").first().exists()).toBeTruthy();
-    expect(wrapper.find("Label").at(1).text()).toContain("Password");
+    expect(wrapper.find(".tooltip").first().exists()).toBeTruthy();
+    expect(wrapper.find("label").text()).toContain("Password");
   });
 
   it("when invalid, adds a 'error' classname and displays validation errors", () => {

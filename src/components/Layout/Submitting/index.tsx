@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { ComponentProps } from "~types";
 
 const SubmittingComponent = ({ className, style }: ComponentProps) => (
-  <div className={className} style={style}>
+  <div data-testid="loading" className={className} style={style}>
     <div className="bar1" />
     <div className="bar2" />
     <div className="bar3" />

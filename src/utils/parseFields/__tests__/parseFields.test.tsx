@@ -2,39 +2,21 @@ import ParseFields from "../index";
 
 const initialFields = [
   {
-    name: "zipCode",
+    name: "firstName",
     type: "text",
-    label: "Zip Code",
-    value: "1",
+    label: "First Name",
+    value: "Bob",
     errors: "",
     style: { width: "20%" },
     required: true
   },
   {
-    name: "city",
+    name: "lastName",
     type: "text",
-    label: "Zip Code",
-    value: "2",
+    label: "Last Name",
+    value: "Smith",
     errors: "",
     style: { width: "20%" },
-    required: true
-  },
-  {
-    name: "suite",
-    type: "text",
-    label: "Zip Code",
-    value: "",
-    errors: "",
-    style: { width: "20%" },
-    required: true
-  },
-  {
-    name: "email",
-    type: "textarea",
-    label: "Background Infomation",
-    value: "",
-    errors: "",
-    style: { width: "100%" },
     required: true
   }
 ];
@@ -54,10 +36,8 @@ describe("ParseFields", () => {
     const formValues = ParseFields(initialFields);
     expect(formValues).toEqual(
       expect.objectContaining({
-        address: expect.objectContaining({
-          zipCode: "1",
-          city: "2"
-        })
+        firstName: "Bob",
+        lastName: "Smith"
       })
     );
   });

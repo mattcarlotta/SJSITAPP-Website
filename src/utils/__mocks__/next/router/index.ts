@@ -1,33 +1,36 @@
-import Router from "next/router";
+import Router, { NextRouter } from "next/router";
+
+const mockRouterOpts: NextRouter = {
+  asPath: "/",
+  basePath: "",
+  back: jest.fn(),
+  beforePopState: jest.fn(),
+  defaultLocale: undefined,
+  events: {
+    on: jest.fn(),
+    off: jest.fn(),
+    emit: jest.fn()
+  },
+  isFallback: false,
+  isLocaleDomain: false,
+  isReady: true,
+  locale: undefined,
+  locales: undefined,
+  pathname: "/",
+  prefetch: jest.fn(),
+  push: jest.fn(),
+  query: {},
+  reload: jest.fn(),
+  replace: jest.fn(),
+  route: "/"
+};
+
+export const useRouter = () => mockRouterOpts;
 
 jest.mock("next/router", () => ({
   __esModule: true,
-  useRouter: {
-    asPath: "/",
-    basePath: "",
-    back: jest.fn(),
-    beforePopState: jest.fn(),
-    components: {},
-    defaultLocale: undefined,
-    events: {
-      on: jest.fn(),
-      off: jest.fn(),
-      emit: jest.fn()
-    },
-    isFallback: false,
-    isLocaleDomain: false,
-    isReady: true,
-    locale: undefined,
-    locales: undefined,
-    pathname: "/",
-    prefetch: jest.fn(),
-    push: jest.fn(),
-    query: {},
-    reload: jest.fn(),
-    replace: jest.fn(),
-    route: "/"
-  },
   makePublicRouterInstance: jest.fn(),
+  useRouter: () => mockRouterOpts,
   default: {
     router: null,
     readyCallbacks: jest.fn(),
