@@ -1,1 +1,1 @@
-export { default as default } from "~containers/Forms/Auth/LoginForm";
+export { default as default } from "~containers/Pages/LoginForm";

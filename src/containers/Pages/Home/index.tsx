@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
-import Router, { useRouter } from "next/router";
 import Spinner from "~components/Layout/Spinner";
 import Link from "~components/Navigation/Link";
 import Submitting from "~components/Layout/Submitting";
@@ -9,7 +8,6 @@ import { IconContext, FaSignInAlt, MdDashboard } from "~icons";
 import { NextPage } from "~types";
 
 const Home: NextPage = () => {
-  const router = useRouter();
   const { role } = useSelector(({ auth }) => auth);
   const hasSession = role !== "guest";
   const pushHref = !role
@@ -25,20 +23,6 @@ const Home: NextPage = () => {
       }}
     >
       <Header title="Home" url="/" />
-      <button
-        data-testid="login"
-        type="button"
-        onClick={() => router.push("/login")}
-      >
-        Go to login
-      </button>
-      <button
-        data-testid="dashboard"
-        type="button"
-        onClick={() => Router.push("/dashboard")}
-      >
-        Go to dashboard
-      </button>
       <Spinner>
         <Link
           dataTestId="home-link"
