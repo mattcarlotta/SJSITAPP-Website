@@ -49,7 +49,7 @@ const SideMenu: FC<TSideMenuProps> = ({
   handleToggle,
   selectedNodeIds
 }) => (
-  <Tree collapsed={collapsed}>
+  <Tree data-testid="sidemenu-tree" collapsed={collapsed}>
     <TreeView
       defaultCollapseIcon={<MdExpandMore />}
       defaultExpandIcon={<MdChevronRight />}

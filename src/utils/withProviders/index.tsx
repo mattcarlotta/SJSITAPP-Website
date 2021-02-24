@@ -10,8 +10,8 @@ export const store = makeStore({});
 export const mockRouter: NextRouter = {
   asPath: "/",
   basePath: "",
-  back: jest.fn(),
-  beforePopState: jest.fn(),
+  back: jest.fn(() => Promise.resolve(true)),
+  beforePopState: jest.fn(() => Promise.resolve(true)),
   defaultLocale: undefined,
   events: {
     on: jest.fn(),
@@ -24,11 +24,11 @@ export const mockRouter: NextRouter = {
   locale: undefined,
   locales: undefined,
   pathname: "/",
-  prefetch: jest.fn(),
-  push: jest.fn(),
+  prefetch: jest.fn(() => Promise.resolve()),
+  push: jest.fn(() => Promise.resolve(true)),
   query: {},
-  reload: jest.fn(),
-  replace: jest.fn(),
+  reload: jest.fn(() => Promise.resolve(true)),
+  replace: jest.fn(() => Promise.resolve(true)),
   route: "/"
 };
 

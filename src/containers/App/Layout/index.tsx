@@ -47,7 +47,7 @@ export const AppLayout: FC<AppLayoutProps> = ({
   }, []);
 
   return (
-    <Section direction="column">
+    <Section data-testid="app-layout" direction="column">
       <Header>
         <FlexCenter>
           <FlexStart>

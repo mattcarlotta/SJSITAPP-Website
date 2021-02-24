@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 import { TSideMenuNodeIds } from "~types";
 
 export const TABS = [

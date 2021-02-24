@@ -45,7 +45,7 @@ const Link = styled(LinkComponent)<{
   background-color: transparent;
   border: 2px solid #025f6d;
   box-shadow: ${({ hideShadow }) =>
-    !hideShadow && "0 4px 14px 0 rgba(2, 95, 109, 0.39)"};
+    !hideShadow ? "0 4px 14px 0 rgba(2, 95, 109, 0.39)" : "none"};
   padding: ${({ padding }) => padding || "13px 18px"};
   border-radius: ${({ borderRadius }) => borderRadius || "10px"};
   margin: ${({ margin }) => margin || "0px"};

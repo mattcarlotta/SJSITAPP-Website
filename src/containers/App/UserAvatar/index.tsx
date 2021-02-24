@@ -28,7 +28,7 @@ export type TUserAvatarProps = {
   signoutUserSession: typeof signoutUserSession;
 };
 
-const UserAvatar: FC<TUserAvatarProps> = ({
+export const UserAvatar: FC<TUserAvatarProps> = ({
   avatar,
   firstName,
   lastName,
@@ -83,12 +83,13 @@ const UserAvatar: FC<TUserAvatarProps> = ({
           `}
         >
           <Flex
+            data-testid="user-menu"
             padding="16px"
             style={{ borderBottom: "1px solid rgba(0, 0, 0, 0.1)" }}
           >
             <Avatar avatar={avatar} width="35px" />
             <UserDetails>
-              <Username>
+              <Username data-testid="users-name">
                 {firstName}&nbsp;{lastName}
               </Username>
               <NavLink
