@@ -10,14 +10,12 @@ export const store = makeStore({});
  *
  * @function withReduxContext
  * @param {node} Component - Component to be mounted
- * @param {object} state - Component initial state for setup.
  * @param {object} options - Optional options for enzyme's mount function.
  * @function createElement - Creates a wrapper around passed in component with incoming props (now we can use wrapper.setProps on root)
  * @returns {ReactWrapper} - a mounted React component with Router context.
  */
 export const withReduxContext = (
   Component: React.ReactElement<any>,
-  state?: any,
   options = {}
 ) => {
   const wrapper = mount(
@@ -26,7 +24,6 @@ export const withReduxContext = (
     )),
     options
   );
-  if (state) wrapper.find(Component).setState(state);
   return wrapper;
 };
 

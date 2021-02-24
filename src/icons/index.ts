@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export { IconContext } from "@react-icons/all-files";
 
 // BS

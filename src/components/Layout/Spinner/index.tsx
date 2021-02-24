@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import FlexCenter from "~components/Layout/FlexCenter";
 import HomeLogo from "~components/Layout/HomeLogo";
-import { FC, ReactElement } from "~types";
+import { ReactElement } from "~types";
 
 export interface ISpinnerState {
   isMounted: boolean;
@@ -15,60 +15,59 @@ export interface ISpinnerProps {
   children?: ReactElement<any> | boolean;
 }
 
-export const SpinnerComponent: FC<ISpinnerProps> = ({
-  className,
-  children
-}) => {
-  const [state, setState] = React.useState<ISpinnerState>({
-    isMounted: false,
-    isIE: false,
-    isEdge: false
-  });
-  const { isMounted, isIE, isEdge } = state;
+export class SpinnerComponent extends React.Component<
+  ISpinnerProps,
+  ISpinnerState
+> {
+  state = { isMounted: false, isIE: false, isEdge: false };
 
-  React.useEffect(() => {
+  componentDidMount() {
     const isIE = /* @cc_on!@ */ false || !!(document as any).documentMode;
     const isEdge = !isIE && !!window.StyleMedia;
+    this.setState({ isMounted: true, isIE, isEdge });
+  }
 
-    setState({ isMounted: true, isIE, isEdge });
-  }, []);
+  render = () => {
+    const { isEdge, isIE, isMounted } = this.state;
+    const { className, children } = this.props;
 
-  return (
-    <div data-testid="spinner" className={className}>
-      {!isMounted ? null : isIE || isEdge ? (
-        <FlexCenter
-          style={{ height: "100%" }}
-          justify="center"
-          direction="column"
-        >
-          <HomeLogo
-            src="/images/staticIceTeamLogo.png"
-            alt="StaticIceTeamLogo.png"
-          />
-          {children}
-        </FlexCenter>
-      ) : (
-        <div className="container">
-          <div className="text-wrapper">
-            <span className="text sharks" data-text="sharks">
-              sharks
-            </span>
-            <span className="gradient"></span>
-            <span className="spotlight"></span>
+    return (
+      <div data-testid="spinner" className={className}>
+        {!isMounted ? null : isIE || isEdge ? (
+          <FlexCenter
+            style={{ height: "100%" }}
+            justify="center"
+            direction="column"
+          >
+            <HomeLogo
+              src="/images/staticIceTeamLogo.png"
+              alt="StaticIceTeamLogo.png"
+            />
+            {children}
+          </FlexCenter>
+        ) : (
+          <div className="container">
+            <div className="text-wrapper">
+              <span className="text sharks" data-text="sharks">
+                sharks
+              </span>
+              <span className="gradient"></span>
+              <span className="spotlight"></span>
+            </div>
+            <div className="text-wrapper">
+              <span className="text iceteam" data-text="ice team">
+                ice team
+              </span>
+              <span className="gradient"></span>
+              <span className="spotlight"></span>
+            </div>
+            {children}
           </div>
-          <div className="text-wrapper">
-            <span className="text iceteam" data-text="ice team">
-              ice team
-            </span>
-            <span className="gradient"></span>
-            <span className="spotlight"></span>
-          </div>
-          {children}
-        </div>
-      )}
-    </div>
-  );
-};
+        )}
+      </div>
+    );
+  };
+}
 
 const Spinner = styled(SpinnerComponent)`
   @media (max-width: 600px) {

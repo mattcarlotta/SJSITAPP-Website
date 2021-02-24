@@ -13,24 +13,24 @@ describe("Spinner", () => {
   });
 
   it("renders nothing if not mounted in the browser", () => {
-    // wrapper.setState({ isMounted: false });
-    // expect(wrapper.find("div.container").exists()).toBeFalsy();
-    // expect(wrapper.find("img").exists()).toBeFalsy();
+    wrapper.setState({ isMounted: false });
+    expect(wrapper.find("div.container").exists()).toBeFalsy();
+    expect(wrapper.find("img").exists()).toBeFalsy();
   });
 
-  // it("renders a dynamic spinner", () => {
-  //   expect(wrapper.find("div.container").exists()).toBeTruthy();
-  // });
+  it("renders a dynamic spinner", () => {
+    expect(wrapper.find("div.container").exists()).toBeTruthy();
+  });
 
-  // it("renders a static image for IE11", () => {
-  //   wrapper.setState({ isIE: true });
+  it("renders a static image for IE11", () => {
+    wrapper.setState({ isIE: true });
 
-  //   expect(wrapper.find("img").exists()).toBeTruthy();
-  // });
+    expect(wrapper.find("img").exists()).toBeTruthy();
+  });
 
-  // it("renders a static image for Edge", () => {
-  //   wrapper.setState({ isEdge: true });
+  it("renders a static image for Edge", () => {
+    wrapper.setState({ isEdge: true });
 
-  //   expect(wrapper.find("img").exists()).toBeTruthy();
-  // });
+    expect(wrapper.find("img").exists()).toBeTruthy();
+  });
 });

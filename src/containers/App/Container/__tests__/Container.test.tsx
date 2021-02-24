@@ -21,4 +21,14 @@ describe("App Container", () => {
   it("renders without errors", () => {
     expect(wrapper.find("Home")).toExist();
   });
+
+  it("removes SSR material ui styles", () => {
+    let root = document.createElement("div");
+    root.id = "jss-server-side";
+    document.body.appendChild(root);
+    wrapper = withRedux(
+      <Container Component={HomePage} router={{} as any} pageProps={{}} />
+    );
+    expect(wrapper.find("#jss-server-side")).not.toExist();
+  });
 });
