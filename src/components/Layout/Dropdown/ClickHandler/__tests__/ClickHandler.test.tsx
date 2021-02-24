@@ -7,7 +7,7 @@ const eventListener: any = {};
 document.addEventListener = (evt: any, cb: any) => (eventListener[evt] = cb);
 document.removeEventListener = jest.fn();
 
-describe("Modal Click Handler", () => {
+describe("Dropdown Click Handler", () => {
   let wrapper: any;
   beforeEach(() => {
     wrapper = mount(

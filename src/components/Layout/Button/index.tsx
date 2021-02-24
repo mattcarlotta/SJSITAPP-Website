@@ -90,6 +90,7 @@ const Button = styled(StyledButton)<StyledButtonProps>`
       if (props.tertiary) return "#fff";
       return "#04515d";
     }};
+    background: ${({ tertiary }) => (tertiary ? "#025f6d" : "transparent")};
     border: 2px solid
       ${props => {
         if (props.primary) return "#025f6d";
@@ -98,8 +99,7 @@ const Button = styled(StyledButton)<StyledButtonProps>`
         return "transparent";
       }};
     box-shadow: ${({ tertiary, noGlow }) =>
-      tertiary && !noGlow && "0px 0px 14px -2px #14d3e2"};
-    background: ${({ tertiary }) => tertiary && "#025f6d"};
+      tertiary && !noGlow ? "0px 0px 14px -2px #14d3e2" : "none"};
   }
 
   &:focus {

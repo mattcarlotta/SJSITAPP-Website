@@ -151,25 +151,6 @@ export type ContainerProps = {
   style?: CSSProperties;
 };
 
-export type DropdownProps = {
-  children: ReactNode;
-  menu: ReactNode;
-};
-
-export type DropdownClickHandlerProps = {
-  children: ({
-    isVisible,
-    handleMenuClick
-  }: {
-    isVisible: boolean;
-    handleMenuClick: () => void;
-  }) => JSX.Element;
-};
-
-export type DropdownClickHandlerState = {
-  isVisible: boolean;
-};
-
 export type FieldErrorProps = {
   className?: string;
   errors?: string;

@@ -13,6 +13,10 @@ const initProps = {
 const wrapper: ReactWrapper = mount(<Modal {...initProps} />);
 
 describe("Modal", () => {
+  afterEach(() => {
+    onClick.mockClear();
+  });
+
   it("renders a modal with some sample content without errors", () => {
     expect(wrapper.find("Modal").exists()).toBeTruthy();
   });
@@ -27,5 +31,11 @@ describe("Modal", () => {
 
     wrapper.find("button").simulate("click");
     expect(onClick).toHaveBeenCalled();
+  });
+
+  it("doesn't call closeModal function when 'disableClickHandler' is true", () => {
+    wrapper.setProps({ onClick, disableClickHandler: true });
+
+    expect(wrapper.find("ClickHandler")).toHaveProp("closeModal", undefined);
   });
 });
