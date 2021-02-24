@@ -18,7 +18,7 @@ export const LinkComponent = ({
   href,
   replace,
   style
-}: ILinkProps) => (
+}: ILinkProps): JSX.Element => (
   <NextLink href={href} prefetch={false} replace={replace} passHref>
     <a data-testid={dataTestId} className={className} style={style}>
       {children}

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Provider } from "react-redux";
-import { mount } from "enzyme";
+import { mount, ReactWrapper } from "enzyme";
 import { makeStore } from "~store";
 
 export const store = makeStore({});
@@ -17,7 +17,7 @@ export const store = makeStore({});
 export const withReduxContext = (
   Component: React.ReactElement<any>,
   options = {}
-) => {
+): ReactWrapper => {
   const wrapper = mount(
     React.createElement(props => (
       <Provider store={store}>{React.cloneElement(Component, props)}</Provider>

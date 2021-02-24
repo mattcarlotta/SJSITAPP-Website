@@ -51,7 +51,7 @@ const parseFields = <T>(fields: Array<TBaseFieldProps>): T => {
 
     return parsedFields;
   } catch (err) {
-    throw String(err);
+    throw String(err.message);
   }
 };
 

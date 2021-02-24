@@ -21,13 +21,13 @@ export class SpinnerComponent extends React.Component<
 > {
   state = { isMounted: false, isIE: false, isEdge: false };
 
-  componentDidMount() {
+  componentDidMount(): void {
     const isIE = /* @cc_on!@ */ false || !!(document as any).documentMode;
     const isEdge = !isIE && !!window.StyleMedia;
     this.setState({ isMounted: true, isIE, isEdge });
   }
 
-  render = () => {
+  render = (): JSX.Element => {
     const { isEdge, isIE, isMounted } = this.state;
     const { className, children } = this.props;
 

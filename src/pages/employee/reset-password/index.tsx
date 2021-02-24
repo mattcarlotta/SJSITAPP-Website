@@ -1,1 +1,1 @@
-export { default as default } from "~containers/Pages/ResetPasswordForm";
+export { default } from "~containers/Pages/ResetPasswordForm";

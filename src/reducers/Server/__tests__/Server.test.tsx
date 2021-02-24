@@ -12,7 +12,7 @@ describe("Server Reducer", () => {
     );
   });
 
-  it("rehydrates", () => {
+  it("rehydrates the state", () => {
     const state = serverReducer(undefined, {
       type: HYDRATE,
       payload: { server: { message, error: "" } }

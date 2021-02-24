@@ -1,8 +1,11 @@
 import { ReactWrapper } from "enzyme";
 import withProviders from "~utils/withProviders";
+import { ReactNode } from "~types";
 import { UserAvatar } from "../index";
 
-jest.mock("next/link", () => ({ children }: { children: any }) => children);
+jest.mock("next/link", () => ({ children }: { children: ReactNode }) =>
+  children
+);
 
 const signoutUserSession = jest.fn();
 
@@ -23,7 +26,7 @@ describe("UserAvatar", () => {
     expect(wrapper.find("[data-testid='account-dropdown']")).toExist();
   });
 
-  it("opens a user menu", async () => {
+  it("opens and closes a user menu", async () => {
     jest.useFakeTimers();
     wrapper.find("[data-testid='account-dropdown']").first().simulate("click");
 

@@ -1,6 +1,6 @@
 import { ReactWrapper } from "enzyme";
-import withRedux from "~utils/withRedux";
 import HomePage from "~containers/Pages/Home";
+import withRedux from "~utils/withRedux";
 import app from "~utils/mockAxios";
 import Container from "../index";
 
@@ -23,7 +23,7 @@ describe("App Container", () => {
   });
 
   it("removes SSR material ui styles", () => {
-    let root = document.createElement("div");
+    const root = document.createElement("div");
     root.id = "jss-server-side";
     document.body.appendChild(root);
     wrapper = withRedux(

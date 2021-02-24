@@ -5,7 +5,7 @@ import DropContainer from "./DropContainer";
 import Option from "./Option";
 import OptionsContainer from "./OptionsContainer";
 import NoOptions from "./NoOptions";
-import { EventTarget, EventTargetDataset } from "~types";
+import { EventTarget, EventTargetDataset, KeyboardEvent } from "~types";
 
 export interface SelectOptionsContainerProps {
   handleOptionSelect: (props: EventTarget) => void;
@@ -17,7 +17,7 @@ export interface SelectOptionsContainerProps {
 }
 
 class SelectOptionsContainer extends PureComponent<SelectOptionsContainerProps> {
-  componentDidUpdate = (prevProps: SelectOptionsContainerProps) => {
+  componentDidUpdate = (prevProps: SelectOptionsContainerProps): void => {
     const { selected, isVisible } = this.props;
 
     if (selected !== prevProps.selected || isVisible) {
@@ -25,7 +25,7 @@ class SelectOptionsContainer extends PureComponent<SelectOptionsContainerProps> 
     }
   };
 
-  handleScroll = () => {
+  handleScroll = (): void => {
     const { selected } = this.props;
     const element = document.getElementById(selected);
 
@@ -37,7 +37,7 @@ class SelectOptionsContainer extends PureComponent<SelectOptionsContainerProps> 
       });
   };
 
-  handleKeySelect = (evt: any) => {
+  handleKeySelect = (evt: KeyboardEvent<any>): void => {
     const { key } = evt;
 
     if (key === "Enter") {
@@ -45,7 +45,7 @@ class SelectOptionsContainer extends PureComponent<SelectOptionsContainerProps> 
         target: {
           dataset: { name, value }
         }
-      } = evt;
+      } = evt as any;
       this.props.handleOptionSelect({ target: { name, value } });
     }
   };
@@ -54,11 +54,11 @@ class SelectOptionsContainer extends PureComponent<SelectOptionsContainerProps> 
     target: {
       dataset: { name, value }
     }
-  }: EventTargetDataset) => {
+  }: EventTargetDataset): void => {
     this.props.handleOptionSelect({ target: { name, value } });
   };
 
-  render = () => {
+  render = (): JSX.Element | null => {
     const { name, searchText, selected, selectOptions } = this.props;
 
     const options = !searchText

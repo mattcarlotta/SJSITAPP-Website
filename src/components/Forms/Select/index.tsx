@@ -27,7 +27,7 @@ const Select = ({
   selectOptions,
   value,
   ...props
-}: TSelectProps) => (
+}: TSelectProps): JSX.Element => (
   <Container>
     <Label name={name} label={label} />
     <ClickHandler disabled={disabled} onChange={props.onChange}>

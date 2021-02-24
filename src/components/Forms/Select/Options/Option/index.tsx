@@ -1,10 +1,10 @@
-import React, { ChangeEvent } from "react";
 import styled from "@emotion/styled";
+import { ChangeEvent, KeyboardEvent } from "~types";
 
 export type TOptionProps = {
   className?: string;
   onClick: (e: ChangeEvent<any>) => void;
-  onKeyPress: (e: ChangeEvent<any>) => void;
+  onKeyPress: (e: KeyboardEvent<any>) => void;
   name: string;
   value: string;
 };

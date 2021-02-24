@@ -36,9 +36,6 @@ const authReducer = (
     case HYDRATE: {
       return { ...state, ...payload.auth };
     }
-    case types.USER_SET_SIDEBAR_STATE: {
-      return { ...state, isCollapsed: !state.isCollapsed };
-    }
     case types.USER_UPDATE_SESSION:
     case types.USER_SET_AVATAR:
     case types.USER_SET_SESSION: {

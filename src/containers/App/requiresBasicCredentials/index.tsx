@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import AppLayout from "~containers/App/Layout";
 // import Spinner from "~components/Layout/Spinner";
 import FadeIn from "~components/Layout/FadeIn";
-import { ComponentType } from "~types";
 import WhiteBackground from "~components/Layout/WhiteBackground";
+import { ComponentType } from "~types";
 
 export interface IRequireAuthProps {
   email: string;
@@ -29,7 +29,7 @@ const requiresBasicCredentials = (
         <AppPage />
       </AppLayout>
     ) : (
-      <WhiteBackground>
+      <WhiteBackground data-testid="loading">
         <FadeIn height="100%" timing="1.5s">
           <div>Loading...</div>
         </FadeIn>

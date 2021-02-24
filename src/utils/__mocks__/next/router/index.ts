@@ -25,7 +25,7 @@ const mockRouterOpts: NextRouter = {
   route: "/"
 };
 
-export const useRouter = () => mockRouterOpts;
+export const useRouter = (): NextRouter => mockRouterOpts;
 
 jest.mock("next/router", () => ({
   __esModule: true,

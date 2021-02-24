@@ -8,7 +8,7 @@ import * as constants from "~constants";
 import app from "~utils/axiosConfig"; // { avatarAPI }
 import { parseData, parseMessage } from "~utils/parseResponse";
 import showError from "~utils/showError";
-import { SagaIterator, TAuthData } from "~types";
+import { AxiosResponse, SagaIterator, TAuthData } from "~types";
 
 /**
  * Checks if the current user has a cookie session.
@@ -23,7 +23,7 @@ import { SagaIterator, TAuthData } from "~types";
  */
 export function* checkForActiveSession(): SagaIterator {
   try {
-    const res = yield call(app.get, "signedin");
+    const res: AxiosResponse = yield call(app.get, "signedin");
     const data: TAuthData = yield call(parseData, res);
 
     yield put(actions.signinSession(data));
@@ -107,7 +107,9 @@ export function* resetPassword({
   try {
     yield put(resetMessage());
 
-    const res = yield call(app.put, "reset-password", { ...props });
+    const res: AxiosResponse = yield call(app.put, "reset-password", {
+      ...props
+    });
     const message: string = yield call(parseMessage, res);
 
     yield call(toast, { type: "info", message });
@@ -136,7 +138,7 @@ export function* signinUser({
   try {
     yield put(resetMessage());
 
-    const res = yield call(app.post, "signin", { ...props });
+    const res: AxiosResponse = yield call(app.post, "signin", { ...props });
     const data: TAuthData = yield call(parseData, res);
 
     yield put(actions.signinSession(data));
@@ -166,7 +168,7 @@ export function* signupUser({
   try {
     yield put(resetMessage());
 
-    const res = yield call(app.post, "signup", { ...props });
+    const res: AxiosResponse = yield call(app.post, "signup", { ...props });
     const message: string = yield call(parseMessage, res);
 
     yield call(toast, { type: "success", message });
@@ -233,7 +235,9 @@ export function* updateUserPassword({
   try {
     yield put(resetMessage());
 
-    const res = yield call(app.put, "new-password", { ...props });
+    const res: AxiosResponse = yield call(app.put, "new-password", {
+      ...props
+    });
     const message: string = yield call(parseMessage, res);
 
     yield call(toast, { type: "success", message });

@@ -70,7 +70,7 @@ class ClickHandler extends React.Component<
     }
   };
 
-  handleClickOutside = (event: Event) => {
+  handleClickOutside = (event: Event): void => {
     if (
       !this.props.disabled &&
       this.state.isVisible &&
@@ -81,33 +81,33 @@ class ClickHandler extends React.Component<
     }
   };
 
-  handleInputChange = (e: ChangeEvent<any>) => {
+  handleInputChange = (e: ChangeEvent<any>): void => {
     this.setState({ searchText: e.target.value, isVisible: true });
   };
 
-  handleSearchClear = (props: EventTarget) => {
+  handleSearchClear = (props: EventTarget): void => {
     this.setState({ searchText: "" }, () => this.props.onChange({ ...props }));
   };
 
-  handleClose = () => {
+  handleClose = (): void => {
     this.setState({ isVisible: false });
   };
 
-  handleOpen = () => {
+  handleOpen = (): void => {
     this.setState({ isVisible: true });
   };
 
-  handleSelectClick = () => {
+  handleSelectClick = (): void => {
     this.setState(prevState => ({ isVisible: !prevState.isVisible }));
   };
 
-  handleOptionSelect = (props: EventTarget) => {
+  handleOptionSelect = (props: EventTarget): void => {
     this.setState({ isVisible: false, searchText: "" }, () =>
       this.props.onChange({ ...props })
     );
   };
 
-  render = () => (
+  render = (): JSX.Element => (
     <div className="clickhandler" ref={this.wrapperRef}>
       {this.props.children({
         ...this.state,

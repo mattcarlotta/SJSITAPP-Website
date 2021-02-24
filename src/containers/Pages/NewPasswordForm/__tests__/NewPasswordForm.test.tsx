@@ -1,60 +1,63 @@
 import { mount, ReactWrapper } from "enzyme";
-import { LoginForm } from "../index";
+import { NewPasswordForm } from "../index";
 
-const signinUser = jest.fn();
+const token =
+  "GHPtUGSNGwkA1VC4P2O$f05eBQT/HLDR6sdKz2.v8.KzmWn36KsEVCROrLaQzVH5";
+
+jest.mock("next/router", () => ({
+  useRouter: () => ({
+    route: "/",
+    pathname: "",
+    query: {
+      token
+    },
+    asPath: ""
+  })
+}));
+
+const updateUserPassword = jest.fn();
 
 const initProps = {
   serverError: "",
-  signinUser
+  updateUserPassword
 };
 
-describe("Login Form", () => {
+describe("New Password Form", () => {
   let wrapper: ReactWrapper;
-  let submitForm: any;
+  let submitForm: () => ReactWrapper;
   beforeEach(() => {
-    wrapper = mount(<LoginForm {...initProps} />);
+    wrapper = mount(<NewPasswordForm {...initProps} />);
     submitForm = () => wrapper.find("form").simulate("submit");
   });
 
-  // it("doesn't render if a user is already signed in", () => {
-  // 	expect(wrapper.find("form").exists()).toBeFalsy();
-  // });
-
   it("renders without errors", () => {
-    expect(wrapper.find("form").exists()).toBeTruthy();
+    expect(wrapper.find("form")).toExist();
   });
 
   it("if there are errors, it doesn't submit the form", () => {
     submitForm();
-    expect(signinUser).toHaveBeenCalledTimes(0);
+
+    expect(updateUserPassword).toHaveBeenCalledTimes(0);
   });
 
   describe("Form Submission", () => {
     beforeEach(() => {
       wrapper
         .find("input")
-        .first()
-        .simulate("change", {
-          target: { name: "email", value: "test@email.com" }
-        });
-
-      wrapper
-        .find("input")
-        .at(1)
         .simulate("change", { target: { name: "password", value: "12345" } });
 
       submitForm();
     });
 
     afterEach(() => {
-      signinUser.mockClear();
+      updateUserPassword.mockClear();
     });
 
     it("submits the form after a successful validation", () => {
       expect(wrapper.find("[data-testid='submitting']")).toExist();
-      expect(signinUser).toHaveBeenCalledWith({
-        email: "test@email.com",
-        password: "12345"
+      expect(updateUserPassword).toHaveBeenCalledWith({
+        password: "12345",
+        token
       });
     });
 

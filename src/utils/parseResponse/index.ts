@@ -1,5 +1,5 @@
 import get from "lodash.get";
-import { NextApiRequest, NextApiResponse } from "~types";
+import { NextApiRequest, AxiosResponse } from "~types";
 
 /**
  * Helper function to parse a cookie from an API request.
@@ -21,7 +21,7 @@ export function parseCookie(
  * @param {array} res - an API response.
  * @returns {string | undefined} a parsed message string from res.data.message.
  */
-export function parseMessage(res: NextApiResponse): string | undefined {
+export function parseMessage(res: AxiosResponse): string | undefined {
   return get(res, ["data", "message"]);
 }
 
@@ -31,6 +31,6 @@ export function parseMessage(res: NextApiResponse): string | undefined {
  * @param {array} res - an API response.
  * @returns {Record<string, unknown>} a parsed data object from res.data.
  */
-export function parseData(res: NextApiResponse): Record<string, unknown> {
+export function parseData(res: AxiosResponse): Record<string, unknown> {
   return get(res, ["data"]);
 }

@@ -1,24 +1,20 @@
 import { mount, ReactWrapper } from "enzyme";
-import { LoginForm } from "../index";
+import { ResetPasswordForm } from "../index";
 
-const signinUser = jest.fn();
+const resetPassword = jest.fn();
 
 const initProps = {
   serverError: "",
-  signinUser
+  resetPassword
 };
 
-describe("Login Form", () => {
+describe("Reset Password Form", () => {
   let wrapper: ReactWrapper;
-  let submitForm: any;
+  let submitForm: () => ReactWrapper;
   beforeEach(() => {
-    wrapper = mount(<LoginForm {...initProps} />);
+    wrapper = mount(<ResetPasswordForm {...initProps} />);
     submitForm = () => wrapper.find("form").simulate("submit");
   });
-
-  // it("doesn't render if a user is already signed in", () => {
-  // 	expect(wrapper.find("form").exists()).toBeFalsy();
-  // });
 
   it("renders without errors", () => {
     expect(wrapper.find("form").exists()).toBeTruthy();
@@ -26,35 +22,26 @@ describe("Login Form", () => {
 
   it("if there are errors, it doesn't submit the form", () => {
     submitForm();
-    expect(signinUser).toHaveBeenCalledTimes(0);
+    expect(resetPassword).toHaveBeenCalledTimes(0);
   });
 
   describe("Form Submission", () => {
     beforeEach(() => {
-      wrapper
-        .find("input")
-        .first()
-        .simulate("change", {
-          target: { name: "email", value: "test@email.com" }
-        });
-
-      wrapper
-        .find("input")
-        .at(1)
-        .simulate("change", { target: { name: "password", value: "12345" } });
+      wrapper.find("input").simulate("change", {
+        target: { name: "email", value: "example@test.com" }
+      });
 
       submitForm();
     });
 
     afterEach(() => {
-      signinUser.mockClear();
+      resetPassword.mockClear();
     });
 
     it("submits the form after a successful validation", () => {
       expect(wrapper.find("[data-testid='submitting']")).toExist();
-      expect(signinUser).toHaveBeenCalledWith({
-        email: "test@email.com",
-        password: "12345"
+      expect(resetPassword).toHaveBeenCalledWith({
+        email: "example@test.com"
       });
     });
 

@@ -1,5 +1,6 @@
 /* istanbul ignore file */
 import { NextApiRequest, NextApiResponse, NextPage } from "next";
+import { AxiosResponse } from "axios";
 import { NextRouter } from "next/router";
 import { AppProps } from "next/app";
 import {
@@ -8,6 +9,7 @@ import {
   CSSProperties,
   FC,
   FormEvent,
+  KeyboardEvent,
   MouseEvent,
   ReactElement,
   ReactNode,
@@ -97,7 +99,7 @@ export type TBaseFieldProps = {
   errors?: string;
   icon?: TIconType;
   inputStyle?: CSSProperties;
-  label: string;
+  label?: string;
   name: string;
   onChange?: (event: ChangeEvent<any>) => void;
   placeholder?: string;
@@ -107,7 +109,7 @@ export type TBaseFieldProps = {
   style?: CSSProperties;
   type: string;
   tooltip?: string;
-  value?: string | Array<moment.Moment>;
+  value?: string | moment.Moment | Array<moment.Moment>;
   updateEvent?: boolean;
 };
 
@@ -229,11 +231,13 @@ export type ParseFields<T> = {
 export {
   AnyAction,
   AppProps,
+  AxiosResponse,
   ChangeEvent,
   ComponentType,
   CSSProperties,
   FC,
   FormEvent,
+  KeyboardEvent,
   MouseEvent,
   NextApiRequest,
   NextApiResponse,

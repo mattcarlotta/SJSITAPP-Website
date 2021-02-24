@@ -16,8 +16,7 @@ export const USER_SET_AVATAR = "USER/SET_AVATAR";
 // user password
 export const USER_PASSWORD_UPDATE = "USER/PASSWORD_UPDATE";
 export const USER_PASSWORD_RESET = "USER/PASSWORD_RESET";
-// ui sidebar state
-export const USER_SET_SIDEBAR_STATE = "USER/SET_SIDEBAR_STATE";
+
 // user auth
 export const USER_CHECK_SESSION = "USER/CHECK_SESSION";
 export const USER_SET_SESSION = "USER/SET_SESSION";

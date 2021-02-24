@@ -43,7 +43,7 @@ const Selection = ({
   name,
   searchText,
   value
-}: TSelectionProps) => (
+}: TSelectionProps): JSX.Element => (
   <SelectionContainer
     tabIndex={0}
     disabled={disabled}
