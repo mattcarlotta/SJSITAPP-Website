@@ -24,7 +24,7 @@ export const checkForActiveSession = (): {
  * Deletes current user avatar.
  *
  * @function deleteUserAvatar
- * @param {string} id - current user id or requested id
+ * @param id - current user id or requested id
  * @returns {object}
  */
 // export const deleteUserAvatar = (id: string) => ({
@@ -48,24 +48,24 @@ export const removeSession = (): {
  * Creates a user password request via passwordreset form.
  *
  * @function resetPassword
- * @param props - props just contain an `email` field.
- * @returns constants.USER_PASSWORD_RESET and props
+ * @param payload - payload just contain an `email` field.
+ * @returns constants.USER_PASSWORD_RESET and payload
  */
 export const resetPassword = (
-  props: TResetPasswordData
+  payload: TResetPasswordData
 ): {
   type: typeof constants.USER_PASSWORD_RESET;
-  props: TResetPasswordData;
+  payload: TResetPasswordData;
 } => ({
   type: constants.USER_PASSWORD_RESET,
-  props
+  payload
 });
 
 /**
  * Persists sidebar state.
  *
  * @function setSidebarState
- * @param {object} props - props just contain an email field.
+ * @param payload - payload just contain an `email` field.
  * @returns constants.USER_SET_SIDEBAR_STATE
  */
 // export const setSidebarState = () => ({
@@ -105,17 +105,17 @@ export const signinSession = (
  * Attempts to sign user into a new session via login form.
  *
  * @function signinUser
- * @param props - contains user's `email` and `password`.
+ * @param payload - contains user's `email` and `password`.
  * @returns constants.USER_SIGNIN_ATTEMPT, email, and password
  */
 export const signinUser = (
-  props: TLoginData
+  payload: TLoginData
 ): {
   type: typeof constants.USER_SIGNIN_ATTEMPT;
-  props: TLoginData;
+  payload: TLoginData;
 } => ({
   type: constants.USER_SIGNIN_ATTEMPT,
-  props
+  payload
 });
 
 /**
@@ -134,24 +134,24 @@ export const signoutUserSession = (): {
  * Sign up user via signup form.
  *
  * @function signupUser
- * @param props - contains a `token`, an `email`, `firstName`, `lastName`, and a `password`.
- * @returns constants.USER_SIGNUP, props
+ * @param payload - contains a `token`, an `email`, `firstName`, `lastName`, and a `password`.
+ * @returns constants.USER_SIGNUP, payload
  */
 export const signupUser = (
-  props: TSignupData
+  payload: TSignupData
 ): {
   type: typeof constants.USER_SIGNUP;
-  props: TSignupData;
+  payload: TSignupData;
 } => ({
   type: constants.USER_SIGNUP,
-  props
+  payload
 });
 
 /**
  * Updates current signed in user first and last name.
  *
  * @function updateUser
- * @param {object} data - contains user session data: `id`, `avatar`, `email`, `firstName`, `lastName`, and `role`
+ * @param data - contains user session data: `id`, `avatar`, `email`, `firstName`, `lastName`, and `role`
  * @returns constants.USER_UPDATE and data
  */
 // export const updateUser = data => ({
@@ -177,15 +177,15 @@ export const signupUser = (
  * Updates user password via newpassword form.
  *
  * @function updateUserPassword
- * @param props - contains a `token` and `password`.
- * @returns  constants.USER_PASSWORD_UPDATE and props
+ * @param payload - contains a `token` and `password`.
+ * @returns  constants.USER_PASSWORD_UPDATE and payload
  */
 export const updateUserPassword = (
-  props: TNewPasswordData
+  payload: TNewPasswordData
 ): {
   type: typeof constants.USER_PASSWORD_UPDATE;
-  props: TNewPasswordData;
+  payload: TNewPasswordData;
 } => ({
   type: constants.USER_PASSWORD_UPDATE,
-  props
+  payload
 });

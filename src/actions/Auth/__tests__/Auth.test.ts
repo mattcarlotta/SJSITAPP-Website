@@ -26,12 +26,12 @@ describe("Auth Actions", () => {
     expect(value).toEqual({ type: constants.USER_REMOVE_SESSION });
   });
 
-  it("resetPassword returns USER_PASSWORD_RESET with an email as props", () => {
-    const props = { email: user.email };
+  it("resetPassword returns USER_PASSWORD_RESET with an email as payload", () => {
+    const payload = { email: user.email };
 
-    const value = actions.resetPassword(props);
+    const value = actions.resetPassword(payload);
 
-    expect(value).toEqual({ type: constants.USER_PASSWORD_RESET, props });
+    expect(value).toEqual({ type: constants.USER_PASSWORD_RESET, payload });
   });
 
   it("signinSession returns USER_SET_SESSION with user details as payload", () => {
@@ -51,12 +51,12 @@ describe("Auth Actions", () => {
     });
   });
 
-  it("signinUser returns USER_SIGNIN_ATTEMPT with email and password as props", () => {
-    const props = { email: user.email, password };
+  it("signinUser returns USER_SIGNIN_ATTEMPT with email and password as payload", () => {
+    const payload = { email: user.email, password };
 
-    const value = actions.signinUser(props);
+    const value = actions.signinUser(payload);
 
-    expect(value).toEqual({ type: constants.USER_SIGNIN_ATTEMPT, props });
+    expect(value).toEqual({ type: constants.USER_SIGNIN_ATTEMPT, payload });
   });
 
   it("signoutUserSession returns USER_SIGNIN_ATTEMPT", () => {
@@ -65,24 +65,24 @@ describe("Auth Actions", () => {
     expect(value).toEqual({ type: constants.USER_SIGNOUT_SESSION });
   });
 
-  it("signupUser returns USER_SIGNUP and user signup details as props", () => {
-    const props = {
+  it("signupUser returns USER_SIGNUP and user signup details as payload", () => {
+    const payload = {
       token,
       email: user.email,
       firstName: user.firstName,
       lastName: user.lastName,
       password
     };
-    const value = actions.signupUser(props);
+    const value = actions.signupUser(payload);
 
-    expect(value).toEqual({ type: constants.USER_SIGNUP, props });
+    expect(value).toEqual({ type: constants.USER_SIGNUP, payload });
   });
 
-  it("updateUserPassword returns USER_PASSWORD_UPDATE with an email as props", () => {
-    const props = { password, token };
+  it("updateUserPassword returns USER_PASSWORD_UPDATE with an email as payload", () => {
+    const payload = { password, token };
 
-    const value = actions.updateUserPassword(props);
+    const value = actions.updateUserPassword(payload);
 
-    expect(value).toEqual({ type: constants.USER_PASSWORD_UPDATE, props });
+    expect(value).toEqual({ type: constants.USER_PASSWORD_UPDATE, payload });
   });
 });

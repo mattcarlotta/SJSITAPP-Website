@@ -15,11 +15,10 @@ import { AxiosResponse, SagaIterator, TAuthData } from "~types";
  *
  * @generator
  * @function checkForUserSession
- * @yields {object} - A response from a call to the API.
- * @yields {object} - Returns parsed res.data.
- * @yields {action} - A redux action to set the current user to redux state.
- * @yields {action} - Navigates user to route.
- * @throws {action} - A redux action to display a server message by type.
+ * @yield {AxiosResponse} - A response from a call to the API.
+ * @yield {TAuthData} - Returns parsed `res.data`.
+ * @yields {AnyAction} - A redux action to set the current user to redux state.
+ * @throws {AnyAction} - A redux action to display a server error.
  */
 export function* checkForActiveSession(): SagaIterator {
   try {
@@ -37,9 +36,9 @@ export function* checkForActiveSession(): SagaIterator {
  *
  * @generator
  * @function signoutUserSession
- * @yields {object} - A redux action to remove the current user from state.
- * @yields {action} - A redux action to push to a URL.
- * @throws {action} - A redux action to display a server message by type.
+ * @yield A redux action to remove the current user from state.
+ * @yields A redux action to push to a URL.
+ * @throws {AnyAction} - A redux action to display a server error.
  */
 export function* signoutUserSession(): SagaIterator {
   try {
@@ -59,13 +58,13 @@ export function* signoutUserSession(): SagaIterator {
  * @generator
  * @function deleteUserAvatar
  * @param {object} id - user id.
- * @yields {object} - A response from a call to the API.
+ * @yield {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to set a server message by type.
- * @yields {action} - A redux action to display a toast message by type.
- * @yields {action} - A redux action to reset users avatar url.
+ * @yield {action} - A redux action to set a server message by type.
+ * @yield {action} - A redux action to display a toast message by type.
+ * @yield {action} - A redux action to reset users avatar url.
  * @yields {action} - A redux action to refresh the member's settings.
- * @throws {action} - A redux action to display a server message by type.
+ * @throws {AnyAction} - A redux action to display a server error.
  */
 // export function* deleteUserAvatar({ id }) {
 //   try {
@@ -93,23 +92,21 @@ export function* signoutUserSession(): SagaIterator {
  *
  * @generator
  * @function resetPassword
- * @param {object} props - props just contain an email field.
- * @yields {object} - A response from a call to the API.
- * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to set a server message by type.
- * @yields {action} - A redux action to display a toast message by type.
- * @yields {action} - A redux action to sign the user out of any sessions.
- * @throws {action} - A redux action to display a server message by type.
+ * @param payload - payload just contain an `email` field.
+ * @yield {AnyAction} - A redux action to reset server messages.
+ * @yield {AxiosResponse} - A response from a call to the API.
+ * @yield {string} - Returns parsed `res.message`.
+ * @yield A toast message by type.
+ * @yields {SagaIterator} - A saga to sign the user out of any sessions.
+ * @throws {AnyAction} - A redux action to display a server error.
  */
 export function* resetPassword({
-  props
+  payload
 }: ReturnType<typeof actions.resetPassword>): SagaIterator {
   try {
     yield put(resetMessage());
 
-    const res: AxiosResponse = yield call(app.put, "reset-password", {
-      ...props
-    });
+    const res: AxiosResponse = yield call(app.put, "reset-password", payload);
     const message: string = yield call(parseMessage, res);
 
     yield call(toast, { type: "info", message });
@@ -125,20 +122,21 @@ export function* resetPassword({
  *
  * @generator
  * @function signinUser
- * @param {object} props - contains user credentials (email and password).
- * @yields {object} - A response from a call to the API.
- * @function parseData - returns a parsed res.data.
- * @yields {action} -  A redux action to set the current user to redux state.
- * @yields {action} - Navigates user to route.
- * @throws {action} - A redux action to display a server message by type.
+ * @param {object} payload - contains user credentials `email` and `password` fields.
+ * @yield {AnyAction} - A redux action to reset server messages.
+ * @yield {AxiosResponse} - A response from a call to the API.
+ * @yield {TAuthData} - Returns parsed `res.data`.
+ * @yield {AnyAction} -  A redux action to set the current user to redux state.
+ * @yields A router replace event to /employee/dashboard.
+ * @throws {AnyAction} - A redux action to display a server error.
  */
 export function* signinUser({
-  props
+  payload
 }: ReturnType<typeof actions.signinUser>): SagaIterator {
   try {
     yield put(resetMessage());
 
-    const res: AxiosResponse = yield call(app.post, "signin", { ...props });
+    const res: AxiosResponse = yield call(app.post, "signin", payload);
     const data: TAuthData = yield call(parseData, res);
 
     yield put(actions.signinSession(data));
@@ -154,21 +152,20 @@ export function* signinUser({
  *
  * @generator
  * @function signupUser
- * @param {object} props - props contain a token, an email, first/last name, and a password.
- * @yields {object} - A response from a call to the API.
- * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to set a server message by type.
- * @yields {action} - A redux action to display a toast message by type.
- * @yields {action} - Navigates user to route.
- * @throws {action} - A redux action to display a server message by type.
+ * @param payload - payload contain a token, an email, first/last name, and a password.
+ * @yield {AxiosResponse} - A response from a call to the API.
+ * @yield {string} - Returns parsed `res.message`.
+ * @yield A toast message by type.
+ * @yields A router push event to /employee/login.
+ * @throws {AnyAction} - A redux action to display a server error.
  */
 export function* signupUser({
-  props
+  payload
 }: ReturnType<typeof actions.signupUser>): SagaIterator {
   try {
     yield put(resetMessage());
 
-    const res: AxiosResponse = yield call(app.post, "signup", { ...props });
+    const res: AxiosResponse = yield call(app.post, "signup", payload);
     const message: string = yield call(parseMessage, res);
 
     yield call(toast, { type: "success", message });
@@ -186,13 +183,13 @@ export function* signupUser({
  * @function updateUserAvatar
  * @param {object} form - formData contains image.
  * @param {string} id - user's id.
- * @yields {object} - A response from a call to the API.
+ * @yield {object} - A response from a call to the API.
  * @function parseData - returns a parsed res.data.
- * @yields {action} - A redux action to set a server message by type.
- * @yields {action} - A redux action to display a toast message by type.
- * @yields {action} - A redux action do set user avatar to redux state.
+ * @yield {action} - A redux action to set a server message by type.
+ * @yield {action} - A redux action to display a toast message by type.
+ * @yield {action} - A redux action do set user avatar to redux state.
  * @yields {action} - A redux action to fresh member settings.
- * @throws {action} - A redux action to display a server message by type.
+ * @throws {AnyAction} - A redux action to display a server error.
  */
 // export function* updateUserAvatar({ form, id }) {
 //   try {
@@ -222,22 +219,20 @@ export function* signupUser({
  *
  * @generator
  * @function updateUserPassword
- * @param {object} props - props contain a token and (new) password fields.
- * @yields {object} - A response from a call to the API.
- * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to display a toast message by type.
- * @yields {action} - A redux action to push to sign the user out of any sessions.
- * @throws {action} - A redux action to display a server message by type.
+ * @param {object} payload - contains a `token` and (new) `password` fields.
+ * @yield {AxiosResponse} - A response from a call to the API.
+ * @yield {string} - Returns parsed `res.message`.
+ * @yield A toast message by type.
+ * @yields {SagaIterator} - A saga to sign the user out of any sessions.
+ * @throws {AnyAction} - A redux action to display a server error.
  */
 export function* updateUserPassword({
-  props
+  payload
 }: ReturnType<typeof actions.updateUserPassword>): SagaIterator {
   try {
     yield put(resetMessage());
 
-    const res: AxiosResponse = yield call(app.put, "new-password", {
-      ...props
-    });
+    const res: AxiosResponse = yield call(app.put, "new-password", payload);
     const message: string = yield call(parseMessage, res);
 
     yield call(toast, { type: "success", message });
@@ -253,7 +248,7 @@ export function* updateUserPassword({
  *
  * @generator
  * @function authSagas
- * @yields {watchers}
+ * @yield {watchers}
  */
 export default function* authSagas(): SagaIterator {
   yield all([

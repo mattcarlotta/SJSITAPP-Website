@@ -1,25 +1,44 @@
 import Router from "next/router";
 import { expectSaga, testSaga } from "redux-saga-test-plan";
-// import { resetMessage, setMessage } from "~actions/Server";
+import { resetMessage } from "~actions/Server"; // setMessage
 // import { fetchMemberSettings } from "~actions/Members";
 import * as actions from "~actions/Auth";
 import * as sagas from "~sagas/Auth";
+import toast from "~components/App/Toast";
 import authReducer, { initialState } from "~reducers/Auth";
 import serverReducer from "~reducers/Server";
 import app from "~utils/axiosConfig"; // avatarAPI
 import mockApp from "~utils/mockAxios"; // mockAPI
-import { parseData } from "~utils/parseResponse"; // parseMessage
-// import toast from "~components/Body/Toast";
+import { parseData, parseMessage } from "~utils/parseResponse";
+import {
+  TLoginData,
+  TNewPasswordData,
+  TResetPasswordData,
+  TSignupData
+} from "~types";
 
 const id = "0123456789";
+const password = "password";
+const email = "test@example.com";
+const firstName = "Beta";
+const lastName = "Tester";
+const token = "1234567890";
 
 const userSession = {
   id,
   avatar: "",
-  email: "test@example.com",
-  firstName: "Beta",
-  lastName: "Tester",
+  email,
+  firstName,
+  lastName,
   role: "staff"
+};
+
+const userSignup = {
+  token,
+  email,
+  firstName,
+  lastName,
+  password
 };
 
 describe("Auth Sagas", () => {
@@ -119,7 +138,7 @@ describe("Auth Sagas", () => {
 
   // 		testSaga(sagas.deleteUserAvatar, { id })
   // 			.next()
-  // 			.put(resetServerMessage())
+  // 			.put(resetMessage())
   // 			.next()
   // 			.call(avatarAPI.delete, `delete/${id}`)
   // 			.next(res)
@@ -163,208 +182,153 @@ describe("Auth Sagas", () => {
   // 	});
   // });
 
-  // describe("Reset User Password", () => {
-  // 	let props;
-  // 	beforeAll(() => {
-  // 		props = mocks.resetPassword;
-  // 	});
+  describe("Reset User Password", () => {
+    let payload: TResetPasswordData;
+    beforeAll(() => {
+      payload = { email: userSession.email };
+    });
 
-  // 	it("logical flow matches pattern for a successful password reset request", () => {
-  // 		const message = "Successfully changed password.";
-  // 		const res = { data: { message } };
+    it("logical flow matches pattern for a successful password reset request", () => {
+      const message = "Successfully changed password.";
+      const res = { data: { message } };
 
-  // 		testSaga(sagas.resetPassword, { props })
-  // 			.next()
-  // 			.put(resetServerMessage())
-  // 			.next()
-  // 			.call(app.put, "reset-password", { ...mocks.resetPassword })
-  // 			.next(res)
-  // 			.call(parseMessage, res)
-  // 			.next(res.data.message)
-  // 			.put(setServerMessage({ message: res.data.message }))
-  // 			.next(res.data.message)
-  // 			.call(toast, { type: "info", message: res.data.message })
-  // 			.next()
-  // 			.call(sagas.signoutUserSession)
-  // 			.next()
-  // 			.isDone();
-  // 	});
+      testSaga(sagas.resetPassword, actions.resetPassword(payload))
+        .next()
+        .put(resetMessage())
+        .next()
+        .call(app.put, "reset-password", payload)
+        .next(res)
+        .call(parseMessage, res)
+        .next(res.data.message)
+        .call(toast, { type: "info", message: res.data.message })
+        .next()
+        .call(sagas.signoutUserSession)
+        .next()
+        .isDone();
+    });
 
-  // 	it("successfully requests a password reset", async () => {
-  // 		const message =
-  // 			"A password reset email has been sent to test@example.com.";
-  // 		mockApp.onPut("reset-password").reply(200, { message });
-  // 		mockApp.onGet("signout").reply(200, { message });
+    it("successfully requests a password reset and removes user from session", async () => {
+      const message =
+        "A password reset email has been sent to test@example.com.";
+      mockApp.onPut("reset-password").reply(200, { message });
+      mockApp.onGet("signout").reply(200, { message });
 
-  // 		return expectSaga(sagas.resetPassword, { props })
-  // 			.dispatch(actions.resetPassword)
-  // 			.withReducer(serverReducer)
-  // 			.hasFinalState({
-  // 				message,
-  // 			})
-  // 			.run();
-  // 	});
+      return expectSaga(sagas.resetPassword, actions.resetPassword(payload))
+        .dispatch(actions.signinSession(userSession))
+        .withReducer(authReducer)
+        .hasFinalState({ ...initialState, role: "guest" })
+        .run();
+    });
 
-  // 	it("if API call fails, it displays a message", async () => {
-  // 		const err = "Unable to automatically sign in";
-  // 		mockApp.onPut("reset-password").reply(404, { err });
+    it("if reset-password API call fails, it displays a message", async () => {
+      const err = "Unable to automatically sign in";
+      mockApp.onPut("reset-password").reply(404, { err });
 
-  // 		return expectSaga(sagas.resetPassword, { props })
-  // 			.dispatch(actions.resetPassword)
-  // 			.withReducer(serverReducer)
-  // 			.hasFinalState({
-  // 				message: err,
-  // 			})
-  // 			.run();
-  // 	});
-  // });
+      return expectSaga(sagas.resetPassword, actions.resetPassword(payload))
+        .withReducer(serverReducer)
+        .hasFinalState({
+          error: err,
+          message: ""
+        })
+        .run();
+    });
+  });
 
-  // describe("Signin User", () => {
-  // 	let props;
-  // 	beforeAll(() => {
-  // 		props = mocks.userSignin;
-  // 	});
+  describe("Signin User", () => {
+    let payload: TLoginData;
+    beforeAll(() => {
+      payload = { email: userSession.email, password };
+    });
 
-  // 	it("logical flow matches pattern for a new sign in session", () => {
-  // 		const res = { data: { ...mocks.userSession } };
+    it("logical flow matches pattern for a new sign in session", () => {
+      const res = { data: userSession };
 
-  // 		testSaga(sagas.signinUser, { props })
-  // 			.next()
-  // 			.put(resetServerMessage())
-  // 			.next()
-  // 			.call(app.post, "signin", { ...props })
-  // 			.next(res)
-  // 			.call(parseData, res)
-  // 			.next(res.data)
-  // 			.put(actions.signin(res.data))
-  // 			.next()
-  // 			.call(Router.push, "/employee/dashboard")
-  // 			.next()
-  // 			.isDone();
-  // 	});
+      testSaga(sagas.signinUser, actions.signinUser(payload))
+        .next()
+        .put(resetMessage())
+        .next()
+        .call(app.post, "signin", payload)
+        .next(res)
+        .call(parseData, res)
+        .next(res.data)
+        .put(actions.signinSession(res.data))
+        .next()
+        .call(Router.replace, "/employee/dashboard")
+        .next()
+        .isDone();
+    });
 
-  // 	it("sets the current signed in user from a session", async () => {
-  // 		mockApp.onPost("signin").reply(200, mocks.userSession);
+    it("sets the current signed in user from a session", async () => {
+      mockApp.onPost("signin").reply(200, userSession);
 
-  // 		return expectSaga(sagas.signinUser, { props })
-  // 			.dispatch(actions.signinUser)
-  // 			.withReducer(authReducer)
-  // 			.hasFinalState(mocks.userSession)
-  // 			.run();
-  // 	});
+      return expectSaga(sagas.signinUser, actions.signinUser(payload))
+        .withReducer(authReducer)
+        .hasFinalState(userSession)
+        .run();
+    });
 
-  // 	it("if API call fails, it displays a message", async () => {
-  // 		const err = "Unable to sign in.";
-  // 		mockApp.onPost("signin").reply(404, { err });
+    it("if signin API call fails, it displays a message", async () => {
+      const err = "Unable to sign in.";
+      mockApp.onPost("signin").reply(404, { err });
 
-  // 		return expectSaga(sagas.signinUser, { props })
-  // 			.dispatch(actions.signinUser)
-  // 			.withReducer(serverReducer)
-  // 			.hasFinalState({
-  // 				message: err,
-  // 			})
-  // 			.run();
-  // 	});
-  // });
+      return expectSaga(sagas.signinUser, actions.signinUser(payload))
+        .withReducer(serverReducer)
+        .hasFinalState({
+          error: err,
+          message: ""
+        })
+        .run();
+    });
+  });
 
-  // describe("Signout User", () => {
-  // 	it("logical flow matches pattern for a sign out session", () => {
-  // 		testSaga(sagas.signoutUserSession)
-  // 			.next()
-  // 			.call(app.get, "signout")
-  // 			.next()
-  // 			.put(actions.signout())
-  // 			.next()
-  // 			.call(Router.push, "/employee/login")
-  // 			.next()
-  // 			.isDone();
-  // 	});
+  describe("Signup User", () => {
+    let payload: TSignupData;
+    beforeAll(() => {
+      payload = userSignup;
+    });
 
-  // 	it("removes the current signed in user from the session", async () => {
-  // 		mockApp.onGet("signout").reply(200);
+    it("logical flow matches pattern for a new sign in session", () => {
+      const message = "Welcome to the Ice Team!";
+      const res = { data: { message } };
 
-  // 		return expectSaga(sagas.signoutUserSession)
-  // 			.dispatch(actions.signoutUser)
-  // 			.withReducer(authReducer)
-  // 			.hasFinalState({
-  // 				id: "",
-  // 				avatar: "",
-  // 				email: "",
-  // 				firstName: "",
-  // 				lastName: "",
-  // 				role: "guest",
-  // 				isCollapsed: false,
-  // 			})
-  // 			.run();
-  // 	});
+      testSaga(sagas.signupUser, actions.signupUser(payload))
+        .next()
+        .put(resetMessage())
+        .next()
+        .call(app.post, "signup", payload)
+        .next(res)
+        .call(parseMessage, res)
+        .next(res.data.message)
+        .call(toast, { type: "success", message: res.data.message })
+        .next()
+        .call(Router.push, "/employee/login")
+        .next()
+        .isDone();
+    });
 
-  // 	it("if API call fails, it displays a message", async () => {
-  // 		const err = "Unable to sign out.";
-  // 		mockApp.onGet("signout").reply(404, { err });
+    it("creates a new user account", async () => {
+      const message = "Welcome to the Ice Team!";
+      mockApp.onPost("signup").reply(200, { message });
 
-  // 		return expectSaga(sagas.signoutUserSession)
-  // 			.dispatch(actions.signoutUser)
-  // 			.withReducer(serverReducer)
-  // 			.hasFinalState({
-  // 				message: err,
-  // 			})
-  // 			.run();
-  // 	});
-  // });
+      return expectSaga(sagas.signupUser, actions.signupUser(payload))
+        .withReducer(authReducer)
+        .hasFinalState(initialState)
+        .run();
+    });
 
-  // describe("Signup User", () => {
-  // 	let props;
-  // 	beforeAll(() => {
-  // 		props = mocks.signupNewUser;
-  // 	});
+    it("if signup API call fails, it displays a message", async () => {
+      const err = "Unable to sign up.";
+      mockApp.onPost("signup").reply(404, { err });
 
-  // 	it("logical flow matches pattern for a new sign in session", () => {
-  // 		const message = "Welcome to the Ice Team!";
-  // 		const res = { data: { message } };
-
-  // 		testSaga(sagas.signupUser, { props })
-  // 			.next()
-  // 			.put(resetServerMessage())
-  // 			.next()
-  // 			.call(app.post, "signup", { ...props })
-  // 			.next(res)
-  // 			.call(parseMessage, res)
-  // 			.next(res.data.message)
-  // 			.put(setServerMessage({ message: res.data.message }))
-  // 			.next(res.data.message)
-  // 			.call(toast, { type: "success", message: res.data.message })
-  // 			.next()
-  // 			.call(Router.push, "/employee/login")
-  // 			.next()
-  // 			.isDone();
-  // 	});
-
-  // 	it("creates a new user account", async () => {
-  // 		const message = "Welcome to the Ice Team!";
-  // 		mockApp.onPost("signup").reply(200, { message });
-
-  // 		return expectSaga(sagas.signupUser, { props })
-  // 			.dispatch(actions.signupUser)
-  // 			.withReducer(serverReducer)
-  // 			.hasFinalState({
-  // 				message,
-  // 			})
-  // 			.run();
-  // 	});
-
-  // 	it("if API call fails, it displays a message", async () => {
-  // 		const err = "Unable to sign up.";
-  // 		mockApp.onPost("signup").reply(404, { err });
-
-  // 		return expectSaga(sagas.signupUser, { props })
-  // 			.dispatch(actions.signupUser)
-  // 			.withReducer(serverReducer)
-  // 			.hasFinalState({
-  // 				message: err,
-  // 			})
-  // 			.run();
-  // 	});
-  // });
+      return expectSaga(sagas.signupUser, actions.signupUser(payload))
+        .withReducer(serverReducer)
+        .hasFinalState({
+          error: err,
+          message: ""
+        })
+        .run();
+    });
+  });
 
   // describe("Update User Avatar", () => {
   // 	let form;
@@ -381,7 +345,7 @@ describe("Auth Sagas", () => {
 
   // 		testSaga(sagas.updateUserAvatar, { form, id })
   // 			.next()
-  // 			.put(resetServerMessage())
+  // 			.put(resetMessage())
   // 			.next()
   // 			.call(avatarAPI.put, `update/${id}`, form)
   // 			.next(res)
@@ -424,58 +388,60 @@ describe("Auth Sagas", () => {
   // 	});
   // });
 
-  // describe("Update Current User Password", () => {
-  // 	let props;
-  // 	beforeAll(() => {
-  // 		props = mocks.updateCurrentPassword;
-  // 	});
+  describe("Update Current User Password", () => {
+    let payload: TNewPasswordData;
+    beforeAll(() => {
+      payload = { password, token };
+    });
 
-  // 	it("logical flow matches pattern for a password update", () => {
-  // 		const message = "Your password has been reset!";
-  // 		const res = { data: { message } };
+    it("logical flow matches pattern for a password update", () => {
+      const message = "Your password has been reset!";
+      const res = { data: { message } };
 
-  // 		testSaga(sagas.updateUserPassword, { props })
-  // 			.next()
-  // 			.put(resetServerMessage())
-  // 			.next()
-  // 			.call(app.put, "new-password", { ...props })
-  // 			.next(res)
-  // 			.call(parseMessage, res)
-  // 			.next(res.data.message)
-  // 			.put(setServerMessage({ message: res.data.message }))
-  // 			.next(res.data.message)
-  // 			.call(toast, { type: "success", message: res.data.message })
-  // 			.next()
-  // 			.call(sagas.signoutUserSession)
-  // 			.next()
-  // 			.isDone();
-  // 	});
+      testSaga(sagas.updateUserPassword, actions.updateUserPassword(payload))
+        .next()
+        .put(resetMessage())
+        .next()
+        .call(app.put, "new-password", payload)
+        .next(res)
+        .call(parseMessage, res)
+        .next(res.data.message)
+        .call(toast, { type: "success", message: res.data.message })
+        .next()
+        .call(sagas.signoutUserSession)
+        .next()
+        .isDone();
+    });
 
-  // 	it("updates the current signed in user's password", async () => {
-  // 		const message = "Your password has been reset!";
-  // 		mockApp.onPut("new-password").reply(200, { message });
-  // 		mockApp.onGet("signout").reply(200, { message });
+    it("updates the current signed in user's password", async () => {
+      const message = "Your password has been reset!";
+      mockApp.onPut("new-password").reply(200, { message });
+      mockApp.onGet("signout").reply(200, { message });
 
-  // 		return expectSaga(sagas.updateUserPassword, { props })
-  // 			.dispatch(actions.updateUserPassword)
-  // 			.withReducer(serverReducer)
-  // 			.hasFinalState({
-  // 				message,
-  // 			})
-  // 			.run();
-  // 	});
+      return expectSaga(
+        sagas.updateUserPassword,
+        actions.updateUserPassword(payload)
+      )
+        .dispatch(actions.signinSession(userSession))
+        .withReducer(authReducer)
+        .hasFinalState({ ...initialState, role: "guest" })
+        .run();
+    });
 
-  // 	it("if API call fails, it displays a message", async () => {
-  // 		const err = "Unable to update your password.";
-  // 		mockApp.onPut("new-password").reply(404, { err });
+    it("if new-password API call fails, it displays a message", async () => {
+      const err = "Unable to update your password.";
+      mockApp.onPut("new-password").reply(404, { err });
 
-  // 		return expectSaga(sagas.updateUserPassword, { props })
-  // 			.dispatch(actions.updateUserPassword)
-  // 			.withReducer(serverReducer)
-  // 			.hasFinalState({
-  // 				message: err,
-  // 			})
-  // 			.run();
-  // 	});
-  // });
+      return expectSaga(
+        sagas.updateUserPassword,
+        actions.updateUserPassword(payload)
+      )
+        .withReducer(serverReducer)
+        .hasFinalState({
+          error: err,
+          message: ""
+        })
+        .run();
+    });
+  });
 });
