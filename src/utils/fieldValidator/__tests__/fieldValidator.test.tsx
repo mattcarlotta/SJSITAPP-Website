@@ -1,4 +1,4 @@
-import moment from "moment-timezone";
+import moment from "~utils/momentWithTimezone";
 import fieldValidator from "../index";
 
 describe("FieldValidator", () => {

@@ -1,4 +1,4 @@
-import moment from "moment-timezone";
+import moment from "~utils/momentWithTimezone";
 import parsedFields from "../index";
 
 describe("Parse Fields Helper", () => {

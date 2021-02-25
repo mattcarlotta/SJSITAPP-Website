@@ -18,8 +18,8 @@ export function parseCookie(
 /**
  * Helper function to parse a message from an API response.
  *
- * @param {array} res - an API response.
- * @returns {string | undefined} a parsed message string from res.data.message.
+ * @param res - an API response.
+ * @returns a parsed message string from res.data.message.
  */
 export function parseMessage(res: AxiosResponse): string | undefined {
   return get(res, ["data", "message"]);
@@ -28,9 +28,9 @@ export function parseMessage(res: AxiosResponse): string | undefined {
 /**
  * Helper function to parse data from an API response.
  *
- * @param {array} res - an API response.
- * @returns {Record<string, unknown>} a parsed data object from res.data.
+ * @param res - an API response.
+ * @returns a parsed data object from res.data.
  */
-export function parseData(res: AxiosResponse): Record<string, unknown> {
+export function parseData(res: AxiosResponse): any {
   return get(res, ["data"]);
 }

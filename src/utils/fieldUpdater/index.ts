@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import isEmpty from "lodash.isempty";
-import moment from "moment-timezone";
+import moment from "~utils/momentWithTimezone";
 import { TBaseFieldProps } from "~types";
 
 /**

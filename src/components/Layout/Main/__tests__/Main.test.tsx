@@ -12,7 +12,7 @@ describe("Main Component", () => {
   it("initially renders a default margin", () => {
     const StyledBtnCtnr = findMain();
     expect(StyledBtnCtnr.exists()).toBeTruthy();
-    expect(StyledBtnCtnr).toHaveStyleRule("margin-left", "280px");
+    expect(StyledBtnCtnr).toHaveStyleRule("margin-left", "270px");
   });
 
   it("removes margin when passed a 'stretch' prop", () => {

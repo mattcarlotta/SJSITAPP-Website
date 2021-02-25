@@ -8,10 +8,10 @@ const Header = styled.main<{ stretch?: boolean }>`
 
   flex: auto;
   min-height: 0;
-  padding: 24px;
+  padding: 26px 24px 24px;
   min-height: 280px;
   transition: 350ms;
-  margin-left: ${({ stretch }) => (stretch ? "0px" : "280px")};
+  margin-left: ${({ stretch }) => (stretch ? "0px" : "270px")};
 `;
 
 export default Header;

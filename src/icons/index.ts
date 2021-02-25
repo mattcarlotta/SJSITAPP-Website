@@ -76,3 +76,4 @@ export { MdPersonPin } from "@react-icons/all-files/md/MdPersonPin";
 export { RiLogoutBoxLine } from "@react-icons/all-files/ri/RiLogoutBoxLine";
 export { RiMenuFoldLine } from "@react-icons/all-files/ri/RiMenuFoldLine";
 export { RiMenuUnfoldLine } from "@react-icons/all-files/ri/RiMenuUnfoldLine";
+export { RiSignalWifiErrorFill } from "@react-icons/all-files/ri/RiSignalWifiErrorFill";

@@ -55,22 +55,6 @@ export type TResetPasswordData = {
 
 export type TSideMenuNodeIds = Array<string>;
 
-export type EventTarget = {
-  target: {
-    name: string;
-    value: string;
-  };
-};
-
-export type EventTargetDataset = {
-  target: {
-    dataset: {
-      name: string;
-      value: string;
-    };
-  };
-};
-
 export type TInputType = "text" | "password" | "email" | string;
 export type TTextAreaType = "textarea";
 
@@ -92,6 +76,24 @@ export type TIconType =
   | "usertag"
   | string;
 
+/// MISC ///
+
+export type EventTarget = {
+  target: {
+    name: string;
+    value: string;
+  };
+};
+
+export type EventTargetDataset = {
+  target: {
+    dataset: {
+      name: string;
+      value: string;
+    };
+  };
+};
+
 /// COMPONENTS ///
 export type TBaseFieldProps = {
   containerStyle?: CSSProperties;
@@ -111,6 +113,25 @@ export type TBaseFieldProps = {
   tooltip?: string;
   value?: string | moment.Moment | Array<moment.Moment>;
   updateEvent?: boolean;
+};
+
+export type TEventData = {
+  _id: string;
+  eventDate: string;
+  eventNotes?: string;
+  eventType: string;
+  notes?: string;
+  opponent?: string;
+  team: string;
+  schedule: Array<{
+    _id?: string;
+    title?: string;
+    employeeIds?: Array<{
+      _id: PropTypes.string;
+      firstName: PropTypes.string;
+      lastName: PropTypes.string;
+    }>;
+  }>;
 };
 
 ///

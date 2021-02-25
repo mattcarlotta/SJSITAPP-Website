@@ -1,6 +1,4 @@
-import * as React from "react";
+import Dashboard from "~components/Pages/Dashboard";
 import requiresBasicCredentials from "~containers/App/requiresBasicCredentials";
-
-const Dashboard = () => <div>Dashboard</div>;
 
 export default requiresBasicCredentials(Dashboard);
