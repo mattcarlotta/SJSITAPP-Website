@@ -8,8 +8,7 @@ const userSession = {
   email: "test@example.com",
   firstName: "Beta",
   lastName: "Tester",
-  role: "staff",
-  isCollapsed: false
+  role: "staff"
 };
 
 const payload = {

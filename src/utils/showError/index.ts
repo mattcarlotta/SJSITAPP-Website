@@ -16,7 +16,8 @@ import { SagaIterator } from "~types";
 function* showError(message: string): SagaIterator {
   yield put(setError(message));
   yield call(toast, { type: "error", message });
-  yield put(resetMessage());
+  /* istanbul ignore next */
+  if (process.env.NODE_ENV !== "test") yield put(resetMessage());
 }
 
 export default showError;

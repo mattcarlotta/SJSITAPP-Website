@@ -9,7 +9,6 @@ export interface IAuthReducerState {
   firstName: string;
   lastName: string;
   role: string;
-  isCollapsed: boolean;
 }
 
 export const initialState: IAuthReducerState = {
@@ -18,8 +17,7 @@ export const initialState: IAuthReducerState = {
   email: "",
   firstName: "",
   lastName: "",
-  role: "",
-  isCollapsed: false
+  role: ""
 };
 
 /**
