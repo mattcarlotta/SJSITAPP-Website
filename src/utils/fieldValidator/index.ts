@@ -30,10 +30,10 @@ const fieldValidator = (
         )
           errors = "Invalid email.";
 
-        if (name === "password" && value && value.length < 5)
+        if (name === "password" && value && (value as string).length < 5)
           errors = "Password too short.";
 
-        if (type === "range" && value && value.length < 2)
+        if (type === "range" && value && (value as string).length < 2)
           errors = "You must select a start and an end date.";
 
         // if (type === "radiogroup" && !value)

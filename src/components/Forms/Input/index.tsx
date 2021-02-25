@@ -13,7 +13,7 @@ export interface IInputComponentProps {
   disabled?: boolean;
   icon?: TIconType;
   inputStyle?: CSSProperties;
-  label: string;
+  label?: string;
   name: string;
   onChange: (e: ChangeEvent<any>) => void;
   placeholder?: string;

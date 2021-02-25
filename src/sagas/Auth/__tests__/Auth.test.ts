@@ -1,14 +1,13 @@
 import Router from "next/router";
 import { expectSaga, testSaga } from "redux-saga-test-plan";
-import app from "~utils/axiosConfig"; // avatarAPI
-import mockApp from "~utils/mockAxios"; // mockAPI
-import * as actions from "~actions/Auth";
 // import { resetMessage, setMessage } from "~actions/Server";
 // import { fetchMemberSettings } from "~actions/Members";
+import * as actions from "~actions/Auth";
 import * as sagas from "~sagas/Auth";
-// import * as mocks from "~sagas/__mocks__/sagas.mocks";
 import authReducer, { initialState } from "~reducers/Auth";
 import serverReducer from "~reducers/Server";
+import app from "~utils/axiosConfig"; // avatarAPI
+import mockApp from "~utils/mockAxios"; // mockAPI
 import { parseData } from "~utils/parseResponse"; // parseMessage
 // import toast from "~components/Body/Toast";
 
@@ -33,7 +32,7 @@ describe("Auth Sagas", () => {
   });
 
   describe("Check For User Session", () => {
-    it("logical flow matches pattern for signed in user session requests", () => {
+    it("logical flow matches pattern for signed in user session", () => {
       const res = { data: userSession };
 
       testSaga(sagas.checkForActiveSession)
@@ -53,9 +52,7 @@ describe("Auth Sagas", () => {
       return expectSaga(sagas.checkForActiveSession)
         .dispatch(actions.checkForActiveSession())
         .withReducer(authReducer)
-        .hasFinalState({
-          ...userSession
-        })
+        .hasFinalState(userSession)
         .run();
     });
 
@@ -75,7 +72,7 @@ describe("Auth Sagas", () => {
   });
 
   describe("Remove User Session", () => {
-    it("logical flow matches pattern for removing signed in user session requests", () => {
+    it("logical flow matches pattern for removing signed in user session", () => {
       testSaga(sagas.signoutUserSession)
         .next()
         .call(app.get, "signout")

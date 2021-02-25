@@ -75,7 +75,7 @@ export function* signoutUserSession(): SagaIterator {
 //     const message: string = yield call(parseMessage, res);
 
 //     yield put(
-//       setServerMessage({
+//       setMessage({
 //         message
 //       })
 //     );
@@ -204,7 +204,7 @@ export function* signupUser({
 //     const { avatar, message } = data;
 
 //     yield put(
-//       setServerMessage({
+//       setMessage({
 //         message
 //       })
 //     );
