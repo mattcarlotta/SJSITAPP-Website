@@ -27,10 +27,11 @@ const MenuLink = styled(MenuLinkComponent)<{
   hoverable?: boolean;
   fontSize?: string;
   padding?: string;
+  primary?: boolean;
   width?: string;
 }>`
   cursor: pointer;
-  color: #025f6d;
+  color: ${({ primary }) => (primary ? "#efefef" : "#025f6d")};
   background-color: transparent;
   transition: color 0.2s ease-in-out, background 0.2s ease-in-out,
     border 0.2s ease-in-out;

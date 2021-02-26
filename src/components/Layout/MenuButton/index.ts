@@ -1,8 +1,13 @@
 import styled from "@emotion/styled";
+import Avatar from "~components/Layout/Avatar";
 
-const MenuButton = styled.button<{ hoverable?: boolean; margin?: string }>`
+const MenuButton = styled.button<{
+  hoverable?: boolean;
+  margin?: string;
+  primary?: boolean;
+}>`
   cursor: pointer;
-  color: #025f6d;
+  color: ${({ primary }) => (primary ? "#efefef" : "#025f6d")};
   background-color: transparent;
   transition: color 0.2s ease-in-out, background 0.2s ease-in-out,
     border 0.2s ease-in-out;
@@ -16,6 +21,9 @@ const MenuButton = styled.button<{ hoverable?: boolean; margin?: string }>`
   margin: ${({ margin }) => margin || "0px"};
 
   :hover {
+    ${Avatar} {
+      color: #025f6d;
+    }
     color: #025f6d;
     background-color: ${({ hoverable }) =>
       hoverable ? "#d8d8d8" : "transparent"};

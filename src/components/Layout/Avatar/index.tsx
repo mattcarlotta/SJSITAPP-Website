@@ -1,25 +1,26 @@
 import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 import { BsPeopleCircle } from "~icons";
 import { CSSProperties, FC } from "~types";
 
 export type TAvatarProps = {
   avatar?: string;
+  className?: string;
+  primary?: boolean;
   style?: CSSProperties;
   width?: string;
 };
 
-const Avatar: FC<TAvatarProps> = ({ avatar, style, width }) => {
+const AvatarComponent: FC<TAvatarProps> = ({
+  avatar,
+  className,
+  style,
+  width
+}) => {
   const avatarWidth = width || "27px";
 
   return (
-    <div
-      data-testid="avatar"
-      css={css`
-        width: ${avatarWidth};
-        display: inline-block;
-        color: #025f6d;
-      `}
-    >
+    <div data-testid="avatar" className={className}>
       {avatar ? (
         <img
           css={css`
@@ -38,5 +39,12 @@ const Avatar: FC<TAvatarProps> = ({ avatar, style, width }) => {
     </div>
   );
 };
+
+const Avatar = styled(AvatarComponent)<{ primary?: boolean; width?: string }>`
+  display: inline-block;
+  color: ${({ primary }) => (primary ? "#efefef" : "#025f6d")};
+  width: ${({ width }) => width || "27px"};
+  transition: all 300ms;
+`;
 
 export default Avatar;

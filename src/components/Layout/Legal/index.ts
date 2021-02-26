@@ -7,7 +7,7 @@ const Legal = styled.div`
   white-space: nowrap;
   letter-spacing: 1px;
   text-align: center;
-  color: rgba(0, 0, 0, 0.65);
+  color: rgba(255, 255, 255, 0.65);
 `;
 
 export default Legal;

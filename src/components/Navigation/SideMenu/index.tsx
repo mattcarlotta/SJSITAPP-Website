@@ -62,7 +62,6 @@ const SideMenu: FC<TSideMenuProps> = ({
         nodeId="dashboard"
         label={
           <NavLink
-            green
             nounderline
             padding="2px 0px"
             marginRight="0px"
@@ -84,7 +83,6 @@ const SideMenu: FC<TSideMenuProps> = ({
           nodeId="events/create"
           label={
             <NavLink
-              green
               nounderline
               padding="2px 0px"
               marginRight="0px"
@@ -101,7 +99,6 @@ const SideMenu: FC<TSideMenuProps> = ({
           nodeId="events/viewall"
           label={
             <NavLink
-              green
               nounderline
               padding="2px 0px"
               marginRight="0px"
@@ -124,7 +121,6 @@ const SideMenu: FC<TSideMenuProps> = ({
           nodeId="forms/create"
           label={
             <NavLink
-              green
               nounderline
               padding="2px 0px"
               marginRight="0px"
@@ -141,7 +137,6 @@ const SideMenu: FC<TSideMenuProps> = ({
           nodeId="forms/viewall"
           label={
             <NavLink
-              green
               nounderline
               padding="2px 0px"
               marginRight="0px"
@@ -164,7 +159,6 @@ const SideMenu: FC<TSideMenuProps> = ({
           nodeId="mail/create"
           label={
             <NavLink
-              green
               nounderline
               padding="2px 0px"
               marginRight="0px"
@@ -181,7 +175,6 @@ const SideMenu: FC<TSideMenuProps> = ({
           nodeId="mail/viewall"
           label={
             <NavLink
-              green
               nounderline
               padding="2px 0px"
               marginRight="0px"
@@ -204,7 +197,6 @@ const SideMenu: FC<TSideMenuProps> = ({
           nodeId="members/create"
           label={
             <NavLink
-              green
               nounderline
               padding="2px 0px"
               marginRight="0px"
@@ -221,7 +213,6 @@ const SideMenu: FC<TSideMenuProps> = ({
           nodeId="members/authorizations/viewall"
           label={
             <NavLink
-              green
               nounderline
               padding="2px 0px"
               marginRight="0px"
@@ -238,7 +229,6 @@ const SideMenu: FC<TSideMenuProps> = ({
           nodeId="members/viewall"
           label={
             <NavLink
-              green
               nounderline
               padding="2px 0px"
               marginRight="0px"
@@ -256,7 +246,6 @@ const SideMenu: FC<TSideMenuProps> = ({
         nodeId="schedule"
         label={
           <NavLink
-            green
             nounderline
             padding="2px 0px"
             marginRight="0px"
@@ -278,7 +267,6 @@ const SideMenu: FC<TSideMenuProps> = ({
           nodeId="seasons/create"
           label={
             <NavLink
-              green
               nounderline
               padding="2px 0px"
               marginRight="0px"
@@ -295,7 +283,6 @@ const SideMenu: FC<TSideMenuProps> = ({
           nodeId="seasons/viewall"
           label={
             <NavLink
-              green
               nounderline
               padding="2px 0px"
               marginRight="0px"
@@ -314,7 +301,6 @@ const SideMenu: FC<TSideMenuProps> = ({
         icon={<FaCogs />}
         label={
           <NavLink
-            green
             nounderline
             padding="2px 0px"
             marginRight="0px"
@@ -331,7 +317,6 @@ const SideMenu: FC<TSideMenuProps> = ({
         nodeId="help"
         label={
           <NavLink
-            green
             nounderline
             padding="2px 0px"
             marginRight="0px"
@@ -348,7 +333,6 @@ const SideMenu: FC<TSideMenuProps> = ({
         nodeId="contact-us"
         label={
           <NavLink
-            green
             nounderline
             padding="2px 0px"
             marginRight="0px"
@@ -365,7 +349,6 @@ const SideMenu: FC<TSideMenuProps> = ({
         nodeId="privacy"
         label={
           <NavLink
-            green
             nounderline
             padding="2px 0px"
             marginRight="0px"
@@ -382,7 +365,6 @@ const SideMenu: FC<TSideMenuProps> = ({
         nodeId="licensing"
         label={
           <NavLink
-            green
             nounderline
             padding="2px 0px"
             marginRight="0px"

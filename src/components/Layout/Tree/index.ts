@@ -6,12 +6,13 @@ const Tree = styled.aside<{ collapsed: boolean }>`
   }
 
   overflow: ${({ collapsed }) => (collapsed ? "hidden" : "auto")};
-  padding: ${({ collapsed }) => (collapsed ? "0 0 0 0" : "0px 0 5px 20px")};
+  padding: ${({ collapsed }) => (collapsed ? "10px 0 0 0" : "10px 0 5px 20px")};
   width: ${({ collapsed }) => (collapsed ? "0px" : "266px")};
   white-space: nowrap;
-  background: #fff;
+  background: #006d76;
+  color: #efefef;
   box-shadow: ${({ collapsed }) =>
-    !collapsed ? "2px 6px 0px 2px rgba(35, 207, 234, 0.15)" : "none"};
+    !collapsed ? "2px 6px 3px 2px rgba(35, 207, 234, 0.15)" : "none"};
   transition: all 0.2s;
   min-height: 100vh;
   position: fixed;

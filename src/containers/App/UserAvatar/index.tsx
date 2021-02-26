@@ -55,6 +55,7 @@ export const UserAvatar: FC<TUserAvatarProps> = ({
   return (
     <>
       <MenuButton
+        primary
         aria-describedby={id}
         data-testid="account-dropdown"
         hoverable
