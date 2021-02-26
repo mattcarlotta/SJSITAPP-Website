@@ -122,14 +122,18 @@ export type TEventData = {
   eventType: string;
   notes?: string;
   opponent?: string;
+  location?: string;
+  employeeResponse?: string;
+  employeeNotes?: string;
+  uniform?: string;
   team: string;
   schedule: Array<{
-    _id?: string;
+    _id: string;
     title?: string;
-    employeeIds?: Array<{
-      _id: PropTypes.string;
-      firstName: PropTypes.string;
-      lastName: PropTypes.string;
+    employeeIds: Array<{
+      _id?: PropTypes.string;
+      firstName?: PropTypes.string;
+      lastName?: PropTypes.string;
     }>;
   }>;
 };

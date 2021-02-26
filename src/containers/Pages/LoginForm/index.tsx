@@ -70,7 +70,7 @@ export const LoginForm: FC<ILoginFormProps> = ({ serverError, signinUser }) => {
 
   return (
     <BlackBackground>
-      <Modal isOpen dataTestId="login-form">
+      <Modal dataTestId="login-form" isOpen>
         <FormTitle
           header="Login"
           title="Welcome!"

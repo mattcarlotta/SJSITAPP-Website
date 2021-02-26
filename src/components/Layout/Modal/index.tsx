@@ -25,35 +25,42 @@ const Modal = ({
   children,
   dataTestId,
   disableClickHandler,
+  isOpen,
   maxWidth,
   onClick
 }: IModalProps): JSX.Element => (
   <>
-    <BackgroundOverlay />
-    <WindowContainer>
-      <ModalContainer>
-        <Center maxWidth={maxWidth}>
-          <ClickHandler closeModal={!disableClickHandler ? onClick : undefined}>
-            <ModalContent
-              data-testid={dataTestId}
-              maxWidth={maxWidth}
-              background={background}
-            >
-              <FlexEnd>
-                <CloseModalButton
-                  id="close-modal"
-                  aria-label="close modal"
-                  onClick={() => (onClick ? onClick() : Router.push("/"))}
+    {isOpen && (
+      <>
+        <BackgroundOverlay />
+        <WindowContainer>
+          <ModalContainer>
+            <Center maxWidth={maxWidth}>
+              <ClickHandler
+                closeModal={!disableClickHandler ? onClick : undefined}
+              >
+                <ModalContent
+                  data-testid={dataTestId}
+                  maxWidth={maxWidth}
+                  background={background}
                 >
-                  <FaTimes />
-                </CloseModalButton>
-              </FlexEnd>
-              {children}
-            </ModalContent>
-          </ClickHandler>
-        </Center>
-      </ModalContainer>
-    </WindowContainer>
+                  <FlexEnd>
+                    <CloseModalButton
+                      id="close-modal"
+                      aria-label="close modal"
+                      onClick={() => (onClick ? onClick() : Router.push("/"))}
+                    >
+                      <FaTimes />
+                    </CloseModalButton>
+                  </FlexEnd>
+                  {children}
+                </ModalContent>
+              </ClickHandler>
+            </Center>
+          </ModalContainer>
+        </WindowContainer>
+      </>
+    )}
   </>
 );
 

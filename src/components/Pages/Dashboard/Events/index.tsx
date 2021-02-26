@@ -3,12 +3,10 @@ import Card from "~components/Layout/Card";
 import TabPanel, { a11yProps } from "~components/Layout/TabPanel";
 import Tab from "~components/Layout/Tab";
 import Tabs from "~components/Layout/Tabs";
-// import NoEvents from "~components/Layout/NoEvents";
 import { MdEvent } from "~icons";
 import app from "~utils/axiosConfig";
 import { parseData } from "~utils/parseResponse";
-import EventsToday from "./Today";
-import EventsUpcoming from "./Upcoming";
+import FetchEvents from "./FetchEvents";
 import { AxiosResponse, ReactNode, TEventData } from "~types";
 
 export type TDashboardEventsState = {
@@ -78,10 +76,10 @@ export const Events = (): JSX.Element => {
         <Tab label="Upcoming" {...a11yProps(1)} />
       </Tabs>
       <TabPanel value={tab} index={0}>
-        <EventsToday {...state} fetchEvents={fetchEvents} />
+        <FetchEvents {...state} fetchEvents={fetchEvents} />
       </TabPanel>
       <TabPanel value={tab} index={1}>
-        <EventsUpcoming {...state} fetchEvents={fetchEvents} />
+        <FetchEvents {...state} fetchEvents={fetchEvents} nextWeek />
       </TabPanel>
     </Card>
   );

@@ -7,7 +7,7 @@ const AntTab = withStyles((theme: Theme) =>
       padding: "0 10px",
       textTransform: "none",
       minWidth: 72,
-      minHeight: 40,
+      minHeight: 35,
       fontWeight: 400,
       fontSize: 15,
       marginRight: 8,
@@ -18,15 +18,14 @@ const AntTab = withStyles((theme: Theme) =>
       },
       "&$selected": {
         color: "#1890ff",
+        background: "#fff",
         fontWeight: theme.typography.fontWeightMedium
       },
       "&:focus": {
         color: "#40a9ff"
       }
     },
-    selected: {
-      background: "rgba(0, 109, 118, 0.08)"
-    }
+    selected: {}
   })
 )((props: { label: string }) => <Tab {...props} />);
 

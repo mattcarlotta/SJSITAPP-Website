@@ -9,8 +9,11 @@ export type TAntTabsProps = {
 };
 
 const AntTabs = withStyles({
+  root: {
+    background: "#f1f1f1"
+  },
   indicator: {
-    display: "flex",
+    display: "none",
     justifyContent: "center",
     "& > span": {
       maxWidth: 100,

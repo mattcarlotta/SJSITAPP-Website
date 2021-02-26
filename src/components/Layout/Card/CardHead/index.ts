@@ -6,7 +6,7 @@ const CardHead = styled.div`
   color: #fff;
   display: flex;
   align-items: center;
-  height: 45px;
+  height: 50px;
   margin-bottom: -1px;
   padding: 0 24px;
   border-bottom: 1px solid rgba(35, 207, 234, 0.3);

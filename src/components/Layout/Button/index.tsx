@@ -39,7 +39,8 @@ export interface StyledButtonProps {
   uppercase?: boolean;
   lowercase?: boolean;
   capitalize?: boolean;
-  marginRight?: string;
+  margin?: string;
+  maxWidth?: string;
   width?: string;
   padding?: string;
   fontSize?: string;
@@ -50,13 +51,12 @@ const Button = styled(StyledButton)<StyledButtonProps>`
   cursor: ${({ disabled }) => (!disabled ? "pointer" : "not-allowed")};
   display: ${({ display }) => display || "block"};
   color: ${props => {
-    if (props.primary || props.danger) return "#025f6d";
+    if (props.primary || props.danger) return "#fff";
     if (props.tertiary) return "#e4e3e3";
     return "#fff";
   }};
   background: ${props => {
-    if (props.primary)
-      return "linear-gradient(90deg,#194048 0%,#0f7888 50%,#194048 100%)";
+    if (props.primary) return "#0d6472";
     if (props.danger)
       return "linear-gradient(90deg,#8a4133 0%,#f56342 50%,#8a4133 100%)";
     if (props.tertiary) return "#010404";
@@ -69,7 +69,6 @@ const Button = styled(StyledButton)<StyledButtonProps>`
     return "none";
   }};
   text-decoration: none;
-  margin-right: ${({ marginRight }) => marginRight || "20px"};
   transition: all 0.2s ease-in-out;
   border-radius: 50px;
   border: 2px solid
@@ -82,6 +81,8 @@ const Button = styled(StyledButton)<StyledButtonProps>`
   width: ${({ width }) => width || "100%"};
   padding: ${({ padding }) => padding || "13px 18px"};
   font-size: ${({ fontSize }) => fontSize || "18px"};
+  margin: ${({ margin }) => margin || "auto"};
+  max-width: ${({ maxWidth }) => maxWidth || "auto"};
   letter-spacing: 1px;
 
   &:hover {
@@ -90,7 +91,12 @@ const Button = styled(StyledButton)<StyledButtonProps>`
       if (props.tertiary) return "#fff";
       return "#04515d";
     }};
-    background: ${({ tertiary }) => (tertiary ? "#025f6d" : "transparent")};
+    background: ${props => {
+      if (props.primary) return "#0d6472";
+      if (props.danger) return "#f56342";
+      if (props.tertiary) return "#025f6d";
+      return "transparent";
+    }};
     border: 2px solid
       ${props => {
         if (props.primary) return "#025f6d";
@@ -98,8 +104,8 @@ const Button = styled(StyledButton)<StyledButtonProps>`
         if (props.tertiary) return "#3794a5";
         return "transparent";
       }};
-    box-shadow: ${({ tertiary, noGlow }) =>
-      tertiary && !noGlow ? "0px 0px 14px -2px #14d3e2" : "none"};
+    box-shadow: ${({ noGlow }) =>
+      !noGlow ? "0px 0px 14px -2px #14d3e2" : "none"};
   }
 
   &:focus {

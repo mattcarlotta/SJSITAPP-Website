@@ -47,6 +47,7 @@ const CalendarDateTitle = styled(CalendarDateTitleComponent)`
   color: rgba(0, 0, 0, 0.65);
   background: transparent;
   padding: 0 5px;
+  margin-bottom: 10px;
   border-radius: 2px;
   transition: all 0.3s;
 `;
