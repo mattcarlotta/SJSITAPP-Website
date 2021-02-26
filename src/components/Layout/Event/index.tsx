@@ -52,21 +52,20 @@ const Event = ({
 }: TEventProps): JSX.Element => {
   const [state, setState] = React.useState({
     isVisible: false,
-    modalContent: null
+    modalContent: {}
   });
   const { isVisible, modalContent } = state;
 
   const handleCloseModal = React.useCallback(() => {
     setState({
       isVisible: false,
-      modalContent: null
+      modalContent: {}
     });
   }, []);
 
   const handleShowModal = React.useCallback((modalContent: TEventData) => {
     setState({
       isVisible: true,
-      // @ts-ignore
       modalContent
     });
   }, []);
@@ -74,23 +73,23 @@ const Event = ({
   return (
     <>
       {!isEmpty(content) &&
-        content.map(item => (
-          <FadeIn key={item._id} timing="0.4s">
+        content.map(event => (
+          <FadeIn key={event._id} timing="0.4s">
             <Button
               dataTestId="upcoming-event"
               className="event-date"
               type="button"
-              primary={item.team === "San Jose Sharks"}
-              danger={item.team === "San Jose Barracuda"}
+              primary={event.team === "San Jose Sharks"}
+              danger={event.team === "San Jose Barracuda"}
               padding={padding}
               margin="0 auto"
               maxWidth="250px"
               style={btnStyle}
-              onClick={() => handleShowModal(item)}
+              onClick={() => handleShowModal(event)}
             >
               <FlexSpaceAround style={innerStyle}>
-                {!isEmpty(item.schedule) &&
-                  item.schedule.map(({ employeeIds }) =>
+                {!isEmpty(event.schedule) &&
+                  event.schedule.map(({ employeeIds }) =>
                     !isEmpty(employeeIds) &&
                     employeeIds.some(({ _id }) => _id === loggedinUserId) ? (
                       <FaCalendarCheck
@@ -102,9 +101,9 @@ const Event = ({
                 <Team
                   folder={folder || "calendar"}
                   size={height || width}
-                  team={item.team}
+                  team={event.team}
                 />
-                {item.opponent && (
+                {event.opponent && (
                   <>
                     <span
                       css={css`
@@ -116,7 +115,7 @@ const Event = ({
                     <Team
                       folder={folder || "calendar"}
                       size={height || width}
-                      team={item.opponent}
+                      team={event.opponent}
                     />
                   </>
                 )}
@@ -131,8 +130,7 @@ const Event = ({
         maxWidth="500px"
       >
         <EventDetails
-          // @ts-ignore
-          event={modalContent}
+          event={modalContent as TEventData}
           id={id}
           loggedinUserId={loggedinUserId}
         />

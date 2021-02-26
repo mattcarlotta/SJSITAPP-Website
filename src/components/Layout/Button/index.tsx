@@ -57,8 +57,7 @@ const Button = styled(StyledButton)<StyledButtonProps>`
   }};
   background: ${props => {
     if (props.primary) return "#0d6472";
-    if (props.danger)
-      return "linear-gradient(90deg,#8a4133 0%,#f56342 50%,#8a4133 100%)";
+    if (props.danger) return "#ef512d";
     if (props.tertiary) return "#010404";
     return "transparent";
   }};
@@ -74,7 +73,7 @@ const Button = styled(StyledButton)<StyledButtonProps>`
   border: 2px solid
     ${props => {
       if (props.primary) return "#04515d";
-      if (props.danger) return "#d24b2e";
+      if (props.danger) return "#ef512d";
       if (props.tertiary) return "#2e7c8a";
       return "transparent";
     }};
@@ -92,20 +91,24 @@ const Button = styled(StyledButton)<StyledButtonProps>`
       return "#04515d";
     }};
     background: ${props => {
-      if (props.primary) return "#0d6472";
-      if (props.danger) return "#f56342";
+      if (props.primary) return "#006d76";
+      if (props.danger) return "#e8502e";
       if (props.tertiary) return "#025f6d";
       return "transparent";
     }};
     border: 2px solid
       ${props => {
-        if (props.primary) return "#025f6d";
-        if (props.danger) return "#f56342";
+        if (props.primary) return "#006d76";
+        if (props.danger) return "#e8502e";
         if (props.tertiary) return "#3794a5";
         return "transparent";
       }};
-    box-shadow: ${({ noGlow }) =>
-      !noGlow ? "0px 0px 14px -2px #14d3e2" : "none"};
+    box-shadow: ${({ noGlow, danger }) =>
+      noGlow
+        ? "none"
+        : danger
+        ? "0px 0px 14px -2px #e25d3f"
+        : "0px 0px 14px -2px #14d3e2"};
   }
 
   &:focus {

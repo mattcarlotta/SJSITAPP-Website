@@ -1,5 +1,4 @@
 import * as React from "react";
-import { css } from "@emotion/react";
 import isEmpty from "lodash.isempty";
 import Badge from "~components/Layout/Badge";
 import Bold from "~components/Layout/Bold";
@@ -8,7 +7,6 @@ import List from "~components/Layout/List";
 import ListItem from "~components/Layout/ListItem";
 import Margin from "~components/Layout/Margin";
 import { FaClock, FaCalendarCheck } from "~icons";
-import moment from "~utils/momentWithTimezone";
 import { TEventData } from "~types";
 
 export type TEventDetailsProps = {
@@ -41,42 +39,42 @@ const EventDetails = ({
         {event.team}
         {event.opponent && (
           <>
-            <span
-              css={css`
-                margin: 0 5px;
-                word-wrap: break-word;
-              `}
-            >
+            <Margin left="5px" right="5px">
               vs.
-            </span>
+            </Margin>
             {event.opponent}
           </>
         )}
       </Bold>
     </ListItem>
     <ListItem padding="0 10px">
-      <Bold>Event Type: </Bold> {event.eventType}
+      <Bold>Event Type:&nbsp;</Bold>&nbsp;
+      {event.eventType}
     </ListItem>
     <ListItem padding="0 10px">
-      <Bold>Date: </Bold>&nbsp;
-      {moment(event.eventDate).format("MMMM Do, YYYY @ h:mm a")}
+      <Bold>Date:&nbsp;</Bold>&nbsp;
+      <FormatDate
+        style={{ display: "inline" }}
+        format="MMMM Do, YYYY @ h:mm a"
+        date={event.eventDate}
+      />
     </ListItem>
     {event.notes && (
       <ListItem padding="0 10px">
-        <Bold>Event Notes: </Bold> {event.notes}
+        <Bold>Event Notes:&nbsp;</Bold>&nbsp;{event.notes}
       </ListItem>
     )}
     <ListItem padding="0 10px">
-      <Bold>Location: </Bold> {event.location}
+      <Bold>Location:&nbsp;</Bold>&nbsp;{event.location}
     </ListItem>
     {event.uniform && (
       <ListItem padding="0 10px">
-        <Bold>Uniform: </Bold> {event.uniform}
+        <Bold>Uniform:&nbsp;</Bold>&nbsp;{event.uniform}
       </ListItem>
     )}
     {event.employeeResponse && (
       <ListItem padding="0 10px">
-        <Bold>Employee Response:</Bold>
+        <Bold>Employee Response:&nbsp;</Bold>&nbsp;
         <Badge
           style={{ display: "inline-block" }}
           response={event.employeeResponse}
@@ -87,12 +85,12 @@ const EventDetails = ({
     )}
     {event.employeeNotes && (
       <ListItem padding="0 10px">
-        <Bold>Employee Notes:</Bold> {event.employeeNotes}
+        <Bold>Employee Notes:&nbsp;</Bold>&nbsp;{event.employeeNotes}
       </ListItem>
     )}
     {!isEmpty(event.schedule) && (
       <ListItem padding="0 10px">
-        <Bold>Scheduled Employees</Bold>
+        <Bold>Scheduled Employees:</Bold>
         {event.schedule.map(({ _id, employeeIds }) => (
           <List style={{ marginTop: 5 }} key={_id}>
             <Bold style={{ paddingLeft: 10 }}>

@@ -14,7 +14,7 @@ const iconStyle = {
 const NoEvents = ({ today }: TNoEventsProps): JSX.Element => (
   <FlexCenter
     data-testid="no-events"
-    height="60%"
+    height="130px"
     direction="column"
     justify="center"
     style={{ color: "#999" }}

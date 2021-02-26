@@ -1,59 +1,32 @@
-import React from "react";
 import styled from "@emotion/styled";
-import { makeStyles } from "@material-ui/core/styles"; // Theme
-import Tooltip from "@material-ui/core/Tooltip";
+import Tooltip from "~components/Layout/Tooltip";
 import { GoQuestion } from "~icons";
-import TooltipText from "~components/Layout/TooltipText";
-import { CSSProperties, FC } from "~types";
+import { CSSProperties } from "~types";
 
-export interface ILabelProps {
+export type TLabelProps = {
   className?: string;
   name?: string;
   label?: any;
   style?: CSSProperties;
   tooltip?: string;
-}
+};
 
-const useStylesBootstrap = makeStyles(() => ({
-  arrow: {
-    color: "#025f6d"
-  },
-  tooltip: {
-    backgroundColor: "#025f6d",
-    boxShadow: "0px 0px 14px -2px #14d3e2",
-    border: "2px solid #3794a5"
-  }
-}));
-
-const LabelComponent: FC<ILabelProps> = ({
+const LabelComponent = ({
   className,
   name,
   label,
   style,
   tooltip
-}): JSX.Element => {
-  const classes = useStylesBootstrap();
-
-  return (
-    <label className={className} style={style} htmlFor={name}>
-      {label}
-      {tooltip && (
-        <span className="tooltip">
-          <Tooltip
-            arrow
-            classes={classes}
-            placement="top"
-            title={<TooltipText>{tooltip}</TooltipText>}
-          >
-            <span>
-              <GoQuestion />
-            </span>
-          </Tooltip>
-        </span>
-      )}
-    </label>
-  );
-};
+}: TLabelProps): JSX.Element => (
+  <label className={className} style={style} htmlFor={name}>
+    {label}
+    {tooltip && (
+      <Tooltip title={tooltip}>
+        <GoQuestion />
+      </Tooltip>
+    )}
+  </label>
+);
 
 const Label = styled(LabelComponent)`
   color: #010404;

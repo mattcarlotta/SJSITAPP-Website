@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 import moment from "~utils/momentWithTimezone";
 
 export type CalendarDateTitleProps = {
@@ -18,16 +19,26 @@ const CalendarDateTitleComponent = ({
 
   return (
     <div className={className}>
-      <div>
-        {dayDate.format("dddd")}
+      <div
+        css={css`
+          font-size: 14px;
+          color: #888;
+          text-align: center;
+        `}
+      >
+        {nextWeek ? "Today" : dayDate.format("dddd")}
         {nextWeek && (
           <>
-            &nbsp;&#8211;&nbsp;
+            &nbsp;to next&nbsp;
             {weekFromDate.format("dddd")}
           </>
         )}
       </div>
-      <div>
+      <div
+        css={css`
+          color: #1a4448;
+        `}
+      >
         {dayDate.format("MMM DD")}
         {nextWeek && (
           <>
@@ -44,10 +55,8 @@ const CalendarDateTitle = styled(CalendarDateTitleComponent)`
   text-align: center;
   width: auto;
   padding: 0;
-  color: rgba(0, 0, 0, 0.65);
   background: transparent;
-  padding: 0 5px;
-  margin-bottom: 10px;
+  margin: 10px 0;
   border-radius: 2px;
   transition: all 0.3s;
 `;

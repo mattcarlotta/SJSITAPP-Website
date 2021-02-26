@@ -1,6 +1,7 @@
 /* istanbul ignore file */
 import * as React from "react";
-import { Tooltip } from "@material-ui/core";
+// import { Tooltip } from "@material-ui/core";
+import Tooltip from "~components/Layout/Tooltip";
 import LoadingImage from "./LoadingImage";
 
 export type TDisplayTeamProps = {
@@ -46,7 +47,7 @@ class DisplayTeam extends React.Component<
     const { folder, size, team } = this.props;
 
     return (
-      <Tooltip placement="top" title={team}>
+      <Tooltip title={team}>
         <span>
           <LoadingImage
             opacity={isLoaded ? 1 : this.props.opacity}
