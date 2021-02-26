@@ -96,7 +96,7 @@ export const UserAvatar: FC<TUserAvatarProps> = ({
                 blue
                 marginRight="0"
                 padding="0"
-                fontSize="14px"
+                fontSize="13px"
                 dataTestId="change-avatar-link"
                 href="/employee/settings"
               >

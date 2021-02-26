@@ -16,9 +16,17 @@ const LoadingPanel = ({
   </FadeIn>
 );
 
-export default styled(LoadingPanel)<{ height?: string }>`
+export default styled(LoadingPanel)<{
+  borderRadius?: string;
+  height?: string;
+  margin?: string;
+  maxWidth?: string;
+  width?: string;
+}>`
+  border-radius: ${({ borderRadius }) => borderRadius || "0px"};
   height: ${({ height }) => height || "252px"};
-  width: 100%;
-  -webkit-animation: pulse 1.2s infinite;
+  max-width: ${({ maxWidth }) => maxWidth || "auto"};
+  margin: ${({ margin }) => margin || "0px"};
+  width: ${({ width }) => width || "100%"};
   animation: pulse 1.2s infinite;
 `;

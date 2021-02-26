@@ -1,17 +1,15 @@
 import * as React from "react";
-import isEmpty from "lodash.isempty";
-// import get from "lodash.get";
-import { css } from "@emotion/react";
 import Card from "~components/Layout/Card";
-import CalendarDateContainer from "~components/Layout/CalendarDateContainer";
-import CalendarDateTitle from "~components/Layout/CalendarDateTitle";
-import LoadingPanel from "~components/Layout/LoadingPanel";
+import TabPanel, { a11yProps } from "~components/Layout/TabPanel";
+import Tab from "~components/Layout/Tab";
+import Tabs from "~components/Layout/Tabs";
 // import NoEvents from "~components/Layout/NoEvents";
 import { MdEvent } from "~icons";
 import app from "~utils/axiosConfig";
 import { parseData } from "~utils/parseResponse";
+import EventsToday from "./Today";
+import EventsUpcoming from "./Upcoming";
 import { AxiosResponse, ReactNode, TEventData } from "~types";
-import FetchError from "~components/Layout/FetchError";
 
 export type TDashboardEventsState = {
   isLoading: boolean;
@@ -19,6 +17,7 @@ export type TDashboardEventsState = {
   error: boolean;
   events: Array<TEventData>;
   modalChildren: ReactNode;
+  tab: number;
 };
 
 export const Events = (): JSX.Element => {
@@ -27,14 +26,25 @@ export const Events = (): JSX.Element => {
     events: [],
     isLoading: true,
     isVisible: false,
-    modalChildren: null
+    modalChildren: null,
+    tab: 0
   });
 
-  const { error, events, isLoading } = state; // isVisible, modalChildren
+  const { tab } = state; // isVisible, modalChildren
 
-  const fetchTodayEvents = React.useCallback(async () => {
+  const handleTabChange = React.useCallback((_, tab: number): void => {
+    setState(prevState => ({
+      ...prevState,
+      isLoading: true,
+      errors: false,
+      events: [],
+      tab
+    }));
+  }, []);
+
+  const fetchEvents = React.useCallback(async (tab: string): Promise<void> => {
     try {
-      const res: AxiosResponse = await app.get("dashboard/events/today");
+      const res: AxiosResponse = await app.get(`dashboard/events/${tab}`);
       const data = parseData(res);
 
       setState(prevState => ({
@@ -51,42 +61,28 @@ export const Events = (): JSX.Element => {
     }
   }, []);
 
-  React.useEffect(() => {
-    fetchTodayEvents();
-  }, [fetchTodayEvents]);
-
   return (
     <Card
       dataTestId="dashboard-events"
       icon={<MdEvent style={{ fontSize: "24px" }} />}
       title="Events"
+      padding="0 24px 24px"
     >
-      <CalendarDateContainer>
-        <CalendarDateTitle />
-        {isLoading ? (
-          <LoadingPanel
-            style={{
-              margin: "30px auto 0",
-              maxWidth: "350px",
-              width: "100%",
-              borderRadius: 3
-            }}
-            height="140px"
-          />
-        ) : error ? (
-          <FetchError />
-        ) : (
-          <div
-            css={css`
-              padding: 30px 20px;
-            `}
-          >
-            {!isEmpty(events) ? (
-              <pre>{JSON.stringify(events, null, 2)}</pre>
-            ) : null}
-          </div>
-        )}
-      </CalendarDateContainer>
+      <Tabs
+        value={tab}
+        onChange={handleTabChange}
+        variant="standard"
+        aria-label="event tabs"
+      >
+        <Tab label="Today" {...a11yProps(0)} />
+        <Tab label="Upcoming" {...a11yProps(1)} />
+      </Tabs>
+      <TabPanel value={tab} index={0}>
+        <EventsToday {...state} fetchEvents={fetchEvents} />
+      </TabPanel>
+      <TabPanel value={tab} index={1}>
+        <EventsUpcoming {...state} fetchEvents={fetchEvents} />
+      </TabPanel>
     </Card>
   );
 };

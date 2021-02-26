@@ -59,6 +59,20 @@ export const GlobalStylesheet = (): JSX.Element => (
         background: #ed1700;
       }
 
+      @keyframes delay {
+        0%,
+        40%,
+        100% {
+          transform: scaleY(0.05);
+          -webkit-transform: scaleY(0.05);
+        }
+
+        20% {
+          transform: scaleY(1);
+          -webkit-transform: scaleY(1);
+        }
+      }
+
       @keyframes fadeIn {
         from {
           opacity: 0;
@@ -66,6 +80,18 @@ export const GlobalStylesheet = (): JSX.Element => (
 
         to {
           opacity: 1;
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          background-color: #eee;
+        }
+        50% {
+          background-color: #e4e4e4;
+        }
+        100% {
+          background-color: #eee;
         }
       }
 

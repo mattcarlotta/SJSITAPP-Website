@@ -1,40 +1,41 @@
-/* istanbul ignore file */
+import * as React from "react";
 import styled from "@emotion/styled";
-import Flex from "~components/Layout/Flex";
-import FlexEnd from "~components/Layout/FlexEnd";
-import FlexStart from "~components/Layout/FlexStart";
 import moment from "~utils/momentWithTimezone";
 
 export type CalendarDateTitleProps = {
   className?: string;
   eventDate?: string;
+  nextWeek?: boolean;
 };
 
 const CalendarDateTitleComponent = ({
   eventDate,
-  className
+  className,
+  nextWeek
 }: CalendarDateTitleProps): JSX.Element => (
-  <Flex>
-    <FlexStart>
-      <div className={className} style={{ textAlign: "left" }}>
-        {moment(eventDate || Date.now()).format("dddd")}
-      </div>
-    </FlexStart>
-    <FlexEnd>
-      <div className={className}>
-        {moment(eventDate || Date.now()).format("MMM DD")}
-      </div>
-    </FlexEnd>
-  </Flex>
+  <div className={className}>
+    {!nextWeek && <div>{moment(eventDate || Date.now()).format("dddd")}</div>}
+    <div>
+      {moment(eventDate || Date.now()).format("MMM DD")}
+      {nextWeek && (
+        <>
+          &nbsp;&#8211;&nbsp;
+          {moment(eventDate || Date.now())
+            .add(7, "days")
+            .format("MMM DD")}
+        </>
+      )}
+    </div>
+  </div>
 );
 
 const CalendarDateTitle = styled(CalendarDateTitleComponent)`
-  text-align: right;
+  text-align: center;
   width: auto;
   padding: 0;
   color: rgba(0, 0, 0, 0.65);
-  line-height: 24px;
   background: transparent;
+  padding: 0 5px;
   border-radius: 2px;
   transition: all 0.3s;
 `;

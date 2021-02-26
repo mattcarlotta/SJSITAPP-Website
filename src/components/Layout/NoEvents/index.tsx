@@ -12,7 +12,7 @@ const NoEvents = ({ today }: TNoEventsProps): JSX.Element => (
       data-testid="no-events"
       css={css`
         margin: 0;
-        padding: 0;
+        padding: 20px 0 0;
       `}
     >
       {!today ? (
@@ -28,7 +28,9 @@ const NoEvents = ({ today }: TNoEventsProps): JSX.Element => (
         text-align: center;
       `}
     >
-      {!today ? "No upcoming scheduled events" : "No events today"}
+      {!today
+        ? "You don't have any upcoming scheduled events"
+        : "No events today"}
     </p>
   </FlexCenter>
 );

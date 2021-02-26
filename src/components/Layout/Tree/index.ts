@@ -6,18 +6,18 @@ const Tree = styled.aside<{ collapsed: boolean }>`
   }
 
   overflow: ${({ collapsed }) => (collapsed ? "hidden" : "auto")};
-  padding: ${({ collapsed }) => (collapsed ? "5px 0 0 0" : "5px 0 5px 20px")};
+  padding: ${({ collapsed }) => (collapsed ? "0 0 0 0" : "0px 0 5px 20px")};
   width: ${({ collapsed }) => (collapsed ? "0px" : "266px")};
   white-space: nowrap;
   background: #fff;
   box-shadow: ${({ collapsed }) =>
-    collapsed ? "none" : "2px 2px 0px 2px rgba(35, 207, 234, 0.15)"};
+    !collapsed ? "2px 6px 0px 2px rgba(35, 207, 234, 0.15)" : "none"};
   transition: all 0.2s;
   min-height: 100vh;
   position: fixed;
-  top: 60px;
+  top: 56px;
   z-index: 3;
-  transition: 350ms;
+  transition: width 350ms ease, padding 350ms ease, overflow 350ms ease;
 `;
 
 export default Tree;

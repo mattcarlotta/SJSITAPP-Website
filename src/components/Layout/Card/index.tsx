@@ -10,6 +10,7 @@ export type TCardProps = {
   children: ReactNode;
   dataTestId: string;
   icon?: ReactNode;
+  padding?: string;
   title: string | ReactNode;
 };
 
@@ -18,6 +19,7 @@ const CardComponent = ({
   children,
   dataTestId,
   icon,
+  padding,
   title
 }: TCardProps): JSX.Element => (
   <div data-testid={dataTestId} className={className}>
@@ -27,7 +29,7 @@ const CardComponent = ({
         {title}
       </CardHeadTitle>
     </CardHead>
-    <CardBody>{children}</CardBody>
+    <CardBody padding={padding}>{children}</CardBody>
   </div>
 );
 
