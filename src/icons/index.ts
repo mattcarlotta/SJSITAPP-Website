@@ -24,6 +24,7 @@ export { FaBug } from "@react-icons/all-files/fa/FaBug";
 export { FaCalendar } from "@react-icons/all-files/fa/FaCalendar";
 export { FaCalendarAlt } from "@react-icons/all-files/fa/FaCalendarAlt";
 export { FaCalendarPlus } from "@react-icons/all-files/fa/FaCalendarPlus";
+export { FaCalendarTimes } from "@react-icons/all-files/fa/FaCalendarTimes";
 export { FaChartArea } from "@react-icons/all-files/fa/FaChartArea";
 export { FaCogs } from "@react-icons/all-files/fa/FaCogs";
 export { FaConciergeBell } from "@react-icons/all-files/fa/FaConciergeBell";

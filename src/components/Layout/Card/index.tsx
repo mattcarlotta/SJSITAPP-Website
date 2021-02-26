@@ -44,7 +44,7 @@ const Card = styled(CardComponent)<{ margin?: string }>`
   background: #fff;
   border-radius: 2px;
   transition: all 0.3s;
-  box-shadow: 0px 0px 3px 3px rgba(35, 207, 234, 0.15);
+  box-shadow: 0px 0px 2px 2px rgba(35, 207, 234, 0.3);
 `;
 
 export default Card;

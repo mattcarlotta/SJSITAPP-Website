@@ -10,7 +10,7 @@ const NoEvents = ({ today }: TNoEventsProps): JSX.Element => (
   <FlexCenter
     direction="column"
     justify="center"
-    style={{ color: "#999", height: "85%" }}
+    style={{ color: "#999", height: "70%" }}
   >
     <div data-testid="no-events">
       {!today ? (

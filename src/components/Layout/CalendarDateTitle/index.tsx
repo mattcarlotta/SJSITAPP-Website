@@ -12,22 +12,33 @@ const CalendarDateTitleComponent = ({
   eventDate,
   className,
   nextWeek
-}: CalendarDateTitleProps): JSX.Element => (
-  <div className={className}>
-    {!nextWeek && <div>{moment(eventDate || Date.now()).format("dddd")}</div>}
-    <div>
-      {moment(eventDate || Date.now()).format("MMM DD")}
-      {nextWeek && (
-        <>
-          &nbsp;&#8211;&nbsp;
-          {moment(eventDate || Date.now())
-            .add(7, "days")
-            .format("MMM DD")}
-        </>
-      )}
+}: CalendarDateTitleProps): JSX.Element => {
+  const dayDate = moment(eventDate || Date.now());
+  const weekFromDate = moment(eventDate || Date.now()).add(7, "days");
+
+  return (
+    <div className={className}>
+      <div>
+        {dayDate.format("dddd")}
+        {nextWeek && (
+          <>
+            &nbsp;&#8211;&nbsp;
+            {weekFromDate.format("dddd")}
+          </>
+        )}
+      </div>
+      <div>
+        {dayDate.format("MMM DD")}
+        {nextWeek && (
+          <>
+            &nbsp;&#8211;&nbsp;
+            {weekFromDate.format("MMM DD")}
+          </>
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const CalendarDateTitle = styled(CalendarDateTitleComponent)`
   text-align: center;

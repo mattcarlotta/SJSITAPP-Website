@@ -29,12 +29,7 @@ const EventsUpcoming = ({
     <CalendarDateContainer>
       <CalendarDateTitle nextWeek />
       {isLoading ? (
-        <LoadingPanel
-          borderRadius="3px"
-          height="170px"
-          margin="10px auto 0"
-          maxWidth="350px"
-        />
+        <LoadingPanel borderRadius="3px" height="170px" margin="10px auto 0" />
       ) : error ? (
         <FetchError />
       ) : !isEmpty(events) ? (
