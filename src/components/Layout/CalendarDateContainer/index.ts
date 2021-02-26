@@ -7,7 +7,8 @@ const CalendarDateContainer = styled.div<{ height?: string }>`
   color: rgba(0, 0, 0, 0.65);
   background-color: rgba(35, 207, 234, 0.03);
   text-align: left;
-  border: 1px solid rgba(35, 207, 234, 0.25);
+  border-top: 1px solid rgba(35, 207, 234, 0.25);
+  border-bottom: 1px solid rgba(35, 207, 234, 0.25);
   border-radius: 4px;
   overflow-y: auto;
   transition: background 0.3s;

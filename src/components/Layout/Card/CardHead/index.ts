@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 
 const CardHead = styled.div`
   background: #f4901e;
-  color: #fdfdfd;
+  color: #fff;
   display: flex;
   align-items: center;
   height: 45px;

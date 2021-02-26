@@ -66,7 +66,7 @@ export const Events = (): JSX.Element => {
       dataTestId="dashboard-events"
       icon={<MdEvent style={{ fontSize: "24px" }} />}
       title="Events"
-      padding="0 24px 24px"
+      padding="0"
     >
       <Tabs
         value={tab}

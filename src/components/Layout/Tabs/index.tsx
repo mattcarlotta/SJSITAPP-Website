@@ -12,9 +12,8 @@ const AntTabs = withStyles({
   indicator: {
     display: "flex",
     justifyContent: "center",
-    backgroundColor: "transparent",
     "& > span": {
-      maxWidth: 80,
+      maxWidth: 100,
       width: "100%",
       backgroundColor: "#635ee7"
     }

@@ -4,13 +4,14 @@ import { Tab } from "@material-ui/core";
 const AntTab = withStyles((theme: Theme) =>
   createStyles({
     root: {
-      padding: 0,
+      padding: "0 10px",
       textTransform: "none",
       minWidth: 72,
       minHeight: 40,
       fontWeight: 400,
       fontSize: 15,
-      marginRight: 16,
+      marginRight: 8,
+      color: "#222",
       "&:hover": {
         color: "#40a9ff",
         opacity: 1
@@ -23,7 +24,9 @@ const AntTab = withStyles((theme: Theme) =>
         color: "#40a9ff"
       }
     },
-    selected: {}
+    selected: {
+      background: "rgba(0, 109, 118, 0.08)"
+    }
   })
 )((props: { label: string }) => <Tab {...props} />);
 
