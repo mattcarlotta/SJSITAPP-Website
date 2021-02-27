@@ -71,7 +71,7 @@ const Button = styled(StyledButton)<StyledButtonProps>`
   border-radius: 50px;
   border: 2px solid
     ${props => {
-      if (props.primary) return "#04515d";
+      if (props.primary) return "#0d6472";
       if (props.danger) return "#ef512d";
       if (props.tertiary) return "#2e7c8a";
       return "transparent";

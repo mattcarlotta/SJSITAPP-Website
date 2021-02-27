@@ -125,7 +125,7 @@ const EventDetails = ({
                   style={{
                     backgroundColor:
                       _id === id || _id === loggedinUserId ? "#006d75" : "",
-
+                    borderRadius: _id === id || _id === loggedinUserId ? 10 : 0,
                     fontWeight:
                       _id === id || _id === loggedinUserId ? "bold" : "normal"
                   }}
