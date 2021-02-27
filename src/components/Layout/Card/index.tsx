@@ -42,9 +42,10 @@ const Card = styled(CardComponent)<{ margin?: string }>`
   list-style: none;
   position: relative;
   background: #fff;
-  border-radius: 2px;
+  border-radius: 10px;
   transition: all 0.3s;
-  box-shadow: 0px 0px 2px 2px rgba(35, 207, 234, 0.3);
+  box-shadow: 0px 2px 1px -1px rgb(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgb(0, 0, 0, 0.14), 0px 1px 3px 0px rgb(0, 0, 0, 0.12);
 `;
 
 export default Card;

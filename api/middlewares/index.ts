@@ -32,7 +32,7 @@ const middlewares = (app: Express): void => {
     session({
       path: "/",
       keys: [COOKIEKEY as string],
-      name: "SJSITApp",
+      name: "sjsitapp",
       maxAge: 2592000000,
       httpOnly: true,
       domain: DOMAIN,

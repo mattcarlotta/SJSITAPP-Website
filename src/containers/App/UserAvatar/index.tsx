@@ -1,6 +1,7 @@
 import * as React from "react";
 import { css } from "@emotion/react";
-import Popover from "@material-ui/core/Popover";
+import { Popover } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { signoutUserSession } from "~actions/Auth";
 import Avatar from "~components/Layout/Avatar";
@@ -28,6 +29,12 @@ export type TUserAvatarProps = {
   signoutUserSession: typeof signoutUserSession;
 };
 
+const useClasses = makeStyles(() => ({
+  paper: {
+    borderRadius: 5
+  }
+}));
+
 export const UserAvatar: FC<TUserAvatarProps> = ({
   avatar,
   firstName,
@@ -37,6 +44,7 @@ export const UserAvatar: FC<TUserAvatarProps> = ({
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
+  const classes = useClasses();
 
   const handleClick = React.useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
@@ -66,6 +74,7 @@ export const UserAvatar: FC<TUserAvatarProps> = ({
       <Popover
         id={id}
         open={open}
+        classes={classes}
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
@@ -140,6 +149,7 @@ export const UserAvatar: FC<TUserAvatarProps> = ({
                 type="button"
                 data-testid="signout-user"
                 style={{ width: "100%" }}
+                margin="0 0 3px 0"
                 onClick={signoutUserSession}
               >
                 <RiLogoutBoxLine />

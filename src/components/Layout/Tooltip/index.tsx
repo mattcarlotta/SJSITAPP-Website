@@ -3,7 +3,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import TooltipText from "~components/Layout/TooltipText";
 import { ReactNode } from "~types";
 
-const useStylesBootstrap = makeStyles(() => ({
+const useClasses = makeStyles(() => ({
   arrow: {
     color: "#025f6d"
   },
@@ -23,7 +23,7 @@ const CustomTooltip = ({
   children,
   title
 }: TCustomTooltipProps): JSX.Element => {
-  const classes = useStylesBootstrap();
+  const classes = useClasses();
 
   return (
     <span className="tooltip">
