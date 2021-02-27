@@ -21,7 +21,7 @@ const ServerError: NextPage = () => (
     >
       <Head title="Server Error" />
       <img src="/logo_192x192.png" alt="Logo.png" />
-      <ErrorTitle>The San Jose Sharks Ice Team</ErrorTitle>
+      <ErrorTitle>The Sharks Ice Team</ErrorTitle>
       <Center>
         <ErrorStatus>
           <FaHeartBroken style={{ position: "relative", top: 8 }} /> 500

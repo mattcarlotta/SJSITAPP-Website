@@ -74,11 +74,11 @@ const createAuthMail = (
   const isEmployee = role === "employee";
   return {
     sendTo: `${authorizedEmail}`,
-    sendFrom: "San Jose Sharks Ice Team <noreply@sjsiceteam.com>",
+    sendFrom: "Sharks Ice Team <noreply@sjsiceteam.com>",
     sendDate: moment().tz("America/Los_Angeles").toDate(),
     subject: `${
       isEmployee ? "Congratulations" : "Welcome"
-    }, you have been invited to join the San Jose Sharks Ice Team!`,
+    }, you have been invited to join the Sharks Ice Team!`,
     message: isEmployee
       ? newAuthorizationKeyTemplate(token, expiration.calendar())
       : newStaffTemplate(token, expiration.calendar())

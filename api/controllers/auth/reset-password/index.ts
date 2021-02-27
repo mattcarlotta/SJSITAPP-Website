@@ -33,7 +33,7 @@ const sendEmailResetToken = async (
     // creates an email template for a password reset
     await Mail.create({
       sendTo: `${existingUser.firstName} ${existingUser.lastName} <${existingUser.email}>`,
-      sendFrom: "San Jose Sharks Ice Team <noreply@sjsiceteam.com>",
+      sendFrom: "Sharks Ice Team <noreply@sjsiceteam.com>",
       sendDate: createDate().toDate(),
       subject: "Password Reset Confirmation",
       message: newPasswordTemplate(

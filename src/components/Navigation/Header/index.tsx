@@ -14,7 +14,7 @@ const Header = ({
   url
 }: THeaderProps): JSX.Element => (
   <Head>
-    <title>{title} - San Jose Sharks Ice Team</title>
+    <title>{title} - Sharks Ice Team</title>
     <link rel="canonical" href={`${process.env.NEXT_PUBLIC_CLIENT}${url}`} />
     <meta name="description" content={description} />
     <meta property="og:description" content={description} />

@@ -27,7 +27,9 @@ const AntTab = withStyles(() =>
     },
     textColorInherit: {
       "&:disabled": {
-        opacity: 1
+        opacity: 1,
+        borderTopRightRadius: 4,
+        borderTopLeftRadius: 4
       }
     }
   })

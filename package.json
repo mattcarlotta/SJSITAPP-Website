@@ -1,7 +1,7 @@
 {
   "name": "sjsitapp",
   "version": "2.0.0",
-  "description": "An application for the San Jose Sharks Ice Team.",
+  "description": "An application for the Sharks Ice Team.",
   "repository": "https://github.com/mattcarlotta/SJITApp-Website",
   "sideEffects": false,
   "author": "Matt Carlotta",

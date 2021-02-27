@@ -108,6 +108,15 @@ export const GlobalStylesheet = (): JSX.Element => (
         }
       }
 
+      @keyframes wave {
+        0% {
+          left: -60%;
+        }
+        100% {
+          left: 125%;
+        }
+      }
+
       ::-moz-focus-inner {
         border: 0;
       }

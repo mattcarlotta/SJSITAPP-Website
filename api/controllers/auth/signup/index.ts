@@ -60,9 +60,9 @@ const createUser = async (req: Request, res: Response): Promise<Response> => {
     // send an email template for a new user signup
     await Mail.create({
       sendTo: `${newUser.firstName} ${newUser.lastName} <${newUser.email}>`,
-      sendFrom: "San Jose Sharks Ice Team <noreply@sjsiceteam.com>",
+      sendFrom: "Sharks Ice Team <noreply@sjsiceteam.com>",
       sendDate: createDate().toDate(),
-      subject: "Welcome to the San Jose Sharks Ice Team!",
+      subject: "Welcome to the Sharks Ice Team!",
       message: newUserTemplate(newUser.firstName, newUser.lastName)
     });
 

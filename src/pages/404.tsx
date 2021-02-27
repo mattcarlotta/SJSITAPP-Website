@@ -20,7 +20,7 @@ const NotFound: NextPage = () => (
     >
       <Head title="Page Not Found" />
       <img src="/logo_192x192.png" alt="Logo.png" />
-      <ErrorTitle>The San Jose Sharks Ice Team</ErrorTitle>
+      <ErrorTitle>The Sharks Ice Team</ErrorTitle>
       <Center>
         <ErrorStatus>Page Not Found</ErrorStatus>
         <ErrorMessage>

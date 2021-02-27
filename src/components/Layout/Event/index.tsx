@@ -21,7 +21,7 @@ const iconStyle = {
 export type TEventProps = {
   btnStyle?: CSSProperties;
   details: Array<TEventData>;
-  folder: string;
+  folder: "badges" | "calendar" | "lowres";
   height?: number;
   id?: string;
   innerStyle?: CSSProperties;

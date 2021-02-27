@@ -24,12 +24,6 @@ const LoadingImage = styled.div<{
     top: -50%;
     left: -50%;
     z-index: 1;
-    background-image: -o-linear-gradient(
-      left,
-      transparent 0%,
-      #fff 50%,
-      transparent 100%
-    );
     background-image: linear-gradient(
       90deg,
       transparent 0px,
@@ -39,6 +33,11 @@ const LoadingImage = styled.div<{
     animation: wave ${({ duration }) => duration || "2.5s"} infinite ease-in-out;
     transform: rotate(25deg);
     ${({ duration }) => duration === "0s" && "display: none;"};
+  }
+
+  img {
+    height: ${({ size }) => (size ? `${size}px` : "50px")};
+    width: ${({ size }) => (size ? `${size}px` : "50px")};
   }
 `;
 
