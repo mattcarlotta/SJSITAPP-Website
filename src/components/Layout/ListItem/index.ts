@@ -19,7 +19,7 @@ const ListItem = styled.li<{
   }};
   margin: ${({ margin }) => margin || "5px 0"};
   text-align: ${({ textAlign }) => textAlign || undefined};
-  padding: ${({ padding }) => padding || "0px"};
+  padding: ${({ padding }) => padding || "0 10px"};
 `;
 
 export default ListItem;

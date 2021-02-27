@@ -2,7 +2,8 @@
 import styled from "@emotion/styled";
 
 const Bold = styled.span`
-  font-weight: bold;
+  font-weight: 500;
+  margin-right: 5px;
 `;
 
 export default Bold;

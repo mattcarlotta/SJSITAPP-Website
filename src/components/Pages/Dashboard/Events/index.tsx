@@ -1,44 +1,56 @@
 import * as React from "react";
+import isEmpty from "lodash.isempty";
+import { connect } from "react-redux";
 import Card from "~components/Layout/Card";
 import TabPanel, { a11yProps } from "~components/Layout/TabPanel";
 import Tab from "~components/Layout/Tab";
 import Tabs from "~components/Layout/Tabs";
+import CalendarDateContainer from "~components/Layout/CalendarDateContainer";
+import CalendarDateTitle from "~components/Layout/CalendarDateTitle";
+import FetchError from "~components/Layout/FetchError";
+import Event from "~components/Layout/Event";
+import LoadingPanel from "~components/Layout/LoadingPanel";
+import NoEvents from "~components/Layout/NoEvents";
 import { MdEvent } from "~icons";
 import app from "~utils/axiosConfig";
 import { parseData } from "~utils/parseResponse";
-import FetchEvents from "./FetchEvents";
-import { AxiosResponse, ReactNode, TEventData } from "~types";
+import { AxiosResponse, TEventData, TRootState } from "~types";
 
 export type TDashboardEventsState = {
   isLoading: boolean;
-  isVisible: boolean;
   error: boolean;
   events: Array<TEventData>;
-  modalChildren: ReactNode;
+  nextWeek: boolean;
   tab: number;
 };
 
-export const Events = (): JSX.Element => {
+export type TDashboardEventsProps = {
+  loggedinUserId: string;
+};
+
+export const Events = ({
+  loggedinUserId
+}: TDashboardEventsProps): JSX.Element => {
   const [state, setState] = React.useState<TDashboardEventsState>({
     error: false,
     events: [],
     isLoading: true,
-    isVisible: false,
-    modalChildren: null,
+    nextWeek: false,
     tab: 0
   });
-
-  const { tab } = state; // isVisible, modalChildren
 
   const handleTabChange = React.useCallback((_, tab: number): void => {
     setState(prevState => ({
       ...prevState,
       isLoading: true,
-      errors: false,
+      error: false,
       events: [],
+      nextWeek: tab !== 0,
       tab
     }));
   }, []);
+
+  const { error, events, isLoading, nextWeek } = state;
 
   const fetchEvents = React.useCallback(async (tab: string): Promise<void> => {
     try {
@@ -59,6 +71,10 @@ export const Events = (): JSX.Element => {
     }
   }, []);
 
+  React.useEffect(() => {
+    fetchEvents(!nextWeek ? "today" : "upcoming");
+  }, [nextWeek, fetchEvents]);
+
   return (
     <Card
       dataTestId="dashboard-events"
@@ -67,46 +83,47 @@ export const Events = (): JSX.Element => {
       padding="0"
     >
       <Tabs
-        value={tab}
+        value={state.tab}
         onChange={handleTabChange}
         variant="standard"
         aria-label="event tabs"
       >
-        <Tab label="Today" {...a11yProps(0)} />
-        <Tab label="Upcoming" {...a11yProps(1)} />
+        <Tab disabled={state.tab === 0} label="Today" {...a11yProps(0)} />
+        <Tab disabled={state.tab === 1} label="Upcoming" {...a11yProps(1)} />
       </Tabs>
-      <TabPanel value={tab} index={0}>
-        <FetchEvents {...state} fetchEvents={fetchEvents} />
-      </TabPanel>
-      <TabPanel value={tab} index={1}>
-        <FetchEvents {...state} fetchEvents={fetchEvents} nextWeek />
+      <TabPanel value={0} index={0}>
+        <CalendarDateContainer>
+          <CalendarDateTitle nextWeek={nextWeek} />
+          {isLoading ? (
+            <LoadingPanel
+              borderRadius="3px"
+              height="170px"
+              margin="10px auto 0"
+            />
+          ) : error ? (
+            <FetchError />
+          ) : !isEmpty(events) ? (
+            events.map(props => (
+              <Event
+                key={props._id}
+                padding="5px 20px"
+                details={[props]}
+                spacing={20}
+                folder="lowres"
+                loggedinUserId={loggedinUserId}
+              />
+            ))
+          ) : (
+            <NoEvents today={!state.nextWeek} />
+          )}
+        </CalendarDateContainer>
       </TabPanel>
     </Card>
   );
 };
 
-export default Events;
+const mapStateToProps = ({ auth }: Pick<TRootState, "auth">) => ({
+  loggedinUserId: auth.id
+});
 
-/*
-events.map(props =>
-											moment(props.eventDate) < endOfDay ? (
-												<ScheduleList
-													key={props._id}
-													content={[props]}
-													innerStyle={{
-														padding: "5px 0",
-														maxWidth: 225,
-														margin: "0 auto",
-													}}
-													btnStyle={{ maxWidth: 585, minWidth: 225 }}
-													spacing={20}
-													padding="0"
-													folder="lowres"
-													handleShowModal={this.handleShowModal}
-													loggedinUserId={this.props.loggedinUserId}
-													scheduleIconStyle={{
-														fontSize: 19,
-														margin: "0 10px",
-													}}
-												/>
-*/
+export default connect(mapStateToProps)(Events);

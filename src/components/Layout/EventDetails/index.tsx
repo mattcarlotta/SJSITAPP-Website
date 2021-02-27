@@ -47,12 +47,12 @@ const EventDetails = ({
         )}
       </Bold>
     </ListItem>
-    <ListItem padding="0 10px">
-      <Bold>Event Type:&nbsp;</Bold>&nbsp;
+    <ListItem>
+      <Bold>Event Type:</Bold>
       {event.eventType}
     </ListItem>
-    <ListItem padding="0 10px">
-      <Bold>Date:&nbsp;</Bold>&nbsp;
+    <ListItem>
+      <Bold>Date:</Bold>
       <FormatDate
         style={{ display: "inline" }}
         format="MMMM Do, YYYY @ h:mm a"
@@ -60,21 +60,24 @@ const EventDetails = ({
       />
     </ListItem>
     {event.notes && (
-      <ListItem padding="0 10px">
-        <Bold>Event Notes:&nbsp;</Bold>&nbsp;{event.notes}
+      <ListItem>
+        <Bold>Event Notes:</Bold>
+        {event.notes}
       </ListItem>
     )}
-    <ListItem padding="0 10px">
-      <Bold>Location:&nbsp;</Bold>&nbsp;{event.location}
+    <ListItem>
+      <Bold>Location:</Bold>
+      {event.location}
     </ListItem>
     {event.uniform && (
-      <ListItem padding="0 10px">
-        <Bold>Uniform:&nbsp;</Bold>&nbsp;{event.uniform}
+      <ListItem>
+        <Bold>Uniform:</Bold>
+        {event.uniform}
       </ListItem>
     )}
     {event.employeeResponse && (
-      <ListItem padding="0 10px">
-        <Bold>Employee Response:&nbsp;</Bold>&nbsp;
+      <ListItem>
+        <Bold>Employee Response:</Bold>
         <Badge
           style={{ display: "inline-block" }}
           response={event.employeeResponse}
@@ -84,12 +87,13 @@ const EventDetails = ({
       </ListItem>
     )}
     {event.employeeNotes && (
-      <ListItem padding="0 10px">
-        <Bold>Employee Notes:&nbsp;</Bold>&nbsp;{event.employeeNotes}
+      <ListItem>
+        <Bold>Employee Notes:</Bold>
+        {event.employeeNotes}
       </ListItem>
     )}
     {!isEmpty(event.schedule) && (
-      <ListItem padding="0 10px">
+      <ListItem>
         <Bold>Scheduled Employees:</Bold>
         {event.schedule.map(({ _id, employeeIds }) => (
           <List style={{ marginTop: 5 }} key={_id}>

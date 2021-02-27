@@ -1,7 +1,7 @@
-import { withStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { withStyles, createStyles } from "@material-ui/core/styles";
 import { Tab } from "@material-ui/core";
 
-const AntTab = withStyles((theme: Theme) =>
+const AntTab = withStyles(() =>
   createStyles({
     root: {
       padding: "0 10px",
@@ -12,21 +12,25 @@ const AntTab = withStyles((theme: Theme) =>
       fontSize: 15,
       marginRight: 8,
       color: "#222",
+      transition: "color 300ms",
       "&:hover": {
-        color: "#40a9ff",
-        opacity: 1
-      },
-      "&$selected": {
-        color: "#1890ff",
-        background: "#fff",
-        fontWeight: theme.typography.fontWeightMedium
+        color: "#40a9ff"
       },
       "&:focus": {
         color: "#40a9ff"
       }
     },
-    selected: {}
+    selected: {
+      color: "#1890ff",
+      background: "#fff",
+      fontWeight: 500
+    },
+    textColorInherit: {
+      "&:disabled": {
+        opacity: 1
+      }
+    }
   })
-)((props: { label: string }) => <Tab {...props} />);
+)((props: { disabled?: boolean; label: string }) => <Tab {...props} />);
 
 export default AntTab;

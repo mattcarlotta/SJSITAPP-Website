@@ -1,5 +1,4 @@
 import * as React from "react";
-import { css } from "@emotion/react";
 import isEmpty from "lodash.isempty";
 import Button from "~components/Layout/Button";
 import FadeIn from "~components/Layout/FadeIn";
@@ -7,6 +6,7 @@ import Team from "~components/Layout/Team";
 import EventDetails from "~components/Layout/EventDetails";
 import FlexSpaceAround from "~components/Layout/FlexSpaceAround";
 import Modal from "~components/Layout/Modal";
+import Margin from "~components/Layout/Margin";
 import { FaCalendarCheck } from "~icons";
 import { CSSProperties, TEventData } from "~types";
 
@@ -20,7 +20,7 @@ const iconStyle = {
 
 export type TEventProps = {
   btnStyle?: CSSProperties;
-  content: Array<TEventData>;
+  details: Array<TEventData>;
   folder: string;
   height?: number;
   id?: string;
@@ -39,7 +39,7 @@ export type TEventState = {
 
 const Event = ({
   btnStyle,
-  content,
+  details,
   folder,
   height,
   id,
@@ -72,8 +72,8 @@ const Event = ({
 
   return (
     <>
-      {!isEmpty(content) &&
-        content.map(event => (
+      {!isEmpty(details) &&
+        details.map(event => (
           <FadeIn key={event._id} timing="0.4s">
             <Button
               dataTestId="upcoming-event"
@@ -105,13 +105,12 @@ const Event = ({
                 />
                 {event.opponent && (
                   <>
-                    <span
-                      css={css`
-                        margin: 0 ${spacing || 5}px;
-                      `}
+                    <Margin
+                      left={`${spacing || 5}px`}
+                      right={`${spacing || 5}px`}
                     >
                       vs.
-                    </span>
+                    </Margin>
                     <Team
                       folder={folder || "calendar"}
                       size={height || width}
