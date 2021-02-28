@@ -34,9 +34,10 @@ const Modal = ({
       <>
         <BackgroundOverlay />
         <WindowContainer>
-          <ModalContainer>
+          <ModalContainer data-testid="modal">
             <Center maxWidth={maxWidth}>
               <ClickHandler
+                data-testid="modal-clickhandler"
                 closeModal={!disableClickHandler ? onClick : undefined}
               >
                 <ModalContent
@@ -46,7 +47,7 @@ const Modal = ({
                 >
                   <FlexEnd>
                     <CloseModalButton
-                      id="close-modal"
+                      data-testid="close-modal"
                       aria-label="close modal"
                       onClick={() => (onClick ? onClick() : Router.push("/"))}
                     >

@@ -76,9 +76,13 @@ describe("Styled Button", () => {
     expect(StyledButton).toHaveStyleRule("background", "transparent", {
       target: ":hover"
     });
-    expect(StyledButton).toHaveStyleRule("box-shadow", "none", {
-      target: ":hover"
-    });
+    expect(StyledButton).toHaveStyleRule(
+      "box-shadow",
+      "0px 0px 14px -2px #14d3e2",
+      {
+        target: ":hover"
+      }
+    );
   });
 
   it("displays a primary button when passed a 'primary' prop", () => {
@@ -86,25 +90,26 @@ describe("Styled Button", () => {
 
     const StyledButton = buttonNode();
 
-    expect(StyledButton).toHaveStyleRule("color", "#025f6d");
-    expect(StyledButton).toHaveStyleRule(
-      "background",
-      "linear-gradient(90deg,#194048 0%,#0f7888 50%,#194048 100%)"
-    );
-    expect(StyledButton).toHaveStyleRule("border", "2px solid #04515d");
+    expect(StyledButton).toHaveStyleRule("color", "#fff");
+    expect(StyledButton).toHaveStyleRule("background", "#0d6472");
+    expect(StyledButton).toHaveStyleRule("border", "2px solid #0d6472");
 
     expect(StyledButton).toHaveStyleRule("color", "#e4e3e3", {
       target: ":hover"
     });
-    expect(StyledButton).toHaveStyleRule("border", "2px solid #025f6d", {
+    expect(StyledButton).toHaveStyleRule("border", "2px solid #006d76", {
       target: ":hover"
     });
-    expect(StyledButton).toHaveStyleRule("background", "transparent", {
+    expect(StyledButton).toHaveStyleRule("background", "#006d76", {
       target: ":hover"
     });
-    expect(StyledButton).toHaveStyleRule("box-shadow", "none", {
-      target: ":hover"
-    });
+    expect(StyledButton).toHaveStyleRule(
+      "box-shadow",
+      "0px 0px 14px -2px #14d3e2",
+      {
+        target: ":hover"
+      }
+    );
   });
 
   it("displays a danger button when passed a 'danger' prop", () => {
@@ -112,25 +117,26 @@ describe("Styled Button", () => {
 
     const StyledButton = buttonNode();
 
-    expect(StyledButton).toHaveStyleRule("color", "#025f6d");
-    expect(StyledButton).toHaveStyleRule(
-      "background",
-      "linear-gradient(90deg,#8a4133 0%,#f56342 50%,#8a4133 100%)"
-    );
-    expect(StyledButton).toHaveStyleRule("border", "2px solid #d24b2e");
+    expect(StyledButton).toHaveStyleRule("color", "#fff");
+    expect(StyledButton).toHaveStyleRule("background", "#ef512d");
+    expect(StyledButton).toHaveStyleRule("border", "2px solid #ef512d");
 
     expect(StyledButton).toHaveStyleRule("color", "#e4e3e3", {
       target: ":hover"
     });
-    expect(StyledButton).toHaveStyleRule("border", "2px solid #f56342", {
+    expect(StyledButton).toHaveStyleRule("border", "2px solid #e8502e", {
       target: ":hover"
     });
-    expect(StyledButton).toHaveStyleRule("background", "transparent", {
+    expect(StyledButton).toHaveStyleRule("background", "#e8502e", {
       target: ":hover"
     });
-    expect(StyledButton).toHaveStyleRule("box-shadow", "none", {
-      target: ":hover"
-    });
+    expect(StyledButton).toHaveStyleRule(
+      "box-shadow",
+      "0px 0px 14px -2px #e25d3f",
+      {
+        target: ":hover"
+      }
+    );
   });
 
   it("displays a tertiary button when passed a 'tertiary' prop", () => {
