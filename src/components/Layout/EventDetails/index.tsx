@@ -21,14 +21,14 @@ const EventDetails = ({
   loggedinUserId
 }: TEventDetailsProps): JSX.Element => (
   <List
-    key="modal-content"
+    data-testid="event-details-content"
     boxShadow="0px 1px 6px 1px rgba(0,0,0,0.25)"
     background="#ebebeb"
     borderRadius="3px"
     margin="10px 0 0"
   >
     <ListItem
-      className="team"
+      data-testid="team"
       team={event.team}
       margin="0"
       color="#fff"
@@ -47,11 +47,11 @@ const EventDetails = ({
         )}
       </Bold>
     </ListItem>
-    <ListItem>
+    <ListItem data-testid="event-type">
       <Bold>Event Type:</Bold>
       {event.eventType}
     </ListItem>
-    <ListItem>
+    <ListItem data-testid="event-date">
       <Bold>Date:</Bold>
       <FormatDate
         style={{ display: "inline" }}
@@ -60,23 +60,23 @@ const EventDetails = ({
       />
     </ListItem>
     {event.notes && (
-      <ListItem>
+      <ListItem data-testid="event-notes">
         <Bold>Event Notes:</Bold>
         {event.notes}
       </ListItem>
     )}
-    <ListItem>
+    <ListItem data-testid="event-location">
       <Bold>Location:</Bold>
       {event.location}
     </ListItem>
     {event.uniform && (
-      <ListItem>
+      <ListItem data-testid="event-uniform">
         <Bold>Uniform:</Bold>
         {event.uniform}
       </ListItem>
     )}
     {event.employeeResponse && (
-      <ListItem>
+      <ListItem data-testid="employee-response">
         <Bold>Employee Response:</Bold>
         <Badge
           style={{ display: "inline-block" }}
@@ -87,16 +87,16 @@ const EventDetails = ({
       </ListItem>
     )}
     {event.employeeNotes && (
-      <ListItem>
+      <ListItem data-testid="employee-notes">
         <Bold>Employee Notes:</Bold>
         {event.employeeNotes}
       </ListItem>
     )}
     {!isEmpty(event.schedule) && (
-      <ListItem>
+      <ListItem data-testid="schedule-employees">
         <Bold>Scheduled Employees:</Bold>
         {event.schedule.map(({ _id, employeeIds }) => (
-          <List style={{ marginTop: 5 }} key={_id}>
+          <List data-testid="call-time" style={{ marginTop: 5 }} key={_id}>
             <Bold style={{ paddingLeft: 10 }}>
               <FaClock
                 style={{
@@ -116,7 +116,7 @@ const EventDetails = ({
               employeeIds.map(({ _id, firstName, lastName }) => (
                 <ListItem
                   key={_id}
-                  className="employee"
+                  data-testid="employee"
                   margin="0 0 0 20px"
                   padding="0 0 0 10px"
                   color={
@@ -147,7 +147,7 @@ const EventDetails = ({
               ))
             ) : (
               <ListItem
-                className="none-scheduled"
+                data-testid="no-scheduled"
                 margin="5px 0 5px 20px"
                 padding="0 0 0 10px"
               >

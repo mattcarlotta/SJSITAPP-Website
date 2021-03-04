@@ -1,4 +1,4 @@
-import React from "react";
+import { css } from "@emotion/react";
 import { FaCircle } from "~icons";
 import { CSSProperties, ReactNode } from "~types";
 
@@ -62,7 +62,14 @@ const Badge = ({ children, response, style }: TBadgeProps): JSX.Element => (
         color: showBadge(response)
       }}
     />
-    <span style={{ position: "relative", top: "-2px" }}>{children}</span>
+    <span
+      css={css`
+        position: relative;
+        top: -2px;
+      `}
+    >
+      {children}
+    </span>
   </div>
 );
 

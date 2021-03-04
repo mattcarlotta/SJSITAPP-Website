@@ -18,10 +18,12 @@ const iconStyle = {
   margin: "0 5px"
 } as CSSProperties;
 
+export type FolderTypes = "badges" | "calendar" | "lowres" | string;
+
 export type TEventProps = {
   btnStyle?: CSSProperties;
   details: Array<TEventData>;
-  folder: "badges" | "calendar" | "lowres";
+  folder?: FolderTypes;
   height?: number;
   id?: string;
   innerStyle?: CSSProperties;

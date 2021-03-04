@@ -26,6 +26,14 @@ describe("Avatar", () => {
     );
   });
 
+  it("sets color according to 'primary' prop", () => {
+    wrapper.setProps({ primary: true });
+    expect(wrapper.find("[data-testid='avatar']")).toHaveStyleRule(
+      "color",
+      "#efefef"
+    );
+  });
+
   it("sets a width according to 'width' prop", () => {
     wrapper.setProps({ width: "100px" });
     expect(wrapper.find("[data-testid='avatar']")).toHaveStyleRule(

@@ -16,7 +16,7 @@ const LoadingImage = styled.div<{
   background-color: ${({ bgColor }) => bgColor || "#eee"};
   opacity: ${({ opacity }) => opacity || 0.25};
 
-  &:before {
+  :before {
     content: "";
     position: absolute;
     width: ${({ size }) => (size ? `${size * 0.125}px` : "6.25px")};

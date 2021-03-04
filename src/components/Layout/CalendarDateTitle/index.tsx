@@ -18,8 +18,9 @@ const CalendarDateTitleComponent = ({
   const weekFromDate = moment(eventDate || Date.now()).add(7, "days");
 
   return (
-    <div className={className}>
+    <div data-testid="date-title" className={className}>
       <div
+        data-testid="day-date"
         css={css`
           font-size: 14px;
           color: #888;
@@ -35,6 +36,7 @@ const CalendarDateTitleComponent = ({
         )}
       </div>
       <div
+        data-testid="calendar-date"
         css={css`
           color: #1a4448;
         `}

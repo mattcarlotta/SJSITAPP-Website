@@ -38,7 +38,7 @@ class DisplayTeam extends React.Component<
 
     return (
       <Tooltip title={team}>
-        <span>
+        <span data-testid={team}>
           <LoadingImage
             opacity={isLoaded ? 1 : opacity}
             size={size}

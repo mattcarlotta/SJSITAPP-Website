@@ -19,6 +19,13 @@ describe("Styled Button", () => {
     expect(buttonNode()).toExist();
   });
 
+  it("sets box-shadow when passed a 'noGlow' prop", () => {
+    wrapper.setProps({ noGlow: true });
+    expect(buttonNode()).toHaveStyleRule("box-shadow", "none", {
+      target: ":hover"
+    });
+  });
+
   it("sets display when passed a 'display' prop", () => {
     wrapper.setProps({ display: "inline-block" });
     expect(buttonNode()).toHaveStyleRule("display", "inline-block");

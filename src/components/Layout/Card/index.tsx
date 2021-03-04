@@ -24,12 +24,14 @@ const CardComponent = ({
 }: TCardProps): JSX.Element => (
   <div data-testid={dataTestId} className={className}>
     <CardHead>
-      <CardHeadTitle>
+      <CardHeadTitle data-testid="card-head-title">
         {icon && <CardHeadIcon>{icon}</CardHeadIcon>}
         {title}
       </CardHeadTitle>
     </CardHead>
-    <CardBody padding={padding}>{children}</CardBody>
+    <CardBody data-testid="card-body" padding={padding}>
+      {children}
+    </CardBody>
   </div>
 );
 
