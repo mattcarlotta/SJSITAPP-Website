@@ -31,6 +31,6 @@ export function parseMessage(res: AxiosResponse): string | undefined {
  * @param res - an API response.
  * @returns a parsed data object from res.data.
  */
-export function parseData(res: AxiosResponse): any {
+export function parseData<T>(res: AxiosResponse): T {
   return get(res, ["data"]);
 }

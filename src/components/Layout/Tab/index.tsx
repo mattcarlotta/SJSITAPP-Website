@@ -5,7 +5,7 @@ const AntTab = withStyles(() =>
   createStyles({
     root: {
       padding: "0 10px",
-      textTransform: "none",
+      textTransform: "capitalize",
       minWidth: 72,
       minHeight: 35,
       fontWeight: 400,
@@ -33,6 +33,8 @@ const AntTab = withStyles(() =>
       }
     }
   })
-)((props: { disabled?: boolean; label: string }) => <Tab {...props} />);
+)((props: { disabled?: boolean; label: string }) => (
+  <Tab data-testid={`tab-${props.label}`} {...props} />
+));
 
 export default AntTab;

@@ -21,7 +21,7 @@ describe("Dashboard Today/Upcoming Event Controller", () => {
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
-        expect(res.body.events).toEqual(
+        expect(res.body).toEqual(
           expect.arrayContaining([
             expect.objectContaining({
               _id: expect.any(String),
@@ -51,7 +51,7 @@ describe("Dashboard Today/Upcoming Event Controller", () => {
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
-        expect(res.body.events).toEqual(
+        expect(res.body).toEqual(
           expect.arrayContaining([
             expect.objectContaining({
               _id: expect.any(String),

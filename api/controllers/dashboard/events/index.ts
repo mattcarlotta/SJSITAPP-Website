@@ -66,7 +66,7 @@ const getSelectedEvents = async (
       .limit(2)
       .lean();
 
-    return res.status(200).json({ events });
+    return res.status(200).send(events);
   } catch (err) {
     /* istanbul ignore next */
     return sendError(err, 400, res);

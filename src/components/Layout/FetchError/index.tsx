@@ -1,30 +1,44 @@
 import styled from "@emotion/styled";
 import { RiSignalWifiErrorFill } from "~icons";
-import FlexCenter from "../FlexCenter";
+import Button from "~components/Layout/Button";
+import FlexCenter from "~components/Layout/FlexCenter";
 
 export type TFetchErrorComponent = {
   className?: string;
+  onClickReload?: () => void;
 };
 
 const FetchErrorComponent = ({
-  className
+  className,
+  onClickReload
 }: TFetchErrorComponent): JSX.Element => (
-  <div className={className}>
+  <div data-testid="fetch-error" className={className}>
     <FlexCenter direction="column">
       <RiSignalWifiErrorFill
         style={{ fontSize: "40px", marginBottom: "5px" }}
       />
-      <div>
-        Oops, something went wrong. Unable to retrieve the requested data.
-      </div>
+      <div>Something went wrong. Unable to retrieve the requested data.</div>
+      {onClickReload && (
+        <Button
+          primary
+          noGlow
+          data-testid="reload-component"
+          padding="3px"
+          margin="10px 0 0 0"
+          width="100px"
+          type="button"
+          onClick={onClickReload}
+        >
+          Reload
+        </Button>
+      )}
     </FlexCenter>
   </div>
 );
 
 const FetchError = styled(FetchErrorComponent)`
   color: #d03916;
-  padding: 20px;
-  margin-top: 25px;
+  padding-top: 20px;
   text-align: center;
   font-size: 15px;
 `;
