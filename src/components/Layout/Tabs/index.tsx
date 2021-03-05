@@ -10,7 +10,7 @@ export type TAntTabsProps = {
 
 const AntTabs = withStyles({
   root: {
-    background: "#f1f1f1"
+    background: "#025f6d"
   },
   indicator: {
     display: "none",
@@ -18,7 +18,7 @@ const AntTabs = withStyles({
     "& > span": {
       maxWidth: 100,
       width: "100%",
-      backgroundColor: "#635ee7"
+      backgroundColor: "#fff"
     }
   }
 })((props: TAntTabsProps) => (

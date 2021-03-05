@@ -33,6 +33,7 @@ export { FaCogs } from "@react-icons/all-files/fa/FaCogs";
 export { FaConciergeBell } from "@react-icons/all-files/fa/FaConciergeBell";
 export { FaCopyright } from "@react-icons/all-files/fa/FaCopyright";
 export { FaEnvelope } from "@react-icons/all-files/fa/FaEnvelope";
+export { FaExclamationTriangle } from "@react-icons/all-files/fa/FaExclamationTriangle";
 export { FaFileAlt } from "@react-icons/all-files/fa/FaFileAlt";
 export { FaFileSignature } from "@react-icons/all-files/fa/FaFileSignature";
 export { FaFolder } from "@react-icons/all-files/fa/FaFolder";
@@ -57,6 +58,7 @@ export { FaStreetView } from "@react-icons/all-files/fa/FaStreetView";
 export { FaTimesCircle } from "@react-icons/all-files/fa/FaTimesCircle";
 export { FaTimes } from "@react-icons/all-files/fa/FaTimes";
 export { FaTshirt } from "@react-icons/all-files/fa/FaTshirt";
+export { FaUserClock } from "@react-icons/all-files/fa/FaUserClock";
 export { FaUserCircle } from "@react-icons/all-files/fa/FaUserCircle";
 export { FaUserFriends } from "@react-icons/all-files/fa/FaUserFriends";
 export { FaUserPlus } from "@react-icons/all-files/fa/FaUserPlus";
@@ -67,6 +69,8 @@ export { FaUnlockAlt } from "@react-icons/all-files/fa/FaUnlockAlt";
 export { FiPaperclip } from "@react-icons/all-files/fi/FiPaperclip";
 
 // MD
+export { MdAccessTime } from "@react-icons/all-files/md/MdAccessTime";
+export { MdAssignment } from "@react-icons/all-files/md/MdAssignment";
 export { MdChevronRight } from "@react-icons/all-files/md/MdChevronRight";
 export { MdDashboard } from "@react-icons/all-files/md/MdDashboard";
 export { MdExpandMore } from "@react-icons/all-files/md/MdExpandMore";
@@ -77,6 +81,7 @@ export { MdNoteAdd } from "@react-icons/all-files/md/MdNoteAdd";
 export { MdPersonPin } from "@react-icons/all-files/md/MdPersonPin";
 
 // RI
+export { RiFileForbidLine } from "@react-icons/all-files/ri/RiFileForbidLine";
 export { RiLogoutBoxLine } from "@react-icons/all-files/ri/RiLogoutBoxLine";
 export { RiMenuFoldLine } from "@react-icons/all-files/ri/RiMenuFoldLine";
 export { RiMenuUnfoldLine } from "@react-icons/all-files/ri/RiMenuUnfoldLine";

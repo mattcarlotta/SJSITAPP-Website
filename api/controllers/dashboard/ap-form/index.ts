@@ -38,7 +38,7 @@ const getAPForm = async (_: Request, res: Response): Promise<Response> => {
       existingForm.endMonth
     );
 
-    return res.status(200).json({ apform: { ...existingForm, eventCounts } });
+    return res.status(200).send({ ...existingForm, eventCounts });
   } catch (err) {
     /* istanbul ignore next */
     return sendError(err, 400, res);

@@ -138,6 +138,20 @@ export type TEventData = {
   }>;
 };
 
+export type TFormData = {
+  _id?: string;
+  startMonth?: string;
+  endMonth?: string;
+  expirationDate?: string;
+  eventCounts?: number;
+};
+
+export type TAvailabilityData = {
+  _id: string;
+  label: string;
+  value: string;
+};
+
 ///
 
 export interface CardProps {

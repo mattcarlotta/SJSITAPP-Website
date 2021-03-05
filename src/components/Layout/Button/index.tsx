@@ -30,6 +30,7 @@ const StyledButton = ({
 );
 
 export interface StyledButtonProps {
+  borderRadius?: string;
   disabled?: boolean;
   display?: string;
   primary?: boolean;
@@ -68,7 +69,7 @@ const Button = styled(StyledButton)<StyledButtonProps>`
   }};
   text-decoration: none;
   transition: all 0.2s ease-in-out;
-  border-radius: 50px;
+  border-radius: ${({ borderRadius }) => borderRadius || "50px"};
   border: 2px solid
     ${props => {
       if (props.primary) return "#0d6472";

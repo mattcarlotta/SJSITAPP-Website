@@ -10,7 +10,6 @@ const Flex = styled.div<{
   display: flex;
   flex-direction: ${({ direction }) => direction || "row"};
   flex-wrap: ${({ flexwrap }) => (flexwrap ? "wrap" : "nowrap")};
-  align-items: center;
   justify-content: ${({ justify }) => justify || "start"};
   padding: ${({ padding }) => padding || "0"};
   width: ${({ width }) => width || "100%"};

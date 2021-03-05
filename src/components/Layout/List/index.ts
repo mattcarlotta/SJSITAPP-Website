@@ -5,13 +5,16 @@ const List = styled.ul<{
   borderRadius?: string;
   boxShadow?: string;
   margin?: string;
+  padding?: string;
+  textAlign?: string;
 }>`
   box-shadow: ${({ boxShadow }) => boxShadow || "none"};
   background: ${({ background }) => background || "transparent"};
   border-radius: ${({ borderRadius }) => borderRadius || "0px"};
   list-style: none;
   margin: ${({ margin }) => margin || "0px"};
-  padding: 0;
+  padding: ${({ padding }) => padding || "0px"};
+  text-align: ${({ textAlign }) => textAlign || "left"};
   overflow: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;

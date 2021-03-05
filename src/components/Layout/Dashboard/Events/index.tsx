@@ -17,9 +17,9 @@ import { TEventData } from "~types";
 
 export type TDashboardEventsState = {
   activeTab: string;
-  isLoading: boolean;
   error: boolean;
   events: Array<TEventData>;
+  isLoading: boolean;
   tab: number;
 };
 

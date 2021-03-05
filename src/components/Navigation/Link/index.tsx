@@ -27,22 +27,33 @@ export const LinkComponent = ({
 );
 
 const Link = styled(LinkComponent)<{
+  alt?: boolean;
   borderRadius?: string;
+  display?: string;
   fontSize?: string;
   hideShadow?: boolean;
   margin?: string;
   padding?: string;
   primary?: boolean;
+  textTransform?: string;
   width?: string;
 }>`
   cursor: pointer;
-  color: ${props => (props.primary ? "#025f6d" : "#fff")};
+  display: ${({ display }) => display};
+  color: ${({ alt, primary }) => {
+    if (primary) return "#025f6d";
+    if (alt) return "#fff";
+    return "#fff";
+  }};
   font-size: ${({ fontSize }) => fontSize || "16px"};
   text-align: center;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-  text-transform: uppercase;
-  background-color: transparent;
+  text-transform: ${({ textTransform }) => textTransform || "uppercase"};
+  background: ${({ alt }) => {
+    if (alt) return "#025f6d";
+    return "transparent";
+  }};
   border: 2px solid #025f6d;
   box-shadow: ${({ hideShadow }) =>
     !hideShadow ? "0 4px 14px 0 rgba(2, 95, 109, 0.39)" : "none"};
@@ -53,10 +64,20 @@ const Link = styled(LinkComponent)<{
   width: ${({ width }) => width || "auto"};
 
   :hover {
-    background: #025f6d;
+    background: ${({ alt }) => {
+      if (alt) return "#006d76";
+      return "#025f6d";
+    }};
     color: #fff;
-    box-shadow: 0px 0px 14px -2px #14d3e2;
-    border: 2px solid #3794a5;
+    box-shadow: ${({ alt }) => {
+      if (alt) return "0px 0px 14px -2px #14d3e2";
+      return "0px 0px 14px -2px #14d3e2";
+    }};
+    border: 2px solid
+      ${({ alt }) => {
+        if (alt) return "#006d76";
+        return "#3794a5";
+      }};
   }
 
   :focus {

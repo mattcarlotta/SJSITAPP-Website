@@ -11,25 +11,25 @@ const AntTab = withStyles(() =>
       fontWeight: 400,
       fontSize: 15,
       marginRight: 8,
-      color: "#222",
+      color: "#ccc",
       transition: "color 300ms",
       "&:hover": {
-        color: "#40a9ff"
+        color: "#fff"
       },
       "&:focus": {
-        color: "#40a9ff"
+        color: "#fff"
       }
     },
     selected: {
-      color: "#1890ff",
+      color: "#025f6d",
       background: "#fff",
       fontWeight: 500
     },
     textColorInherit: {
+      opacity: 1,
       "&:disabled": {
         opacity: 1,
-        borderTopRightRadius: 4,
-        borderTopLeftRadius: 4
+        borderTopRightRadius: 4
       }
     }
   })

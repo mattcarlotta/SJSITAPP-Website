@@ -103,13 +103,12 @@ const getAvailability = async (
       }
     ]);
 
-    return res.status(200).json({
-      eventAvailability: createMemberAvailabilityAverage({
+    return res.status(200).send(
+      createMemberAvailabilityAverage({
         eventCounts,
         eventResponses
-      }),
-      months
-    });
+      })
+    );
   } catch (err) {
     /* istanbul ignore next */
     return sendError(err, 400, res);

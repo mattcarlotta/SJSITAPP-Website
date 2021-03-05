@@ -1,59 +1,166 @@
 import * as React from "react";
-// import isEmpty from "lodash.isempty";
-// import get from "lodash.get";
+import { css } from "@emotion/react";
+import isEmpty from "lodash.isempty";
+import APFormExpired from "~components/Layout/APFormExpired";
+import APFormTitle from "~components/Layout/APFormTitle";
 import Card from "~components/Layout/Card";
-import { FaFileSignature } from "~icons";
-// import app from "~utils/axiosConfig";
-// import { parseData } from "~utils/parseResponse";
-// import { AxiosResponse, ReactNode, TEventData } from "~types";
+import Center from "~components/Layout/Center";
+import FetchError from "~components/Layout/FetchError";
+import LoadingPanel from "~components/Layout/LoadingPanel";
+import NoForms from "~components/Layout/NoForms";
+import Padding from "~components/Layout/Padding";
+import Link from "~components/Navigation/Link";
+import { BsPencilSquare, FaFileSignature } from "~icons";
+import app from "~utils/axiosConfig";
+import moment from "~utils/momentWithTimezone";
+import { parseData } from "~utils/parseResponse";
+import { TFormData } from "~types";
 
-// export type TDashboardEventsState = {
-//   isLoading: boolean;
-//   isVisible: boolean;
-//   error: string;
-//   events: Array<TEventData>;
-//   modalChildren: ReactNode;
-// };
+export type TDashboardEventsState = {
+  error: boolean;
+  form: TFormData;
+  hasExpired: boolean;
+  isLoading: boolean;
+};
 
-export const Events = (): JSX.Element => {
-  // const [state, setState] = React.useState<TDashboardEventsState>({
-  //   error: "",
-  //   events: [],
-  //   isLoading: true,
-  //   isVisible: false,
-  //   modalChildren: null
-  // });
+const format = "MMM Do @ hh:mm a";
+const simpleFormat = "MMM Do";
 
-  // const { events, isVisible, modalChildren } = state;
+export const Forms = (): JSX.Element => {
+  const [state, setState] = React.useState<TDashboardEventsState>({
+    error: false,
+    form: {},
+    hasExpired: false,
+    isLoading: true
+  });
 
-  // const fetchTodayEvents = React.useCallback(async () => {
-  //   try {
-  //     const res: AxiosResponse = await app.get("dashboard/events/today");
-  //     const data = parseData(res);
+  const { error, form, hasExpired, isLoading } = state;
 
-  //     setState(prevState => ({
-  //       ...prevState,
-  //       isLoading: false,
-  //       events: data.events
-  //     }));
-  //   } catch (error) {
-  //     setState(prevState => ({
-  //       ...prevState,
-  //       isLoading: false,
-  //       error: error.message
-  //     }));
-  //   }
-  // }, []);
+  const fetchForms = React.useCallback(async (): Promise<void> => {
+    try {
+      const res = await app.get("dashboard/ap-form");
+      const data = parseData<TFormData>(res);
 
-  // React.useEffect(() => {
-  //   fetchTodayEvents();
-  // }, [fetchTodayEvents]);
+      const hasExpired =
+        moment(data.expirationDate).toDate() < moment().toDate();
+
+      setState({
+        error: false,
+        form: data,
+        isLoading: false,
+        hasExpired
+      });
+    } catch (err) {
+      setState(prevState => ({
+        ...prevState,
+        error: true,
+        isLoading: false
+      }));
+    }
+  }, []);
+
+  const handleReload = React.useCallback(() => {
+    setState({
+      error: false,
+      form: {},
+      hasExpired: false,
+      isLoading: true
+    });
+  }, []);
+
+  React.useEffect(() => {
+    if (isLoading) fetchForms();
+  }, [isLoading, fetchForms]);
 
   return (
-    <Card dataTestId="dashboard-forms" icon={<FaFileSignature />} title="Forms">
-      Hello
+    <Card
+      dataTestId="dashboard-forms"
+      icon={<FaFileSignature />}
+      title="Forms"
+      padding="0"
+    >
+      <APFormTitle>Sharks & Barracuda A/P Form</APFormTitle>
+      <Padding top="5px" left="10px" right="10px">
+        {isLoading ? (
+          <LoadingPanel
+            data-testid="loading-events"
+            borderRadius="5px"
+            height="240px"
+            margin="5px auto 0"
+          />
+        ) : error ? (
+          <FetchError onClickReload={handleReload} />
+        ) : !isEmpty(form) ? (
+          <>
+            <div
+              css={css`
+                padding: 5px;
+                text-align: center;
+              `}
+            >
+              <div
+                css={css`
+                  color: #888;
+                  margin: 2px 0 0 0;
+                  font-size: 14px;
+                `}
+              >
+                Expires on {moment(form.expirationDate).format(format)}
+              </div>
+              <div
+                css={css`
+                  margin-bottom: 13px;
+                  color: #1a4448;
+                `}
+              >
+                {moment(form.startMonth).format(simpleFormat)}&nbsp;–&nbsp;
+                {moment(form.endMonth).format(simpleFormat)}
+              </div>
+              {!hasExpired ? (
+                <Link
+                  alt
+                  display="block"
+                  margin="0 auto"
+                  borderRadius="50px"
+                  padding="17px 0px"
+                  width="220px"
+                  hideShadow
+                  dataTestId="dashboard-ap-form-link"
+                  href={`/employee/forms/view/${form._id}`}
+                >
+                  <BsPencilSquare
+                    style={{
+                      position: "relative",
+                      top: 4,
+                      marginRight: 8,
+                      fontSize: 20
+                    }}
+                  />
+                  View Form
+                </Link>
+              ) : (
+                <APFormExpired />
+              )}
+            </div>
+          </>
+        ) : (
+          <Center>
+            <div
+              css={css`
+                margin-top: 5px;
+                color: #1a4448;
+              `}
+            >
+              {moment().add(1, "months").startOf("month").format(simpleFormat)}
+              &nbsp;–&nbsp;
+              {moment().add(1, "months").endOf("month").format(simpleFormat)}
+            </div>
+            <NoForms />
+          </Center>
+        )}
+      </Padding>
     </Card>
   );
 };
 
-export default Events;
+export default Forms;

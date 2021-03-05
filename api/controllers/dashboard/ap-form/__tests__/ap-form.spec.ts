@@ -21,7 +21,7 @@ describe("Dashboard AP Form Controller", () => {
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
-        expect(res.body.apform).toEqual({
+        expect(res.body).toEqual({
           _id: expect.any(String),
           endMonth: expect.any(String),
           eventCounts: expect.any(Number),
