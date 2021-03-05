@@ -21,15 +21,16 @@ describe("Dashboard Availability Controller", () => {
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
-        expect(res.body).toEqual(
-          expect.arrayContaining([
+        expect(res.body).toEqual({
+          eventAvailability: expect.arrayContaining([
             expect.objectContaining({
               id: expect.any(String),
               label: expect.any(String),
               value: expect.any(Number)
             })
-          ])
-        );
+          ]),
+          months: expect.arrayContaining([expect.any(String)])
+        });
         done();
       });
   });

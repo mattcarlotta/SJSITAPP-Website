@@ -24,7 +24,6 @@ const CalendarDateTitleComponent = ({
         css={css`
           font-size: 14px;
           color: #888;
-          text-align: center;
         `}
       >
         {nextWeek ? "Today" : dayDate.format("dddd")}

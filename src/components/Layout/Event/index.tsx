@@ -1,7 +1,6 @@
 import * as React from "react";
 import isEmpty from "lodash.isempty";
 import Button from "~components/Layout/Button";
-import FadeIn from "~components/Layout/FadeIn";
 import Team from "~components/Layout/Team";
 import EventDetails from "~components/Layout/EventDetails";
 import FlexSpaceAround from "~components/Layout/FlexSpaceAround";
@@ -76,53 +75,52 @@ const Event = ({
     <>
       {!isEmpty(details) &&
         details.map(event => (
-          <FadeIn key={event._id} timing="0.4s">
-            <Button
-              dataTestId="upcoming-event"
-              className="event-date"
-              type="button"
-              primary={event.team === "San Jose Sharks"}
-              danger={event.team === "San Jose Barracuda"}
-              padding={padding}
-              margin="0 auto"
-              maxWidth="250px"
-              style={btnStyle}
-              onClick={() => handleShowModal(event)}
-            >
-              <FlexSpaceAround style={innerStyle}>
-                {!isEmpty(event.schedule) &&
-                  event.schedule.map(({ employeeIds }) =>
-                    !isEmpty(employeeIds) &&
-                    employeeIds.some(({ _id }) => _id === loggedinUserId) ? (
-                      <FaCalendarCheck
-                        key={loggedinUserId}
-                        style={{ ...iconStyle, ...scheduleIconStyle }}
-                      />
-                    ) : null
-                  )}
-                <Team
-                  folder={folder || "calendar"}
-                  size={height || width}
-                  team={event.team}
-                />
-                {event.opponent && (
-                  <>
-                    <Margin
-                      left={`${spacing || 5}px`}
-                      right={`${spacing || 5}px`}
-                    >
-                      vs.
-                    </Margin>
-                    <Team
-                      folder={folder || "calendar"}
-                      size={height || width}
-                      team={event.opponent}
+          <Button
+            dataTestId="upcoming-event"
+            key={event._id}
+            className="event-date"
+            type="button"
+            primary={event.team === "San Jose Sharks"}
+            danger={event.team === "San Jose Barracuda"}
+            padding={padding}
+            margin="0 auto"
+            maxWidth="250px"
+            style={btnStyle}
+            onClick={() => handleShowModal(event)}
+          >
+            <FlexSpaceAround style={innerStyle}>
+              {!isEmpty(event.schedule) &&
+                event.schedule.map(({ employeeIds }) =>
+                  !isEmpty(employeeIds) &&
+                  employeeIds.some(({ _id }) => _id === loggedinUserId) ? (
+                    <FaCalendarCheck
+                      key={loggedinUserId}
+                      style={{ ...iconStyle, ...scheduleIconStyle }}
                     />
-                  </>
+                  ) : null
                 )}
-              </FlexSpaceAround>
-            </Button>
-          </FadeIn>
+              <Team
+                folder={folder || "calendar"}
+                size={height || width}
+                team={event.team}
+              />
+              {event.opponent && (
+                <>
+                  <Margin
+                    left={`${spacing || 5}px`}
+                    right={`${spacing || 5}px`}
+                  >
+                    vs.
+                  </Margin>
+                  <Team
+                    folder={folder || "calendar"}
+                    size={height || width}
+                    team={event.opponent}
+                  />
+                </>
+              )}
+            </FlexSpaceAround>
+          </Button>
         ))}
       <Modal
         dataTestId="event-details-modal"

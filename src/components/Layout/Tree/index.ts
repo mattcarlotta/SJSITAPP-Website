@@ -9,7 +9,7 @@ const Tree = styled.aside<{ collapsed: boolean }>`
   padding: ${({ collapsed }) => (collapsed ? "10px 0 0 0" : "10px 0 5px 20px")};
   width: ${({ collapsed }) => (collapsed ? "0px" : "266px")};
   white-space: nowrap;
-  background: #006d76;
+  background: #0d6472;
   color: #efefef;
   box-shadow: ${({ collapsed }) =>
     !collapsed ? "2px 6px 3px 2px rgba(35, 207, 234, 0.15)" : "none"};

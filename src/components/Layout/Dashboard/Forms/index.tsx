@@ -91,13 +91,8 @@ export const Forms = (): JSX.Element => {
         ) : error ? (
           <FetchError onClickReload={handleReload} />
         ) : !isEmpty(form) ? (
-          <>
-            <div
-              css={css`
-                padding: 5px;
-                text-align: center;
-              `}
-            >
+          <Center>
+            <Padding top="5px" right="5px" bottom="5px" left="5px">
               <div
                 css={css`
                   color: #888;
@@ -123,7 +118,7 @@ export const Forms = (): JSX.Element => {
                   margin="0 auto"
                   borderRadius="50px"
                   padding="17px 0px"
-                  width="220px"
+                  width="280px"
                   hideShadow
                   dataTestId="dashboard-ap-form-link"
                   href={`/employee/forms/view/${form._id}`}
@@ -136,13 +131,13 @@ export const Forms = (): JSX.Element => {
                       fontSize: 20
                     }}
                   />
-                  View Form
+                  View Form ({form.eventCounts} events)
                 </Link>
               ) : (
                 <APFormExpired />
               )}
-            </div>
-          </>
+            </Padding>
+          </Center>
         ) : (
           <Center>
             <div
