@@ -3,26 +3,12 @@ import { css } from "@emotion/react";
 import isEmpty from "lodash.isempty";
 import get from "lodash.get";
 import { ResponsivePie } from "@nivo/pie";
+import AvailabilityChartLabel from "~components/Layout/AvailabilityChartLabel";
 import NoAvailability from "~components/Layout/NoAvailability";
-import { CSSProperties, TAvailabilityData } from "~types";
+import { TAvailabilityData } from "~types";
 
 const VALIDCOLORS = ["#2979FF", "#BBBBBB"];
 const INVALIDCOLORS = ["#F04D4D", "#BBBBBB"];
-const styles = {
-  position: "absolute",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  fontSize: 16,
-  color: "#025f6d",
-  textAlign: "center",
-  pointerEvents: "none"
-} as CSSProperties;
 
 export type AvailabilityAvgChartProps = {
   availability: Array<TAvailabilityData>;
@@ -31,7 +17,7 @@ export type AvailabilityAvgChartProps = {
 const AvailabilityAvgChart = ({
   availability
 }: AvailabilityAvgChartProps): JSX.Element => {
-  const availabilityPercentage = get(availability, ["value"]) || 0;
+  const availabilityPercentage = get(availability[0], ["value"]) || 0;
 
   return (
     <>
@@ -86,10 +72,10 @@ const AvailabilityAvgChart = ({
               )
             }
           />
-          <div style={styles}>
+          <AvailabilityChartLabel>
             <span data-test="availability-avg">{availabilityPercentage}%</span>
             <span>Availability</span>
-          </div>
+          </AvailabilityChartLabel>
         </div>
       ) : (
         <NoAvailability />

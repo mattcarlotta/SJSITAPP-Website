@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 const CalendarDateContainer = styled.div<{ height?: string }>`
   display: block;
   height: ${({ height }) => height || "252px"};
-  padding: 5px 15px;
+  padding: 5px 10px;
   color: rgba(0, 0, 0, 0.65);
   background-color: #fff;
   text-align: left;

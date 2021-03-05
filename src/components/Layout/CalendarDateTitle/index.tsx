@@ -57,7 +57,7 @@ const CalendarDateTitle = styled(CalendarDateTitleComponent)`
   width: auto;
   padding: 0;
   background: transparent;
-  margin: 10px 0;
+  margin-bottom: 10px;
   border-radius: 2px;
   transition: all 0.3s;
 `;

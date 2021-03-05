@@ -9,6 +9,7 @@ import FetchError from "~components/Layout/FetchError";
 import LoadingPanel from "~components/Layout/LoadingPanel";
 import NoForms from "~components/Layout/NoForms";
 import Padding from "~components/Layout/Padding";
+import PanelDescription from "~components/Layout/PanelDescription";
 import Link from "~components/Navigation/Link";
 import { BsPencilSquare, FaFileSignature } from "~icons";
 import app from "~utils/axiosConfig";
@@ -80,69 +81,60 @@ export const Forms = (): JSX.Element => {
       padding="0"
     >
       <APFormTitle>Sharks & Barracuda A/P Form</APFormTitle>
-      <Padding top="5px" left="10px" right="10px">
+      <Padding top="10px" left="20px" right="20px">
         {isLoading ? (
           <LoadingPanel
             data-testid="loading-events"
             borderRadius="5px"
-            height="240px"
+            height="230px"
             margin="5px auto 0"
           />
         ) : error ? (
           <FetchError onClickReload={handleReload} />
         ) : !isEmpty(form) ? (
           <Center>
-            <Padding top="5px" right="5px" bottom="5px" left="5px">
-              <div
-                css={css`
-                  color: #888;
-                  margin: 2px 0 0 0;
-                  font-size: 14px;
-                `}
+            <PanelDescription>
+              Expires on {moment(form.expirationDate).format(format)}
+            </PanelDescription>
+            <div
+              css={css`
+                margin-bottom: 13px;
+                color: #1a4448;
+              `}
+            >
+              {moment(form.startMonth).format(simpleFormat)}&nbsp;–&nbsp;
+              {moment(form.endMonth).format(simpleFormat)}
+            </div>
+            {!hasExpired ? (
+              <Link
+                alt
+                display="block"
+                margin="0 auto"
+                borderRadius="50px"
+                padding="17px 0px"
+                width="280px"
+                hideShadow
+                dataTestId="dashboard-ap-form-link"
+                href={`/employee/forms/view/${form._id}`}
               >
-                Expires on {moment(form.expirationDate).format(format)}
-              </div>
-              <div
-                css={css`
-                  margin-bottom: 13px;
-                  color: #1a4448;
-                `}
-              >
-                {moment(form.startMonth).format(simpleFormat)}&nbsp;–&nbsp;
-                {moment(form.endMonth).format(simpleFormat)}
-              </div>
-              {!hasExpired ? (
-                <Link
-                  alt
-                  display="block"
-                  margin="0 auto"
-                  borderRadius="50px"
-                  padding="17px 0px"
-                  width="280px"
-                  hideShadow
-                  dataTestId="dashboard-ap-form-link"
-                  href={`/employee/forms/view/${form._id}`}
-                >
-                  <BsPencilSquare
-                    style={{
-                      position: "relative",
-                      top: 4,
-                      marginRight: 8,
-                      fontSize: 20
-                    }}
-                  />
-                  View Form ({form.eventCounts} events)
-                </Link>
-              ) : (
-                <APFormExpired />
-              )}
-            </Padding>
+                <BsPencilSquare
+                  style={{
+                    position: "relative",
+                    top: 4,
+                    marginRight: 8,
+                    fontSize: 20
+                  }}
+                />
+                View Form ({form.eventCounts} events)
+              </Link>
+            ) : (
+              <APFormExpired />
+            )}
           </Center>
         ) : (
           <Center>
             <div
               css={css`
-                margin-top: 5px;
                 color: #1a4448;
               `}
             >

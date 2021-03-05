@@ -41,6 +41,7 @@ const FetchError = styled(FetchErrorComponent)`
   padding-top: 20px;
   text-align: center;
   font-size: 15px;
+  height: 100%;
 `;
 
 export default FetchError;

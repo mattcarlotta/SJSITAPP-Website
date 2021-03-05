@@ -10,7 +10,7 @@ const iconStyle = {
 const NoForms = (): JSX.Element => (
   <FlexCenter
     data-testid="no-forms"
-    height="200px"
+    height="190px"
     direction="column"
     justify="center"
     style={{ color: "#999" }}

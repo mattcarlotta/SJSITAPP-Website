@@ -21,8 +21,6 @@ const AntTabs = withStyles({
       backgroundColor: "#fff"
     }
   }
-})((props: TAntTabsProps) => (
-  <Tabs {...props} TabIndicatorProps={{ children: <span /> }} />
-));
+})((props: TAntTabsProps) => <Tabs {...props} />);
 
 export default AntTabs;

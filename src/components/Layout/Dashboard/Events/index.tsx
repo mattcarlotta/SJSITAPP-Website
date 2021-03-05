@@ -7,6 +7,7 @@ import Event from "~components/Layout/Event";
 import FetchError from "~components/Layout/FetchError";
 import LoadingPanel from "~components/Layout/LoadingPanel";
 import NoEvents from "~components/Layout/NoEvents";
+import Padding from "~components/Layout/Padding";
 import TabPanel, { a11yProps } from "~components/Layout/TabPanel";
 import Tab from "~components/Layout/Tab";
 import Tabs from "~components/Layout/Tabs";
@@ -103,32 +104,34 @@ export const Events = ({
         <Tab disabled={state.tab === 1} label="upcoming" {...a11yProps(1)} />
       </Tabs>
       <TabPanel value={0} index={0}>
-        <CalendarDateContainer>
-          <CalendarDateTitle nextWeek={nextWeek} />
-          {isLoading ? (
-            <LoadingPanel
-              data-testid="loading-events"
-              borderRadius="3px"
-              height="170px"
-              margin="10px auto 0"
-            />
-          ) : error ? (
-            <FetchError onClickReload={handleReload} />
-          ) : !isEmpty(events) ? (
-            events.map(props => (
-              <Event
-                key={props._id}
-                padding="5px 20px"
-                details={[props]}
-                spacing={20}
-                folder="lowres"
-                loggedinUserId={loggedinUserId}
+        <Padding top="10px" left="10px" right="10px">
+          <CalendarDateContainer>
+            <CalendarDateTitle nextWeek={nextWeek} />
+            {isLoading ? (
+              <LoadingPanel
+                data-testid="loading-events"
+                borderRadius="3px"
+                height="175px"
+                margin="10px auto 0"
               />
-            ))
-          ) : (
-            <NoEvents today={!nextWeek} />
-          )}
-        </CalendarDateContainer>
+            ) : error ? (
+              <FetchError onClickReload={handleReload} />
+            ) : !isEmpty(events) ? (
+              events.map(props => (
+                <Event
+                  key={props._id}
+                  padding="5px 20px"
+                  details={[props]}
+                  spacing={20}
+                  folder="lowres"
+                  loggedinUserId={loggedinUserId}
+                />
+              ))
+            ) : (
+              <NoEvents today={!nextWeek} />
+            )}
+          </CalendarDateContainer>
+        </Padding>
       </TabPanel>
     </Card>
   );

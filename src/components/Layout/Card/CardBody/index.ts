@@ -6,7 +6,7 @@ const CardBody = styled.div<{ padding?: string }>`
   padding: ${({ padding }) => padding || "24px"};
 
   .MuiTabs-root {
-    min-height: 35px;
+    min-height: 34px;
   }
 `;
 

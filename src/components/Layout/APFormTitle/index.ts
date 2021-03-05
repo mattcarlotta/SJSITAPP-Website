@@ -5,7 +5,6 @@ const APFormTitle = styled.div`
   background: #0d6472;
   padding: 5px 0;
   color: #eee;
-  font-size: 17px;
 `;
 
 export default APFormTitle;

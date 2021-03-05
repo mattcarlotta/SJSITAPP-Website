@@ -1,17 +1,18 @@
 import * as React from "react";
 import { css } from "@emotion/react";
+import AvailabilityAvgChart from "~components/Layout/AvailabilityAvgChart";
 import APFormTitle from "~components/Layout/APFormTitle";
 import Card from "~components/Layout/Card";
 import Center from "~components/Layout/Center";
 import FetchError from "~components/Layout/FetchError";
 import LoadingPanel from "~components/Layout/LoadingPanel";
 import Padding from "~components/Layout/Padding";
+import PanelDescription from "~components/Layout/PanelDescription";
 import { FaUserClock } from "~icons";
 import app from "~utils/axiosConfig";
 import moment from "~utils/momentWithTimezone";
 import { parseData } from "~utils/parseResponse";
 import { TAvailabilityData } from "~types";
-import AvailabilityAvgChart from "~components/Layout/AvailabilityAvgChart";
 
 export type TDashboardEventsState = {
   availability: Array<TAvailabilityData>;
@@ -78,32 +79,25 @@ export const Availability = (): JSX.Element => {
       padding="0"
     >
       <APFormTitle>Sharks & Barracuda Availability</APFormTitle>
-      <Padding top="5px" left="10px" right="10px">
+      <Padding top="10px" left="20px" right="20px">
         {isLoading ? (
           <LoadingPanel
             data-testid="loading-events"
             borderRadius="5px"
-            height="240px"
+            height="230px"
             margin="5px auto 0"
           />
         ) : error ? (
           <FetchError onClickReload={handleReload} />
         ) : (
           <Center>
-            <div
-              css={css`
-                color: #888;
-                margin-top: 5px;
-                font-size: 14px;
-              `}
-            >
+            <PanelDescription>
               Availability should be greater than 75%
-            </div>
+            </PanelDescription>
             <div
               css={css`
                 margin-bottom: 10px;
                 color: #1a4448;
-                text-align: center;
               `}
             >
               {moment(months[0]).format(simpleFormat)}
