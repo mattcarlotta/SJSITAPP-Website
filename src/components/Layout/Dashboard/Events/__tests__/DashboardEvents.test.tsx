@@ -1,6 +1,6 @@
-import { mount } from "enzyme";
-import mockApp from "~utils/mockAxios";
+import { mount, ReactWrapper } from "enzyme";
 import waitFor from "~utils/waitFor";
+import mockApp from "~utils/mockAxios";
 import Events from "../index";
 
 const initProps = {
@@ -37,88 +37,90 @@ const gameSchedule = [
 ];
 
 const APIURL = "dashboard/events/today";
+mockApp
+  .onGet(APIURL)
+  .replyOnce(200)
+  .onGet(APIURL)
+  .replyOnce(200)
+  .onGet(APIURL)
+  .replyOnce(200)
+  .onGet(APIURL)
+  .replyOnce(200)
+  .onGet(APIURL)
+  .replyOnce(200, gameSchedule)
+  .onGet(APIURL)
+  .replyOnce(400)
+  .onGet(APIURL)
+  .replyOnce(400)
+  .onGet(APIURL)
+  .reply(200);
+
+mockApp.onGet("dashboard/events/upcoming").reply(400);
 
 describe("Dashboard Events Tab", () => {
-  afterEach(() => {
-    mockApp.reset();
+  let wrapper: ReactWrapper;
+  let findById: (id: string) => ReactWrapper;
+  beforeEach(() => {
+    wrapper = mount(<Events {...initProps} />);
+    findById = id => wrapper.find(`[data-testid='${id}']`);
   });
 
   it("renders without errors and displays a placeholder", async () => {
-    const wrapper = mount(<Events {...initProps} />);
     await waitFor(() => {
-      expect(wrapper.find("[data-testid='dashboard-events']")).toExist();
-      expect(wrapper.find("[data-testid='loading-events']")).toExist();
+      expect(findById("dashboard-events")).toExist();
+      expect(findById("loading-events")).toExist();
     });
   });
 
   it("toggles to 'upcoming' and 'today' tab and calls API again", async () => {
-    mockApp.onGet(APIURL).reply(200);
-    mockApp.onGet("dashboard/events/upcoming").reply(400);
-    const wrapper = mount(<Events {...initProps} />);
-
-    wrapper.find("[data-testid='tab-upcoming']").at(1).simulate("click");
+    findById("tab-upcoming").at(1).simulate("click");
 
     await waitFor(() => {
       wrapper.update();
-      expect(wrapper.find("[data-testid='fetch-error']")).toExist();
+      expect(findById("fetch-error")).toExist();
     });
 
-    wrapper.find("[data-testid='tab-today']").at(1).simulate("click");
+    findById("tab-today").at(1).simulate("click");
 
     await waitFor(() => {
       wrapper.update();
-      expect(wrapper.find("[data-testid='no-events']")).toExist();
+      expect(findById("no-events")).toExist();
     });
   });
 
   it("displays no events message when no data is returned from API", async () => {
-    mockApp.onGet(APIURL).reply(200);
-    const wrapper = mount(<Events {...initProps} />);
-
     await waitFor(() => {
       wrapper.update();
-      expect(wrapper.find("[data-testid='no-events']")).toExist();
+      expect(findById("no-events")).toExist();
     });
   });
 
   it("displays a button when events data has been retrieve from the API", async () => {
-    mockApp.onGet(APIURL).reply(200, gameSchedule);
-    const wrapper = mount(<Events {...initProps} />);
-
     await waitFor(() => {
       wrapper.update();
-      expect(wrapper.find("[data-testid='upcoming-event']")).toExist();
+      expect(findById("upcoming-event")).toExist();
     });
   });
 
   it("displays an error message when the request to the API failed", async () => {
-    mockApp.onGet(APIURL).reply(400);
-    const wrapper = mount(<Events {...initProps} />);
-
     await waitFor(() => {
       wrapper.update();
-      expect(wrapper.find("[data-testid='fetch-error']")).toExist();
+      expect(findById("fetch-error")).toExist();
     });
   });
 
   it("attempts to reload the component when a request to the API failed", async () => {
-    mockApp.onGet(APIURL).replyOnce(400).onGet(APIURL).replyOnce(200);
-    const wrapper = mount(<Events {...initProps} />);
-
     await waitFor(async () => {
       wrapper.update();
-
-      expect(wrapper.find("[data-testid='fetch-error']")).toExist();
-      expect(wrapper.find("[data-testid='reload-component']")).toExist();
-      wrapper
-        .find("[data-testid='reload-component']")
-        .first()
-        .simulate("click");
+      expect(findById("fetch-error")).toExist();
+      expect(findById("reload-component")).toExist();
     });
+
+    findById("reload-component").first().simulate("click");
 
     await waitFor(() => {
       wrapper.update();
-      expect(wrapper.find("[data-testid='no-events']")).toExist();
+      expect(findById("no-events")).toExist();
     });
   });
 });

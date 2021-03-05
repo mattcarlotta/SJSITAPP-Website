@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { act } from "react-dom/test-utils";
 
 /**
@@ -13,7 +14,7 @@ const waitFor = (callback: () => void): Promise<any> =>
       new Promise((resolve, reject) => {
         const startTime = Date.now();
 
-        const nextInterval = () => {
+        const tick = () => {
           setTimeout(() => {
             try {
               callback();
@@ -22,13 +23,13 @@ const waitFor = (callback: () => void): Promise<any> =>
               if (Date.now() - startTime > 1000) {
                 reject(new Error("Timed out."));
               } else {
-                nextInterval();
+                tick();
               }
             }
           }, 50);
         };
 
-        nextInterval();
+        tick();
       })
   );
 

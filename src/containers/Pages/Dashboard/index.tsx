@@ -10,7 +10,7 @@ export type TDashboardProps = {
   loggedinUserId: string;
 };
 
-const Dashboard = ({ loggedinUserId }: TDashboardProps): JSX.Element => (
+export const Dashboard = ({ loggedinUserId }: TDashboardProps): JSX.Element => (
   <>
     <Header title="Dashboard" url="/dashboard" />
     <Grid container spacing={3}>
@@ -27,6 +27,7 @@ const Dashboard = ({ loggedinUserId }: TDashboardProps): JSX.Element => (
   </>
 );
 
+/* istanbul ignore next */
 const mapStateToProps = ({ auth }: Pick<TRootState, "auth">) => ({
   loggedinUserId: auth.id
 });

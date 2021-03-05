@@ -12,7 +12,7 @@ const LoadingPanel = ({
   style
 }: TLoadingPanelProps): JSX.Element => (
   <FadeIn timing="0.6s">
-    <div className={className} style={style} />
+    <div data-testid="loading-panel" className={className} style={style} />
   </FadeIn>
 );
 

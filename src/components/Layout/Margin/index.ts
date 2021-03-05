@@ -6,10 +6,10 @@ const Margin = styled.span<{
   right?: string;
   top?: string;
 }>`
-  margin-top: ${({ top }) => top || "0x"};
-  margin-bottom: ${({ bottom }) => bottom || "0x"};
-  margin-right: ${({ right }) => right || "0x"};
-  margin-left: ${({ left }) => left || "0x"};
+  margin-top: ${({ top }) => top || "0px"};
+  margin-bottom: ${({ bottom }) => bottom || "0px"};
+  margin-right: ${({ right }) => right || "0px"};
+  margin-left: ${({ left }) => left || "0px"};
   word-wrap: break-word;
 `;
 
