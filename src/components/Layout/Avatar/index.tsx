@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { BsPeopleCircle } from "~icons";
-import { CSSProperties, FC } from "~types";
+import { CSSProperties } from "~types";
 
 export type TAvatarProps = {
   avatar?: string;
@@ -11,12 +11,12 @@ export type TAvatarProps = {
   width?: string;
 };
 
-const AvatarComponent: FC<TAvatarProps> = ({
+const AvatarComponent = ({
   avatar,
   className,
   style,
   width
-}) => {
+}: TAvatarProps): JSX.Element => {
   const avatarWidth = width || "27px";
 
   return (

@@ -4,17 +4,17 @@ import Center from "~components/Layout/Center";
 import Paragraph from "~components/Layout/Paragraph";
 import Title from "~components/Layout/Title";
 
-export interface IFormTitleProps {
+export type TFormTitleProps = {
   description: string;
   header: string;
   title: string;
-}
+};
 
 const FormTitle = ({
   description,
   header,
   title
-}: IFormTitleProps): JSX.Element => (
+}: TFormTitleProps): JSX.Element => (
   <>
     <Head title={header} />
     <Center style={{ borderBottom: "1px solid #e8edf2", marginBottom: "25px" }}>

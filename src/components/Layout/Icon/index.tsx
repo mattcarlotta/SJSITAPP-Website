@@ -18,7 +18,7 @@ import {
   FaUserCircle,
   MdPersonPin
 } from "~icons";
-import { ChangeEvent, CSSProperties, FC, TIconType } from "~types";
+import { ChangeEvent, CSSProperties, TIconType } from "~types";
 
 export interface IIconProps {
   className?: string;
@@ -81,13 +81,13 @@ const icons = (type?: TIconType): JSX.Element => {
   }
 };
 
-const IconComponent: FC<IIconProps> = ({
+const IconComponent = ({
   className,
   dataTestId,
   onClick,
   style,
   type
-}) => (
+}: IIconProps): JSX.Element => (
   <i
     role="presentation"
     aria-hidden="true"

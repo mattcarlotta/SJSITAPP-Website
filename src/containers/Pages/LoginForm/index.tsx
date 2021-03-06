@@ -13,21 +13,24 @@ import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
 import fields from "./Fields";
-import { EventTarget, FC, FormEvent, TLoginData, TRootState } from "~types";
+import { EventTarget, FormEvent, TLoginData, TRootState } from "~types";
 
-export interface ILoginFormState {
+export type TLoginFormState = {
   fields: typeof fields;
   errors: boolean;
   isSubmitting: boolean;
-}
+};
 
-export interface ILoginFormProps {
+export type TLoginFormProps = {
   serverError?: string;
   signinUser: typeof signinUser;
-}
+};
 
-export const LoginForm: FC<ILoginFormProps> = ({ serverError, signinUser }) => {
-  const [state, setState] = React.useState<ILoginFormState>({
+export const LoginForm = ({
+  serverError,
+  signinUser
+}: TLoginFormProps): JSX.Element => {
+  const [state, setState] = React.useState<TLoginFormState>({
     fields,
     errors: false,
     isSubmitting: false

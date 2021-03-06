@@ -4,9 +4,9 @@ import { useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { checkForActiveSession } from "~actions/Auth";
 import GlobalStylesheet from "~styles/globalStylesheet";
-import { AppProps, FC } from "~types";
+import { AppProps } from "~types";
 
-const Container: FC<AppProps> = ({ Component, pageProps }) => {
+const Container = ({ Component, pageProps }: AppProps): JSX.Element => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {

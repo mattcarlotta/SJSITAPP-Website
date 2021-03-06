@@ -1,12 +1,16 @@
 /* eslint-disable react/button-has-type */
 import styled from "@emotion/styled";
-import { ComponentProps } from "~types";
+import { ChangeEvent, CSSProperties, ReactNode } from "~types";
 
-export interface ButtonProps extends ComponentProps {
+export type TButtonProps = {
+  className?: string;
+  children: ReactNode;
+  dataTestId?: string;
   disabled?: boolean;
-  danger?: boolean;
+  style?: CSSProperties;
+  onClick?: (event: ChangeEvent<any>) => void;
   type: "button" | "submit" | "reset" | undefined;
-}
+};
 
 const StyledButton = ({
   className,
@@ -16,7 +20,7 @@ const StyledButton = ({
   onClick,
   style,
   type
-}: ButtonProps): JSX.Element => (
+}: TButtonProps): JSX.Element => (
   <button
     data-testid={dataTestId}
     disabled={disabled}

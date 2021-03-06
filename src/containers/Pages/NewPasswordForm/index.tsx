@@ -14,29 +14,28 @@ import parseFields from "~utils/parseFields";
 import fields from "./Fields";
 import {
   EventTarget,
-  FC,
   FormEvent,
   TBaseFieldProps,
   TNewPasswordData,
   TRootState
 } from "~types";
 
-export interface ISignupFormState {
+export type ISignupFormState = {
   fields: Array<TBaseFieldProps>;
   token: string;
   errors: boolean;
   isSubmitting: boolean;
-}
+};
 
-export interface ISignupFormProps {
+export type TSignupFormProps = {
   serverError?: string;
   updateUserPassword: typeof updateUserPassword;
-}
+};
 
-export const NewPasswordForm: FC<ISignupFormProps> = ({
+export const NewPasswordForm = ({
   serverError,
   updateUserPassword
-}) => {
+}: TSignupFormProps): JSX.Element => {
   const router = useRouter();
   const token = get(router, ["query", "token"]);
   const [state, setState] = React.useState({

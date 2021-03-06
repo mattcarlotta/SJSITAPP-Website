@@ -20,7 +20,7 @@ import {
   MdHelpOutline,
   RiLogoutBoxLine
 } from "~icons";
-import { FC, MouseEvent, TRootState } from "~types";
+import { MouseEvent, TRootState } from "~types";
 
 export type TUserAvatarProps = {
   avatar?: string;
@@ -35,12 +35,12 @@ const useClasses = makeStyles(() => ({
   }
 }));
 
-export const UserAvatar: FC<TUserAvatarProps> = ({
+export const UserAvatar = ({
   avatar,
   firstName,
   lastName,
   signoutUserSession
-}) => {
+}: TUserAvatarProps): JSX.Element => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );

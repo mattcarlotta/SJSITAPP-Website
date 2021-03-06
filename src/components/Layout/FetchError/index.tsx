@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import { RiSignalWifiErrorFill } from "~icons";
 import Button from "~components/Layout/Button";
 import FlexCenter from "~components/Layout/FlexCenter";
+import { MdRefresh, RiSignalWifiErrorFill } from "~icons";
 
 export type TFetchErrorComponent = {
   className?: string;
@@ -23,12 +23,19 @@ const FetchErrorComponent = ({
           primary
           noGlow
           data-testid="reload-component"
-          padding="3px"
+          padding="5px"
           margin="10px 0 0 0"
-          width="100px"
+          width="130px"
           type="button"
           onClick={onClickReload}
         >
+          <MdRefresh
+            style={{
+              position: "relative",
+              top: 3,
+              marginRight: 5
+            }}
+          />
           Reload
         </Button>
       )}

@@ -34,7 +34,7 @@ import {
   MdEventNote,
   MdNoteAdd
 } from "~icons";
-import { FC, TSideMenuNodeIds } from "~types";
+import { TSideMenuNodeIds } from "~types";
 
 export type TSideMenuProps = {
   collapsed: boolean;
@@ -43,12 +43,12 @@ export type TSideMenuProps = {
   selectedNodeIds: TSideMenuNodeIds;
 };
 
-const SideMenu: FC<TSideMenuProps> = ({
+const SideMenu = ({
   collapsed,
   expandedNodeIds,
   handleToggle,
   selectedNodeIds
-}) => (
+}: TSideMenuProps): JSX.Element => (
   <Tree data-testid="sidemenu-tree" collapsed={collapsed}>
     <TreeView
       defaultCollapseIcon={<MdExpandMore />}

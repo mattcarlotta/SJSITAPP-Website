@@ -22,7 +22,7 @@ describe("CalendarDateTitle", () => {
 
     expect(
       wrapper.find("[data-testid='calendar-date']").first().text()
-    ).toEqual(dayDate.format("MMM DD"));
+    ).toEqual(dayDate.format("MMM Do"));
   });
 
   it("displays the calendar day and next week when passed a 'nextWeek' prop", () => {
@@ -35,7 +35,7 @@ describe("CalendarDateTitle", () => {
     expect(
       wrapper.find("[data-testid='calendar-date']").first().text()
     ).toEqual(
-      `${dayDate.format("MMM DD")}\u00a0–\u00a0${weekFromDate.format("MMM DD")}`
+      `${dayDate.format("MMM Do")}\u00a0–\u00a0${weekFromDate.format("MMM Do")}`
     );
   });
 
@@ -48,6 +48,6 @@ describe("CalendarDateTitle", () => {
 
     expect(
       wrapper.find("[data-testid='calendar-date']").first().text()
-    ).toEqual(weekFromDate.format("MMM DD"));
+    ).toEqual(weekFromDate.format("MMM Do"));
   });
 });

@@ -5,18 +5,20 @@ import moment from "~utils/momentWithTimezone";
 export type TDisplayMonthDates = {
   startMonth?: string;
   endMonth?: string;
+  marginBottom?: string;
 };
 
 const simpleFormat = "MMM Do";
 
 const DisplayMonthDates = ({
-  startMonth,
-  endMonth
+  endMonth,
+  marginBottom,
+  startMonth
 }: TDisplayMonthDates): JSX.Element => (
   <div
     css={css`
       color: #1a4448;
-      margin-bottom: 10px;
+      margin-bottom: ${marginBottom || "10px"};
     `}
   >
     {startMonth

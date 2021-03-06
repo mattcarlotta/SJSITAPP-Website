@@ -1,12 +1,10 @@
 import styled from "@emotion/styled";
 
-export interface ButtonContainerProps {
+const ButtonContainer = styled.div<{
   primary?: boolean;
   danger?: boolean;
   tertiary?: boolean;
-}
-
-const ButtonContainer = styled.div<ButtonContainerProps>`
+}>`
   width: 100%;
   border-radius: 50px;
   background: transparent;

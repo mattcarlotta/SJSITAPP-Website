@@ -17,28 +17,27 @@ import parseFields from "~utils/parseFields";
 import fields from "./Fields";
 import {
   EventTarget,
-  FC,
   FormEvent,
   TBaseFieldProps,
   TSignupData,
   TRootState
 } from "~types";
 
-export interface ISignupFormState {
+export type TSignupFormState = {
   fields: Array<TBaseFieldProps>;
   errors: boolean;
   isSubmitting: boolean;
-}
+};
 
-export interface ISignupFormProps {
+export type TSignupFormProps = {
   serverError?: string;
   signupUser: typeof signupUser;
-}
+};
 
-export const SignupForm: FC<ISignupFormProps> = ({
+export const SignupForm = ({
   serverError,
   signupUser
-}) => {
+}: TSignupFormProps): JSX.Element => {
   const router = useRouter();
   const token = get(router, ["query", "token"]);
   const [state, setState] = React.useState({

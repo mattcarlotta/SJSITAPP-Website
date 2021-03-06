@@ -3,10 +3,11 @@ import Modal from "~components/Layout/Modal";
 import Event from "../index";
 
 const initProps = {
-  details: [],
+  events: [],
   folder: "",
   id: "",
-  loggedinUserId: "88"
+  loggedinUserId: "88",
+  nextWeek: false
 };
 
 const gameSchedule = [
@@ -80,9 +81,9 @@ describe("Event", () => {
     expect(wrapper.find(Modal).props().isOpen).toBeFalsy();
   });
 
-  it("renders a button that opens and closes the modal with game details", () => {
+  it("renders a button that opens and closes the modal with game events", () => {
     wrapper.setProps({
-      details: gameSchedule,
+      events: gameSchedule,
       folder: "lowres"
     });
 
@@ -99,7 +100,7 @@ describe("Event", () => {
   });
 
   it("renders a button with a schedule icon and logos for a game", () => {
-    wrapper.setProps({ details: gameSchedule });
+    wrapper.setProps({ events: gameSchedule });
     expect(wrapper.find("[data-testid='upcoming-event']")).toExist();
     expect(wrapper.find("FaCalendarCheck")).toExist();
     expect(wrapper.find("[data-testid='San Jose Sharks']")).toExist();
@@ -112,7 +113,7 @@ describe("Event", () => {
   });
 
   it("renders a button with team logos for an unschedule game", () => {
-    wrapper.setProps({ details: unscheduledGame });
+    wrapper.setProps({ events: unscheduledGame });
     expect(wrapper.find("[data-testid='upcoming-event']")).toExist();
     expect(wrapper.find("FaCalendarCheck")).not.toExist();
     expect(wrapper.find("[data-testid='San Jose Sharks']")).toExist();

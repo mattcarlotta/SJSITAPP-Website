@@ -1,7 +1,6 @@
 import { BsFillHouseFill } from "~icons";
-import { FC } from "~types";
 
-const HomeIcon: FC = () => (
+const HomeIcon = (): JSX.Element => (
   <span
     data-testid="home-icon"
     style={{ marginRight: "4px", fontSize: "20px" }}

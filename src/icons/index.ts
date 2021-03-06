@@ -79,6 +79,7 @@ export { MdEventNote } from "@react-icons/all-files/md/MdEventNote";
 export { MdHelpOutline } from "@react-icons/all-files/md/MdHelpOutline";
 export { MdNoteAdd } from "@react-icons/all-files/md/MdNoteAdd";
 export { MdPersonPin } from "@react-icons/all-files/md/MdPersonPin";
+export { MdRefresh } from "@react-icons/all-files/md/MdRefresh";
 
 // RI
 export { RiFileForbidLine } from "@react-icons/all-files/ri/RiFileForbidLine";

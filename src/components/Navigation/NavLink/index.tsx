@@ -2,14 +2,14 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 import { ReactNode, CSSProperties } from "~types";
 
-export interface INavLinkProps {
+export type TNavLinkProps = {
   children: ReactNode;
   dataTestId: string;
   className?: string;
   href: string;
   style?: CSSProperties;
   target?: string;
-}
+};
 
 const NavLinkComponent = ({
   className,
@@ -18,7 +18,7 @@ const NavLinkComponent = ({
   href,
   style,
   target
-}: INavLinkProps): JSX.Element => (
+}: TNavLinkProps): JSX.Element => (
   <Link href={href} prefetch={false} passHref>
     <a
       data-testid={dataTestId}

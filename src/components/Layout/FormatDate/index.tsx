@@ -2,7 +2,7 @@ import moment from "~utils/momentWithTimezone";
 import { CSSProperties } from "~types";
 
 export type TFormatDateProps = {
-  date: string | Date;
+  date?: string | Date;
   format: string;
   style?: CSSProperties;
 };

@@ -14,9 +14,9 @@ import MenuLink from "~components/Navigation/MenuLink";
 import UserAvatar from "~containers/App/UserAvatar";
 import { IconContext, RiMenuFoldLine, RiMenuUnfoldLine } from "~icons";
 import { expandedIds, selectedTab } from "./Tabs";
-import { ReactElement, FC, TSideMenuNodeIds, TRootState } from "~types";
+import { ReactElement, TSideMenuNodeIds, TRootState } from "~types";
 
-interface AppLayoutProps {
+export type TAppLayoutProps = {
   children?: ReactElement<any>;
   collapsed: boolean;
   expandedNodeIds: TSideMenuNodeIds;
@@ -24,9 +24,9 @@ interface AppLayoutProps {
   toggleSideNav: typeof actions.toggleSideNav;
   setSelectedTabs: typeof actions.setSelectedTabs;
   setExpandedTabs: typeof actions.setExpandedTabs;
-}
+};
 
-export const AppLayout: FC<AppLayoutProps> = ({
+export const AppLayout = ({
   children,
   collapsed,
   expandedNodeIds,
@@ -34,7 +34,7 @@ export const AppLayout: FC<AppLayoutProps> = ({
   setExpandedTabs,
   setSelectedTabs,
   toggleSideNav
-}) => {
+}: TAppLayoutProps): JSX.Element => {
   const router = useRouter();
 
   const handleToggle = React.useCallback((_, nodeIds: TSideMenuNodeIds) => {

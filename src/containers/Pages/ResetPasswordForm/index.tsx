@@ -15,29 +15,28 @@ import parseFields from "~utils/parseFields";
 import fields from "./Fields";
 import {
   EventTarget,
-  FC,
   FormEvent,
   TBaseFieldProps,
   TResetPasswordData,
   TRootState
 } from "~types";
 
-export interface ISignupFormState {
+export type TSignupFormState = {
   fields: Array<TBaseFieldProps>;
   errors: boolean;
   isSubmitting: boolean;
-}
+};
 
-export interface IResetPasswordFormProps {
+export type TResetPasswordFormProps = {
   serverError?: string;
   resetPassword: typeof resetPassword;
-}
+};
 
-export const ResetPasswordForm: FC<IResetPasswordFormProps> = ({
+export const ResetPasswordForm = ({
   resetPassword,
   serverError
-}) => {
-  const [state, setState] = React.useState<ISignupFormState>({
+}: TResetPasswordFormProps): JSX.Element => {
+  const [state, setState] = React.useState<TSignupFormState>({
     fields,
     errors: false,
     isSubmitting: false

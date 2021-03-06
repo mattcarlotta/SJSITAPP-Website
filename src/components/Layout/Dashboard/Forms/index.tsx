@@ -1,5 +1,4 @@
 import * as React from "react";
-import { css } from "@emotion/react";
 import isEmpty from "lodash.isempty";
 import APFormExpired from "~components/Layout/APFormExpired";
 import APFormTitle from "~components/Layout/APFormTitle";
@@ -7,6 +6,7 @@ import Card from "~components/Layout/Card";
 import Center from "~components/Layout/Center";
 import DisplayMonthDates from "~components/Layout/DisplayMonthDates";
 import FetchError from "~components/Layout/FetchError";
+import FormatDate from "~components/Layout/FormatDate";
 import LoadingPanel from "~components/Layout/LoadingPanel";
 import NoForms from "~components/Layout/NoForms";
 import Padding from "~components/Layout/Padding";
@@ -47,8 +47,8 @@ export const Forms = (): JSX.Element => {
       setState({
         error: false,
         form: data,
-        isLoading: false,
-        hasExpired
+        hasExpired,
+        isLoading: false
       });
     } catch (err) {
       setState(prevState => ({
@@ -81,63 +81,63 @@ export const Forms = (): JSX.Element => {
     >
       <APFormTitle>Sharks & Barracuda A/P Form</APFormTitle>
       <Padding top="10px" left="20px" right="20px">
-        {isLoading ? (
-          <LoadingPanel
-            data-testid="loading-events"
-            borderRadius="5px"
-            height="230px"
-            margin="5px auto 0"
-          />
-        ) : error ? (
-          <FetchError onClickReload={handleReload} />
-        ) : !isEmpty(form) ? (
-          <Center>
-            <PanelDescription>
-              {!hasExpired ? "Expires" : "Expired"} on&nbsp;
-              {moment(form.expirationDate).format(format)}
-            </PanelDescription>
-            <div
-              css={css`
-                margin-bottom: 13px;
-              `}
-            >
+        <Center>
+          {isLoading ? (
+            <LoadingPanel
+              data-testid="loading-events"
+              borderRadius="5px"
+              height="230px"
+              margin="5px auto 0"
+            />
+          ) : error ? (
+            <FetchError onClickReload={handleReload} />
+          ) : !isEmpty(form) ? (
+            <>
+              <PanelDescription>
+                {!hasExpired ? "Expires" : "Expired"} on&nbsp;
+                <FormatDate
+                  date={form.expirationDate}
+                  format={format}
+                  style={{ display: "inline" }}
+                />
+              </PanelDescription>
               <DisplayMonthDates
                 startMonth={form.startMonth}
                 endMonth={form.endMonth}
               />
-            </div>
-            {!hasExpired ? (
-              <Link
-                alt
-                display="block"
-                margin="10px auto"
-                borderRadius="50px"
-                padding="17px 0px"
-                width="280px"
-                hideShadow
-                dataTestId="dashboard-ap-form-link"
-                href={`/employee/forms/view/${form._id}`}
-              >
-                <BsPencilSquare
-                  style={{
-                    position: "relative",
-                    top: 4,
-                    marginRight: 8,
-                    fontSize: 20
-                  }}
-                />
-                View Form ({form.eventCounts} events)
-              </Link>
-            ) : (
-              <APFormExpired />
-            )}
-          </Center>
-        ) : (
-          <Center>
-            <DisplayMonthDates />
-            <NoForms />
-          </Center>
-        )}
+              {!hasExpired ? (
+                <Link
+                  alt
+                  display="block"
+                  margin="10px auto"
+                  borderRadius="50px"
+                  padding="17px 0px"
+                  width="280px"
+                  hideShadow
+                  dataTestId="dashboard-ap-form-link"
+                  href={`/employee/forms/view/${form._id}`}
+                >
+                  <BsPencilSquare
+                    style={{
+                      position: "relative",
+                      top: 4,
+                      marginRight: 8,
+                      fontSize: 20
+                    }}
+                  />
+                  View Form ({form.eventCounts} events)
+                </Link>
+              ) : (
+                <APFormExpired />
+              )}
+            </>
+          ) : (
+            <>
+              <DisplayMonthDates />
+              <NoForms />
+            </>
+          )}
+        </Center>
       </Padding>
     </Card>
   );
