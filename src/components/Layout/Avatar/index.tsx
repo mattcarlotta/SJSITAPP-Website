@@ -17,7 +17,7 @@ const AvatarComponent = ({
   style,
   width
 }: TAvatarProps): JSX.Element => {
-  const avatarWidth = width || "27px";
+  const avatarWidth = width || "30px";
 
   return (
     <div data-testid="avatar" className={className}>
@@ -40,10 +40,16 @@ const AvatarComponent = ({
   );
 };
 
-const Avatar = styled(AvatarComponent)<{ primary?: boolean; width?: string }>`
-  display: inline-block;
+const Avatar = styled(AvatarComponent)<{
+  height?: string;
+  primary?: boolean;
+  width?: string;
+}>`
+  display: flex;
+  align-items: center;
   color: ${({ primary }) => (primary ? "#efefef" : "#025f6d")};
-  width: ${({ width }) => width || "27px"};
+  width: ${({ width }) => width || "30px"};
+  height: ${({ height }) => height || "auto"};
   transition: all 300ms;
 `;
 

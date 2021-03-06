@@ -19,10 +19,17 @@ describe("Avatar", () => {
     expect(wrapper.find("BsPeopleCircle")).toExist();
   });
 
-  it("initially renders a placeholder 27px width", () => {
+  it("initially renders a placeholder 30px width", () => {
     expect(wrapper.find("[data-testid='avatar']")).toHaveStyleRule(
       "width",
-      "27px"
+      "30px"
+    );
+  });
+
+  it("initially renders a placeholder auto height", () => {
+    expect(wrapper.find("[data-testid='avatar']")).toHaveStyleRule(
+      "height",
+      "auto"
     );
   });
 
@@ -38,6 +45,14 @@ describe("Avatar", () => {
     wrapper.setProps({ width: "100px" });
     expect(wrapper.find("[data-testid='avatar']")).toHaveStyleRule(
       "width",
+      "100px"
+    );
+  });
+
+  it("sets a height according to 'height' prop", () => {
+    wrapper.setProps({ height: "100px" });
+    expect(wrapper.find("[data-testid='avatar']")).toHaveStyleRule(
+      "height",
       "100px"
     );
   });

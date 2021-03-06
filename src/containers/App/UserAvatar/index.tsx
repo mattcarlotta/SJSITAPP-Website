@@ -67,6 +67,7 @@ export const UserAvatar = ({
         aria-describedby={id}
         data-testid="account-dropdown"
         hoverable
+        padding="4px"
         onClick={handleClick}
       >
         <Avatar avatar={avatar} />
