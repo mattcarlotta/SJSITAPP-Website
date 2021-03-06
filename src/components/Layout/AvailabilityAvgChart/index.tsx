@@ -5,6 +5,7 @@ import get from "lodash.get";
 import { ResponsivePie } from "@nivo/pie";
 import AvailabilityChartLabel from "~components/Layout/AvailabilityChartLabel";
 import NoAvailability from "~components/Layout/NoAvailability";
+import AvailabilityTooltip from "./Tooltip";
 import { TAvailabilityData } from "~types";
 
 const VALIDCOLORS = ["#2979FF", "#BBBBBB"];
@@ -39,38 +40,7 @@ const AvailabilityAvgChart = ({
             endAngle={0}
             enableRadialLabels={false}
             enableSliceLabels={false}
-            tooltip={
-              /* istanbul ignore next */ ({ datum }) => (
-                <div
-                  css={css`
-                    background: #fff;
-                    font-size: inherit;
-                    border-radius: 2px;
-                    box-shadow: rgb(0 0 0 / 25%) 0px 1px 2px;
-                    padding: 5px 9px;
-                  `}
-                >
-                  <div
-                    css={css`
-                      white-space: pre;
-                      display: flex;
-                      align-items: center;
-                    `}
-                  >
-                    <span
-                      css={css`
-                        display: block;
-                        width: 12px;
-                        height: 12px;
-                        background: ${datum.color};
-                        margin-right: 7px;
-                      `}
-                    />
-                    <span>Availability - {datum.value}%</span>
-                  </div>
-                </div>
-              )
-            }
+            tooltip={AvailabilityTooltip}
           />
           <AvailabilityChartLabel>
             <span data-test="availability-avg">{availabilityPercentage}%</span>
