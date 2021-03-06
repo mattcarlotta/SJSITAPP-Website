@@ -11,7 +11,7 @@ const iconStyle = {
 const NoAvailability = (): JSX.Element => (
   <FlexCenter
     data-testid="no-availability"
-    height="110px"
+    height="120px"
     direction="column"
     justify="center"
     style={{ color: "#999" }}

@@ -11,7 +11,7 @@ const iconStyle = {
 const APFormExpired = (): JSX.Element => (
   <FlexCenter
     data-testid="expired-form"
-    height="85px"
+    height="125px"
     direction="column"
     justify="center"
     style={{ color: "#999" }}

@@ -21,7 +21,7 @@ const AvailabilityAvgChart = ({
 
   return (
     <>
-      {!isEmpty(availability) ? (
+      {isEmpty(availability) ? (
         <div
           css={css`
             height: 150px;

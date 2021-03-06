@@ -1,4 +1,5 @@
 import * as React from "react";
+import { css } from "@emotion/react";
 import moment from "~utils/momentWithTimezone";
 
 export type TDisplayMonthDates = {
@@ -12,15 +13,20 @@ const DisplayMonthDates = ({
   startMonth,
   endMonth
 }: TDisplayMonthDates): JSX.Element => (
-  <>
+  <div
+    css={css`
+      color: #1a4448;
+      margin-bottom: 10px;
+    `}
+  >
     {startMonth
       ? moment(startMonth).format(simpleFormat)
-      : moment().add(1, "months").startOf("month").format()}
+      : moment().add(1, "months").startOf("month").format(simpleFormat)}
     &nbsp;–&nbsp;
     {endMonth
       ? moment(endMonth).format(simpleFormat)
-      : moment().add(1, "months").endOf("month").format()}
-  </>
+      : moment().add(1, "months").endOf("month").format(simpleFormat)}
+  </div>
 );
 
 export default DisplayMonthDates;

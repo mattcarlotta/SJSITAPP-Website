@@ -99,7 +99,6 @@ export const Forms = (): JSX.Element => {
             <div
               css={css`
                 margin-bottom: 13px;
-                color: #1a4448;
               `}
             >
               <DisplayMonthDates
@@ -111,7 +110,7 @@ export const Forms = (): JSX.Element => {
               <Link
                 alt
                 display="block"
-                margin="0 auto"
+                margin="10px auto"
                 borderRadius="50px"
                 padding="17px 0px"
                 width="280px"
@@ -135,13 +134,7 @@ export const Forms = (): JSX.Element => {
           </Center>
         ) : (
           <Center>
-            <div
-              css={css`
-                color: #1a4448;
-              `}
-            >
-              <DisplayMonthDates />
-            </div>
+            <DisplayMonthDates />
             <NoForms />
           </Center>
         )}

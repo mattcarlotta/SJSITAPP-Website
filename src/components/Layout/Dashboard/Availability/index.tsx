@@ -1,5 +1,4 @@
 import * as React from "react";
-import { css } from "@emotion/react";
 import AvailabilityAvgChart from "~components/Layout/AvailabilityAvgChart";
 import APFormTitle from "~components/Layout/APFormTitle";
 import Card from "~components/Layout/Card";
@@ -92,14 +91,7 @@ export const Availability = (): JSX.Element => {
             <PanelDescription>
               Availability should be greater than 75%
             </PanelDescription>
-            <div
-              css={css`
-                margin-bottom: 10px;
-                color: #1a4448;
-              `}
-            >
-              <DisplayMonthDates startMonth={months[0]} endMonth={months[1]} />
-            </div>
+            <DisplayMonthDates startMonth={months[0]} endMonth={months[1]} />
             <AvailabilityAvgChart availability={availability} />
           </Center>
         )}
