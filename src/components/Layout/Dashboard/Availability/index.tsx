@@ -4,13 +4,13 @@ import AvailabilityAvgChart from "~components/Layout/AvailabilityAvgChart";
 import APFormTitle from "~components/Layout/APFormTitle";
 import Card from "~components/Layout/Card";
 import Center from "~components/Layout/Center";
+import DisplayMonthDates from "~components/Layout/DisplayMonthDates";
 import FetchError from "~components/Layout/FetchError";
 import LoadingPanel from "~components/Layout/LoadingPanel";
 import Padding from "~components/Layout/Padding";
 import PanelDescription from "~components/Layout/PanelDescription";
 import { FaUserClock } from "~icons";
 import app from "~utils/axiosConfig";
-import moment from "~utils/momentWithTimezone";
 import { parseData } from "~utils/parseResponse";
 import { TAvailabilityData } from "~types";
 
@@ -25,8 +25,6 @@ export type TAvailabilityResData = {
   eventAvailability: Array<TAvailabilityData>;
   months: Array<string>;
 };
-
-const simpleFormat = "MMM Do";
 
 export const Availability = (): JSX.Element => {
   const [state, setState] = React.useState<TDashboardEventsState>({
@@ -100,9 +98,7 @@ export const Availability = (): JSX.Element => {
                 color: #1a4448;
               `}
             >
-              {moment(months[0]).format(simpleFormat)}
-              &nbsp;–&nbsp;
-              {moment(months[1]).format(simpleFormat)}
+              <DisplayMonthDates startMonth={months[0]} endMonth={months[1]} />
             </div>
             <AvailabilityAvgChart availability={availability} />
           </Center>

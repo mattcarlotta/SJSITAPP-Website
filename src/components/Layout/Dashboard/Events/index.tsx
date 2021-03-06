@@ -1,12 +1,10 @@
 import * as React from "react";
-import isEmpty from "lodash.isempty";
 import Card from "~components/Layout/Card";
 import CalendarDateContainer from "~components/Layout/CalendarDateContainer";
 import CalendarDateTitle from "~components/Layout/CalendarDateTitle";
-import Event from "~components/Layout/Event";
+import DisplayEvents from "~components/Layout/DisplayEvents";
 import FetchError from "~components/Layout/FetchError";
 import LoadingPanel from "~components/Layout/LoadingPanel";
-import NoEvents from "~components/Layout/NoEvents";
 import Padding from "~components/Layout/Padding";
 import TabPanel, { a11yProps } from "~components/Layout/TabPanel";
 import Tab from "~components/Layout/Tab";
@@ -116,19 +114,14 @@ export const Events = ({
               />
             ) : error ? (
               <FetchError onClickReload={handleReload} />
-            ) : !isEmpty(events) ? (
-              events.map(props => (
-                <Event
-                  key={props._id}
-                  padding="5px 20px"
-                  details={[props]}
-                  spacing={20}
-                  folder="lowres"
-                  loggedinUserId={loggedinUserId}
-                />
-              ))
             ) : (
-              <NoEvents today={!nextWeek} />
+              <DisplayEvents
+                events={events}
+                nextWeek={nextWeek}
+                spacing={20}
+                folder="lowres"
+                loggedinUserId={loggedinUserId}
+              />
             )}
           </CalendarDateContainer>
         </Padding>

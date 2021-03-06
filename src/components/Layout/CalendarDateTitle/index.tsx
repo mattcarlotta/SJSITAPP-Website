@@ -40,11 +40,11 @@ const CalendarDateTitleComponent = ({
           color: #1a4448;
         `}
       >
-        {dayDate.format("MMM DD")}
+        {dayDate.format("MMM Do")}
         {nextWeek && (
           <>
             &nbsp;&#8211;&nbsp;
-            {weekFromDate.format("MMM DD")}
+            {weekFromDate.format("MMM Do")}
           </>
         )}
       </div>

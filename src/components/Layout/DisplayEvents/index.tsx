@@ -6,6 +6,7 @@ import EventDetails from "~components/Layout/EventDetails";
 import FlexSpaceAround from "~components/Layout/FlexSpaceAround";
 import Modal from "~components/Layout/Modal";
 import Margin from "~components/Layout/Margin";
+import NoEvents from "~components/Layout/NoEvents";
 import { FaCalendarCheck } from "~icons";
 import { CSSProperties, TEventData } from "~types";
 
@@ -19,38 +20,38 @@ const iconStyle = {
 
 export type FolderTypes = "badges" | "calendar" | "lowres" | string;
 
-export type TEventProps = {
+export type TDisplayEventProps = {
   btnStyle?: CSSProperties;
-  details: Array<TEventData>;
+  events: Array<TEventData>;
   folder?: FolderTypes;
   height?: number;
   id?: string;
   innerStyle?: CSSProperties;
-  padding?: string;
   loggedinUserId?: string;
+  nextWeek: boolean;
   scheduleIconStyle?: CSSProperties;
   spacing?: number;
   width?: number;
 };
 
-export type TEventState = {
+export type TDisplayEventState = {
   isVisible: boolean;
-  modalContent: any;
+  modalContent: TEventData;
 };
 
-const Event = ({
+const DisplayEvents = ({
   btnStyle,
-  details,
+  events,
   folder,
   height,
   id,
   innerStyle,
-  padding,
   loggedinUserId,
+  nextWeek,
   scheduleIconStyle,
   spacing,
   width
-}: TEventProps): JSX.Element => {
+}: TDisplayEventProps): JSX.Element => {
   const [state, setState] = React.useState({
     isVisible: false,
     modalContent: {}
@@ -73,8 +74,8 @@ const Event = ({
 
   return (
     <>
-      {!isEmpty(details) &&
-        details.map(event => (
+      {!isEmpty(events) ? (
+        events.map(event => (
           <Button
             dataTestId="upcoming-event"
             key={event._id}
@@ -82,8 +83,8 @@ const Event = ({
             type="button"
             primary={event.team === "San Jose Sharks"}
             danger={event.team === "San Jose Barracuda"}
-            padding={padding}
-            margin="0 auto"
+            padding="5px 20px"
+            margin="0 auto 5px auto"
             maxWidth="250px"
             style={btnStyle}
             onClick={() => handleShowModal(event)}
@@ -121,9 +122,12 @@ const Event = ({
               )}
             </FlexSpaceAround>
           </Button>
-        ))}
+        ))
+      ) : (
+        <NoEvents today={!nextWeek} />
+      )}
       <Modal
-        dataTestId="event-details-modal"
+        dataTestId="event-events-modal"
         isOpen={isVisible}
         onClick={handleCloseModal}
         maxWidth="500px"
@@ -138,4 +142,4 @@ const Event = ({
   );
 };
 
-export default Event;
+export default DisplayEvents;

@@ -5,6 +5,7 @@ import APFormExpired from "~components/Layout/APFormExpired";
 import APFormTitle from "~components/Layout/APFormTitle";
 import Card from "~components/Layout/Card";
 import Center from "~components/Layout/Center";
+import DisplayMonthDates from "~components/Layout/DisplayMonthDates";
 import FetchError from "~components/Layout/FetchError";
 import LoadingPanel from "~components/Layout/LoadingPanel";
 import NoForms from "~components/Layout/NoForms";
@@ -25,7 +26,6 @@ export type TDashboardEventsState = {
 };
 
 const format = "MMM Do @ hh:mm a";
-const simpleFormat = "MMM Do";
 
 export const Forms = (): JSX.Element => {
   const [state, setState] = React.useState<TDashboardEventsState>({
@@ -34,7 +34,6 @@ export const Forms = (): JSX.Element => {
     hasExpired: false,
     isLoading: true
   });
-
   const { error, form, hasExpired, isLoading } = state;
 
   const fetchForms = React.useCallback(async (): Promise<void> => {
@@ -94,7 +93,8 @@ export const Forms = (): JSX.Element => {
         ) : !isEmpty(form) ? (
           <Center>
             <PanelDescription>
-              Expires on {moment(form.expirationDate).format(format)}
+              {!hasExpired ? "Expires" : "Expired"} on&nbsp;
+              {moment(form.expirationDate).format(format)}
             </PanelDescription>
             <div
               css={css`
@@ -102,8 +102,10 @@ export const Forms = (): JSX.Element => {
                 color: #1a4448;
               `}
             >
-              {moment(form.startMonth).format(simpleFormat)}&nbsp;–&nbsp;
-              {moment(form.endMonth).format(simpleFormat)}
+              <DisplayMonthDates
+                startMonth={form.startMonth}
+                endMonth={form.endMonth}
+              />
             </div>
             {!hasExpired ? (
               <Link
@@ -138,9 +140,7 @@ export const Forms = (): JSX.Element => {
                 color: #1a4448;
               `}
             >
-              {moment().add(1, "months").startOf("month").format(simpleFormat)}
-              &nbsp;–&nbsp;
-              {moment().add(1, "months").endOf("month").format(simpleFormat)}
+              <DisplayMonthDates />
             </div>
             <NoForms />
           </Center>
