@@ -1,4 +1,5 @@
 import * as React from "react";
+import get from "lodash.get";
 import isEmpty from "lodash.isempty";
 import APFormExpired from "~components/Layout/APFormExpired";
 import APFormTitle from "~components/Layout/APFormTitle";
@@ -42,7 +43,7 @@ export const Forms = (): JSX.Element => {
       const data = parseData<TFormData>(res);
 
       const hasExpired =
-        moment(data.expirationDate).toDate() < moment().toDate();
+        moment(get(data, ["expirationDate"])).toDate() < moment().toDate();
 
       setState({
         error: false,
@@ -93,7 +94,7 @@ export const Forms = (): JSX.Element => {
             <FetchError onClickReload={handleReload} />
           ) : !isEmpty(form) ? (
             <>
-              <PanelDescription>
+              <PanelDescription data-testid="ap-form">
                 {!hasExpired ? "Expires" : "Expired"} on&nbsp;
                 <FormatDate
                   date={form.expirationDate}

@@ -8,6 +8,7 @@ export type TAvailabilityTooltip = {
 
 const AvailabilityTooltip = ({ datum }: TAvailabilityTooltip): JSX.Element => (
   <div
+    data-testid="tooltip"
     css={css`
       background: #fff;
       font-size: inherit;
@@ -24,6 +25,7 @@ const AvailabilityTooltip = ({ datum }: TAvailabilityTooltip): JSX.Element => (
       `}
     >
       <span
+        data-testid="tooltip-block"
         css={css`
           display: block;
           width: 12px;
@@ -32,7 +34,7 @@ const AvailabilityTooltip = ({ datum }: TAvailabilityTooltip): JSX.Element => (
           margin-right: 7px;
         `}
       />
-      <span>Availability - {datum.value}%</span>
+      <span data-testid="tooltip-value">Availability - {datum.value}%</span>
     </div>
   </div>
 );

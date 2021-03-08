@@ -24,6 +24,7 @@ const AvailabilityAvgChart = ({
     <>
       {!isEmpty(availability) ? (
         <div
+          data-testid="availability-chart"
           css={css`
             height: 150px;
             width: 150px;
