@@ -26,7 +26,7 @@ export type TDashboardEventsState = {
   isLoading: boolean;
 };
 
-const format = "MMM Do @ hh:mm a";
+const format = "MMM Do YYYY @ hh:mm a";
 
 export const Forms = (): JSX.Element => {
   const [state, setState] = React.useState<TDashboardEventsState>({

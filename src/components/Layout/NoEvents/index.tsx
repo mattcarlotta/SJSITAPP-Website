@@ -17,15 +17,15 @@ const NoEvents = ({ today }: TNoEventsProps): JSX.Element => (
     height="135px"
     direction="column"
     justify="center"
-    style={{ color: "#999" }}
+    color="#999"
   >
-    <div data-testid="no-events-icon">
+    <Center data-testid="no-events-icon">
       {!today ? (
         <MdEventNote style={iconStyle} />
       ) : (
         <MdEvent style={iconStyle} />
       )}
-    </div>
+    </Center>
     <Center data-testid="no-events-message">
       {!today
         ? "You don't have any upcoming scheduled events"

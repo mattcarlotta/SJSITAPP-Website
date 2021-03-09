@@ -14,11 +14,11 @@ const NoAvailability = (): JSX.Element => (
     height="120px"
     direction="column"
     justify="center"
-    style={{ color: "#999" }}
+    color="#999"
   >
-    <div data-testid="no-availability-icon">
+    <Center data-testid="no-availability-icon">
       <MdAccessTime style={iconStyle} />
-    </div>
+    </Center>
     <Center data-testid="no-availability-message">
       There isn&apos;t any availabity for this month
     </Center>

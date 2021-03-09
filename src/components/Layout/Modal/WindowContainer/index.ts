@@ -14,7 +14,7 @@ const WindowContainer = styled.div`
   animation: fadeIn 0.2s 0s ease-in-out forwards;
   z-index: 100;
 
-  &::before {
+  :before {
     display: inline-block;
     width: 0;
     height: 100%;

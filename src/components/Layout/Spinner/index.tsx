@@ -34,11 +34,7 @@ export class SpinnerComponent extends React.Component<
     return (
       <div data-testid="spinner" className={className}>
         {!isMounted ? null : isIE || isEdge ? (
-          <FlexCenter
-            style={{ height: "100%" }}
-            justify="center"
-            direction="column"
-          >
+          <FlexCenter height="100%" justify="center" direction="column">
             <HomeLogo
               src="/images/staticIceTeamLogo.png"
               alt="StaticIceTeamLogo.png"
@@ -112,7 +108,7 @@ const Spinner = styled(SpinnerComponent)`
     position: relative;
     user-select: none;
 
-    ::before {
+    :before {
       content: attr(data-text);
       position: absolute;
       filter: blur(0.02em);

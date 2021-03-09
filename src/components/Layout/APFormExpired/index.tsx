@@ -11,16 +11,16 @@ const iconStyle = {
 const APFormExpired = (): JSX.Element => (
   <FlexCenter
     data-testid="expired-form"
-    height="125px"
+    height="140px"
     direction="column"
     justify="center"
-    style={{ color: "#999" }}
+    color="#999"
   >
-    <div data-testid="expired-form-icon">
+    <Center data-testid="expired-form-icon">
       <RiFileForbidLine style={iconStyle} />
-    </div>
+    </Center>
     <Center data-testid="expired-form-message">
-      Form has expired and is no longer viewable.
+      This form has expired and is no longer viewable.
     </Center>
   </FlexCenter>
 );

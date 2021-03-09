@@ -5,6 +5,7 @@ const FlexCenter = styled.div<{
   height?: string;
   justify?: string;
 }>`
+  color: ${({ color }) => color || "inherit"};
   height: ${({ height }) => height || "auto"};
   flex-direction: ${({ direction }) => direction || "row"};
   display: flex;

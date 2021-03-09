@@ -14,6 +14,7 @@ const mockRouterOpts: NextRouter = {
   isFallback: false,
   isLocaleDomain: false,
   isReady: true,
+  isPreview: false,
   locale: undefined,
   locales: undefined,
   pathname: "/",

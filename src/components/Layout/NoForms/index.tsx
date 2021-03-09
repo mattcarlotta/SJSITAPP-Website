@@ -13,7 +13,7 @@ const NoForms = (): JSX.Element => (
     height="190px"
     direction="column"
     justify="center"
-    style={{ color: "#999" }}
+    color="#999"
   >
     <div data-testid="no-forms-icon">
       <MdAssignment style={iconStyle} />

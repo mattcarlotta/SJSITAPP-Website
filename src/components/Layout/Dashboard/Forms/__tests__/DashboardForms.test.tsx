@@ -12,6 +12,11 @@ const apForm = {
   eventCounts: 1
 };
 
+const expiredAPForm = {
+  ...apForm,
+  expirationDate: "2019-08-07T00:00:00.000+00:00"
+};
+
 const APIURL = "dashboard/ap-form";
 mockApp
   .onGet(APIURL)
@@ -21,10 +26,7 @@ mockApp
   .onGet(APIURL)
   .replyOnce(200, apForm)
   .onGet(APIURL)
-  .replyOnce(200, {
-    ...apForm,
-    expirationDate: "2019-08-07T00:00:00.000+00:00"
-  })
+  .replyOnce(200, expiredAPForm)
   .onGet(APIURL)
   .replyOnce(400)
   .onGet(APIURL)
@@ -58,6 +60,9 @@ describe("Dashboard Forms", () => {
     await waitFor(() => {
       wrapper.update();
       expect(findById("dashboard-ap-form-link")).toExist();
+      expect(findById("dashboard-ap-form-link").first().text()).toContain(
+        "View Form (1 events)"
+      );
     });
   });
 

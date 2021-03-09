@@ -18,6 +18,16 @@ describe("FlexCenter", () => {
     expect(wrapper).toHaveStyleRule("flex-direction", "column");
   });
 
+  it("sets color when passed a 'color' prop", () => {
+    wrapper.setProps({ color: "#fff" });
+    expect(wrapper).toHaveStyleRule("color", "#fff");
+  });
+
+  it("sets height when passed a 'height' prop", () => {
+    wrapper.setProps({ height: "10px" });
+    expect(wrapper).toHaveStyleRule("height", "10px");
+  });
+
   it("sets justify-content when passed a 'justify' prop", () => {
     wrapper.setProps({ justify: "center" });
     expect(wrapper).toHaveStyleRule("justify-content", "center");

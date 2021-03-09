@@ -17,14 +17,12 @@ export const store = makeStore({});
 export const withReduxContext = (
   Component: React.ReactElement<any>,
   options = {}
-): ReactWrapper => {
-  const wrapper = mount(
+): ReactWrapper =>
+  mount(
     React.createElement(props => (
       <Provider store={store}>{React.cloneElement(Component, props)}</Provider>
     )),
     options
   );
-  return wrapper;
-};
 
 export default withReduxContext;

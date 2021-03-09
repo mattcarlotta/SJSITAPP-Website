@@ -22,6 +22,7 @@ export const mockRouter: NextRouter = {
   isFallback: false,
   isLocaleDomain: false,
   isReady: true,
+  isPreview: false,
   locale: undefined,
   locales: undefined,
   pathname: "/",
@@ -47,8 +48,8 @@ export const withProviders = (
   Component: React.ReactElement<any>,
   routerOpts = {},
   options = {}
-): ReactWrapper => {
-  const wrapper = mount(
+): ReactWrapper =>
+  mount(
     React.createElement(props => (
       <Provider store={store}>
         <RouterContext.Provider value={{ ...mockRouter, ...routerOpts }}>
@@ -58,7 +59,5 @@ export const withProviders = (
     )),
     options
   );
-  return wrapper;
-};
 
 export default withProviders;
