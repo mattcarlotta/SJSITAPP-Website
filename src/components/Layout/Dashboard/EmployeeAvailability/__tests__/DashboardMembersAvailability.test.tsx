@@ -40,7 +40,7 @@ mockApp
   .onGet(APIURL)
   .reply(200, availability);
 
-describe("Dashboard Employee EmployeeAvailability", () => {
+describe("Dashboard Employee Availability", () => {
   let wrapper: ReactWrapper;
   let findById: (id: string) => ReactWrapper;
   beforeEach(() => {

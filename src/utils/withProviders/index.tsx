@@ -3,6 +3,8 @@ import { RouterContext } from "next/dist/next-server/lib/router-context";
 import { NextRouter } from "next/router";
 import { Provider } from "react-redux";
 import { mount, ReactWrapper } from "enzyme";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import MomentUtils from "@date-io/moment";
 import { makeStore } from "~store";
 
 export const store = makeStore({});
@@ -52,9 +54,11 @@ export const withProviders = (
   mount(
     React.createElement(props => (
       <Provider store={store}>
-        <RouterContext.Provider value={{ ...mockRouter, ...routerOpts }}>
-          {React.cloneElement(Component, props)}
-        </RouterContext.Provider>
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+          <RouterContext.Provider value={{ ...mockRouter, ...routerOpts }}>
+            {React.cloneElement(Component, props)}
+          </RouterContext.Provider>
+        </MuiPickersUtilsProvider>
       </Provider>
     )),
     options

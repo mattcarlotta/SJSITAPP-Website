@@ -1,11 +1,10 @@
-/* istanbul ignore file */
 import styled from "@emotion/styled";
 
-const FlexEnd = styled.div`
+const FlexEnd = styled.div<{ width?: string }>`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 100%;
+  width: ${({ width }) => width || "100%"};
 `;
 
 /*

@@ -122,10 +122,10 @@ export const EmployeeAvailability = (): JSX.Element => {
                     <FlexStart>
                       <Bold>{id}</Bold>
                     </FlexStart>
-                    <FlexEnd>
+                    <FlexEnd width="25%">
                       <span
                         css={css`
-                          color: ${availability >= 75 ? "blue" : "red"};
+                          color: ${availability >= 75 ? "#2979ff" : "#f04d4d"};
                         `}
                       >
                         {availability}&#37;

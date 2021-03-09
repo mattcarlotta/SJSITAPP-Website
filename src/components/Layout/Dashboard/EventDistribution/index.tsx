@@ -24,7 +24,7 @@ export type TDashboardEventDistributionState = {
   startDate: string;
 };
 
-const format = "YYYY-MM-DDTHH:mm:ssZ";
+export const format = "YYYY-MM-DDTHH:mm:ssZ";
 
 export const EventDistribution = (): JSX.Element => {
   const [state, setState] = React.useState<TDashboardEventDistributionState>({

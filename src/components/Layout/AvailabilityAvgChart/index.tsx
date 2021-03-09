@@ -8,8 +8,8 @@ import NoAvailability from "~components/Layout/NoAvailability";
 import AvailabilityTooltip from "./Tooltip";
 import { TAvailabilityData } from "~types";
 
-const VALIDCOLORS = ["#2979FF", "#BBBBBB"];
-const INVALIDCOLORS = ["#F04D4D", "#BBBBBB"];
+const VALIDCOLORS = ["#2979ff", "#bbb"];
+const INVALIDCOLORS = ["#f04d4d", "#bbb"];
 
 export type AvailabilityAvgChartProps = {
   availability: Array<TAvailabilityData>;
