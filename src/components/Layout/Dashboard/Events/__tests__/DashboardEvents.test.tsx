@@ -4,6 +4,7 @@ import mockApp from "~utils/mockAxios";
 import Events from "../index";
 
 const initProps = {
+  isEmployee: true,
   loggedinUserId: "88"
 };
 

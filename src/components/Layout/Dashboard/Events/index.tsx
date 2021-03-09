@@ -23,6 +23,7 @@ export type TDashboardEventsState = {
 };
 
 export type TDashboardEventsProps = {
+  isEmployee: boolean;
   loggedinUserId: string;
 };
 
@@ -35,6 +36,7 @@ const initialState = {
 };
 
 export const Events = ({
+  isEmployee,
   loggedinUserId
 }: TDashboardEventsProps): JSX.Element => {
   const [state, setState] = React.useState<TDashboardEventsState>(initialState);
@@ -99,7 +101,9 @@ export const Events = ({
         aria-label="event tabs"
       >
         <Tab disabled={state.tab === 0} label="today" {...a11yProps(0)} />
-        <Tab disabled={state.tab === 1} label="upcoming" {...a11yProps(1)} />
+        {isEmployee && (
+          <Tab disabled={state.tab === 1} label="upcoming" {...a11yProps(1)} />
+        )}
       </Tabs>
       <TabPanel value={0} index={0}>
         <Padding top="10px" left="10px" right="10px">

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Label from "~components/Forms/Label";
 import Errors from "~components/Forms/Errors";
@@ -6,7 +7,7 @@ import Icon from "~components/Layout/Icon";
 import ClickHandler from "./ClickHandler";
 import { ChangeEvent, CSSProperties, TIconType, TInputType } from "~types";
 
-export interface IInputComponentProps {
+export type TInputComponentProps = {
   className?: string;
   containerStyle?: CSSProperties;
   errors?: string;
@@ -21,7 +22,7 @@ export interface IInputComponentProps {
   type: TInputType;
   tooltip?: string;
   value: string;
-}
+};
 
 const InputComponent = ({
   className,
@@ -38,7 +39,7 @@ const InputComponent = ({
   type,
   tooltip,
   value
-}: IInputComponentProps): JSX.Element => (
+}: TInputComponentProps): JSX.Element => (
   <div className={className} style={containerStyle}>
     <ClickHandler>
       {({ isFocused, handleBlur, handleFocus }) => (
@@ -52,7 +53,12 @@ const InputComponent = ({
             .join(" ")}
         >
           {label && <Label name={name} label={label} tooltip={tooltip} />}
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <div
+            css={css`
+              display: flex;
+              align-items: center;
+            `}
+          >
             {icon && <Icon dataTestId={name} type={icon} />}
             <input
               aria-label={name}
@@ -92,15 +98,15 @@ const Input = styled(InputComponent)`
     border-radius: 4px;
     transition: border 0.2s ease-in-out;
 
-    &:hover {
+    :hover {
       border: 1px solid #bfbebe;
     }
 
-    &::placeholder {
+    ::placeholder {
       color: #d3dce6;
     }
 
-    &:focus {
+    :focus {
       outline: 0;
     }
   }
@@ -137,7 +143,7 @@ const Input = styled(InputComponent)`
       background: #f5f5f5;
       border: 1px solid #e6d8d8;
 
-      &:hover {
+      :hover {
         border: 1px solid #e6d8d8;
       }
     }

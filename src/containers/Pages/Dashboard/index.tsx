@@ -5,32 +5,41 @@ import Header from "~components/Navigation/Header";
 import Events from "~components/Layout/Dashboard/Events";
 import Forms from "~components/Layout/Dashboard/Forms";
 import Availability from "~components/Layout/Dashboard/Availability";
+import EmployeeAvailability from "~components/Layout/Dashboard/EmployeeAvailability";
 import { TRootState } from "~types";
 
 export type TDashboardProps = {
   loggedinUserId: string;
+  role: string;
 };
 
-export const Dashboard = ({ loggedinUserId }: TDashboardProps): JSX.Element => (
-  <>
-    <Header title="Dashboard" url="/dashboard" />
-    <Grid container spacing={3}>
-      <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
-        <Events loggedinUserId={loggedinUserId} />
+export const Dashboard = ({
+  loggedinUserId,
+  role
+}: TDashboardProps): JSX.Element => {
+  const isEmployee = role === "employee";
+  return (
+    <>
+      <Header title="Dashboard" url="/dashboard" />
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
+          <Events loggedinUserId={loggedinUserId} isEmployee={isEmployee} />
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
+          <Forms />
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
+          {isEmployee ? <Availability /> : <EmployeeAvailability />}
+        </Grid>
       </Grid>
-      <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
-        <Forms />
-      </Grid>
-      <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
-        <Availability />
-      </Grid>
-    </Grid>
-  </>
-);
+    </>
+  );
+};
 
 /* istanbul ignore next */
 const mapStateToProps = ({ auth }: Pick<TRootState, "auth">) => ({
-  loggedinUserId: auth.id
+  loggedinUserId: auth.id,
+  role: auth.role
 });
 
 export default connect(mapStateToProps)(Dashboard);

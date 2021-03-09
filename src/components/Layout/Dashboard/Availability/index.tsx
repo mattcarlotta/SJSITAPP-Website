@@ -13,7 +13,7 @@ import app from "~utils/axiosConfig";
 import { parseData } from "~utils/parseResponse";
 import { TAvailabilityData } from "~types";
 
-export type TDashboardEventsState = {
+export type TAvailabilityState = {
   availability: Array<TAvailabilityData>;
   error: boolean;
   isLoading: boolean;
@@ -26,7 +26,7 @@ export type TAvailabilityResData = {
 };
 
 export const Availability = (): JSX.Element => {
-  const [state, setState] = React.useState<TDashboardEventsState>({
+  const [state, setState] = React.useState<TAvailabilityState>({
     availability: [],
     error: false,
     isLoading: true,

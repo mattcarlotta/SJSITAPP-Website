@@ -1,11 +1,13 @@
 import styled from "@emotion/styled";
 
 const ListItem = styled.li<{
+  display?: string;
   margin?: string;
   team?: string;
   textAlign?: string;
   padding?: string;
 }>`
+  display: ${({ display }) => display || "block"};
   color: ${({ color }) => color || "#010404"};
   background: ${({ team }) => {
     switch (team) {

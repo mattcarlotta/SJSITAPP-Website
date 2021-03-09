@@ -2,13 +2,25 @@ import { mount } from "enzyme";
 import { Dashboard } from "../index";
 
 const initProps = {
-  loggedinUserId: "88"
+  loggedinUserId: "88",
+  role: "employee"
 };
 
 const wrapper = mount(<Dashboard {...initProps} />);
 
 describe("Dashboard", () => {
-  it("renders without errors", () => {
+  it("renders employee panels", () => {
     expect(wrapper.find("Dashboard")).toExist();
+    expect(wrapper.find("Events")).toExist();
+    expect(wrapper.find("Forms")).toExist();
+    expect(wrapper.find("Availability")).toExist();
+  });
+
+  it("renders staff panels", () => {
+    wrapper.setProps({ role: "staff" });
+    expect(wrapper.find("Dashboard")).toExist();
+    expect(wrapper.find("Events")).toExist();
+    expect(wrapper.find("Forms")).toExist();
+    expect(wrapper.find("EmployeeAvailability")).toExist();
   });
 });

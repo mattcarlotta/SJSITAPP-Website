@@ -152,6 +152,11 @@ export type TAvailabilityData = {
   value: string;
 };
 
+export type TEmployeeAvailabilityData = {
+  id: string;
+  availability: number;
+};
+
 ///
 
 export interface CardProps {

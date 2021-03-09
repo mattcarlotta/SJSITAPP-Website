@@ -9,10 +9,16 @@ describe("ListItem", () => {
   });
 
   it("initially renders initial CSS props", () => {
+    expect(wrapper).toHaveStyleRule("display", "block");
     expect(wrapper).toHaveStyleRule("color", "#010404");
     expect(wrapper).toHaveStyleRule("background", "transparent");
     expect(wrapper).toHaveStyleRule("margin", "5px 0");
     expect(wrapper).toHaveStyleRule("padding", "0 10px");
+  });
+
+  it("sets display based upon 'display' prop", () => {
+    wrapper.setProps({ display: "flex" });
+    expect(wrapper).toHaveStyleRule("display", "flex");
   });
 
   it("sets color based upon 'color' prop", () => {
