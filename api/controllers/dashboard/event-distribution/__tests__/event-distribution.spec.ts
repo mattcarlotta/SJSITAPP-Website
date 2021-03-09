@@ -5,7 +5,7 @@ import { missingDates } from "~messages/errors";
 import { memberSignIn } from "~test/utils/signIn";
 import app from "~test/utils/testServer";
 
-const format = "MM/DD/YYYY";
+const format = "YYYY-MM-DDTHH:mm:ssZ";
 
 describe("Dashboard Event Distribution Controller", () => {
   let cookie: string;
@@ -42,7 +42,7 @@ describe("Dashboard Event Distribution Controller", () => {
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
-        expect(res.body.members).toEqual([]);
+        expect(res.body).toEqual([]);
         done();
       });
   });
@@ -62,7 +62,7 @@ describe("Dashboard Event Distribution Controller", () => {
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
-        expect(res.body.members).toEqual(
+        expect(res.body).toEqual(
           expect.arrayContaining([
             expect.objectContaining({
               name: expect.any(String),

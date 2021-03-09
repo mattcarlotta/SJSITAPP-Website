@@ -1,6 +1,6 @@
-import { MdEvent, MdEventNote } from "~icons";
 import FlexCenter from "~components/Layout/FlexCenter";
 import Center from "~components/Layout/Center";
+import { MdEvent, MdEventNote } from "~icons";
 import { CSSProperties } from "~types";
 
 export type TNoEventsProps = {

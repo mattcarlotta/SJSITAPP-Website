@@ -2,6 +2,8 @@ import * as React from "react";
 import Head from "next/head";
 import { useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import MomentUtils from "@date-io/moment";
 import { checkForActiveSession } from "~actions/Auth";
 import GlobalStylesheet from "~styles/globalStylesheet";
 import { AppProps } from "~types";
@@ -24,7 +26,9 @@ const Container = ({ Component, pageProps }: AppProps): JSX.Element => {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
       </Head>
-      <Component {...pageProps} />
+      <MuiPickersUtilsProvider utils={MomentUtils}>
+        <Component {...pageProps} />
+      </MuiPickersUtilsProvider>
       <GlobalStylesheet />
       <ToastContainer
         position="top-right"

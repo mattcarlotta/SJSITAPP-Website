@@ -13,7 +13,7 @@ const AvailabilityTooltip = ({ datum }: TAvailabilityTooltip): JSX.Element => (
       background: #fff;
       font-size: inherit;
       border-radius: 2px;
-      box-shadow: rgb(0 0 0 / 25%) 0px 1px 2px;
+      box-shadow: rgb(0, 0, 0, 0.25) 0px 1px 2px;
       padding: 5px 9px;
     `}
   >

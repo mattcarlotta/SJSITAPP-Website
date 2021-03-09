@@ -5,6 +5,8 @@ import { createMemberEventCount, getUsers, moment, sendError } from "~helpers";
 import { missingDates } from "~messages/errors";
 import type { TActiveMembers } from "~models/user";
 
+const format = "YYYY-MM-DDTHH:mm:ssZ";
+
 /**
  * Retrieves all members event distribution for a bar chart.
  *
@@ -31,14 +33,13 @@ const getEventDistribution = async (
       }
     });
     /* istanbul ignore next */
-    if (isEmpty(members)) return res.status(200).json({ members: [] });
-
+    if (isEmpty(members)) return res.status(200).json([]);
     const memberEventCounts = await Event.aggregate([
       {
         $match: {
           eventDate: {
-            $gte: moment(String(startDate), "MM/DD/YYYY").toDate(),
-            $lte: moment(String(endDate), "MM/DD/YYYY").toDate()
+            $gte: moment(startDate as string, format).toDate(),
+            $lte: moment(endDate as string, format).toDate()
           }
         }
       },
@@ -55,15 +56,14 @@ const getEventDistribution = async (
         }
       }
     ]);
-    if (isEmpty(memberEventCounts))
-      return res.status(200).json({ members: [] });
+    if (isEmpty(memberEventCounts)) return res.status(200).send([]);
 
-    return res.status(200).json({
-      members: createMemberEventCount({
+    return res.status(200).send(
+      createMemberEventCount({
         members: members as TActiveMembers,
         memberEventCounts
       })
-    });
+    );
   } catch (err) {
     /* istanbul ignore next */
     return sendError(err, 400, res);

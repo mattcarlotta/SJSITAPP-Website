@@ -15,6 +15,7 @@ import {
   ReactNode,
   ReactText
 } from "react";
+import { MaterialUiPickersDate } from "@material-ui/pickers";
 import { AnyAction, Store } from "redux";
 import { SagaIterator } from "redux-saga";
 import * as actions from "~actions/Users";
@@ -157,6 +158,11 @@ export type TEmployeeAvailabilityData = {
   availability: number;
 };
 
+export type TEventDistributionData = {
+  id: string;
+  "Event Counts": number;
+};
+
 ///
 
 export interface CardProps {
@@ -282,6 +288,7 @@ export {
   FC,
   FormEvent,
   KeyboardEvent,
+  MaterialUiPickersDate,
   MouseEvent,
   NextApiRequest,
   NextApiResponse,

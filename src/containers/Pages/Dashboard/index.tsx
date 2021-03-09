@@ -6,6 +6,7 @@ import Events from "~components/Layout/Dashboard/Events";
 import Forms from "~components/Layout/Dashboard/Forms";
 import Availability from "~components/Layout/Dashboard/Availability";
 import EmployeeAvailability from "~components/Layout/Dashboard/EmployeeAvailability";
+import EventDistribution from "~components/Layout/Dashboard/EventDistribution";
 import { TRootState } from "~types";
 
 export type TDashboardProps = {
@@ -30,6 +31,9 @@ export const Dashboard = ({
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
           {isEmployee ? <Availability /> : <EmployeeAvailability />}
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <EventDistribution />
         </Grid>
       </Grid>
     </>

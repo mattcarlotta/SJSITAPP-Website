@@ -91,7 +91,7 @@ export const Forms = (): JSX.Element => {
               margin="5px auto 0"
             />
           ) : error ? (
-            <FetchError onClickReload={handleReload} />
+            <FetchError height="227px" onClickReload={handleReload} />
           ) : !isEmpty(form) ? (
             <>
               <PanelDescription data-testid="ap-form">
