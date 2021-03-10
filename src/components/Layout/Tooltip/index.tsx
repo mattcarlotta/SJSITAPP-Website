@@ -16,11 +16,26 @@ const useClasses = makeStyles(() => ({
 
 export type TCustomTooltipProps = {
   children: ReactNode;
+  placement:
+    | "bottom"
+    | "left"
+    | "right"
+    | "top"
+    | "bottom-end"
+    | "bottom-start"
+    | "left-end"
+    | "left-start"
+    | "right-end"
+    | "right-start"
+    | "top-end"
+    | "top-start"
+    | undefined;
   title: string;
 };
 
 const CustomTooltip = ({
   children,
+  placement,
   title
 }: TCustomTooltipProps): JSX.Element => {
   const classes = useClasses();
@@ -30,13 +45,17 @@ const CustomTooltip = ({
       <Tooltip
         arrow
         classes={classes}
-        placement="top"
+        placement={placement}
         title={<TooltipText>{title}</TooltipText>}
       >
         <span>{children}</span>
       </Tooltip>
     </span>
   );
+};
+
+CustomTooltip.defaultProps = {
+  placement: "top"
 };
 
 export default CustomTooltip;

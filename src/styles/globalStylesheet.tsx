@@ -49,7 +49,8 @@ export const GlobalStylesheet = (): JSX.Element => (
         color: #025f6d;
         background: #ebebeb;
         font-size: 16px;
-        overflow: hidden;
+        overflow: auto !important;
+        padding: 0 !important;
       }
 
       .Toastify__toast--info {

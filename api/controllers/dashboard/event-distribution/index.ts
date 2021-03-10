@@ -60,7 +60,7 @@ const getEventDistribution = async (
 
     return res.status(200).send(
       createMemberEventCount({
-        members: members as TActiveMembers,
+        members: members.reverse() as TActiveMembers,
         memberEventCounts
       })
     );

@@ -13,13 +13,22 @@ const events = [
   {
     id: "Member 2",
     "Event Count": 2
+  },
+  {
+    id: "Member 3",
+    "Event Count": 0
   }
 ];
 
 const startDate = moment().startOf("month").format(format);
 const endDate = moment().endOf("month").format(format);
 
+const previousStartDate = moment().subtract(1, "month").startOf("month");
+const previousMonth = previousStartDate.format("MMMM YYYY");
 const APIURL = `dashboard/event-distribution?&startDate=${startDate}&endDate=${endDate}`;
+const NEXTAPIURL = `dashboard/event-distribution?&startDate=${previousStartDate.format(
+  format
+)}&endDate=${endDate}`;
 mockApp
   .onGet(APIURL)
   .replyOnce(200)
@@ -29,7 +38,7 @@ mockApp
   .replyOnce(200, events)
   .onGet(APIURL)
   .replyOnce(200, events)
-  .onGet(APIURL)
+  .onGet(NEXTAPIURL)
   .replyOnce(200)
   .onGet(APIURL)
   .replyOnce(400)
@@ -48,8 +57,8 @@ describe("Dashboard Event Distribution", () => {
 
   it("renders without errors and displays a placeholder", async () => {
     await waitFor(() => {
+      wrapper.update();
       expect(findById("dashboard-event-distribution")).toExist();
-      expect(findById("loading-events")).toExist();
     });
   });
 
@@ -78,12 +87,34 @@ describe("Dashboard Event Distribution", () => {
     await waitFor(() => {
       wrapper.update();
       expect(wrapper.find(".MuiDialog-container")).toExist();
-      wrapper
-        .find(".MuiDialogActions-root")
-        .find("button")
-        .at(1)
-        .simulate("click");
     });
+
+    // change to previous month
+    wrapper
+      .find("button.MuiPickersCalendarHeader-iconButton")
+      .first()
+      .simulate("click");
+
+    await waitFor(() => {
+      wrapper.update();
+      expect(wrapper.find("p.MuiTypography-root").first().text()).toEqual(
+        previousMonth
+      );
+    });
+
+    // select first day
+    wrapper
+      .find(".MuiPickersDay-day")
+      .not(".MuiPickersDay-hidden")
+      .first()
+      .simulate("click");
+
+    // click OK
+    wrapper
+      .find(".MuiDialogActions-root")
+      .find("button")
+      .at(1)
+      .simulate("click");
 
     await waitFor(() => {
       wrapper.update();

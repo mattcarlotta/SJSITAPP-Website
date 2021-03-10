@@ -6,7 +6,6 @@ import DatePicker from "~components/Forms/DatePicker";
 import EventDistributionChart from "~components/Layout/EventDistributionChart";
 import FetchError from "~components/Layout/FetchError";
 import FlexCenter from "~components/Layout/FlexCenter";
-import LoadingPanel from "~components/Layout/LoadingPanel";
 import Margin from "~components/Layout/Margin";
 import Padding from "~components/Layout/Padding";
 import PanelDescription from "~components/Layout/PanelDescription";
@@ -15,12 +14,12 @@ import moment from "~utils/momentWithTimezone";
 import app from "~utils/axiosConfig";
 import { parseData } from "~utils/parseResponse";
 import { MaterialUiPickersDate, TEventDistributionData } from "~types";
+import FadeIn from "~components/Layout/FadeIn";
 
 export type TDashboardEventDistributionState = {
   endDate: string;
   error: boolean;
   events: Array<TEventDistributionData>;
-  isLoading: boolean;
   startDate: string;
 };
 
@@ -31,17 +30,15 @@ export const EventDistribution = (): JSX.Element => {
     endDate: moment().endOf("month").format(format),
     error: false,
     events: [],
-    isLoading: true,
     startDate: moment().startOf("month").format(format)
   });
-  const { endDate, error, events, isLoading, startDate } = state;
+  const { endDate, error, events, startDate } = state;
 
   const handleDateChange = React.useCallback(
     ({ name, date }: { name: string; date: MaterialUiPickersDate }): void => {
       setState(prevState => ({
         ...prevState,
         errors: false,
-        isLoading: true,
         [name]: date.format(format)
       }));
     },
@@ -59,14 +56,12 @@ export const EventDistribution = (): JSX.Element => {
         setState(prevState => ({
           ...prevState,
           error: false,
-          events: data,
-          isLoading: false
+          events: data
         }));
       } catch (err) {
         setState(prevState => ({
           ...prevState,
-          error: true,
-          isLoading: false
+          error: true
         }));
       }
     },
@@ -83,8 +78,8 @@ export const EventDistribution = (): JSX.Element => {
   }, []);
 
   React.useEffect(() => {
-    if (isLoading) fetchEventsDistribution(startDate, endDate);
-  }, [isLoading, fetchEventsDistribution]);
+    fetchEventsDistribution(startDate, endDate);
+  }, [startDate, endDate, fetchEventsDistribution]);
 
   return (
     <Card
@@ -114,17 +109,12 @@ export const EventDistribution = (): JSX.Element => {
               onChange={handleDateChange}
             />
           </FlexCenter>
-          {isLoading ? (
-            <LoadingPanel
-              data-testid="loading-events"
-              borderRadius="5px"
-              height="660px"
-              margin="5px auto 0"
-            />
-          ) : error ? (
+          {error ? (
             <FetchError height="690px" onClickReload={handleReload} />
           ) : (
-            <EventDistributionChart events={events} />
+            <FadeIn timing="500ms">
+              <EventDistributionChart events={events} />
+            </FadeIn>
           )}
         </Center>
       </Padding>

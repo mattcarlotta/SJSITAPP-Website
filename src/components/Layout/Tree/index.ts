@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 const Tree = styled.aside<{ collapsed: boolean }>`
-  @media (max-width: 1200px) {
+  @media (max-width: 1400px) {
     display: none;
   }
 

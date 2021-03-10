@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 const Header = styled.main<{ stretch?: boolean }>`
-  @media (max-width: 1200px) {
+  @media (max-width: 1400px) {
     margin-left: 0;
   }
 

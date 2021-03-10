@@ -44,7 +44,6 @@ export const UserAvatar = ({
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
-  const classes = useClasses();
 
   const handleClick = React.useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
@@ -75,12 +74,12 @@ export const UserAvatar = ({
       <Popover
         id={id}
         open={open}
-        classes={classes}
+        classes={useClasses()}
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "center"
+          horizontal: "left"
         }}
         transformOrigin={{
           vertical: "top",
