@@ -51,7 +51,7 @@ export const AppLayout = ({
   return (
     <Section data-testid="app-layout" direction="column">
       <Header>
-        <FlexCenter>
+        <FlexCenter height="100%">
           <FlexStart>
             <MenuButton
               data-testid="hamburger-menu"
@@ -92,9 +92,7 @@ export const AppLayout = ({
         role={role}
         selectedNodeIds={selectedNodeIds}
       />
-      <Section direction="row" hideOverflowX>
-        <Main stretch={collapsed}>{children}</Main>
-      </Section>
+      <Main stretch={collapsed}>{children}</Main>
     </Section>
   );
 };

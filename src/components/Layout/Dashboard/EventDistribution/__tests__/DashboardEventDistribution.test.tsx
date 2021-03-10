@@ -8,11 +8,11 @@ import withProviders from "~utils/withProviders";
 const events = [
   {
     id: "Member 1",
-    "Event Counts": 1
+    "Event Count": 1
   },
   {
     id: "Member 2",
-    "Event Counts": 2
+    "Event Count": 2
   }
 ];
 

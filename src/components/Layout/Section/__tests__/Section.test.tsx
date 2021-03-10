@@ -17,9 +17,4 @@ describe("Section", () => {
     wrapper.setProps({ direction: "column" });
     expect(wrapper).toHaveStyleRule("flex-direction", "column");
   });
-
-  it("sets 'overflow-x: hidden' when passed a 'hideOverflowX' prop", () => {
-    wrapper.setProps({ hideOverflowX: true });
-    expect(wrapper).toHaveStyleRule("overflow-x", "hidden");
-  });
 });

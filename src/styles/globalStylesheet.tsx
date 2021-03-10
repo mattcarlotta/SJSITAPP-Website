@@ -47,8 +47,9 @@ export const GlobalStylesheet = (): JSX.Element => (
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         color: #025f6d;
-        background: #f0f2f5;
+        background: #ebebeb;
         font-size: 16px;
+        overflow: hidden;
       }
 
       .Toastify__toast--info {

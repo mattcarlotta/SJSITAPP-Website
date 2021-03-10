@@ -40,7 +40,6 @@ export const EventDistribution = (): JSX.Element => {
     ({ name, date }: { name: string; date: MaterialUiPickersDate }): void => {
       setState(prevState => ({
         ...prevState,
-        events: [],
         errors: false,
         isLoading: true,
         [name]: date.format(format)
