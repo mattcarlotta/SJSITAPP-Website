@@ -10,6 +10,7 @@ const initProps = {
   children: <p>Hello</p>,
   collapsed: false,
   expandedNodeIds: [],
+  role: "staff",
   selectedNodeIds: [],
   setExpandedTabs,
   setSelectedTabs,

@@ -20,6 +20,7 @@ export type TAppLayoutProps = {
   children?: ReactElement<any>;
   collapsed: boolean;
   expandedNodeIds: TSideMenuNodeIds;
+  role: string;
   selectedNodeIds: TSideMenuNodeIds;
   toggleSideNav: typeof actions.toggleSideNav;
   setSelectedTabs: typeof actions.setSelectedTabs;
@@ -30,6 +31,7 @@ export const AppLayout = ({
   children,
   collapsed,
   expandedNodeIds,
+  role,
   selectedNodeIds,
   setExpandedTabs,
   setSelectedTabs,
@@ -87,6 +89,7 @@ export const AppLayout = ({
         collapsed={collapsed}
         expandedNodeIds={expandedNodeIds}
         handleToggle={handleToggle}
+        role={role}
         selectedNodeIds={selectedNodeIds}
       />
       <Section direction="row" hideOverflowX>
@@ -97,7 +100,11 @@ export const AppLayout = ({
 };
 
 /* istanbul ignore next */
-const mapStateToProps = ({ sidemenu }: Pick<TRootState, "sidemenu">) => ({
+const mapStateToProps = ({
+  auth,
+  sidemenu
+}: Pick<TRootState, "auth" | "sidemenu">) => ({
+  role: auth.role,
   ...sidemenu
 });
 

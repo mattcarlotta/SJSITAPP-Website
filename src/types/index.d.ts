@@ -160,7 +160,7 @@ export type TEmployeeAvailabilityData = {
 
 export type TEventDistributionData = {
   id: string;
-  "Event Counts": number;
+  "Event Count": number;
 };
 
 ///

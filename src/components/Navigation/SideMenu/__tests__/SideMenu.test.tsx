@@ -7,6 +7,7 @@ const initProps = {
   collapsed: false,
   expandedNodeIds: [],
   handleToggle,
+  role: "employee",
   selectedNodeIds: []
 };
 

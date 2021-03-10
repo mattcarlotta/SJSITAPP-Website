@@ -11,24 +11,22 @@ export type TEventDistributionChartProps = {
 
 const EventDistributionChart = ({
   events
-}: TEventDistributionChartProps): JSX.Element => (
-  <>
-    {!isEmpty(events) ? (
-      <div
-        data-testid="event-distribution-chart"
-        css={css`
-          height: 650px;
-          width: 100%;
-          padding-left: 18px;
-          padding-right: 35px;
-        `}
-      >
+}: TEventDistributionChartProps): JSX.Element => {
+  const key = "Event Count";
+  const largestValue = events.reduce((a, b) => (a > b[key] ? a : b[key]), 0);
+  const maxValue = Math.ceil((largestValue + 1) / 10) * 5;
+
+  return (
+    <>
+      {!isEmpty(events) ? (
         <div
+          data-testid="event-distribution-chart"
           css={css`
-            height: 100%;
+            height: 650px;
             width: 100%;
+            padding-left: 18px;
+            padding-right: 35px;
             background-color: #fff;
-            border-radius: 3px;
           `}
         >
           <ResponsiveBar
@@ -36,6 +34,8 @@ const EventDistributionChart = ({
             margin={{ top: 60, right: 40, bottom: 250, left: 80 }}
             indexBy="name"
             keys={["Event Count"]}
+            animate
+            maxValue={maxValue || "auto"}
             motionStiffness={90}
             motionDamping={15}
             axisLeft={{
@@ -77,11 +77,11 @@ const EventDistributionChart = ({
             }}
           />
         </div>
-      </div>
-    ) : (
-      <NoEventDistribitionData />
-    )}
-  </>
-);
+      ) : (
+        <NoEventDistribitionData />
+      )}
+    </>
+  );
+};
 
 export default EventDistributionChart;
