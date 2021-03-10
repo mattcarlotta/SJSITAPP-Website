@@ -24,8 +24,7 @@ const useStyles = makeStyles({
   root: {
     "& .MuiTreeItem-root": {
       padding: "3px 0",
-      background: "none",
-      transition: "background 200ms ease-in-out"
+      background: "none"
     },
     "& .MuiTreeItem-root:hover": {
       background: "none",
@@ -40,7 +39,7 @@ const useStyles = makeStyles({
       padding: "3px 0 0 20px"
     },
     "& .MuiTreeItem-content:hover": {
-      background: "#004f5a"
+      background: "#00778a"
     },
     "& .Mui-selected:hover": {
       "& a": {
@@ -48,7 +47,9 @@ const useStyles = makeStyles({
       }
     },
     "& .Mui-selected > .MuiTreeItem-content": {
-      background: "#004f5a",
+      background: "#00778a",
+      // background: "#004f5a",
+      // background: "#ef7f00",
       "& a": {
         fontWeight: "500"
       }
