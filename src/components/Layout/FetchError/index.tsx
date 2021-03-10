@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import Button from "~components/Layout/Button";
-import FlexCenter from "~components/Layout/FlexCenter";
-import { MdRefresh, RiSignalWifiErrorFill } from "~icons";
+import { MdRefresh } from "~icons";
 
 export type TFetchErrorComponent = {
   className?: string;

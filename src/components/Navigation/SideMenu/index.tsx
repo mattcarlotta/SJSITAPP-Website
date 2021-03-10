@@ -1,4 +1,5 @@
 import * as React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import moment from "moment";
 import TreeView from "@material-ui/lab/TreeView";
 import TreeItem from "@material-ui/lab/TreeItem";
@@ -43,6 +44,37 @@ export type TSideMenuProps = {
   selectedNodeIds: TSideMenuNodeIds;
 };
 
+const useStyles = makeStyles({
+  root: {
+    "& .MuiTreeItem-root": {
+      padding: "3px 0",
+      background: "none",
+      transition: "all 200ms ease-in-out"
+    },
+    "& .MuiTreeItem-root:hover": {
+      background: "none",
+      "& .MuiTreeItem-label": {
+        color: "#fff"
+      }
+    },
+    "& .MuiTreeItem-root.Mui-selected > .MuiTreeItem-content .MuiTreeItem-label": {
+      background: "none"
+    },
+    "& .MuiTreeItem-content": {
+      padding: "3px 0 0 20px"
+    },
+    "& .MuiTreeItem-content:hover": {
+      background: "#004f5a"
+    },
+    "& .Mui-selected > .MuiTreeItem-content": {
+      background: "#004f5a"
+    },
+    "& .MuiTreeItem-root:focus > .MuiTreeItem-content .MuiTreeItem-label": {
+      background: "none"
+    }
+  }
+});
+
 const SideMenu = ({
   collapsed,
   expandedNodeIds,
@@ -51,6 +83,7 @@ const SideMenu = ({
 }: TSideMenuProps): JSX.Element => (
   <Tree data-testid="sidemenu-tree" collapsed={collapsed}>
     <TreeView
+      className={useStyles().root}
       defaultCollapseIcon={<MdExpandMore />}
       defaultExpandIcon={<MdChevronRight />}
       expanded={expandedNodeIds}

@@ -13,7 +13,7 @@ describe("Tree", () => {
 
   it("sets uncollapsed CSS properties when passed a false 'collapsed' prop", () => {
     expect(wrapper).toHaveStyleRule("overflow", "auto");
-    expect(wrapper).toHaveStyleRule("padding", "10px 0 5px 20px");
+    expect(wrapper).toHaveStyleRule("padding", "10px 0 5px 0");
     expect(wrapper).toHaveStyleRule("width", "266px");
     expect(wrapper).toHaveStyleRule(
       "box-shadow",

@@ -56,21 +56,21 @@ const NavLink = styled(NavLinkComponent)<{
   font-size: ${({ fontSize }) => fontSize || "16px"};
   width: ${({ width }) => width || "auto"};
 
-  &:hover {
+  :hover {
     color: ${({ blue, green }) => {
       if (blue) return "#40a9ff";
       if (green) return "#025f6d";
-      return "#62c0ce";
+      return "#d2d2d2";
     }};
     text-decoration: ${({ nounderline }) =>
       nounderline ? "none" : "underline"};
   }
 
-  &:focus {
+  :focus {
     color: ${({ blue, green }) => {
       if (blue) return "#40a9ff";
       if (green) return "#025f6d";
-      return "#62c0ce";
+      return "#fff";
     }};
     outline: none;
     border: 0;
