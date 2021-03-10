@@ -1,4 +1,3 @@
-import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import moment from "moment";
 import TreeView from "@material-ui/lab/TreeView";
@@ -27,10 +26,7 @@ const useStyles = makeStyles({
       background: "none"
     },
     "& .MuiTreeItem-root:hover": {
-      background: "none",
-      "& .MuiTreeItem-label": {
-        color: "#fff"
-      }
+      background: "none"
     },
     "& .MuiTreeItem-root.Mui-selected > .MuiTreeItem-content .MuiTreeItem-label": {
       background: "none"
@@ -38,13 +34,11 @@ const useStyles = makeStyles({
     "& .MuiTreeItem-content": {
       padding: "3px 0 0 20px"
     },
+    "& .MuiTreeItem-label:hover": {
+      background: "none"
+    },
     "& .MuiTreeItem-content:hover": {
       background: "#00778a"
-    },
-    "& .Mui-selected:hover": {
-      "& a": {
-        color: "#fff"
-      }
     },
     "& .Mui-selected > .MuiTreeItem-content": {
       background: "#00778a",

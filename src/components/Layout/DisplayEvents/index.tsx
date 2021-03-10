@@ -28,7 +28,7 @@ export type TDisplayEventProps = {
   id?: string;
   innerStyle?: CSSProperties;
   loggedinUserId?: string;
-  nextWeek: boolean;
+  nextWeek?: boolean;
   scheduleIconStyle?: CSSProperties;
   spacing?: number;
   width?: number;

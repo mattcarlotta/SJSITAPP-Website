@@ -29,7 +29,7 @@ describe("Styled NavLink", () => {
 
   it("initially displays as white with a light teal hover", () => {
     expect(navLinkNode()).toHaveStyleRule("color", "#fff");
-    expect(navLinkNode()).toHaveStyleRule("color", "#d2d2d2", {
+    expect(navLinkNode()).toHaveStyleRule("color", "#fff", {
       target: ":hover"
     });
     expect(navLinkNode()).toHaveStyleRule("color", "#fff", {

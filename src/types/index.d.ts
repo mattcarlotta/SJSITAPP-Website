@@ -15,6 +15,7 @@ import {
   ReactNode,
   ReactText
 } from "react";
+import { Moment } from "moment-timezone";
 import { MaterialUiPickersDate } from "@material-ui/pickers";
 import { AnyAction, Store } from "redux";
 import { SagaIterator } from "redux-saga";
@@ -290,6 +291,7 @@ export {
   KeyboardEvent,
   MaterialUiPickersDate,
   MouseEvent,
+  Moment,
   NextApiRequest,
   NextApiResponse,
   NextPage,

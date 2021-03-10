@@ -21,7 +21,7 @@ const getScheduledEvents = async (
   try {
     const { id, selectedDate, selectedGames } = req.query;
 
-    const selected = !selectedGames ? "All Games" : selectedGames;
+    const selected = !selectedGames ? "All Events" : selectedGames;
 
     const selectedId = id || parseSession(req);
 
@@ -30,7 +30,7 @@ const getScheduledEvents = async (
     );
 
     const filters =
-      selected === "All Games"
+      selected === "All Events"
         ? {
             eventDate: {
               $gte: startOfMonth.format(),
@@ -63,7 +63,7 @@ const getScheduledEvents = async (
       select: "_id firstName lastName"
     });
 
-    return res.status(200).json({ events });
+    return res.status(200).send(events);
   } catch (err) {
     /* istanbul ignore next */
     return sendError(err, 400, res);

@@ -4,6 +4,7 @@ import Card from "~components/Layout/Card";
 import Center from "~components/Layout/Center";
 import DatePicker from "~components/Forms/DatePicker";
 import EventDistributionChart from "~components/Layout/EventDistributionChart";
+import FadeIn from "~components/Layout/FadeIn";
 import FetchError from "~components/Layout/FetchError";
 import FlexCenter from "~components/Layout/FlexCenter";
 import Margin from "~components/Layout/Margin";
@@ -14,7 +15,6 @@ import moment from "~utils/momentWithTimezone";
 import app from "~utils/axiosConfig";
 import { parseData } from "~utils/parseResponse";
 import { MaterialUiPickersDate, TEventDistributionData } from "~types";
-import FadeIn from "~components/Layout/FadeIn";
 
 export type TDashboardEventDistributionState = {
   endDate: string;

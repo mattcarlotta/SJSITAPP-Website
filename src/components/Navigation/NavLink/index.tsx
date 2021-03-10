@@ -60,7 +60,7 @@ const NavLink = styled(NavLinkComponent)<{
     color: ${({ blue, green }) => {
       if (blue) return "#40a9ff";
       if (green) return "#025f6d";
-      return "#d2d2d2";
+      return "#fff";
     }};
     text-decoration: ${({ nounderline }) =>
       nounderline ? "none" : "underline"};
