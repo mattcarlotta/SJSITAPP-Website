@@ -44,10 +44,10 @@ const NativeSelect = ({
     name={name}
     className={useStyles().root}
     value={value}
-    onChange={e =>
+    onChange={({ target: { name, value } }) =>
       onChange({
-        name: e.target.name as string,
-        value: e.target.value as string
+        name: name as string,
+        value: value as string
       })
     }
     IconComponent={() => null}

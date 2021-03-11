@@ -35,7 +35,13 @@ const CardComponent = ({
   </div>
 );
 
-const Card = styled(CardComponent)<{ margin?: string }>`
+const Card = styled(CardComponent)<{ breakpoint?: boolean; margin?: string }>`
+  ${({ breakpoint }) =>
+    breakpoint &&
+    `@media (max-width: 600px) {
+      display: none;
+    }
+  `};
   margin: ${({ margin }) => margin || "0px"};
   padding: 0;
   color: rgba(0, 0, 0, 0.65);

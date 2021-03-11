@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import isEmpty from "lodash.isempty";
 import NativeSelect from "~components/Forms/NativeSelect";
 import APFormTitle from "~components/Layout/APFormTitle";
+import Bold from "~components/Layout/Bold";
 import Card from "~components/Layout/Card";
 import Center from "~components/Layout/Center";
 import Date from "~components/Layout/Date";
@@ -10,9 +11,9 @@ import DisplayEvents from "~components/Layout/DisplayEvents";
 import FetchError from "~components/Layout/FetchError";
 import Flex from "~components/Layout/Flex";
 import FlexCenter from "~components/Layout/FlexCenter";
-import InlineBlock from "~components/Layout/InlineBlock";
 import Margin from "~components/Layout/Margin";
 import Padding from "~components/Layout/Padding";
+import PanelDescription from "~components/Layout/PanelDescription";
 import Header from "~components/Navigation/Header";
 import { FaCalendar } from "~icons";
 import moment from "~utils/momentWithTimezone";
@@ -145,7 +146,11 @@ export const Schedule = ({ loggedinUserId }: TScheduleProps): JSX.Element => {
         <APFormTitle>Event Calendar</APFormTitle>
         <Padding top="10px" left="20px" right="20px" bottom="30px">
           <Center>
-            <FlexCenter justify="center" style={{ margin: "5px 0 20px 0" }}>
+            <FlexCenter
+              breakpoint
+              justify="center"
+              style={{ margin: "5px 0 20px 0" }}
+            >
               <NativeSelect
                 name="selectedGames"
                 options={["All Events", "My Events"]}
@@ -183,12 +188,12 @@ export const Schedule = ({ loggedinUserId }: TScheduleProps): JSX.Element => {
                     key={date}
                   >
                     <Margin as="div" bottom="5px">
-                      <InlineBlock>
-                        {moment(date, eventFormat).format("ddd")}
-                      </InlineBlock>
-                      <InlineBlock textAlign="right">
-                        {moment(date, eventFormat).format("D")}
-                      </InlineBlock>
+                      <Center>
+                        <PanelDescription margin="0px">
+                          {moment(date, eventFormat).format("ddd")}
+                        </PanelDescription>
+                        <Bold>{moment(date, eventFormat).format("D")}</Bold>
+                      </Center>
                     </Margin>
                     {!isEmpty(events)
                       ? events.map(event =>

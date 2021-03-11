@@ -16,6 +16,8 @@ const Tree = styled.aside<{ collapsed: boolean }>`
   transition: all 0.2s;
   min-height: 100vh;
   position: fixed;
+  height: 100vh;
+  overflow-y: auto;
   top: 56px;
   z-index: 3;
   transition: width 350ms ease, padding 350ms ease, overflow 350ms ease;

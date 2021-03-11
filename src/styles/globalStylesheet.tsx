@@ -123,9 +123,15 @@ export const GlobalStylesheet = (): JSX.Element => (
         border: 0;
       }
 
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
       *,
       :after,
       :before {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
         font-family: "Karla", -apple-system, BlinkMacSystemFont, "Segoe UI",
           Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
           "Helvetica Neue", sans-serif;

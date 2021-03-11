@@ -83,6 +83,7 @@ export const EventDistribution = (): JSX.Element => {
 
   return (
     <Card
+      breakpoint
       dataTestId="dashboard-event-distribution"
       icon={<FaChartBar />}
       title="Event Distribution"

@@ -4,7 +4,14 @@ const FlexCenter = styled.div<{
   direction?: string;
   height?: string;
   justify?: string;
+  breakpoint?: boolean;
 }>`
+  ${({ breakpoint }) =>
+    breakpoint &&
+    `@media (max-width: 600px) {
+      flex-direction: column;
+    }
+  `};
   color: ${({ color }) => color || "inherit"};
   height: ${({ height }) => height || "auto"};
   flex-direction: ${({ direction }) => direction || "row"};

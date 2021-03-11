@@ -75,7 +75,7 @@ const SideMenu = ({
       >
         {TABS.map(({ divider, icon, nodeId, href, title, testId, submenu }) =>
           divider ? (
-            <Divider key={title} margin="20px 0 20px -20px" />
+            <Divider key={title} margin="5px 10px 5px 10px" />
           ) : (
             <TreeItem
               key={nodeId}

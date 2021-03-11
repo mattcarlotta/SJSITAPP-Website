@@ -1,9 +1,8 @@
-/* istanbul ignore file */
 import styled from "@emotion/styled";
 
-const PanelDescription = styled.div`
+const PanelDescription = styled.div<{ margin?: string }>`
   color: #888;
-  margin-top: 5px;
+  margin: ${({ margin }) => margin || "5px 0 0 0"};
   font-size: 14px;
 `;
 
