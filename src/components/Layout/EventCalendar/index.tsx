@@ -167,14 +167,14 @@ export const EventCalendar = ({ id }: TEventCalendarProps): JSX.Element => {
             <Button
               alt
               margin="0px"
-              padding="2px 6px"
-              fontSize="30px"
+              padding="2px 5px"
+              fontSize="25px"
               width="auto"
               type="button"
               onClick={handlePreviousMonthChange}
             >
               <FaChevronLeft
-                style={{ position: "relative", top: 3, right: 3 }}
+                style={{ position: "relative", top: 3, right: 1 }}
               />
             </Button>
           </FlexStart>
@@ -208,14 +208,14 @@ export const EventCalendar = ({ id }: TEventCalendarProps): JSX.Element => {
             <Button
               alt
               margin="0px"
-              padding="2px 6px"
-              fontSize="30px"
+              padding="2px 5px"
+              fontSize="25px"
               width="auto"
               type="button"
               onClick={handleNextMonthChange}
             >
               <FaChevronRight
-                style={{ position: "relative", top: 3, left: 2 }}
+                style={{ position: "relative", top: 3, left: 1 }}
               />
             </Button>
           </FlexEnd>
