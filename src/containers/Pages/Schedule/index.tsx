@@ -18,6 +18,16 @@ import Header from "~components/Navigation/Header";
 import { FaCalendar } from "~icons";
 import moment from "~utils/momentWithTimezone";
 import app from "~utils/axiosConfig";
+import {
+  dayFormat,
+  defaultFormat,
+  eventFormat,
+  fullyearFormat,
+  monthdateFormat,
+  monthnameFormat,
+  weekdayFormat,
+  yearMonthFormat
+} from "~utils/dateFormats";
 import generateCalendarDays from "~utils/generateCalendarDays";
 import { parseData } from "~utils/parseResponse";
 import { TEventData, TRootState } from "~types";
@@ -26,97 +36,88 @@ export type TScheduleState = {
   days: Array<string>;
   error: boolean;
   events: Array<TEventData>;
-  isLoading: boolean;
   months: Array<string>;
   selectedGames: string;
   selectedMonth: string;
   selectedYear: string;
-  years: Array<number>;
+  today: string;
+  years: Array<string>;
 };
 
 export type TScheduleProps = {
   loggedinUserId: string;
 };
 
-export const format = "YYYY-MM-DDTHH:mm:ssZ";
-export const simpleFormat = "MMMM YYYY";
-export const eventFormat = "YYYY-MM-DD";
-
 export const Schedule = ({ loggedinUserId }: TScheduleProps): JSX.Element => {
   const [state, setState] = React.useState<TScheduleState>({
     days: generateCalendarDays(
       moment().daysInMonth(),
-      moment().format("MM"),
-      moment().format("YYYY")
+      moment().format(monthdateFormat),
+      moment().format(fullyearFormat)
     ),
     error: false,
     events: [],
-    isLoading: true,
     months: moment.months(),
     selectedGames: "All Events",
-    selectedMonth: moment().format("MMMM"),
-    selectedYear: moment().format("YYYY"),
-    years: Array.from(
-      { length: 11 },
-      (_, i) => parseInt(moment().subtract(5, "year").format("YYYY"), 10) + i
+    selectedMonth: moment().format(monthnameFormat),
+    selectedYear: moment().format(fullyearFormat),
+    today: moment().format(eventFormat),
+    years: Array.from({ length: 11 }, (_, i) =>
+      moment().subtract(5, "years").add(i, "years").format(fullyearFormat)
     )
   });
   const {
     days,
     error,
     events,
-    isLoading,
     months,
     selectedGames,
     selectedMonth,
     selectedYear,
+    today,
     years
   } = state;
-  const selectedDate = moment(
-    `${selectedYear}-${selectedMonth}`,
-    "YYYY-MMMM"
-  ).format();
+
+  const fetchSchedule = React.useCallback(async (): Promise<void> => {
+    try {
+      const selectedDate = moment(
+        `${selectedYear} ${selectedMonth}`,
+        yearMonthFormat
+      ).format();
+
+      const res = await app.get(
+        `events/schedule?&selectedDate=${selectedDate}&selectedGames=${selectedGames}`
+      );
+
+      const data = parseData<Array<TEventData>>(res);
+
+      const calendar = moment(selectedDate, defaultFormat);
+
+      setState(prevState => ({
+        ...prevState,
+        days: generateCalendarDays(
+          calendar.daysInMonth(),
+          calendar.format(monthdateFormat),
+          calendar.format(fullyearFormat)
+        ),
+        error: false,
+        events: data
+      }));
+    } catch (err) {
+      setState(prevState => ({
+        ...prevState,
+        error: true
+      }));
+    }
+  }, [selectedGames, selectedMonth, selectedYear]);
 
   const handleDateChange = React.useCallback(
     ({ name, value }: { name: string; value: string }): void => {
       setState(prevState => ({
         ...prevState,
-        isLoading: true,
         error: false,
         [name]: value
       }));
-    },
-    []
-  );
-
-  const fetchSchedule = React.useCallback(
-    async (selectedDate: string, selectedGames: string): Promise<void> => {
-      try {
-        const res = await app.get(
-          `events/schedule?&selectedDate=${selectedDate}&selectedGames=${selectedGames}`
-        );
-        const data = parseData<Array<TEventData>>(res);
-
-        const calendar = moment(selectedDate, format);
-
-        setState(prevState => ({
-          ...prevState,
-          days: generateCalendarDays(
-            calendar.daysInMonth(),
-            calendar.format("MM"),
-            calendar.format("YYYY")
-          ),
-          error: false,
-          events: data,
-          isLoading: false
-        }));
-      } catch (err) {
-        setState(prevState => ({
-          ...prevState,
-          error: true,
-          isLoading: false
-        }));
-      }
     },
     []
   );
@@ -125,14 +126,13 @@ export const Schedule = ({ loggedinUserId }: TScheduleProps): JSX.Element => {
     setState(prevState => ({
       ...prevState,
       error: false,
-      events: [],
-      isLoading: true
+      events: []
     }));
   }, []);
 
   React.useEffect(() => {
-    if (isLoading) fetchSchedule(selectedDate, selectedGames);
-  }, [fetchSchedule, isLoading, selectedDate, selectedGames]);
+    fetchSchedule();
+  }, [fetchSchedule, selectedGames, selectedMonth, selectedYear]);
 
   return (
     <>
@@ -146,11 +146,7 @@ export const Schedule = ({ loggedinUserId }: TScheduleProps): JSX.Element => {
         <APFormTitle>Event Calendar</APFormTitle>
         <Padding top="10px" left="20px" right="20px" bottom="30px">
           <Center>
-            <FlexCenter
-              breakpoint
-              justify="center"
-              style={{ margin: "5px 0 20px 0" }}
-            >
+            <FlexCenter breakpoint justify="center" margin="10px 0 20px 0">
               <NativeSelect
                 name="selectedGames"
                 options={["All Events", "My Events"]}
@@ -177,28 +173,26 @@ export const Schedule = ({ loggedinUserId }: TScheduleProps): JSX.Element => {
               />
             </FlexCenter>
             {error ? (
-              <FetchError height="966px" onClickReload={handleReload} />
+              <FetchError height="1008px" onClickReload={handleReload} />
             ) : (
               <Flex justify="center" flexwrap>
-                {days.map(date => (
-                  <Date
-                    today={moment(date, eventFormat).isSame(
-                      moment().format(eventFormat)
-                    )}
-                    key={date}
-                  >
-                    <Margin as="div" bottom="5px">
-                      <Center>
-                        <PanelDescription margin="0px">
-                          {moment(date, eventFormat).format("ddd")}
-                        </PanelDescription>
-                        <Bold>{moment(date, eventFormat).format("D")}</Bold>
-                      </Center>
-                    </Margin>
-                    {!isEmpty(events)
-                      ? events.map(event =>
-                          moment(event.eventDate).format(eventFormat) ===
-                          date ? (
+                {days.map(date => {
+                  const calendarDate = moment(date, eventFormat);
+                  return (
+                    <Date today={calendarDate.isSame(today)} key={date}>
+                      <Margin as="div" bottom="5px">
+                        <Center>
+                          <PanelDescription margin="0px">
+                            {calendarDate.format(weekdayFormat)}
+                          </PanelDescription>
+                          <Bold>{calendarDate.format(dayFormat)}</Bold>
+                        </Center>
+                      </Margin>
+                      {!isEmpty(events) &&
+                        events.map(event =>
+                          moment(event.eventDate, defaultFormat).format(
+                            eventFormat
+                          ) === date ? (
                             <DisplayEvents
                               key={event._id}
                               loggedinUserId={loggedinUserId}
@@ -208,10 +202,10 @@ export const Schedule = ({ loggedinUserId }: TScheduleProps): JSX.Element => {
                               folder="calendar"
                             />
                           ) : null
-                        )
-                      : null}
-                  </Date>
-                ))}
+                        )}
+                    </Date>
+                  );
+                })}
               </Flex>
             )}
           </Center>

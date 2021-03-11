@@ -5,7 +5,7 @@ const Date = styled.div<{ today?: boolean }>`
     width: 100%;
   }
 
-  height: 150px;
+  height: 160px;
   width: 210px;
   margin: 4px;
   padding: 4px 8px;

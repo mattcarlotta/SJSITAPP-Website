@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import { fullweekdayFormat, shortmonthFormat } from "~utils/dateFormats";
 import moment from "~utils/momentWithTimezone";
 
 export type CalendarDateTitleProps = {
@@ -26,11 +27,11 @@ const CalendarDateTitleComponent = ({
           color: #888;
         `}
       >
-        {nextWeek ? "Today" : dayDate.format("dddd")}
+        {nextWeek ? "Today" : dayDate.format(fullweekdayFormat)}
         {nextWeek && (
           <>
             &nbsp;to next&nbsp;
-            {weekFromDate.format("dddd")}
+            {weekFromDate.format(fullweekdayFormat)}
           </>
         )}
       </div>
@@ -40,11 +41,11 @@ const CalendarDateTitleComponent = ({
           color: #1a4448;
         `}
       >
-        {dayDate.format("MMM Do")}
+        {dayDate.format(shortmonthFormat)}
         {nextWeek && (
           <>
             &nbsp;&#8211;&nbsp;
-            {weekFromDate.format("MMM Do")}
+            {weekFromDate.format(shortmonthFormat)}
           </>
         )}
       </div>

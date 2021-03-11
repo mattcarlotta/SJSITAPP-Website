@@ -1,10 +1,11 @@
 import styled from "@emotion/styled";
 
 const FlexCenter = styled.div<{
+  breakpoint?: boolean;
   direction?: string;
   height?: string;
   justify?: string;
-  breakpoint?: boolean;
+  margin?: string;
 }>`
   ${({ breakpoint }) =>
     breakpoint &&
@@ -15,6 +16,7 @@ const FlexCenter = styled.div<{
   color: ${({ color }) => color || "inherit"};
   height: ${({ height }) => height || "auto"};
   flex-direction: ${({ direction }) => direction || "row"};
+  margin: ${({ margin }) => margin || "0px"};
   display: flex;
   align-items: center;
   width: 100%;

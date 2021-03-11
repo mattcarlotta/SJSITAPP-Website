@@ -1,4 +1,5 @@
 import { mount, ReactWrapper } from "enzyme";
+import { fullweekdayFormat, shortmonthFormat } from "~utils/dateFormats";
 import moment from "~utils/momentWithTimezone";
 import CalendarDateTitle from "../index";
 
@@ -17,25 +18,27 @@ describe("CalendarDateTitle", () => {
 
   it("initially displays the calendar day", () => {
     expect(wrapper.find("[data-testid='day-date']").first().text()).toEqual(
-      dayDate.format("dddd")
+      dayDate.format(fullweekdayFormat)
     );
 
     expect(
       wrapper.find("[data-testid='calendar-date']").first().text()
-    ).toEqual(dayDate.format("MMM Do"));
+    ).toEqual(dayDate.format(shortmonthFormat));
   });
 
   it("displays the calendar day and next week when passed a 'nextWeek' prop", () => {
     wrapper.setProps({ nextWeek: true });
 
     expect(wrapper.find("[data-testid='day-date']").first().text()).toEqual(
-      `Today\u00a0to next\u00a0${weekFromDate.format("dddd")}`
+      `Today\u00a0to next\u00a0${weekFromDate.format(fullweekdayFormat)}`
     );
 
     expect(
       wrapper.find("[data-testid='calendar-date']").first().text()
     ).toEqual(
-      `${dayDate.format("MMM Do")}\u00a0–\u00a0${weekFromDate.format("MMM Do")}`
+      `${dayDate.format(shortmonthFormat)}\u00a0–\u00a0${weekFromDate.format(
+        shortmonthFormat
+      )}`
     );
   });
 
@@ -43,11 +46,11 @@ describe("CalendarDateTitle", () => {
     wrapper.setProps({ eventDate: weekFromDate.format() });
 
     expect(wrapper.find("[data-testid='day-date']").first().text()).toEqual(
-      weekFromDate.format("dddd")
+      weekFromDate.format(fullweekdayFormat)
     );
 
     expect(
       wrapper.find("[data-testid='calendar-date']").first().text()
-    ).toEqual(weekFromDate.format("MMM Do"));
+    ).toEqual(weekFromDate.format(shortmonthFormat));
   });
 });

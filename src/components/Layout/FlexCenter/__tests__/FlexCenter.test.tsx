@@ -28,6 +28,11 @@ describe("FlexCenter", () => {
     expect(wrapper).toHaveStyleRule("height", "10px");
   });
 
+  it("sets margin when passed a 'margin' prop", () => {
+    wrapper.setProps({ margin: "10px" });
+    expect(wrapper).toHaveStyleRule("margin", "10px");
+  });
+
   it("sets justify-content when passed a 'justify' prop", () => {
     wrapper.setProps({ justify: "center" });
     expect(wrapper).toHaveStyleRule("justify-content", "center");

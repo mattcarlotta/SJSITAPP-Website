@@ -7,7 +7,9 @@ import Legal from "~components/Layout/Legal";
 import Tree from "~components/Layout/Tree";
 import NavLink from "~components/Navigation/NavLink";
 import NavTitle from "~components/Navigation/NavTitle";
+import { fullyearFormat } from "~utils/dateFormats";
 import { MdExpandMore, MdChevronRight } from "~icons";
+
 import { EmployeeRoutes, StaffRoutes } from "./Tabs";
 import { TSideMenuNodeIds } from "~types";
 
@@ -125,7 +127,7 @@ const SideMenu = ({
           )
         )}
       </TreeView>
-      <Legal>© 2019-{moment().format("YYYY")} Matt Carlotta</Legal>
+      <Legal>© 2019-{moment().format(fullyearFormat)} Matt Carlotta</Legal>
     </Tree>
   );
 };

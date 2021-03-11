@@ -13,6 +13,7 @@ import PanelDescription from "~components/Layout/PanelDescription";
 import { FaChartBar } from "~icons";
 import moment from "~utils/momentWithTimezone";
 import app from "~utils/axiosConfig";
+import { defaultFormat } from "~utils/dateFormats";
 import { parseData } from "~utils/parseResponse";
 import { MaterialUiPickersDate, TEventDistributionData } from "~types";
 
@@ -23,14 +24,12 @@ export type TDashboardEventDistributionState = {
   startDate: string;
 };
 
-export const format = "YYYY-MM-DDTHH:mm:ssZ";
-
 export const EventDistribution = (): JSX.Element => {
   const [state, setState] = React.useState<TDashboardEventDistributionState>({
-    endDate: moment().endOf("month").format(format),
+    endDate: moment().endOf("month").format(defaultFormat),
     error: false,
     events: [],
-    startDate: moment().startOf("month").format(format)
+    startDate: moment().startOf("month").format(defaultFormat)
   });
   const { endDate, error, events, startDate } = state;
 
@@ -39,7 +38,7 @@ export const EventDistribution = (): JSX.Element => {
       setState(prevState => ({
         ...prevState,
         errors: false,
-        [name]: value.format(format)
+        [name]: value.format(defaultFormat)
       }));
     },
     []

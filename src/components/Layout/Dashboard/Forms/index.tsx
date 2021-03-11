@@ -15,6 +15,7 @@ import PanelDescription from "~components/Layout/PanelDescription";
 import Link from "~components/Navigation/Link";
 import { BsPencilSquare, FaFileSignature } from "~icons";
 import app from "~utils/axiosConfig";
+import { dateTimeFormat } from "~utils/dateFormats";
 import moment from "~utils/momentWithTimezone";
 import { parseData } from "~utils/parseResponse";
 import { TFormData } from "~types";
@@ -25,8 +26,6 @@ export type TDashboardEventsState = {
   hasExpired: boolean;
   isLoading: boolean;
 };
-
-const format = "MMM Do YYYY @ hh:mm a";
 
 export const Forms = (): JSX.Element => {
   const [state, setState] = React.useState<TDashboardEventsState>({
@@ -98,7 +97,7 @@ export const Forms = (): JSX.Element => {
                 {!hasExpired ? "Expires" : "Expired"} on&nbsp;
                 <FormatDate
                   date={form.expirationDate}
-                  format={format}
+                  format={dateTimeFormat}
                   style={{ display: "inline" }}
                 />
               </PanelDescription>

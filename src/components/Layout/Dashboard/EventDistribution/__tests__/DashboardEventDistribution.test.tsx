@@ -2,7 +2,8 @@ import { ReactWrapper } from "enzyme";
 import waitFor from "~utils/waitFor";
 import mockApp from "~utils/mockAxios";
 import moment from "~utils/momentWithTimezone";
-import EventDistribution, { format } from "../index";
+import { defaultFormat } from "~utils/dateFormats";
+import EventDistribution from "../index";
 import withProviders from "~utils/withProviders";
 
 const events = [
@@ -20,14 +21,14 @@ const events = [
   }
 ];
 
-const startDate = moment().startOf("month").format(format);
-const endDate = moment().endOf("month").format(format);
+const startDate = moment().startOf("month").format(defaultFormat);
+const endDate = moment().endOf("month").format(defaultFormat);
 
 const previousStartDate = moment().subtract(1, "month").startOf("month");
 const previousMonth = previousStartDate.format("MMMM YYYY");
 const APIURL = `dashboard/event-distribution?&startDate=${startDate}&endDate=${endDate}`;
 const NEXTAPIURL = `dashboard/event-distribution?&startDate=${previousStartDate.format(
-  format
+  defaultFormat
 )}&endDate=${endDate}`;
 mockApp
   .onGet(APIURL)

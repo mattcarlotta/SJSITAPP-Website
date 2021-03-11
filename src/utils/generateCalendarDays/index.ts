@@ -1,6 +1,5 @@
 import moment from "~utils/momentWithTimezone";
-
-export const eventFormat = "YYYY-MM-DD";
+import { eventFormat } from "~utils/dateFormats";
 
 /**
  * Helper function to generate an array of dates in the current month and year.
