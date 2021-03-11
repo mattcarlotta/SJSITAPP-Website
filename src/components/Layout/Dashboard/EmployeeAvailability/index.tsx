@@ -1,9 +1,9 @@
 import * as React from "react";
 import { css } from "@emotion/react";
 import isEmpty from "lodash.isempty";
-import APFormTitle from "~components/Layout/APFormTitle";
 import Bold from "~components/Layout/Bold";
 import Card from "~components/Layout/Card";
+import CardSubTitle from "~components/Layout/CardSubTitle";
 import Center from "~components/Layout/Center";
 import DisplayMonthDates from "~components/Layout/DisplayMonthDates";
 import FetchError from "~components/Layout/FetchError";
@@ -91,7 +91,7 @@ export const EmployeeAvailability = (): JSX.Element => {
       title="Availability"
       padding="0"
     >
-      <APFormTitle>Employee Availability</APFormTitle>
+      <CardSubTitle>Employee Availability</CardSubTitle>
       <Padding top="10px" left="20px" right="20px">
         {isLoading ? (
           <LoadingPanel

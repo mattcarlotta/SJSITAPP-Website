@@ -112,8 +112,8 @@ const EventDetails = ({ event, id }: TEventDetailsProps): JSX.Element => (
                 <ListItem
                   key={_id}
                   data-testid="employee"
-                  margin="0 0 0 20px"
-                  padding="0 0 0 10px"
+                  margin="5px 0 5px 20px"
+                  padding="3px 0 3px 10px"
                   color={_id === id ? "#fff" : undefined}
                   style={{
                     backgroundColor: _id === id ? "#006d75" : "",

@@ -11,6 +11,13 @@ describe("FlexCenter", () => {
     expect(wrapper).toExist();
   });
 
+  it("sets a media rule when passed a 'breakpoint' prop", () => {
+    wrapper.setProps({ breakpoint: "true" });
+    expect(wrapper).toHaveStyleRule("flex-direction", "column", {
+      media: "(max-width: 600px)"
+    });
+  });
+
   it("sets flex-direction when passed a 'direction' prop", () => {
     expect(wrapper).toHaveStyleRule("flex-direction", "row");
 

@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 
 const Flex = styled.div<{
+  background?: string;
   direction?: string;
   flexwrap?: boolean;
   justify?: string;
@@ -13,6 +14,8 @@ const Flex = styled.div<{
   justify-content: ${({ justify }) => justify || "start"};
   padding: ${({ padding }) => padding || "0"};
   width: ${({ width }) => width || "100%"};
+  background: ${({ background }) => background || "transparent"};
+  border-radius: 5px;
 `;
 
 export default Flex;

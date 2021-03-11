@@ -75,7 +75,7 @@ export const GlobalStylesheet = (): JSX.Element => (
         }
       }
 
-      @keyframes fadeIn {
+      @keyframes fade-in {
         from {
           opacity: 0;
         }

@@ -2,7 +2,7 @@ import * as React from "react";
 import get from "lodash.get";
 import isEmpty from "lodash.isempty";
 import APFormExpired from "~components/Layout/APFormExpired";
-import APFormTitle from "~components/Layout/APFormTitle";
+import CardSubTitle from "~components/Layout/CardSubTitle";
 import Card from "~components/Layout/Card";
 import Center from "~components/Layout/Center";
 import DisplayMonthDates from "~components/Layout/DisplayMonthDates";
@@ -79,7 +79,7 @@ export const Forms = (): JSX.Element => {
       title="Forms"
       padding="0"
     >
-      <APFormTitle>Sharks & Barracuda A/P Form</APFormTitle>
+      <CardSubTitle>Sharks & Barracuda A/P Form</CardSubTitle>
       <Padding top="10px" left="20px" right="20px">
         <Center>
           {isLoading ? (

@@ -42,7 +42,7 @@ const EventDistributionChart = ({
           <ResponsiveBar
             data={events}
             layout="horizontal"
-            margin={{ top: 60, right: 40, bottom: 60, left: 200 }}
+            margin={{ top: 20, right: 40, bottom: 60, left: 200 }}
             indexBy="name"
             keys={["Event Count"]}
             maxValue={largestValue + 1}

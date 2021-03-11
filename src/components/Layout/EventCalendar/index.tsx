@@ -1,8 +1,8 @@
 import * as React from "react";
+import { IconButton } from "@material-ui/core";
 import isEmpty from "lodash.isempty";
 import NativeSelect from "~components/Forms/NativeSelect";
 import Bold from "~components/Layout/Bold";
-import Button from "~components/Layout/Button";
 import Center from "~components/Layout/Center";
 import Date from "~components/Layout/Date";
 import DisplayEvents from "~components/Layout/DisplayEvents";
@@ -14,7 +14,8 @@ import FlexStart from "~components/Layout/FlexStart";
 import Margin from "~components/Layout/Margin";
 import Padding from "~components/Layout/Padding";
 import PanelDescription from "~components/Layout/PanelDescription";
-import { FaChevronLeft, FaChevronRight } from "~icons";
+import Tooltip from "~components/Layout/Tooltip";
+import { IconContext, FaChevronLeft, FaChevronRight } from "~icons";
 import app from "~utils/axiosConfig";
 import {
   dayFormat,
@@ -35,6 +36,7 @@ export type TEventCalendarState = {
   days: Array<string>;
   error: boolean;
   events: Array<TEventData>;
+  isLoading: boolean;
   months: Array<string>;
   selectedGames: string;
   selectedMonth: string;
@@ -56,6 +58,7 @@ export const EventCalendar = ({ id }: TEventCalendarProps): JSX.Element => {
     ),
     error: false,
     events: [],
+    isLoading: true,
     months: moment.months(),
     selectedGames: "All Events",
     selectedMonth: moment().format(monthnameFormat),
@@ -69,6 +72,7 @@ export const EventCalendar = ({ id }: TEventCalendarProps): JSX.Element => {
     days,
     error,
     events,
+    isLoading,
     months,
     selectedGames,
     selectedMonth,
@@ -100,38 +104,28 @@ export const EventCalendar = ({ id }: TEventCalendarProps): JSX.Element => {
           calendar.format(fullyearFormat)
         ),
         error: false,
-        events: data
+        events: data,
+        isLoading: false
       }));
     } catch (err) {
       setState(prevState => ({
         ...prevState,
-        error: true
+        error: true,
+        isLoading: false
       }));
     }
   }, [id, selectedGames, selectedMonth, selectedYear]);
 
-  const handlePreviousMonthChange = React.useCallback(() => {
+  const handleMonthChange = React.useCallback((days: number): void => {
     setState(prevState => ({
       ...prevState,
       error: false,
+      isLoading: true,
       selectedMonth: moment(
         `${prevState.selectedYear}-${prevState.selectedMonth}`,
         yearMonthFormat
       )
-        .subtract(1, "month")
-        .format(monthnameFormat)
-    }));
-  }, []);
-
-  const handleNextMonthChange = React.useCallback(() => {
-    setState(prevState => ({
-      ...prevState,
-      error: false,
-      selectedMonth: moment(
-        `${prevState.selectedYear}-${prevState.selectedMonth}`,
-        yearMonthFormat
-      )
-        .add(1, "month")
+        .add(days, "month")
         .format(monthnameFormat)
     }));
   }, []);
@@ -141,6 +135,7 @@ export const EventCalendar = ({ id }: TEventCalendarProps): JSX.Element => {
       setState(prevState => ({
         ...prevState,
         error: false,
+        isLoading: true,
         [name]: value
       }));
     },
@@ -156,79 +151,83 @@ export const EventCalendar = ({ id }: TEventCalendarProps): JSX.Element => {
   }, []);
 
   React.useEffect(() => {
-    fetchSchedule();
-  }, [fetchSchedule, selectedGames, selectedMonth, selectedYear]);
+    if (isLoading) fetchSchedule();
+  }, [fetchSchedule, isLoading]);
 
   return (
     <Padding top="10px" left="20px" right="20px" bottom="30px">
       <Center>
-        <Flex padding="0 5px">
-          <FlexStart>
-            <Button
-              alt
-              margin="0px"
-              padding="2px 5px"
-              fontSize="25px"
-              width="auto"
-              type="button"
-              onClick={handlePreviousMonthChange}
-            >
-              <FaChevronLeft
-                style={{ position: "relative", top: 3, right: 1 }}
+        <IconContext.Provider
+          value={{
+            style: {
+              color: "#0d6472",
+              fontSize: 22
+            }
+          }}
+        >
+          <Flex padding="0 5px">
+            <FlexStart>
+              <Tooltip title="Previous Month">
+                <IconButton
+                  data-testid="previous-month-button"
+                  aria-label="go to previous month"
+                  onClick={() => handleMonthChange(-1)}
+                >
+                  <FaChevronLeft />
+                </IconButton>
+              </Tooltip>
+            </FlexStart>
+            <FlexCenter breakpoint justify="center" margin="10px 0 20px 0">
+              <NativeSelect
+                name="selectedGames"
+                options={["All Events", "My Events"]}
+                value={selectedGames}
+                onChange={handleDateChange}
               />
-            </Button>
-          </FlexStart>
-          <FlexCenter breakpoint justify="center" margin="10px 0 20px 0">
-            <NativeSelect
-              name="selectedGames"
-              options={["All Events", "My Events"]}
-              value={selectedGames}
-              onChange={handleDateChange}
-            />
-            <Margin left="10px" right="10px">
-              in
-            </Margin>
-            <NativeSelect
-              name="selectedMonth"
-              options={months}
-              value={selectedMonth}
-              onChange={handleDateChange}
-            />
-            <Margin left="10px" right="10px">
-              of
-            </Margin>
-            <NativeSelect
-              name="selectedYear"
-              options={years}
-              value={selectedYear}
-              onChange={handleDateChange}
-            />
-          </FlexCenter>
-          <FlexEnd>
-            <Button
-              alt
-              margin="0px"
-              padding="2px 5px"
-              fontSize="25px"
-              width="auto"
-              type="button"
-              onClick={handleNextMonthChange}
-            >
-              <FaChevronRight
-                style={{ position: "relative", top: 3, left: 1 }}
+              <Margin left="10px" right="10px">
+                in
+              </Margin>
+              <NativeSelect
+                name="selectedMonth"
+                options={months}
+                value={selectedMonth}
+                onChange={handleDateChange}
               />
-            </Button>
-          </FlexEnd>
-        </Flex>
-
+              <Margin left="10px" right="10px">
+                of
+              </Margin>
+              <NativeSelect
+                name="selectedYear"
+                options={years}
+                value={selectedYear}
+                onChange={handleDateChange}
+              />
+            </FlexCenter>
+            <FlexEnd>
+              <Tooltip title="Next Month">
+                <IconButton
+                  aria-label="go to next month"
+                  data-testid="next-month-button"
+                  onClick={() => handleMonthChange(1)}
+                >
+                  <FaChevronRight />
+                </IconButton>
+              </Tooltip>
+            </FlexEnd>
+          </Flex>
+        </IconContext.Provider>
         {error ? (
           <FetchError height="1008px" onClickReload={handleReload} />
         ) : (
-          <Flex justify="center" flexwrap>
-            {days.map(date => {
+          <Flex flexwrap background="#0d6472" justify="start" padding="5px">
+            {days.map((date, index) => {
               const calendarDate = moment(date, eventFormat);
               return (
-                <Date today={calendarDate.isSame(today)} key={date}>
+                <Date
+                  today={calendarDate.isSame(today)}
+                  fadeIn={`${index * 0.5 * 75}ms`}
+                  key={date}
+                >
                   <Margin as="div" bottom="5px">
                     <Center>
                       <PanelDescription margin="0px">

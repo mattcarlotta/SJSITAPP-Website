@@ -1,6 +1,6 @@
 import * as React from "react";
-import APFormTitle from "~components/Layout/APFormTitle";
 import Card from "~components/Layout/Card";
+import CardSubTitle from "~components/Layout/CardSubTitle";
 import Center from "~components/Layout/Center";
 import DatePicker from "~components/Forms/DatePicker";
 import EventDistributionChart from "~components/Layout/EventDistributionChart";
@@ -88,13 +88,13 @@ export const EventDistribution = (): JSX.Element => {
       title="Event Distribution"
       padding="0"
     >
-      <APFormTitle>Employee Scheduled Events Distribution</APFormTitle>
+      <CardSubTitle>Employee Scheduled Events Distribution</CardSubTitle>
       <Padding top="10px" left="20px" right="20px">
         <Center style={{ height: "750px" }}>
           <PanelDescription data-testid="ap-form">
             Event distribution for&nbsp;
           </PanelDescription>
-          <FlexCenter justify="center" style={{ margin: "5px 0 10px 0" }}>
+          <FlexCenter justify="center" margin="5px 0 10px 0">
             <DatePicker
               name="startDate"
               value={startDate}

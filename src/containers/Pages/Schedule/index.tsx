@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import APFormTitle from "~components/Layout/APFormTitle";
 import Card from "~components/Layout/Card";
+import CardSubTitle from "~components/Layout/CardSubTitle";
 import EventCalendar from "~components/Layout/EventCalendar";
 import Header from "~components/Navigation/Header";
 import { FaCalendar } from "~icons";
@@ -20,7 +20,7 @@ export const Schedule = ({ loggedinUserId }: TScheduleProps): JSX.Element => (
       title="Schedule"
       padding="0"
     >
-      <APFormTitle>Event Calendar</APFormTitle>
+      <CardSubTitle>Event Calendar</CardSubTitle>
       <EventCalendar id={loggedinUserId} />
     </Card>
   </>

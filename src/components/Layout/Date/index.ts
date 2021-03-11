@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-const Date = styled.div<{ today?: boolean }>`
+const Date = styled.div<{ today?: boolean; fadeIn?: string }>`
   @media (max-width: 600px) {
     width: 100%;
   }
@@ -13,9 +13,10 @@ const Date = styled.div<{ today?: boolean }>`
   background: #f3f3f3;
   text-align: left;
   border: 2px solid #e8e8e8;
-  border-radius: 5px;
   transition: background 0.3s;
   overflow-y: auto;
+  animation: ${({ fadeIn }) =>
+    `fade-in ${fadeIn || "1s"} 0s ease-in-out forwards`};
   ${({ today }) => today && "border-color: #1890ff;background: #e6f7ff;"};
 `;
 

@@ -1,6 +1,6 @@
 import * as React from "react";
 import AvailabilityAvgChart from "~components/Layout/AvailabilityAvgChart";
-import APFormTitle from "~components/Layout/APFormTitle";
+import CardSubTitle from "~components/Layout/CardSubTitle";
 import Card from "~components/Layout/Card";
 import Center from "~components/Layout/Center";
 import DisplayMonthDates from "~components/Layout/DisplayMonthDates";
@@ -75,7 +75,7 @@ export const Availability = (): JSX.Element => {
       title="Availability"
       padding="0"
     >
-      <APFormTitle>Sharks & Barracuda Availability</APFormTitle>
+      <CardSubTitle>Sharks & Barracuda Availability</CardSubTitle>
       <Padding top="10px" left="20px" right="20px">
         {isLoading ? (
           <LoadingPanel
