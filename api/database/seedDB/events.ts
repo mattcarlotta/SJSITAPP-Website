@@ -277,7 +277,24 @@ export const seedEvents = async (
     opponent: "Chicago Wolves",
     seasonId: currentSeason,
     team: "San Jose Barracuda",
-    schedule: createSchedule(newEventCallTimes9),
+    schedule: [
+      {
+        _id: "2019-02-09T17:45:26-07:00",
+        employeeIds: [scheduledUser._id]
+      },
+      {
+        _id: "2019-02-09T18:15:26-07:00",
+        employeeIds: []
+      },
+      {
+        _id: "2019-02-09T18:30:26-07:00",
+        employeeIds: []
+      },
+      {
+        _id: "2019-02-09T19:00:26-07:00",
+        employeeIds: []
+      }
+    ],
     scheduledIds: [scheduledUser._id],
     sentEmailReminders: true,
     employeeResponses: [

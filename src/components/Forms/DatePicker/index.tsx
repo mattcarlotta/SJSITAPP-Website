@@ -1,17 +1,18 @@
 import { makeStyles } from "@material-ui/core";
 import { DatePicker } from "@material-ui/pickers";
-import { MaterialUiPickersDate } from "~types";
+import { DatePickerView, MaterialUiPickersDate } from "~types";
 
 export type TDatePickerProps = {
   name: string;
   onChange: ({
     name,
-    date
+    value
   }: {
     name: string;
-    date: MaterialUiPickersDate;
+    value: MaterialUiPickersDate;
   }) => void;
   value: string;
+  views?: Array<DatePickerView>;
 };
 
 const useStyles = makeStyles({
@@ -43,14 +44,16 @@ const useStyles = makeStyles({
 const DatePickerComponent = ({
   name,
   onChange,
-  value
+  value,
+  views
 }: TDatePickerProps): JSX.Element => (
   <DatePicker
     name={name}
+    views={views}
     format="MM/DD/YYYY"
     className={useStyles().root}
     value={value}
-    onChange={date => onChange({ name, date })}
+    onChange={value => onChange({ name, value })}
   />
 );
 

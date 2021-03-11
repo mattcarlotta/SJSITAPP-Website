@@ -35,11 +35,11 @@ export const EventDistribution = (): JSX.Element => {
   const { endDate, error, events, startDate } = state;
 
   const handleDateChange = React.useCallback(
-    ({ name, date }: { name: string; date: MaterialUiPickersDate }): void => {
+    ({ name, value }: { name: string; value: MaterialUiPickersDate }): void => {
       setState(prevState => ({
         ...prevState,
         errors: false,
-        [name]: date.format(format)
+        [name]: value.format(format)
       }));
     },
     []

@@ -16,7 +16,7 @@ import {
   ReactText
 } from "react";
 import { Moment } from "moment-timezone";
-import { MaterialUiPickersDate } from "@material-ui/pickers";
+import { DatePickerView, MaterialUiPickersDate } from "@material-ui/pickers";
 import { AnyAction, Store } from "redux";
 import { SagaIterator } from "redux-saga";
 import * as actions from "~actions/Users";
@@ -286,6 +286,7 @@ export {
   ChangeEvent,
   ComponentType,
   CSSProperties,
+  DatePickerView,
   FC,
   FormEvent,
   KeyboardEvent,

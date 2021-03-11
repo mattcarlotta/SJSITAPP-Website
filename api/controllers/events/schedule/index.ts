@@ -43,7 +43,7 @@ const getScheduledEvents = async (
               $lte: endOfMonth.format()
             },
             scheduledIds: {
-              $in: [convertId(String(selectedId))]
+              $in: [convertId(selectedId as string)]
             }
           };
 

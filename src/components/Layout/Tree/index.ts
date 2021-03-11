@@ -6,7 +6,7 @@ const Tree = styled.aside<{ collapsed: boolean }>`
   }
 
   overflow: ${({ collapsed }) => (collapsed ? "hidden" : "auto")};
-  padding: ${({ collapsed }) => (collapsed ? "10px 0 0 0" : "10px 0 5px 0")};
+  padding: ${({ collapsed }) => (collapsed ? "5px 0 0 0" : "5px 0 5px 0")};
   width: ${({ collapsed }) => (collapsed ? "0px" : "266px")};
   white-space: nowrap;
   background: #0d6472;

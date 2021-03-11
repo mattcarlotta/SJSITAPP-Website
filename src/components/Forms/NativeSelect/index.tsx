@@ -1,11 +1,10 @@
-import { makeStyles, Select } from "@material-ui/core";
-import { ChangeEvent } from "~types";
+import { makeStyles, Select, MenuItem } from "@material-ui/core";
 
 export type TNativeSelectProps = {
   name: string;
-  options: Array<string>;
+  options: Array<string> | Array<number>;
   value: string;
-  onChange: (e: ChangeEvent<any>) => void;
+  onChange: ({ name, value }: { name: string; value: string }) => void;
 };
 
 const useStyles = makeStyles({
@@ -17,19 +16,19 @@ const useStyles = makeStyles({
       border: "1px solid #888",
       background: "#eee",
       borderRadius: 10,
-      paddingLeft: 15,
+      paddingLeft: 20,
       transition: "all 300ms ease-in-out",
       fontFamily: `"Karla", -apple-system, BlinkMacSystemFont, "Segoe UI",
       Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
       "Helvetica Neue", sans-serif;`
     },
+    "& .MuiSelect-icon": {
+      top: "calc(50% - 15px)"
+    },
     "& .MuiInput-input:hover": {
       background: "#fff",
       borderColor: "#1e90ff",
       boxShadow: "0px 0px 14px -2px #a1cdf9"
-    },
-    "& .MuiInput-underline:before, & .MuiInput-underline:after": {
-      display: "none"
     }
   }
 });
@@ -41,16 +40,22 @@ const NativeSelect = ({
   onChange
 }: TNativeSelectProps): JSX.Element => (
   <Select
-    native
+    disableUnderline
     name={name}
     className={useStyles().root}
     value={value}
-    onChange={onChange}
+    onChange={e =>
+      onChange({
+        name: e.target.name as string,
+        value: e.target.value as string
+      })
+    }
+    IconComponent={() => null}
   >
-    {options.map(option => (
-      <option key={option} value={option}>
+    {options.map((option: string | number) => (
+      <MenuItem key={option} value={option}>
         {option}
-      </option>
+      </MenuItem>
     ))}
   </Select>
 );
