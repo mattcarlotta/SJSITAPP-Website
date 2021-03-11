@@ -19,12 +19,27 @@ describe("Flex", () => {
     expect(wrapper).toHaveStyleRule("flex-direction", "column");
   });
 
-  it("sets 'flex-wrap' as a 'wrap' when passed a 'wrap' prop", () => {
+  it("sets margin when passed a 'margin' prop", () => {
+    wrapper.setProps({ margin: "10px" });
+    expect(wrapper).toHaveStyleRule("margin", "10px");
+  });
+
+  it("sets padding when passed a 'padding' prop", () => {
+    wrapper.setProps({ padding: "10px" });
+    expect(wrapper).toHaveStyleRule("padding", "10px");
+  });
+
+  it("sets background when passed a 'background' prop", () => {
+    wrapper.setProps({ background: "#fff" });
+    expect(wrapper).toHaveStyleRule("background", "#fff");
+  });
+
+  it("sets flex-wrap as a 'wrap' when passed a 'wrap' prop", () => {
     wrapper.setProps({ flexwrap: "true" });
     expect(wrapper).toHaveStyleRule("flex-wrap", "wrap");
   });
 
-  it("sets 'justify-content' as a 'center' when passed a 'justify' prop", () => {
+  it("sets justify-content when passed a 'justify' prop", () => {
     wrapper.setProps({ justify: "center" });
     expect(wrapper).toHaveStyleRule("justify-content", "center");
   });

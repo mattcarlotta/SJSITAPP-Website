@@ -91,7 +91,6 @@ export const EventCalendar = ({ id }: TEventCalendarProps): JSX.Element => {
       const res = await app.get(
         `events/schedule?id=${id}&selectedDate=${selectedDate}&selectedGames=${selectedGames}`
       );
-
       const data = parseData<Array<TEventData>>(res);
 
       const calendar = moment(selectedDate, defaultFormat);
@@ -155,7 +154,13 @@ export const EventCalendar = ({ id }: TEventCalendarProps): JSX.Element => {
   }, [fetchSchedule, isLoading]);
 
   return (
-    <Padding top="10px" left="20px" right="20px" bottom="30px">
+    <Padding
+      data-testid="calendar"
+      top="10px"
+      left="20px"
+      right="20px"
+      bottom="30px"
+    >
       <Center>
         <IconContext.Provider
           value={{
@@ -165,7 +170,7 @@ export const EventCalendar = ({ id }: TEventCalendarProps): JSX.Element => {
             }
           }}
         >
-          <Flex padding="0 5px">
+          <Flex margin="10px 0 10px 0">
             <FlexStart>
               <Tooltip title="Previous Month">
                 <IconButton
@@ -177,7 +182,7 @@ export const EventCalendar = ({ id }: TEventCalendarProps): JSX.Element => {
                 </IconButton>
               </Tooltip>
             </FlexStart>
-            <FlexCenter breakpoint justify="center" margin="10px 0 20px 0">
+            <FlexCenter breakpoint justify="center" margin="0">
               <NativeSelect
                 name="selectedGames"
                 options={["All Events", "My Events"]}
@@ -219,11 +224,17 @@ export const EventCalendar = ({ id }: TEventCalendarProps): JSX.Element => {
         {error ? (
           <FetchError height="1008px" onClickReload={handleReload} />
         ) : (
-          <Flex flexwrap background="#0d6472" justify="start" padding="5px">
+          <Flex
+            data-testid="calender-container"
+            flexwrap
+            justify="center"
+            padding="5px"
+          >
             {days.map((date, index) => {
               const calendarDate = moment(date, eventFormat);
               return (
                 <Date
+                  data-testid={date}
                   today={calendarDate.isSame(today)}
                   fadeIn={`${index * 0.5 * 75}ms`}
                   key={date}

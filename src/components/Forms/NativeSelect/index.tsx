@@ -41,6 +41,7 @@ const NativeSelect = ({
 }: TNativeSelectProps): JSX.Element => (
   <Select
     disableUnderline
+    data-testid={name}
     name={name}
     className={useStyles().root}
     value={value}
@@ -53,7 +54,7 @@ const NativeSelect = ({
     IconComponent={() => null}
   >
     {options.map((option: string | number) => (
-      <MenuItem key={option} value={option}>
+      <MenuItem data-testid={option} key={option} value={option}>
         {option}
       </MenuItem>
     ))}
