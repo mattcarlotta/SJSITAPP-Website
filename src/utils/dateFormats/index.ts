@@ -4,12 +4,12 @@
 export const fullyearFormat = "YYYY";
 
 /**
- * Formats month dates as 2 digits: 01.
+ * Formats month dates as 2 digits: 04.
  */
 export const monthdateFormat = "MM";
 
 /**
- * Formats month dates as week days: Monday.
+ * Formats month dates as string months: April.
  */
 export const monthnameFormat = "MMMM";
 

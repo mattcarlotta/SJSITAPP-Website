@@ -124,7 +124,7 @@ export const Events = ({
                 nextWeek={nextWeek}
                 spacing={20}
                 folder="lowres"
-                loggedinUserId={loggedinUserId}
+                id={loggedinUserId}
               />
             )}
           </CalendarDateContainer>

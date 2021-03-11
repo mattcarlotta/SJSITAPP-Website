@@ -28,6 +28,8 @@ export { FaCalendarPlus } from "@react-icons/all-files/fa/FaCalendarPlus";
 export { FaCalendarTimes } from "@react-icons/all-files/fa/FaCalendarTimes";
 export { FaChartArea } from "@react-icons/all-files/fa/FaChartArea";
 export { FaChartBar } from "@react-icons/all-files/fa/FaChartBar";
+export { FaChevronLeft } from "@react-icons/all-files/fa/FaChevronLeft";
+export { FaChevronRight } from "@react-icons/all-files/fa/FaChevronRight";
 export { FaCircle } from "@react-icons/all-files/fa/FaCircle";
 export { FaClock } from "@react-icons/all-files/fa/FaClock";
 export { FaCogs } from "@react-icons/all-files/fa/FaCogs";

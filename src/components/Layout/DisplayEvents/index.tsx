@@ -27,7 +27,6 @@ export type TDisplayEventProps = {
   height?: number;
   id?: string;
   innerStyle?: CSSProperties;
-  loggedinUserId?: string;
   nextWeek?: boolean;
   scheduleIconStyle?: CSSProperties;
   spacing?: number;
@@ -46,7 +45,6 @@ const DisplayEvents = ({
   height,
   id,
   innerStyle,
-  loggedinUserId,
   nextWeek,
   scheduleIconStyle,
   spacing,
@@ -93,9 +91,9 @@ const DisplayEvents = ({
               {!isEmpty(event.schedule) &&
                 event.schedule.map(({ employeeIds }) =>
                   !isEmpty(employeeIds) &&
-                  employeeIds.some(({ _id }) => _id === loggedinUserId) ? (
+                  employeeIds.some(({ _id }) => _id === id) ? (
                     <FaCalendarCheck
-                      key={loggedinUserId}
+                      key={id}
                       style={{ ...iconStyle, ...scheduleIconStyle }}
                     />
                   ) : null
@@ -132,11 +130,7 @@ const DisplayEvents = ({
         onClick={handleCloseModal}
         maxWidth="500px"
       >
-        <EventDetails
-          event={modalContent as TEventData}
-          id={id}
-          loggedinUserId={loggedinUserId}
-        />
+        <EventDetails event={modalContent as TEventData} id={id} />
       </Modal>
     </>
   );

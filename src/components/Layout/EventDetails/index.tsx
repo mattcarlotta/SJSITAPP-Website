@@ -12,14 +12,9 @@ import { TEventData } from "~types";
 export type TEventDetailsProps = {
   event: TEventData;
   id?: string;
-  loggedinUserId?: string;
 };
 
-const EventDetails = ({
-  event,
-  id,
-  loggedinUserId
-}: TEventDetailsProps): JSX.Element => (
+const EventDetails = ({ event, id }: TEventDetailsProps): JSX.Element => (
   <List
     data-testid="event-details-content"
     boxShadow="0px 1px 6px 1px rgba(0,0,0,0.25)"
@@ -119,19 +114,15 @@ const EventDetails = ({
                   data-testid="employee"
                   margin="0 0 0 20px"
                   padding="0 0 0 10px"
-                  color={
-                    _id === id || _id === loggedinUserId ? "#fff" : undefined
-                  }
+                  color={_id === id ? "#fff" : undefined}
                   style={{
-                    backgroundColor:
-                      _id === id || _id === loggedinUserId ? "#006d75" : "",
-                    borderRadius: _id === id || _id === loggedinUserId ? 10 : 0,
-                    fontWeight:
-                      _id === id || _id === loggedinUserId ? "bold" : "normal"
+                    backgroundColor: _id === id ? "#006d75" : "",
+                    borderRadius: _id === id ? 10 : 0,
+                    fontWeight: _id === id ? "bold" : "normal"
                   }}
                 >
                   <Margin right="5px">&#9900;</Margin>
-                  {(_id === id || _id === loggedinUserId) && (
+                  {_id === id && (
                     <Margin right="5px">
                       <FaCalendarCheck
                         style={{

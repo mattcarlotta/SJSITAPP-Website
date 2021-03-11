@@ -5,8 +5,7 @@ import Event from "../index";
 const initProps = {
   events: [],
   folder: "",
-  id: "",
-  loggedinUserId: "88",
+  id: "88",
   nextWeek: false
 };
 

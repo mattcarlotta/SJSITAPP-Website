@@ -34,6 +34,7 @@ const StyledButton = ({
 );
 
 export interface StyledButtonProps {
+  alt?: boolean;
   borderRadius?: string;
   disabled?: boolean;
   display?: string;
@@ -56,6 +57,7 @@ const Button = styled(StyledButton)<StyledButtonProps>`
   display: ${({ display }) => display || "block"};
   color: ${props => {
     if (props.primary || props.danger) return "#fff";
+    if (props.alt) return "#0d6472";
     if (props.tertiary) return "#e4e3e3";
     return "#fff";
   }};
