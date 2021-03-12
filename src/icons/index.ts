@@ -4,6 +4,7 @@ export { IconContext } from "@react-icons/all-files";
 // BS
 export { BsChatQuote } from "@react-icons/all-files/bs/BsChatQuote";
 export { BsCheckBox } from "@react-icons/all-files/bs/BsCheckBox";
+export { BsEyeSlashFill } from "@react-icons/all-files/bs/BsEyeSlashFill";
 export { BsFillExclamationOctagonFill } from "@react-icons/all-files/bs/BsFillExclamationOctagonFill";
 export { BsFillExclamationTriangleFill } from "@react-icons/all-files/bs/BsFillExclamationTriangleFill";
 export { BsFillHouseFill } from "@react-icons/all-files/bs/BsFillHouseFill";

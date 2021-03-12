@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import FlexCenter from "~components/Layout/FlexCenter";
 import HomeLogo from "~components/Layout/HomeLogo";
-import { ReactElement } from "~types";
+import { ReactNode } from "~types";
 
 export interface ISpinnerState {
   isMounted: boolean;
@@ -12,7 +12,7 @@ export interface ISpinnerState {
 
 export interface ISpinnerProps {
   className?: string;
-  children?: ReactElement<any> | boolean;
+  children?: ReactNode | boolean;
 }
 
 export class SpinnerComponent extends React.Component<

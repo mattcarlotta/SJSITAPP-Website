@@ -1,5 +1,4 @@
 import * as React from "react";
-import { css } from "@emotion/react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import * as actions from "~actions/Sidemenu";
@@ -8,6 +7,7 @@ import FlexEnd from "~components/Layout/FlexEnd";
 import FlexStart from "~components/Layout/FlexStart";
 import Header from "~components/Layout/Header";
 import Main from "~components/Layout/Main";
+import Margin from "~components/Layout/Margin";
 import MenuButton from "~components/Layout/MenuButton";
 import Section from "~components/Layout/Section";
 import SideMenu from "~components/Navigation/SideMenu";
@@ -79,13 +79,9 @@ export const AppLayout = ({
               width="auto"
             >
               SHARKS ICE
-              <img
-                css={css`
-                  margin: 0 3px 0 5px;
-                `}
-                src="/logo_24x24.png"
-                alt="logo"
-              />
+              <Margin right="3px" left="5px">
+                <img src="/logo_24x24.png" alt="logo" />
+              </Margin>
               TEAM
             </MenuLink>
           </FlexStart>

@@ -2,7 +2,7 @@
 import styled from "@emotion/styled";
 
 const WhiteBackground = styled.div`
-  background: #ebebeb;
+  background: #fff;
   height: 100vh;
 `;
 
