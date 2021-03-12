@@ -15,7 +15,7 @@ mockApp
   .onPost(APIURL)
   .reply(400, { err: errorMessage });
 
-describe("Login Form", () => {
+describe("Contact Us Form", () => {
   let wrapper: ReactWrapper;
   let findById: (id: string) => ReactWrapper;
   beforeEach(() => {
@@ -24,7 +24,7 @@ describe("Login Form", () => {
   });
 
   it("renders without errors", () => {
-    expect(wrapper.find("form").exists()).toBeTruthy();
+    expect(wrapper.find("form")).toExist();
   });
 
   it("doesn't submit the form if a field has errors", () => {
@@ -34,7 +34,10 @@ describe("Login Form", () => {
 
   describe("Form Submission", () => {
     beforeEach(async () => {
-      findById("select-text").first().simulate("click");
+      findById("sendTo")
+        .find("[data-testid='select-text']")
+        .first()
+        .simulate("click");
 
       findById("Admin").first().simulate("click");
 
