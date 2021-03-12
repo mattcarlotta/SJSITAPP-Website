@@ -15,4 +15,9 @@ describe("Title", () => {
     wrapper.setProps({ centered: true });
     expect(wrapper).toHaveStyleRule("text-align", "center");
   });
+
+  it("sets font-size when passed a 'fontSize' prop", () => {
+    wrapper.setProps({ fontSize: "10px" });
+    expect(wrapper).toHaveStyleRule("font-size", "10px");
+  });
 });

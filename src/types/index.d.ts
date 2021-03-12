@@ -13,6 +13,7 @@ import {
   MouseEvent,
   ReactElement,
   ReactNode,
+  ReactPortal,
   ReactText
 } from "react";
 import { Moment } from "moment-timezone";
@@ -300,6 +301,7 @@ export {
   NextRouter,
   ReactElement,
   ReactNode,
+  ReactPortal,
   ReactText,
   SagaIterator,
   TRootState

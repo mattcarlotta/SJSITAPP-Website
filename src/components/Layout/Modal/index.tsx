@@ -10,6 +10,7 @@ import ClickHandler from "./ClickHandler";
 import ModalContent from "./ModalContent";
 import ModalContainer from "./ModalContainer";
 import WindowContainer from "./WindowContainer";
+import { ReactPortal, ReactNode } from "~types";
 
 export interface IModalProps {
   background?: string;
@@ -20,6 +21,11 @@ export interface IModalProps {
   maxWidth?: string;
   onClick?: () => void;
 }
+
+const render = (children: ReactNode): ReactPortal | ReactNode =>
+  typeof window !== "undefined" && typeof document !== "undefined"
+    ? ReactDOM.createPortal(children, document.body)
+    : children;
 
 const Modal = ({
   background,
@@ -32,7 +38,7 @@ const Modal = ({
 }: IModalProps): JSX.Element => (
   <>
     {isOpen &&
-      ReactDOM.createPortal(
+      render(
         <>
           <BackgroundOverlay />
           <WindowContainer>
@@ -62,8 +68,7 @@ const Modal = ({
               </Center>
             </ModalContainer>
           </WindowContainer>
-        </>,
-        document.body
+        </>
       )}
   </>
 );

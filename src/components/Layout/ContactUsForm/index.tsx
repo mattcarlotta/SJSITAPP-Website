@@ -6,12 +6,13 @@ import FormTitle from "~components/Forms/FormTitle";
 import Card from "~components/Layout/Card";
 import Padding from "~components/Layout/Padding";
 import SubmitButton from "~components/Layout/SubmitButton";
+import { FaConciergeBell } from "~icons";
 import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
-import fields from "./Fields";
 import app from "~utils/axiosConfig";
 import { parseMessage } from "~utils/parseResponse";
+import fields from "./Fields";
 import { EventTarget, FormEvent } from "~types";
 
 export type TContactUsFormState = {
@@ -72,15 +73,16 @@ export const ContactUsForm = (): JSX.Element => {
         isSubmitting: false
       }));
     }
-  }, [fields, state.fields]);
+  }, [parseFields, fields, state.fields]);
 
   React.useEffect(() => {
     if (state.isSubmitting && !state.errors) sendMail();
-  }, [parseFields, state]);
+  }, [state.isSubmitting, state.errors]);
 
   return (
     <Card
       dataTestId="contact-us-page"
+      icon={<FaConciergeBell />}
       title="Contact Us"
       subtitle="Questions and Feedback Form"
     >
