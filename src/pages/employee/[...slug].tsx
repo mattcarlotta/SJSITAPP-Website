@@ -3,24 +3,22 @@ import Card from "~components/Layout/Card";
 import Center from "~components/Layout/Center";
 import ErrorMessage from "~components/Layout/ErrorMessage";
 import ErrorStatus from "~components/Layout/ErrorStatus";
-import HomeIcon from "~components/Layout/HomeIcon";
 import Flex from "~components/Layout/Flex";
+import HomeIcon from "~components/Layout/HomeIcon";
 import Margin from "~components/Layout/Margin";
 import Head from "~components/Navigation/Header";
 import Link from "~components/Navigation/Link";
 import requiresBasicCredentials from "~containers/App/requiresBasicCredentials";
 import { BsEyeSlashFill } from "~icons";
 import { NextPage } from "~types";
-import CardSubTitle from "~components/Layout/CardSubTitle";
 
 const AppPageNotFound: NextPage = () => (
   <Card
     dataTestId="app-page-not-found"
     title="Page Not Found"
     icon={<BsEyeSlashFill />}
-    padding="0"
+    subtitle="Uh oh. You took a wrong turn!"
   >
-    <CardSubTitle>Uh oh. You took a wrong turn!</CardSubTitle>
     <Flex
       data-testid="not-found-page"
       direction="column"

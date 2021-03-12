@@ -1,6 +1,5 @@
 import * as React from "react";
 import Card from "~components/Layout/Card";
-import CardSubTitle from "~components/Layout/CardSubTitle";
 import Center from "~components/Layout/Center";
 import DatePicker from "~components/Forms/DatePicker";
 import EventDistributionChart from "~components/Layout/EventDistributionChart";
@@ -86,9 +85,8 @@ export const EventDistribution = (): JSX.Element => {
       dataTestId="dashboard-event-distribution"
       icon={<FaChartBar />}
       title="Event Distribution"
-      padding="0"
+      subtitle="Employee Scheduled Events Distribution"
     >
-      <CardSubTitle>Employee Scheduled Events Distribution</CardSubTitle>
       <Padding top="10px" left="20px" right="20px">
         <Center style={{ height: "750px" }}>
           <PanelDescription data-testid="ap-form">

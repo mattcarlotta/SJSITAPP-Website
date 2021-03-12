@@ -12,7 +12,7 @@ export type TSelectProps = {
   disabled?: boolean;
   errors?: string;
   name: string;
-  label: string;
+  label?: string;
   placeholder?: string;
   onChange: (e: EventTarget) => void;
   selectOptions: Array<string>;
@@ -52,7 +52,7 @@ const Select = ({
         </SelectContainer>
       )}
     </ClickHandler>
-    {errors && <Errors data-test="errors">{errors}</Errors>}
+    {errors && <Errors data-testid="errors">{errors}</Errors>}
   </Container>
 );
 

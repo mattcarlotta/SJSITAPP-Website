@@ -9,7 +9,6 @@ const DropContainer = styled.div`
   background-color: hsl(0, 0%, 100%);
   border-radius: 4px;
   margin-top: 1px;
-  box-sizing: border-box;
 `;
 
 export default DropContainer;

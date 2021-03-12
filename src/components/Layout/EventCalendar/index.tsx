@@ -145,7 +145,8 @@ export const EventCalendar = ({ id }: TEventCalendarProps): JSX.Element => {
     setState(prevState => ({
       ...prevState,
       error: false,
-      events: []
+      events: [],
+      isLoading: true
     }));
   }, []);
 

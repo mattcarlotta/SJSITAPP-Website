@@ -24,10 +24,9 @@ const SelectTextComponent = ({
 );
 
 const SelectText = styled(SelectTextComponent)`
-  -webkit-box-align: center;
-  align-items: center;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   position: relative;
   box-sizing: border-box;
   flex: 1 1 0%;

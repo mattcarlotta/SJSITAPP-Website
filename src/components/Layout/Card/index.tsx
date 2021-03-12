@@ -4,13 +4,14 @@ import CardHead from "./CardHead";
 import CardHeadIcon from "./CardHeadIcon";
 import CardHeadTitle from "./CardHeadTitle";
 import { ReactNode } from "~types";
+import CardSubTitle from "../CardSubTitle";
 
 export type TCardProps = {
   className?: string;
   children: ReactNode;
   dataTestId: string;
   icon?: ReactNode;
-  padding?: string;
+  subtitle?: string;
   title: string | ReactNode;
 };
 
@@ -19,7 +20,7 @@ const CardComponent = ({
   children,
   dataTestId,
   icon,
-  padding,
+  subtitle,
   title
 }: TCardProps): JSX.Element => (
   <div data-testid={dataTestId} className={className}>
@@ -29,7 +30,8 @@ const CardComponent = ({
         {title}
       </CardHeadTitle>
     </CardHead>
-    <CardBody data-testid="card-body" padding={padding}>
+    <CardBody data-testid="card-body">
+      {subtitle && <CardSubTitle>{subtitle}</CardSubTitle>}
       {children}
     </CardBody>
   </div>

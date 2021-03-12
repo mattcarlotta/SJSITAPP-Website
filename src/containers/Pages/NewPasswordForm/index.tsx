@@ -100,7 +100,7 @@ export const NewPasswordForm = ({
           <SubmitButton
             isSubmitting={state.isSubmitting}
             title="Reset"
-            style={{ width: "300px", margin: "0 auto" }}
+            style={{ maxWidth: "300px", margin: "0 auto" }}
             submitBtnStyle={{
               background: "#010404",
               border: "2px solid #2e7c8a"

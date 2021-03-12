@@ -2,7 +2,6 @@ import * as React from "react";
 import get from "lodash.get";
 import isEmpty from "lodash.isempty";
 import APFormExpired from "~components/Layout/APFormExpired";
-import CardSubTitle from "~components/Layout/CardSubTitle";
 import Card from "~components/Layout/Card";
 import Center from "~components/Layout/Center";
 import DisplayMonthDates from "~components/Layout/DisplayMonthDates";
@@ -77,9 +76,8 @@ export const Forms = (): JSX.Element => {
       dataTestId="dashboard-forms"
       icon={<FaFileSignature />}
       title="Forms"
-      padding="0"
+      subtitle="Sharks & Barracuda A/P Form"
     >
-      <CardSubTitle>Sharks & Barracuda A/P Form</CardSubTitle>
       <Padding top="10px" left="20px" right="20px">
         <Center>
           {isLoading ? (

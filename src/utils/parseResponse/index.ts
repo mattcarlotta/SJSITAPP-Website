@@ -21,7 +21,7 @@ export function parseCookie(
  * @param res - an API response.
  * @returns a parsed message string from res.data.message.
  */
-export function parseMessage(res: AxiosResponse): string | undefined {
+export function parseMessage(res: AxiosResponse): string {
   return get(res, ["data", "message"]);
 }
 

@@ -38,7 +38,7 @@ const Option = styled(OptionComponent)<{ selected?: string; value?: string }>`
     selected === value ? "#f3f3f3" : "#fff"};
   display: block;
   word-break: break-all;
-  font-size: 18px;
+  font-size: 16px;
   padding: 8px 22px;
   width: 100%;
   font-weight: normal;

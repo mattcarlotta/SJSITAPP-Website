@@ -3,14 +3,15 @@ import styled from "@emotion/styled";
 const DisplayOption = styled.div<{ value?: string; icon?: string }>`
   color: ${({ value }) => (value ? "#282c34;" : "#d3dce6")};
   padding: ${({ icon }) => (icon ? "11px 0 11px 48px" : "8px 8px 8px 14px")};
-  font-size: 20px;
-  -webkit-box-align: center;
-  align-items: center;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  font-size: 16px;
   position: relative;
   box-sizing: border-box;
-  flex: 1 1 0%;
+  white-space: nowrap;
+  flex: 1 0 0%;
   overflow: hidden;
 `;
 

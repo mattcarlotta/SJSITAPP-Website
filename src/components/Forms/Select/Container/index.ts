@@ -2,7 +2,7 @@
 import styled from "@emotion/styled";
 
 const Container = styled.div`
-  height: 117px;
+  height: 90px;
   width: 100%;
 `;
 

@@ -1,6 +1,6 @@
 import { TBaseFieldProps } from "~types";
 
-const Fields = (token?: string): TBaseFieldProps[] => [
+const Fields = (token?: string): Array<TBaseFieldProps> => [
   {
     name: "token",
     type: "text",

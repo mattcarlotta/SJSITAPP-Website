@@ -92,7 +92,6 @@ export const Events = ({
       dataTestId="dashboard-events"
       icon={<MdEvent style={{ fontSize: "24px" }} />}
       title="Events"
-      padding="0"
     >
       <Tabs
         value={state.tab}

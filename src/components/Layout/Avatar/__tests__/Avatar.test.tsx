@@ -22,7 +22,7 @@ describe("Avatar", () => {
   it("initially renders a placeholder 30px width", () => {
     expect(wrapper.find("[data-testid='avatar']")).toHaveStyleRule(
       "width",
-      "30px"
+      "26px"
     );
   });
 

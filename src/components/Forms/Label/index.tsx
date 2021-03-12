@@ -32,7 +32,6 @@ const Label = styled(LabelComponent)`
   color: #010404;
   display: block;
   margin-bottom: 10px;
-  height: 12px;
   line-height: 16px;
   font-size: 16px;
 

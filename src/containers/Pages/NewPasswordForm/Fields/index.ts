@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 import { TBaseFieldProps } from "~types";
 
-const Fields: TBaseFieldProps[] = [
+const Fields: Array<TBaseFieldProps> = [
   {
     name: "password",
     type: "password",

@@ -44,7 +44,9 @@ const AvailabilityAvgChart = ({
             tooltip={AvailabilityTooltip}
           />
           <AvailabilityChartLabel>
-            <span data-test="availability-avg">{availabilityPercentage}%</span>
+            <span data-testid="availability-avg">
+              {availabilityPercentage}%
+            </span>
             <span>Availability</span>
           </AvailabilityChartLabel>
         </div>

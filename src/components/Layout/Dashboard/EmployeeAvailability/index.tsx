@@ -3,7 +3,6 @@ import { css } from "@emotion/react";
 import isEmpty from "lodash.isempty";
 import Bold from "~components/Layout/Bold";
 import Card from "~components/Layout/Card";
-import CardSubTitle from "~components/Layout/CardSubTitle";
 import Center from "~components/Layout/Center";
 import DisplayMonthDates from "~components/Layout/DisplayMonthDates";
 import FetchError from "~components/Layout/FetchError";
@@ -89,9 +88,8 @@ export const EmployeeAvailability = (): JSX.Element => {
       dataTestId="dashboard-employee-availability"
       icon={<FaUserClock />}
       title="Availability"
-      padding="0"
+      subtitle="Employee Availability"
     >
-      <CardSubTitle>Employee Availability</CardSubTitle>
       <Padding top="10px" left="20px" right="20px">
         {isLoading ? (
           <LoadingPanel

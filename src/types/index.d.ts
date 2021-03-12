@@ -111,6 +111,7 @@ export type TBaseFieldProps = {
   readOnly?: boolean;
   notes?: string;
   style?: CSSProperties;
+  selectOptions?: Array<string>;
   type: string;
   tooltip?: string;
   value?: string | moment.Moment | Array<moment.Moment>;

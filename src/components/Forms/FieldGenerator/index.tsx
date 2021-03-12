@@ -1,7 +1,8 @@
 import * as React from "react";
 import Input from "~components/Forms/Input";
+import Select from "~components/Forms/Select";
 import TextArea from "~components/Forms/TextArea";
-import { ChangeEvent, TBaseFieldProps } from "~types";
+import { ChangeEvent, EventTarget, TBaseFieldProps } from "~types";
 
 /**
  * Reusable function that converts an object of properties into a React form components.
@@ -21,7 +22,7 @@ import { ChangeEvent, TBaseFieldProps } from "~types";
 
 const FieldGenerator = <
   T extends Array<TBaseFieldProps>,
-  K extends (e: ChangeEvent<any>) => void
+  K extends (e: ChangeEvent<any> | EventTarget) => void
 >({
   fields,
   onChange
@@ -30,7 +31,7 @@ const FieldGenerator = <
   onChange: K;
 }): JSX.Element => (
   <>
-    {fields.map(({ name, value, type, ...rest }) => {
+    {fields.map(({ name, value, type, selectOptions, ...rest }) => {
       switch (type) {
         case "text":
         case "email":
@@ -42,6 +43,18 @@ const FieldGenerator = <
               name={name}
               type={type}
               value={value as string}
+              onChange={onChange}
+            />
+          );
+        }
+        case "select": {
+          return (
+            <Select
+              {...rest}
+              key={name}
+              name={name}
+              value={value as string}
+              selectOptions={selectOptions as Array<string>}
               onChange={onChange}
             />
           );

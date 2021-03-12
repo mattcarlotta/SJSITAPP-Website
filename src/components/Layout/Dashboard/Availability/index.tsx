@@ -1,6 +1,5 @@
 import * as React from "react";
 import AvailabilityAvgChart from "~components/Layout/AvailabilityAvgChart";
-import CardSubTitle from "~components/Layout/CardSubTitle";
 import Card from "~components/Layout/Card";
 import Center from "~components/Layout/Center";
 import DisplayMonthDates from "~components/Layout/DisplayMonthDates";
@@ -73,9 +72,8 @@ export const Availability = (): JSX.Element => {
       dataTestId="dashboard-availability"
       icon={<FaUserClock />}
       title="Availability"
-      padding="0"
+      subtitle="Sharks & Barracuda Availability"
     >
-      <CardSubTitle>Sharks & Barracuda Availability</CardSubTitle>
       <Padding top="10px" left="20px" right="20px">
         {isLoading ? (
           <LoadingPanel
