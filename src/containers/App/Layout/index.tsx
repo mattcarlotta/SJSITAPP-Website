@@ -1,4 +1,5 @@
 import * as React from "react";
+import { css } from "@emotion/react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import * as actions from "~actions/Sidemenu";
@@ -77,7 +78,15 @@ export const AppLayout = ({
               padding="6px 12px"
               width="auto"
             >
-              SHARKS ICE TEAM
+              SHARKS ICE
+              <img
+                css={css`
+                  margin: 0 3px 0 5px;
+                `}
+                src="/logo_24x24.png"
+                alt="logo"
+              />
+              TEAM
             </MenuLink>
           </FlexStart>
           <FlexEnd>
