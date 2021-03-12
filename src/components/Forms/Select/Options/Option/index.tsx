@@ -21,6 +21,7 @@ const OptionComponent = ({
     tabIndex={0}
     className={className}
     data-name={name}
+    data-testid={value}
     data-value={value}
     onClick={onClick}
     onKeyPress={onKeyPress}

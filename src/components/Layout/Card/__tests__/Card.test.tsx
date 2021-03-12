@@ -25,6 +25,19 @@ describe("Card", () => {
     );
   });
 
+  it("displays a subtitle when passed an 'subtitle' prop", () => {
+    wrapper.setProps({ subtitle: "hello" });
+    expect(wrapper.find("[data-testid='card-body']").first().text()).toEqual(
+      "helloTest Body"
+    );
+  });
+
+  it("displays the children", () => {
+    expect(wrapper.find("[data-testid='card-body']").first().text()).toEqual(
+      "Test Body"
+    );
+  });
+
   describe("Card Head", () => {
     it("displays just the title", () => {
       expect(
@@ -37,22 +50,6 @@ describe("Card", () => {
       expect(
         wrapper.find("[data-testid='card-head-title']").first().text()
       ).toEqual("iconTest Title");
-    });
-  });
-
-  describe("Card Body", () => {
-    it("displays the children", () => {
-      expect(wrapper.find("[data-testid='card-body']").first().text()).toEqual(
-        "Test Body"
-      );
-    });
-
-    it("sets the padding when passed a 'padding' prop", () => {
-      wrapper.setProps({ padding: "10px" });
-      expect(wrapper.find("[data-testid='card-body']").first()).toHaveStyleRule(
-        "padding",
-        "10px"
-      );
     });
   });
 });

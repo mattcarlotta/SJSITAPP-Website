@@ -33,17 +33,17 @@ const textarea = {
   errors: ""
 };
 
-// const select = {
-// 	name: "role",
-// 	type: "select",
-// 	label: "Role",
-// 	placeholder: "Select an option...",
-// 	icon: "usertag",
-// 	value: "",
-// 	errors: "",
-// 	required: true,
-// 	selectOptions: ["staff", "member"],
-// };
+const select = {
+  name: "role",
+  type: "select",
+  label: "Role",
+  placeholder: "Select an option...",
+  icon: "usertag",
+  value: "",
+  errors: "",
+  required: true,
+  selectOptions: ["staff", "member"]
+};
 
 // const range = {
 // 	type: "range",
@@ -184,11 +184,11 @@ describe("Field Generator", () => {
     expect(wrapper.find("Errors").exists()).toBeTruthy();
   });
 
-  // it("returns a Select when type is 'select'", () => {
-  // 	wrapper.setProps({ fields: [select] });
+  it("returns a Select when type is 'select'", () => {
+    wrapper.setProps({ fields: [select] });
 
-  // 	expect(wrapper.find("Select").exists()).toBeTruthy();
-  // });
+    expect(wrapper.find("Select").exists()).toBeTruthy();
+  });
 
   // it("returns a Switch when type is 'switch'", () => {
   // 	wrapper.setProps({ fields: [switchField] });

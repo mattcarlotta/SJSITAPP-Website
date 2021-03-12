@@ -46,6 +46,7 @@ const Selection = ({
 }: TSelectionProps): JSX.Element => (
   <SelectionContainer
     tabIndex={0}
+    data-testid={name}
     disabled={disabled}
     errors={errors}
     isVisible={isVisible}

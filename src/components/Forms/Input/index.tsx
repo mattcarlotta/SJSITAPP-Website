@@ -62,6 +62,7 @@ const InputComponent = ({
             {icon && <Icon dataTestId={name} type={icon} />}
             <input
               aria-label={name}
+              data-testid={name}
               tabIndex={0}
               type={type}
               name={name}

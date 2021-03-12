@@ -22,6 +22,7 @@ export interface IModalProps {
   onClick?: () => void;
 }
 
+/* istanbul ignore next */
 const render = (children: ReactNode): ReactPortal | ReactNode =>
   typeof window !== "undefined" && typeof document !== "undefined"
     ? ReactDOM.createPortal(children, document.body)

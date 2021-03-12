@@ -55,7 +55,7 @@ export const ContactUsForm = (): JSX.Element => {
 
   const sendMail = React.useCallback(async (): Promise<void> => {
     try {
-      const res = await app.post(`mail/contact`, parseFields(state.fields));
+      const res = await app.post("mail/contact", parseFields(state.fields));
       const message = parseMessage(res);
 
       toast({ type: "success", message });
