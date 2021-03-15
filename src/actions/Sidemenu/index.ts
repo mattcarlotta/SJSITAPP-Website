@@ -1,9 +1,22 @@
 import {
+  SIDEMENU_COLLAPSE,
   SIDEMENU_EXPANDED_TABS,
   SIDEMENU_SELECTED_TABS,
   SIDEMENU_TOGGLE
 } from "~constants";
 import { TSideMenuNodeIds } from "~types";
+
+/**
+ * Collapses the side menu.
+ *
+ * @function collapseSideNav
+ * @returns constants.SIDEMENU_EXPANDED_TABS, payload
+ */
+export const collapseSideNav = (): {
+  type: typeof SIDEMENU_COLLAPSE;
+} => ({
+  type: SIDEMENU_COLLAPSE
+});
 
 /**
  * Sets expanded tabs for the side menu.
@@ -42,7 +55,7 @@ export const setSelectedTabs = (
 /**
  * Toggles side menu collapsing.
  *
- * @function setExpandedTabs
+ * @function toggleSideNav
  * @returns constants.SIDEMENU_TOGGLE, payload
  */
 export const toggleSideNav = (): {

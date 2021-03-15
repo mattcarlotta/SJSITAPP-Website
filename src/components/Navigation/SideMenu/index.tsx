@@ -14,7 +14,6 @@ import { EmployeeRoutes, StaffRoutes } from "./Tabs";
 import { TSideMenuNodeIds } from "~types";
 
 export type TSideMenuProps = {
-  collapsed: boolean;
   expandedNodeIds: TSideMenuNodeIds;
   handleToggle: (_: any, nodeIds: TSideMenuNodeIds) => void;
   role: string;
@@ -57,7 +56,6 @@ const useStyles = makeStyles({
 });
 
 const SideMenu = ({
-  collapsed,
   expandedNodeIds,
   role,
   handleToggle,
@@ -66,7 +64,7 @@ const SideMenu = ({
   const TABS = role !== "employee" ? StaffRoutes : EmployeeRoutes;
 
   return (
-    <Tree data-testid="sidemenu-tree" collapsed={collapsed}>
+    <Tree data-testid="sidemenu-tree">
       <TreeView
         className={useStyles().root}
         defaultCollapseIcon={<MdExpandMore />}

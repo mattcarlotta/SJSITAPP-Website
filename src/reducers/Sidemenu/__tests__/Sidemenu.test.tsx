@@ -29,6 +29,14 @@ describe("Server Reducer", () => {
     expect(state).toEqual(payload.sidemenu);
   });
 
+  it("collapses sidemenu", () => {
+    const state = sidemenuReducer(undefined, {
+      type: constants.SIDEMENU_COLLAPSE
+    });
+
+    expect(state).toEqual({ ...initialState, collapsed: true });
+  });
+
   it("sets expanded tabs", () => {
     const state = sidemenuReducer(undefined, {
       type: constants.SIDEMENU_EXPANDED_TABS,

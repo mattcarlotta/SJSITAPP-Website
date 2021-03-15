@@ -2,6 +2,7 @@ import { ReactWrapper } from "enzyme";
 import Layout, { AppLayout } from "../index";
 import withProviders, { store } from "~utils/withRedux";
 
+const collapseSideNav = jest.fn();
 const setExpandedTabs = jest.fn();
 const setSelectedTabs = jest.fn();
 const toggleSideNav = jest.fn();
@@ -9,6 +10,7 @@ const toggleSideNav = jest.fn();
 const initProps = {
   children: <p>Hello</p>,
   collapsed: false,
+  collapseSideNav,
   expandedNodeIds: [],
   role: "staff",
   selectedNodeIds: [],
@@ -24,6 +26,7 @@ describe("Layout", () => {
   });
 
   afterEach(() => {
+    collapseSideNav.mockClear();
     setExpandedTabs.mockClear();
     setSelectedTabs.mockClear();
     toggleSideNav.mockClear();
@@ -51,7 +54,8 @@ describe("Layout", () => {
     expect(toggleSideNav).toHaveBeenCalledTimes(1);
   });
 
-  it("calls setExpandedTabs when a expandable tree item is clicked", () => {
+  it("calls setExpandedTabs when an expandable tree item is clicked", () => {
+    Object.assign(window, { innerWidth: 1500 });
     wrapper = withProviders(<Layout />);
 
     wrapper

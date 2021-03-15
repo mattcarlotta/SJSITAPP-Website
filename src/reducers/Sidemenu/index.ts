@@ -28,6 +28,9 @@ const sidemenuReducer = (
     case HYDRATE: {
       return { ...state, ...payload.sidemenu };
     }
+    case types.SIDEMENU_COLLAPSE: {
+      return { ...state, collapsed: true };
+    }
     case types.SIDEMENU_EXPANDED_TABS: {
       return { ...state, expandedNodeIds: payload };
     }

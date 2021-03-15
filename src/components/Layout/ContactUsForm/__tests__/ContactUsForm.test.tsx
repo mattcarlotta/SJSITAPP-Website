@@ -20,7 +20,7 @@ describe("Contact Us Form", () => {
   let findById: (id: string) => ReactWrapper;
   beforeEach(() => {
     wrapper = mount(<ContactUsForm />);
-    findById = (id: string) => wrapper.find(`[data-testid='${id}']`);
+    findById = id => wrapper.find(`[data-testid='${id}']`);
   });
 
   it("renders without errors", () => {

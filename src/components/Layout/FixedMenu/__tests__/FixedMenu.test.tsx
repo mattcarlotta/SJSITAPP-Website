@@ -1,10 +1,10 @@
 import { mount, ReactWrapper } from "enzyme";
-import Tree from "../index";
+import FixedMenu from "../index";
 
-describe("Tree", () => {
+describe("FixedMenu", () => {
   let wrapper: ReactWrapper;
   beforeEach(() => {
-    wrapper = mount(<Tree collapsed={false} />);
+    wrapper = mount(<FixedMenu collapsed={false} />);
   });
 
   it("renders the dropdown", () => {

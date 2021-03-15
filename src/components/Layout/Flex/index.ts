@@ -5,6 +5,7 @@ const Flex = styled.div<{
   direction?: string;
   flexwrap?: boolean;
   justify?: string;
+  height?: string;
   padding?: string;
   margin?: string;
   width?: string;
@@ -15,6 +16,7 @@ const Flex = styled.div<{
   justify-content: ${({ justify }) => justify || "start"};
   padding: ${({ padding }) => padding || "0px"};
   margin: ${({ margin }) => margin || "0px"};
+  height: ${({ height }) => height};
   width: ${({ width }) => width || "100%"};
   background: ${({ background }) => background || "transparent"};
   border-radius: 5px;

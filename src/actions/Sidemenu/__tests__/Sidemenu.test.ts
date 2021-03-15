@@ -4,6 +4,12 @@ import * as actions from "../index";
 const payload = ["1"];
 
 describe("Sidemenu Actions", () => {
+  it("collapseSideNav returns SIDEMENU_COLLAPSE", () => {
+    const value = actions.collapseSideNav();
+
+    expect(value).toEqual({ type: constants.SIDEMENU_COLLAPSE });
+  });
+
   it("setExpandedTabs returns SIDEMENU_EXPANDED_TABS and nodeIds as payload", () => {
     const value = actions.setExpandedTabs(payload);
 

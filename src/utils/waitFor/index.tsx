@@ -21,7 +21,7 @@ const waitFor = (callback: () => void): Promise<any> =>
               resolve();
             } catch (err) {
               if (Date.now() - startTime > 1000) {
-                reject(new Error(err));
+                reject(err);
               } else {
                 tick();
               }
