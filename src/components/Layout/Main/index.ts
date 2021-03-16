@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-const Header = styled.main<{ stretch?: boolean }>`
+const Main = styled.main<{ stretch?: boolean }>`
   @media (max-width: 1400px) {
     margin-left: 0;
   }
@@ -12,4 +12,4 @@ const Header = styled.main<{ stretch?: boolean }>`
   margin-left: ${({ stretch }) => (stretch ? "0px" : "270px")};
 `;
 
-export default Header;
+export default Main;

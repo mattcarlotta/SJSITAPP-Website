@@ -1,10 +1,10 @@
 import { mount, ReactWrapper } from "enzyme";
-import Section from "../index";
+import AppContainer from "../index";
 
-describe("Section", () => {
+describe("AppContainer", () => {
   let wrapper: ReactWrapper;
   beforeEach(() => {
-    wrapper = mount(<Section />);
+    wrapper = mount(<AppContainer />);
   });
 
   it("renders the dropdown", () => {

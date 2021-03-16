@@ -2,13 +2,13 @@ import * as React from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import * as actions from "~actions/Sidemenu";
+import AppContainer from "~components/Layout/AppContainer";
 import Flex from "~components/Layout/Flex";
 import FlexEnd from "~components/Layout/FlexEnd";
 import FlexStart from "~components/Layout/FlexStart";
 import Header from "~components/Layout/Header";
 import Main from "~components/Layout/Main";
 import MenuHamburger from "~components/Layout/MenuHamburger";
-import Section from "~components/Layout/Section";
 import TeamLogo from "~components/Layout/TeamLogo";
 import MenuLink from "~components/Navigation/MenuLink";
 import NavBar from "~components/Navigation/NavBar";
@@ -31,13 +31,10 @@ export type TAppLayoutProps = {
 export const AppLayout = ({
   children,
   collapsed,
-  collapseSideNav,
-  expandedNodeIds,
-  role,
-  selectedNodeIds,
   setExpandedTabs,
   setSelectedTabs,
-  toggleSideNav
+  toggleSideNav,
+  ...rest
 }: TAppLayoutProps): JSX.Element => {
   const router = useRouter();
 
@@ -51,7 +48,7 @@ export const AppLayout = ({
   }, []);
 
   return (
-    <Section data-testid="app-layout" direction="column">
+    <AppContainer data-testid="app-layout" direction="column">
       <Header>
         <Flex height="100%">
           <FlexStart>
@@ -67,23 +64,20 @@ export const AppLayout = ({
               <TeamLogo />
             </MenuLink>
           </FlexStart>
-          <FlexEnd>
+          <FlexEnd width="50px">
             <UserAvatar />
           </FlexEnd>
         </Flex>
       </Header>
       <NavBar
+        {...rest}
         collapsed={collapsed}
-        collapseSideNav={collapseSideNav}
-        expandedNodeIds={expandedNodeIds}
         handleToggle={handleToggle}
-        role={role}
         router={router}
-        selectedNodeIds={selectedNodeIds}
         toggleSideNav={toggleSideNav}
       />
       <Main stretch={collapsed}>{children}</Main>
-    </Section>
+    </AppContainer>
   );
 };
 

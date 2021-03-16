@@ -25,7 +25,7 @@ const NavBar = ({
   ...rest
 }: TSideMenuProps): JSX.Element => {
   const windowHeight = useWindowSize();
-  const isMobile = windowHeight < 1400;
+  const isMobile = windowHeight <= 1400;
 
   React.useLayoutEffect(() => {
     if (isMobile && !collapsed) collapseSideNav();
