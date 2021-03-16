@@ -31,15 +31,15 @@ export const AppLayout = ({
   toggleSideNav,
   ...rest
 }: TAppLayoutProps): JSX.Element => {
-  const router = useRouter();
+  const { pathname } = useRouter();
 
   const handleToggle = React.useCallback((_, nodeIds: TSideMenuNodeIds) => {
     setExpandedTabs(nodeIds);
   }, []);
 
   React.useEffect(() => {
-    setExpandedTabs(expandedIds(router.pathname));
-    setSelectedTabs(selectedTab(router.pathname));
+    setExpandedTabs(expandedIds(pathname));
+    setSelectedTabs(selectedTab(pathname));
   }, []);
 
   return (
@@ -48,7 +48,7 @@ export const AppLayout = ({
       <NavBar
         collapsed={collapsed}
         collapseSideNav={collapseSideNav}
-        router={router}
+        pathname={pathname}
         toggleSideNav={toggleSideNav}
       >
         <SideMenu {...rest} handleToggle={handleToggle} />

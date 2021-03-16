@@ -61,6 +61,28 @@ export const GlobalStylesheet = (): JSX.Element => (
         background: #ed1700;
       }
 
+      @keyframes rotate {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes loading {
+        0% {
+          opacity: 1;
+          letter-spacing: 2px;
+        }
+        100% {
+          opacity: 0.5;
+          letter-spacing: auto;
+        }
+      }
+
       @keyframes delay {
         0%,
         40%,

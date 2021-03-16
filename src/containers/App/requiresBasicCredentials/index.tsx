@@ -3,7 +3,9 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import AppLayout from "~containers/App/Layout";
 // import Spinner from "~components/Layout/Spinner";
-import FadeIn from "~components/Layout/FadeIn";
+import FlexCenter from "~components/Layout/FlexCenter";
+// import FadeIn from "~components/Layout/FadeIn";
+import LoadingUp from "~components/Layout/LoadingUp";
 import WhiteBackground from "~components/Layout/WhiteBackground";
 import { ComponentType } from "~types";
 
@@ -30,9 +32,9 @@ const requiresBasicCredentials = (
       </AppLayout>
     ) : (
       <WhiteBackground data-testid="loading">
-        <FadeIn height="100%" timing="1.5s">
-          <div>Loading...</div>
-        </FadeIn>
+        <FlexCenter justify="center" height="90vh" direction="column">
+          <LoadingUp />
+        </FlexCenter>
       </WhiteBackground>
     );
   };

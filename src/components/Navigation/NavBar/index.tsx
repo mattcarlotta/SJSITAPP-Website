@@ -10,14 +10,14 @@ export type TSideMenuProps = {
   collapsed: boolean;
   collapseSideNav: typeof actions.collapseSideNav;
   toggleSideNav: typeof actions.toggleSideNav;
-  router: NextRouter;
+  pathname: string;
 };
 
 const NavBar = ({
   children,
   collapsed,
   collapseSideNav,
-  router,
+  pathname,
   toggleSideNav
 }: TSideMenuProps): JSX.Element => {
   const windowHeight = useWindowSize();
@@ -25,7 +25,7 @@ const NavBar = ({
 
   React.useLayoutEffect(() => {
     if (isMobile && !collapsed) collapseSideNav();
-  }, [router.pathname, isMobile]);
+  }, [pathname, isMobile]);
 
   return !isMobile ? (
     <FixedMenu data-testid="fixed-sidemenu" collapsed={collapsed}>

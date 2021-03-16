@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { mount, ReactWrapper } from "enzyme";
 import Navbar from "../index";
 
@@ -9,7 +8,7 @@ const initProps = {
   collapsed: false,
   collapseSideNav,
   toggleSideNav,
-  router: useRouter(),
+  pathname: "/",
   children: <p>Test</p>
 };
 
