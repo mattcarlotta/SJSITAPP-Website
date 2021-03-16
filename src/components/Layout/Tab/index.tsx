@@ -29,7 +29,11 @@ const AntTab = withStyles(() =>
       opacity: 1,
       "&:disabled": {
         opacity: 1,
+        color: "#025f6d",
         borderTopRightRadius: 4
+      },
+      "&:focus": {
+        color: "#025f6d"
       }
     }
   })

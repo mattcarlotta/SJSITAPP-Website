@@ -3,18 +3,14 @@ import { mount, ReactWrapper } from "enzyme";
 import Navbar from "../index";
 
 const collapseSideNav = jest.fn();
-const handleToggle = jest.fn();
 const toggleSideNav = jest.fn();
 
 const initProps = {
   collapsed: false,
   collapseSideNav,
-  expandedNodeIds: [],
-  handleToggle,
-  role: "employee",
-  selectedNodeIds: [],
   toggleSideNav,
-  router: useRouter()
+  router: useRouter(),
+  children: <p>Test</p>
 };
 
 describe("Navbar", () => {

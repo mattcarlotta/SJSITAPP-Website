@@ -2,27 +2,23 @@ import * as React from "react";
 import * as actions from "~actions/Sidemenu";
 import Drawer from "~components/Navigation/Drawer";
 import FixedMenu from "~components/Layout/FixedMenu";
-import SideMenu from "~components/Navigation/SideMenu";
 import useWindowSize from "~utils/useWindowSize";
-import { NextRouter, TSideMenuNodeIds } from "~types";
+import { NextRouter, ReactNode } from "~types";
 
 export type TSideMenuProps = {
+  children: ReactNode;
   collapsed: boolean;
   collapseSideNav: typeof actions.collapseSideNav;
-  expandedNodeIds: TSideMenuNodeIds;
-  handleToggle: (_: any, nodeIds: TSideMenuNodeIds) => void;
-  role: string;
-  selectedNodeIds: TSideMenuNodeIds;
   toggleSideNav: typeof actions.toggleSideNav;
   router: NextRouter;
 };
 
 const NavBar = ({
+  children,
   collapsed,
   collapseSideNav,
   router,
-  toggleSideNav,
-  ...rest
+  toggleSideNav
 }: TSideMenuProps): JSX.Element => {
   const windowHeight = useWindowSize();
   const isMobile = windowHeight <= 1400;
@@ -33,11 +29,11 @@ const NavBar = ({
 
   return !isMobile ? (
     <FixedMenu data-testid="fixed-sidemenu" collapsed={collapsed}>
-      <SideMenu {...rest} />
+      {children}
     </FixedMenu>
   ) : (
     <Drawer open={!collapsed} onClose={toggleSideNav}>
-      <SideMenu {...rest} />
+      {children}
     </Drawer>
   );
 };

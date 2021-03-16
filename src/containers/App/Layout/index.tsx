@@ -3,16 +3,10 @@ import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import * as actions from "~actions/Sidemenu";
 import AppContainer from "~components/Layout/AppContainer";
-import Flex from "~components/Layout/Flex";
-import FlexEnd from "~components/Layout/FlexEnd";
-import FlexStart from "~components/Layout/FlexStart";
-import Header from "~components/Layout/Header";
 import Main from "~components/Layout/Main";
-import MenuHamburger from "~components/Layout/MenuHamburger";
-import TeamLogo from "~components/Layout/TeamLogo";
-import MenuLink from "~components/Navigation/MenuLink";
 import NavBar from "~components/Navigation/NavBar";
-import UserAvatar from "~containers/App/UserAvatar";
+import SideMenu from "~components/Navigation/SideMenu";
+import TopBar from "~components/Navigation/TopBar";
 import { expandedIds, selectedTab } from "./Tabs";
 import { ReactElement, TSideMenuNodeIds, TRootState } from "~types";
 
@@ -31,6 +25,7 @@ export type TAppLayoutProps = {
 export const AppLayout = ({
   children,
   collapsed,
+  collapseSideNav,
   setExpandedTabs,
   setSelectedTabs,
   toggleSideNav,
@@ -49,33 +44,15 @@ export const AppLayout = ({
 
   return (
     <AppContainer data-testid="app-layout" direction="column">
-      <Header>
-        <Flex height="100%">
-          <FlexStart>
-            <MenuHamburger collapsed={collapsed} onClick={toggleSideNav} />
-            <MenuLink
-              dataTestId="logo-dashboard-link"
-              href="/"
-              hoverable
-              fontSize="17px"
-              padding="6px 12px"
-              width="auto"
-            >
-              <TeamLogo />
-            </MenuLink>
-          </FlexStart>
-          <FlexEnd width="50px">
-            <UserAvatar />
-          </FlexEnd>
-        </Flex>
-      </Header>
+      <TopBar collapsed={collapsed} toggleSideNav={toggleSideNav} />
       <NavBar
-        {...rest}
         collapsed={collapsed}
-        handleToggle={handleToggle}
+        collapseSideNav={collapseSideNav}
         router={router}
         toggleSideNav={toggleSideNav}
-      />
+      >
+        <SideMenu {...rest} handleToggle={handleToggle} />
+      </NavBar>
       <Main stretch={collapsed}>{children}</Main>
     </AppContainer>
   );
