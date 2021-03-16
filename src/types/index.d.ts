@@ -162,7 +162,7 @@ export type TEmployeeAvailabilityData = {
 };
 
 export type TEventDistributionData = {
-  id: string;
+  name: string;
   "Event Count": number;
 };
 

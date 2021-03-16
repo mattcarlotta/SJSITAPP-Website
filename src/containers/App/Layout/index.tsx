@@ -37,7 +37,7 @@ export const AppLayout = ({
     setExpandedTabs(nodeIds);
   }, []);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     setExpandedTabs(expandedIds(pathname));
     setSelectedTabs(selectedTab(pathname));
   }, []);

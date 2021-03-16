@@ -3,7 +3,7 @@ import * as actions from "~actions/Sidemenu";
 import Drawer from "~components/Navigation/Drawer";
 import FixedMenu from "~components/Layout/FixedMenu";
 import useWindowSize from "~utils/useWindowSize";
-import { NextRouter, ReactNode } from "~types";
+import { ReactNode } from "~types";
 
 export type TSideMenuProps = {
   children: ReactNode;

@@ -5,18 +5,28 @@ import moment from "~utils/momentWithTimezone";
 import { defaultFormat } from "~utils/dateFormats";
 import EventDistribution from "../index";
 import withProviders from "~utils/withProviders";
+import { ReactNode } from "~types";
+
+jest.mock("react-resize-detector", () => ({
+  __esModule: true,
+  default: ({
+    children
+  }: {
+    children: ({ width }: { width: number }) => ReactNode;
+  }): ReactNode => children({ width: 600 })
+}));
 
 const events = [
   {
-    id: "Member 1",
+    name: "Member 1",
     "Event Count": 1
   },
   {
-    id: "Member 2",
+    name: "Member 2",
     "Event Count": 2
   },
   {
-    id: "Member 3",
+    name: "Member 3",
     "Event Count": 0
   }
 ];
