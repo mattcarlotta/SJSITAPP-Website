@@ -115,12 +115,10 @@ const createMemberAvailabilityAverage = ({
   return [
     {
       id: "available",
-      label: "available",
       value: toAverage(avail, eventCounts)
     },
     {
       id: "unavailable",
-      label: "unavailable",
       value: toAverage(unavail, eventCounts)
     }
   ];

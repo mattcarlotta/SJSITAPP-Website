@@ -2,13 +2,12 @@ import * as React from "react";
 import { css } from "@emotion/react";
 import isEmpty from "lodash.isempty";
 import get from "lodash.get";
-import { ResponsivePie } from "@nivo/pie";
+import { VictoryPie } from "victory";
 import AvailabilityChartLabel from "~components/Layout/AvailabilityChartLabel";
 import NoAvailability from "~components/Layout/NoAvailability";
-import AvailabilityTooltip from "./Tooltip";
 import { TAvailabilityData } from "~types";
 
-const VALIDCOLORS = ["#2979ff", "#bbb"];
+const VALIDCOLORS = ["#0d6472", "#bbb"];
 const INVALIDCOLORS = ["#f04d4d", "#bbb"];
 
 export type AvailabilityAvgChartProps = {
@@ -26,22 +25,23 @@ const AvailabilityAvgChart = ({
         <div
           data-testid="availability-chart"
           css={css`
-            height: 150px;
-            width: 150px;
+            height: 190px;
             margin-left: auto;
             margin-right: auto;
             position: relative;
           `}
         >
-          <ResponsivePie
-            colors={availabilityPercentage >= 75 ? VALIDCOLORS : INVALIDCOLORS}
+          <VictoryPie
+            animate
+            x="_id"
+            y="value"
+            padding={{ top: 0, bottom: 40 }}
+            innerRadius={140}
             data={availability}
-            innerRadius={0.8}
-            startAngle={360}
-            endAngle={0}
-            enableRadialLabels={false}
-            enableSliceLabels={false}
-            tooltip={AvailabilityTooltip}
+            labels={/* istanbul ignore next */ () => null}
+            colorScale={
+              availabilityPercentage >= 75 ? VALIDCOLORS : INVALIDCOLORS
+            }
           />
           <AvailabilityChartLabel>
             <span data-testid="availability-avg">

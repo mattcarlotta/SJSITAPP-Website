@@ -123,12 +123,10 @@ describe("Helpers", () => {
     expect(averages).toEqual([
       {
         id: "available",
-        label: "available",
         value: 66
       },
       {
         id: "unavailable",
-        label: "unavailable",
         value: 33
       }
     ]);

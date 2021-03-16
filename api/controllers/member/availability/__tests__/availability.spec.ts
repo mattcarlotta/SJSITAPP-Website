@@ -31,7 +31,6 @@ describe("Member Availability Controller", () => {
           eventAvailability: expect.arrayContaining([
             expect.objectContaining({
               id: expect.any(String),
-              label: expect.any(String),
               value: expect.any(Number)
             })
           ]),
@@ -65,7 +64,6 @@ describe("Member Availability Controller", () => {
           eventAvailability: expect.arrayContaining([
             expect.objectContaining({
               id: expect.any(String),
-              label: expect.any(String),
               value: expect.any(Number)
             })
           ]),
@@ -111,7 +109,6 @@ describe("Member Availability Controller", () => {
           eventAvailability: expect.arrayContaining([
             expect.objectContaining({
               id: expect.any(String),
-              label: expect.any(String),
               value: expect.any(Number)
             })
           ]),

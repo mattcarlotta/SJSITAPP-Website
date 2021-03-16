@@ -152,7 +152,6 @@ export type TFormData = {
 
 export type TAvailabilityData = {
   _id: string;
-  label: string;
   value: string;
 };
 

@@ -33,7 +33,6 @@ export type TEventMemberAvailability = Array<{
 
 export type TEventMemberAvailabilityAvg = Array<{
   id: string;
-  label: string;
   value: number;
 }>;
 
