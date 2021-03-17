@@ -12,8 +12,14 @@ jest.mock("react-resize-detector", () => ({
   default: ({
     children
   }: {
-    children: ({ width }: { width: number }) => ReactNode;
-  }): ReactNode => children({ width: 600 })
+    children: ({
+      width,
+      targetRef
+    }: {
+      width: number;
+      targetRef: null;
+    }) => ReactNode;
+  }): ReactNode => children({ width: 600, targetRef: null })
 }));
 
 const events = [

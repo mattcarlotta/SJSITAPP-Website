@@ -14,7 +14,8 @@ import {
   ReactElement,
   ReactNode,
   ReactPortal,
-  ReactText
+  ReactText,
+  RefObject
 } from "react";
 import { Moment } from "moment-timezone";
 import { DatePickerView, MaterialUiPickersDate } from "@material-ui/pickers";
@@ -302,6 +303,7 @@ export {
   ReactNode,
   ReactPortal,
   ReactText,
+  RefObject,
   SagaIterator,
   TRootState
 };

@@ -110,7 +110,7 @@ export const EventDistribution = (): JSX.Element => {
           {error ? (
             <FetchError height="690px" onClickReload={handleReload} />
           ) : (
-            <FadeIn timing="500ms">
+            <FadeIn timing="1s">
               <EventDistributionChart events={events} />
             </FadeIn>
           )}
