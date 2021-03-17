@@ -26,6 +26,7 @@ const Home: NextPage = () => {
       <Header title="Home" url="/" />
       <PuckSpinner>
         <Link
+          display="block"
           dataTestId="home-link"
           secondary
           href={pushHref}

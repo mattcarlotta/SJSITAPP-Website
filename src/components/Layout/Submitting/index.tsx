@@ -14,6 +14,7 @@ const Submitting = styled(SubmittingComponent)`
   display: flex;
   justify-content: center;
   align-items: center;
+  direction: row;
   height: 54px;
   border-radius: 50px;
   cursor: wait;

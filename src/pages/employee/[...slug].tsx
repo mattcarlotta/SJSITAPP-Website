@@ -1,4 +1,3 @@
-import * as React from "react";
 import Card from "~components/Layout/Card";
 import Center from "~components/Layout/Center";
 import ErrorMessage from "~components/Layout/ErrorMessage";
@@ -23,7 +22,7 @@ const AppPageNotFound: NextPage = () => (
       data-testid="not-found-page"
       direction="column"
       justify="center"
-      style={{ height: "calc(100vh - 200px)" }}
+      height="calc(100vh - 200px)"
     >
       <Head title="Page Not Found" />
       <Center>
