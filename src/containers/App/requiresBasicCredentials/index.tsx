@@ -2,7 +2,6 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import AppLayout from "~containers/App/Layout";
-// import Spinner from "~components/Layout/Spinner";
 import FlexCenter from "~components/Layout/FlexCenter";
 // import FadeIn from "~components/Layout/FadeIn";
 import LoadingUp from "~components/Layout/LoadingUp";
@@ -32,7 +31,7 @@ const requiresBasicCredentials = (
       </AppLayout>
     ) : (
       <WhiteBackground data-testid="loading">
-        <FlexCenter justify="center" height="90vh" direction="column">
+        <FlexCenter justify="center" height="115vh" direction="column">
           <LoadingUp />
         </FlexCenter>
       </WhiteBackground>

@@ -1,4 +1,3 @@
-import * as React from "react";
 import { css } from "@emotion/react";
 import isEmpty from "lodash.isempty";
 import { VictoryAxis, VictoryBar, VictoryLabel, VictoryChart } from "victory";

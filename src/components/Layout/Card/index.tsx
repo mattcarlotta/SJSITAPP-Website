@@ -40,13 +40,12 @@ const CardComponent = ({
 const Card = styled(CardComponent)<{ breakpoint?: boolean; margin?: string }>`
   ${({ breakpoint }) =>
     breakpoint &&
-    `@media (max-width: 600px) {
+    `@media (max-width: 400px) {
       display: none;
     }
   `};
   margin: ${({ margin }) => margin || "0px"};
   padding: 0;
-  color: rgba(0, 0, 0, 0.65);
   font-variant: tabular-nums;
   line-height: 1.5;
   list-style: none;

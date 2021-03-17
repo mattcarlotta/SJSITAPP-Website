@@ -2,6 +2,7 @@
 import * as React from "react";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import WarpedText from "~components/Layout/WarpedText";
 
 const LoadingUpComponent = ({
   className
@@ -14,16 +15,22 @@ const LoadingUpComponent = ({
     </div>
     <div
       css={css`
-        animation: loading 1.2s infinite 0s ease-in-out;
-        animation-direction: alternate;
+        animation: rotate 3s linear infinite;
         position: relative;
-        top: -110px;
-        color: #fff;
-        font-size: 15px;
-        margin-top: 2px;
+        top: -200px;
       `}
     >
-      SHARKS ICE TEAM
+      <WarpedText />
+    </div>
+    <div
+      css={css`
+        animation: rotate 3s linear infinite;
+        position: relative;
+        top: -320px;
+        opacity: 0.9;
+      `}
+    >
+      <img src="/logo_64x64.png" height="48px" alt="logo" />
     </div>
   </>
 );
@@ -43,14 +50,27 @@ const LoadingUp = styled(LoadingUpComponent)`
     border-radius: 100%;
     animation: rotate 3s linear infinite;
 
+    :before {
+      position: absolute;
+      top: 17.5%;
+      left: 17.5%;
+      width: 65%;
+      height: 65%;
+      content: "";
+      border: 2px solid #ddd;
+      background: #999;
+      border-radius: 100%;
+    }
+
     :after {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 25%;
+      left: 25%;
+      width: 50%;
+      height: 50%;
       content: "";
-      border: 7px solid #0d6472;
+      border: 2px solid #888;
+      background: #fff;
       border-radius: 100%;
     }
   }
