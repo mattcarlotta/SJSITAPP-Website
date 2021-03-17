@@ -63,11 +63,9 @@ export const GlobalStylesheet = (): JSX.Element => (
 
       @keyframes rotate {
         0% {
-          -webkit-transform: rotate(0deg);
           transform: rotate(0deg);
         }
         100% {
-          -webkit-transform: rotate(360deg);
           transform: rotate(360deg);
         }
       }
@@ -88,12 +86,10 @@ export const GlobalStylesheet = (): JSX.Element => (
         40%,
         100% {
           transform: scaleY(0.05);
-          -webkit-transform: scaleY(0.05);
         }
 
         20% {
           transform: scaleY(1);
-          -webkit-transform: scaleY(1);
         }
       }
 

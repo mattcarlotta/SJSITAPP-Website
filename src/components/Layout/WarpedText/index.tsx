@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import styled from "@emotion/styled";
 
 const WarpedTextComponent = ({
@@ -6,30 +7,36 @@ const WarpedTextComponent = ({
   className?: string;
 }): JSX.Element => (
   <div className={className}>
-    <span className="w0">S</span>
-    <span className="w1">a</span>
-    <span className="w2">n</span>
-    <span className="w3"> </span>
-    <span className="w4">J</span>
-    <span className="w5">o</span>
-    <span className="w6">s</span>
-    <span className="w7">e</span>
-    <span className="w8"> </span>
-    <span className="w9">S</span>
-    <span className="w10">h</span>
-    <span className="w11">a</span>
-    <span className="w12">r</span>
-    <span className="w13">k</span>
-    <span className="w14">s</span>
-    <span className="w15"> </span>
-    <span className="w16">I</span>
-    <span className="w17">c</span>
-    <span className="w18">e</span>
-    <span className="w19"> </span>
-    <span className="w20">T</span>
-    <span className="w21">e</span>
-    <span className="w22">a</span>
-    <span className="w23">m</span>
+    {[
+      "S",
+      "a",
+      "n",
+      "",
+      "J",
+      "o",
+      "s",
+      "e",
+      " ",
+      "S",
+      "h",
+      "a",
+      "r",
+      "k",
+      "s",
+      " ",
+      "I",
+      "c",
+      "e",
+      " ",
+      "T",
+      "e",
+      "a",
+      "m"
+    ].map((letter, i) => (
+      <span className={`w${i}`} key={`w${i}`}>
+        {letter}
+      </span>
+    ))}
   </div>
 );
 
@@ -46,7 +53,7 @@ const WarpedText = styled(WarpedTextComponent)`
     font-size: 14px;
     height: 11px;
     color: #fff;
-    line-height: 0.45;
+    line-height: 4;
     white-space: pre;
     overflow: visible;
     padding: 0px;
@@ -358,3 +365,4 @@ const WarpedText = styled(WarpedTextComponent)`
 `;
 
 export default WarpedText;
+/* eslint-enable react/no-array-index-key */

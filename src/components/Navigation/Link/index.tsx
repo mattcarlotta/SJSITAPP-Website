@@ -35,14 +35,15 @@ const Link = styled(LinkComponent)<{
   margin?: string;
   padding?: string;
   primary?: boolean;
+  secondary?: boolean;
   textTransform?: string;
   width?: string;
 }>`
   cursor: pointer;
   display: ${({ display }) => display};
-  color: ${({ alt, primary }) => {
+  color: ${({ alt, primary, secondary }) => {
     if (primary) return "#025f6d";
-    if (alt) return "#fff";
+    if (secondary || alt) return "#fff";
     return "#fff";
   }};
   font-size: ${({ fontSize }) => fontSize || "16px"};
@@ -50,11 +51,15 @@ const Link = styled(LinkComponent)<{
   transition: all 0.2s ease-in-out;
   text-decoration: none;
   text-transform: ${({ textTransform }) => textTransform || "uppercase"};
-  background: ${({ alt }) => {
-    if (alt) return "#025f6d";
+  background: ${({ alt, secondary }) => {
+    if (alt || secondary) return "#025f6d";
     return "transparent";
   }};
-  border: 2px solid #025f6d;
+  border: 2px solid
+    ${({ secondary }) => {
+      if (secondary) return "#3794a5";
+      return "#025f6d";
+    }};
   box-shadow: ${({ hideShadow }) =>
     !hideShadow ? "0 4px 14px 0 rgba(2, 95, 109, 0.39)" : "none"};
   padding: ${({ padding }) => padding || "13px 18px"};
@@ -64,8 +69,9 @@ const Link = styled(LinkComponent)<{
   width: ${({ width }) => width || "auto"};
 
   :hover {
-    background: ${({ alt }) => {
+    background: ${({ alt, secondary }) => {
       if (alt) return "#006d76";
+      if (secondary) return "#006d76";
       return "#025f6d";
     }};
     color: #fff;

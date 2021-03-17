@@ -3,14 +3,19 @@ import * as React from "react";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import WarpedText from "~components/Layout/WarpedText";
+import { ReactNode } from "~types";
+
+export type TLoadingUpComponentProps = {
+  className?: string;
+  children?: ReactNode | boolean;
+};
 
 const LoadingUpComponent = ({
-  className
-}: {
-  className?: string;
-}): JSX.Element => (
+  className,
+  children
+}: TLoadingUpComponentProps): JSX.Element => (
   <>
-    <div className={className}>
+    <div data-testid="spinner" className={className}>
       <div className="spinner" />
     </div>
     <div
@@ -32,6 +37,14 @@ const LoadingUpComponent = ({
     >
       <img src="/logo_64x64.png" height="48px" alt="logo" />
     </div>
+    <div
+      css={css`
+        position: relative;
+        top: -200px;
+      `}
+    >
+      {children}
+    </div>
   </>
 );
 
@@ -44,11 +57,12 @@ const LoadingUp = styled(LoadingUpComponent)`
     width: 100%;
     height: 100%;
     background-color: #131313;
-    border-style: dashed;
+    border-style: solid;
     border-color: #424242;
     border-width: 5px;
     border-radius: 100%;
     animation: rotate 3s linear infinite;
+    box-shadow: 0px 9px 6px -1px rgba(32, 67, 119, 0.5);
 
     :before {
       position: absolute;
@@ -58,16 +72,16 @@ const LoadingUp = styled(LoadingUpComponent)`
       height: 65%;
       content: "";
       border: 2px solid #ddd;
-      background: #999;
+      background: #131313;
       border-radius: 100%;
     }
 
     :after {
       position: absolute;
-      top: 25%;
-      left: 25%;
-      width: 50%;
-      height: 50%;
+      top: 27.5%;
+      left: 27.5%;
+      width: 45%;
+      height: 45%;
       content: "";
       border: 2px solid #888;
       background: #fff;

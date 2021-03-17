@@ -106,14 +106,14 @@ export const Forms = (): JSX.Element => {
               {!hasExpired ? (
                 <Link
                   alt
+                  hideShadow
                   display="block"
-                  margin="10px auto"
+                  margin="45px auto 0 auto"
                   borderRadius="50px"
                   padding="17px 0px"
-                  width="280px"
-                  hideShadow
                   dataTestId="dashboard-ap-form-link"
                   href={`/employee/forms/view/${form._id}`}
+                  style={{ maxWidth: "280px" }}
                 >
                   <BsPencilSquare
                     style={{

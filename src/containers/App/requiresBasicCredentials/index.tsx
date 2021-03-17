@@ -2,10 +2,7 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import AppLayout from "~containers/App/Layout";
-import FlexCenter from "~components/Layout/FlexCenter";
-// import FadeIn from "~components/Layout/FadeIn";
-import LoadingUp from "~components/Layout/LoadingUp";
-import WhiteBackground from "~components/Layout/WhiteBackground";
+import PuckSpinner from "~components/Layout/PuckSpinner";
 import { ComponentType } from "~types";
 
 export interface IRequireAuthProps {
@@ -30,11 +27,7 @@ const requiresBasicCredentials = (
         <AppPage />
       </AppLayout>
     ) : (
-      <WhiteBackground data-testid="loading">
-        <FlexCenter justify="center" height="115vh" direction="column">
-          <LoadingUp />
-        </FlexCenter>
-      </WhiteBackground>
+      <PuckSpinner />
     );
   };
 

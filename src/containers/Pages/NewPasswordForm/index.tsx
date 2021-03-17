@@ -5,9 +5,9 @@ import { connect } from "react-redux";
 import { updateUserPassword } from "~actions/Auth";
 import FieldGenerator from "~components/Forms/FieldGenerator";
 import FormTitle from "~components/Forms/FormTitle";
-import BlackBackground from "~components/Layout/BlackBackground";
 import Modal from "~components/Layout/Modal";
 import SubmitButton from "~components/Layout/SubmitButton";
+import WhiteBackground from "~components/Layout/WhiteBackground";
 import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
@@ -88,7 +88,7 @@ export const NewPasswordForm = ({
   }, [parseFields, updateUserPassword, state]);
 
   return (
-    <BlackBackground>
+    <WhiteBackground>
       <Modal dataTestId="signup-form" isOpen>
         <FormTitle
           header="Update Password"
@@ -108,7 +108,7 @@ export const NewPasswordForm = ({
           />
         </form>
       </Modal>
-    </BlackBackground>
+    </WhiteBackground>
   );
 };
 

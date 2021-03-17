@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 const AvailabilityChartLabel = styled.div`
   position: absolute;
-  top: -20px;
+  top: -18px;
   left: 0;
   right: 0;
   bottom: 0;

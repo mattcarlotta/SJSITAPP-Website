@@ -5,10 +5,10 @@ import { connect } from "react-redux";
 import { signupUser } from "~actions/Auth";
 import FieldGenerator from "~components/Forms/FieldGenerator";
 import FormTitle from "~components/Forms/FormTitle";
-import BlackBackground from "~components/Layout/BlackBackground";
 import Center from "~components/Layout/Center";
 import Modal from "~components/Layout/Modal";
 import SubmitButton from "~components/Layout/SubmitButton";
+import WhiteBackground from "~components/Layout/WhiteBackground";
 import NavLink from "~components/Navigation/NavLink";
 import { FaUnlockAlt } from "~icons";
 import fieldValidator from "~utils/fieldValidator";
@@ -86,7 +86,7 @@ export const SignupForm = ({
   }, [parseFields, signupUser, state]);
 
   return (
-    <BlackBackground>
+    <WhiteBackground>
       <Modal dataTestId="signup-form" isOpen maxWidth="600px">
         <form onSubmit={handleSubmit}>
           <FormTitle
@@ -131,7 +131,7 @@ export const SignupForm = ({
           </NavLink>
         </Center>
       </Modal>
-    </BlackBackground>
+    </WhiteBackground>
   );
 };
 

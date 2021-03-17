@@ -35,7 +35,7 @@ const AppPageNotFound: NextPage = () => (
           We&#39;re sorry, the page you&#39;ve requested could not be located.
         </ErrorMessage>
         <Link
-          primary
+          secondary
           replace
           dataTestId="dashboard-link"
           href="/employee/dashboard"

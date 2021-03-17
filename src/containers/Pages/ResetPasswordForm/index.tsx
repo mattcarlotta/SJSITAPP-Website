@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import { resetPassword } from "~actions/Auth";
 import FieldGenerator from "~components/Forms/FieldGenerator";
 import FormTitle from "~components/Forms/FormTitle";
-import BlackBackground from "~components/Layout/BlackBackground";
 import Center from "~components/Layout/Center";
 import Modal from "~components/Layout/Modal";
 import SubmitButton from "~components/Layout/SubmitButton";
+import WhiteBackground from "~components/Layout/WhiteBackground";
 import NavLink from "~components/Navigation/NavLink";
 import { BsPeopleCircle } from "~icons";
 import fieldValidator from "~utils/fieldValidator";
@@ -78,7 +78,7 @@ export const ResetPasswordForm = ({
   }, [parseFields, resetPassword, state]);
 
   return (
-    <BlackBackground>
+    <WhiteBackground>
       <Modal dataTestId="reset-password-form" isOpen>
         <FormTitle
           header="Reset Password"
@@ -126,7 +126,7 @@ export const ResetPasswordForm = ({
           </NavLink>
         </Center>
       </Modal>
-    </BlackBackground>
+    </WhiteBackground>
   );
 };
 
