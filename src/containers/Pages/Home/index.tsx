@@ -11,11 +11,6 @@ import PuckSpinner from "~components/Layout/PuckSpinner";
 const Home: NextPage = () => {
   const { role } = useSelector(({ auth }) => auth);
   const hasSession = role !== "guest";
-  const pushHref = !role
-    ? ""
-    : hasSession
-    ? "/employee/dashboard"
-    : "/employee/login";
 
   return (
     <IconContext.Provider
@@ -29,7 +24,7 @@ const Home: NextPage = () => {
           display="block"
           dataTestId="home-link"
           secondary
-          href={pushHref}
+          href={hasSession ? "/employee/dashboard" : "/employee/login"}
           borderRadius="50px"
           fontSize="18px"
           padding="13px 18px"

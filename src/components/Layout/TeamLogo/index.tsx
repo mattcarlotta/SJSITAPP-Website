@@ -5,7 +5,7 @@ const TeamLogo = (): JSX.Element => (
   <>
     SHARKS ICE
     <Margin right="3px" left="5px">
-      <img src="/logo_24x24.png" alt="logo" />
+      <img src="/images/logo_24x24.png" alt="logo" />
     </Margin>
     TEAM
   </>

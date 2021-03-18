@@ -41,7 +41,11 @@ class CustomDocument extends Document {
           name="description"
           content="Official website for the Sharks Ice Team."
         />
-        <link rel="apple-touch-icon" sizes="192x192" href="/logo_192x192.png" />
+        <link
+          rel="apple-touch-icon"
+          sizes="192x192"
+          href="/images/logo_192x192.png"
+        />
         <meta name="theme-color" content="#000000" />
         <meta name="msapplication-TileColor" content="#000000" />
         <meta name="msapplication-navbutton-color" content="#000000" />
@@ -49,7 +53,7 @@ class CustomDocument extends Document {
         <link
           rel="apple-touch-icon"
           sizes="192x192"
-          href="/ITLogo_192x192.png"
+          href="images/logo_192x192.png"
         />
         <link
           rel="preload"

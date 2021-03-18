@@ -113,7 +113,7 @@ export const Forms = (): JSX.Element => {
                   padding="17px 0px"
                   dataTestId="dashboard-ap-form-link"
                   href={`/employee/forms/view/${form._id}`}
-                  style={{ maxWidth: "280px" }}
+                  style={{ maxWidth: "260px" }}
                 >
                   <BsPencilSquare
                     style={{
@@ -123,7 +123,7 @@ export const Forms = (): JSX.Element => {
                       fontSize: 20
                     }}
                   />
-                  View Form ({form.eventCounts} events)
+                  AP Form ({form.eventCounts} events)
                 </Link>
               ) : (
                 <APFormExpired />

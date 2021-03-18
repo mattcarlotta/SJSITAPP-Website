@@ -35,7 +35,7 @@ const LoadingUpComponent = ({
         opacity: 0.9;
       `}
     >
-      <img src="/logo_64x64.png" height="48px" alt="logo" />
+      <img src="/images/logo_64x64.png" height="48px" alt="logo" />
     </div>
     <div
       css={css`

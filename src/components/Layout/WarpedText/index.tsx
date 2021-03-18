@@ -53,7 +53,7 @@ const WarpedText = styled(WarpedTextComponent)`
     font-size: 14px;
     height: 11px;
     color: #fff;
-    line-height: 4;
+    line-height: 4.2;
     white-space: pre;
     overflow: visible;
     padding: 0px;

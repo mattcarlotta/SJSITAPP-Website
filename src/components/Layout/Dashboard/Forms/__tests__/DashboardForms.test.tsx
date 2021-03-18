@@ -61,7 +61,7 @@ describe("Dashboard Forms", () => {
       wrapper.update();
       expect(findById("dashboard-ap-form-link")).toExist();
       expect(findById("dashboard-ap-form-link").first().text()).toContain(
-        "View Form (1 events)"
+        "AP Form (1 events)"
       );
     });
   });
