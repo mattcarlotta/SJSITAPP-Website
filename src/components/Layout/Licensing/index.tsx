@@ -1,8 +1,8 @@
 import * as React from "react";
 import { FaCopyright } from "~icons";
 import Card from "~components/Layout/Card";
-import Line from "~components/Layout/Line";
 import InfoText from "~components/Layout/InfoText";
+import Line from "~components/Layout/Line";
 import Padding from "~components/Layout/Padding";
 import Title from "~components/Layout/Title";
 import Head from "~components/Navigation/Header";

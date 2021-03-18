@@ -64,7 +64,7 @@ const TextArea = styled(TextAreaComponent)`
     resize: none;
 
     ::placeholder {
-      color: #d3dce6;
+      color: #ccc;
     }
 
     :focus {

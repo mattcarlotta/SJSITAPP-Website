@@ -48,6 +48,7 @@ export { FaHockeyPuck } from "@react-icons/all-files/fa/FaHockeyPuck";
 export { FaIdCard } from "@react-icons/all-files/fa/FaIdCard";
 export { FaIdBadge } from "@react-icons/all-files/fa/FaIdBadge";
 export { FaKey } from "@react-icons/all-files/fa/FaKey";
+export { FaLink } from "@react-icons/all-files/fa/FaLink";
 export { FaLock } from "@react-icons/all-files/fa/FaLock";
 export { FaRegTimesCircle } from "@react-icons/all-files/fa/FaRegTimesCircle";
 export { FaMailBulk } from "@react-icons/all-files/fa/FaMailBulk";

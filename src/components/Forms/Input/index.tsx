@@ -104,7 +104,7 @@ const Input = styled(InputComponent)`
     }
 
     ::placeholder {
-      color: #d3dce6;
+      color: #ccc;
     }
 
     :focus {

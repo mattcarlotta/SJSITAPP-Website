@@ -6,9 +6,10 @@ const Input = styled.input`
   width: 100%;
   border: none;
   color: #282c34;
+  font-size: 16px;
 
   &::placeholder {
-    color: #d3dce6;
+    color: #ccc;
   }
 
   &:focus {

@@ -11,10 +11,11 @@ import { EventTarget } from "~types";
 export type TSelectProps = {
   disabled?: boolean;
   errors?: string;
-  name: string;
+  isSearchable?: boolean;
   label?: string;
-  placeholder?: string;
+  name: string;
   onChange: (e: EventTarget) => void;
+  placeholder?: string;
   selectOptions: Array<string>;
   value: string;
 };

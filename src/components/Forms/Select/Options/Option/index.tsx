@@ -35,7 +35,7 @@ const Option = styled(OptionComponent)<{ selected?: string; value?: string }>`
   border-radius: 4px;
   color: ${({ selected, value }) =>
     selected === value ? "#0f7ae5" : "#282c34"};
-  background-color: ${({ selected, value }) =>
+  background: ${({ selected, value }) =>
     selected === value ? "#f3f3f3" : "#fff"};
   display: block;
   word-break: break-all;
@@ -55,7 +55,7 @@ const Option = styled(OptionComponent)<{ selected?: string; value?: string }>`
   &:hover {
     color: ${({ selected, value }) =>
       selected !== value || !value ? "#282c34" : "#0f7ae5"};
-    background-color: #e6f7ff;
+    background: #e6f7ff;
     outline: 0;
     border: 1px solid transparent;
   }
@@ -63,7 +63,7 @@ const Option = styled(OptionComponent)<{ selected?: string; value?: string }>`
   &:focus {
     color: ${({ selected, value }) =>
       selected !== value || !value ? "#282c34" : "#0f7ae5"};
-    background-color: #e6f7ff;
+    background: #e6f7ff;
     outline: 0;
   }
 `;

@@ -8,6 +8,7 @@ export interface ILinkProps {
   dataTestId: string;
   href: string;
   replace?: boolean;
+  shallow?: boolean;
   style?: CSSProperties;
 }
 
@@ -17,9 +18,16 @@ export const LinkComponent = ({
   className,
   href,
   replace,
+  shallow,
   style
 }: ILinkProps): JSX.Element => (
-  <NextLink href={href} prefetch={false} replace={replace} passHref>
+  <NextLink
+    href={href}
+    prefetch={false}
+    replace={replace}
+    shallow={shallow}
+    passHref
+  >
     <a data-testid={dataTestId} className={className} style={style}>
       {children}
     </a>
@@ -28,6 +36,7 @@ export const LinkComponent = ({
 
 const Link = styled(LinkComponent)<{
   alt?: boolean;
+  border?: string;
   borderRadius?: string;
   display?: string;
   fontSize?: string;
@@ -55,11 +64,11 @@ const Link = styled(LinkComponent)<{
     if (alt || secondary) return "#025f6d";
     return "transparent";
   }};
-  border: 2px solid
-    ${({ secondary }) => {
-      if (secondary) return "#3794a5";
-      return "#025f6d";
-    }};
+  border: ${({ border, secondary }) => {
+    if (border) return border;
+    if (secondary) return "2px solid #3794a5";
+    return "2px solid #025f6d";
+  }};
   box-shadow: ${({ hideShadow }) =>
     !hideShadow ? "0 4px 14px 0 rgba(2, 95, 109, 0.39)" : "none"};
   padding: ${({ padding }) => padding || "13px 18px"};
@@ -79,11 +88,11 @@ const Link = styled(LinkComponent)<{
       if (alt) return "0px 0px 14px -2px #14d3e2";
       return "0px 0px 14px -2px #14d3e2";
     }};
-    border: 2px solid
-      ${({ alt }) => {
-        if (alt) return "#006d76";
-        return "#3794a5";
-      }};
+    border: ${({ border, alt }) => {
+      if (border) return border;
+      if (alt) return "2px solid #006d76";
+      return "2px solid #3794a5";
+    }};
   }
 
   :focus {
