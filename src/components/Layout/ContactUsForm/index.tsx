@@ -14,6 +14,7 @@ import app from "~utils/axiosConfig";
 import { parseMessage } from "~utils/parseResponse";
 import fields from "./Fields";
 import { EventTarget, FormEvent } from "~types";
+import Paragraph from "../Paragraph";
 
 export type TContactUsFormState = {
   fields: typeof fields;
@@ -110,6 +111,13 @@ export const ContactUsForm = (): JSX.Element => {
             }}
           />
         </form>
+        <Paragraph marginTop="30px" marginBottom="0px">
+          By clicking the &quot;Send&quot; button, you agree to allow us to use
+          your email address as a &quot;Sent From&quot; addresser. Using your
+          email adress, an email with the subject and message supplied above
+          will be generated and sent to one or many of the &quot;Send To&quot;
+          addresses associated with the Sharks Ice Team.
+        </Paragraph>
       </Padding>
     </Card>
   );

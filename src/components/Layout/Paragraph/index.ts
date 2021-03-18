@@ -6,6 +6,8 @@ const Paragraph = styled.div<{ marginBottom?: string; marginTop?: string }>`
   word-wrap: normal;
   white-space: pre-wrap;
   letter-spacing: 1px;
+  line-height: 35px;
+  width: 100%;
 `;
 
 export default Paragraph;

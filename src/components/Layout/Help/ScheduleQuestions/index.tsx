@@ -14,7 +14,7 @@ const ScheduleQuestions = ({ id }: { id: string }): JSX.Element => (
       </Paragraph>
       <Line />
     </Center>
-    <Accordion expanded={id} title="How do I view the monthly schedule?">
+    <Accordion expanded={id} title="How do I view my monthly schedule?">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
       malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
       sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit

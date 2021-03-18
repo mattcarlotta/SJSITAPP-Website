@@ -32,7 +32,7 @@ const HelpPage = (): JSX.Element => {
     id: hash
   });
   const { searchText, id } = state;
-  const nextPath = `${basePath}#${id}`;
+  const nextPath = `${basePath}${id ? `#${id}` : ""}`;
 
   const handleSearchChange = React.useCallback(
     ({ target: { value } }: EventTarget) => {
@@ -42,7 +42,7 @@ const HelpPage = (): JSX.Element => {
   );
 
   React.useEffect(() => {
-    if (id) router.push(nextPath, undefined, { shallow: true });
+    router.push(nextPath, undefined, { shallow: true });
   }, [id, nextPath]);
 
   return (
@@ -54,7 +54,7 @@ const HelpPage = (): JSX.Element => {
         icon={<FaQuestionCircle />}
         subtitle="Questions and Answers"
       >
-        <Padding top="10px" right="40px" bottom="40px" left="40px">
+        <Padding top="10px" right="40px" bottom="80px" left="40px">
           <Center
             style={{
               marginTop: 25,

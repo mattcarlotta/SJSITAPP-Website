@@ -8,7 +8,7 @@ const OptionsContainer = styled.div`
   box-shadow: 0 0 0 1px hsla(0, 0%, 0%, 0.1), 0 4px 11px hsla(0, 0%, 0%, 0.1);
   position: absolute;
   width: 100%;
-  z-index: 100;
+  z-index: 1;
   max-height: 200px;
   overflow-y: auto;
 `;

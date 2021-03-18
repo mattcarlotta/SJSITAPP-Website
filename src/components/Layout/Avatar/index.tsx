@@ -41,12 +41,13 @@ const AvatarComponent = ({
 };
 
 const Avatar = styled(AvatarComponent)<{
+  display?: string;
   height?: string;
   padding?: string;
   primary?: boolean;
   width?: string;
 }>`
-  display: flex;
+  display: ${({ display }) => display || "flex"};
   align-items: center;
   color: ${({ primary }) => (primary ? "#efefef" : "#025f6d")};
   width: ${({ width }) => width || "26px"};

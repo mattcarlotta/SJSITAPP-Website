@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 const DropContainer = styled.div`
   position: absolute;
   width: 100%;
-  z-index: 1000;
+  z-index: 1;
   top: 100%;
   background-color: hsl(0, 0%, 100%);
   border-radius: 4px;

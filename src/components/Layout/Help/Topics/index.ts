@@ -8,10 +8,11 @@ const topics = [
   "How do I view my monthly availabilty?",
   "How do I view my monthly A/P form responses?",
   "How do I view an A/P form?",
-  "How do I view the monthly schedule?",
   "How do I add my availability to an A/P form?",
   "How do I update my A/P form availabilty?",
-  "How do I view my monthly schedule?"
+  "How do I view my monthly schedule?",
+  "How do I view my scheduled games?",
+  "How is scheduling determined?"
 ];
 
 export default topics;
