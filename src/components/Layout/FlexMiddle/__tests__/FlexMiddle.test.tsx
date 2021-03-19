@@ -1,10 +1,10 @@
 import { mount, ReactWrapper } from "enzyme";
-import FlexEnd from "../index";
+import FlexMiddle from "../index";
 
-describe("FlexEnd", () => {
+describe("FlexMiddle", () => {
   let wrapper: ReactWrapper;
   beforeEach(() => {
-    wrapper = mount(<FlexEnd />);
+    wrapper = mount(<FlexMiddle />);
   });
 
   it("renders without errors", () => {
@@ -14,12 +14,5 @@ describe("FlexEnd", () => {
   it("sets width when passed a 'width' prop", () => {
     wrapper.setProps({ width: "10px" });
     expect(wrapper).toHaveStyleRule("width", "10px");
-  });
-
-  it("sets a media rule when passed a 'breakpoint' prop", () => {
-    wrapper.setProps({ breakpoint: "true" });
-    expect(wrapper).toHaveStyleRule("width", "auto", {
-      media: "(max-width: 800px)"
-    });
   });
 });

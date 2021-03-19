@@ -3,15 +3,15 @@ import styled from "@emotion/styled";
 const SelectionContainer = styled.div<{
   disabled?: boolean;
   errors?: string;
+  height?: string;
   isVisible?: boolean;
   value?: string;
 }>`
   cursor: ${({ disabled }) => (!disabled ? "pointer" : "not-allowed")};
   background-color: ${({ disabled }) => (!disabled ? "#fff" : "#ebebeb")};
   display: inline-block;
-  height: 40px;
+  height: ${({ height }) => height || "40px"};
   width: 100%;
-  min-height: 40px;
   border-radius: 4px;
   border: 1px solid
     ${({ errors, isVisible, value }) => {

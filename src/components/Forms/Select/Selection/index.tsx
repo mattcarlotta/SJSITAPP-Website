@@ -21,6 +21,7 @@ export type TSelectionProps = {
   handleInputChange: (e: ChangeEvent<any>) => void;
   handleSearchClear: (props: EventTarget) => void;
   handleSelectClick: () => void;
+  height?: string;
   icon?: string;
   isVisible: boolean;
   isSearchable?: boolean;
@@ -36,6 +37,7 @@ const Selection = ({
   handleInputChange,
   handleSearchClear,
   handleSelectClick,
+  height,
   icon,
   isVisible,
   isSearchable,
@@ -48,6 +50,7 @@ const Selection = ({
     tabIndex={0}
     data-testid={name}
     disabled={disabled}
+    height={height}
     errors={errors}
     isVisible={isVisible}
     value={value}

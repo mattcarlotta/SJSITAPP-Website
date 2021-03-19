@@ -11,6 +11,7 @@ import { EventTarget } from "~types";
 export type TSelectProps = {
   disabled?: boolean;
   errors?: string;
+  height?: string;
   isSearchable?: boolean;
   label?: string;
   name: string;
@@ -23,13 +24,14 @@ export type TSelectProps = {
 const Select = ({
   disabled,
   errors,
+  height,
   name,
   label,
   selectOptions,
   value,
   ...props
 }: TSelectProps): JSX.Element => (
-  <Container>
+  <Container height={height}>
     <Label name={name} label={label} />
     <ClickHandler disabled={disabled} onChange={props.onChange}>
       {handlers => (
@@ -38,6 +40,7 @@ const Select = ({
             <Selection
               {...handlers}
               {...props}
+              height={height}
               name={name}
               disabled={disabled}
               errors={errors}

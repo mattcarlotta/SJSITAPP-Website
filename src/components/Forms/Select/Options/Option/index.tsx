@@ -32,7 +32,6 @@ const OptionComponent = ({
 
 const Option = styled(OptionComponent)<{ selected?: string; value?: string }>`
   cursor: pointer;
-  border-radius: 4px;
   color: ${({ selected, value }) =>
     selected === value ? "#0f7ae5" : "#282c34"};
   background: ${({ selected, value }) =>
@@ -44,8 +43,6 @@ const Option = styled(OptionComponent)<{ selected?: string; value?: string }>`
   width: 100%;
   font-weight: normal;
   user-select: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  box-sizing: border-box;
   border: 1px solid transparent;
   text-align: left;
   transition: all 0.3s ease-in-out;

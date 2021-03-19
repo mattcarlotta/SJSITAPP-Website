@@ -1,8 +1,7 @@
-/* istanbul ignore file */
 import styled from "@emotion/styled";
 
-const Container = styled.div`
-  height: 90px;
+const Container = styled.div<{ height?: string }>`
+  height: ${({ height }) => height || "90px"};
   width: 100%;
 `;
 

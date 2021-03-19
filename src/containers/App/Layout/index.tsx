@@ -44,7 +44,11 @@ export const AppLayout = ({
 
   return (
     <AppContainer data-testid="app-layout" direction="column">
-      <TopBar collapsed={collapsed} toggleSideNav={toggleSideNav} />
+      <TopBar
+        role={rest.role}
+        collapsed={collapsed}
+        toggleSideNav={toggleSideNav}
+      />
       <NavBar
         collapsed={collapsed}
         collapseSideNav={collapseSideNav}

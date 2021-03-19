@@ -40,7 +40,7 @@ const EventDistributionChart = ({
   );
 
   return (
-    <ReactResizeDetector handleWidth>
+    <ReactResizeDetector handleWidth refreshMode="throttle" refreshRate={1000}>
       {({ width, targetRef }) => (
         <div ref={targetRef as RefObject<HTMLDivElement>}>
           {!isEmpty(events) ? (

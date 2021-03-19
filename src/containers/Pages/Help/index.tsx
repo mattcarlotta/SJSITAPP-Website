@@ -31,7 +31,11 @@ export type THelpPageState = {
   id: string;
 };
 
-const HelpPage = ({ role }: { role: string }): JSX.Element => {
+export type THelpPageProps = {
+  role: string;
+};
+
+const HelpPage = ({ role }: THelpPageProps): JSX.Element => {
   const router = useRouter();
   const isStaff = role !== "employeee";
   const availableTopics = isStaff ? stafftopics : topics;
@@ -51,8 +55,12 @@ const HelpPage = ({ role }: { role: string }): JSX.Element => {
   );
 
   React.useEffect(() => {
+    if (hash !== id) setState(prevState => ({ ...prevState, id: hash }));
+  }, [hash]);
+
+  React.useEffect(() => {
     router.push(nextPath, undefined, { shallow: true });
-  }, [nextPath]);
+  }, [id]);
 
   return (
     <>
