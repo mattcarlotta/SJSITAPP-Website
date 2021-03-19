@@ -18,7 +18,7 @@ const FormAndAvailabilityQuestions = ({ id }: { id: string }): JSX.Element => (
       </Paragraph>
       <Line />
     </Center>
-    <Accordion expanded={id} title="How do I view my monthly availabilty?">
+    <Accordion expanded={id} title="How do I view my monthly availability?">
       To view your month to month availability, go to the
       <OutsideLink dataTestId="settings-link" href="/employee/settings">
         Settings
@@ -88,7 +88,7 @@ const FormAndAvailabilityQuestions = ({ id }: { id: string }): JSX.Element => (
       expanded={id}
       title="How do I add my availability to an A/P form?"
     >
-      To add your availabilty to an A/P form, go to the
+      To add your availability to an A/P form, go to the
       <OutsideLink dataTestId="dashboard-link" href="/employee/dashboard">
         Dashboard
       </OutsideLink>
@@ -129,8 +129,8 @@ const FormAndAvailabilityQuestions = ({ id }: { id: string }): JSX.Element => (
         has expired.
       </WarningText>
     </Accordion>
-    <Accordion expanded={id} title="How do I update my A/P form availabilty?">
-      To update your availabilty to an A/P form, go to the
+    <Accordion expanded={id} title="How do I update my A/P form availability?">
+      To update your availability to an A/P form, go to the
       <OutsideLink dataTestId="dashboard-link" href="/employee/dashboard">
         Dashboard
       </OutsideLink>

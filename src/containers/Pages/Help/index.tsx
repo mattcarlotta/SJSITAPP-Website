@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useRouter } from "next/router";
 import { css } from "@emotion/react";
+import { connect } from "react-redux";
 import Select from "~components/Forms/Select";
 import Card from "~components/Layout/Card";
 import Center from "~components/Layout/Center";
@@ -13,19 +14,24 @@ import Head from "~components/Navigation/Header";
 import OutsideLink from "~components/Navigation/OutsideLink";
 import { FaQuestionCircle } from "~icons";
 import stripSpaces from "~utils/stripSpaces";
-import topics from "./Topics";
+import topics, { stafftopics } from "./Topics";
 import GeneralQuestions from "./GeneralQuestions";
 import FormAndAvailabilityQuestions from "./FormAndAvailabilityQuestions";
 import ScheduleQuestions from "./ScheduleQuestions";
-import { EventTarget } from "~types";
+import GettingStarted from "./GettingStarted";
+import AutomatedServices from "./AutomatedServices";
+import Events from "./Events";
+import { EventTarget, TRootState } from "~types";
 
 export type THelpPageState = {
   searchText: string;
   id: string;
 };
 
-const HelpPage = (): JSX.Element => {
+const HelpPage = ({ role }: { role: string }): JSX.Element => {
   const router = useRouter();
+  const isStaff = role !== "employeee";
+  const availableTopics = isStaff ? stafftopics : topics;
   const [basePath, hash] = router.asPath.split("#");
   const [state, setState] = React.useState<THelpPageState>({
     searchText: "",
@@ -80,7 +86,7 @@ const HelpPage = (): JSX.Element => {
                 name="searchQuestions"
                 placeholder="Type here to search for common questions..."
                 value={searchText}
-                selectOptions={topics}
+                selectOptions={availableTopics}
                 onChange={handleSearchChange}
               />
             </div>
@@ -98,10 +104,22 @@ const HelpPage = (): JSX.Element => {
           <GeneralQuestions id={id} />
           <FormAndAvailabilityQuestions id={id} />
           <ScheduleQuestions id={id} />
+          {isStaff && (
+            <>
+              <GettingStarted id={id} />
+              <AutomatedServices id={id} />
+              <Events id={id} />
+            </>
+          )}
         </Padding>
       </Card>
     </>
   );
 };
 
-export default HelpPage;
+/* istanbul ignore next */
+const mapStateToProps = ({ auth }: Pick<TRootState, "auth">) => ({
+  role: auth.role
+});
+
+export default connect(mapStateToProps)(HelpPage);

@@ -22,7 +22,8 @@ import {
   MdDashboard,
   MdEvent,
   MdEventNote,
-  MdNoteAdd
+  MdNoteAdd,
+  MdSettingsInputComponent
 } from "~icons";
 import { ReactNode } from "~types";
 
@@ -207,6 +208,13 @@ export const StaffRoutes: TRoutes = [
         subtestId: "seasons-viewall-link"
       }
     ]
+  },
+  {
+    icon: <MdSettingsInputComponent />,
+    nodeId: "services",
+    href: "services",
+    title: "Services",
+    testId: "services-link"
   },
   ...sharedRoutes
 ];
