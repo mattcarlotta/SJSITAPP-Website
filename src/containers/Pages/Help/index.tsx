@@ -23,6 +23,7 @@ import Forms from "./Forms";
 import Mail from "./Mail";
 import Members from "./Members";
 import EmployeeScheduling from "./EmployeeScheduling";
+import Seasons from "./Seasons";
 import { EventTarget, TRootState } from "~types";
 
 export type THelpPageState = {
@@ -115,6 +116,7 @@ const HelpPage = ({ role }: { role: string }): JSX.Element => {
               <Mail id={id} />
               <Members id={id} />
               <EmployeeScheduling id={id} />
+              <Seasons id={id} />
             </>
           )}
         </Padding>

@@ -1,11 +1,9 @@
 import * as React from "react";
 import Accordion from "~components/Layout/Accordion";
-// import Button from "~components/Layout/Button";
 import Center from "~components/Layout/Center";
 import Line from "~components/Layout/Line";
 import Paragraph from "~components/Layout/Paragraph";
 import Title from "~components/Layout/Title";
-// import WarningText from "~components/Layout/WarningText";
 import OutsideLink from "~components/Navigation/OutsideLink";
 import { FaCalendarCheck, FaClock } from "~icons";
 

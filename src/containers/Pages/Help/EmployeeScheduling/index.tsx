@@ -1,6 +1,5 @@
 import * as React from "react";
 import Accordion from "~components/Layout/Accordion";
-// import Button from "~components/Layout/Button";
 import Center from "~components/Layout/Center";
 import Line from "~components/Layout/Line";
 import Paragraph from "~components/Layout/Paragraph";
