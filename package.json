@@ -80,6 +80,7 @@
     "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "fuse.js": "^6.4.6",
     "lodash.debounce": "^4.0.8",
     "lodash.get": "^4.4.2",
     "lodash.groupby": "^4.6.0",

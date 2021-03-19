@@ -11,7 +11,7 @@ import WarningText from "~components/Layout/WarningText";
 import OutsideLink from "~components/Navigation/OutsideLink";
 import { FaCloudUploadAlt, FaUpload, RiLogoutBoxLine } from "~icons";
 
-const GeneralQuestions = ({ id }: { id: string }): JSX.Element => (
+const General = ({ id }: { id: string }): JSX.Element => (
   <>
     <Center>
       <Title margin="50px 0 0px 0">General Questions</Title>
@@ -207,4 +207,4 @@ const GeneralQuestions = ({ id }: { id: string }): JSX.Element => (
   </>
 );
 
-export default GeneralQuestions;
+export default General;

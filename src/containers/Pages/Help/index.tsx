@@ -5,22 +5,24 @@ import { connect } from "react-redux";
 import Select from "~components/Forms/Select";
 import Card from "~components/Layout/Card";
 import Center from "~components/Layout/Center";
-// import Line from "~components/Layout/Line";
 import Padding from "~components/Layout/Padding";
 import PanelDescription from "~components/Layout/PanelDescription";
 import Paragraph from "~components/Layout/Paragraph";
 import Head from "~components/Navigation/Header";
-// import Link from "~components/Navigation/Link";
 import OutsideLink from "~components/Navigation/OutsideLink";
 import { FaQuestionCircle } from "~icons";
 import stripSpaces from "~utils/stripSpaces";
 import topics, { stafftopics } from "./Topics";
-import GeneralQuestions from "./GeneralQuestions";
-import FormAndAvailabilityQuestions from "./FormAndAvailabilityQuestions";
-import ScheduleQuestions from "./ScheduleQuestions";
+import General from "./General";
+import FormAndAvailability from "./FormAndAvailability";
+import EmployeeSchedule from "./EmployeeSchedule";
 import GettingStarted from "./GettingStarted";
 import AutomatedServices from "./AutomatedServices";
 import Events from "./Events";
+import Forms from "./Forms";
+import Mail from "./Mail";
+import Members from "./Members";
+import EmployeeScheduling from "./EmployeeScheduling";
 import { EventTarget, TRootState } from "~types";
 
 export type THelpPageState = {
@@ -101,14 +103,18 @@ const HelpPage = ({ role }: { role: string }): JSX.Element => {
               .
             </PanelDescription>
           </Center>
-          <GeneralQuestions id={id} />
-          <FormAndAvailabilityQuestions id={id} />
-          <ScheduleQuestions id={id} />
+          <General id={id} />
+          <FormAndAvailability id={id} />
+          <EmployeeSchedule id={id} />
           {isStaff && (
             <>
               <GettingStarted id={id} />
               <AutomatedServices id={id} />
               <Events id={id} />
+              <Forms id={id} />
+              <Mail id={id} />
+              <Members id={id} />
+              <EmployeeScheduling id={id} />
             </>
           )}
         </Padding>

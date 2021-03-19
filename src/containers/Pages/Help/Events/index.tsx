@@ -260,7 +260,7 @@ const Events = ({ id }: { id: string }): JSX.Element => (
       button to save your changes.
       <WarningText>
         According to the <strong>Event Date</strong>, individual email reminders
-        will be automatically sent to all scheduled members{" "}
+        will be automatically sent to all scheduled members&nbsp;
         <strong>one day</strong>
         &nbsp;before the event date. The emails will notify them that
         they&#39;re scheduled to work that particular event at their assigned

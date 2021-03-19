@@ -9,7 +9,7 @@ import WarningText from "~components/Layout/WarningText";
 import OutsideLink from "~components/Navigation/OutsideLink";
 import { BsPencilSquare } from "~icons";
 
-const FormAndAvailabilityQuestions = ({ id }: { id: string }): JSX.Element => (
+const FormAndAvailability = ({ id }: { id: string }): JSX.Element => (
   <>
     <Center>
       <Title style={{ marginTop: 50 }}>Forms and Availability Questions</Title>
@@ -174,4 +174,4 @@ const FormAndAvailabilityQuestions = ({ id }: { id: string }): JSX.Element => (
   </>
 );
 
-export default FormAndAvailabilityQuestions;
+export default FormAndAvailability;

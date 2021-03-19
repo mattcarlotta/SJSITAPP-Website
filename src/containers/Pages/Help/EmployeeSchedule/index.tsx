@@ -9,7 +9,7 @@ import Title from "~components/Layout/Title";
 import OutsideLink from "~components/Navigation/OutsideLink";
 import { FaCalendarCheck, FaClock } from "~icons";
 
-const ScheduleQuestions = ({ id }: { id: string }): JSX.Element => (
+const EmployeeSchedule = ({ id }: { id: string }): JSX.Element => (
   <>
     <Center>
       <Title margin="50px 0 0px 0">Scheduling Questions</Title>
@@ -71,4 +71,4 @@ const ScheduleQuestions = ({ id }: { id: string }): JSX.Element => (
   </>
 );
 
-export default ScheduleQuestions;
+export default EmployeeSchedule;

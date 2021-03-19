@@ -1,4 +1,5 @@
-import React, { PureComponent } from "react";
+import * as React from "react";
+import Fuse from "fuse.js";
 import isEmpty from "lodash.isempty";
 import { FaSearchLocation } from "~icons";
 import DropContainer from "./DropContainer";
@@ -16,7 +17,18 @@ export interface SelectOptionsContainerProps {
   selectOptions: Array<string>;
 }
 
-class SelectOptionsContainer extends PureComponent<SelectOptionsContainerProps> {
+export interface SelectOptionsContainerState {
+  searchOptions: Fuse<string>;
+}
+
+class SelectOptionsContainer extends React.Component<
+  SelectOptionsContainerProps,
+  SelectOptionsContainerState
+> {
+  state = {
+    searchOptions: new Fuse(this.props.selectOptions)
+  };
+
   componentDidUpdate = (prevProps: SelectOptionsContainerProps): void => {
     const { selected, isVisible } = this.props;
 
@@ -59,13 +71,15 @@ class SelectOptionsContainer extends PureComponent<SelectOptionsContainerProps> 
   };
 
   render = (): JSX.Element | null => {
+    const { searchOptions } = this.state;
     const { name, searchText, selected, selectOptions } = this.props;
 
     const options = !searchText
       ? selectOptions
-      : selectOptions.filter(value =>
-          value.toLowerCase().includes(searchText.toLowerCase())
-        );
+      : searchOptions
+          .search(searchText)
+          .map(({ item }: { item: string }) => item);
+
     return this.props.isVisible ? (
       <DropContainer>
         <OptionsContainer>
@@ -85,7 +99,7 @@ class SelectOptionsContainer extends PureComponent<SelectOptionsContainerProps> 
               <FaSearchLocation
                 style={{ position: "relative", top: 4, marginRight: 5 }}
               />
-              <span>Oops! No results were found.</span>
+              <span>No results were found.</span>
             </NoOptions>
           )}
         </OptionsContainer>
@@ -93,14 +107,5 @@ class SelectOptionsContainer extends PureComponent<SelectOptionsContainerProps> 
     ) : null;
   };
 }
-
-// SelectOptionsContainer.propTypes = {
-//   handleOptionSelect: PropTypes.func.isRequired,
-//   isVisible: PropTypes.bool.isRequired,
-//   name: PropTypes.string.isRequired,
-//   searchText: PropTypes.string,
-//   selected: PropTypes.string,
-//   selectOptions: PropTypes.arrayOf(PropTypes.string.isRequired)
-// };
 
 export default SelectOptionsContainer;

@@ -28,11 +28,11 @@ const AutomatedServices = ({ id }: { id: string }): JSX.Element => (
       is sent out.
       <br />
       <br />
-      These services are configurable by going to
+      These services are configurable by going to the
       <OutsideLink data-testid="services-link" href="/employee/services">
         Services
       </OutsideLink>
-      .
+      page.
       <br />
       <br />
       Here&#39;s an example breakdown of how the automated services will
