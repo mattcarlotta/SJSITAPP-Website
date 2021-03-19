@@ -114,7 +114,7 @@ const FormAndAvailabilityQuestions = ({ id }: { id: string }): JSX.Element => (
       button located underneath to the <strong>Forms</strong> panel. Add your
       responses accordingly and click the
       <Button
-        primary
+        tertiary
         display="inline-block"
         type="button"
         width="100px"
@@ -156,7 +156,7 @@ const FormAndAvailabilityQuestions = ({ id }: { id: string }): JSX.Element => (
       button located underneath to the <strong>Forms</strong> panel. Update your
       previous responses accordingly and click the
       <Button
-        primary
+        tertiary
         display="inline-block"
         type="button"
         width="100px"

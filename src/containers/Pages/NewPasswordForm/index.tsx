@@ -99,7 +99,7 @@ export const NewPasswordForm = ({
           <FieldGenerator fields={state.fields} onChange={handleChange} />
           <SubmitButton
             isSubmitting={state.isSubmitting}
-            title="Reset"
+            title="Update"
             style={{ maxWidth: "300px", margin: "0 auto" }}
             submitBtnStyle={{
               background: "#010404",

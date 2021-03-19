@@ -1,8 +1,7 @@
 /**
- * Helper function to strip and convert template names to snaked lowercase name.
+ * Helper function to strip and convert strings to snaked lowercase strings.
  *
- * @function
- * @returns {string}
+ * @returns a snake cased string
  */
 const stripSpaces = (name: string): string =>
   name

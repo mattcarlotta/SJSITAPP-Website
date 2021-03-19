@@ -4,31 +4,10 @@ export const GlobalStylesheet = (): JSX.Element => (
   <Global
     styles={css`
       @font-face {
-        font-family: "Karla Regular";
+        font-family: "Karla";
         font-style: normal;
         font-weight: normal;
-        src: url("/fonts/Karla-Regular.ttf") format("truetype");
-        font-display: swap;
-      }
-      @font-face {
-        font-family: "Karla Bold";
-        font-style: normal;
-        font-weight: normal;
-        src: url("/fonts/Karla-Bold.ttf") format("truetype");
-        font-display: swap;
-      }
-      @font-face {
-        font-family: "Karla Italic";
-        font-style: normal;
-        font-weight: normal;
-        src: url("/fonts/Karla-Italic.ttf") format("truetype");
-        font-display: swap;
-      }
-      @font-face {
-        font-family: "Karla Bold Italic";
-        font-style: normal;
-        font-weight: normal;
-        src: url("/fonts/Karla-BoldItalic.ttf") format("truetype");
+        src: url("/fonts/Karla-Medium.ttf") format("truetype");
         font-display: swap;
       }
 
@@ -49,8 +28,6 @@ export const GlobalStylesheet = (): JSX.Element => (
         color: #025f6d;
         background: #ebebeb;
         font-size: 16px;
-        overflow: auto !important;
-        padding: 0 !important;
       }
 
       .Toastify__toast--info {

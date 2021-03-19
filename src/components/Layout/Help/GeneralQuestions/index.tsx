@@ -45,8 +45,8 @@ const GeneralQuestions = ({ id }: { id: string }): JSX.Element => (
         />
         &nbsp;Upload
       </Button>
-      button. Click or drag and drop an image on the upload box. Once an image
-      has been selected, click the
+      button. Click or drag and drop an image on to the upload box. Once an
+      image has been selected, click the
       <Button
         primary
         display="inline-block"
@@ -73,7 +73,7 @@ const GeneralQuestions = ({ id }: { id: string }): JSX.Element => (
       page and update the <strong>Email</strong> field with a new email address.
       Once finished, click the
       <Button
-        primary
+        tertiary
         display="inline-block"
         type="button"
         width="190px"
@@ -97,7 +97,7 @@ const GeneralQuestions = ({ id }: { id: string }): JSX.Element => (
       page and toggle the <strong>Email Reminders</strong> field. Once finished,
       click the
       <Button
-        primary
+        tertiary
         display="inline-block"
         type="button"
         width="190px"
@@ -120,7 +120,7 @@ const GeneralQuestions = ({ id }: { id: string }): JSX.Element => (
       page and change the <strong>First Name</strong> and/or
       <strong>&nbsp;Last Name</strong> field(s). Once finished, click the
       <Button
-        primary
+        tertiary
         display="inline-block"
         type="button"
         width="190px"
@@ -142,14 +142,14 @@ const GeneralQuestions = ({ id }: { id: string }): JSX.Element => (
       page and fill out the <strong>Email</strong> field. Once finished, click
       the
       <Button
-        primary
+        tertiary
         display="inline-block"
         type="button"
         width="180px"
         padding="5px"
         margin="0 3px"
       >
-        Reset Password
+        Reset
       </Button>
       button to initiate a password reset request. In a few minutes, a password
       reset request email will be sent to the account&#39;s email address. Open
@@ -167,14 +167,14 @@ const GeneralQuestions = ({ id }: { id: string }): JSX.Element => (
       link. This link will take you to an Update Password form. Fill out the
       <strong>&nbsp;New Password</strong> field. Once completed, click the
       <Button
-        primary
+        tertiary
         display="inline-block"
         type="button"
         width="190px"
         padding="5px"
         margin="0 3px"
       >
-        Update Password
+        Update
       </Button>
       button to update the account&#39;s password.
       <WarningText>

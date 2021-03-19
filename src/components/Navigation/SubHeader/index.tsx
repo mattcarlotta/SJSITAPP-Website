@@ -39,6 +39,7 @@ const SubHeader = styled(SubHeaderComponent)`
   padding: 0;
   font-size: 17px;
   color: #282c34;
+  text-transform: none;
 
   svg {
     opacity: 0;

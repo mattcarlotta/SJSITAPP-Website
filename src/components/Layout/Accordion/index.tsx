@@ -16,22 +16,18 @@ export type TCustomAccordionProps = {
   title: string;
 };
 
-const useStyles = makeStyles({
+const useAccSumStyles = makeStyles({
   root: {
-    backgroundColor: "rgba(0, 0, 0, .03)",
-    borderBottom: "1px solid rgba(0, 0, 0, .125)",
-    marginBottom: -1,
-    minHeight: 56,
-    "&$expanded": {
-      minHeight: 56
-    }
-  },
-  content: {
-    "&$expanded": {
-      margin: "12px 0"
-    }
-  },
-  expanded: {}
+    backgroundColor: "#f7f7f7",
+    border: "1px solid #ccc",
+    minHeight: 56
+  }
+});
+
+const useAccDetStyles = makeStyles({
+  root: {
+    backgroundColor: "#ddd"
+  }
 });
 
 const CustomAccordion = ({
@@ -58,11 +54,11 @@ const CustomAccordion = ({
           aria-controls={id}
           id={id}
           expandIcon={<MdExpandMore />}
-          classes={useStyles()}
+          className={useAccSumStyles().root}
         >
           Click to view details
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails className={useAccDetStyles().root}>
           <Paragraph marginBottom="0px">{children}</Paragraph>
         </AccordionDetails>
       </Accordion>

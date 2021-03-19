@@ -57,24 +57,6 @@ class CustomDocument extends Document {
         />
         <link
           rel="preload"
-          href="/fonts/Karla-Bold.ttf"
-          as="font"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/Karla-BoldItalic.ttf"
-          as="font"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/Karla-Italic.ttf"
-          as="font"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
           href="/fonts/Karla-Regular.ttf"
           as="font"
           crossOrigin="anonymous"
