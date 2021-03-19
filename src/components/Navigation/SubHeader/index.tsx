@@ -36,10 +36,11 @@ const SubHeader = styled(SubHeaderComponent)`
   display: flex;
   align-items: center;
   cursor: pointer;
-  padding: 0;
+  padding: 0px;
   font-size: 17px;
   color: #282c34;
   text-transform: none;
+  font-weight: 500;
 
   svg {
     opacity: 0;

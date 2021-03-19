@@ -16,6 +16,12 @@ export type TCustomAccordionProps = {
   title: string;
 };
 
+const useAccStyles = makeStyles({
+  expanded: {
+    boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.5)"
+  }
+});
+
 const useAccSumStyles = makeStyles({
   root: {
     backgroundColor: "#f7f7f7",
@@ -36,27 +42,32 @@ const CustomAccordion = ({
   title
 }: TCustomAccordionProps): JSX.Element => {
   const id = stripSpaces(title);
-  const [tabExpanded, setExpanded] = React.useState(expanded === id);
+  const isExpanded = expanded === id;
+  const [tabExpanded, setExpanded] = React.useState(isExpanded);
 
   const handleChange = React.useCallback((): void => {
     setExpanded(prevState => !prevState);
   }, []);
 
   React.useEffect(() => {
-    setExpanded(expanded === id);
+    setExpanded(isExpanded);
   }, [expanded]);
 
   return (
     <>
       <SubHeader>{title}</SubHeader>
-      <Accordion expanded={tabExpanded} onChange={handleChange}>
+      <Accordion
+        classes={useAccStyles()}
+        expanded={tabExpanded}
+        onChange={handleChange}
+      >
         <AccordionSummary
           aria-controls={id}
           id={id}
           expandIcon={<MdExpandMore />}
           className={useAccSumStyles().root}
         >
-          Click to view details
+          {!tabExpanded ? "Click to expand answer" : title}
         </AccordionSummary>
         <AccordionDetails className={useAccDetStyles().root}>
           <Paragraph marginBottom="0px">{children}</Paragraph>

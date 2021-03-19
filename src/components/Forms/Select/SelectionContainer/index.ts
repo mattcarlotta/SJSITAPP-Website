@@ -11,15 +11,13 @@ const SelectionContainer = styled.div<{
   display: inline-block;
   height: 40px;
   width: 100%;
-  display: flex;
   min-height: 40px;
-  box-sizing: border-box;
   border-radius: 4px;
   border: 1px solid
     ${({ errors, isVisible, value }) => {
       if (errors && !value) return "#d14023 !important";
       if (isVisible) return "#1e90ff";
-      return "#e5e5e5";
+      return "#ccc";
     }};
   transition: all 0.3s ease-in-out;
 

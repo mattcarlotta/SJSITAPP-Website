@@ -43,7 +43,7 @@ const HelpPage = (): JSX.Element => {
 
   React.useEffect(() => {
     router.push(nextPath, undefined, { shallow: true });
-  }, [id, nextPath]);
+  }, [nextPath]);
 
   return (
     <>

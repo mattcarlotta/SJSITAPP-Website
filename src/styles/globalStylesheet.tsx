@@ -7,7 +7,7 @@ export const GlobalStylesheet = (): JSX.Element => (
         font-family: "Karla";
         font-style: normal;
         font-weight: normal;
-        src: url("/fonts/Karla-Medium.ttf") format("truetype");
+        src: url("/fonts/Karla-Regular.ttf") format("truetype");
         font-display: swap;
       }
 
