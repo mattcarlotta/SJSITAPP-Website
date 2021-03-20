@@ -45,7 +45,7 @@ describe("Select - Selection", () => {
       wrapper.setProps({ icon: "id" });
 
       expect(findBtnCtnr().exists()).toBeTruthy();
-      expect(findBtnCtnr()).toHaveStyleRule("border", "1px solid #e5e5e5");
+      expect(findBtnCtnr()).toHaveStyleRule("border", "1px solid #ccc");
       expect(findBtnCtnr()).toHaveStyleRule("border", "1px solid #bfbebe", {
         target: ":hover"
       });

@@ -78,7 +78,6 @@ describe("Options", () => {
 
       it("initially renders a default option", () => {
         expect(optionNode()).toHaveStyleRule("color", "#282c34");
-        expect(optionNode()).toHaveStyleRule("background-color", "#fff");
         expect(optionNode()).toHaveStyleRule("color", "#282c34", {
           target: ":hover"
         });
@@ -91,7 +90,6 @@ describe("Options", () => {
         wrapper.setProps({ value: "Ducks", selected: "Ducks" });
 
         expect(optionNode()).toHaveStyleRule("color", "#0f7ae5");
-        expect(optionNode()).toHaveStyleRule("background-color", "#f3f3f3");
         expect(optionNode()).toHaveStyleRule("color", "#0f7ae5", {
           target: ":hover"
         });

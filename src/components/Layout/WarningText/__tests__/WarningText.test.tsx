@@ -13,10 +13,10 @@ describe("WarningText Component", () => {
 
   it("initially renders a default CSS props", () => {
     expect(wrapper).toExist();
-    expect(wrapper).toHaveStyleRule("margin", "20px 0");
+    expect(wrapper).toHaveStyleRule("margin", "10px 0");
     expect(wrapper).toHaveStyleRule("padding", "10px");
     expect(wrapper).toHaveStyleRule("background", "#f56342");
-    expect(wrapper).toHaveStyleRule("border-radius", "0px");
+    expect(wrapper).toHaveStyleRule("border-radius", "10px");
     expect(wrapper).toHaveStyleRule("color", "#fff");
   });
 
