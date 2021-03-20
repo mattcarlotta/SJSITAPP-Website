@@ -24,7 +24,7 @@ const EventDistributionChart = ({
 }: TEventDistributionChartProps): JSX.Element => {
   const label = "name";
   const key = "Event Count";
-  const largestValue = !isEmpty(events)
+  const [largestValue, largestNameLength] = !isEmpty(events)
     ? events.reduce(
         (a, b) => {
           if (a[0] < b[key]) a[0] = b[key];
@@ -34,10 +34,7 @@ const EventDistributionChart = ({
         [0, 0]
       )
     : [0, 0];
-  const tickValues = Array.from(
-    { length: largestValue[0] + 1 },
-    (_, i) => i + 1
-  );
+  const tickValues = Array.from({ length: largestValue + 1 }, (_, i) => i + 1);
 
   return (
     <ReactResizeDetector handleWidth refreshMode="throttle" refreshRate={1000}>
@@ -56,14 +53,15 @@ const EventDistributionChart = ({
             >
               <VictoryChart
                 animate={{
-                  duration: 500,
-                  easing: "bounce"
+                  duration: 1000,
+                  easing: "bounce",
+                  onLoad: { duration: 300 }
                 }}
                 horizontal
                 padding={{
                   top: 20,
                   bottom: 60,
-                  left: largestValue[1] + 150,
+                  left: largestNameLength + 150,
                   right: 20
                 }}
                 domainPadding={{ x: 15 }}
@@ -97,8 +95,7 @@ const EventDistributionChart = ({
                     grid: {
                       stroke: "grey",
                       strokeDasharray: 4,
-                      opacity: 0.25,
-                      zIndex: -1
+                      opacity: 0.25
                     },
                     ticks: { stroke: "black", size: 5 },
                     tickLabels: { fontSize: 14 }

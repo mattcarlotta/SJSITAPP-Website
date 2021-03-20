@@ -4,6 +4,7 @@ import toast from "~components/App/Toast";
 import FieldGenerator from "~components/Forms/FieldGenerator";
 import FormTitle from "~components/Forms/FormTitle";
 import Card from "~components/Layout/Card";
+import Margin from "~components/Layout/Margin";
 import Padding from "~components/Layout/Padding";
 import SubmitButton from "~components/Layout/SubmitButton";
 import { FaConciergeBell } from "~icons";
@@ -14,7 +15,6 @@ import app from "~utils/axiosConfig";
 import { parseMessage } from "~utils/parseResponse";
 import fields from "./Fields";
 import { EventTarget, FormEvent } from "~types";
-import Paragraph from "../Paragraph";
 
 export type TContactUsFormState = {
   fields: typeof fields;
@@ -110,14 +110,14 @@ export const ContactUsForm = (): JSX.Element => {
               border: "2px solid #2e7c8a"
             }}
           />
+          <Margin as="div" top="30px">
+            By clicking the &quot;Send&quot; button, you agree to allow us to
+            use your email address as a &quot;Sent From&quot; addresser. Using
+            your email adress, an email with the subject and message supplied
+            above will be generated and sent to one or many of the &quot;Send
+            To&quot; addresses associated with the Sharks Ice Team.
+          </Margin>
         </form>
-        <Paragraph marginTop="30px" marginBottom="0px">
-          By clicking the &quot;Send&quot; button, you agree to allow us to use
-          your email address as a &quot;Sent From&quot; addresser. Using your
-          email adress, an email with the subject and message supplied above
-          will be generated and sent to one or many of the &quot;Send To&quot;
-          addresses associated with the Sharks Ice Team.
-        </Paragraph>
       </Padding>
     </Card>
   );

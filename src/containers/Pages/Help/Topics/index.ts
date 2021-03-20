@@ -17,7 +17,6 @@ const topics = [
 export const stafftopics = [
   ...topics,
   "How do I get started?",
-  "How do the automatic services work?",
   "How do I create an event?",
   "How do I delete an event?",
   "How do I edit an event?",
@@ -49,7 +48,8 @@ export const stafftopics = [
   "How do I create a season?",
   "How do I delete a season?",
   "How do I edit a season?",
-  "How do I view all seasons?"
+  "How do I view all seasons?",
+  "How do the automatic services work?"
 ];
 
 export default topics;

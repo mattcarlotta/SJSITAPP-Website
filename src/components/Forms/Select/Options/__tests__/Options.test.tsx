@@ -52,6 +52,12 @@ describe("Options", () => {
       expect(handleOptionSelect).toHaveBeenCalledTimes(2);
     });
 
+    it("finds an option by searchText", () => {
+      wrapper.setProps({ searchText: "Ducks" });
+
+      expect(wrapper.find("Option")).toHaveLength(1);
+    });
+
     it("filters the options by searchText", () => {
       wrapper.setProps({ searchText: "option3" });
 

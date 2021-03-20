@@ -3,7 +3,7 @@
 An application to manage the Sharks Ice Team scheduling.
 
 <a target="_blank" rel="noopener noreferrer" href="https://sjsiceteam.com/" alt="sharksWelcome.png">
-<img src="https://i.sjsiceteam.com/images/sharksWelcome.png" />
+<img src="https://i.imgur.com/7isN4eO.png" />
 </a>
 
 <br />

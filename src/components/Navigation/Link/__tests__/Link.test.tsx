@@ -52,6 +52,12 @@ describe("Styled Link", () => {
     expect(wrapper).toHaveStyleRule("padding", "10px");
   });
 
+  it("sets border when passed a 'border' prop", () => {
+    wrapper.setProps({ border: "10px" });
+    expect(wrapper).toHaveStyleRule("border", "10px");
+    expect(wrapper).toHaveStyleRule("border", "10px", { target: "hover" });
+  });
+
   it("sets border-radius when passed a 'borderRadius' prop", () => {
     wrapper.setProps({ borderRadius: "10px" });
     expect(wrapper).toHaveStyleRule("border-radius", "10px");

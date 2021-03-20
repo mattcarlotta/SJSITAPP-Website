@@ -35,9 +35,9 @@ export type THelpPageProps = {
   role: string;
 };
 
-const HelpPage = ({ role }: THelpPageProps): JSX.Element => {
+export const HelpPage = ({ role }: THelpPageProps): JSX.Element => {
   const router = useRouter();
-  const isStaff = role !== "employeee";
+  const isStaff = role !== "employee";
   const availableTopics = isStaff ? stafftopics : topics;
   const [basePath, hash] = router.asPath.split("#");
   const [state, setState] = React.useState<THelpPageState>({
@@ -71,7 +71,7 @@ const HelpPage = ({ role }: THelpPageProps): JSX.Element => {
         icon={<FaQuestionCircle />}
         subtitle="Questions and Answers"
       >
-        <Padding top="10px" right="40px" bottom="80px" left="40px">
+        <Padding top="10px" right="50px" bottom="80px" left="50px">
           <Center
             style={{
               marginTop: 25,
@@ -118,13 +118,13 @@ const HelpPage = ({ role }: THelpPageProps): JSX.Element => {
           {isStaff && (
             <>
               <GettingStarted id={id} />
-              <AutomatedServices id={id} />
               <Events id={id} />
               <Forms id={id} />
               <Mail id={id} />
               <Members id={id} />
               <EmployeeScheduling id={id} />
               <Seasons id={id} />
+              <AutomatedServices id={id} />
             </>
           )}
         </Padding>
