@@ -3,7 +3,6 @@ import Errors from "~components/Forms/Errors";
 import Container from "./Container";
 import ClickHandler from "./ClickHandler";
 import Selection from "./Selection";
-import SelectBox from "./SelectBox";
 import SelectContainer from "./SelectContainer";
 import Options from "./Options";
 import { EventTarget } from "~types";
@@ -36,23 +35,21 @@ const Select = ({
     <ClickHandler disabled={disabled} onChange={props.onChange}>
       {handlers => (
         <SelectContainer>
-          <SelectBox>
-            <Selection
-              {...handlers}
-              {...props}
-              height={height}
-              name={name}
-              disabled={disabled}
-              errors={errors}
-              value={value}
-            />
-            <Options
-              {...handlers}
-              name={name}
-              selectOptions={selectOptions}
-              selected={value}
-            />
-          </SelectBox>
+          <Selection
+            {...handlers}
+            {...props}
+            height={height}
+            name={name}
+            disabled={disabled}
+            errors={errors}
+            value={value}
+          />
+          <Options
+            {...handlers}
+            name={name}
+            selectOptions={selectOptions}
+            selected={value}
+          />
         </SelectContainer>
       )}
     </ClickHandler>

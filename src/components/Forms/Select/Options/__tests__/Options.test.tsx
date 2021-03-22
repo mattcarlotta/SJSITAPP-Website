@@ -19,7 +19,7 @@ describe("Options", () => {
   });
 
   it("initally renders nothing when invisible", () => {
-    expect(wrapper.find("DropContainer").exists()).toBeFalsy();
+    expect(wrapper.find("DropContainer")).not.toExist();
   });
 
   describe("When the options menu is visible", () => {
@@ -61,8 +61,8 @@ describe("Options", () => {
     it("filters the options by searchText", () => {
       wrapper.setProps({ searchText: "option3" });
 
-      expect(wrapper.find("Option")).toHaveLength(0);
-      expect(wrapper.find("NoOptions").exists()).toBeTruthy();
+      expect(wrapper.find("Option")).not.toExist();
+      expect(wrapper.find("NoOptions")).toExist();
     });
 
     it("calls handleScroll when an option has been selected", () => {

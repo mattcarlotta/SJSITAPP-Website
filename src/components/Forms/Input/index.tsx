@@ -95,7 +95,7 @@ const Input = styled(InputComponent)`
     width: 100%;
     font-size: 16px;
     background: #fff;
-    border: 1px solid #e5e5e5;
+    border: 1px solid #ccc;
     border-radius: 4px;
     transition: border 0.2s ease-in-out;
 

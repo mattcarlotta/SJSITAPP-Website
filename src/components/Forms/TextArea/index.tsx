@@ -57,7 +57,7 @@ const TextArea = styled(TextAreaComponent)`
     width: 100%;
     background: #fff;
     color: #3a3a3a;
-    border: 1px solid ${({ errors }) => (errors ? "#d03916" : "#d3d3d3")};
+    border: 1px solid ${({ errors }) => (errors ? "#d03916" : "#ccc")};
     border-radius: 4px;
     transition: 0.2s ease-in-out;
     transition-property: color, border;

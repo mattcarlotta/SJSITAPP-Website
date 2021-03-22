@@ -14,16 +14,16 @@ const initProps = {
 const wrapper = mount(<Select {...initProps} />);
 describe("Select Component", () => {
   it("renders without errors", () => {
-    expect(wrapper.find("Container").exists()).toBeTruthy();
-    expect(wrapper.find("SelectContainer").exists()).toBeTruthy();
+    expect(wrapper.find("Container")).toExist();
+    expect(wrapper.find("SelectContainer")).toExist();
   });
 
   it("initially doesn't display errors", () => {
-    expect(wrapper.find("Errors").exists()).toBeFalsy();
+    expect(wrapper.find("Errors")).not.toExist();
   });
 
   it("displays errors", () => {
     wrapper.setProps({ errors: "Required" });
-    expect(wrapper.find("Errors").exists()).toBeTruthy();
+    expect(wrapper.find("Errors")).toExist();
   });
 });

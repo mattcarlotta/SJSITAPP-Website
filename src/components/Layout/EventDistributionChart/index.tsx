@@ -1,9 +1,9 @@
-import { css } from "@emotion/react";
 import isEmpty from "lodash.isempty";
 import { VictoryAxis, VictoryBar, VictoryLabel, VictoryChart } from "victory";
 import ReactResizeDetector from "react-resize-detector";
-import NoEventDistribitionData from "~components/Layout/NoEventDistrubtionData";
 import FadeIn from "~components/Layout/FadeIn";
+import Padding from "~components/Layout/Padding";
+import NoEventDistribitionData from "~components/Layout/NoEventDistrubtionData";
 import { RefObject, TEventDistributionData } from "~types";
 
 export type TEventDistributionChartProps = {
@@ -34,28 +34,23 @@ const EventDistributionChart = ({
         [0, 0]
       )
     : [0, 0];
-  const tickValues = Array.from({ length: largestValue + 1 }, (_, i) => i + 1);
 
   return (
     <ReactResizeDetector handleWidth refreshMode="throttle" refreshRate={1000}>
       {({ width, targetRef }) => (
         <div ref={targetRef as RefObject<HTMLDivElement>}>
           {!isEmpty(events) ? (
-            <div
+            <Padding
               data-testid="event-distribution-chart"
-              css={css`
-                height: 650px;
-                width: 100%;
-                padding-left: 18px;
-                padding-right: 35px;
-                background-color: #fff;
-              `}
+              top="5px"
+              right="15px"
+              left="15px"
             >
               <VictoryChart
                 animate={{
-                  duration: 1000,
+                  duration: 500,
                   easing: "bounce",
-                  onLoad: { duration: 300 }
+                  onLoad: { duration: 500 }
                 }}
                 horizontal
                 padding={{
@@ -86,7 +81,10 @@ const EventDistributionChart = ({
                 <VictoryAxis
                   dependentAxis
                   label="Number of Scheduled Events"
-                  tickValues={tickValues}
+                  tickValues={Array.from(
+                    { length: largestValue + 1 },
+                    (_, i) => i + 1
+                  )}
                   tickLabelComponent={<VictoryLabel />}
                   tickFormat={t => `${parseInt(t, 10)}`}
                   style={{
@@ -116,7 +114,7 @@ const EventDistributionChart = ({
                   y={key}
                 />
               </VictoryChart>
-            </div>
+            </Padding>
           ) : (
             <FadeIn timing="300ms">
               <NoEventDistribitionData />

@@ -5,6 +5,7 @@ const SelectContainer = styled.div`
   display: flex;
   margin: 0 auto;
   width: 100%;
+  position: relative;
   flex-direction: row;
 `;
 

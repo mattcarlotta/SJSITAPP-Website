@@ -99,7 +99,7 @@ describe("Select - Selection", () => {
 
     it("initially contains default padding and color", () => {
       expect(displayOptionBtn()).toHaveStyleRule("padding", "8px 8px 8px 14px");
-      expect(displayOptionBtn()).toHaveStyleRule("color", "#d3dce6");
+      expect(displayOptionBtn()).toHaveStyleRule("color", "#ccc");
     });
 
     it("changes padding when an icon is present", () => {

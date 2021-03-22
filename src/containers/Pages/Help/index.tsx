@@ -54,6 +54,7 @@ export const HelpPage = ({ role }: THelpPageProps): JSX.Element => {
     []
   );
 
+  /* istanbul ignore next */
   React.useEffect(() => {
     if (hash !== id) setState(prevState => ({ ...prevState, id: hash }));
   }, [hash]);
