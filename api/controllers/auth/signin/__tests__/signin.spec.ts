@@ -70,10 +70,13 @@ describe("Sign In Controller", () => {
         expect(res.body).toEqual({
           avatar: expect.any(String),
           email: expect.any(String),
+          emailReminders: expect.any(Boolean),
           firstName: expect.any(String),
           id: expect.any(String),
           lastName: expect.any(String),
-          role: expect.any(String)
+          registered: expect.any(String),
+          role: expect.any(String),
+          status: expect.any(String)
         });
         done();
       });

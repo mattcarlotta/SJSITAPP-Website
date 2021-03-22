@@ -27,9 +27,12 @@ const signin = async (req: Request, res: Response): Promise<Response> => {
       id: existingUser._id,
       avatar: existingUser.avatar,
       email: existingUser.email,
+      emailReminders: existingUser.emailReminders,
       firstName: existingUser.firstName,
       lastName: existingUser.lastName,
-      role: existingUser.role
+      registered: existingUser.registered,
+      role: existingUser.role,
+      status: existingUser.status
     };
 
     return res.status(200).send(req.session!.user);

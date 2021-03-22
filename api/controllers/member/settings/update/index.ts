@@ -32,7 +32,10 @@ const updateMemberSettings = async (
     )
       throw missingUpdateMemberParams;
 
-    const existingMember = await User.findOne({ _id });
+    const existingMember = await User.findOne(
+      { _id },
+      { password: 0, token: 0, __v: 0 }
+    );
     /* istanbul ignore next */
     if (!existingMember) throw unableToLocateMember;
 
@@ -56,10 +59,28 @@ const updateMemberSettings = async (
       lastName
     });
 
+    const updatedMember = await User.findOne(
+      { _id: existingMember._id },
+      { password: 0, token: 0, __v: 0 }
+    ).lean();
+    /* istanbul ignore next */
+    if (!updatedMember) throw unableToLocateMember;
+
     return res.status(200).json({
       message: updatedEmail
         ? "Your profile has been updated. Please re-log into your account with your new email address."
-        : "Successfully updated your settings."
+        : "Successfully updated your settings.",
+      user: {
+        id: updatedMember._id,
+        avatar: updatedMember.avatar,
+        email: updatedMember.email,
+        emailReminders: updatedMember.emailReminders,
+        firstName: updatedMember.firstName,
+        lastName: updatedMember.lastName,
+        registered: updatedMember.registered,
+        role: updatedMember.role,
+        status: updatedMember.status
+      }
     });
   } catch (err) {
     return sendError(err, 400, res);

@@ -10,7 +10,7 @@ const SelectionContainer = styled.div<{
   cursor: ${({ disabled }) => (!disabled ? "pointer" : "not-allowed")};
   background-color: ${({ disabled }) => (!disabled ? "#fff" : "#ebebeb")};
   display: inline-block;
-  height: ${({ height }) => height || "40px"};
+  height: ${({ height }) => height || "auto"};
   width: 100%;
   border-radius: 4px;
   border: 1px solid

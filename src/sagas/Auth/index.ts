@@ -3,7 +3,7 @@ import { all, put, call, takeLatest } from "redux-saga/effects";
 import toast from "~components/App/Toast";
 import * as actions from "~actions/Auth"; // setUserAvatar, signout
 // import { fetchMemberSettings } from "~actions/Members";
-import { resetMessage } from "~actions/Server"; // setMessage
+import { setMessage, resetMessage } from "~actions/Server";
 import * as constants from "~constants";
 import app from "~utils/axiosConfig"; // { avatarAPI }
 import { parseData, parseMessage } from "~utils/parseResponse";
@@ -215,6 +215,42 @@ export function* signupUser({
 // }
 
 /**
+ * Attempts to update a user profile.
+ *
+ * @generator
+ * @function updateUserAvatar
+ * @param {object} form - formData contains image.
+ * @param {string} id - user's id.
+ * @yield {object} - A response from a call to the API.
+ * @function parseData - returns a parsed res.data.
+ * @yield {action} - A redux action to set a server message by type.
+ * @yield {action} - A redux action to display a toast message by type.
+ * @yield {action} - A redux action do set user avatar to redux state.
+ * @yields {action} - A redux action to fresh member settings.
+ * @throws {AnyAction} - A redux action to display a server error.
+ */
+export function* updateUserProfile({
+  payload
+}: ReturnType<typeof actions.updateUserProfile>): SagaIterator {
+  try {
+    const res = yield call(app.put, `member/settings/update`, payload);
+    const data = yield call(parseData, res);
+
+    yield put(setMessage(data.message));
+    yield call(toast, { type: "info", message: data.message });
+
+    if (data.message !== "Successfully updated your settings.") {
+      yield call(signoutUserSession);
+    } else {
+      yield put(actions.signinSession(data.user));
+    }
+    yield put(resetMessage());
+  } catch (e) {
+    yield call(showError, e.toString());
+  }
+}
+
+/**
  * Attempts to create a new user password.
  *
  * @generator
@@ -258,6 +294,7 @@ export default function* authSagas(): SagaIterator {
     takeLatest(constants.USER_SIGNIN_ATTEMPT, signinUser),
     takeLatest(constants.USER_SIGNOUT_SESSION, signoutUserSession),
     takeLatest(constants.USER_SIGNUP, signupUser),
+    takeLatest(constants.USER_UPDATE_PROFILE, updateUserProfile),
     // takeLatest(constants.USER_UPDATE_AVATAR, updateUserAvatar),
     takeLatest(constants.USER_PASSWORD_UPDATE, updateUserPassword)
   ]);

@@ -31,9 +31,12 @@ export type TAuthData = {
   id?: string;
   avatar?: string;
   email?: string;
+  emailReminders?: boolean;
   firstName?: string;
   lastName?: string;
+  registered?: string;
   role?: string;
+  status?: string;
 };
 
 export type TLoginData = {
@@ -86,7 +89,7 @@ export type TIconType =
 export type EventTarget = {
   target: {
     name: string;
-    value: string;
+    value: string | boolean;
   };
 };
 
@@ -117,7 +120,7 @@ export type TBaseFieldProps = {
   selectOptions?: Array<string>;
   type: string;
   tooltip?: string;
-  value?: string | moment.Moment | Array<moment.Moment>;
+  value?: string | moment.Moment | Array<moment.Moment> | boolean;
   updateEvent?: boolean;
 };
 

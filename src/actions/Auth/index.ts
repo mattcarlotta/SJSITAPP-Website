@@ -148,16 +148,21 @@ export const signupUser = (
 });
 
 /**
- * Updates current signed in user first and last name.
+ * Updates current signed in user details.
  *
- * @function updateUser
- * @param data - contains user session data: `id`, `avatar`, `email`, `firstName`, `lastName`, and `role`
- * @returns constants.USER_UPDATE and data
+ * @function updateUserProfile
+ * @param payload - contains user session data: `id`, `avatar`, `email`, `firstName`, `lastName`, and `role`
+ * @returns constants.USER_UPDATE_PROFILE and payload
  */
-// export const updateUser = data => ({
-// 	type: constants.USER_UPDATE,
-// 	payload: data,
-// });
+export const updateUserProfile = (
+  data: TAuthData
+): {
+  type: typeof constants.USER_UPDATE_PROFILE;
+  payload: TAuthData;
+} => ({
+  type: constants.USER_UPDATE_PROFILE,
+  payload: data
+});
 
 /**
  * Updates current signed in user avatar.

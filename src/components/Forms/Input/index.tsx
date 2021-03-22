@@ -86,7 +86,7 @@ const InputComponent = ({
 const Input = styled(InputComponent)`
   position: relative;
   display: inline-block;
-  height: 90px;
+  height: 95px;
   width: 100%;
 
   input {

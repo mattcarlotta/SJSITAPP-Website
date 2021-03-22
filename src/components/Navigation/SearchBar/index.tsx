@@ -26,7 +26,10 @@ const SearchBar = ({ role }: TSearchBarProps): JSX.Element => {
 
   const handleSearchChange = React.useCallback(
     ({ target: { value } }: EventTarget) => {
-      setState({ searchText: value, id: stripSpaces(value) });
+      setState({
+        searchText: value as string,
+        id: stripSpaces(value as string)
+      });
     },
     []
   );

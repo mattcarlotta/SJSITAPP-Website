@@ -1,6 +1,7 @@
 import * as React from "react";
 import Input from "~components/Forms/Input";
 import Select from "~components/Forms/Select";
+import Switch from "~components/Forms/Switch";
 import TextArea from "~components/Forms/TextArea";
 import { ChangeEvent, EventTarget, TBaseFieldProps } from "~types";
 
@@ -56,6 +57,17 @@ const FieldGenerator = <
               value={value as string}
               selectOptions={selectOptions as Array<string>}
               onChange={onChange}
+            />
+          );
+        }
+        case "switch": {
+          return (
+            <Switch
+              {...rest}
+              key={name}
+              name={name}
+              onChange={onChange}
+              value={value as boolean}
             />
           );
         }
