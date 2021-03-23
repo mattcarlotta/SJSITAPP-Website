@@ -72,11 +72,13 @@ export { FaTools } from "@react-icons/all-files/fa/FaTools";
 export { FaTrash } from "@react-icons/all-files/fa/FaTrash";
 export { FaTshirt } from "@react-icons/all-files/fa/FaTshirt";
 export { FaUpload } from "@react-icons/all-files/fa/FaUpload";
+export { FaUser } from "@react-icons/all-files/fa/FaUser";
 export { FaUserClock } from "@react-icons/all-files/fa/FaUserClock";
 export { FaUserCircle } from "@react-icons/all-files/fa/FaUserCircle";
 export { FaUserFriends } from "@react-icons/all-files/fa/FaUserFriends";
 export { FaUserPlus } from "@react-icons/all-files/fa/FaUserPlus";
 export { FaUsers } from "@react-icons/all-files/fa/FaUsers";
+export { FaUserTimes } from "@react-icons/all-files/fa/FaUserTimes";
 export { FaUnlockAlt } from "@react-icons/all-files/fa/FaUnlockAlt";
 
 // FI

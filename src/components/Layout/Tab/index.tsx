@@ -62,7 +62,7 @@ const AntTab = withStyles(() =>
     tab: number;
   }) => (
     <Tab
-      data-testid={dataTestId}
+      data-testid={`tab-${dataTestId}`}
       disabled={tab === index}
       {...a11yProps(index)}
       {...rest}

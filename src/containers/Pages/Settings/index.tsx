@@ -19,9 +19,11 @@ export type TSettingPageProps = {
   emailReminders: boolean;
   firstName: string;
   lastName: string;
+  registered: string;
   role: string;
   serverError?: string;
   serverMessage?: string;
+  status: string;
   updateUserProfile: typeof updateUserProfile;
 };
 
@@ -41,7 +43,7 @@ const SettingsPage = (props: TSettingPageProps): JSX.Element => {
         <Tabs
           value={tab}
           onChange={handleTabChange}
-          variant="standard"
+          variant="scrollable"
           aria-label="event tabs"
         >
           <Tab

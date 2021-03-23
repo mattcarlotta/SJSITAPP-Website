@@ -104,7 +104,7 @@ describe("Select - Selection", () => {
 
     it("changes padding when an icon is present", () => {
       wrapper.setProps({ icon: "id" });
-      expect(displayOptionBtn()).toHaveStyleRule("padding", "11px 0 11px 48px");
+      expect(displayOptionBtn()).toHaveStyleRule("padding", "8px 0 8px 48px");
     });
 
     it("initially displays a placeholder", () => {

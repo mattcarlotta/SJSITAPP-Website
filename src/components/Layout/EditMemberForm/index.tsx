@@ -81,7 +81,8 @@ export const EditMemberForm = ({
   return (
     <form
       css={css`
-        width: 400px;
+        max-width: 400px;
+        width: 100%;
         margin-top: 30px;
       `}
       onSubmit={handleSubmit}
@@ -90,7 +91,7 @@ export const EditMemberForm = ({
       <SubmitButton
         isSubmitting={state.isSubmitting}
         title="Update Settings"
-        style={{ width: "300px", margin: "0 auto" }}
+        style={{ maxWidth: "300px", margin: "0 auto" }}
         submitBtnStyle={{
           background: "#010404",
           border: "2px solid #2e7c8a"
