@@ -40,8 +40,6 @@ const responseTypes = [
   "No response."
 ];
 
-const COLORS = ["#247BA0", "#2A9D8F", "#F4A261", "#FF8060", "#BFBFBF"];
-
 // const arraysEqual = (a: Array<any>, b: Array<any>): boolean =>
 //   // eslint-disable-next-line
 //   JSON.stringify(a) == JSON.stringify(b);
@@ -278,11 +276,9 @@ const createMemberResponseCount = (
   eventResponses: TEventAggResponses
 ): TEventAccResponses =>
   eventResponses.reduce((acc, { responses }) => {
-    responseTypes.forEach((rspType, index) => {
+    responseTypes.forEach(rspType => {
       acc.push({
         id: rspType,
-        label: rspType,
-        color: COLORS[index],
         value: responses.filter(rsp => rsp === rspType).length
       });
     });

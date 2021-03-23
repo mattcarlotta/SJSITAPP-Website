@@ -156,7 +156,7 @@ export type TFormData = {
 };
 
 export type TAvailabilityData = {
-  _id: string;
+  id: string;
   value: string;
 };
 
@@ -168,6 +168,22 @@ export type TEmployeeAvailabilityData = {
 export type TEventDistributionData = {
   name: string;
   "Event Count": number;
+};
+
+export type TEventResponseCount = {
+  id: string;
+  value: number;
+};
+
+export type TEventScheduledEvents = {
+  id: string;
+  events: number;
+};
+
+export type TAvailabilityAggData = {
+  eventAvailability: Array<TAvailabilityData>;
+  memberResponseCount: Array<TEventResponseCount>;
+  memberScheduleEvents: Array<TEventScheduledEvents>;
 };
 
 ///

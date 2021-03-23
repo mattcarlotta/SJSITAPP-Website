@@ -9,7 +9,7 @@ const FlexCenter = styled.div<{
 }>`
   ${({ breakpoint }) =>
     breakpoint &&
-    `@media (max-width: 600px) {
+    `@media (max-width: 900px) {
       flex-direction: column;
     }
   `};

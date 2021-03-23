@@ -183,32 +183,22 @@ describe("Helpers", () => {
     expect(eventResponseCount).toEqual([
       {
         id: "I want to work.",
-        label: "I want to work.",
-        color: "#247BA0",
         value: 0
       },
       {
         id: "Available to work.",
-        label: "Available to work.",
-        color: "#2A9D8F",
         value: 0
       },
       {
         id: "Prefer not to work.",
-        label: "Prefer not to work.",
-        color: "#F4A261",
         value: 0
       },
       {
         id: "Not available to work.",
-        label: "Not available to work.",
-        color: "#FF8060",
         value: 0
       },
       {
         id: "No response.",
-        label: "No response.",
-        color: "#BFBFBF",
         value: 5
       }
     ]);

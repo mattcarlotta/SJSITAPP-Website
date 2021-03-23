@@ -90,7 +90,10 @@ export const Availability = (): JSX.Element => {
               Availability should be at 75% or above
             </PanelDescription>
             <DisplayMonthDates startMonth={months[0]} endMonth={months[1]} />
-            <AvailabilityAvgChart availability={availability} />
+            <AvailabilityAvgChart
+              availability={availability}
+              style={{ margin: "0 auto" }}
+            />
           </Center>
         )}
       </Padding>

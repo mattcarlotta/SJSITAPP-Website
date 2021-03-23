@@ -8,10 +8,10 @@ const iconStyle = {
   marginBottom: 5
 } as CSSProperties;
 
-const NoAvailability = (): JSX.Element => (
+const NoAvailability = ({ height }: { height?: string }): JSX.Element => (
   <FlexCenter
     data-testid="no-availability"
-    height="120px"
+    height={height || "120px"}
     direction="column"
     justify="center"
     color="#999"

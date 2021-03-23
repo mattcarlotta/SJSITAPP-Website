@@ -10,6 +10,7 @@ export type TNativeSelectProps = {
 const useStyles = makeStyles({
   root: {
     width: 125,
+    textAlign: "center",
     "& .MuiInput-input": {
       fontSize: 16,
       cursor: "pointer",

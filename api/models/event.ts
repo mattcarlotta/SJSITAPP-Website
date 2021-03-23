@@ -6,8 +6,6 @@ type TId = Types.ObjectId | string;
 
 export type TEventAccResponses = Array<{
   id: string;
-  label: string;
-  color: string;
   value: number;
 }>;
 

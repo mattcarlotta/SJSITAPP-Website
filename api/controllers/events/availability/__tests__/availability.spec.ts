@@ -37,8 +37,6 @@ describe("Event Availability Controller", () => {
           memberResponseCount: expect.arrayContaining([
             expect.objectContaining({
               id: expect.any(String),
-              label: expect.any(String),
-              color: expect.any(String),
               value: expect.any(Number)
             })
           ]),
@@ -70,8 +68,6 @@ describe("Event Availability Controller", () => {
           memberResponseCount: expect.arrayContaining([
             expect.objectContaining({
               id: expect.any(String),
-              label: expect.any(String),
-              color: expect.any(String),
               value: expect.any(Number)
             })
           ]),
@@ -115,8 +111,6 @@ describe("Event Availability Controller", () => {
           memberResponseCount: expect.arrayContaining([
             expect.objectContaining({
               id: expect.any(String),
-              label: expect.any(String),
-              color: expect.any(String),
               value: expect.any(Number)
             })
           ]),
