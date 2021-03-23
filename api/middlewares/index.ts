@@ -1,9 +1,9 @@
-import { Express } from "express";
-import bodyParser from "body-parser";
+import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import compression from "compression";
 import session from "cookie-session";
+import type { Express } from "express";
 
 const { CLIENT, inStaging, COOKIEKEY, DOMAIN, NODE_ENV } = process.env;
 const inTesting = NODE_ENV === "test";
@@ -46,8 +46,8 @@ const middlewares = (app: Express): void => {
       credentials: true
     })
   ); // allows receiving of cookies/tokens from front-end
-  app.use(bodyParser.json()); // parses header requests (req.body)
-  app.use(bodyParser.urlencoded({ extended: true })); // allows objects and arrays to be URL-encoded
+  app.use(express.json()); // parses header requests (req.body)
+  app.use(express.urlencoded({ extended: true })); // allows objects and arrays to be URL-encoded
   app.set("json spaces", 2); // sets JSON spaces for clarity
 };
 
