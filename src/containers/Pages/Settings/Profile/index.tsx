@@ -1,6 +1,5 @@
 import { updateUserProfile } from "~actions/Auth";
 import EditMemberForm from "~components/Layout/EditMemberForm";
-import Padding from "~components/Layout/Padding";
 
 export type TProfileProps = {
   id: string;
@@ -16,9 +15,7 @@ export type TProfileProps = {
 };
 
 const Profile = (props: TProfileProps): JSX.Element => (
-  <Padding top="10px" left="10px" right="10px" bottom="40px">
-    <EditMemberForm {...props} />
-  </Padding>
+  <EditMemberForm {...props} />
 );
 
 export default Profile;

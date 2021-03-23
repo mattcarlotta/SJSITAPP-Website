@@ -19,7 +19,7 @@ export const Schedule = ({ loggedinUserId }: TScheduleProps): JSX.Element => (
       title="Schedule"
       subtitle="Event Calendar"
     >
-      <EventCalendar id={loggedinUserId} />
+      <EventCalendar APIURL="schedule" id={loggedinUserId} />
     </Card>
   </>
 );

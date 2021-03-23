@@ -6,13 +6,6 @@ export type TTabelPanelProps = {
   value: number;
 };
 
-export const a11yProps = (
-  index: number
-): { id: string; "aria-controls": string } => ({
-  id: `tab-${index}`,
-  "aria-controls": `tabpanel-${index}`
-});
-
 const TabPanel = ({
   children,
   value,

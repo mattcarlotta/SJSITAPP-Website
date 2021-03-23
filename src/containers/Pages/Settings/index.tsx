@@ -2,12 +2,14 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { updateUserProfile } from "~actions/Auth";
 import Card from "~components/Layout/Card";
-import TabPanel, { a11yProps } from "~components/Layout/TabPanel";
+import Padding from "~components/Layout/Padding";
+import TabPanel from "~components/Layout/TabPanel";
 import Tab from "~components/Layout/Tab";
 import Tabs from "~components/Layout/Tabs";
 import Header from "~components/Navigation/Header";
 import Profile from "./Profile";
-import { FaCogs } from "~icons";
+import EventResponses from "./EventResponses";
+import { BsPeopleCircle, FaCogs, FaChartBar, FaReply } from "~icons";
 import { TRootState } from "~types";
 
 export type TSettingPageProps = {
@@ -42,31 +44,55 @@ const SettingsPage = (props: TSettingPageProps): JSX.Element => {
           variant="standard"
           aria-label="event tabs"
         >
-          <Tab disabled={tab === 0} label="profile" {...a11yProps(0)} />
+          <Tab
+            dataTestId="profile"
+            index={0}
+            tab={tab}
+            label={
+              <>
+                <BsPeopleCircle style={{ marginRight: 5 }} />
+                Profile
+              </>
+            }
+          />
           {isEmployee && [
             <Tab
               key="availability"
-              disabled={tab === 1}
-              label="availability"
-              {...a11yProps(1)}
+              index={1}
+              dataTestId="availability"
+              tab={tab}
+              label={
+                <>
+                  <FaChartBar style={{ marginRight: 5 }} />
+                  Availability
+                </>
+              }
             />,
             <Tab
               key="responses"
-              disabled={tab === 2}
-              label="responses"
-              {...a11yProps(2)}
+              dataTestId="responses"
+              index={2}
+              tab={tab}
+              label={
+                <>
+                  <FaReply style={{ marginRight: 5 }} />
+                  Responses
+                </>
+              }
             />
           ]}
         </Tabs>
-        <TabPanel value={tab} index={0}>
-          <Profile {...props} />
-        </TabPanel>
-        <TabPanel value={tab} index={1}>
-          <div>Availability</div>
-        </TabPanel>
-        <TabPanel value={tab} index={2}>
-          <div>Responses</div>
-        </TabPanel>
+        <Padding top="10px" left="40px" right="40px" bottom="40px">
+          <TabPanel value={tab} index={0}>
+            <Profile {...props} />
+          </TabPanel>
+          <TabPanel value={tab} index={1}>
+            <div>Events Availability</div>
+          </TabPanel>
+          <TabPanel value={tab} index={2}>
+            <EventResponses id={props.id} />
+          </TabPanel>
+        </Padding>
       </Card>
     </>
   );

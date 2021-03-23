@@ -58,6 +58,7 @@ export { FaMailBulk } from "@react-icons/all-files/fa/FaMailBulk";
 export { FaMinusCircle } from "@react-icons/all-files/fa/FaMinusCircle";
 export { FaPaperPlane } from "@react-icons/all-files/fa/FaPaperPlane";
 export { FaQuestionCircle } from "@react-icons/all-files/fa/FaQuestionCircle";
+export { FaReply } from "@react-icons/all-files/fa/FaReply";
 export { FaSearch } from "@react-icons/all-files/fa/FaSearch";
 export { FaSearchLocation } from "@react-icons/all-files/fa/FaSearchLocation";
 export { FaSearchPlus } from "@react-icons/all-files/fa/FaSearchPlus";

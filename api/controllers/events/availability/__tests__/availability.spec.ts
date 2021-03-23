@@ -5,7 +5,7 @@ import User, { IUserDocument } from "~models/user";
 import { unableToLocateMember } from "~messages/errors";
 import app from "~test/utils/testServer";
 
-describe("Member Availability Controller", () => {
+describe("Event Availability Controller", () => {
   let member: IUserDocument | null;
   let memberCookie: string;
   let staffCookie: string;
@@ -22,7 +22,7 @@ describe("Member Availability Controller", () => {
 
   it("accepts requests to retrieve logged in user availability", done => {
     app()
-      .get("/api/member/availability")
+      .get("/api/events/availability")
       .set("Cookie", memberCookie)
       .expect("Content-Type", /json/)
       .expect(200)
@@ -55,7 +55,7 @@ describe("Member Availability Controller", () => {
 
   it("accepts requests to retrieve a specfic user's availability", done => {
     app()
-      .get(`/api/member/availability?id=${member!.id}`)
+      .get(`/api/events/availability?id=${member!.id}`)
       .set("Cookie", staffCookie)
       .expect("Content-Type", /json/)
       .expect(200)
@@ -88,7 +88,7 @@ describe("Member Availability Controller", () => {
 
   it("rejects requests to retrieve an invalid user's availability", done => {
     app()
-      .get("/api/member/availability?id=601dc43483adb35b1ca678ea")
+      .get("/api/events/availability?id=601dc43483adb35b1ca678ea")
       .set("Cookie", staffCookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -100,7 +100,7 @@ describe("Member Availability Controller", () => {
 
   it("accepts requests to retrieve a specfic user's availability", done => {
     app()
-      .get(`/api/member/availability?id=${member!.id}`)
+      .get(`/api/events/availability?id=${member!.id}`)
       .set("Cookie", staffCookie)
       .expect("Content-Type", /json/)
       .expect(200)
@@ -134,7 +134,7 @@ describe("Member Availability Controller", () => {
   it("accepts requests to retrieve a specfic user's availability by date", done => {
     app()
       .get(
-        `/api/member/availability?id=${
+        `/api/events/availability?id=${
           member!._id
         }&selectedDate=1000-06-01T07:00:00.000Z`
       )

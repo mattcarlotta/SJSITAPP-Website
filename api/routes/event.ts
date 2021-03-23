@@ -10,7 +10,9 @@ import {
 } from "~controllers/event";
 import {
   getAllEvents,
+  getMemberEventsAvailability,
   deleteManyEvents,
+  getEventResponses,
   getScheduledEvents
 } from "~controllers/events";
 import { requireAuth, requireStaffRole } from "~services/strategies";
@@ -26,6 +28,8 @@ const eventRoutes = (router: Router): void => {
 
   router.get("/events/viewall", requireStaffRole, getAllEvents);
   router.delete("/events/delete-many", requireStaffRole, deleteManyEvents);
+  router.get("/events/availability", requireAuth, getMemberEventsAvailability);
+  router.get("/events/responses", requireAuth, getEventResponses);
   router.get("/events/schedule", requireAuth, getScheduledEvents);
 };
 

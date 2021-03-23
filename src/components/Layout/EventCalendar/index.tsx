@@ -46,10 +46,14 @@ export type TEventCalendarState = {
 };
 
 export type TEventCalendarProps = {
+  APIURL: string;
   id: string;
 };
 
-export const EventCalendar = ({ id }: TEventCalendarProps): JSX.Element => {
+export const EventCalendar = ({
+  APIURL,
+  id
+}: TEventCalendarProps): JSX.Element => {
   const [state, setState] = React.useState<TEventCalendarState>({
     days: generateCalendarDays(
       moment().daysInMonth(),
@@ -81,7 +85,7 @@ export const EventCalendar = ({ id }: TEventCalendarProps): JSX.Element => {
     years
   } = state;
 
-  const fetchSchedule = React.useCallback(async (): Promise<void> => {
+  const fetchEvents = React.useCallback(async (): Promise<void> => {
     try {
       const selectedDate = moment(
         `${selectedYear} ${selectedMonth}`,
@@ -89,7 +93,7 @@ export const EventCalendar = ({ id }: TEventCalendarProps): JSX.Element => {
       ).format();
 
       const res = await app.get(
-        `events/schedule?id=${id}&selectedDate=${selectedDate}&selectedGames=${selectedGames}`
+        `events/${APIURL}?id=${id}&selectedDate=${selectedDate}&selectedGames=${selectedGames}`
       );
       const data = parseData<Array<TEventData>>(res);
 
@@ -113,7 +117,7 @@ export const EventCalendar = ({ id }: TEventCalendarProps): JSX.Element => {
         isLoading: false
       }));
     }
-  }, [id, selectedGames, selectedMonth, selectedYear]);
+  }, [APIURL, id, selectedGames, selectedMonth, selectedYear]);
 
   const handleMonthChange = React.useCallback((days: number): void => {
     setState(prevState => ({
@@ -151,8 +155,8 @@ export const EventCalendar = ({ id }: TEventCalendarProps): JSX.Element => {
   }, []);
 
   React.useEffect(() => {
-    if (isLoading) fetchSchedule();
-  }, [fetchSchedule, isLoading]);
+    if (isLoading) fetchEvents();
+  }, [fetchEvents, isLoading]);
 
   return (
     <Padding

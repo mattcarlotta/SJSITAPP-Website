@@ -639,7 +639,7 @@ const getUsers = async ({
  * Find all member availability between a date range.
  *
  * @function findMemberAvailabilty
- * @returns {object} -
+ * @returns -
     eventAvailability: { eventCounts, eventResponses }, memberResponseCount, memberScheduleEvents: [
      { id: "scheduled", events: scheduledCount }, { id: "available", events: eventCounts }]
  */

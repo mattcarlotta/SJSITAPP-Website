@@ -78,7 +78,7 @@ describe("Dashboard EventCalendar", () => {
   let wrapper: ReactWrapper;
   let findById: (id: string) => ReactWrapper;
   beforeEach(() => {
-    wrapper = mount(<EventCalendar id={id} />);
+    wrapper = mount(<EventCalendar APIURL="schedule" id={id} />);
     findById = id => wrapper.find(`[data-testid='${id}']`);
   });
 

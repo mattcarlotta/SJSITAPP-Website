@@ -1,5 +1,13 @@
 import { withStyles, createStyles } from "@material-ui/core/styles";
 import { Tab } from "@material-ui/core";
+import { ReactNode } from "~types";
+
+export const a11yProps = (
+  index: number
+): { id: string; "aria-controls": string } => ({
+  id: `tab-${index}`,
+  "aria-controls": `tabpanel-${index}`
+});
 
 const AntTab = withStyles(() =>
   createStyles({
@@ -35,10 +43,31 @@ const AntTab = withStyles(() =>
       "&:focus": {
         color: "#025f6d"
       }
+    },
+    wrapper: {
+      flexDirection: "row"
     }
   })
-)((props: { disabled?: boolean; label: string }) => (
-  <Tab data-testid={`tab-${props.label}`} {...props} />
-));
+)(
+  ({
+    dataTestId,
+    index,
+    tab,
+    ...rest
+  }: {
+    dataTestId: string;
+    index: number;
+    disabled?: boolean;
+    label: ReactNode;
+    tab: number;
+  }) => (
+    <Tab
+      data-testid={dataTestId}
+      disabled={tab === index}
+      {...a11yProps(index)}
+      {...rest}
+    />
+  )
+);
 
 export default AntTab;

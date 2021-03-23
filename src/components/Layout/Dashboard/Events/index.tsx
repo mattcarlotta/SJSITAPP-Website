@@ -6,7 +6,7 @@ import DisplayEvents from "~components/Layout/DisplayEvents";
 import FetchError from "~components/Layout/FetchError";
 import LoadingPanel from "~components/Layout/LoadingPanel";
 import Padding from "~components/Layout/Padding";
-import TabPanel, { a11yProps } from "~components/Layout/TabPanel";
+import TabPanel from "~components/Layout/TabPanel";
 import Tab from "~components/Layout/Tab";
 import Tabs from "~components/Layout/Tabs";
 import { MdEvent } from "~icons";
@@ -99,9 +99,14 @@ export const Events = ({
         variant="standard"
         aria-label="event tabs"
       >
-        <Tab disabled={state.tab === 0} label="today" {...a11yProps(0)} />
+        <Tab dataTestId="today" index={0} tab={state.tab} label="today" />
         {isEmployee && (
-          <Tab disabled={state.tab === 1} label="upcoming" {...a11yProps(1)} />
+          <Tab
+            dataTestId="upcoming"
+            index={1}
+            tab={state.tab}
+            label="upcoming"
+          />
         )}
       </Tabs>
       <TabPanel value={0} index={0}>
