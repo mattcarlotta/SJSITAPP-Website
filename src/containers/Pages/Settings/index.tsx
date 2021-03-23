@@ -1,15 +1,15 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { updateUserProfile } from "~actions/Auth";
+import { updateUserAvatar, updateUserProfile } from "~actions/Auth";
 import Availability from "~components/Layout/Availability";
 import Card from "~components/Layout/Card";
 import EventCalendar from "~components/Layout/EventCalendar";
 import Padding from "~components/Layout/Padding";
+import Profile from "~components/Layout/Profile";
 import TabPanel from "~components/Layout/TabPanel";
 import Tab from "~components/Layout/Tab";
 import Tabs from "~components/Layout/Tabs";
 import Header from "~components/Navigation/Header";
-import Profile from "./Profile";
 import { BsPeopleCircle, FaCogs, FaChartBar, FaReply } from "~icons";
 import { TRootState } from "~types";
 
@@ -25,6 +25,7 @@ export type TSettingPageProps = {
   serverError?: string;
   serverMessage?: string;
   status: string;
+  updateUserAvatar: typeof updateUserAvatar;
   updateUserProfile: typeof updateUserProfile;
 };
 
@@ -113,6 +114,7 @@ const mapStateToProps = ({
 
 /* istanbul ignore next */
 const mapDispatchToProps = {
+  updateUserAvatar,
   updateUserProfile
 };
 

@@ -1,6 +1,8 @@
 import isEmpty from "lodash.isempty";
 import * as constants from "~constants";
 import {
+  TAvatarData,
+  TAvatarResData,
   TAuthData,
   TLoginData,
   TNewPasswordData,
@@ -62,27 +64,21 @@ export const resetPassword = (
 });
 
 /**
- * Persists sidebar state.
- *
- * @function setSidebarState
- * @param payload - payload just contain an `email` field.
- * @returns constants.USER_SET_SIDEBAR_STATE
- */
-// export const setSidebarState = () => ({
-// 	type: constants.USER_SET_SIDEBAR_STATE,
-// });
-
-/**
  * Updates the user avatar to redux state.
  *
  * @function setUserAvatar
  * @param avatar
  * @returns object
  */
-// export const setUserAvatar = avatar => ({
-// 	type: constants.USER_SET_AVATAR,
-// 	payload: avatar,
-// });
+export const setUserAvatar = (
+  payload: TAvatarResData
+): {
+  type: typeof constants.USER_SET_AVATAR;
+  payload: TAvatarResData;
+} => ({
+  type: constants.USER_SET_AVATAR,
+  payload
+});
 
 /**
  * Sets current signed in user (can be guest) to redux state
@@ -172,11 +168,15 @@ export const updateUserProfile = (
  * @param id - contains user `id`
  * @returns constants.USER_UPDATE_AVATAR, form, id
  */
-// export const updateUserAvatar = ({ form, id }) => ({
-// 	type: constants.USER_UPDATE_AVATAR,
-// 	form,
-// 	id,
-// });
+export const updateUserAvatar = (
+  payload: TAvatarData
+): {
+  type: typeof constants.USER_UPDATE_AVATAR;
+  payload: TAvatarData;
+} => ({
+  type: constants.USER_UPDATE_AVATAR,
+  payload
+});
 
 /**
  * Updates user password via newpassword form.

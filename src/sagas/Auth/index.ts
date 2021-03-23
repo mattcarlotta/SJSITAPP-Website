@@ -5,7 +5,7 @@ import * as actions from "~actions/Auth"; // setUserAvatar, signout
 // import { fetchMemberSettings } from "~actions/Members";
 import { setMessage, resetMessage } from "~actions/Server";
 import * as constants from "~constants";
-import app from "~utils/axiosConfig"; // { avatarAPI }
+import app, { avatarAPI } from "~utils/axiosConfig";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import showError from "~utils/showError";
 import { AxiosResponse, SagaIterator, TAuthData } from "~types";
@@ -122,7 +122,7 @@ export function* resetPassword({
  *
  * @generator
  * @function signinUser
- * @param {object} payload - contains user credentials `email` and `password` fields.
+ * @param payload - contains user credentials `email` and `password` fields.
  * @yield {AnyAction} - A redux action to reset server messages.
  * @yield {AxiosResponse} - A response from a call to the API.
  * @yield {TAuthData} - Returns parsed `res.data`.
@@ -181,9 +181,8 @@ export function* signupUser({
  *
  * @generator
  * @function updateUserAvatar
- * @param {object} form - formData contains image.
- * @param {string} id - user's id.
- * @yield {object} - A response from a call to the API.
+ * @param {object} payload - `form` is formData image and `id` is user id.
+ * @yield {AxiosResponse} - A response from a call to the API.
  * @function parseData - returns a parsed res.data.
  * @yield {action} - A redux action to set a server message by type.
  * @yield {action} - A redux action to display a toast message by type.
@@ -191,36 +190,40 @@ export function* signupUser({
  * @yields {action} - A redux action to fresh member settings.
  * @throws {AnyAction} - A redux action to display a server error.
  */
-// export function* updateUserAvatar({ form, id }) {
-//   try {
-//     yield put(resetMessage());
+export function* updateUserAvatar({
+  payload
+}: ReturnType<typeof actions.updateUserAvatar>): SagaIterator {
+  try {
+    yield put(resetMessage());
 
-//     const res = yield call(avatarAPI.put, `update/${id}`, form);
-//     const data = yield call(parseData, res);
+    const res: AxiosResponse = yield call(
+      avatarAPI.put,
+      `update/${payload.id}`,
+      payload.form
+    );
+    const data: { avatar: string; message: string } = yield call(
+      parseData,
+      res
+    );
 
-//     const { avatar, message } = data;
+    const { avatar, message } = data;
 
-//     yield put(
-//       setMessage({
-//         message
-//       })
-//     );
-//     yield call(toast, { type: "info", message });
+    yield put(setMessage(message));
+    yield call(toast, { type: "info", message });
 
-//     yield put(setUserAvatar({ avatar }));
-//     yield put(fetchMemberSettings());
-//   } catch (e) {
-//      yield call(showError, e.toString());
-//   }
-// }
+    yield put(actions.setUserAvatar({ avatar }));
+    yield put(resetMessage());
+  } catch (e) {
+    yield call(showError, e.toString());
+  }
+}
 
 /**
  * Attempts to update a user profile.
  *
  * @generator
- * @function updateUserAvatar
- * @param {object} form - formData contains image.
- * @param {string} id - user's id.
+ * @function updateUserProfile
+ * @param payload - .
  * @yield {object} - A response from a call to the API.
  * @function parseData - returns a parsed res.data.
  * @yield {action} - A redux action to set a server message by type.
@@ -233,16 +236,25 @@ export function* updateUserProfile({
   payload
 }: ReturnType<typeof actions.updateUserProfile>): SagaIterator {
   try {
-    const res = yield call(app.put, `member/settings/update`, payload);
-    const data = yield call(parseData, res);
+    const res: AxiosResponse = yield call(
+      app.put,
+      `member/settings/update`,
+      payload
+    );
+    const data: { message: string; user: TAuthData } = yield call(
+      parseData,
+      res
+    );
 
-    yield put(setMessage(data.message));
-    yield call(toast, { type: "info", message: data.message });
+    const { message, user } = data;
 
-    if (data.message !== "Successfully updated your settings.") {
+    yield put(setMessage(message));
+    yield call(toast, { type: "info", message });
+
+    if (message !== "Successfully updated your settings.") {
       yield call(signoutUserSession);
     } else {
-      yield put(actions.signinSession(data.user));
+      yield put(actions.signinSession(user));
     }
     yield put(resetMessage());
   } catch (e) {
@@ -295,7 +307,7 @@ export default function* authSagas(): SagaIterator {
     takeLatest(constants.USER_SIGNOUT_SESSION, signoutUserSession),
     takeLatest(constants.USER_SIGNUP, signupUser),
     takeLatest(constants.USER_UPDATE_PROFILE, updateUserProfile),
-    // takeLatest(constants.USER_UPDATE_AVATAR, updateUserAvatar),
+    takeLatest(constants.USER_UPDATE_AVATAR, updateUserAvatar),
     takeLatest(constants.USER_PASSWORD_UPDATE, updateUserPassword)
   ]);
 }

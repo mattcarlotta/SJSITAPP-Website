@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 
 const Flex = styled.div<{
+  align?: string;
   background?: string;
   direction?: string;
   flexwrap?: boolean;
@@ -18,6 +19,7 @@ const Flex = styled.div<{
   margin: ${({ margin }) => margin || "0px"};
   height: ${({ height }) => height};
   width: ${({ width }) => width || "100%"};
+  align-items: ${({ align }) => align};
   background: ${({ background }) => background || "transparent"};
   border-radius: 5px;
 `;

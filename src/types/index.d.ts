@@ -27,6 +27,15 @@ import { TRootState } from "~reducers";
 
 /// ACTIONS ///
 
+export type TAvatarData = {
+  form: FormData;
+  id: string;
+};
+
+export type TAvatarResData = {
+  avatar: string;
+};
+
 export type TAuthData = {
   id?: string;
   avatar?: string;

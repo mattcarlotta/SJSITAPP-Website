@@ -32,7 +32,7 @@ const MemberDetails = ({
   role,
   status
 }: TMemberDetails): JSX.Element => (
-  <div>
+  <Margin as="div" bottom="20px">
     <Title data-testid="user-name" fontSize="36px" margin="0px">
       {firstName} {lastName}
     </Title>
@@ -58,7 +58,7 @@ const MemberDetails = ({
       <strong>Role:</strong>&nbsp;
       {role}
     </Margin>
-  </div>
+  </Margin>
 );
 
 export default MemberDetails;

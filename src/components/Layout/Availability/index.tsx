@@ -149,7 +149,7 @@ const Availability = ({ id }: TAvailabilityProps): JSX.Element => {
                   toward as being available.
                 </PanelDescription>
               </Center>
-              <FlexCenter breakpoint justify="center" margin="10px 0 0 0">
+              <FlexCenter breakpoint justify="center" margin="10px 0">
                 <AvailabilityAvgChart
                   availability={events.eventAvailability}
                   style={{ height: "250px", margin: 0 }}

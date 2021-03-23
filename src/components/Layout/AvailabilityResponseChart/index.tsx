@@ -35,8 +35,8 @@ const AvailabilityResponseChart = ({
           labels={/* istanbul ignore next */ () => null}
           colorScale={["#247BA0", "#2A9D8F", "#F4A261", "#FF8060", "#BFBFBF"]}
         />
-        <AvailabilityChartLabel>
-          <div data-testid="availability-avg">Event</div>
+        <AvailabilityChartLabel data-testid="event-response-label">
+          <div>Event</div>
           <div>Response</div>
           <div>Distribution</div>
         </AvailabilityChartLabel>

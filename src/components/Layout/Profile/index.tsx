@@ -1,9 +1,9 @@
 import * as React from "react";
-import { updateUserProfile } from "~actions/Auth";
+import { updateUserAvatar, updateUserProfile } from "~actions/Auth";
 import EditMemberForm from "~components/Layout/EditMemberForm";
-import Flex from "~components/Layout/Flex";
-import Line from "~components/Layout/Line";
+import FlexCenter from "~components/Layout/FlexCenter";
 import MemberDetails from "~components/Layout/MemberDetails";
+import UploadAvatarForm from "~components/Layout/UploadAvatarForm";
 
 export type TProfileProps = {
   id: string;
@@ -17,17 +17,16 @@ export type TProfileProps = {
   serverError?: string;
   serverMessage?: string;
   status: string;
+  updateUserAvatar: typeof updateUserAvatar;
   updateUserProfile: typeof updateUserProfile;
 };
 
 const Profile = (props: TProfileProps): JSX.Element => (
-  <>
-    <Flex flexwrap margin="0 0 20px 0">
-      <MemberDetails {...props} />
-    </Flex>
-    <Line width="550px" />
+  <FlexCenter justify="center" direction="column" margin="20px auto">
+    <UploadAvatarForm {...props} />
+    <MemberDetails {...props} />
     <EditMemberForm {...props} />
-  </>
+  </FlexCenter>
 );
 
 export default Profile;
