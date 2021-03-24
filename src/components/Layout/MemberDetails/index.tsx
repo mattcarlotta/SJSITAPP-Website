@@ -1,3 +1,4 @@
+import Center from "~components/Layout/Center";
 import FormatDate from "~components/Layout/FormatDate";
 import Margin from "~components/Layout/Margin";
 import Title from "~components/Layout/Title";
@@ -32,33 +33,33 @@ const MemberDetails = ({
   role,
   status
 }: TMemberDetails): JSX.Element => (
-  <Margin as="div" bottom="20px">
+  <Center style={{ maxWidth: 400, width: "100%", color: "#010404" }}>
     <Title data-testid="user-name" fontSize="36px" margin="0px">
       {firstName} {lastName}
     </Title>
     <div>
-      <strong>Account Status:</strong>&nbsp;
+      <strong>Account Status:</strong>&nbsp;&nbsp;
       {status === "active" ? (
         <FaUser style={activeUserStyle} />
       ) : (
         <FaUserTimes style={inactiveUserStyle} />
       )}
-      &nbsp;
+      &nbsp;&nbsp;
       <span data-test="user-status">({status})</span>
     </div>
-    <Margin as="div" top="5px">
-      <strong>Registered:</strong>&nbsp;
+    <Margin as="div" top="10px">
+      <strong>Registered:</strong>&nbsp;&nbsp;
       <FormatDate
         date={registered}
         format="MMMM Do, YYYY"
         style={{ display: "inline-block" }}
       />
     </Margin>
-    <Margin as="div" top="5px">
+    <Margin as="div" top="10px">
       <strong>Role:</strong>&nbsp;
       {role}
     </Margin>
-  </Margin>
+  </Center>
 );
 
 export default MemberDetails;

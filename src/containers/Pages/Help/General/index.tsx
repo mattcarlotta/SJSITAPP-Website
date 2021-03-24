@@ -1,4 +1,5 @@
 import * as React from "react";
+import { css } from "@emotion/react";
 import Accordion from "~components/Layout/Accordion";
 import Avatar from "~components/Layout/Avatar";
 import Button from "~components/Layout/Button";
@@ -7,9 +8,10 @@ import Line from "~components/Layout/Line";
 import Paragraph from "~components/Layout/Paragraph";
 import MenuButton from "~components/Layout/MenuButton";
 import Title from "~components/Layout/Title";
+import UploadAvatarInstructions from "~components/Layout/UploadAvatarInstructions";
 import WarningText from "~components/Layout/WarningText";
 import OutsideLink from "~components/Navigation/OutsideLink";
-import { FaCloudUploadAlt, FaUpload, RiLogoutBoxLine } from "~icons";
+import { FaCloudUploadAlt, FaTrash, RiLogoutBoxLine } from "~icons";
 
 const General = ({ id }: { id: string }): JSX.Element => (
   <>
@@ -31,7 +33,7 @@ const General = ({ id }: { id: string }): JSX.Element => (
         primary
         display="inline-block"
         type="button"
-        width="130px"
+        width="190px"
         padding="5px"
         margin="0 3px"
       >
@@ -43,26 +45,59 @@ const General = ({ id }: { id: string }): JSX.Element => (
             top: 3
           }}
         />
-        &nbsp;Upload
+        &nbsp;Upload Avatar
       </Button>
-      button. Click or drag and drop an image on to the upload box. Once an
-      image has been selected, click the
+      button to bring up this upload dialog box:
+      <div
+        css={css`
+          height: 195px;
+          width: 200px;
+          margin-top: 10px;
+          background: #efebeb;
+          position: relative;
+          border: 1px dashed #03a9f3;
+          line-height: normal;
+        `}
+      >
+        <UploadAvatarInstructions />
+      </div>
+      Click or drag and drop an image on to the upload box. Once an image has
+      been selected, the image will automatically be uploaded to your profile.
+      If the upload is successful, then your account will be updated with your
+      new avatar.
+      <br />
+      <br />
+      To remove your current avatar, go to the
+      <OutsideLink dataTestId="settings-link" href="/employee/settings">
+        Settings
+      </OutsideLink>
+      page. Located underneath your avatar, click on the
       <Button
-        primary
+        danger
         display="inline-block"
         type="button"
-        width="50px"
+        width="190px"
         padding="5px"
         margin="0 3px"
       >
-        <FaUpload style={{ fontSize: 16 }} />
+        <FaTrash
+          style={{
+            fontSize: 18,
+            marginRight: 5,
+            position: "relative",
+            top: 3
+          }}
+        />
+        &nbsp;Remove Avatar
       </Button>
-      button to upload it. If the image upload is successful, your account will
-      be updated with the new avatar.
+      button.
+      <br />
+      <br />
       <WarningText>
-        For the best results, pick an image where the subject is centered. In
-        addition, images larger than 10mb or are not .jpg/.jpeg/.png files will
-        be rejected.
+        For the best results, pick an image where the subject is centered and is
+        squared in dimension (for example: 256 pixels in length by 256 pixels in
+        width). Images that are larger than 2mb and/or do not end with
+        .jpg/.jpeg/.png will not be accepted.
       </WarningText>
     </Accordion>
     <Accordion expanded={id} title="How do I change my email?">
@@ -80,7 +115,7 @@ const General = ({ id }: { id: string }): JSX.Element => (
         padding="5px"
         margin="0 3px"
       >
-        Update Settings
+        Save Settings
       </Button>
       button to save and update your email.
       <WarningText>
@@ -104,7 +139,7 @@ const General = ({ id }: { id: string }): JSX.Element => (
         padding="5px"
         margin="0 3px"
       >
-        Update Settings
+        Save Settings
       </Button>
       button to update and save your changes.
       <strong>
@@ -127,7 +162,7 @@ const General = ({ id }: { id: string }): JSX.Element => (
         padding="5px"
         margin="0 3px"
       >
-        Update Settings
+        Save Settings
       </Button>
       button to update and save your changes.
     </Accordion>

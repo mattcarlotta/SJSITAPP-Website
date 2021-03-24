@@ -20,7 +20,7 @@ const NoAvailability = ({ height }: { height?: string }): JSX.Element => (
       <MdAccessTime style={iconStyle} />
     </Center>
     <Center data-testid="no-availability-message">
-      There isn&apos;t any availabity for this month
+      No availabity was found for this month
     </Center>
   </FlexCenter>
 );

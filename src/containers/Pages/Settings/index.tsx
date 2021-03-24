@@ -1,6 +1,10 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { updateUserAvatar, updateUserProfile } from "~actions/Auth";
+import {
+  deleteUserAvatar,
+  updateUserAvatar,
+  updateUserProfile
+} from "~actions/Auth";
 import Availability from "~components/Layout/Availability";
 import Card from "~components/Layout/Card";
 import EventCalendar from "~components/Layout/EventCalendar";
@@ -25,6 +29,7 @@ export type TSettingPageProps = {
   serverError?: string;
   serverMessage?: string;
   status: string;
+  deleteUserAvatar: typeof deleteUserAvatar;
   updateUserAvatar: typeof updateUserAvatar;
   updateUserProfile: typeof updateUserProfile;
 };
@@ -114,6 +119,7 @@ const mapStateToProps = ({
 
 /* istanbul ignore next */
 const mapDispatchToProps = {
+  deleteUserAvatar,
   updateUserAvatar,
   updateUserProfile
 };

@@ -1,8 +1,7 @@
 import Router from "next/router";
 import { all, put, call, takeLatest } from "redux-saga/effects";
 import toast from "~components/App/Toast";
-import * as actions from "~actions/Auth"; // setUserAvatar, signout
-// import { fetchMemberSettings } from "~actions/Members";
+import * as actions from "~actions/Auth";
 import { setMessage, resetMessage } from "~actions/Server";
 import * as constants from "~constants";
 import app, { avatarAPI } from "~utils/axiosConfig";
@@ -57,7 +56,7 @@ export function* signoutUserSession(): SagaIterator {
  *
  * @generator
  * @function deleteUserAvatar
- * @param {object} id - user id.
+ * @param {object} payload - contains user id.
  * @yield {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
  * @yield {action} - A redux action to set a server message by type.
@@ -66,26 +65,23 @@ export function* signoutUserSession(): SagaIterator {
  * @yields {action} - A redux action to refresh the member's settings.
  * @throws {AnyAction} - A redux action to display a server error.
  */
-// export function* deleteUserAvatar({ id }) {
-//   try {
-//     yield put(resetMessage());
+export function* deleteUserAvatar({
+  payload
+}: ReturnType<typeof actions.deleteUserAvatar>): SagaIterator {
+  try {
+    const res: AxiosResponse = yield call(
+      avatarAPI.delete,
+      `delete/${payload}`
+    );
+    const message: string = yield call(parseMessage, res);
 
-//     const res = yield call(avatarAPI.delete, `delete/${id}`);
-//     const message: string = yield call(parseMessage, res);
+    yield call(toast, { type: "info", message });
 
-//     yield put(
-//       setMessage({
-//         message
-//       })
-//     );
-//     yield call(toast, { type: "info", message });
-
-//     yield put(setUserAvatar({ avatar: "" }));
-//     yield put(fetchMemberSettings());
-//   } catch (e) {
-//      yield call(showError, e.toString());
-//   }
-// }
+    yield put(actions.setUserAvatar({ avatar: "" }));
+  } catch (e) {
+    yield call(showError, e.toString());
+  }
+}
 
 /**
  * Attempts to create a reset password request.
@@ -104,8 +100,6 @@ export function* resetPassword({
   payload
 }: ReturnType<typeof actions.resetPassword>): SagaIterator {
   try {
-    yield put(resetMessage());
-
     const res: AxiosResponse = yield call(app.put, "reset-password", payload);
     const message: string = yield call(parseMessage, res);
 
@@ -134,8 +128,6 @@ export function* signinUser({
   payload
 }: ReturnType<typeof actions.signinUser>): SagaIterator {
   try {
-    yield put(resetMessage());
-
     const res: AxiosResponse = yield call(app.post, "signin", payload);
     const data: TAuthData = yield call(parseData, res);
 
@@ -163,8 +155,6 @@ export function* signupUser({
   payload
 }: ReturnType<typeof actions.signupUser>): SagaIterator {
   try {
-    yield put(resetMessage());
-
     const res: AxiosResponse = yield call(app.post, "signup", payload);
     const message: string = yield call(parseMessage, res);
 
@@ -194,13 +184,12 @@ export function* updateUserAvatar({
   payload
 }: ReturnType<typeof actions.updateUserAvatar>): SagaIterator {
   try {
-    yield put(resetMessage());
-
     const res: AxiosResponse = yield call(
       avatarAPI.put,
       `update/${payload.id}`,
       payload.form
     );
+
     const data: { avatar: string; message: string } = yield call(
       parseData,
       res
@@ -278,8 +267,6 @@ export function* updateUserPassword({
   payload
 }: ReturnType<typeof actions.updateUserPassword>): SagaIterator {
   try {
-    yield put(resetMessage());
-
     const res: AxiosResponse = yield call(app.put, "new-password", payload);
     const message: string = yield call(parseMessage, res);
 
@@ -301,7 +288,7 @@ export function* updateUserPassword({
 export default function* authSagas(): SagaIterator {
   yield all([
     takeLatest(constants.USER_CHECK_SESSION, checkForActiveSession),
-    // takeLatest(constants.USER_DELETE_AVATAR, deleteUserAvatar),
+    takeLatest(constants.USER_DELETE_AVATAR, deleteUserAvatar),
     takeLatest(constants.USER_PASSWORD_RESET, resetPassword),
     takeLatest(constants.USER_SIGNIN_ATTEMPT, signinUser),
     takeLatest(constants.USER_SIGNOUT_SESSION, signoutUserSession),

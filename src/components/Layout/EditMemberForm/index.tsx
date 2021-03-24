@@ -83,14 +83,18 @@ export const EditMemberForm = ({
       css={css`
         max-width: 400px;
         width: 100%;
-        margin-top: 30px;
+        margin-top: 10px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background: #eee;
       `}
       onSubmit={handleSubmit}
     >
       <FieldGenerator fields={state.fields} onChange={handleChange} />
       <SubmitButton
         isSubmitting={state.isSubmitting}
-        title="Update Settings"
+        title="Save Settings"
         style={{ maxWidth: "300px", margin: "0 auto" }}
         submitBtnStyle={{
           background: "#010404",
@@ -100,24 +104,5 @@ export const EditMemberForm = ({
     </form>
   );
 };
-
-/*
-EditMemberForm.propTypes = {
-	serverMessage: PropTypes.string,
-	updateMember: PropTypes.func.isRequired,
-	viewMember: PropTypes.shape({
-		_id: PropTypes.string,
-		email: PropTypes.string,
-		emailReminders: PropTypes.bool,
-		events: PropTypes.any,
-		firstName: PropTypes.string,
-		lastName: PropTypes.string,
-		registered: PropTypes.string,
-		role: PropTypes.string,
-		schedule: PropTypes.any,
-		status: PropTypes.string,
-	}).isRequired,
-};
-*/
 
 export default EditMemberForm;

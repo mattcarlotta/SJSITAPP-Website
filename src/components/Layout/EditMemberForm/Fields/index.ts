@@ -19,7 +19,7 @@ const Fields = (props: TFieldsProps): Array<TBaseFieldProps> =>
       label: "Email Reminders",
       value: props.emailReminders,
       tooltip:
-        "This setting only affects scheduled events and A/P form email reminders. Monthly schedules will remain unaffected.",
+        "This setting only affects scheduled event and A/P form email reminders. The monthly schedule email will remain unaffected.",
       required: false
     },
     props.role !== "employee" && {
@@ -36,8 +36,10 @@ const Fields = (props: TFieldsProps): Array<TBaseFieldProps> =>
     {
       name: "email",
       type: "email",
-      label: "Email",
+      label: "Account Email",
       icon: "mail",
+      tooltip:
+        "Changing your account email will log you out of your current session.",
       value: props.email,
       errors: "",
       required: true

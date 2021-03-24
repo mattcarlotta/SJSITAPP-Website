@@ -26,13 +26,18 @@ export const checkForActiveSession = (): {
  * Deletes current user avatar.
  *
  * @function deleteUserAvatar
- * @param id - current user id or requested id
+ * @param payload - current user id or requested id
  * @returns {object}
  */
-// export const deleteUserAvatar = (id: string) => ({
-// 	type: constants.USER_DELETE_AVATAR,
-// 	id,
-// });
+export const deleteUserAvatar = (
+  payload: string
+): {
+  type: typeof constants.USER_DELETE_AVATAR;
+  payload: string;
+} => ({
+  type: constants.USER_DELETE_AVATAR,
+  payload
+});
 
 /**
  * Removes user out of current redux session.
