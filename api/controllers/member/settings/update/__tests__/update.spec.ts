@@ -11,20 +11,22 @@ import { memberSignIn } from "~test/utils/signIn";
 import app from "~test/utils/testServer";
 
 const textPassword = "password";
+const registered = createDate().toDate();
 const newUser = {
   email: "updateme1234@example.com",
   firstName: "Hello",
   lastName: "Goodbye",
   role: "employee",
   token: createSignupToken(),
-  registered: createDate().toDate()
+  registered
 };
 
 const updatedSettings = {
   email: "dkfsdfkdskmfk2332343@example.com",
   emailReminders: false,
   firstName: "Goobyde",
-  lastName: "Hello"
+  lastName: "Hello",
+  role: "staff"
 };
 
 describe("Member Settings Update Controller", () => {
@@ -46,7 +48,12 @@ describe("Member Settings Update Controller", () => {
       .put("/api/member/settings/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
-      .send({ email: "", emailReminders: "", firstName: "", lastName: "" })
+      .send({
+        email: "",
+        emailReminders: "",
+        firstName: "",
+        lastName: ""
+      })
       .expect(400)
       .then(res => {
         expect(res.body.err).toEqual(missingUpdateMemberParams);
@@ -59,7 +66,10 @@ describe("Member Settings Update Controller", () => {
       .put("/api/member/settings/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
-      .send({ ...updatedSettings, email: "scheduledmember@test.com" })
+      .send({
+        ...updatedSettings,
+        email: "scheduledmember@test.com"
+      })
       .expect(400)
       .then(res => {
         expect(res.body.err).toEqual(emailAlreadyTaken);
@@ -72,7 +82,11 @@ describe("Member Settings Update Controller", () => {
       .put("/api/member/settings/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
-      .send({ ...updatedSettings, firstName: "Scheduled", lastName: "Member" })
+      .send({
+        ...updatedSettings,
+        firstName: "Scheduled",
+        lastName: "Member"
+      })
       .expect(400)
       .then(res => {
         expect(res.body.err).toEqual(usernameAlreadyTaken);
@@ -103,7 +117,20 @@ describe("Member Settings Update Controller", () => {
       .send(updatedSettings)
       .expect(200)
       .then(res => {
-        expect(res.body.message).toEqual("Successfully updated your settings.");
+        expect(res.body).toEqual({
+          message: "Successfully updated your settings.",
+          user: {
+            id: expect.any(String),
+            avatar: expect.any(String),
+            email: expect.any(String),
+            emailReminders: expect.any(Boolean),
+            firstName: expect.any(String),
+            lastName: expect.any(String),
+            role: expect.any(String),
+            registered: expect.any(String),
+            status: expect.any(String)
+          }
+        });
         done();
       });
   });

@@ -21,10 +21,11 @@ const updateMemberSettings = async (
 ): Promise<Response> => {
   try {
     let updatedEmail = false;
-    const _id = parseSession(req);
+    const id = parseSession(req);
 
-    const { email, emailReminders, firstName, lastName } = req.body;
+    const { email, emailReminders, firstName, lastName, role } = req.body;
     if (
+      !id ||
       !email ||
       typeof emailReminders !== "boolean" ||
       !firstName ||
@@ -33,7 +34,7 @@ const updateMemberSettings = async (
       throw missingUpdateMemberParams;
 
     const existingMember = await User.findOne(
-      { _id },
+      { _id: id },
       { password: 0, token: 0, __v: 0 }
     );
     /* istanbul ignore next */
@@ -56,7 +57,8 @@ const updateMemberSettings = async (
       email,
       emailReminders,
       firstName,
-      lastName
+      lastName,
+      role
     });
 
     const updatedMember = await User.findOne(

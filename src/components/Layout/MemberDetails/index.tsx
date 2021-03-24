@@ -1,8 +1,8 @@
-import Center from "~components/Layout/Center";
+// import { css } from "@emotion/react";
+import DisabledInput from "~components/Layout/DisabledInput";
 import FormatDate from "~components/Layout/FormatDate";
 import Margin from "~components/Layout/Margin";
-import Title from "~components/Layout/Title";
-import { FaUser, FaUserTimes } from "~icons";
+import { FaIdBadge, FaUser, FaUserTimes, MdAccessTime } from "~icons";
 import { CSSProperties } from "~types";
 
 const activeUserStyle = {
@@ -10,6 +10,7 @@ const activeUserStyle = {
   position: "relative",
   top: "2px"
 } as CSSProperties;
+
 const inactiveUserStyle = {
   fontSize: 22,
   position: "relative",
@@ -18,48 +19,60 @@ const inactiveUserStyle = {
   color: "red"
 } as CSSProperties;
 
+const iconStyles = {
+  position: "relative",
+  top: 3,
+  marginRight: 8,
+  color: "#888"
+} as CSSProperties;
+
 export type TMemberDetails = {
-  firstName: string;
-  lastName: string;
+  editRole?: boolean;
   registered: string;
   role: string;
   status: string;
 };
 
 const MemberDetails = ({
-  firstName,
-  lastName,
+  editRole,
   registered,
   role,
   status
 }: TMemberDetails): JSX.Element => (
-  <Center style={{ maxWidth: 400, width: "100%", color: "#010404" }}>
-    <Title data-testid="user-name" fontSize="36px" margin="0px">
-      {firstName} {lastName}
-    </Title>
+  <div style={{ color: "#010404" }}>
     <div>
-      <strong>Account Status:</strong>&nbsp;&nbsp;
-      {status === "active" ? (
-        <FaUser style={activeUserStyle} />
-      ) : (
-        <FaUserTimes style={inactiveUserStyle} />
-      )}
-      &nbsp;&nbsp;
-      <span data-test="user-status">({status})</span>
+      <div>Account Status</div>
+      <DisabledInput>
+        {status === "active" ? (
+          <FaUser style={activeUserStyle} />
+        ) : (
+          <FaUserTimes style={inactiveUserStyle} />
+        )}
+        &nbsp;&nbsp;
+        <span data-test="user-status">({status})</span>
+      </DisabledInput>
     </div>
-    <Margin as="div" top="10px">
-      <strong>Registered:</strong>&nbsp;&nbsp;
-      <FormatDate
-        date={registered}
-        format="MMMM Do, YYYY"
-        style={{ display: "inline-block" }}
-      />
+    <Margin as="div" top="20px" bottom="20px">
+      <div>Registered</div>
+      <DisabledInput>
+        <MdAccessTime style={iconStyles} />
+        <FormatDate
+          date={registered}
+          format="MMMM Do, YYYY @ hh:mma"
+          style={{ display: "inline-block" }}
+        />
+      </DisabledInput>
     </Margin>
-    <Margin as="div" top="10px">
-      <strong>Role:</strong>&nbsp;
-      {role}
-    </Margin>
-  </Center>
+    {!editRole && (
+      <Margin as="div" bottom="20px">
+        <div>Role</div>
+        <DisabledInput>
+          <FaIdBadge style={iconStyles} />
+          {role}
+        </DisabledInput>
+      </Margin>
+    )}
+  </div>
 );
 
 export default MemberDetails;

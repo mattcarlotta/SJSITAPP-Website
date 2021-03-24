@@ -4,6 +4,7 @@ import { TBaseFieldProps } from "~types";
 export type TFieldsProps = {
   id: string;
   avatar: string;
+  editRole?: boolean;
   email: string;
   emailReminders: boolean;
   firstName: string;
@@ -13,16 +14,7 @@ export type TFieldsProps = {
 
 const Fields = (props: TFieldsProps): Array<TBaseFieldProps> =>
   [
-    {
-      name: "emailReminders",
-      type: "switch",
-      label: "Email Reminders",
-      value: props.emailReminders,
-      tooltip:
-        "This setting only affects scheduled event and A/P form email reminders. The monthly schedule email will remain unaffected.",
-      required: false
-    },
-    props.role !== "employee" && {
+    props.editRole && {
       name: "role",
       type: "select",
       label: "Role",
@@ -32,6 +24,15 @@ const Fields = (props: TFieldsProps): Array<TBaseFieldProps> =>
       errors: "",
       required: true,
       selectOptions: ["staff", "employee"]
+    },
+    {
+      name: "emailReminders",
+      type: "switch",
+      label: "Email Reminders",
+      value: props.emailReminders,
+      tooltip:
+        "This setting only affects scheduled event and A/P form email reminders. The monthly schedule email will remain unaffected.",
+      required: false
     },
     {
       name: "email",

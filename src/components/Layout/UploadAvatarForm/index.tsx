@@ -135,12 +135,7 @@ export const UploadAvatarForm = ({
           />
         </form>
       ) : (
-        <Avatar
-          avatar={avatar}
-          height="195px"
-          width="195px"
-          style={{ border: "2px dotted #03a9f3" }}
-        />
+        <Avatar avatar={avatar} height="195px" width="195px" />
       )}
       {isSubmitting ? (
         <SubmitButton

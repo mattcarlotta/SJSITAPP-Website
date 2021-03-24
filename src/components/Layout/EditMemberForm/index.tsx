@@ -2,6 +2,7 @@ import * as React from "react";
 import { css } from "@emotion/react";
 import { updateUserProfile } from "~actions/Auth";
 import FieldGenerator from "~components/Forms/FieldGenerator";
+import MemberDetails from "~components/Layout/MemberDetails";
 import SubmitButton from "~components/Layout/SubmitButton";
 import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
@@ -20,11 +21,14 @@ export type TEditMemberFormProps = {
   avatar: string;
   email: string;
   emailReminders: boolean;
+  editRole?: boolean;
   firstName: string;
   lastName: string;
   role: string;
+  registered: string;
   serverError?: string;
   serverMessage?: string;
+  status: string;
   updateUserProfile: typeof updateUserProfile | (() => void);
 };
 
@@ -79,9 +83,9 @@ export const EditMemberForm = ({
   }, [parseFields, updateUserProfile, state]);
 
   return (
-    <form
+    <div
       css={css`
-        max-width: 400px;
+        max-width: 550px;
         width: 100%;
         margin-top: 10px;
         padding: 20px;
@@ -89,19 +93,21 @@ export const EditMemberForm = ({
         border-radius: 10px;
         background: #eee;
       `}
-      onSubmit={handleSubmit}
     >
-      <FieldGenerator fields={state.fields} onChange={handleChange} />
-      <SubmitButton
-        isSubmitting={state.isSubmitting}
-        title="Save Settings"
-        style={{ maxWidth: "300px", margin: "0 auto" }}
-        submitBtnStyle={{
-          background: "#010404",
-          border: "2px solid #2e7c8a"
-        }}
-      />
-    </form>
+      <MemberDetails {...rest} />
+      <form onSubmit={handleSubmit}>
+        <FieldGenerator fields={state.fields} onChange={handleChange} />
+        <SubmitButton
+          isSubmitting={state.isSubmitting}
+          title="Save Settings"
+          style={{ maxWidth: "300px", margin: "0 auto" }}
+          submitBtnStyle={{
+            background: "#010404",
+            border: "2px solid #2e7c8a"
+          }}
+        />
+      </form>
+    </div>
   );
 };
 

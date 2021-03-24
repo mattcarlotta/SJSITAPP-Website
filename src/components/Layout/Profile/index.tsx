@@ -7,7 +7,7 @@ import {
 import Center from "~components/Layout/Center";
 import EditMemberForm from "~components/Layout/EditMemberForm";
 import FlexCenter from "~components/Layout/FlexCenter";
-import MemberDetails from "~components/Layout/MemberDetails";
+import Title from "~components/Layout/Title";
 import UploadAvatarForm from "~components/Layout/UploadAvatarForm";
 import OutsideLink from "~components/Navigation/OutsideLink";
 import PanelDescription from "../PanelDescription";
@@ -37,18 +37,21 @@ const Profile = (props: TProfileProps): JSX.Element => (
     height="auto"
   >
     <UploadAvatarForm {...props} />
+    <Title data-testid="user-name" centered fontSize="36px" margin="0">
+      {props.firstName} {props.lastName}
+    </Title>
     <Center>
-      <PanelDescription>
-        Having trouble uploading an avatar? See
+      <PanelDescription margin="5px 0 10px 0">
+        Having trouble uploading an avatar? See the
         <OutsideLink
           dataTestId="help-change-avatar-link"
           href="/employee/help#how-do-i-change-my-avatar"
         >
-          How do I change my avatar?
+          how do I change my avatar
         </OutsideLink>
+        help section.
       </PanelDescription>
     </Center>
-    <MemberDetails {...props} />
     <EditMemberForm {...props} />
   </FlexCenter>
 );
