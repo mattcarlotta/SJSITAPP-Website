@@ -1,5 +1,7 @@
 import * as React from "react";
+import get from "lodash.get";
 import { connect } from "react-redux";
+import { useRouter } from "next/router";
 import {
   deleteUserAvatar,
   updateUserAvatar,
@@ -36,15 +38,24 @@ export type TSettingPageProps = {
   updateUserAvatar: typeof updateUserAvatar;
   updateUserProfile: typeof updateUserProfile;
 };
+const TABS = ["profile", "availability", "responses"];
 
-const SettingsPage = (props: TSettingPageProps): JSX.Element => {
+export const SettingsPage = (props: TSettingPageProps): JSX.Element => {
   const { role } = props;
-  const isEmployee = role === "employee";
+  const router = useRouter();
+  const query = get(router, ["query", "tab"]);
   const [tab, setTab] = React.useState(0);
 
+  const isEmployee = role === "employee";
+  const tabValue = TABS.findIndex(tab => tab === query);
+
   const handleTabChange = React.useCallback((_, tab: number): void => {
-    setTab(tab);
+    router.push(`?tab=${TABS[tab]}`, undefined, { shallow: true });
   }, []);
+
+  React.useEffect(() => {
+    setTab(Math.max(0, tabValue));
+  }, [tabValue]);
 
   return (
     <>

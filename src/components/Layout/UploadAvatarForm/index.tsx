@@ -87,6 +87,7 @@ export const UploadAvatarForm = ({
 
   React.useEffect(() => {
     if (state.isSubmitting && showForm) {
+      /* istanbul ignore else */
       if (imageRef && imageRef.current) imageRef.current.value = "";
       setState(initialState);
     }
@@ -95,13 +96,14 @@ export const UploadAvatarForm = ({
   return (
     <Margin
       as="div"
+      data-testid="upload-avatar-form-container"
       right="20px"
       bottom="10px"
       style={{ maxWidth: 200, width: "100%" }}
     >
       {showForm ? (
         <form
-          data-test="upload-avatar-form"
+          data-testid="upload-avatar-form"
           css={css`
             height: 195px;
             width: 200px;
@@ -110,11 +112,11 @@ export const UploadAvatarForm = ({
             position: relative;
             border: 1px dashed #03a9f3;
           `}
-          onSubmit={e => e.preventDefault()}
+          onSubmit={/* istanbul ignore next */ e => e.preventDefault()}
         >
           <UploadAvatarInstructions />
           <input
-            data-test="upload-avatar-input"
+            data-testid="upload-avatar-input"
             disabled={isSubmitting}
             css={css`
               position: absolute;
@@ -170,7 +172,7 @@ export const UploadAvatarForm = ({
                       marginRight: 5
                     }}
                   />
-                  {!avatar ? "Upload" : "Change"} Avatar
+                  Upload Avatar
                 </>
               ) : (
                 <>

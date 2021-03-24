@@ -114,7 +114,7 @@ const Availability = ({ id }: TAvailabilityProps): JSX.Element => {
 
   return (
     <>
-      <Center>
+      <Center data-testid="my-availability">
         <Title>My Availability</Title>
         <Line centered width="400px" />
         <Margin as="div" top="20px">
@@ -141,7 +141,7 @@ const Availability = ({ id }: TAvailabilityProps): JSX.Element => {
         <Margin as="div" top="20px" style={{ height: "820px" }}>
           {!isEmpty(events) ? (
             <>
-              <Center>
+              <Center data-testid="availability-description">
                 <PanelDescription margin="0 auto" style={{ maxWidth: 900 }}>
                   Availability is calculated by combining the first two options
                   in the legend below and comparing the aggregated value against

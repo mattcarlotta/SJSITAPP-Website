@@ -14,37 +14,34 @@ export type TAvailabilityResponseChartProps = {
 const AvailabilityResponseChart = ({
   availability,
   style
-}: TAvailabilityResponseChartProps): JSX.Element => (
-  <>
-    {!isEmpty(availability) ? (
-      <div
-        data-testid="availability-response-chart"
-        style={style}
-        css={css`
-          height: 190px;
-          position: relative;
-        `}
-      >
-        <VictoryPie
-          animate
-          x="id"
-          y="value"
-          padding={{ top: 0, bottom: 40 }}
-          innerRadius={140}
-          data={availability}
-          labels={/* istanbul ignore next */ () => null}
-          colorScale={["#247BA0", "#2A9D8F", "#F4A261", "#FF8060", "#BFBFBF"]}
-        />
-        <AvailabilityChartLabel data-testid="event-response-label">
-          <div>Event</div>
-          <div>Response</div>
-          <div>Distribution</div>
-        </AvailabilityChartLabel>
-      </div>
-    ) : (
-      <NoAvailability />
-    )}
-  </>
-);
+}: TAvailabilityResponseChartProps): JSX.Element =>
+  !isEmpty(availability) ? (
+    <div
+      data-testid="availability-response-chart"
+      style={style}
+      css={css`
+        height: 190px;
+        position: relative;
+      `}
+    >
+      <VictoryPie
+        animate
+        x="id"
+        y="value"
+        padding={{ top: 0, bottom: 40 }}
+        innerRadius={140}
+        data={availability}
+        labels={/* istanbul ignore next */ () => null}
+        colorScale={["#247BA0", "#2A9D8F", "#F4A261", "#FF8060", "#BFBFBF"]}
+      />
+      <AvailabilityChartLabel data-testid="event-response-label">
+        <div>Event</div>
+        <div>Response</div>
+        <div>Distribution</div>
+      </AvailabilityChartLabel>
+    </div>
+  ) : (
+    <NoAvailability />
+  );
 
 export default AvailabilityResponseChart;

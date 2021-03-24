@@ -14,7 +14,7 @@ describe("FlexCenter", () => {
   it("sets a media rule when passed a 'breakpoint' prop", () => {
     wrapper.setProps({ breakpoint: "true" });
     expect(wrapper).toHaveStyleRule("flex-direction", "column", {
-      media: "(max-width: 600px)"
+      media: "(max-width: 900px)"
     });
   });
 

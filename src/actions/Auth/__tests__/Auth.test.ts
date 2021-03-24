@@ -20,6 +20,13 @@ describe("Auth Actions", () => {
     expect(value).toEqual({ type: constants.USER_CHECK_SESSION });
   });
 
+  it("deleteUserAvatar returns USER_DELETE_AVATAR with an id as payload", () => {
+    const payload = user.id;
+    const value = actions.deleteUserAvatar(payload);
+
+    expect(value).toEqual({ type: constants.USER_DELETE_AVATAR, payload });
+  });
+
   it("removeSession returns SERVER_MESSAGE", () => {
     const value = actions.removeSession();
 
@@ -32,6 +39,13 @@ describe("Auth Actions", () => {
     const value = actions.resetPassword(payload);
 
     expect(value).toEqual({ type: constants.USER_PASSWORD_RESET, payload });
+  });
+
+  it("setUserAvatar returns USER_SET_AVATAR with avatar as payload", () => {
+    const payload = { avatar: "http://localhost:3000/123.png" };
+    const value = actions.setUserAvatar(payload);
+
+    expect(value).toEqual({ type: constants.USER_SET_AVATAR, payload });
   });
 
   it("signinSession returns USER_SET_SESSION with user details as payload", () => {
@@ -76,6 +90,25 @@ describe("Auth Actions", () => {
     const value = actions.signupUser(payload);
 
     expect(value).toEqual({ type: constants.USER_SIGNUP, payload });
+  });
+
+  it("updateUserProfile returns USER_UPDATE_PROFILE with user details as payload", () => {
+    const value = actions.updateUserProfile(user);
+
+    expect(value).toEqual({
+      type: constants.USER_UPDATE_PROFILE,
+      payload: user
+    });
+  });
+
+  it("updateUserAvatar returns USER_UPDATE_AVATAR with form and id as payload", () => {
+    const payload = { form: new FormData(), id: user.id };
+    const value = actions.updateUserAvatar(payload);
+
+    expect(value).toEqual({
+      type: constants.USER_UPDATE_AVATAR,
+      payload
+    });
   });
 
   it("updateUserPassword returns USER_PASSWORD_UPDATE with an email as payload", () => {

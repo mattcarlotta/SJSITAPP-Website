@@ -194,8 +194,6 @@ describe("Auth Sagas", () => {
 
       testSaga(sagas.resetPassword, actions.resetPassword(payload))
         .next()
-        .put(resetMessage())
-        .next()
         .call(app.put, "reset-password", payload)
         .next(res)
         .call(parseMessage, res)
@@ -245,8 +243,6 @@ describe("Auth Sagas", () => {
 
       testSaga(sagas.signinUser, actions.signinUser(payload))
         .next()
-        .put(resetMessage())
-        .next()
         .call(app.post, "signin", payload)
         .next(res)
         .call(parseData, res)
@@ -292,8 +288,6 @@ describe("Auth Sagas", () => {
       const res = { data: { message } };
 
       testSaga(sagas.signupUser, actions.signupUser(payload))
-        .next()
-        .put(resetMessage())
         .next()
         .call(app.post, "signup", payload)
         .next(res)
@@ -399,8 +393,6 @@ describe("Auth Sagas", () => {
       const res = { data: { message } };
 
       testSaga(sagas.updateUserPassword, actions.updateUserPassword(payload))
-        .next()
-        .put(resetMessage())
         .next()
         .call(app.put, "new-password", payload)
         .next(res)

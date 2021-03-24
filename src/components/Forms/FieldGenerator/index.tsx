@@ -20,7 +20,6 @@ import { ChangeEvent, EventTarget, TBaseFieldProps } from "~types";
  * @param {function} onChange - a function to update component state.
  * @returns {JSX.Element} a React component
  */
-
 const FieldGenerator = <
   T extends Array<TBaseFieldProps>,
   K extends (e: ChangeEvent<any> | EventTarget) => void

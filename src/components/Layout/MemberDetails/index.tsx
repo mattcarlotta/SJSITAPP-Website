@@ -41,8 +41,8 @@ const MemberDetails = ({
   role,
   status
 }: TMemberDetails): JSX.Element => (
-  <div style={{ color: "#010404" }}>
-    <div>
+  <div data-testid="member-details" style={{ color: "#010404" }}>
+    <div data-testid="member-status">
       <div>Account Status</div>
       <DisabledInput>
         {status === "active" ? (
@@ -65,7 +65,7 @@ const MemberDetails = ({
       </DisabledInput>
     </Margin>
     {!editRole && (
-      <Margin as="div" bottom="20px">
+      <Margin data-testid="member-role" as="div" bottom="20px">
         <div>Role</div>
         <DisabledInput>
           <FaIdBadge style={iconStyles} />

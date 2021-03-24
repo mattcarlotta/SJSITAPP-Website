@@ -17,7 +17,7 @@ const EventScheduleChart = ({
   events,
   style
 }: TAvailabilityResponseChartProps): JSX.Element => {
-  const largestValue = get(events[1], "events") || 0;
+  const largestValue = !isEmpty(events) ? get(events[1], "events") : 0;
 
   return (
     <>
@@ -56,7 +56,7 @@ const EventScheduleChart = ({
                 },
                 ticks: { stroke: "black", size: 5 },
                 tickLabels: {
-                  fontSize: 14
+                  fontSize: 12
                 }
               }}
             />
@@ -77,7 +77,7 @@ const EventScheduleChart = ({
                   opacity: 0.25
                 },
                 ticks: { stroke: "black", size: 5 },
-                tickLabels: { fontSize: 14 }
+                tickLabels: { fontSize: 12 }
               }}
             />
             <VictoryBar

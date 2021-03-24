@@ -26,7 +26,7 @@ export const checkForActiveSession = (): {
  * Deletes current user avatar.
  *
  * @function deleteUserAvatar
- * @param payload - current user id or requested id
+ * @param payload - payload contains is a user's `id`
  * @returns {object}
  */
 export const deleteUserAvatar = (
@@ -55,7 +55,7 @@ export const removeSession = (): {
  * Creates a user password request via passwordreset form.
  *
  * @function resetPassword
- * @param payload - payload just contain an `email` field.
+ * @param payload - payload contains an `email` field.
  * @returns constants.USER_PASSWORD_RESET and payload
  */
 export const resetPassword = (
@@ -72,7 +72,7 @@ export const resetPassword = (
  * Updates the user avatar to redux state.
  *
  * @function setUserAvatar
- * @param avatar
+ * @param payload - contains an `avatar` url field
  * @returns object
  */
 export const setUserAvatar = (
@@ -89,7 +89,7 @@ export const setUserAvatar = (
  * Sets current signed in user (can be guest) to redux state
  *
  * @function signinSession
- * @param data - contains user session data: `id`, `email`, `firstName`, `lastName`, and `role`.
+ * @param data - contains user session data: `id`, `avatar`, `email`, `firstName`, `lastName`, `registered`, `role`, and `status`.
  * @returns constants.USER_SET_SESSION and data
  */
 export const signinSession = (
@@ -169,9 +169,8 @@ export const updateUserProfile = (
  * Updates current signed in user avatar.
  *
  * @function updateUserAvatar
- * @param form - contains formData with user image upload
- * @param id - contains user `id`
- * @returns constants.USER_UPDATE_AVATAR, form, id
+ * @param payload - contains `form` formData with user image upload and user `id`
+ * @returns constants.USER_UPDATE_AVATAR and payload
  */
 export const updateUserAvatar = (
   payload: TAvatarData

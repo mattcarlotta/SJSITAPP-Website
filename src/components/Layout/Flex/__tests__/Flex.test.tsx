@@ -26,7 +26,7 @@ describe("Flex", () => {
 
   it("sets align-items when passed a 'align' prop", () => {
     wrapper.setProps({ align: "center" });
-    expect(wrapper).toHaveStyleRule("align", "center");
+    expect(wrapper).toHaveStyleRule("align-items", "center");
   });
 
   it("sets padding when passed a 'padding' prop", () => {
