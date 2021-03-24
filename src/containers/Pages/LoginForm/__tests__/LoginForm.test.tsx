@@ -10,7 +10,7 @@ const initProps = {
 
 describe("Login Form", () => {
   let wrapper: ReactWrapper;
-  let submitForm: any;
+  let submitForm: () => void;
   beforeEach(() => {
     wrapper = mount(<LoginForm {...initProps} />);
     submitForm = () => wrapper.find("form").simulate("submit");

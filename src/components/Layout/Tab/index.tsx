@@ -41,7 +41,7 @@ const AntTab = withStyles(() =>
         borderTopRightRadius: 4
       },
       "&:focus": {
-        color: "#025f6d"
+        color: "#ccc"
       }
     },
     wrapper: {

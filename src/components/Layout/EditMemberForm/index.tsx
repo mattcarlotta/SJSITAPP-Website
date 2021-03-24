@@ -84,6 +84,7 @@ export const EditMemberForm = ({
 
   return (
     <div
+      data-testid="edit-member-form-container"
       css={css`
         max-width: 500px;
         width: 100%;

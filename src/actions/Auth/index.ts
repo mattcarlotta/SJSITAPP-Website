@@ -149,23 +149,6 @@ export const signupUser = (
 });
 
 /**
- * Updates current signed in user details.
- *
- * @function updateUserProfile
- * @param payload - contains user session data: `id`, `avatar`, `email`, `firstName`, `lastName`, and `role`
- * @returns constants.USER_UPDATE_PROFILE and payload
- */
-export const updateUserProfile = (
-  data: TAuthData
-): {
-  type: typeof constants.USER_UPDATE_PROFILE;
-  payload: TAuthData;
-} => ({
-  type: constants.USER_UPDATE_PROFILE,
-  payload: data
-});
-
-/**
  * Updates current signed in user avatar.
  *
  * @function updateUserAvatar
@@ -196,5 +179,22 @@ export const updateUserPassword = (
   payload: TNewPasswordData;
 } => ({
   type: constants.USER_PASSWORD_UPDATE,
+  payload
+});
+
+/**
+ * Updates current signed in user details.
+ *
+ * @function updateUserProfile
+ * @param payload - contains user session data: `id`, `avatar`, `email`, `firstName`, `lastName`, and `role`
+ * @returns constants.USER_UPDATE_PROFILE and payload
+ */
+export const updateUserProfile = (
+  payload: TAuthData
+): {
+  type: typeof constants.USER_UPDATE_PROFILE;
+  payload: TAuthData;
+} => ({
+  type: constants.USER_UPDATE_PROFILE,
   payload
 });

@@ -2,11 +2,11 @@ import Router from "next/router";
 import { all, put, call, takeLatest } from "redux-saga/effects";
 import toast from "~components/App/Toast";
 import * as actions from "~actions/Auth";
-import { setMessage, resetMessage } from "~actions/Server";
 import * as constants from "~constants";
 import app, { avatarAPI } from "~utils/axiosConfig";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import showError from "~utils/showError";
+import showMessage from "~utils/showMessage";
 import { AxiosResponse, SagaIterator, TAuthData } from "~types";
 
 /**
@@ -174,10 +174,8 @@ export function* signupUser({
  * @param {object} payload - `form` is formData image and `id` is user id.
  * @yield {AxiosResponse} - A response from a call to the API.
  * @function parseData - returns a parsed res.data.
- * @yield {action} - A redux action to set a server message by type.
- * @yield {action} - A redux action to display a toast message by type.
+ * @yield {action} - A redux action to display a server success message.
  * @yield {action} - A redux action do set user avatar to redux state.
- * @yields {action} - A redux action to fresh member settings.
  * @throws {AnyAction} - A redux action to display a server error.
  */
 export function* updateUserAvatar({
@@ -197,55 +195,9 @@ export function* updateUserAvatar({
 
     const { avatar, message } = data;
 
-    yield put(setMessage(message));
-    yield call(toast, { type: "info", message });
+    yield call(showMessage, message);
 
     yield put(actions.setUserAvatar({ avatar }));
-    yield put(resetMessage());
-  } catch (e) {
-    yield call(showError, e.toString());
-  }
-}
-
-/**
- * Attempts to update a user profile.
- *
- * @generator
- * @function updateUserProfile
- * @param payload - .
- * @yield {object} - A response from a call to the API.
- * @function parseData - returns a parsed res.data.
- * @yield {action} - A redux action to set a server message by type.
- * @yield {action} - A redux action to display a toast message by type.
- * @yield {action} - A redux action do set user avatar to redux state.
- * @yields {action} - A redux action to fresh member settings.
- * @throws {AnyAction} - A redux action to display a server error.
- */
-export function* updateUserProfile({
-  payload
-}: ReturnType<typeof actions.updateUserProfile>): SagaIterator {
-  try {
-    const res: AxiosResponse = yield call(
-      app.put,
-      `member/settings/update`,
-      payload
-    );
-    const data: { message: string; user: TAuthData } = yield call(
-      parseData,
-      res
-    );
-
-    const { message, user } = data;
-
-    yield put(setMessage(message));
-    yield call(toast, { type: "info", message });
-
-    if (message !== "Successfully updated your settings.") {
-      yield call(signoutUserSession);
-    } else {
-      yield put(actions.signinSession(user));
-    }
-    yield put(resetMessage());
   } catch (e) {
     yield call(showError, e.toString());
   }
@@ -273,6 +225,48 @@ export function* updateUserPassword({
     yield call(toast, { type: "success", message });
 
     yield call(signoutUserSession);
+  } catch (e) {
+    yield call(showError, e.toString());
+  }
+}
+
+/**
+ * Attempts to update a user profile.
+ *
+ * @generator
+ * @function updateUserProfile
+ * @param payload - .
+ * @yield {object} - A response from a call to the API.
+ * @function parseData - returns a parsed res.data.
+ * @yield {action} - A redux action to set a server message by type.
+ * @yield {action} - A redux action to display a toast message by type.
+ * @yield {action} - A redux action do set user avatar to redux state.
+ * @yields {action} - A redux action to fresh member settings.
+ * @throws {AnyAction} - A redux action to display a server error.
+ */
+export function* updateUserProfile({
+  payload
+}: ReturnType<typeof actions.updateUserProfile>): SagaIterator {
+  try {
+    const res: AxiosResponse = yield call(
+      app.put,
+      "member/settings/update",
+      payload
+    );
+    const data: { message: string; user: TAuthData } = yield call(
+      parseData,
+      res
+    );
+
+    const { message, user } = data;
+
+    yield call(showMessage, message);
+
+    if (message !== "Successfully updated your settings.") {
+      yield call(signoutUserSession);
+    } else {
+      yield put(actions.signinSession(user));
+    }
   } catch (e) {
     yield call(showError, e.toString());
   }

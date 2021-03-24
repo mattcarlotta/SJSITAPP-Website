@@ -1,16 +1,16 @@
 import Router from "next/router";
 import { expectSaga, testSaga } from "redux-saga-test-plan";
-import { resetMessage } from "~actions/Server"; // setMessage
-// import { fetchMemberSettings } from "~actions/Members";
 import * as actions from "~actions/Auth";
 import * as sagas from "~sagas/Auth";
 import toast from "~components/App/Toast";
 import authReducer, { initialState } from "~reducers/Auth";
 import serverReducer from "~reducers/Server";
-import app from "~utils/axiosConfig"; // avatarAPI
-import mockApp from "~utils/mockAxios"; // mockAPI
+import app, { avatarAPI } from "~utils/axiosConfig";
+import mockApp, { mockAPI } from "~utils/mockAxios";
 import { parseData, parseMessage } from "~utils/parseResponse";
+import showMessage from "~utils/showMessage";
 import {
+  TAuthData,
   TLoginData,
   TNewPasswordData,
   TResetPasswordData,
@@ -131,56 +131,58 @@ describe("Auth Sagas", () => {
     });
   });
 
-  // describe("Delete User Avatar", () => {
-  // 	it("logical flow matches pattern for delete avatar requests", () => {
-  // 		const message = "Successfully removed avatar.";
-  // 		const res = { data: { message } };
+  describe("Delete User Avatar", () => {
+    let payload: string;
+    beforeAll(() => {
+      payload = id;
+    });
 
-  // 		testSaga(sagas.deleteUserAvatar, { id })
-  // 			.next()
-  // 			.put(resetMessage())
-  // 			.next()
-  // 			.call(avatarAPI.delete, `delete/${id}`)
-  // 			.next(res)
-  // 			.call(parseMessage, res)
-  // 			.next(res.data.message)
-  // 			.put(setServerMessage({ message: res.data.message }))
-  // 			.next(res.data.message)
-  // 			.call(toast, { type: "info", message: res.data.message })
-  // 			.next()
-  // 			.put(actions.setUserAvatar({ avatar: "" }))
-  // 			.next()
-  // 			.put(fetchMemberSettings(id))
-  // 			.next()
-  // 			.isDone();
-  // 	});
+    it("logical flow matches pattern for delete avatar requests", () => {
+      const message = "Successfully removed avatar.";
+      const res = { data: { message } };
 
-  // 	it("successfully deletes an avatar", async () => {
-  // 		const message = "Successfully removed avatar.";
-  // 		mockAPI.onDelete(`delete/${id}`).reply(200, { message });
+      testSaga(sagas.deleteUserAvatar, actions.deleteUserAvatar(payload))
+        .next()
+        .call(avatarAPI.delete, `delete/${id}`)
+        .next(res)
+        .call(parseMessage, res)
+        .next(res.data.message)
+        .call(toast, { type: "info", message: res.data.message })
+        .next()
+        .put(actions.setUserAvatar({ avatar: "" }))
+        .next()
+        .isDone();
+    });
 
-  // 		return expectSaga(sagas.deleteUserAvatar, { id })
-  // 			.dispatch(actions.deleteUserAvatar)
-  // 			.withReducer(serverReducer)
-  // 			.hasFinalState({
-  // 				message,
-  // 			})
-  // 			.run();
-  // 	});
+    it("successfully deletes an avatar", async () => {
+      const message = "Successfully removed avatar.";
+      mockAPI.onDelete(`delete/${id}`).reply(200, { message });
 
-  // 	it("if API call fails, it displays a message", async () => {
-  // 		const err = "Unable to delete the member avatar.";
-  // 		mockAPI.onDelete(`delete/${id}`).reply(404, { err });
+      return expectSaga(
+        sagas.deleteUserAvatar,
+        actions.deleteUserAvatar(payload)
+      )
+        .withReducer(authReducer)
+        .hasFinalState(initialState)
+        .run();
+    });
 
-  // 		return expectSaga(sagas.deleteUserAvatar, { id })
-  // 			.dispatch(actions.deleteUserAvatar)
-  // 			.withReducer(serverReducer)
-  // 			.hasFinalState({
-  // 				message: err,
-  // 			})
-  // 			.run();
-  // 	});
-  // });
+    it("if API call fails, it displays a message", async () => {
+      const err = "Unable to delete the member avatar.";
+      mockAPI.onDelete(`delete/${id}`).reply(404, { err });
+
+      return expectSaga(
+        sagas.deleteUserAvatar,
+        actions.deleteUserAvatar(payload)
+      )
+        .withReducer(serverReducer)
+        .hasFinalState({
+          error: err,
+          message: ""
+        })
+        .run();
+    });
+  });
 
   describe("Reset User Password", () => {
     let payload: TResetPasswordData;
@@ -324,63 +326,63 @@ describe("Auth Sagas", () => {
     });
   });
 
-  // describe("Update User Avatar", () => {
-  // 	let form;
-  // 	let message;
-  // 	let avatar;
-  // 	beforeEach(() => {
-  // 		message = "Successfully updated your current avatar.";
-  // 		avatar = "123.png";
-  // 		form = { image: "123.png" };
-  // 	});
+  describe("Update User Avatar", () => {
+    let form: FormData;
+    let message: string;
+    let avatar: string;
+    beforeEach(() => {
+      message = "Successfully updated your current avatar.";
+      avatar = "http://localhost:3000/123.png";
+      form = new FormData();
+    });
 
-  // 	it("logical flow matches pattern for update user avatar requests", () => {
-  // 		const res = { data: { message, avatar } };
+    it("logical flow matches pattern for update user avatar requests", () => {
+      const res = { data: { message, avatar } };
 
-  // 		testSaga(sagas.updateUserAvatar, { form, id })
-  // 			.next()
-  // 			.put(resetMessage())
-  // 			.next()
-  // 			.call(avatarAPI.put, `update/${id}`, form)
-  // 			.next(res)
-  // 			.call(parseData, res)
-  // 			.next(res.data)
-  // 			.put(setServerMessage({ message: res.data.message }))
-  // 			.next(res.data)
-  // 			.call(toast, { type: "info", message: res.data.message })
-  // 			.next(res.data)
-  // 			.put(actions.setUserAvatar({ avatar: res.data.avatar }))
-  // 			.next()
-  // 			.put(fetchMemberSettings())
-  // 			.next()
-  // 			.isDone();
-  // 	});
+      testSaga(sagas.updateUserAvatar, actions.updateUserAvatar({ form, id }))
+        .next()
+        .call(avatarAPI.put, `update/${id}`, form)
+        .next(res)
+        .call(parseData, res)
+        .next(res.data)
+        .call(showMessage, res.data.message)
+        .next(res.data)
+        .put(actions.setUserAvatar({ avatar: res.data.avatar }))
+        .next()
+        .isDone();
+    });
 
-  // 	it("successfully updates a user avatar", async () => {
-  // 		mockAPI.onPut(`update/${id}`).reply(200, { message });
+    it("successfully updates a user avatar", async () => {
+      mockAPI.onPut(`update/${id}`).reply(200, { avatar, message });
 
-  // 		return expectSaga(sagas.updateUserAvatar, { form, id })
-  // 			.dispatch(actions.updateUserAvatar)
-  // 			.withReducer(serverReducer)
-  // 			.hasFinalState({
-  // 				message,
-  // 			})
-  // 			.run();
-  // 	});
+      return expectSaga(
+        sagas.updateUserAvatar,
+        actions.updateUserAvatar({ form, id })
+      )
+        .withReducer(authReducer)
+        .hasFinalState({
+          ...initialState,
+          avatar
+        })
+        .run();
+    });
 
-  // 	it("if API call fails, it displays a message", async () => {
-  // 		const err = "Unable to update the user avatar.";
-  // 		mockAPI.onPut(`update/${id}`).reply(404, { err });
+    it("if API call fails, it displays a message", async () => {
+      const err = "Unable to update the user avatar.";
+      mockAPI.onPut(`update/${id}`).reply(404, { err });
 
-  // 		return expectSaga(sagas.updateUserAvatar, { form, id })
-  // 			.dispatch(actions.updateUserAvatar)
-  // 			.withReducer(serverReducer)
-  // 			.hasFinalState({
-  // 				message: err,
-  // 			})
-  // 			.run();
-  // 	});
-  // });
+      return expectSaga(
+        sagas.updateUserAvatar,
+        actions.updateUserAvatar({ form, id })
+      )
+        .withReducer(serverReducer)
+        .hasFinalState({
+          error: err,
+          message: ""
+        })
+        .run();
+    });
+  });
 
   describe("Update Current User Password", () => {
     let payload: TNewPasswordData;
@@ -427,6 +429,87 @@ describe("Auth Sagas", () => {
       return expectSaga(
         sagas.updateUserPassword,
         actions.updateUserPassword(payload)
+      )
+        .withReducer(serverReducer)
+        .hasFinalState({
+          error: err,
+          message: ""
+        })
+        .run();
+    });
+  });
+
+  describe("Update Member's Settings", () => {
+    let payload: TAuthData;
+    beforeEach(() => {
+      payload = {
+        id: "0123456789",
+        avatar: "",
+        email: "test@test.com",
+        emailReminders: true,
+        firstName: "Bob",
+        lastName: "Dole",
+        role: "employee"
+      };
+    });
+
+    it("logical flow matches pattern for updating crucial member's settings requests", () => {
+      const message =
+        "Your email has changed, please log out and log in with your new email.";
+      const res = { data: { message } };
+
+      testSaga(sagas.updateUserProfile, actions.updateUserProfile(payload))
+        .next()
+        .call(app.put, "member/settings/update", payload)
+        .next(res)
+        .call(parseData, res)
+        .next(res.data)
+        .call(showMessage, res.data.message)
+        .next()
+        .call(sagas.signoutUserSession)
+        .next()
+        .isDone();
+    });
+
+    it("logical flow matches pattern for updating non-crucial member's settings requests", () => {
+      const message = "Successfully updated your settings.";
+      const res = { data: { message, user: payload } };
+
+      testSaga(sagas.updateUserProfile, actions.updateUserProfile(payload))
+        .next()
+        .call(app.put, "member/settings/update", payload)
+        .next(res)
+        .call(parseData, res)
+        .next(res.data)
+        .call(showMessage, res.data.message)
+        .next(res.data)
+        .put(actions.signinSession(res.data.user))
+        .next()
+        .isDone();
+    });
+
+    it("successfully updates a member's settings", async () => {
+      const message = "Successfully updated your settings.";
+      mockApp
+        .onPut("member/settings/update")
+        .reply(200, { message, user: payload });
+
+      return expectSaga(
+        sagas.updateUserProfile,
+        actions.updateUserProfile(payload)
+      )
+        .withReducer(authReducer)
+        .hasFinalState({ ...initialState, ...payload })
+        .run();
+    });
+
+    it("if API call fails, it displays a message", async () => {
+      const err = "Unable to update the member's settings.";
+      mockApp.onPut("member/settings/update").reply(404, { err });
+
+      return expectSaga(
+        sagas.updateUserProfile,
+        actions.updateUserProfile(payload)
       )
         .withReducer(serverReducer)
         .hasFinalState({
