@@ -47,7 +47,7 @@ const General = ({ id }: { id: string }): JSX.Element => (
         />
         &nbsp;Upload Avatar
       </Button>
-      button to bring up this upload dialog box:
+      button to bring up an upload dialog box:
       <div
         css={css`
           height: 195px;
@@ -61,7 +61,7 @@ const General = ({ id }: { id: string }): JSX.Element => (
       >
         <UploadAvatarInstructions />
       </div>
-      Click or drag and drop an image on to the upload box. Once an image has
+      Click on or drag and drop an image on to the upload box. Once an image has
       been selected, the image will automatically be uploaded to your profile.
       If the upload is successful, then your account will be updated with your
       new avatar.

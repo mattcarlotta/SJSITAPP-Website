@@ -124,7 +124,9 @@ const Availability = ({ id }: TAvailabilityProps): JSX.Element => {
             value={selectedMonth}
             onChange={handleDateChange}
           />
-          <Margin left="10px" right="10px" />
+          <Margin left="10px" right="10px">
+            of
+          </Margin>
           <NativeSelect
             name="selectedYear"
             options={years}

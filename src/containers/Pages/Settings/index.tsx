@@ -7,12 +7,15 @@ import {
 } from "~actions/Auth";
 import Availability from "~components/Layout/Availability";
 import Card from "~components/Layout/Card";
+import Center from "~components/Layout/Center";
 import EventCalendar from "~components/Layout/EventCalendar";
+import Line from "~components/Layout/Line";
 import Padding from "~components/Layout/Padding";
 import Profile from "~components/Layout/Profile";
 import TabPanel from "~components/Layout/TabPanel";
 import Tab from "~components/Layout/Tab";
 import Tabs from "~components/Layout/Tabs";
+import Title from "~components/Layout/Title";
 import Header from "~components/Navigation/Header";
 import { BsPeopleCircle, FaCogs, FaChartBar, FaReply } from "~icons";
 import { TRootState } from "~types";
@@ -99,7 +102,11 @@ const SettingsPage = (props: TSettingPageProps): JSX.Element => {
             <Availability id={props.id} />
           </TabPanel>
           <TabPanel value={tab} index={2}>
-            <EventCalendar APIURL="responses" id={props.id} />
+            <Center style={{ marginBottom: "-4px" }}>
+              <Title>My Responses</Title>
+              <Line centered width="400px" />
+            </Center>
+            <EventCalendar APIURL="responses" id={props.id} disableGames />
           </TabPanel>
         </Padding>
       </Card>

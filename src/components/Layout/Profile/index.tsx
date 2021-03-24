@@ -42,14 +42,14 @@ const Profile = (props: TProfileProps): JSX.Element => (
     </Title>
     <Center>
       <PanelDescription margin="5px 0 10px 0">
-        Having trouble uploading an avatar? See the
+        Having trouble uploading an avatar? Click
         <OutsideLink
           dataTestId="help-change-avatar-link"
           href="/employee/help#how-do-i-change-my-avatar"
         >
-          how do I change my avatar
+          here
         </OutsideLink>
-        help section.
+        for help.
       </PanelDescription>
     </Center>
     <EditMemberForm {...props} />

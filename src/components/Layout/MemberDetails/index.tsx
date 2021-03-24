@@ -8,7 +8,8 @@ import { CSSProperties } from "~types";
 const activeUserStyle = {
   color: "green",
   position: "relative",
-  top: "2px"
+  top: "2px",
+  marginRight: 8
 } as CSSProperties;
 
 const inactiveUserStyle = {
@@ -16,7 +17,8 @@ const inactiveUserStyle = {
   position: "relative",
   top: 5,
   left: 3,
-  color: "red"
+  color: "red",
+  marginRight: 8
 } as CSSProperties;
 
 const iconStyles = {
@@ -48,8 +50,7 @@ const MemberDetails = ({
         ) : (
           <FaUserTimes style={inactiveUserStyle} />
         )}
-        &nbsp;&nbsp;
-        <span data-test="user-status">({status})</span>
+        {status}
       </DisabledInput>
     </div>
     <Margin as="div" top="20px" bottom="20px">

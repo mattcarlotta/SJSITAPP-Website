@@ -48,11 +48,13 @@ export type TEventCalendarState = {
 export type TEventCalendarProps = {
   APIURL: string;
   id: string;
+  disableGames?: boolean;
 };
 
 export const EventCalendar = ({
   APIURL,
-  id
+  id,
+  disableGames
 }: TEventCalendarProps): JSX.Element => {
   const [state, setState] = React.useState<TEventCalendarState>({
     days: generateCalendarDays(
@@ -188,15 +190,19 @@ export const EventCalendar = ({
               </Tooltip>
             </FlexStart>
             <FlexCenter breakpoint justify="center" margin="0">
-              <NativeSelect
-                name="selectedGames"
-                options={["All Events", "My Events"]}
-                value={selectedGames}
-                onChange={handleDateChange}
-              />
-              <Margin left="10px" right="10px">
-                in
-              </Margin>
+              {!disableGames && (
+                <>
+                  <NativeSelect
+                    name="selectedGames"
+                    options={["All Events", "My Events"]}
+                    value={selectedGames}
+                    onChange={handleDateChange}
+                  />
+                  <Margin left="10px" right="10px">
+                    in
+                  </Margin>
+                </>
+              )}
               <NativeSelect
                 name="selectedMonth"
                 options={months}

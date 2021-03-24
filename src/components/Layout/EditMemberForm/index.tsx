@@ -85,7 +85,7 @@ export const EditMemberForm = ({
   return (
     <div
       css={css`
-        max-width: 550px;
+        max-width: 500px;
         width: 100%;
         margin-top: 10px;
         padding: 20px;

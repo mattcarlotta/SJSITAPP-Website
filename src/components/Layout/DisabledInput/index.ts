@@ -2,6 +2,7 @@
 import styled from "@emotion/styled";
 
 const DisabledInput = styled.div`
+  cursor: not-allowed;
   background: #eee;
   width: 100%;
   padding: 8px 8px 8px 16px;
