@@ -1,5 +1,5 @@
 import { HYDRATE } from "next-redux-wrapper";
-import * as types from "~constants";
+import * as constants from "~constants";
 import { AnyAction } from "~types";
 
 export interface ISidemenuReducerState {
@@ -28,17 +28,20 @@ const sidemenuReducer = (
     case HYDRATE: {
       return { ...state, ...payload.sidemenu };
     }
-    case types.SIDEMENU_COLLAPSE: {
+    case constants.SIDEMENU_COLLAPSE: {
       return { ...state, collapsed: true };
     }
-    case types.SIDEMENU_EXPANDED_TABS: {
+    case constants.SIDEMENU_EXPANDED_TABS: {
       return { ...state, expandedNodeIds: payload };
     }
-    case types.SIDEMENU_SELECTED_TABS: {
+    case constants.SIDEMENU_SELECTED_TABS: {
       return { ...state, selectedNodeIds: payload };
     }
-    case types.SIDEMENU_TOGGLE: {
+    case constants.SIDEMENU_TOGGLE: {
       return { ...state, collapsed: !state.collapsed };
+    }
+    case constants.SIDEMENU_RESET: {
+      return initialState;
     }
     default: {
       return state;

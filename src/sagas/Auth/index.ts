@@ -2,6 +2,7 @@ import Router from "next/router";
 import { all, put, call, takeLatest } from "redux-saga/effects";
 import toast from "~components/App/Toast";
 import * as actions from "~actions/Auth";
+import { resetSideMenu } from "~actions/Sidemenu";
 import * as constants from "~constants";
 import app, { avatarAPI } from "~utils/axiosConfig";
 import { parseData, parseMessage } from "~utils/parseResponse";
@@ -46,6 +47,7 @@ export function* signoutUserSession(): SagaIterator {
     yield call(Router.push, "/employee/login");
 
     yield put(actions.removeSession());
+    yield put(resetSideMenu());
   } catch (e) {
     yield call(showError, e.toString());
   }

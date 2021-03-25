@@ -1,6 +1,7 @@
 import {
   SIDEMENU_COLLAPSE,
   SIDEMENU_EXPANDED_TABS,
+  SIDEMENU_RESET,
   SIDEMENU_SELECTED_TABS,
   SIDEMENU_TOGGLE
 } from "~constants";
@@ -50,6 +51,18 @@ export const setSelectedTabs = (
 } => ({
   type: SIDEMENU_SELECTED_TABS,
   payload
+});
+
+/**
+ * Resets side menu state.
+ *
+ * @function resetSideMenu
+ * @returns constants.SIDEMENU_RESET
+ */
+export const resetSideMenu = (): {
+  type: typeof SIDEMENU_RESET;
+} => ({
+  type: SIDEMENU_RESET
 });
 
 /**

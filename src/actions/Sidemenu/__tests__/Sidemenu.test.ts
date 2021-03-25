@@ -16,6 +16,12 @@ describe("Sidemenu Actions", () => {
     expect(value).toEqual({ type: constants.SIDEMENU_EXPANDED_TABS, payload });
   });
 
+  it("resetSideMenu returns SIDEMENU_RESET", () => {
+    const value = actions.resetSideMenu();
+
+    expect(value).toEqual({ type: constants.SIDEMENU_RESET });
+  });
+
   it("setSelectedTabs returns SIDEMENU_SELECTED_TABS and nodeIds as payload", () => {
     const value = actions.setSelectedTabs(payload);
 

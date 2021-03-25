@@ -59,7 +59,10 @@ export const SettingsPage = (props: TSettingPageProps): JSX.Element => {
 
   return (
     <>
-      <Header title="Settings" url="/settings" />
+      <Header
+        title={`Settings ${query || ""}`}
+        url={`/employee/settings${query ? `?tab=${query}` : ""}`}
+      />
       <Card dataTestId="settings-page" title="Settings" icon={<FaCogs />}>
         <Tabs
           value={tab}

@@ -62,4 +62,19 @@ describe("Server Reducer", () => {
 
     expect(state).toEqual({ ...initialState, collapsed: true });
   });
+
+  it("resets state when user is logged out", () => {
+    let state = sidemenuReducer(undefined, {
+      type: constants.SIDEMENU_EXPANDED_TABS,
+      payload: expandedNodeIds
+    });
+
+    expect(state).toEqual({ ...initialState, expandedNodeIds });
+
+    state = sidemenuReducer(state, {
+      type: constants.SIDEMENU_RESET
+    });
+
+    expect(state).toEqual(initialState);
+  });
 });

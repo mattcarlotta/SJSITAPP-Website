@@ -2,6 +2,7 @@ import Router from "next/router";
 import { expectSaga, testSaga } from "redux-saga-test-plan";
 import * as actions from "~actions/Auth";
 import * as sagas from "~sagas/Auth";
+import { resetSideMenu } from "~actions/Sidemenu";
 import toast from "~components/App/Toast";
 import authReducer, { initialState } from "~reducers/Auth";
 import serverReducer from "~reducers/Server";
@@ -99,6 +100,8 @@ describe("Auth Sagas", () => {
         .call(Router.push, "/employee/login")
         .next()
         .put(actions.removeSession())
+        .next()
+        .put(resetSideMenu())
         .next()
         .isDone();
     });
