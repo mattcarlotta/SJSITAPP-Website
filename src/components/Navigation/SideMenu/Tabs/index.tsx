@@ -48,7 +48,7 @@ const sharedRoutes: TRoutes = [
   {
     icon: <FaCogs />,
     nodeId: "settings",
-    href: "settings",
+    href: "settings?tab=profile",
     title: "Settings",
     testId: "settings-link"
   },

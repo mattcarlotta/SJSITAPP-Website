@@ -5,6 +5,7 @@ import { css } from "@emotion/react";
 import toast from "~components/App/Toast";
 import FieldGenerator from "~components/Forms/FieldGenerator";
 import Card from "~components/Layout/Card";
+import Center from "~components/Layout/Center";
 import FormatDate from "~components/Layout/FormatDate";
 import LoadingPanel from "~components/Layout/LoadingPanel";
 import Notes from "~components/Layout/Notes";
@@ -90,6 +91,12 @@ const APForm = (): JSX.Element => {
       e.preventDefault();
       const { validatedFields, errors } = fieldValidator(state.fields);
 
+      if (errors)
+        toast({
+          type: "error",
+          message: "Please fill out all of the required fields."
+        });
+
       setState(prevState => ({
         ...prevState,
         fields: !errors ? prevState.fields : validatedFields,
@@ -126,8 +133,8 @@ const APForm = (): JSX.Element => {
   }, [submitApForm, isSubmitting]);
 
   React.useEffect(() => {
-    if (isLoading) fetchAPForm();
-  }, [isLoading, fetchAPForm]);
+    if (isLoading && id) fetchAPForm();
+  }, [isLoading, id, fetchAPForm]);
 
   return (
     <>
@@ -148,16 +155,12 @@ const APForm = (): JSX.Element => {
           ) : (
             <form
               css={css`
-                margin-left: auto;
-                margin-right: auto;
-                margin-bottom: 60px;
-                width: 100%;
+                margin: 0 auto 60px auto;
                 max-width: 600px;
-                text-align: center;
               `}
               onSubmit={handleSubmit}
             >
-              <>
+              <Center>
                 <Title margin="0px" style={{ color: "#025f6d" }}>
                   <FormatDate
                     date={form.startMonth}
@@ -190,13 +193,13 @@ const APForm = (): JSX.Element => {
                 <SubmitButton
                   isSubmitting={isSubmitting}
                   title="Submit AP Form"
-                  style={{ width: "300px", margin: "0 auto" }}
+                  style={{ maxWidth: "600px", margin: "0 auto" }}
                   submitBtnStyle={{
                     background: "#010404",
                     border: "2px solid #2e7c8a"
                   }}
                 />
-              </>
+              </Center>
             </form>
           )}
         </Padding>

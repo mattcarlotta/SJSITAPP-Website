@@ -20,6 +20,7 @@ import Tabs from "~components/Layout/Tabs";
 import Title from "~components/Layout/Title";
 import Header from "~components/Navigation/Header";
 import { BsPeopleCircle, FaCogs, FaChartBar, FaReply } from "~icons";
+import capitalize from "~utils/capitalize";
 import { TRootState } from "~types";
 
 export type TSettingPageProps = {
@@ -60,7 +61,7 @@ export const SettingsPage = (props: TSettingPageProps): JSX.Element => {
   return (
     <>
       <Header
-        title={`Settings ${query || ""}`}
+        title={`Settings ${capitalize(query as string) || ""}`}
         url={`/employee/settings${query ? `?tab=${query}` : ""}`}
       />
       <Card dataTestId="settings-page" title="Settings" icon={<FaCogs />}>

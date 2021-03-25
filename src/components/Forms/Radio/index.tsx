@@ -5,6 +5,7 @@ import { ToggleButtonGroup, ToggleButton } from "@material-ui/lab";
 import Errors from "~components/Forms/Errors";
 import Label from "~components/Forms/Label";
 import Notes from "~components/Layout/Notes";
+import Padding from "~components/Layout/Padding";
 import { CSSProperties, EventTarget, ReactNode } from "~types";
 
 export type TRadioProps = {
@@ -27,14 +28,19 @@ export type TRadioProps = {
 const useGroupStyles = makeStyles({
   root: {
     width: "100%",
-    maxWidth: 400,
-    background: "#fff"
+    maxWidth: 410,
+    padding: "0 5px"
   }
 });
 
 const useButtonStyles = makeStyles(() => ({
   root: {
-    color: "#010404"
+    color: "#010404",
+    width: "100%",
+    background: "#fff",
+    margin: "10px 0",
+    border: "1px solid #ccc !important",
+    borderRadius: "50px !important"
   },
   selected: {
     background: "#1890ff !important",
@@ -73,7 +79,7 @@ const RadioComponent = ({
     <ToggleButtonGroup
       orientation="vertical"
       aria-label="event group"
-      className={useGroupStyles().root}
+      classes={useGroupStyles()}
       exclusive
       onChange={(_, value) => onChange({ target: { name, value } })}
       value={value}
@@ -92,22 +98,27 @@ const RadioComponent = ({
         ))}
     </ToggleButtonGroup>
     {errors && (
-      <Errors
-        data-testid="errors"
-        style={{
-          textAlign: "center",
-          maxWidth: 400,
-          margin: "0 auto",
-          padding: "11px",
-          border: "1px solid rgba(0, 0, 0, 0.12)",
-          background: "#d14023",
-          color: "#fff",
-          fontSize: 18,
-          textTransform: "uppercase"
-        }}
+      <Padding
+        left="5px"
+        right="5px"
+        style={{ maxWidth: 410, margin: "0 auto" }}
       >
-        {errors}
-      </Errors>
+        <Errors
+          data-testid="errors"
+          style={{
+            textAlign: "center",
+            padding: "11px",
+            border: "1px solid rgba(0, 0, 0, 0.12)",
+            background: "#d14023",
+            borderRadius: 50,
+            color: "#fff",
+            fontSize: 18,
+            textTransform: "uppercase"
+          }}
+        >
+          {errors}
+        </Errors>
+      </Padding>
     )}
   </div>
 );
