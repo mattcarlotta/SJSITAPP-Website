@@ -69,8 +69,8 @@ const APForm = (): JSX.Element => {
         form: data.form,
         isLoading: false
       }));
-    } catch (error) {
-      toast({ type: "error", message: error.toString() });
+    } catch (err) {
+      toast({ type: "error", message: err.toString() });
       router.replace("/employee/dashboard");
     }
   }, [id]);

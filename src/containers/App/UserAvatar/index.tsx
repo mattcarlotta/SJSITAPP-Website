@@ -15,8 +15,10 @@ import MenuLink from "~components/Navigation/MenuLink";
 import NavLink from "~components/Navigation/NavLink";
 import {
   IconContext,
-  FaCogs,
   BsChatQuote,
+  FaCogs,
+  FaReply,
+  FaUserClock,
   MdHelpOutline,
   RiLogoutBoxLine
 } from "~icons";
@@ -138,7 +140,28 @@ export const UserAvatar = ({
               </MenuLink>
             </MenuItem>
             <MenuItem>
-              <MenuLink dataTestId="settings-link" href="/employee/settings">
+              <MenuLink
+                dataTestId="settings-availability-link"
+                href="/employee/settings?tab=availability"
+              >
+                <FaUserClock />
+                My Availability
+              </MenuLink>
+            </MenuItem>
+            <MenuItem>
+              <MenuLink
+                dataTestId="settings-responses-link"
+                href="/employee/settings?tab=responses"
+              >
+                <FaReply />
+                My Responses
+              </MenuLink>
+            </MenuItem>
+            <MenuItem>
+              <MenuLink
+                dataTestId="settings-profile-link"
+                href="/employee/settings?tab=profile"
+              >
                 <FaCogs />
                 Settings
               </MenuLink>

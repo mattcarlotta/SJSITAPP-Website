@@ -25,7 +25,10 @@ const General = ({ id }: { id: string }): JSX.Element => (
     </Center>
     <Accordion expanded={id} title="How do I change my avatar?">
       To change your avatar, go to the
-      <OutsideLink dataTestId="settings-link" href="/employee/settings">
+      <OutsideLink
+        dataTestId="settings-link"
+        href="/employee/settings?tab=profile"
+      >
         Settings
       </OutsideLink>
       page and click on the
@@ -68,7 +71,10 @@ const General = ({ id }: { id: string }): JSX.Element => (
       <br />
       <br />
       To remove your current avatar, go to the
-      <OutsideLink dataTestId="settings-link" href="/employee/settings">
+      <OutsideLink
+        dataTestId="settings-link"
+        href="/employee/settings?tab=profile"
+      >
         Settings
       </OutsideLink>
       page. Located underneath your avatar, click on the
@@ -102,7 +108,10 @@ const General = ({ id }: { id: string }): JSX.Element => (
     </Accordion>
     <Accordion expanded={id} title="How do I change my email?">
       To change your email, go to the
-      <OutsideLink dataTestId="settings-link" href="/employee/settings">
+      <OutsideLink
+        dataTestId="settings-link"
+        href="/employee/settings?tab=profile"
+      >
         Settings
       </OutsideLink>
       page and update the <strong>Email</strong> field with a new email address.
@@ -126,7 +135,10 @@ const General = ({ id }: { id: string }): JSX.Element => (
     </Accordion>
     <Accordion expanded={id} title="How do I change my email preferences?">
       To change your email preferences, go to the
-      <OutsideLink dataTestId="settings-link" href="/employee/settings">
+      <OutsideLink
+        dataTestId="settings-link"
+        href="/employee/settings?tab=profile"
+      >
         Settings
       </OutsideLink>
       page and toggle the <strong>Email Reminders</strong> field. Once finished,
@@ -149,7 +161,10 @@ const General = ({ id }: { id: string }): JSX.Element => (
     </Accordion>
     <Accordion expanded={id} title="How do I change my first or last name?">
       To change your first and/or last name, go to the
-      <OutsideLink dataTestId="settings-link" href="/employee/settings">
+      <OutsideLink
+        dataTestId="settings-link"
+        href="/employee/settings?tab=profile"
+      >
         Settings
       </OutsideLink>
       page and change the <strong>First Name</strong> and/or

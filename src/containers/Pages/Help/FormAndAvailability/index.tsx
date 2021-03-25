@@ -20,18 +20,21 @@ const FormAndAvailability = ({ id }: { id: string }): JSX.Element => (
     </Center>
     <Accordion expanded={id} title="How do I view my monthly availability?">
       To view your month to month availability, go to the
-      <OutsideLink dataTestId="settings-link" href="/employee/settings">
+      <OutsideLink
+        dataTestId="settings-link"
+        href="/employee/settings?tab=availability"
+      >
         Settings
       </OutsideLink>
-      page and click on the <strong>Availability</strong> tab. You can change
-      the <strong>Month</strong> and/or <strong>Year</strong> to reflect which
-      month and year you&#39;d wish to view. The pie chart displays your
-      responses and availability for the selected month&#39;s A/P form and the
-      bar chart displays the amount of games that you were scheduled for versus
-      the amount of available home games.
+      page (make sure you&#39;re viewing the <strong>Availability</strong> tab).
+      You can change the <strong>Month</strong> and/or <strong>Year</strong> to
+      reflect which month and year you&#39;d wish to view. The pie chart
+      displays your responses and availability for the selected month&#39;s A/P
+      form and the bar chart displays the amount of games that you were
+      scheduled for versus the amount of available home games.
       <br />
       <br />
-      To view the current month&#39;s availability percentage, go to the
+      To quickly view the current month&#39;s availability percentage, go to the
       <OutsideLink dataTestId="dashboard-link" href="/employee/dashboard">
         Dashboard
       </OutsideLink>
@@ -43,10 +46,14 @@ const FormAndAvailability = ({ id }: { id: string }): JSX.Element => (
       title="How do I view my monthly A/P form responses?"
     >
       To view your month to month A/P form responses, go to the
-      <OutsideLink dataTestId="settings-link" href="/employee/settings">
+      <OutsideLink
+        dataTestId="settings-link"
+        href="/employee/settings?tab=responses"
+      >
         Settings
       </OutsideLink>
-      page and click on the <strong>Responses</strong> tab. You can change the
+      page (make sure you&#39;re viewing the <strong>Responses</strong> tab).
+      You can change the
       <strong>&nbsp;Month</strong> and/or <strong>Year</strong> to reflect which
       month and year you&#39;d wish to view. If you&#39;ve filled out the A/P
       form for the selected month, a series of games will be rendered within the
@@ -117,11 +124,11 @@ const FormAndAvailability = ({ id }: { id: string }): JSX.Element => (
         tertiary
         display="inline-block"
         type="button"
-        width="100px"
+        width="180px"
         padding="4px"
         margin="0 3px"
       >
-        Submit
+        Submit AP Form
       </Button>
       button when you&#39;re done.
       <WarningText>
@@ -159,11 +166,11 @@ const FormAndAvailability = ({ id }: { id: string }): JSX.Element => (
         tertiary
         display="inline-block"
         type="button"
-        width="100px"
-        padding="8px"
+        width="180px"
+        padding="4px"
         margin="0 3px"
       >
-        Submit
+        Submit AP Form
       </Button>
       button when you&#39;re done.
       <WarningText>

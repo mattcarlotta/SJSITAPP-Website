@@ -100,7 +100,10 @@ const RadioComponent = ({
           margin: "0 auto",
           padding: "11px",
           border: "1px solid rgba(0, 0, 0, 0.12)",
-          background: "#d14023"
+          background: "#d14023",
+          color: "#fff",
+          fontSize: 18,
+          textTransform: "uppercase"
         }}
       >
         {errors}
