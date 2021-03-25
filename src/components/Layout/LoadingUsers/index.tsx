@@ -1,13 +1,23 @@
 import styled from "@emotion/styled";
 import FadeIn from "~components/Layout/FadeIn";
-import { LoadingUsersProps } from "~types";
 
-const LoadingUsersComponent = ({ className }: LoadingUsersProps) => (
+export type TLoadingUsersProps = {
+  className?: string;
+};
+
+const LoadingUsersComponent = ({
+  className
+}: TLoadingUsersProps): JSX.Element => (
   <FadeIn data-testid="loading-users" timing="0.6s">
     <div data-testid="loading-user-card" className={className} />
   </FadeIn>
 );
-const LoadingUsers = styled(LoadingUsersComponent)`
+const LoadingUsers = styled(LoadingUsersComponent)<{
+  duration?: string;
+  height?: number;
+  opacity?: string;
+  width?: number;
+}>`
   @keyframes wave {
     0% {
       left: -60%;

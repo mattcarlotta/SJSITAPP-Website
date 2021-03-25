@@ -2,12 +2,12 @@ import styled from "@emotion/styled";
 import { Switch as MuiSwitch } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Label from "~components/Forms/Label";
-import { EventTarget, CSSProperties } from "~types";
+import { EventTarget, CSSProperties, ReactNode } from "~types";
 
 export type TComponentProps = {
   className?: string;
   errors?: string;
-  label?: string;
+  label?: ReactNode;
   name?: string;
   onChange: ({ target: { name, value: checked } }: EventTarget) => void;
   value?: boolean;

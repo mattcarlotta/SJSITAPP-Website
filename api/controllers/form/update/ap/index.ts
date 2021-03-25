@@ -15,9 +15,9 @@ import { unableToLocateForm, unableToUpdateApForm } from "~messages/errors";
 const updateApForm = async (req: Request, res: Response): Promise<Response> => {
   try {
     const {
-      _id,
+      id: _id,
       responses
-    }: { _id: string; responses: Array<TEventResponse> } = req.body;
+    }: { id: string; responses: Array<TEventResponse> } = req.body;
     if (!_id || !responses) throw unableToUpdateApForm;
 
     const formExists = await Form.findOne({ _id });

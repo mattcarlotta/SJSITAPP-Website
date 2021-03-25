@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
 import Tooltip from "~components/Layout/Tooltip";
 import { GoQuestion } from "~icons";
-import { CSSProperties } from "~types";
+import { CSSProperties, ReactNode } from "~types";
 
 export type TLabelProps = {
   className?: string;
   name?: string;
-  label?: any;
+  label?: ReactNode;
   style?: CSSProperties;
   tooltip?: string;
 };

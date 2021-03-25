@@ -5,7 +5,13 @@ import Label from "~components/Forms/Label";
 import Errors from "~components/Forms/Errors";
 import Icon from "~components/Layout/Icon";
 import ClickHandler from "./ClickHandler";
-import { ChangeEvent, CSSProperties, TIconType, TInputType } from "~types";
+import {
+  ChangeEvent,
+  CSSProperties,
+  ReactNode,
+  TIconType,
+  TInputType
+} from "~types";
 
 export type TInputComponentProps = {
   className?: string;
@@ -14,7 +20,7 @@ export type TInputComponentProps = {
   disabled?: boolean;
   icon?: TIconType;
   inputStyle?: CSSProperties;
-  label?: string;
+  label?: ReactNode;
   name: string;
   onChange: (e: ChangeEvent<any>) => void;
   placeholder?: string;

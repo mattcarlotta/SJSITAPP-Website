@@ -60,7 +60,7 @@ describe("Update AP Schedule Controller", () => {
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({
-        _id: "a01dc43483adb35b1ca678ea",
+        id: "a01dc43483adb35b1ca678ea",
         responses
       })
       .expect(400)
@@ -75,7 +75,7 @@ describe("Update AP Schedule Controller", () => {
       .put("/api/form/update/ap")
       .set("Cookie", cookie)
       .send({
-        _id: form!._id,
+        id: form!._id,
         responses
       })
       .expect("Content-Type", /json/)
@@ -93,7 +93,7 @@ describe("Update AP Schedule Controller", () => {
       .put("/api/form/update/ap")
       .set("Cookie", cookie)
       .send({
-        _id: form!._id,
+        id: form!._id,
         responses: responses.map(response => ({
           ...response,
           value: "Not available to work.",

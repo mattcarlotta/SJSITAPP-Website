@@ -2,15 +2,17 @@ import styled from "@emotion/styled";
 import { TextareaAutosize } from "@material-ui/core";
 import Errors from "~components/Forms/Errors";
 import Label from "~components/Forms/Label";
-import { ChangeEvent, CSSProperties } from "~types";
+import { ChangeEvent, CSSProperties, ReactNode } from "~types";
 
 export type TComponentProps = {
   className?: string;
   errors?: string;
-  label?: string;
+  label?: ReactNode;
   name?: string;
+  maxLength?: number;
   placeholder?: string;
   onChange?: (event: ChangeEvent<any>) => void;
+  innerStyle?: CSSProperties;
   rows?: number;
   value?: string;
   style?: CSSProperties;
@@ -19,7 +21,9 @@ export type TComponentProps = {
 const TextAreaComponent = ({
   className,
   errors,
+  innerStyle,
   label,
+  maxLength,
   name,
   placeholder,
   onChange,
@@ -40,6 +44,8 @@ const TextAreaComponent = ({
       rows={rows || 10}
       tabIndex={0}
       value={value}
+      style={innerStyle}
+      maxLength={maxLength}
     />
     {errors && <Errors data-testid="errors">{errors}</Errors>}
   </div>

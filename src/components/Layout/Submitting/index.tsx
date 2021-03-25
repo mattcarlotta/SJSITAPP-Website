@@ -1,8 +1,16 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { ComponentProps } from "~types";
+import { CSSProperties } from "~types";
 
-const SubmittingComponent = ({ className, style }: ComponentProps) => (
+export type TSubmittingProps = {
+  className?: string;
+  style?: CSSProperties;
+};
+
+const SubmittingComponent = ({
+  className,
+  style
+}: TSubmittingProps): JSX.Element => (
   <div data-testid="submitting" className={className} style={style}>
     <div className="bar1" />
     <div className="bar2" />

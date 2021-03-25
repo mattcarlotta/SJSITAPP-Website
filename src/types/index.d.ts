@@ -113,18 +113,24 @@ export type EventTargetDataset = {
 
 /// COMPONENTS ///
 export type TBaseFieldProps = {
+  id?: string;
   containerStyle?: CSSProperties;
   disabled?: boolean;
   errors?: string;
   icon?: TIconType;
   inputStyle?: CSSProperties;
-  label?: string;
+  innerStyle?: CSSProperties;
+  label?: ReactNode;
+  maxLength?: number;
   name: string;
   onChange?: (event: ChangeEvent<any>) => void;
   placeholder?: string;
   required: boolean;
   readOnly?: boolean;
   notes?: string;
+  radioContainerStyle?: CSSProperties;
+  radioLabelStyle?: CSSProperties;
+  radioStyle?: CSSProperties;
   style?: CSSProperties;
   selectOptions?: Array<string>;
   type: string;
@@ -164,6 +170,38 @@ export type TFormData = {
   eventCounts?: number;
 };
 
+export type TEventEmployeeResponse = Array<{
+  _id?: string;
+  response?: string;
+  notes?: string;
+}>;
+
+export type TApEventDetails = {
+  _id: string;
+  eventDate: string;
+  eventType: string;
+  notes?: string;
+  opponent?: string;
+  location: string;
+  employeeResponse?: TEventEmployeeResponse;
+  team: string;
+};
+
+export type TAPFormDetails = {
+  _id: string;
+  endMonth: string;
+  expirationDate: string;
+  notes?: string;
+  sendEmailNotificationsDate: string;
+  sentEmails: boolean;
+  startMonth: string;
+};
+
+export type TAPFormData = {
+  events: Array<TApEventDetails>;
+  form: TAPFormDetails;
+};
+
 export type TAvailabilityData = {
   id: string;
   value: string;
@@ -182,6 +220,13 @@ export type TEventDistributionData = {
 export type TEventResponseCount = {
   id: string;
   value: number;
+};
+
+export type TEventResponse = {
+  id: string;
+  value: string;
+  notes?: string;
+  updateEvent: boolean;
 };
 
 export type TEventScheduledEvents = {
@@ -211,104 +256,12 @@ export interface CardProps {
   handleEditClick: (id: string) => void;
   deleteUser: (id: string) => ReturnType<typeof actions.deleteUser>;
 }
-/// OLD ///
-
-export type ComponentProps = {
-  className?: string;
-  children?: any;
-  dataTestId?: string;
-  errors?: string;
-  name?: string;
-  placeholder?: string;
-  label?: string;
-  onChange?: (event: ChangeEvent<any>) => void;
-  onClick?: (event: ChangeEvent<any>) => void;
-  type?: string;
-  value?: string;
-  style?: CSSProperties;
-};
-
-export type ContainerProps = {
-  children: ReactNode;
-  dataTestId?: string;
-  innerStyle?: CSSProperties;
-  style?: CSSProperties;
-};
-
-export type FieldErrorProps = {
-  className?: string;
-  errors?: string;
-};
-
-export type InputProps = ComponentProps;
-
-export type LoadingUsersProps = {
-  className?: string;
-  duration?: string;
-  height?: number;
-  opacity?: string;
-  width?: number;
-};
-
-export type ModalProps = {
-  children: ReactNode;
-  maxWidth?: string;
-  onClick: (event: MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  title?: string | ReactNode;
-};
-
-export type ShowUsersState = {
-  isEditingID: string;
-  openModal: boolean;
-};
-
-export interface TextAreaProps extends ComponentProps {
-  rows?: number;
-}
-
-export interface UserFormFields extends TBaseFieldProps {
-  disabled?: boolean;
-  readOnly?: boolean;
-}
-
-export interface UserFormState {
-  fields: UserFormFields[];
-  errors: number;
-  isSubmitting: boolean;
-}
-
-export type UserListNavigationProps = {
-  className?: string;
-  openModal: (event: any) => void;
-  seedDB: (type: string) => ReturnType<typeof actions.seedDB>;
-};
 
 /// REDUX + SAGAS ///
 
 export interface SagaStore extends Store {
   sagaTask: Task;
 }
-
-export type ReducerState = {
-  server: ServerReducerState;
-  users: UserReducerState;
-};
-
-/// UTILS ///
-
-export type FieldKeys = "city" | "street" | "state" | "suite" | "zipCode";
-
-export type ParseKeys<T> = {
-  [K in keyof T]: T[K] extends { name: string } ? T[K]["name"] : never;
-}[Exclude<keyof T, keyof []>];
-
-export type ParseFields<T> = {
-  address: {
-    [N in Extract<ParseKeys<T>, FieldKeys>]: string;
-  };
-} & {
-  [N in Exclude<ParseKeys<T>, FieldKeys>]: string;
-};
 
 export {
   AnyAction,

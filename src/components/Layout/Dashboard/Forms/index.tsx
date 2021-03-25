@@ -108,7 +108,7 @@ export const Forms = (): JSX.Element => {
                   alt
                   hideShadow
                   display="block"
-                  margin="45px auto 0 auto"
+                  margin="10px auto 0 auto"
                   borderRadius="50px"
                   padding="17px 0px"
                   dataTestId="dashboard-ap-form-link"

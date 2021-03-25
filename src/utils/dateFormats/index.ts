@@ -29,6 +29,11 @@ export const dateTimeFormat = `${shortmonthFormat} ${fullyearFormat} @ hh:mm a`;
 export const dayFormat = "D";
 
 /**
+ * Formats moment dates as 1 digits by suffix (st/nd/rd/th): 1st
+ */
+export const daySuffix = "Do";
+
+/**
  * Formats moment dates as 2 digits: 01
  */
 export const fulldayFormat = "DD";
@@ -42,6 +47,11 @@ export const weekdayFormat = "ddd";
  * Formats moment dates with weekday: Tuesday
  */
 export const fullweekdayFormat = "dddd";
+
+/**
+ * Formats moment dates as month, followed by day, and 4 digit year: April 21st 2020.
+ */
+export const calendarDateFormat = `${monthnameFormat} ${daySuffix} ${fullyearFormat}`;
 
 /**
  * Default moment formated dates: 2021-03-01T00:00:00Z

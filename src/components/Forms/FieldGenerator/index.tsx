@@ -1,5 +1,6 @@
 import * as React from "react";
 import Input from "~components/Forms/Input";
+import Radio from "~components/Forms/Radio";
 import Select from "~components/Forms/Select";
 import Switch from "~components/Forms/Switch";
 import TextArea from "~components/Forms/TextArea";
@@ -43,6 +44,18 @@ const FieldGenerator = <
               name={name}
               type={type}
               value={value as string}
+              onChange={onChange}
+            />
+          );
+        }
+        case "radiogroup": {
+          return (
+            <Radio
+              {...rest}
+              key={name}
+              name={name}
+              value={value as string}
+              selectOptions={selectOptions as Array<string>}
               onChange={onChange}
             />
           );

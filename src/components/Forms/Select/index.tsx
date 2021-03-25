@@ -5,14 +5,14 @@ import ClickHandler from "./ClickHandler";
 import Selection from "./Selection";
 import SelectContainer from "./SelectContainer";
 import Options from "./Options";
-import { EventTarget } from "~types";
+import { EventTarget, ReactNode } from "~types";
 
 export type TSelectProps = {
   disabled?: boolean;
   errors?: string;
   height?: string;
   isSearchable?: boolean;
-  label?: string;
+  label?: ReactNode;
   name: string;
   onChange: (e: EventTarget) => void;
   placeholder?: string;
