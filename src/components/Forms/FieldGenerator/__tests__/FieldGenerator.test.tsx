@@ -89,20 +89,20 @@ const initProps = {
   onChange
 };
 
-// const radiogroup = {
-// 	type: "radiogroup",
-// 	name: "0123456789",
-// 	value: "",
-// 	errors: "",
-// 	required: true,
-// 	disabled: true,
-// 	selectOptions: [
-// 		"I want to work.",
-// 		"Available to work.",
-// 		"Prefer not to work.",
-// 		"Not available to work.",
-// 	],
-// };
+const radiogroup = {
+  type: "radiogroup",
+  name: "0123456789",
+  value: "",
+  errors: "",
+  required: true,
+  disabled: true,
+  selectOptions: [
+    "I want to work.",
+    "Available to work.",
+    "Prefer not to work.",
+    "Not available to work."
+  ]
+};
 
 // const transfer = {
 // 	name: "sendTo",
@@ -230,11 +230,11 @@ describe("Field Generator", () => {
   // 	expect(wrapper.find("RangePicker").exists()).toBeTruthy();
   // });
 
-  // it("returns an RadioGroup when type is 'radiogroup'", () => {
-  // 	wrapper.setProps({ fields: [radiogroup] });
+  it("returns an RadioGroup when type is 'radiogroup'", () => {
+    wrapper.setProps({ fields: [radiogroup] });
 
-  // 	expect(wrapper.find("RadioGroup").exists()).toBeTruthy();
-  // });
+    expect(wrapper.find("[data-testid='radio-container']")).toExist();
+  });
 
   // it("displays a RadioGroup with notes when passed a 'notes' prop", () => {
   // 	wrapper.setProps({

@@ -22,7 +22,7 @@ jest.mock("next/router", () => ({
   .mockImplementation(() => ({
     route: "/",
     pathname: "",
-    query: {},
+    query: { tab: "profile" },
     asPath: "/",
     push: mockPush
   }));

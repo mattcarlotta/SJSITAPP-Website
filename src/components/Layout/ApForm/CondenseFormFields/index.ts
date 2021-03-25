@@ -17,7 +17,7 @@ const condenseFormFields = (
 
   const updateFormFields = radiogroup.map(field => {
     const eventNote = textarea.find(item => field.id === item.id);
-    return { ...field, notes: eventNote ? (eventNote.value as string) : "" };
+    return { ...field, notes: eventNote && (eventNote.value as string) };
   });
 
   return updateFormFields;

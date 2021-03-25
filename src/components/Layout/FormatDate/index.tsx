@@ -8,7 +8,9 @@ export type TFormatDateProps = {
 };
 
 const FormatDate = ({ date, format, style }: TFormatDateProps): JSX.Element => (
-  <div style={style}>{moment(date || Date.now()).format(format)}</div>
+  <div data-testid="formatted-date" style={style}>
+    {moment(date || Date.now()).format(format)}
+  </div>
 );
 
 export default FormatDate;

@@ -1,9 +1,15 @@
 import get from "lodash.get";
 import EventLabel from "~components/Layout/EventLabel";
-import { TAPFormData, TBaseFieldProps, TEventEmployeeResponse } from "~types";
+import {
+  TApEventDetails,
+  TBaseFieldProps,
+  TEventEmployeeResponse
+} from "~types";
 
-const updateFormFields = (data: TAPFormData): Array<TBaseFieldProps> => {
-  const initializedFields = data.events.reduce((acc, event) => {
+const updateFormFields = (
+  data: Array<TApEventDetails>
+): Array<TBaseFieldProps> => {
+  const initializedFields = data.reduce((acc, event) => {
     const field = {
       name: "events",
       type: "radiogroup",

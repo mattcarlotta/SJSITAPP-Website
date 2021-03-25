@@ -62,7 +62,7 @@ const APForm = (): JSX.Element => {
     try {
       const res = await app.get(`form/view/${id}`);
       const data = parseData<TAPFormData>(res);
-      const fields = updateFormFields(data);
+      const fields = updateFormFields(data.events);
 
       setState(prevState => ({
         ...prevState,
@@ -126,7 +126,7 @@ const APForm = (): JSX.Element => {
         isSubmitting: false
       }));
     }
-  }, [fields, id]);
+  }, [app, condenseFormFields, fields, id, parseFields, router, toast]);
 
   React.useEffect(() => {
     if (isSubmitting && !errors) submitApForm();
@@ -154,9 +154,10 @@ const APForm = (): JSX.Element => {
             />
           ) : (
             <form
+              data-testid="ap-form"
               css={css`
                 margin: 0 auto 60px auto;
-                max-width: 600px;
+                max-width: 650px;
               `}
               onSubmit={handleSubmit}
             >

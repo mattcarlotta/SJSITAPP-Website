@@ -65,7 +65,7 @@ const RadioComponent = ({
   value
 }: TRadioProps): JSX.Element => (
   <div
-    data-testid="textarea-container"
+    data-testid="radio-container"
     className={className}
     style={radioContainerStyle}
   >
@@ -75,7 +75,7 @@ const RadioComponent = ({
       tooltip={tooltip}
       style={radioLabelStyle}
     />
-    {notes && <Notes className="ap-form-note" notes={notes} />}
+    {notes && <Notes notes={notes} />}
     <ToggleButtonGroup
       orientation="vertical"
       aria-label="event group"
@@ -88,6 +88,7 @@ const RadioComponent = ({
         selectOptions.map(value => (
           <ToggleButton
             key={value}
+            data-testid={value}
             classes={useButtonStyles()}
             aria-label={value}
             style={radioStyle}
@@ -108,7 +109,7 @@ const RadioComponent = ({
           style={{
             textAlign: "center",
             padding: "11px",
-            border: "1px solid rgba(0, 0, 0, 0.12)",
+            border: "1px solid transparent",
             background: "#d14023",
             borderRadius: 50,
             color: "#fff",
