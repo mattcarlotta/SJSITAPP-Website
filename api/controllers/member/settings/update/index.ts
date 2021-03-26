@@ -60,22 +60,18 @@ const updateMemberSettings = async (
       lastName
     });
 
-    const updatedMember = await User.findOne(
+    const user = await User.findOne(
       { _id: existingMember._id },
-      { password: 0, token: 0, __v: 0 }
+      { _id: 0, emailReminders: 1, firstName: 1, lastName: 1 }
     ).lean();
     /* istanbul ignore next */
-    if (!updatedMember) throw unableToLocateMember;
+    if (!user) throw unableToLocateMember;
 
     return res.status(200).json({
       message: updatedEmail
         ? "Your profile has been updated. Please re-log into your account with your new email address."
         : "Successfully updated your settings.",
-      user: {
-        emailReminders: updatedMember.emailReminders,
-        firstName: updatedMember.firstName,
-        lastName: updatedMember.lastName
-      }
+      user
     });
   } catch (err) {
     return sendError(err, 400, res);
