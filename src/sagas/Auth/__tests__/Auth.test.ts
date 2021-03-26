@@ -446,13 +446,9 @@ describe("Auth Sagas", () => {
     let payload: TAuthData;
     beforeEach(() => {
       payload = {
-        id: "0123456789",
-        avatar: "",
-        email: "test@test.com",
         emailReminders: true,
         firstName: "Bob",
-        lastName: "Dole",
-        role: "employee"
+        lastName: "Dole"
       };
     });
 
@@ -486,7 +482,7 @@ describe("Auth Sagas", () => {
         .next(res.data)
         .call(showMessage, res.data.message)
         .next(res.data)
-        .put(actions.signinSession(res.data.user))
+        .put(actions.updateUserSession(res.data.user))
         .next()
         .isDone();
     });

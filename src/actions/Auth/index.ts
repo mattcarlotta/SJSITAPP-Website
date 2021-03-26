@@ -198,3 +198,20 @@ export const updateUserProfile = (
   type: constants.USER_UPDATE_PROFILE,
   payload
 });
+
+/**
+ * Updates current signed in session details.
+ *
+ * @function updateUserSession
+ * @param payload - contains user session data: `id`, `avatar`, `email`, `firstName`, `lastName`, and `role`
+ * @returns constants.USER_UPDATE_SESSION and payload
+ */
+export const updateUserSession = (
+  payload: TAuthData
+): {
+  type: typeof constants.USER_UPDATE_SESSION;
+  payload: TAuthData;
+} => ({
+  type: constants.USER_UPDATE_SESSION,
+  payload
+});

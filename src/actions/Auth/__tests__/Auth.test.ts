@@ -118,4 +118,11 @@ describe("Auth Actions", () => {
 
     expect(value).toEqual({ type: constants.USER_PASSWORD_UPDATE, payload });
   });
+
+  it("updateUserSession returns USER_UPDATE_SESSION with an user session details as payload", () => {
+    const payload = user;
+    const value = actions.updateUserSession(payload);
+
+    expect(value).toEqual({ type: constants.USER_UPDATE_SESSION, payload });
+  });
 });

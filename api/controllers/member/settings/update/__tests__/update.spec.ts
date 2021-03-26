@@ -120,15 +120,9 @@ describe("Member Settings Update Controller", () => {
         expect(res.body).toEqual({
           message: "Successfully updated your settings.",
           user: {
-            id: expect.any(String),
-            avatar: expect.any(String),
-            email: expect.any(String),
             emailReminders: expect.any(Boolean),
             firstName: expect.any(String),
-            lastName: expect.any(String),
-            role: expect.any(String),
-            registered: expect.any(String),
-            status: expect.any(String)
+            lastName: expect.any(String)
           }
         });
         done();

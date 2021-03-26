@@ -23,7 +23,7 @@ const updateMemberSettings = async (
     let updatedEmail = false;
     const id = parseSession(req);
 
-    const { email, emailReminders, firstName, lastName, role } = req.body;
+    const { email, emailReminders, firstName, lastName } = req.body;
     if (
       !id ||
       !email ||
@@ -57,8 +57,7 @@ const updateMemberSettings = async (
       email,
       emailReminders,
       firstName,
-      lastName,
-      role
+      lastName
     });
 
     const updatedMember = await User.findOne(
@@ -73,15 +72,9 @@ const updateMemberSettings = async (
         ? "Your profile has been updated. Please re-log into your account with your new email address."
         : "Successfully updated your settings.",
       user: {
-        id: updatedMember._id,
-        avatar: updatedMember.avatar,
-        email: updatedMember.email,
         emailReminders: updatedMember.emailReminders,
         firstName: updatedMember.firstName,
-        lastName: updatedMember.lastName,
-        registered: updatedMember.registered,
-        role: updatedMember.role,
-        status: updatedMember.status
+        lastName: updatedMember.lastName
       }
     });
   } catch (err) {

@@ -42,6 +42,7 @@ const Link = styled(LinkComponent)<{
   fontSize?: string;
   hideShadow?: boolean;
   margin?: string;
+  maxWidth?: string;
   padding?: string;
   primary?: boolean;
   secondary?: boolean;
@@ -76,6 +77,7 @@ const Link = styled(LinkComponent)<{
   margin: ${({ margin }) => margin || "0px"};
   letter-spacing: 1px;
   width: ${({ width }) => width || "auto"};
+  max-width: ${({ maxWidth }) => maxWidth};
 
   :hover {
     background: ${({ alt, secondary }) => {

@@ -72,4 +72,9 @@ describe("Styled Link", () => {
     wrapper.setProps({ width: "10px" });
     expect(wrapper).toHaveStyleRule("width", "10px");
   });
+
+  it("sets max-width when passed a 'maxWidth' prop", () => {
+    wrapper.setProps({ maxWidth: "10px" });
+    expect(wrapper).toHaveStyleRule("max-width", "10px");
+  });
 });

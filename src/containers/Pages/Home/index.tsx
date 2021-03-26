@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
-// import Spinner from "~components/Layout/Spinner";
 import Link from "~components/Navigation/Link";
 import Submitting from "~components/Layout/Submitting";
 import Header from "~components/Navigation/Header";
@@ -21,9 +20,9 @@ const Home: NextPage = () => {
       <Header title="Home" url="/" />
       <PuckSpinner>
         <Link
+          secondary
           display="block"
           dataTestId="home-link"
-          secondary
           href={hasSession ? "/employee/dashboard" : "/employee/login"}
           borderRadius="50px"
           fontSize="18px"
@@ -31,7 +30,9 @@ const Home: NextPage = () => {
           width="260px"
         >
           {!role ? (
-            <Submitting style={{ height: "24px" }} />
+            <Submitting
+              style={{ height: "25px", background: "#025f6d", border: 0 }}
+            />
           ) : hasSession ? (
             <>
               <MdDashboard />

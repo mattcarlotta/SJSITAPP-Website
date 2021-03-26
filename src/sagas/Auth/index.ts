@@ -267,7 +267,7 @@ export function* updateUserProfile({
     if (message !== "Successfully updated your settings.") {
       yield call(signoutUserSession);
     } else {
-      yield put(actions.signinSession(user));
+      yield put(actions.updateUserSession(user));
     }
   } catch (e) {
     yield call(showError, e.toString());

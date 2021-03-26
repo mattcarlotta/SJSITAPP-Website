@@ -38,10 +38,10 @@ const AntTab = withStyles(() =>
       "&:disabled": {
         opacity: 1,
         color: "#025f6d",
-        borderTopRightRadius: 4
+        borderTopRightRadius: 5
       },
       "&:focus": {
-        color: "#ccc"
+        color: "#025f6d"
       }
     },
     wrapper: {
