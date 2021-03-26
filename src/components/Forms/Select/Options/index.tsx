@@ -10,11 +10,11 @@ import { EventTarget, EventTargetDataset, KeyboardEvent } from "~types";
 
 export interface SelectOptionsContainerProps {
   handleOptionSelect: (props: EventTarget) => void;
-  padding?: string;
-  selected: string;
   isVisible: boolean;
   name: string;
+  padding?: string;
   searchText?: string;
+  selected: string;
   selectOptions: Array<string>;
   textAlign?: string;
 }
@@ -85,9 +85,7 @@ class SelectOptionsContainer extends React.Component<
 
     const options = !searchText
       ? selectOptions
-      : searchOptions
-          .search(searchText)
-          .map(({ item }: { item: string }) => item);
+      : searchOptions.search(searchText).map(({ item }) => item);
 
     return this.props.isVisible ? (
       <DropContainer>

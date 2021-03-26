@@ -6,7 +6,7 @@ const DisplayOption = styled.div<{
   icon?: string;
   justifyContent?: string;
 }>`
-  color: ${({ value }) => (value ? "#282c34;" : "#ccc")};
+  color: ${({ value }) => (value ? "#282c34" : "#ccc")};
   padding: ${({ padding, icon }) => {
     if (padding) return padding;
     if (icon) return "8px 0 8px 48px";

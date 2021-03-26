@@ -108,10 +108,10 @@ describe("Dashboard Events Tab", () => {
       expect(findById("availability-description")).toExist();
     });
 
-    wrapper
-      .find("#mui-component-select-selectedMonth")
+    findById("selectedMonth")
+      .find("[data-testid='select-text']")
       .first()
-      .simulate("mousedown", { button: 0 });
+      .simulate("click");
 
     await waitFor(() => {
       wrapper.update();

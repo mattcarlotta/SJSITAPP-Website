@@ -128,7 +128,7 @@ const Availability = ({ id }: TAvailabilityProps): JSX.Element => {
             justifyContent="center"
             padding="8px"
             textAlign="center"
-            width="125px"
+            width="115px"
             name="selectedMonth"
             selectOptions={months}
             value={selectedMonth}
@@ -146,7 +146,7 @@ const Availability = ({ id }: TAvailabilityProps): JSX.Element => {
             justifyContent="center"
             padding="8px"
             textAlign="center"
-            width="125px"
+            width="110px"
             name="selectedYear"
             selectOptions={years}
             value={selectedYear}

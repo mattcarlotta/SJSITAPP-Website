@@ -27,7 +27,7 @@ describe("Click Handler", () => {
   });
 
   it("renders without errors", () => {
-    expect(wrapper.find("ClickHandler").exists()).toBeTruthy();
+    expect(wrapper.find("ClickHandler")).toExist();
   });
 
   it("handles focus", () => {

@@ -14,23 +14,23 @@ describe("Spinner", () => {
 
   it("renders nothing if not mounted in the browser", () => {
     wrapper.setState({ isMounted: false });
-    expect(wrapper.find("div.container").exists()).toBeFalsy();
-    expect(wrapper.find("img").exists()).toBeFalsy();
+    expect(wrapper.find("div.container")).not.toExist();
+    expect(wrapper.find("img")).not.toExist();
   });
 
   it("renders a dynamic spinner", () => {
-    expect(wrapper.find("div.container").exists()).toBeTruthy();
+    expect(wrapper.find("div.container")).toExist();
   });
 
   it("renders a static image for IE11", () => {
     wrapper.setState({ isIE: true });
 
-    expect(wrapper.find("img").exists()).toBeTruthy();
+    expect(wrapper.find("img")).toExist();
   });
 
   it("renders a static image for Edge", () => {
     wrapper.setState({ isEdge: true });
 
-    expect(wrapper.find("img").exists()).toBeTruthy();
+    expect(wrapper.find("img")).toExist();
   });
 });

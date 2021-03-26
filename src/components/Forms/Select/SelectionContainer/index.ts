@@ -1,11 +1,7 @@
 import styled from "@emotion/styled";
 
 const SelectionContainer = styled.div<{
-  disabled?: boolean;
-  errors?: string;
   height?: string;
-  isVisible?: boolean;
-  value?: string;
 }>`
   display: inline-block;
   height: ${({ height }) => height || "auto"};

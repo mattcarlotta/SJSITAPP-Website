@@ -76,11 +76,11 @@ describe("Click Handler", () => {
   });
 
   it("renders without errors", () => {
-    expect(wrapper.find("div.clickhandler").exists()).toBeTruthy();
+    expect(wrapper.find("div.clickhandler")).toExist();
   });
 
   it("initially displays a menu", () => {
-    expect(wrapper.find("div.menu").exists()).toBeTruthy();
+    expect(wrapper.find("div.menu")).toExist();
   });
 
   it("handles open/close menu left clicks", () => {

@@ -151,43 +151,41 @@ describe("Field Generator", () => {
 
   it("initially returns an invalid component", () => {
     wrapper.setProps({ fields: [{ ...input, type: "invalid" }] });
-    expect(
-      wrapper.find("[data-testid='invalid-component']").exists()
-    ).toBeTruthy();
+    expect(wrapper.find("[data-testid='invalid-component']")).toExist();
   });
 
   it("returns an Input when type is 'text'", () => {
     wrapper.setProps({ fields: [input] });
 
-    expect(wrapper.find("Input").exists()).toBeTruthy();
+    expect(wrapper.find("Input")).toExist();
   });
 
   it("returns a Input when type is 'email'", () => {
     wrapper.setProps({ fields: [{ ...input, type: "email" }] });
 
-    expect(wrapper.find("Input").exists()).toBeTruthy();
+    expect(wrapper.find("Input")).toExist();
   });
 
   it("returns a Input when type is 'password'", () => {
     wrapper.setProps({ fields: [{ ...input, type: "password" }] });
 
-    expect(wrapper.find("Input").exists()).toBeTruthy();
+    expect(wrapper.find("Input")).toExist();
   });
 
   it("returns a TextArea when type is 'textarea'", () => {
     wrapper.setProps({ fields: [textarea] });
 
-    expect(wrapper.find("TextArea").exists()).toBeTruthy();
-    expect(wrapper.find("Errors").exists()).toBeFalsy();
+    expect(wrapper.find("TextArea")).toExist();
+    expect(wrapper.find("Errors")).not.toExist();
 
     wrapper.setProps({ fields: [{ ...textarea, errors: "Required." }] });
-    expect(wrapper.find("Errors").exists()).toBeTruthy();
+    expect(wrapper.find("Errors")).toExist();
   });
 
   it("returns a Select when type is 'select'", () => {
     wrapper.setProps({ fields: [select] });
 
-    expect(wrapper.find("Select").exists()).toBeTruthy();
+    expect(wrapper.find("Select")).toExist();
   });
 
   it("returns a Switch when type is 'switch'", () => {
@@ -204,7 +202,7 @@ describe("Field Generator", () => {
   // 	wrapper.find(".ant-calendar-cell.ant-calendar-today").simulate("click");
   // 	wrapper.find(".ant-calendar-ok-btn").simulate("click");
 
-  // 	expect(wrapper.find(DatePicker).exists()).toBeTruthy();
+  // 	expect(wrapper.find(DatePicker)).toExist();
   // 	expect(onChange).toHaveBeenCalledWith({
   // 		target: { name: "eventDate", value: expect.any(moment) },
   // 	});
@@ -221,13 +219,13 @@ describe("Field Generator", () => {
   // 		target: { name: "message", value: "" },
   // 	});
   //
-  // 	expect(wrapper.find("LazyQuill").exists()).toBeTruthy();
+  // 	expect(wrapper.find("LazyQuill")).toExist();
   // });
 
   // it("returns a RangePicker when type is 'range'", () => {
   // 	wrapper.setProps({ fields: [range] });
 
-  // 	expect(wrapper.find("RangePicker").exists()).toBeTruthy();
+  // 	expect(wrapper.find("RangePicker")).toExist();
   // });
 
   it("returns an RadioGroup when type is 'radiogroup'", () => {
@@ -241,7 +239,7 @@ describe("Field Generator", () => {
   // 		fields: [{ ...radiogroup, notes: "This is a special note!" }],
   // 	});
 
-  // 	expect(wrapper.find("Notes").exists()).toBeTruthy();
+  // 	expect(wrapper.find("Notes")).toExist();
   // });
 
   // it("displays a RadioGroup with errors when passed an 'errors' prop", () => {
@@ -249,7 +247,7 @@ describe("Field Generator", () => {
   // 		fields: [{ ...radiogroup, errors: "Required!" }],
   // 	});
 
-  // 	expect(wrapper.find("Errors").exists()).toBeTruthy();
+  // 	expect(wrapper.find("Errors")).toExist();
   // });
 
   // it("returns a TimePicker when type is 'time'", () => {
@@ -258,8 +256,8 @@ describe("Field Generator", () => {
   // 	const value = moment("2000-01-01 00:00:00");
   // 	wrapper.find(TimePicker).instance().handleChange(value);
 
-  // 	expect(wrapper.find("Label").exists()).toBeTruthy();
-  // 	expect(wrapper.find("TimePicker").exists()).toBeTruthy();
+  // 	expect(wrapper.find("Label")).toExist();
+  // 	expect(wrapper.find("TimePicker")).toExist();
   // 	expect(onChange).toHaveBeenCalledWith({
   // 		target: { name: "callTime", value },
   // 	});
@@ -271,20 +269,20 @@ describe("Field Generator", () => {
   // 	wrapper.find("Icon").first().simulate("click");
 
   // 	expect(onFieldRemove).toHaveBeenCalledWith("callTime");
-  // 	expect(wrapper.find("Label").exists()).toBeFalsy();
-  // 	expect(wrapper.find("FaMinusCircle").exists()).toBeTruthy();
-  // 	expect(wrapper.find("TimePicker").exists()).toBeTruthy();
+  // 	expect(wrapper.find("Label")).not.toExist();
+  // 	expect(wrapper.find("FaMinusCircle")).toExist();
+  // 	expect(wrapper.find("TimePicker")).toExist();
   // });
 
   // it("returns a Transfer field when type is 'transfer'", () => {
   // 	wrapper.setProps({ fields: [transfer] });
 
-  // 	expect(wrapper.find("Transfer").exists()).toBeTruthy();
+  // 	expect(wrapper.find("Transfer")).toExist();
   // 	expect(wrapper.find("Transfer").props().className).toEqual("");
 
   // 	wrapper.setProps({ fields: [{ ...transfer, errors: "Required. " }] });
   // 	expect(wrapper.find("Transfer").props().className).toEqual("has-error");
-  // 	expect(wrapper.find("Errors").exists()).toBeTruthy();
+  // 	expect(wrapper.find("Errors")).toExist();
 
   // 	wrapper
   // 		.find("input.ant-transfer-list-search")

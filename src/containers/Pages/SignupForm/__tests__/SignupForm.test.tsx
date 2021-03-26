@@ -31,7 +31,7 @@ describe("Signup Form", () => {
   });
 
   it("renders without errors", () => {
-    expect(wrapper.find("form").exists()).toBeTruthy();
+    expect(wrapper.find("form")).toExist();
   });
 
   it("initializes and disables the 'token' field when a token is present in the URL", () => {

@@ -32,44 +32,12 @@ describe("Select - Selection", () => {
   });
 
   it("renders without errors", () => {
-    expect(wrapper.find("SelectionContainer").exists()).toBeTruthy();
+    expect(wrapper.find("SelectionContainer")).toExist();
   });
 
-  describe("Selection Container", () => {
-    let findBtnCtnr: () => ReactWrapper;
-    beforeEach(() => {
-      findBtnCtnr = () => wrapper.find("SelectionContainer");
-    });
-
-    it("initially renders a default container", () => {
-      wrapper.setProps({ icon: "id" });
-
-      expect(findBtnCtnr().exists()).toBeTruthy();
-      expect(findBtnCtnr()).toHaveStyleRule("border", "1px solid #ccc");
-      expect(findBtnCtnr()).toHaveStyleRule("border", "1px solid #bfbebe", {
-        target: ":hover"
-      });
-    });
-
-    it("renders a focused container when visible", () => {
-      wrapper.setProps({ isVisible: true });
-
-      expect(findBtnCtnr().exists()).toBeTruthy();
-      expect(findBtnCtnr()).toHaveStyleRule("border", "1px solid #1e90ff");
-      expect(findBtnCtnr()).toHaveStyleRule("border", "1px solid #1e90ff", {
-        target: ":hover"
-      });
-    });
-
-    it("renders an error container when there are errors", () => {
-      wrapper.setProps({ errors: "Required." });
-
-      expect(findBtnCtnr().exists()).toBeTruthy();
-      expect(findBtnCtnr()).toHaveStyleRule(
-        "border",
-        "1px solid #d14023!important"
-      );
-    });
+  it("doesn't display an icon if a 'hideIcon' prop is true", () => {
+    wrapper.setProps({ hideIcon: true });
+    expect(wrapper.find("[data-testid='search-icon']")).not.toExist();
   });
 
   it("calls handleSelectClick when [data-testid='select-text'] is clicked", () => {
@@ -84,11 +52,11 @@ describe("Select - Selection", () => {
   });
 
   it("renders an Icon based upon an 'icon' prop", () => {
-    expect(wrapper.find("Icon").exists()).toBeFalsy();
+    expect(wrapper.find("Icon")).not.toExist();
 
     wrapper.setProps({ icon: "id" });
 
-    expect(wrapper.find("Icon").exists()).toBeTruthy();
+    expect(wrapper.find("Icon")).toExist();
   });
 
   describe("Display Option", () => {
@@ -126,15 +94,15 @@ describe("Select - Selection", () => {
       chevronIcon = () => wrapper.find("[data-testid='chevron-icon']");
     });
 
-    it("initially points down when options are hidden", () => {
-      expect(chevronIcon()).toHaveStyleRule("transform", "rotate(270deg)", {
+    it("initially points up when options are hidden", () => {
+      expect(chevronIcon()).toHaveStyleRule("transform", "rotate(90deg)", {
         target: "svg"
       });
     });
 
-    it("points up when option are shown", () => {
+    it("points down when option are shown", () => {
       wrapper.setProps({ isVisible: true });
-      expect(chevronIcon()).toHaveStyleRule("transform", "rotate(90deg)", {
+      expect(chevronIcon()).toHaveStyleRule("transform", "rotate(270deg)", {
         target: "svg"
       });
     });
@@ -142,21 +110,19 @@ describe("Select - Selection", () => {
 
   describe("Icon Swapping", () => {
     it("it initally renders a Chevron icon", () => {
-      expect(
-        wrapper.find("[data-testid='chevron-icon']").exists()
-      ).toBeTruthy();
+      expect(wrapper.find("[data-testid='chevron-icon']")).toExist();
     });
 
     it("renders a FaSearch icon if 'isSearchable' is true and no value nor searchText is present", () => {
       wrapper.setProps({ isSearchable: true });
 
-      expect(wrapper.find("FaSearch").exists()).toBeTruthy();
+      expect(wrapper.find("FaSearch")).toExist();
     });
 
     it("renders a FaTimesCircle icon if 'isSearchable' is true and a value or searchText is present", () => {
       wrapper.setProps({ isSearchable: true, searchText: "Test" });
 
-      expect(wrapper.find("FaTimesCircle").exists()).toBeTruthy();
+      expect(wrapper.find("FaTimesCircle")).toExist();
     });
 
     it("clicking on the FaTimesCircle calls handleSearchClear", () => {

@@ -124,7 +124,11 @@ describe("Dashboard EventCalendar", () => {
   });
 
   it("displays next months calendar when the month selector is clicked and the next month is selected", async () => {
-    wrapper.find('[role="button"]').at(1).simulate("mousedown", { button: 0 });
+    findById("selectedMonth")
+      .find("[data-testid='select-text']")
+      .first()
+      .simulate("click");
+
     findById(nextMonth.format(monthnameFormat)).first().simulate("click");
 
     await waitFor(() => {

@@ -120,7 +120,7 @@ describe("Event", () => {
 
     wrapper.find("[data-testid='upcoming-event']").simulate("click");
     wrapper.update();
-    expect(wrapper.find("List").exists()).toBeTruthy();
+    expect(wrapper.find("List")).toExist();
     expect(wrapper.find("ListItem")).toHaveLength(10);
   });
 });

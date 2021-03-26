@@ -22,7 +22,7 @@ const useStyles = makeStyles({
       fontSize: 16,
       cursor: "pointer",
       border: "1px solid #ccc",
-      background: "#eee",
+      background: "#f7f7f7",
       borderRadius: 5,
       padding: 10,
       textAlign: "center",

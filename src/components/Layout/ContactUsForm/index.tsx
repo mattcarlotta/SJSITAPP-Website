@@ -103,12 +103,8 @@ export const ContactUsForm = (): JSX.Element => {
           <FieldGenerator fields={state.fields} onChange={handleChange} />
           <SubmitButton
             isSubmitting={state.isSubmitting}
+            maxWidth="500px"
             title="Send"
-            style={{ maxWidth: "250px", margin: "0 auto" }}
-            submitBtnStyle={{
-              background: "#010404",
-              border: "2px solid #2e7c8a"
-            }}
           />
           <Margin as="div" top="30px">
             By clicking the &quot;Send&quot; button, you agree to allow us to

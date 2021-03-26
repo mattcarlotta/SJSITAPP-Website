@@ -210,12 +210,8 @@ const APForm = (): JSX.Element => {
                 <FieldGenerator fields={fields} onChange={handleChange} />
                 <SubmitButton
                   isSubmitting={isSubmitting}
+                  maxWidth="625px"
                   title="Submit AP Form"
-                  style={{ maxWidth: "625px", margin: "0 auto" }}
-                  submitBtnStyle={{
-                    background: "#010404",
-                    border: "2px solid #2e7c8a"
-                  }}
                 />
               </Center>
             </form>

@@ -44,7 +44,7 @@ describe("Dropdown Click Handler", () => {
   });
 
   it("renders without errors", () => {
-    expect(wrapper.find("div.dropdown-container").exists()).toBeTruthy();
+    expect(wrapper.find("div.dropdown-container")).toExist();
   });
 
   it("doesn't open the dropdown if the dropdown container was clicked", () => {

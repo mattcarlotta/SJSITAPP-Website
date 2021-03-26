@@ -96,11 +96,7 @@ export const LoginForm = ({
           <SubmitButton
             isSubmitting={state.isSubmitting}
             title="Login"
-            style={{ width: "300px", margin: "0 auto" }}
-            submitBtnStyle={{
-              background: "#010404",
-              border: "2px solid #2e7c8a"
-            }}
+            maxWidth="300px"
           />
         </form>
         <Center style={{ marginTop: 10 }}>

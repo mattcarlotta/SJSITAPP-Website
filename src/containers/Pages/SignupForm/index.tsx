@@ -109,12 +109,8 @@ export const SignupForm = ({
           </Center>
           <SubmitButton
             isSubmitting={state.isSubmitting}
+            maxWidth="300px"
             title="Register"
-            style={{ maxWidth: "300px", margin: "0 auto" }}
-            submitBtnStyle={{
-              background: "#010404",
-              border: "2px solid #2e7c8a"
-            }}
           />
         </form>
         <Center style={{ marginTop: 10 }}>

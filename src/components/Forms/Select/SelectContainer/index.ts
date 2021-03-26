@@ -30,13 +30,15 @@ const SelectContainer = styled.div<{
   }};
   transition: all 0.3s ease-in-out;
   outline: 0;
-  ${({ isVisible, hoverable }) =>
+  ${({ disabled, isVisible, hoverable }) =>
     isVisible &&
     hoverable &&
+    !disabled &&
     "background: #fff;box-shadow: 0px 0px 14px -2px #a1cdf9;border-color: #1e90ff"};
 
   svg {
-    color: ${({ errors, isVisible, value }) => {
+    color: ${({ disabled, errors, isVisible, value }) => {
+      if (disabled) return "#ebebeb";
       if (errors && !value) return "#d14023";
       if (isVisible) return "#1e90ff";
       return "#d3dce6";
@@ -44,8 +46,9 @@ const SelectContainer = styled.div<{
   }
 
   :hover {
-    ${({ hoverable }) =>
+    ${({ disabled, hoverable }) =>
       hoverable &&
+      !disabled &&
       "background: #fff;box-shadow: 0px 0px 14px -2px #a1cdf9;border-color: #1e90ff"};
     border: 1px solid
       ${({ disabled, isVisible }) => {

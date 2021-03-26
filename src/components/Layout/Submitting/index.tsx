@@ -23,10 +23,12 @@ const Submitting = styled(SubmittingComponent)`
   justify-content: center;
   align-items: center;
   direction: row;
-  height: 54px;
+  height: 47px;
   border-radius: 50px;
   cursor: wait;
   animation: fadeIn 0.5s 0s ease-in-out forwards;
+  background: #010404;
+  border: 2px solid #2e7c8a;
 
   & > div {
     width: 10px;

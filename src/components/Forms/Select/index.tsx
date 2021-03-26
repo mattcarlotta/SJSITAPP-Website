@@ -37,11 +37,13 @@ const Select = ({
   errors,
   height,
   hoverable,
+  label,
   margin,
   maxWidth,
   name,
-  label,
+  padding,
   selectOptions,
+  textAlign,
   value,
   width,
   ...props
@@ -68,16 +70,18 @@ const Select = ({
             {...handlers}
             {...props}
             height={height}
+            padding={padding}
             name={name}
             disabled={disabled}
             value={value}
           />
           <Options
-            {...props}
             {...handlers}
+            padding={padding}
             name={name}
             selectOptions={selectOptions}
             selected={value}
+            textAlign={textAlign}
           />
         </SelectContainer>
       )}

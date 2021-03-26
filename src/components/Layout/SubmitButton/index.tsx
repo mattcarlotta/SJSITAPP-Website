@@ -6,6 +6,7 @@ import { CSSProperties } from "~types";
 
 export interface ISubmitButtonProps {
   disabled?: boolean;
+  maxWidth: string;
   isSubmitting: boolean;
   style?: CSSProperties;
   submitBtnStyle?: CSSProperties;
@@ -15,22 +16,25 @@ export interface ISubmitButtonProps {
 const SubmitButton = ({
   disabled,
   isSubmitting,
+  maxWidth,
   title,
   style,
   submitBtnStyle
 }: ISubmitButtonProps): JSX.Element => (
-  <ButtonContainer style={{ marginTop: 10, ...style }}>
+  <ButtonContainer maxWidth={maxWidth} style={style}>
     {isSubmitting ? (
       <Submitting style={{ ...submitBtnStyle }} />
     ) : (
       <Button
         tertiary
         dataTestId="submit-button"
-        style={{ ...style, minHeight: 54 }}
+        margin="0 auto"
         disabled={disabled}
         fontSize="22px"
         padding="8.5px 18px"
         type="submit"
+        maxWidth={maxWidth}
+        style={style}
       >
         {title}
       </Button>

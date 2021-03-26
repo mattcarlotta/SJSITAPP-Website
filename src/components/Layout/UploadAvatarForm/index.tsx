@@ -141,14 +141,11 @@ export const UploadAvatarForm = ({
       )}
       {isSubmitting ? (
         <SubmitButton
-          isSubmitting={isSubmitting}
+          isSubmitting
           title="Upload"
-          style={{ maxWidth: "250px", margin: "8px auto 0 auto" }}
-          submitBtnStyle={{
-            background: "#010404",
-            border: "2px solid #2e7c8a",
-            height: 46
-          }}
+          maxWidth="250px"
+          style={{ margin: "8px auto 0 auto" }}
+          submitBtnStyle={{ height: 46 }}
         />
       ) : (
         <>

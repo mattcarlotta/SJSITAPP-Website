@@ -28,18 +28,18 @@ describe("Input", () => {
   });
 
   it("renders without errors", () => {
-    expect(wrapper.find("input").exists()).toBeTruthy();
+    expect(wrapper.find("input")).toExist();
   });
 
   it("doesn't display an Icon if 'icon' is missing", () => {
-    expect(wrapper.find("i").exists()).toBeFalsy();
+    expect(wrapper.find("i")).not.toExist();
   });
 
   it("displays a Font Awesome icon by a string type", () => {
     wrapper.setProps({ icon: "key" });
 
-    expect(wrapper.find("i").exists()).toBeTruthy();
-    expect(wrapper.find("FaKey").exists()).toBeTruthy();
+    expect(wrapper.find("i")).toExist();
+    expect(wrapper.find("FaKey")).toExist();
   });
 
   it("displays a label and a tooltip", () => {
@@ -48,27 +48,27 @@ describe("Input", () => {
       tooltip: "Your password must be longer than 5 characters."
     });
 
-    expect(wrapper.find(".tooltip").first().exists()).toBeTruthy();
+    expect(wrapper.find(".tooltip").first()).toExist();
     expect(wrapper.find("label").text()).toContain("Password");
   });
 
   it("when invalid, adds a 'error' classname and displays validation errors", () => {
     wrapper.setProps({ errors: "Required." });
 
-    expect(wrapper.find("div.error").exists()).toBeTruthy();
+    expect(wrapper.find("div.error")).toExist();
     expect(wrapper.find("Errors").text()).toEqual("Required.");
   });
 
   it("when clicked, adds a 'focused' className", () => {
     wrapper.find("ClickHandler").setState({ isFocused: true });
 
-    expect(wrapper.find("div.focused").exists()).toBeTruthy();
+    expect(wrapper.find("div.focused")).toExist();
   });
 
   it("when disabled, adds a 'disabled-input' className and disables the input", () => {
     wrapper.setProps({ disabled: true });
 
-    expect(wrapper.find("div.disabled-input").exists()).toBeTruthy();
+    expect(wrapper.find("div.disabled-input")).toExist();
     expect(wrapper.find("input").prop("disabled")).toEqual(true);
   });
 });

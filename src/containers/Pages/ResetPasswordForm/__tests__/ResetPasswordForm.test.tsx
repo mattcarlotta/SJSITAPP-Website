@@ -17,7 +17,7 @@ describe("Reset Password Form", () => {
   });
 
   it("renders without errors", () => {
-    expect(wrapper.find("form").exists()).toBeTruthy();
+    expect(wrapper.find("form")).toExist();
   });
 
   it("if there are errors, it doesn't submit the form", () => {

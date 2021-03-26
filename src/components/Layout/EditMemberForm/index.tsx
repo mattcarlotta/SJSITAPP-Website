@@ -100,12 +100,8 @@ export const EditMemberForm = ({
         <FieldGenerator fields={state.fields} onChange={handleChange} />
         <SubmitButton
           isSubmitting={state.isSubmitting}
+          maxWidth="500px"
           title="Save Settings"
-          style={{ maxWidth: "300px", margin: "0 auto" }}
-          submitBtnStyle={{
-            background: "#010404",
-            border: "2px solid #2e7c8a"
-          }}
         />
       </form>
     </div>

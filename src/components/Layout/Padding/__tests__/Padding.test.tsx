@@ -15,6 +15,16 @@ describe("Padding Component", () => {
     expect(wrapper).toHaveStyleRule("padding-left", "0px");
   });
 
+  it("sets a media rule when passed a 'breakpoint' prop", () => {
+    wrapper.setProps({ breakpoint: "true" });
+    expect(wrapper).toHaveStyleRule("padding-left", "0", {
+      media: "(max-width: 610px)"
+    });
+    expect(wrapper).toHaveStyleRule("padding-right", "0", {
+      media: "(max-width: 610px)"
+    });
+  });
+
   it("sets padding-top when passed a 'top' prop", () => {
     wrapper.setProps({ top: "10px" });
     expect(wrapper).toHaveStyleRule("padding-top", "10px");

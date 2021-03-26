@@ -17,11 +17,11 @@ describe("Login Form", () => {
   });
 
   // it("doesn't render if a user is already signed in", () => {
-  // 	expect(wrapper.find("form").exists()).toBeFalsy();
+  // 	expect(wrapper.find("form")).not.toExist();
   // });
 
   it("renders without errors", () => {
-    expect(wrapper.find("form").exists()).toBeTruthy();
+    expect(wrapper.find("form")).toExist();
   });
 
   it("if there are errors, it doesn't submit the form", () => {

@@ -1,23 +1,13 @@
 import styled from "@emotion/styled";
 
 const ButtonContainer = styled.div<{
-  primary?: boolean;
-  danger?: boolean;
-  tertiary?: boolean;
+  maxWidth: string;
 }>`
-  width: 100%;
+  max-width: ${({ maxWidth }) => maxWidth};
   border-radius: 50px;
+  margin-top: 10px;
   background: transparent;
+  margin: 0 auto;
 `;
-
-/*
-background: ${props => {
-    if (props.primary)
-      return "linear-gradient(90deg,#194048 0%,#0f7888 50%,#194048 100%)";
-    if (props.danger)
-      return "linear-gradient(90deg,#8a4133 0%,#f56342 50%,#8a4133 100%)";
-  if (props.tertiary)
-      return "linear-gradient(90deg,#12454e 0%,rgb(16,116,131) 50%,#12454e 100%)";
-*/
 
 export default ButtonContainer;

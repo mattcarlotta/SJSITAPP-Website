@@ -100,11 +100,7 @@ export const NewPasswordForm = ({
           <SubmitButton
             isSubmitting={state.isSubmitting}
             title="Update"
-            style={{ maxWidth: "300px", margin: "0 auto" }}
-            submitBtnStyle={{
-              background: "#010404",
-              border: "2px solid #2e7c8a"
-            }}
+            maxWidth="250px"
           />
         </form>
       </Modal>
