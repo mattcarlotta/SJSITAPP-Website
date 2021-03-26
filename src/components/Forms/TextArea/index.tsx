@@ -37,7 +37,6 @@ const TextAreaComponent = ({
       id={name}
       aria-label={name}
       data-testid={name}
-      className={errors ? "has-error" : undefined}
       name={name}
       onChange={onChange}
       placeholder={placeholder}

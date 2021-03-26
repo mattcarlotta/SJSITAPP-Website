@@ -27,7 +27,6 @@ const SubmitButton = ({
         tertiary
         dataTestId="submit-button"
         style={{ ...style, minHeight: 54 }}
-        className="submit"
         disabled={disabled}
         fontSize="22px"
         padding="8.5px 18px"

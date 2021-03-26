@@ -143,9 +143,9 @@ const APForm = (): JSX.Element => {
         dataTestId="dashboard-availability"
         icon={<FaFileSignature />}
         title={title}
-        subtitle="Please select an availability response for all events below."
+        subtitle="Please select a response for all of the events below."
       >
-        <Padding top="30px" bottom="40px" left="40px" right="40px">
+        <Padding top="20px" bottom="40px" left="40px" right="40px">
           {isLoading ? (
             <LoadingPanel
               data-testid="loading-events"
@@ -157,11 +157,18 @@ const APForm = (): JSX.Element => {
               data-testid="ap-form"
               css={css`
                 margin: 0 auto 60px auto;
-                max-width: 650px;
+                max-width: 625px;
               `}
               onSubmit={handleSubmit}
             >
               <Center>
+                <Title
+                  margin="0px"
+                  fontSize="30px"
+                  style={{ color: "#025f6d" }}
+                >
+                  Sharks & Barracuda A/P Form
+                </Title>
                 <Title margin="0px" style={{ color: "#025f6d" }}>
                   <FormatDate
                     date={form.startMonth}
@@ -180,21 +187,31 @@ const APForm = (): JSX.Element => {
                   fontSize="16px"
                   style={{ color: "#025f6d" }}
                 >
-                  This form will expire on:&nbsp;
-                  <span style={{ color: "#f56342" }}>
-                    <FormatDate
-                      date={form.expirationDate}
-                      format={dateTimeFormat}
-                      style={{ display: "inline" }}
-                    />
-                  </span>
+                  Form expires on:
+                  <FormatDate
+                    date={form.expirationDate}
+                    format={dateTimeFormat}
+                    style={{ color: "#f56342" }}
+                  />
+                </Title>
+                <Title
+                  margin="10px 0"
+                  fontSize="16px"
+                  style={{ color: "#025f6d" }}
+                >
+                  Form reminders will be sent out on:
+                  <FormatDate
+                    date={form.sendEmailNotificationsDate}
+                    format={dateTimeFormat}
+                    style={{ color: "#f56342" }}
+                  />
                 </Title>
                 {form.notes && <Notes notes={form.notes} />}
                 <FieldGenerator fields={fields} onChange={handleChange} />
                 <SubmitButton
                   isSubmitting={isSubmitting}
                   title="Submit AP Form"
-                  style={{ maxWidth: "600px", margin: "0 auto" }}
+                  style={{ maxWidth: "625px", margin: "0 auto" }}
                   submitBtnStyle={{
                     background: "#010404",
                     border: "2px solid #2e7c8a"

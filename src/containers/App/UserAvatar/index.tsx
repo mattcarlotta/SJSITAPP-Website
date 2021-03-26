@@ -28,6 +28,7 @@ export type TUserAvatarProps = {
   avatar?: string;
   firstName: string;
   lastName: string;
+  role: string;
   signoutUserSession: typeof signoutUserSession;
 };
 
@@ -41,6 +42,7 @@ export const UserAvatar = ({
   avatar,
   firstName,
   lastName,
+  role,
   signoutUserSession
 }: TUserAvatarProps): JSX.Element => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
@@ -60,6 +62,7 @@ export const UserAvatar = ({
 
   const open = Boolean(anchorEl);
   const id = open ? "user-settings" : undefined;
+  const isEmployee = role === "employee";
 
   return (
     <>
@@ -139,24 +142,28 @@ export const UserAvatar = ({
                 Help
               </MenuLink>
             </MenuItem>
-            <MenuItem>
-              <MenuLink
-                dataTestId="settings-availability-link"
-                href="/employee/settings?tab=availability"
-              >
-                <FaUserClock />
-                My Availability
-              </MenuLink>
-            </MenuItem>
-            <MenuItem>
-              <MenuLink
-                dataTestId="settings-responses-link"
-                href="/employee/settings?tab=responses"
-              >
-                <FaReply />
-                My Responses
-              </MenuLink>
-            </MenuItem>
+            {isEmployee && (
+              <>
+                <MenuItem>
+                  <MenuLink
+                    dataTestId="settings-availability-link"
+                    href="/employee/settings?tab=availability"
+                  >
+                    <FaUserClock />
+                    My Availability
+                  </MenuLink>
+                </MenuItem>
+                <MenuItem>
+                  <MenuLink
+                    dataTestId="settings-responses-link"
+                    href="/employee/settings?tab=responses"
+                  >
+                    <FaReply />
+                    My Responses
+                  </MenuLink>
+                </MenuItem>
+              </>
+            )}
             <MenuItem>
               <MenuLink
                 dataTestId="settings-profile-link"
@@ -190,7 +197,8 @@ export const UserAvatar = ({
 const mapStateToProps = ({ auth }: Pick<TRootState, "auth">) => ({
   avatar: auth.avatar,
   firstName: auth.firstName,
-  lastName: auth.lastName
+  lastName: auth.lastName,
+  role: auth.role
 });
 
 /* istanbul ignore next */

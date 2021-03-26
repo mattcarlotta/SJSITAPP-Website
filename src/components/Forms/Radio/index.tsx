@@ -78,7 +78,7 @@ const RadioComponent = ({
     {notes && <Notes notes={notes} />}
     <ToggleButtonGroup
       orientation="vertical"
-      aria-label="event group"
+      aria-label={`${name} group`}
       classes={useGroupStyles()}
       exclusive
       onChange={(_, value) => onChange({ target: { name, value } })}

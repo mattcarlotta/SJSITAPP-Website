@@ -37,8 +37,8 @@ export type THelpPageProps = {
 
 export const HelpPage = ({ role }: THelpPageProps): JSX.Element => {
   const router = useRouter();
-  const isStaff = role !== "employee";
-  const availableTopics = isStaff ? stafftopics : topics;
+  const isEmployee = role === "employee";
+  const availableTopics = !isEmployee ? stafftopics : topics;
   const [basePath, hash] = router.asPath.split("#");
   const [state, setState] = React.useState<THelpPageState>({
     searchText: "",
@@ -78,9 +78,7 @@ export const HelpPage = ({ role }: THelpPageProps): JSX.Element => {
         <Padding top="10px" right="50px" bottom="80px" left="50px">
           <Center
             style={{
-              marginTop: 25,
               maxWidth: "800px",
-              width: "100%",
               margin: "0 auto"
             }}
           >
@@ -90,7 +88,6 @@ export const HelpPage = ({ role }: THelpPageProps): JSX.Element => {
             </Paragraph>
             <div
               css={css`
-                width: 100%;
                 height: 45px;
                 max-width: 650px;
                 margin: 0 auto;
@@ -106,7 +103,8 @@ export const HelpPage = ({ role }: THelpPageProps): JSX.Element => {
               />
             </div>
             <PanelDescription>
-              If you&#39;re unable to find an answer to your question, please
+              If you&#39;re unable to find an answer to your question, then
+              please
               <OutsideLink
                 dataTestId="contact-us-link"
                 href="/employee/contact-us"
@@ -119,7 +117,7 @@ export const HelpPage = ({ role }: THelpPageProps): JSX.Element => {
           <General id={id} />
           <FormAndAvailability id={id} />
           <EmployeeSchedule id={id} />
-          {isStaff && (
+          {!isEmployee && (
             <>
               <GettingStarted id={id} />
               <Events id={id} />
