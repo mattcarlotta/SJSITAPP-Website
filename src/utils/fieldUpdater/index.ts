@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import isEmpty from "lodash.isempty";
-import moment from "~utils/momentWithTimezone";
-import { TBaseFieldProps } from "~types";
+import { Moment, TBaseFieldProps } from "~types";
 
 /**
  * Helper function to update form fields.
@@ -16,7 +15,7 @@ import { TBaseFieldProps } from "~types";
 const fieldUpdater = (
   fields: Array<TBaseFieldProps>,
   name: string,
-  value?: string | Array<moment.Moment> | boolean
+  value?: string | Array<Moment> | boolean
 ): Array<TBaseFieldProps> => {
   try {
     if (isEmpty(fields) || !name)

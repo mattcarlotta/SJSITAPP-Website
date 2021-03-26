@@ -19,7 +19,7 @@ const Chevron = styled(ChevronComponent)<{ isVisible?: boolean }>`
   svg {
     vertical-align: middle;
     transform: ${({ isVisible }) =>
-      isVisible ? "rotate(90deg)" : "rotate(270deg)"};
+      isVisible ? "rotate(270deg)" : "rotate(90deg)"};
     transition: 0.2s ease-in-out;
     transition-property: transform;
   }

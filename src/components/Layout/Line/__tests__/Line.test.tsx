@@ -17,6 +17,11 @@ describe("Line", () => {
     expect(wrapper).toHaveStyleRule("width", "10px");
   });
 
+  it("sets max-width based upon 'maxWidth' prop", () => {
+    wrapper.setProps({ maxWidth: "10px" });
+    expect(wrapper).toHaveStyleRule("max-width", "10px");
+  });
+
   it("sets 'margin: 0 auto' based upon 'centered' prop", () => {
     wrapper.setProps({ centered: true });
     expect(wrapper).toHaveStyleRule("margin", "0 auto");

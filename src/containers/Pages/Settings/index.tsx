@@ -109,21 +109,23 @@ export const SettingsPage = (props: TSettingPageProps): JSX.Element => {
             />
           ]}
         </Tabs>
-        <Padding top="10px" left="40px" right="40px" bottom="40px">
-          <TabPanel value={tab} index={0}>
+        <TabPanel value={tab} index={0}>
+          <Padding top="10px" left="20px" right="20px" bottom="40px">
             <Profile {...props} />
-          </TabPanel>
-          <TabPanel value={tab} index={1}>
+          </Padding>
+        </TabPanel>
+        <TabPanel value={tab} index={1}>
+          <Padding left="20px" right="20px" bottom="40px">
             <Availability id={props.id} />
-          </TabPanel>
-          <TabPanel value={tab} index={2}>
-            <Center style={{ marginBottom: "-4px" }}>
-              <Title>My Responses</Title>
-              <Line centered width="400px" />
-            </Center>
-            <EventCalendar APIURL="responses" id={props.id} disableGames />
-          </TabPanel>
-        </Padding>
+          </Padding>
+        </TabPanel>
+        <TabPanel value={tab} index={2}>
+          <Center style={{ marginBottom: "-4px" }}>
+            <Title>My Responses</Title>
+            <Line centered maxWidth="225px" />
+          </Center>
+          <EventCalendar APIURL="responses" id={props.id} disableGames />
+        </TabPanel>
       </Card>
     </>
   );

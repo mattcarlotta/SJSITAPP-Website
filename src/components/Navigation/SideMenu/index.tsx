@@ -1,8 +1,8 @@
 import { makeStyles } from "@material-ui/core/styles";
-import moment from "moment";
 import TreeView from "@material-ui/lab/TreeView";
 import TreeItem from "@material-ui/lab/TreeItem";
 import Divider from "~components/Layout/Divider";
+import FormatDate from "~components/Layout/FormatDate";
 import Legal from "~components/Layout/Legal";
 import Tree from "~components/Layout/Tree";
 import NavLink from "~components/Navigation/NavLink";
@@ -125,7 +125,14 @@ const SideMenu = ({
           )
         )}
       </TreeView>
-      <Legal>© 2019-{moment().format(fullyearFormat)} Matt Carlotta</Legal>
+      <Legal>
+        © 2019&nbsp;-&nbsp;
+        <FormatDate
+          format={fullyearFormat}
+          style={{ display: "inline", marginRight: 5 }}
+        />
+        Matt Carlotta
+      </Legal>
     </Tree>
   );
 };

@@ -10,11 +10,13 @@ import { EventTarget, EventTargetDataset, KeyboardEvent } from "~types";
 
 export interface SelectOptionsContainerProps {
   handleOptionSelect: (props: EventTarget) => void;
+  padding?: string;
   selected: string;
   isVisible: boolean;
   name: string;
   searchText?: string;
   selectOptions: Array<string>;
+  textAlign?: string;
 }
 
 export interface SelectOptionsContainerState {
@@ -72,7 +74,14 @@ class SelectOptionsContainer extends React.Component<
 
   render = (): JSX.Element | null => {
     const { searchOptions } = this.state;
-    const { name, searchText, selected, selectOptions } = this.props;
+    const {
+      name,
+      padding,
+      searchText,
+      selected,
+      selectOptions,
+      textAlign
+    } = this.props;
 
     const options = !searchText
       ? selectOptions
@@ -88,6 +97,8 @@ class SelectOptionsContainer extends React.Component<
               <Option
                 key={value}
                 name={name}
+                padding={padding}
+                textAlign={textAlign}
                 value={value}
                 onClick={this.handleOptionSelect}
                 onKeyPress={this.handleKeySelect}

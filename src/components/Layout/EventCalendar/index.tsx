@@ -1,7 +1,7 @@
 import * as React from "react";
 import { IconButton } from "@material-ui/core";
 import isEmpty from "lodash.isempty";
-import NativeSelect from "~components/Forms/NativeSelect";
+import Select from "~components/Forms/Select";
 import Bold from "~components/Layout/Bold";
 import Center from "~components/Layout/Center";
 import Date from "~components/Layout/Date";
@@ -15,6 +15,7 @@ import Margin from "~components/Layout/Margin";
 import Padding from "~components/Layout/Padding";
 import PanelDescription from "~components/Layout/PanelDescription";
 import Tooltip from "~components/Layout/Tooltip";
+import Word from "~components/Layout/Word";
 import { IconContext, FaChevronLeft, FaChevronRight } from "~icons";
 import app from "~utils/axiosConfig";
 import {
@@ -30,7 +31,7 @@ import {
 import generateCalendarDays from "~utils/generateCalendarDays";
 import moment from "~utils/momentWithTimezone";
 import { parseData } from "~utils/parseResponse";
-import { TEventData } from "~types";
+import { EventTarget, TEventData } from "~types";
 
 export type TEventCalendarState = {
   days: Array<string>;
@@ -136,7 +137,7 @@ export const EventCalendar = ({
   }, []);
 
   const handleDateChange = React.useCallback(
-    ({ name, value }: { name: string; value: string }): void => {
+    ({ target: { name, value } }: EventTarget): void => {
       setState(prevState => ({
         ...prevState,
         error: false,
@@ -192,29 +193,53 @@ export const EventCalendar = ({
             <FlexCenter breakpoint justify="center" margin="0">
               {!disableGames && (
                 <>
-                  <NativeSelect
+                  <Select
+                    hideIcon
+                    hoverable
+                    height="auto"
+                    background="#f7f7f7"
+                    justifyContent="center"
+                    width="130px"
+                    padding="8px"
+                    textAlign="center"
                     name="selectedGames"
-                    options={["All Events", "My Events"]}
+                    selectOptions={["All Events", "My Events"]}
                     value={selectedGames}
                     onChange={handleDateChange}
                   />
-                  <Margin left="10px" right="10px">
+                  <Word breakpoint top="10px" left="10px" right="10px">
                     in
-                  </Margin>
+                  </Word>
                 </>
               )}
-              <NativeSelect
+              <Select
+                hideIcon
+                hoverable
+                height="auto"
+                background="#f7f7f7"
+                justifyContent="center"
+                width="125px"
+                padding="8px"
+                textAlign="center"
                 name="selectedMonth"
-                options={months}
+                selectOptions={months}
                 value={selectedMonth}
                 onChange={handleDateChange}
               />
-              <Margin left="10px" right="10px">
+              <Word breakpoint top="10px" left="10px" right="10px">
                 of
-              </Margin>
-              <NativeSelect
+              </Word>
+              <Select
+                hideIcon
+                hoverable
+                height="auto"
+                background="#f7f7f7"
+                justifyContent="center"
+                width="125px"
+                padding="8px"
+                textAlign="center"
                 name="selectedYear"
-                options={years}
+                selectOptions={years}
                 value={selectedYear}
                 onChange={handleDateChange}
               />

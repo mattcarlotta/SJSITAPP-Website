@@ -21,9 +21,10 @@ const useStyles = makeStyles({
     "& .MuiInput-input": {
       fontSize: 16,
       cursor: "pointer",
-      border: "1px solid #888",
+      border: "1px solid #ccc",
       background: "#eee",
-      borderRadius: 10,
+      borderRadius: 5,
+      padding: 10,
       textAlign: "center",
       transition: "all 300ms ease-in-out",
       fontFamily: `"Karla", -apple-system, BlinkMacSystemFont, "Segoe UI",

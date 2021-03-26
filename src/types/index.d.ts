@@ -135,7 +135,7 @@ export type TBaseFieldProps = {
   selectOptions?: Array<string>;
   type: string;
   tooltip?: string;
-  value?: string | moment.Moment | Array<moment.Moment> | boolean;
+  value?: string | Moment | Array<Moment> | boolean;
   updateEvent?: boolean;
 };
 

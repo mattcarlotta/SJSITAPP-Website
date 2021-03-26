@@ -6,9 +6,9 @@ import EventDistributionChart from "~components/Layout/EventDistributionChart";
 import FadeIn from "~components/Layout/FadeIn";
 import FetchError from "~components/Layout/FetchError";
 import FlexCenter from "~components/Layout/FlexCenter";
-import Margin from "~components/Layout/Margin";
 import Padding from "~components/Layout/Padding";
 import PanelDescription from "~components/Layout/PanelDescription";
+import Word from "~components/Layout/Word";
 import { FaChartBar } from "~icons";
 import moment from "~utils/momentWithTimezone";
 import app from "~utils/axiosConfig";
@@ -98,9 +98,9 @@ export const EventDistribution = (): JSX.Element => {
               value={startDate}
               onChange={handleDateChange}
             />
-            <Margin left="10px" right="10px">
+            <Word left="10px" right="10px">
               to
-            </Margin>
+            </Word>
             <DatePicker
               name="endDate"
               value={endDate}

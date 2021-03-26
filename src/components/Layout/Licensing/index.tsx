@@ -2,12 +2,12 @@ import * as React from "react";
 import { FaCopyright } from "~icons";
 import Card from "~components/Layout/Card";
 import InfoText from "~components/Layout/InfoText";
+import FormatDate from "~components/Layout/FormatDate";
 import Line from "~components/Layout/Line";
 import Padding from "~components/Layout/Padding";
 import Title from "~components/Layout/Title";
 import Head from "~components/Navigation/Header";
 import { fullyearFormat } from "~utils/dateFormats";
-import moment from "~utils/momentWithTimezone";
 
 const LicensingPage = (): JSX.Element => (
   <>
@@ -25,7 +25,12 @@ const LicensingPage = (): JSX.Element => (
         <br />
         <br />
         <InfoText>
-          Copyright (c) 2019-{moment().format(fullyearFormat)} Matt Carlotta
+          Copyright (c) 2019&nbsp;-&nbsp;
+          <FormatDate
+            format={fullyearFormat}
+            style={{ display: "inline", marginRight: 5 }}
+          />
+          Matt Carlotta
         </InfoText>
         <br />
         <br />

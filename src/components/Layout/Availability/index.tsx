@@ -1,6 +1,6 @@
 import * as React from "react";
 import isEmpty from "lodash.isempty";
-import NativeSelect from "~components/Forms/NativeSelect";
+import Select from "~components/Forms/Select";
 import AvailabilityAvgChart from "~components/Layout/AvailabilityAvgChart";
 import AvailabilityResponseChart from "~components/Layout/AvailabilityResponseChart";
 import Center from "~components/Layout/Center";
@@ -10,10 +10,11 @@ import FetchError from "~components/Layout/FetchError";
 import FlexCenter from "~components/Layout/FlexCenter";
 import Legend from "~components/Layout/Legend";
 import Line from "~components/Layout/Line";
-import Margin from "~components/Layout/Margin";
 import NoAvailability from "~components/Layout/NoAvailability";
+import Padding from "~components/Layout/Padding";
 import PanelDescription from "~components/Layout/PanelDescription";
 import Title from "~components/Layout/Title";
+import Word from "~components/Layout/Word";
 import app from "~utils/axiosConfig";
 import {
   fullyearFormat,
@@ -22,7 +23,7 @@ import {
 } from "~utils/dateFormats";
 import moment from "~utils/momentWithTimezone";
 import { parseData } from "~utils/parseResponse";
-import { TAvailabilityAggData } from "~types";
+import { TAvailabilityAggData, EventTarget } from "~types";
 
 export type TAvailabilityState = {
   error: boolean;
@@ -88,7 +89,7 @@ const Availability = ({ id }: TAvailabilityProps): JSX.Element => {
   }, [id, selectedMonth, selectedYear]);
 
   const handleDateChange = React.useCallback(
-    ({ name, value }: { name: string; value: string }): void => {
+    ({ target: { name, value } }: EventTarget): void => {
       setState(prevState => ({
         ...prevState,
         error: false,
@@ -116,29 +117,47 @@ const Availability = ({ id }: TAvailabilityProps): JSX.Element => {
     <>
       <Center data-testid="my-availability">
         <Title>My Availability</Title>
-        <Line centered width="400px" />
-        <Margin as="div" top="20px">
-          <NativeSelect
+        <Line centered maxWidth="225px" />
+        <Padding top="16px">
+          <Select
+            hideIcon
+            hoverable
+            height="auto"
+            background="#f7f7f7"
+            display="inline-block"
+            justifyContent="center"
+            padding="8px"
+            textAlign="center"
+            width="125px"
             name="selectedMonth"
-            options={months}
+            selectOptions={months}
             value={selectedMonth}
             onChange={handleDateChange}
           />
-          <Margin left="10px" right="10px">
+          <Word breakpoint top="10px" left="10px" right="10px">
             of
-          </Margin>
-          <NativeSelect
+          </Word>
+          <Select
+            hideIcon
+            hoverable
+            height="auto"
+            background="#f7f7f7"
+            display="inline-block"
+            justifyContent="center"
+            padding="8px"
+            textAlign="center"
+            width="125px"
             name="selectedYear"
-            options={years}
+            selectOptions={years}
             value={selectedYear}
             onChange={handleDateChange}
           />
-        </Margin>
+        </Padding>
       </Center>
       {error ? (
         <FetchError height="1008px" onClickReload={handleReload} />
       ) : (
-        <Margin as="div" top="20px" style={{ height: "820px" }}>
+        <Padding top="20px" style={{ minHeight: "820px" }}>
           {!isEmpty(events) ? (
             <>
               <Center data-testid="availability-description">
@@ -176,7 +195,7 @@ const Availability = ({ id }: TAvailabilityProps): JSX.Element => {
               <NoAvailability height="820px" />
             </FadeIn>
           ) : null}
-        </Margin>
+        </Padding>
       )}
     </>
   );

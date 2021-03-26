@@ -30,21 +30,26 @@ const OptionComponent = ({
   </div>
 );
 
-const Option = styled(OptionComponent)<{ selected?: string; value?: string }>`
+const Option = styled(OptionComponent)<{
+  padding?: string;
+  selected?: string;
+  textAlign?: string;
+  value?: string;
+}>`
   cursor: pointer;
   color: ${({ selected, value }) =>
     selected === value ? "#0f7ae5" : "#282c34"};
   background: ${({ selected, value }) =>
-    selected === value ? "#f3f3f3" : "#fff"};
+    selected === value ? "#e6f7ff" : "#fff"};
   display: block;
   word-break: break-word;
   font-size: 16px;
-  padding: 8px 22px;
+  padding: ${({ padding }) => padding || "8px 22px"};
   width: 100%;
   font-weight: normal;
   user-select: none;
   border: 1px solid transparent;
-  text-align: left;
+  text-align: ${({ textAlign }) => textAlign || "left"};
   transition: all 200ms ease-in-out;
   font-weight: ${({ selected, value }) =>
     selected === value ? 600 : "normal"};
@@ -52,7 +57,8 @@ const Option = styled(OptionComponent)<{ selected?: string; value?: string }>`
   &:hover {
     color: ${({ selected, value }) =>
       selected !== value || !value ? "#282c34" : "#0f7ae5"};
-    background: #e6f7ff;
+    background: ${({ selected, value }) =>
+      selected === value ? "#e6f7ff" : "#efefef"};
     outline: 0;
     border: 1px solid transparent;
   }
@@ -60,7 +66,8 @@ const Option = styled(OptionComponent)<{ selected?: string; value?: string }>`
   &:focus {
     color: ${({ selected, value }) =>
       selected !== value || !value ? "#282c34" : "#0f7ae5"};
-    background: #e6f7ff;
+    background: ${({ selected, value }) =>
+      selected === value ? "#e6f7ff" : "#efefef"};
     outline: 0;
   }
 `;
