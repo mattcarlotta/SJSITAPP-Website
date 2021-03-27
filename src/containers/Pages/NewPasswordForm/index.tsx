@@ -46,7 +46,7 @@ export const NewPasswordForm = ({
   });
 
   const handleChange = React.useCallback(
-    ({ target: { name, value } }: EventTarget) => {
+    ({ target: { name, value } }: EventTarget): void => {
       setState(prevState => ({
         ...prevState,
         fields: fieldUpdater(prevState.fields, name, value)

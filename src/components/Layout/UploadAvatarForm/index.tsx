@@ -43,7 +43,7 @@ export const UploadAvatarForm = ({
   const { isSubmitting, showForm } = state;
 
   const handleChange = React.useCallback(
-    ({ target: { files } }) => {
+    ({ target: { files } }): void => {
       try {
         const file = files[0];
 

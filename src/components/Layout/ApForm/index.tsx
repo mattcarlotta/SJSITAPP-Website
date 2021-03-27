@@ -58,7 +58,7 @@ const APForm = (): JSX.Element => {
   });
   const { errors, fields, form, isSubmitting, isLoading } = state;
 
-  const fetchAPForm = React.useCallback(async () => {
+  const fetchAPForm = React.useCallback(async (): Promise<void> => {
     try {
       const res = await app.get(`form/view/${id}`);
       const data = parseData<TAPFormData>(res);
@@ -74,10 +74,10 @@ const APForm = (): JSX.Element => {
       toast({ type: "error", message: err.toString() });
       router.replace("/employee/dashboard");
     }
-  }, [id]);
+  }, [app, parseData, id, router, toast, updateFormFields]);
 
   const handleChange = React.useCallback(
-    ({ target: { name, value } }: EventTarget) => {
+    ({ target: { name, value } }: EventTarget): void => {
       setState(prevState => ({
         ...prevState,
         fields: fieldUpdater(prevState.fields, name, value)
@@ -104,7 +104,7 @@ const APForm = (): JSX.Element => {
     }));
   };
 
-  const submitApForm = React.useCallback(async () => {
+  const submitApForm = React.useCallback(async (): Promise<void> => {
     try {
       const condensedFields = condenseFormFields(fields);
 

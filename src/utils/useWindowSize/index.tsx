@@ -6,7 +6,7 @@ const useWindowSize = (): number => {
   const [windowSize, setWindowSize] = React.useState(window.innerWidth);
 
   const setWindowHeight = React.useCallback(
-    throttle(() => {
+    throttle((): void => {
       setWindowSize(window.innerWidth);
     }, 300),
     []
