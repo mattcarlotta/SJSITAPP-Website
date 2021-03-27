@@ -3,8 +3,8 @@ import CardBody from "./CardBody";
 import CardHead from "./CardHead";
 import CardHeadIcon from "./CardHeadIcon";
 import CardHeadTitle from "./CardHeadTitle";
-import { ReactNode } from "~types";
 import CardSubTitle from "../CardSubTitle";
+import { ReactNode } from "~types";
 
 export type TCardProps = {
   className?: string;

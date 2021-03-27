@@ -12,7 +12,7 @@ import OutsideLink from "~components/Navigation/OutsideLink";
 const AutomatedServices = ({ id }: { id: string }): JSX.Element => (
   <>
     <Center>
-      <Title style={{ marginTop: 50 }}>Automated Services</Title>
+      <Title margin="50px 0 0 0">Automated Services</Title>
       <Paragraph>
         Overview about how the automated services work for you.
       </Paragraph>

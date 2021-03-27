@@ -159,14 +159,10 @@ const APForm = (): JSX.Element => {
               onSubmit={handleSubmit}
             >
               <Center>
-                <Title
-                  margin="0px"
-                  fontSize="30px"
-                  style={{ color: "#025f6d" }}
-                >
+                <Title margin="0px" fontSize="30px" color="#025f6d">
                   Sharks & Barracuda A/P Form
                 </Title>
-                <Title margin="0px" style={{ color: "#025f6d" }}>
+                <Title margin="0px" color="#025f6d">
                   <FormatDate
                     date={form.startMonth}
                     format={calendarDateFormat}
@@ -179,11 +175,7 @@ const APForm = (): JSX.Element => {
                     style={{ display: "inline" }}
                   />
                 </Title>
-                <Title
-                  margin="10px 0"
-                  fontSize="16px"
-                  style={{ color: "#025f6d" }}
-                >
+                <Title margin="10px 0" fontSize="16px" color="#025f6d">
                   Form expires on:
                   <FormatDate
                     date={form.expirationDate}
@@ -191,11 +183,7 @@ const APForm = (): JSX.Element => {
                     style={{ color: "#f56342" }}
                   />
                 </Title>
-                <Title
-                  margin="10px 0"
-                  fontSize="16px"
-                  style={{ color: "#025f6d" }}
-                >
+                <Title margin="10px 0" fontSize="16px" color="#025f6d">
                   Form reminders will be sent out on:
                   <FormatDate
                     date={form.sendEmailNotificationsDate}
@@ -209,6 +197,8 @@ const APForm = (): JSX.Element => {
                   isSubmitting={isSubmitting}
                   maxWidth="625px"
                   title="Submit AP Form"
+                  style={{ minHeight: 60 }}
+                  submitBtnStyle={{ minHeight: 60 }}
                 />
               </Center>
             </form>

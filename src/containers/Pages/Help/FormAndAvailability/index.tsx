@@ -12,7 +12,7 @@ import { BsPencilSquare } from "~icons";
 const FormAndAvailability = ({ id }: { id: string }): JSX.Element => (
   <>
     <Center>
-      <Title style={{ marginTop: 50 }}>Forms and Availability Questions</Title>
+      <Title margin="50px 0 0 0">Forms and Availability Questions</Title>
       <Paragraph>
         Find answers to questions about A/P forms and availability.
       </Paragraph>

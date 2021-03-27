@@ -36,8 +36,9 @@ export function* checkForActiveSession(): SagaIterator {
  *
  * @generator
  * @function signoutUserSession
- * @yield A redux action to remove the current user from state.
- * @yields A redux action to push to a URL.
+ * @yield {AxiosResponse} - A response from a call to the API.
+ * @yields {AnyAction} A redux action to push to a URL.
+ * @yield {AnyAction} A redux action to remove the current user from state.
  * @throws {AnyAction} - A redux action to display a server error.
  */
 export function* signoutUserSession(): SagaIterator {
@@ -58,13 +59,11 @@ export function* signoutUserSession(): SagaIterator {
  *
  * @generator
  * @function deleteUserAvatar
- * @param {object} payload - contains user id.
- * @yield {object} - A response from a call to the API.
- * @function parseMessage - returns a parsed res.data.message.
- * @yield {action} - A redux action to set a server message by type.
- * @yield {action} - A redux action to display a toast message by type.
- * @yield {action} - A redux action to reset users avatar url.
- * @yields {action} - A redux action to refresh the member's settings.
+ * @param payload - contains user `id`.
+ * @yield {AxiosResponse} - A response from a call to the API.
+ * @yield {string} - Returns parsed `res.message`.
+ * @yield {AnyAction} - A redux action to display a toast message by type.
+ * @yield {AnyAction} - A redux action to reset users avatar url.
  * @throws {AnyAction} - A redux action to display a server error.
  */
 export function* deleteUserAvatar({
@@ -123,7 +122,7 @@ export function* resetPassword({
  * @yield {AxiosResponse} - A response from a call to the API.
  * @yield {TAuthData} - Returns parsed `res.data`.
  * @yield {AnyAction} -  A redux action to set the current user to redux state.
- * @yields A router replace event to /employee/dashboard.
+ * @yields {AnyAction} - A router replace event to /employee/dashboard.
  * @throws {AnyAction} - A redux action to display a server error.
  */
 export function* signinUser({
@@ -146,11 +145,11 @@ export function* signinUser({
  *
  * @generator
  * @function signupUser
- * @param payload - payload contain a token, an email, first/last name, and a password.
+ * @param payload - payload contain a `token`, an `email`, `firstName`, `lastName`, and a `password`.
  * @yield {AxiosResponse} - A response from a call to the API.
  * @yield {string} - Returns parsed `res.message`.
- * @yield A toast message by type.
- * @yields A router push event to /employee/login.
+ * @yield {AnyAction} - A toast message by type.
+ * @yields {AnyAction} - A router push event to /employee/login.
  * @throws {AnyAction} - A redux action to display a server error.
  */
 export function* signupUser({
@@ -173,11 +172,11 @@ export function* signupUser({
  *
  * @generator
  * @function updateUserAvatar
- * @param {object} payload - `form` is formData image and `id` is user id.
+ * @param payload - `form` is formData image and `id` is user id.
  * @yield {AxiosResponse} - A response from a call to the API.
- * @function parseData - returns a parsed res.data.
- * @yield {action} - A redux action to display a server success message.
- * @yield {action} - A redux action do set user avatar to redux state.
+ * @yield {object} - returns a parsed res.data of `avatar` as string and `message` as string.
+ * @yield {AnyAction} - A redux action to display a server success message.
+ * @yield {AnyAction} - A redux action do set user avatar to redux state.
  * @throws {AnyAction} - A redux action to display a server error.
  */
 export function* updateUserAvatar({
@@ -210,10 +209,10 @@ export function* updateUserAvatar({
  *
  * @generator
  * @function updateUserPassword
- * @param {object} payload - contains a `token` and (new) `password` fields.
+ * @param payload - contains a `token` and (new) `password` fields.
  * @yield {AxiosResponse} - A response from a call to the API.
  * @yield {string} - Returns parsed `res.message`.
- * @yield A toast message by type.
+ * @yield {AnyAction} - A toast message by type.
  * @yields {SagaIterator} - A saga to sign the user out of any sessions.
  * @throws {AnyAction} - A redux action to display a server error.
  */
@@ -237,13 +236,13 @@ export function* updateUserPassword({
  *
  * @generator
  * @function updateUserProfile
- * @param payload - .
- * @yield {object} - A response from a call to the API.
- * @function parseData - returns a parsed res.data.
- * @yield {action} - A redux action to set a server message by type.
- * @yield {action} - A redux action to display a toast message by type.
- * @yield {action} - A redux action do set user avatar to redux state.
- * @yields {action} - A redux action to fresh member settings.
+ * @param payload - An object that contains `emailReminders`, `email`, `firstName` and `lastName`.
+ * @yield {AxiosResponse} - A response from a call to the API.
+ * @yield {object} - returns a parsed res.data of `message` as string and `user` with updated payload properties.
+ * @yield {AnyAction} - A redux action to set a server message by type.
+ * @yield {AnyAction} - A redux action to display a toast message by type.
+ * @yield {SagaIterator} - A saga action to remove user current session.
+ * @yields {AnyAction} - A redux action to update settings with `user` data.
  * @throws {AnyAction} - A redux action to display a server error.
  */
 export function* updateUserProfile({

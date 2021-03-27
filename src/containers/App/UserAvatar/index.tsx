@@ -8,8 +8,8 @@ import Avatar from "~components/Layout/Avatar";
 import Divider from "~components/Layout/Divider";
 import Flex from "~components/Layout/Flex";
 import MenuButton from "~components/Layout/MenuButton";
+import Margin from "~components/Layout/Margin";
 import MenuItem from "~components/Layout/MenuItem";
-import UserDetails from "~components/Layout/UserDetails";
 import Username from "~components/Layout/Username";
 import MenuLink from "~components/Navigation/MenuLink";
 import NavLink from "~components/Navigation/NavLink";
@@ -100,7 +100,7 @@ export const UserAvatar = ({
             style={{ borderBottom: "1px solid rgba(0, 0, 0, 0.1)" }}
           >
             <Avatar avatar={avatar} width="35px" />
-            <UserDetails>
+            <Margin as="div" left="16px">
               <Username data-testid="users-name">
                 {firstName}&nbsp;{lastName}
               </Username>
@@ -114,7 +114,7 @@ export const UserAvatar = ({
               >
                 Change Avatar
               </NavLink>
-            </UserDetails>
+            </Margin>
           </Flex>
           <IconContext.Provider
             value={{

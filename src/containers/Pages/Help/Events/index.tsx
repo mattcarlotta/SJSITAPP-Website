@@ -25,7 +25,7 @@ const iconStyle = {
 const Events = ({ id }: { id: string }): JSX.Element => (
   <>
     <Center>
-      <Title margin="50px 0 0px 0">Events</Title>
+      <Title margin="50px 0 0 0">Events</Title>
       <Paragraph>
         Find answers to all things regarding creating, editing, deleting, and
         scheduling events.

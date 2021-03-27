@@ -1,6 +1,7 @@
 import * as React from "react";
 import { css } from "@emotion/react";
 import FormatDate from "~components/Layout/FormatDate";
+import Padding from "~components/Layout/Padding";
 import Team from "~components/Layout/Team";
 import { CSSProperties } from "~types";
 
@@ -19,7 +20,7 @@ const EventLabel = ({
   style,
   team
 }: TEventLabelProps): JSX.Element => (
-  <div style={style}>
+  <Padding bottom="5px" style={style}>
     <div
       css={css`
         display: inline-block;
@@ -56,7 +57,7 @@ const EventLabel = ({
         date={eventDate}
       />
     </div>
-  </div>
+  </Padding>
 );
 
 export default EventLabel;

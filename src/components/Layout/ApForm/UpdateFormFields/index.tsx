@@ -10,21 +10,6 @@ const updateFormFields = (
   data: Array<TApEventDetails>
 ): Array<TBaseFieldProps> => {
   const initializedFields = data.reduce((acc, event) => {
-    const field = {
-      name: "events",
-      type: "radiogroup",
-      value: "",
-      errors: "",
-      required: false,
-      disabled: true,
-      selectOptions: [
-        "I want to work.",
-        "Available to work.",
-        "Prefer not to work.",
-        "Not available to work."
-      ]
-    };
-
     const {
       _id,
       team,
@@ -43,37 +28,31 @@ const updateFormFields = (
     ]);
 
     const radioFields = {
-      ...field,
       id: _id,
       name: _id,
+      type: "radiogroup",
       label: (
         <EventLabel
           eventType={eventType}
           eventDate={eventDate}
           opponent={opponent}
           team={team}
-          style={{ padding: "0 0 5px 0" }}
         />
       ),
-      radioLabelStyle: {
-        background: team === "San Jose Sharks" ? "#0d6472" : "#ef7f00",
-        color: "#fff",
-        borderTopRightRadius: 5,
-        borderTopLeftRadius: 5
-      },
-      radioContainerStyle: {
-        marginTop: 20,
-        borderTop: "1px solid",
-        borderLeft: "1px solid",
-        borderRight: "1px solid",
-        borderColor: "#9e9e9e",
-        borderTopRightRadius: 5,
-        borderTopLeftRadius: 5
-      },
-      disabled: false,
       required: true,
       value: response || "",
+      errors: "",
+      selectOptions: [
+        "I want to work.",
+        "Available to work.",
+        "Prefer not to work.",
+        "Not available to work."
+      ],
       updateEvent: !!response,
+      radioLabelStyle: {
+        background: team === "San Jose Sharks" ? "#0d6472" : "#ef7f00",
+        color: "#fff"
+      },
       notes
     };
 
@@ -86,8 +65,6 @@ const updateFormFields = (
       placeholder:
         "(Optional) Include any special notes for the event above...",
       required: false,
-      disabled: false,
-      className: "ap-form-notes",
       maxLength: 200,
       rows: 3,
       style: {

@@ -19,7 +19,7 @@ const iconStyle = {
 const GettingStarted = ({ id }: { id: string }): JSX.Element => (
   <>
     <Center>
-      <Title style={{ marginTop: 50 }}>Getting Started</Title>
+      <Title margin="50px 0 0 0">Getting Started</Title>
       <Paragraph>
         Quick and easy overview on how to get up and running.
       </Paragraph>

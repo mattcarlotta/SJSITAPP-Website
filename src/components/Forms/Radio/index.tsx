@@ -126,10 +126,15 @@ const RadioComponent = ({
 
 const Radio = styled(RadioComponent)`
   background-color: #f5f5f5;
+  margin-top: 20px;
   margin-bottom: 0;
   padding-bottom: 10px;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+  border-top: 1px solid;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  border-color: #9e9e9e;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 `;
 
 export default Radio;
