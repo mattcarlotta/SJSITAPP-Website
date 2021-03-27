@@ -56,19 +56,19 @@ const DisplayEvents = ({
   });
   const { isVisible, modalContent } = state;
 
-  const handleCloseModal = React.useCallback(() => {
+  const handleCloseModal = (): void => {
     setState({
       isVisible: false,
       modalContent: {}
     });
-  }, []);
+  };
 
-  const handleShowModal = React.useCallback((modalContent: TEventData) => {
+  const handleShowModal = (modalContent: TEventData): void => {
     setState({
       isVisible: true,
       modalContent
     });
-  }, []);
+  };
 
   return (
     <>

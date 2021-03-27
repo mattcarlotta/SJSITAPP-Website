@@ -120,9 +120,19 @@ export const EventCalendar = ({
         isLoading: false
       }));
     }
-  }, [APIURL, id, selectedGames, selectedMonth, selectedYear]);
+  }, [
+    app,
+    APIURL,
+    generateCalendarDays,
+    id,
+    moment,
+    parseData,
+    selectedGames,
+    selectedMonth,
+    selectedYear
+  ]);
 
-  const handleMonthChange = React.useCallback((days: number): void => {
+  const handleMonthChange = (days: number): void => {
     setState(prevState => ({
       ...prevState,
       error: false,
@@ -134,28 +144,25 @@ export const EventCalendar = ({
         .add(days, "month")
         .format(monthnameFormat)
     }));
-  }, []);
+  };
 
-  const handleDateChange = React.useCallback(
-    ({ target: { name, value } }: EventTarget): void => {
-      setState(prevState => ({
-        ...prevState,
-        error: false,
-        isLoading: true,
-        [name]: value
-      }));
-    },
-    []
-  );
+  const handleDateChange = ({ target: { name, value } }: EventTarget): void => {
+    setState(prevState => ({
+      ...prevState,
+      error: false,
+      isLoading: true,
+      [name]: value
+    }));
+  };
 
-  const handleReload = React.useCallback(() => {
+  const handleReload = (): void => {
     setState(prevState => ({
       ...prevState,
       error: false,
       events: [],
       isLoading: true
     }));
-  }, []);
+  };
 
   React.useEffect(() => {
     if (isLoading) fetchEvents();

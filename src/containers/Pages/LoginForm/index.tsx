@@ -37,7 +37,7 @@ export const LoginForm = ({
   });
 
   const handleChange = React.useCallback(
-    ({ target: { name, value } }: EventTarget) => {
+    ({ target: { name, value } }: EventTarget): void => {
       setState(prevState => ({
         ...prevState,
         fields: fieldUpdater(prevState.fields, name, value)
@@ -46,20 +46,17 @@ export const LoginForm = ({
     []
   );
 
-  const handleSubmit = React.useCallback(
-    (e: FormEvent) => {
-      e.preventDefault();
-      const { validatedFields, errors } = fieldValidator(state.fields);
+  const handleSubmit = (e: FormEvent): void => {
+    e.preventDefault();
+    const { validatedFields, errors } = fieldValidator(state.fields);
 
-      setState(prevState => ({
-        ...prevState,
-        fields: !errors ? prevState.fields : validatedFields,
-        errors: !!errors,
-        isSubmitting: !errors
-      }));
-    },
-    [state, fieldValidator]
-  );
+    setState(prevState => ({
+      ...prevState,
+      fields: !errors ? prevState.fields : validatedFields,
+      errors: !!errors,
+      isSubmitting: !errors
+    }));
+  };
 
   React.useEffect(() => {
     if (state.isSubmitting && serverError)

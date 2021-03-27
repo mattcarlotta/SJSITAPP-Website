@@ -24,15 +24,12 @@ const SearchBar = ({ role }: TSearchBarProps): JSX.Element => {
   });
   const { searchText, id } = state;
 
-  const handleSearchChange = React.useCallback(
-    ({ target: { value } }: EventTarget) => {
-      setState({
-        searchText: value as string,
-        id: stripSpaces(value as string)
-      });
-    },
-    []
-  );
+  const handleSearchChange = ({ target: { value } }: EventTarget): void => {
+    setState({
+      searchText: value as string,
+      id: stripSpaces(value as string)
+    });
+  };
 
   React.useEffect(() => {
     if (searchText && id) router.push(`/employee/help#${id}`);

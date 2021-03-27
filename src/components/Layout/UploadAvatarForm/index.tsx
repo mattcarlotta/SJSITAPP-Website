@@ -73,12 +73,12 @@ export const UploadAvatarForm = ({
         });
       }
     },
-    [toast]
+    [toast, updateUserAvatar]
   );
 
-  const toggleForm = React.useCallback(() => {
+  const toggleForm = (): void => {
     setState(prevState => ({ ...prevState, showForm: !prevState.showForm }));
-  }, []);
+  };
 
   React.useEffect(() => {
     if (state.isSubmitting && serverError)

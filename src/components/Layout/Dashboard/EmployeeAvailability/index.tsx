@@ -68,16 +68,16 @@ export const EmployeeAvailability = (): JSX.Element => {
         isLoading: false
       }));
     }
-  }, []);
+  }, [app, parseData]);
 
-  const handleReload = React.useCallback(() => {
+  const handleReload = (): void => {
     setState({
       availability: [],
       error: false,
       isLoading: true,
       months: []
     });
-  }, []);
+  };
 
   React.useEffect(() => {
     if (isLoading) fetchMembersAvailability();

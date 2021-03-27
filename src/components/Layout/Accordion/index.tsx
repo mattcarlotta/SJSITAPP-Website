@@ -45,9 +45,9 @@ const CustomAccordion = ({
   const isExpanded = expanded === id;
   const [tabExpanded, setExpanded] = React.useState(isExpanded);
 
-  const handleChange = React.useCallback((): void => {
+  const handleChange = (): void => {
     setExpanded(prevState => !prevState);
-  }, []);
+  };
 
   React.useEffect(() => {
     setExpanded(isExpanded);

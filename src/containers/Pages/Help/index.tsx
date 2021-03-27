@@ -47,15 +47,12 @@ export const HelpPage = ({ role }: THelpPageProps): JSX.Element => {
   const { searchText, id } = state;
   const nextPath = `${basePath}${id ? `#${id}` : ""}`;
 
-  const handleSearchChange = React.useCallback(
-    ({ target: { value } }: EventTarget) => {
-      setState({
-        searchText: value as string,
-        id: stripSpaces(value as string)
-      });
-    },
-    []
-  );
+  const handleSearchChange = ({ target: { value } }: EventTarget): void => {
+    setState({
+      searchText: value as string,
+      id: stripSpaces(value as string)
+    });
+  };
 
   /* istanbul ignore next */
   React.useEffect(() => {

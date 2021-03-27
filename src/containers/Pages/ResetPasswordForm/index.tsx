@@ -52,20 +52,17 @@ export const ResetPasswordForm = ({
     []
   );
 
-  const handleSubmit = React.useCallback(
-    (e: FormEvent) => {
-      e.preventDefault();
-      const { validatedFields, errors } = fieldValidator(state.fields);
+  const handleSubmit = (e: FormEvent): void => {
+    e.preventDefault();
+    const { validatedFields, errors } = fieldValidator(state.fields);
 
-      setState(prevState => ({
-        ...prevState,
-        fields: !errors ? prevState.fields : validatedFields,
-        errors: !!errors,
-        isSubmitting: !errors
-      }));
-    },
-    [state, fieldValidator]
-  );
+    setState(prevState => ({
+      ...prevState,
+      fields: !errors ? prevState.fields : validatedFields,
+      errors: !!errors,
+      isSubmitting: !errors
+    }));
+  };
 
   React.useEffect(() => {
     if (state.isSubmitting && serverError)

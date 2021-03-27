@@ -49,16 +49,13 @@ export const UserAvatar = ({
     null
   );
 
-  const handleClick = React.useCallback(
-    (event: MouseEvent<HTMLButtonElement>) => {
-      setAnchorEl(event.currentTarget);
-    },
-    []
-  );
+  const handleClick = (event: MouseEvent<HTMLButtonElement>): void => {
+    setAnchorEl(event.currentTarget);
+  };
 
-  const handleClose = React.useCallback(() => {
+  const handleClose = (): void => {
     setAnchorEl(null);
-  }, []);
+  };
 
   const open = Boolean(anchorEl);
   const id = open ? "user-settings" : undefined;

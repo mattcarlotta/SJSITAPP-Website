@@ -1,11 +1,12 @@
 import { withStyles } from "@material-ui/core/styles";
 import { Tabs } from "@material-ui/core";
+import { ChangeEvent } from "~types";
 
 export type TAntTabsProps = {
   "aria-label": string;
   value: number;
   variant: "fullWidth" | "standard" | "scrollable";
-  onChange: (_: any, tab: number) => void;
+  onChange: (_: ChangeEvent<any>, tab: number) => void;
 };
 
 const AntTabs = withStyles({

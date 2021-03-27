@@ -29,31 +29,6 @@ export const ContactUsForm = (): JSX.Element => {
     isSubmitting: false
   });
 
-  const handleChange = React.useCallback(
-    ({ target: { name, value } }: EventTarget) => {
-      setState(prevState => ({
-        ...prevState,
-        fields: fieldUpdater(prevState.fields, name, value)
-      }));
-    },
-    []
-  );
-
-  const handleSubmit = React.useCallback(
-    (e: FormEvent) => {
-      e.preventDefault();
-      const { validatedFields, errors } = fieldValidator(state.fields);
-
-      setState(prevState => ({
-        ...prevState,
-        fields: !errors ? prevState.fields : validatedFields,
-        errors: !!errors,
-        isSubmitting: !errors
-      }));
-    },
-    [state, fieldValidator]
-  );
-
   const sendMail = React.useCallback(async (): Promise<void> => {
     try {
       const res = await app.post("mail/contact", parseFields(state.fields));
@@ -74,7 +49,29 @@ export const ContactUsForm = (): JSX.Element => {
         isSubmitting: false
       }));
     }
-  }, [parseFields, fields, state.fields]);
+  }, [app, parseFields, parseMessage, state.fields]);
+
+  const handleChange = React.useCallback(
+    ({ target: { name, value } }: EventTarget) => {
+      setState(prevState => ({
+        ...prevState,
+        fields: fieldUpdater(prevState.fields, name, value)
+      }));
+    },
+    []
+  );
+
+  const handleSubmit = (e: FormEvent): void => {
+    e.preventDefault();
+    const { validatedFields, errors } = fieldValidator(state.fields);
+
+    setState(prevState => ({
+      ...prevState,
+      fields: !errors ? prevState.fields : validatedFields,
+      errors: !!errors,
+      isSubmitting: !errors
+    }));
+  };
 
   React.useEffect(() => {
     if (state.isSubmitting && !state.errors) sendMail();

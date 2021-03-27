@@ -9,13 +9,12 @@ import NavLink from "~components/Navigation/NavLink";
 import NavTitle from "~components/Navigation/NavTitle";
 import { fullyearFormat } from "~utils/dateFormats";
 import { MdExpandMore, MdChevronRight } from "~icons";
-
 import { EmployeeRoutes, StaffRoutes } from "./Tabs";
-import { TSideMenuNodeIds } from "~types";
+import { ChangeEvent, TSideMenuNodeIds } from "~types";
 
 export type TSideMenuProps = {
   expandedNodeIds: TSideMenuNodeIds;
-  handleToggle: (_: any, nodeIds: TSideMenuNodeIds) => void;
+  handleToggle: (_: ChangeEvent<any>, nodeIds: TSideMenuNodeIds) => void;
   role: string;
   selectedNodeIds: TSideMenuNodeIds;
 };

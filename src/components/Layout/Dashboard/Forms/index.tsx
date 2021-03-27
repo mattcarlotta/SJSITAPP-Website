@@ -56,16 +56,16 @@ export const Forms = (): JSX.Element => {
         isLoading: false
       }));
     }
-  }, []);
+  }, [app, parseData, moment]);
 
-  const handleReload = React.useCallback(() => {
+  const handleReload = (): void => {
     setState({
       error: false,
       form: {},
       hasExpired: false,
       isLoading: true
     });
-  }, []);
+  };
 
   React.useEffect(() => {
     if (isLoading) fetchForms();
@@ -110,7 +110,7 @@ export const Forms = (): JSX.Element => {
                   display="block"
                   margin="10px auto 0 auto"
                   borderRadius="50px"
-                  padding="17px 0px"
+                  padding="16px 0px"
                   dataTestId="dashboard-ap-form-link"
                   href={`/employee/forms/view/${form._id}`}
                   style={{ maxWidth: "260px" }}

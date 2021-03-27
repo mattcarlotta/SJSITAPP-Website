@@ -8,7 +8,12 @@ import NavBar from "~components/Navigation/NavBar";
 import SideMenu from "~components/Navigation/SideMenu";
 import TopBar from "~components/Navigation/TopBar";
 import { expandedIds, selectedTab } from "./Tabs";
-import { ReactElement, TSideMenuNodeIds, TRootState } from "~types";
+import {
+  ChangeEvent,
+  ReactElement,
+  TSideMenuNodeIds,
+  TRootState
+} from "~types";
 
 export type TAppLayoutProps = {
   children?: ReactElement<any>;
@@ -33,9 +38,9 @@ export const AppLayout = ({
 }: TAppLayoutProps): JSX.Element => {
   const { pathname } = useRouter();
 
-  const handleToggle = React.useCallback((_, nodeIds: TSideMenuNodeIds) => {
+  const handleToggle = (_: ChangeEvent<any>, nodeIds: TSideMenuNodeIds) => {
     setExpandedTabs(nodeIds);
-  }, []);
+  };
 
   React.useLayoutEffect(() => {
     setExpandedTabs(expandedIds(pathname));

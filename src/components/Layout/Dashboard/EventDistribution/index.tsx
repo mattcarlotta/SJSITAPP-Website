@@ -32,16 +32,19 @@ export const EventDistribution = (): JSX.Element => {
   });
   const { endDate, error, events, startDate } = state;
 
-  const handleDateChange = React.useCallback(
-    ({ name, value }: { name: string; value: MaterialUiPickersDate }): void => {
-      setState(prevState => ({
-        ...prevState,
-        errors: false,
-        [name]: value.format(defaultFormat)
-      }));
-    },
-    []
-  );
+  const handleDateChange = ({
+    name,
+    value
+  }: {
+    name: string;
+    value: MaterialUiPickersDate;
+  }): void => {
+    setState(prevState => ({
+      ...prevState,
+      errors: false,
+      [name]: value.format(defaultFormat)
+    }));
+  };
 
   const fetchEventsDistribution = React.useCallback(
     async (startDate: string, endDate: string): Promise<void> => {
@@ -63,17 +66,17 @@ export const EventDistribution = (): JSX.Element => {
         }));
       }
     },
-    []
+    [app, parseData]
   );
 
-  const handleReload = React.useCallback(() => {
+  const handleReload = (): void => {
     setState(prevState => ({
       ...prevState,
       error: false,
       events: [],
       isLoading: true
     }));
-  }, []);
+  };
 
   React.useEffect(() => {
     fetchEventsDistribution(startDate, endDate);

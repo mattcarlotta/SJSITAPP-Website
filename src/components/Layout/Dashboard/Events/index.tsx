@@ -12,7 +12,7 @@ import Tabs from "~components/Layout/Tabs";
 import { MdEvent } from "~icons";
 import app from "~utils/axiosConfig";
 import { parseData } from "~utils/parseResponse";
-import { TEventData } from "~types";
+import { ChangeEvent, TEventData } from "~types";
 
 export type TDashboardEventsState = {
   activeTab: string;
@@ -43,7 +43,7 @@ export const Events = ({
   const { activeTab, error, events, isLoading } = state;
   const nextWeek = activeTab !== "today";
 
-  const handleTabChange = React.useCallback((_, tab: number): void => {
+  const handleTabChange = (_: ChangeEvent<any>, tab: number): void => {
     setState(prevState => ({
       ...prevState,
       activeTab: tab === 0 ? "today" : "upcoming",
@@ -52,36 +52,39 @@ export const Events = ({
       isLoading: true,
       tab
     }));
-  }, []);
+  };
 
-  const fetchEvents = React.useCallback(async (tab: string): Promise<void> => {
-    try {
-      const res = await app.get(`dashboard/events/${tab}`);
-      const data = parseData<Array<TEventData>>(res);
+  const fetchEvents = React.useCallback(
+    async (tab: string): Promise<void> => {
+      try {
+        const res = await app.get(`dashboard/events/${tab}`);
+        const data = parseData<Array<TEventData>>(res);
 
-      setState(prevState => ({
-        ...prevState,
-        error: false,
-        events: data,
-        isLoading: false
-      }));
-    } catch (err) {
-      setState(prevState => ({
-        ...prevState,
-        error: true,
-        isLoading: false
-      }));
-    }
-  }, []);
+        setState(prevState => ({
+          ...prevState,
+          error: false,
+          events: data,
+          isLoading: false
+        }));
+      } catch (err) {
+        setState(prevState => ({
+          ...prevState,
+          error: true,
+          isLoading: false
+        }));
+      }
+    },
+    [app, parseData]
+  );
 
-  const handleReload = React.useCallback(() => {
+  const handleReload = (): void => {
     setState(prevState => ({
       ...prevState,
       error: false,
       events: [],
       isLoading: true
     }));
-  }, []);
+  };
 
   React.useEffect(() => {
     if (isLoading) fetchEvents(activeTab);

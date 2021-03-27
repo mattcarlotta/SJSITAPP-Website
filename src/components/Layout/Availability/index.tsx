@@ -86,28 +86,25 @@ const Availability = ({ id }: TAvailabilityProps): JSX.Element => {
         isLoading: false
       }));
     }
-  }, [id, selectedMonth, selectedYear]);
+  }, [app, parseData, id, selectedMonth, selectedYear, yearMonthFormat]);
 
-  const handleDateChange = React.useCallback(
-    ({ target: { name, value } }: EventTarget): void => {
-      setState(prevState => ({
-        ...prevState,
-        error: false,
-        isLoading: true,
-        [name]: value
-      }));
-    },
-    []
-  );
+  const handleDateChange = ({ target: { name, value } }: EventTarget): void => {
+    setState(prevState => ({
+      ...prevState,
+      error: false,
+      isLoading: true,
+      [name]: value
+    }));
+  };
 
-  const handleReload = React.useCallback(() => {
+  const handleReload = (): void => {
     setState(prevState => ({
       ...prevState,
       error: false,
       events: {} as TAvailabilityAggData,
       isLoading: true
     }));
-  }, []);
+  };
 
   React.useEffect(() => {
     if (isLoading) fetchAvailability();

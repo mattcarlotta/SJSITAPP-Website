@@ -86,26 +86,23 @@ const APForm = (): JSX.Element => {
     []
   );
 
-  const handleSubmit = React.useCallback(
-    (e: FormEvent) => {
-      e.preventDefault();
-      const { validatedFields, errors } = fieldValidator(state.fields);
+  const handleSubmit = (e: FormEvent): void => {
+    e.preventDefault();
+    const { validatedFields, errors } = fieldValidator(state.fields);
 
-      if (errors)
-        toast({
-          type: "error",
-          message: "Please fill out all of the required fields."
-        });
+    if (errors)
+      toast({
+        type: "error",
+        message: "Please fill out all of the required fields."
+      });
 
-      setState(prevState => ({
-        ...prevState,
-        fields: !errors ? prevState.fields : validatedFields,
-        errors: !!errors,
-        isSubmitting: !errors
-      }));
-    },
-    [state, fieldValidator]
-  );
+    setState(prevState => ({
+      ...prevState,
+      fields: !errors ? prevState.fields : validatedFields,
+      errors: !!errors,
+      isSubmitting: !errors
+    }));
+  };
 
   const submitApForm = React.useCallback(async () => {
     try {
