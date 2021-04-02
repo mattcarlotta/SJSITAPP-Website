@@ -91,7 +91,7 @@ const missingEmailCreds =
 
 const missingEventId = "You must provide an event id.";
 
-const missingFormId = "You must provide a form id.";
+const missingFormId = "You must provide a valid form id.";
 
 const missingTeamId = "You must provide a team id.";
 

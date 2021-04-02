@@ -1,9 +1,11 @@
 import type { Request, Response } from "express";
 import isEmpty from "lodash.isempty";
+import { isValidObjectId } from "mongoose";
 import { Event, Form } from "~models";
 import { convertId, parseSession, moment, sendError } from "~helpers";
 import {
   expiredForm,
+  missingFormId,
   unableToLocateEvents,
   unableToLocateForm
 } from "~messages/errors";
@@ -19,6 +21,7 @@ const viewApForm = async (req: Request, res: Response): Promise<Response> => {
   try {
     const userId = parseSession(req);
     const { id: _id } = req.params;
+    if (!isValidObjectId(_id)) throw missingFormId;
 
     const existingForm = await Form.findOne({ _id }, { __v: 0, seasonId: 0 });
     if (!existingForm) throw unableToLocateForm;

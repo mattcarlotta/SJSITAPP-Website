@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import { connectToDB } from "~database";
 import {
   expiredForm,
+  missingFormId,
   unableToLocateEvents,
   unableToLocateForm
 } from "~messages/errors";
@@ -48,6 +49,18 @@ describe("Review Form Controller", () => {
   });
 
   it("rejects requests where the form id is invalid", done => {
+    app()
+      .get("/api/form/view/undefined")
+      .set("Cookie", cookie)
+      .expect("Content-Type", /json/)
+      .expect(400)
+      .then(res => {
+        expect(res.body.err).toEqual(missingFormId);
+        done();
+      });
+  });
+
+  it("rejects requests where the form id doesn't exist", done => {
     app()
       .get("/api/form/view/601dc43483adb35b1ca678ea")
       .set("Cookie", cookie)

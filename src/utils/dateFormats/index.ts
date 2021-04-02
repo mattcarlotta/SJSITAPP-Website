@@ -1,3 +1,5 @@
+export const timestampFormat = "@ hh:mm a";
+
 /**
  * Formats year dates as 4 digits: 2020.
  */
@@ -21,7 +23,7 @@ export const shortmonthFormat = "MMM Do";
 /**
  * Formats moment dates as 3 digits months, followed by day, 4 digit year, and time: April 21st 2020 @ 12:00pm.
  */
-export const dateTimeFormat = `${shortmonthFormat} ${fullyearFormat} @ hh:mm a`;
+export const dateTimeFormat = `${shortmonthFormat} ${fullyearFormat} ${timestampFormat}`;
 
 /**
  * Formats moment dates as 1 digits: 1
@@ -47,6 +49,11 @@ export const weekdayFormat = "ddd";
  * Formats moment dates with weekday: Tuesday
  */
 export const fullweekdayFormat = "dddd";
+
+/**
+ * Formats moment dates as 3 digit weekday, month name, followed by day, and time: Sat, April 21st @ 12:00pm.
+ */
+export const weekdateTimeFormat = `${weekdayFormat}, ${monthnameFormat} ${daySuffix} ${timestampFormat}`;
 
 /**
  * Formats moment dates as month, followed by day, and 4 digit year: April 21st 2020.

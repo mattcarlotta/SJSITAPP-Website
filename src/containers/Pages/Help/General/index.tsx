@@ -101,8 +101,8 @@ const General = ({ id }: { id: string }): JSX.Element => (
       <br />
       <WarningText>
         For the best results, pick an image where the subject is centered and is
-        squared in dimension (for example: 256 pixels in length by 256 pixels in
-        width). Images that are larger than 2mb and/or do not end with
+        squared in dimension (for example: 256 pixels in height by 256 pixels in
+        length). Images that are larger than 2mb and/or do not end with
         .jpg/.jpeg/.png will not be accepted.
       </WarningText>
     </Accordion>

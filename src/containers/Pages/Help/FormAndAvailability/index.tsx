@@ -87,8 +87,8 @@ const FormAndAvailability = ({ id }: { id: string }): JSX.Element => (
       </Button>
       button located located underneath the <strong>Forms</strong> panel.
       <WarningText>
-        Be advised that this A/P form button will disappear once the A/P form
-        has expired.
+        Be advised that this A/P form button will disappear once the form has
+        expired.
       </WarningText>
     </Accordion>
     <Accordion
@@ -132,8 +132,8 @@ const FormAndAvailability = ({ id }: { id: string }): JSX.Element => (
       </Button>
       button when you&#39;re done.
       <WarningText>
-        Be advised that this A/P form button will disappear once the A/P form
-        has expired.
+        Be advised that this A/P form button will disappear once the form has
+        expired.
       </WarningText>
     </Accordion>
     <Accordion expanded={id} title="How do I update my A/P form availability?">
@@ -174,8 +174,8 @@ const FormAndAvailability = ({ id }: { id: string }): JSX.Element => (
       </Button>
       button when you&#39;re done.
       <WarningText>
-        Be advised that this A/P form button will disappear once the A/P form
-        has expired.
+        Be advised that this A/P form button will disappear once the form has
+        expired.
       </WarningText>
     </Accordion>
   </>

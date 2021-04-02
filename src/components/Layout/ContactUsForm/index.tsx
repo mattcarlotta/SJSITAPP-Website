@@ -84,7 +84,7 @@ export const ContactUsForm = (): JSX.Element => {
       title="Contact Us"
       subtitle="Questions and Feedback Form"
     >
-      <Padding left="50px" right="50px" bottom="50px">
+      <Padding top="20px" left="50px" right="50px" bottom="50px">
         <FormTitle
           header="Contact Us"
           title="Contact Us"
@@ -106,7 +106,7 @@ export const ContactUsForm = (): JSX.Element => {
           <Margin as="div" top="30px">
             By clicking the &quot;Send&quot; button, you agree to allow us to
             use your email address as a &quot;Sent From&quot; addresser. Using
-            your email adress, an email with the subject and message supplied
+            your email address, an email with the subject and message supplied
             above will be generated and sent to one or many of the &quot;Send
             To&quot; addresses associated with the Sharks Ice Team.
           </Margin>

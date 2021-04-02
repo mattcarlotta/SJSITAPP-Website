@@ -31,7 +31,7 @@ const getAPForm = async (_: Request, res: Response): Promise<Response> => {
       }
     ).lean();
     /* istanbul ignore next */
-    if (!existingForm) return res.status(200).json({ apform: {} });
+    if (!existingForm) return res.status(200).send({});
 
     const eventCounts = await getEventCounts(
       existingForm.startMonth,
