@@ -9,7 +9,7 @@ import { staffSignIn } from "~test/utils/signIn";
 
 const newToken = {
   authorizedEmail: "new.token@test.com",
-  role: "employee"
+  role: "member"
 };
 
 describe("Create Token Controller", () => {

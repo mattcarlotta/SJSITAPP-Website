@@ -16,7 +16,7 @@ export type TSearchBarState = {
 
 const SearchBar = ({ role }: TSearchBarProps): JSX.Element => {
   const router = useRouter();
-  const availableTopics = role !== "employee" ? stafftopics : topics;
+  const availableTopics = role !== "member" ? stafftopics : topics;
   const hash = router.asPath.split("#")[0];
   const [state, setState] = React.useState<TSearchBarState>({
     searchText: "",

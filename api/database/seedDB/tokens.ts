@@ -11,7 +11,7 @@ export const seedTokens = async (): Promise<void> => {
   const newHire = {
     authorizedEmail: "carlotta.matt2@gmail.com",
     email: "carlotta.matt2@gmail.com",
-    role: "employee",
+    role: "member",
     token: createSignupToken(),
     expiration: expirationDate().toDate()
   };
@@ -19,70 +19,70 @@ export const seedTokens = async (): Promise<void> => {
   const newHire1 = {
     authorizedEmail: "member@example.com",
     email: "member@example.com",
-    role: "employee",
+    role: "member",
     token: createSignupToken(),
     expiration: expirationDate().toDate()
   };
 
   const newHire2 = {
     authorizedEmail: "member55@example.com",
-    role: "employee",
+    role: "member",
     token: createSignupToken(),
     expiration: expirationDate().toDate()
   };
 
   const newHire3 = {
     authorizedEmail: "member66@example.com",
-    role: "employee",
+    role: "member",
     token: createSignupToken(),
     expiration: expirationDate().toDate()
   };
 
   const newHire4 = {
     authorizedEmail: "member667@example.com",
-    role: "employee",
+    role: "member",
     token: createSignupToken(),
     expiration: expirationDate().toDate()
   };
 
   const newHire5 = {
     authorizedEmail: "member77@example.com",
-    role: "employee",
+    role: "member",
     token: createSignupToken(),
     expiration: expirationDate().toDate()
   };
 
   const newHire6 = {
     authorizedEmail: "member888@example.com",
-    role: "employee",
+    role: "member",
     token: createSignupToken(),
     expiration: expirationDate().toDate()
   };
 
   const newHire7 = {
     authorizedEmail: "member999@example.com",
-    role: "employee",
+    role: "member",
     token: createSignupToken(),
     expiration: expirationDate().toDate()
   };
 
   const newHire8 = {
     authorizedEmail: "member1000@example.com",
-    role: "employee",
+    role: "member",
     token: createSignupToken(),
     expiration: expirationDate().toDate()
   };
 
   const newHire9 = {
     authorizedEmail: "member1001@example.com",
-    role: "employee",
+    role: "member",
     token: createSignupToken(),
     expiration: expirationDate().toDate()
   };
 
   const newHire10 = {
     authorizedEmail: "member1002@example.com",
-    role: "employee",
+    role: "member",
     token: createSignupToken(),
     expiration: expirationDate().toDate()
   };
@@ -98,7 +98,7 @@ export const seedTokens = async (): Promise<void> => {
   const newHire12 = {
     authorizedEmail: "deleteme@delete.com",
     email: "deleteme@delete.com",
-    role: "employee",
+    role: "member",
     token: createSignupToken(),
     expiration: expirationDate().toDate()
   };
@@ -106,7 +106,7 @@ export const seedTokens = async (): Promise<void> => {
   const staticTestHire = {
     authorizedEmail: "static@member.com",
     email: "",
-    role: "employee",
+    role: "member",
     token: "0123456789",
     expiration: expirationDate().toDate()
   };

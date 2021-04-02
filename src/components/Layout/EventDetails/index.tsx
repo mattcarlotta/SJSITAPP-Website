@@ -42,10 +42,6 @@ const EventDetails = ({ event, id }: TEventDetailsProps): JSX.Element => (
         )}
       </Bold>
     </ListItem>
-    <ListItem data-testid="event-type">
-      <Bold>Event Type:</Bold>
-      {event.eventType}
-    </ListItem>
     <ListItem data-testid="event-date">
       <Bold>Date:</Bold>
       <FormatDate
@@ -53,6 +49,10 @@ const EventDetails = ({ event, id }: TEventDetailsProps): JSX.Element => (
         format="MMMM Do, YYYY @ h:mm a"
         date={event.eventDate}
       />
+    </ListItem>
+    <ListItem data-testid="event-type">
+      <Bold>Event Type:</Bold>
+      {event.eventType}
     </ListItem>
     {event.notes && (
       <ListItem data-testid="event-notes">
@@ -72,7 +72,7 @@ const EventDetails = ({ event, id }: TEventDetailsProps): JSX.Element => (
     )}
     {event.employeeResponse && (
       <ListItem data-testid="employee-response">
-        <Bold>Employee Response:</Bold>
+        <Bold>My Response:</Bold>
         <Badge
           style={{ display: "inline-block" }}
           response={event.employeeResponse}
@@ -89,7 +89,7 @@ const EventDetails = ({ event, id }: TEventDetailsProps): JSX.Element => (
     )}
     {!isEmpty(event.schedule) && (
       <ListItem data-testid="schedule-employees">
-        <Bold>Scheduled Employees:</Bold>
+        <Bold>Schedule:</Bold>
         {event.schedule.map(({ _id, employeeIds }) => (
           <List data-testid="call-time" style={{ marginTop: 5 }} key={_id}>
             <Bold style={{ paddingLeft: 10 }}>

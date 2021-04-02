@@ -24,7 +24,7 @@ const getAvailabilityForAllMembers = async (
     const members = await User.aggregate([
       {
         $match: {
-          role: { $eq: "employee" },
+          role: { $eq: "member" },
           status: "active"
         }
       },

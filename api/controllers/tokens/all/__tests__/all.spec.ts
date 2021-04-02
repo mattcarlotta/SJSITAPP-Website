@@ -62,7 +62,7 @@ describe("Retrieve All Tokens Controller", () => {
 
   it("accepts requests to retrieve all tokens for pagination by role", done => {
     app()
-      .get("/api/tokens/viewall?role=employee")
+      .get("/api/tokens/viewall?role=member")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)

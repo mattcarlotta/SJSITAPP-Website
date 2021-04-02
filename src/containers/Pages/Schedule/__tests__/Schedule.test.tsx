@@ -2,7 +2,8 @@ import { mount } from "enzyme";
 import { Schedule } from "../index";
 
 const initProps = {
-  loggedinUserId: "88"
+  loggedinUserId: "88",
+  role: "member"
 };
 
 const wrapper = mount(<Schedule {...initProps} />);

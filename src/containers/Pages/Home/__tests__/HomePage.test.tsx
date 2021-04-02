@@ -26,7 +26,7 @@ describe("Home Page", () => {
     );
   });
 
-  it("renders a 'View Dashboard' for previous employee sessions", () => {
+  it("renders a 'View Dashboard' for previous member sessions", () => {
     store.dispatch(
       signinSession({
         id: "23823838328",
@@ -34,7 +34,7 @@ describe("Home Page", () => {
         email: "t@t.com",
         firstName: "Example",
         lastName: "User",
-        role: "employee"
+        role: "member"
       })
     );
     wrapper.update();

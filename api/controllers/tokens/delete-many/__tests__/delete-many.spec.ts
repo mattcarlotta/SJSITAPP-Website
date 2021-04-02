@@ -8,14 +8,14 @@ import app from "~test/utils/testServer";
 
 const newToken = {
   authorizedEmail: "delete.many.tokens1@test.com",
-  role: "employee",
+  role: "member",
   expiration: new Date(),
   token: createSignupToken()
 };
 
 const newToken2 = {
   authorizedEmail: "delete.many.tokens2@test.com",
-  role: "employee",
+  role: "member",
   expiration: new Date(),
   token: createSignupToken()
 };

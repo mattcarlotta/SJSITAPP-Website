@@ -22,7 +22,7 @@ const newSeason = {
 
 const newHire = {
   authorizedEmail: "signuptoken@example.com",
-  role: "employee",
+  role: "member",
   seasonId: "20402041",
   token: createSignupToken(),
   expiration: new Date(2080, 10, 6)
@@ -30,7 +30,7 @@ const newHire = {
 
 const oldHire = {
   authorizedEmail: "old@example.com",
-  role: "employee",
+  role: "member",
   seasonId: "19701971",
   token: createSignupToken(),
   expiration: new Date(1970, 10, 6)

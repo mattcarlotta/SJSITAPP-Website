@@ -11,7 +11,7 @@ const newUser = {
   password: "password",
   firstName: "delete",
   lastName: "user",
-  role: "employee",
+  role: "member",
   token: createRandomToken(),
   emailReminders: true,
   registered: Date.now()

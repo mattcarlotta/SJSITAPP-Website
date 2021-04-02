@@ -27,7 +27,7 @@ describe("Requires Basic Credentials", () => {
   });
 
   it("allows employees to view the authenticated page", () => {
-    store.dispatch(signinSession({ email: "test@test.com", role: "employee" }));
+    store.dispatch(signinSession({ email: "test@test.com", role: "member" }));
     wrapper.update();
 
     expect(wrapper.find("[data-testid='authenticated-page']")).toExist();

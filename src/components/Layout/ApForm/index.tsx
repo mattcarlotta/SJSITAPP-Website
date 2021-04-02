@@ -46,16 +46,18 @@ export type TApParsedFields = {
 
 const title = "Sharks & Barracuda A/P Form";
 
+const initialState = {
+  fields: [],
+  form: {} as TAPFormDetails,
+  errors: false,
+  isLoading: true,
+  isSubmitting: false
+};
+
 const APForm = (): JSX.Element => {
   const router = useRouter();
   const id = get(router, ["query", "id"]);
-  const [state, setState] = React.useState<TAPFormState>({
-    fields: [],
-    form: {} as TAPFormDetails,
-    errors: false,
-    isLoading: true,
-    isSubmitting: false
-  });
+  const [state, setState] = React.useState<TAPFormState>(initialState);
   const { errors, fields, form, isSubmitting, isLoading } = state;
 
   const fetchAPForm = React.useCallback(async (): Promise<void> => {

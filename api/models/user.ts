@@ -52,7 +52,7 @@ export interface IUserDocument extends Document, IUserModelProperties {
 
 export type TUserModel = PaginateModel<IUserDocument> & IUserModelProperties;
 
-// admin, staff, employee
+// admin, staff, member
 const userSchema = new Schema<IUserDocument>({
   avatar: { type: String, default: "" },
   email: {
@@ -60,7 +60,7 @@ const userSchema = new Schema<IUserDocument>({
     unique: true,
     lowercase: true
   },
-  role: { type: String, default: "employee" },
+  role: { type: String, default: "member" },
   status: { type: String, default: "active" },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },

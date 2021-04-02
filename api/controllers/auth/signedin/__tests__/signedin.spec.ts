@@ -11,7 +11,7 @@ const newUser = {
   email: susendedEmail,
   firstName: "Hello",
   lastName: "Goodbye",
-  role: "employee",
+  role: "member",
   token: "abc2838",
   registered: new Date()
 };

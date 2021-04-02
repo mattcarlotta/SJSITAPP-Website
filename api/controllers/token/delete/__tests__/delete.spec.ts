@@ -8,7 +8,7 @@ import app from "~test/utils/testServer";
 
 const newToken = {
   authorizedEmail: "delete.token@test.com",
-  role: "employee",
+  role: "member",
   expiration: new Date(),
   token: createSignupToken()
 };

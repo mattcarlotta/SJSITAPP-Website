@@ -39,7 +39,7 @@ const initProps = {
   firstName: "First",
   lastName: "Last",
   registered: moment().format(),
-  role: "employee",
+  role: "member",
   serverError: "",
   serverMessage: "",
   status: "active",

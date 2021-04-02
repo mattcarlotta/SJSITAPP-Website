@@ -10,7 +10,7 @@ const fields = {
   emailReminders: true,
   firstName: "First",
   lastName: "Last",
-  role: "employee"
+  role: "member"
 };
 
 const initProps = {

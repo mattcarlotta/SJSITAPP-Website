@@ -28,7 +28,7 @@ const EmployeeSchedule = ({ id }: { id: string }): JSX.Element => (
       year, then you&#39;ll see a button with a scheduled (
       <FaCalendarCheck style={{ position: "relative", top: 2 }} />) icon. Click
       on the button to view its details. Underneath one of the
-      <strong>Scheduled Employees</strong> call times(
+      <strong>Scheduled:</strong> call times(
       <FaClock style={{ position: "relative", top: 2 }} />
       ), you&#39;ll see your name highlighted
       <strong

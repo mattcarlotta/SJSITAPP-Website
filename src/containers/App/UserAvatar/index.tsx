@@ -59,7 +59,7 @@ export const UserAvatar = ({
 
   const open = Boolean(anchorEl);
   const id = open ? "user-settings" : undefined;
-  const isEmployee = role === "employee";
+  const isEmployee = role === "member";
 
   return (
     <>

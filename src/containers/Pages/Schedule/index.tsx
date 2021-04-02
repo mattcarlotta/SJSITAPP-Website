@@ -8,9 +8,13 @@ import { TRootState } from "~types";
 
 export type TScheduleProps = {
   loggedinUserId: string;
+  role: string;
 };
 
-export const Schedule = ({ loggedinUserId }: TScheduleProps): JSX.Element => (
+export const Schedule = ({
+  loggedinUserId,
+  role
+}: TScheduleProps): JSX.Element => (
   <>
     <Header title="Schedule" url="/employee/schedule" />
     <Card
@@ -19,14 +23,19 @@ export const Schedule = ({ loggedinUserId }: TScheduleProps): JSX.Element => (
       title="Schedule"
       subtitle="Event Calendar"
     >
-      <EventCalendar APIURL="schedule" id={loggedinUserId} />
+      <EventCalendar
+        APIURL="schedule"
+        id={loggedinUserId}
+        disableGames={role !== "member"}
+      />
     </Card>
   </>
 );
 
 /* istanbul ignore next */
 const mapStateToProps = ({ auth }: Pick<TRootState, "auth">) => ({
-  loggedinUserId: auth.id
+  loggedinUserId: auth.id,
+  role: auth.role
 });
 
 export default connect(mapStateToProps)(Schedule);

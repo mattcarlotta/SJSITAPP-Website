@@ -60,7 +60,7 @@ const SideMenu = ({
   handleToggle,
   selectedNodeIds
 }: TSideMenuProps): JSX.Element => {
-  const TABS = role !== "employee" ? StaffRoutes : EmployeeRoutes;
+  const TABS = role !== "member" ? StaffRoutes : EmployeeRoutes;
 
   return (
     <Tree data-testid="sidemenu-tree">

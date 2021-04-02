@@ -65,8 +65,8 @@ describe("Help Page", () => {
     expect(wrapper.find("[data-testid='help-page']")).toExist();
   });
 
-  it("renders employee help without errors", () => {
-    wrapper.setProps({ role: "employee" });
+  it("renders member help without errors", () => {
+    wrapper.setProps({ role: "member" });
     expect(wrapper.find("[data-testid='help-page']")).toExist();
   });
 });

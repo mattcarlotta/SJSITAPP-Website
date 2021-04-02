@@ -13,7 +13,7 @@ const initProps = {
   avatar: "",
   firstName: "First",
   lastName: "Last",
-  role: "employee",
+  role: "member",
   signoutUserSession
 };
 

@@ -33,7 +33,7 @@ const getEventForScheduling = async (
     if (!event) throw unableToLocateEvent;
 
     const members = await getUsers({
-      match: { role: { $eq: "employee" }, status: "active" },
+      match: { role: { $eq: "member" }, status: "active" },
       project: { avatar: 1, firstName: 1, lastName: 1 }
     });
     /* istanbul ignore next */

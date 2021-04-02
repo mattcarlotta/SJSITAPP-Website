@@ -107,7 +107,7 @@ describe("Event Details", () => {
     wrapper.setProps({ event: employeeEventResponse });
     expect(
       wrapper.find("[data-testid='employee-response']").first().text()
-    ).toEqual("Employee Response:Not available.");
+    ).toEqual("My Response:Not available.");
   });
 
   it("displays an employee notes", () => {

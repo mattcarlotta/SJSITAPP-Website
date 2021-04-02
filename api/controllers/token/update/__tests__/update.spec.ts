@@ -13,20 +13,20 @@ import app from "~test/utils/testServer";
 
 const newToken = {
   authorizedEmail: "update.token@test.com",
-  role: "employee",
+  role: "member",
   expiration: new Date(),
   token: createSignupToken()
 };
 
 const updatedToken = {
   authorizedEmail: "updated.token@test.com",
-  role: "employee"
+  role: "member"
 };
 
 const usedToken = {
   authorizedEmail: "used.token3@test.com",
   email: "used.token3@test.com",
-  role: "employee",
+  role: "member",
   expiration: new Date(),
   token: createSignupToken()
 };

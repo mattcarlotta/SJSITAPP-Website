@@ -42,7 +42,7 @@ describe("Retrieve All Members Controller", () => {
 
   it("accepts requests to retrieve all employees for pagination", done => {
     app()
-      .get("/api/members/viewall?role=employee")
+      .get("/api/members/viewall?role=member")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)

@@ -24,7 +24,7 @@ const getEventDistribution = async (
 
     const members = await getUsers({
       match: {
-        role: { $eq: "employee" },
+        role: { $eq: "member" },
         status: "active"
       },
       project: {

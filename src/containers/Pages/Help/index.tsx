@@ -37,7 +37,7 @@ export type THelpPageProps = {
 
 export const HelpPage = ({ role }: THelpPageProps): JSX.Element => {
   const router = useRouter();
-  const isEmployee = role === "employee";
+  const isEmployee = role === "member";
   const availableTopics = !isEmployee ? stafftopics : topics;
   const [basePath, hash] = router.asPath.split("#");
   const [state, setState] = React.useState<THelpPageState>({

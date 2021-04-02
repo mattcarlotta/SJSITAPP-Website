@@ -5,7 +5,7 @@ import MemberDetails from "../index";
 const initProps = {
   editRole: false,
   registered: moment().format(),
-  role: "employee",
+  role: "member",
   status: "active"
 };
 

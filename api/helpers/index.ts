@@ -69,7 +69,7 @@ const createAuthMail = (
   subject: string;
   message: string;
 } => {
-  const isEmployee = role === "employee";
+  const isEmployee = role === "member";
   return {
     sendTo: `${authorizedEmail}`,
     sendFrom: "Sharks Ice Team <noreply@sjsiceteam.com>",

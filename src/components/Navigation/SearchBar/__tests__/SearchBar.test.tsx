@@ -4,7 +4,7 @@ import waitFor from "~utils/waitFor";
 import SearchBar from "../index";
 
 const initProps = {
-  role: "employee"
+  role: "member"
 };
 
 describe("SearchBar", () => {

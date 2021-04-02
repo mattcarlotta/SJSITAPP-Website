@@ -23,7 +23,7 @@ const Fields = (props: TFieldsProps): Array<TBaseFieldProps> =>
       value: props.role,
       errors: "",
       required: true,
-      selectOptions: ["staff", "employee"]
+      selectOptions: ["staff", "member"]
     },
     {
       name: "emailReminders",

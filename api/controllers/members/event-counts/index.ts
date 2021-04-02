@@ -26,7 +26,7 @@ const getMemberEventCounts = async (
 
     const activeMembers = await getUsers({
       match: {
-        role: { $eq: "employee" },
+        role: { $eq: "member" },
         status: "active"
       },
       project: {

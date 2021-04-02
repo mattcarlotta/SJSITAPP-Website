@@ -18,7 +18,7 @@ export const Dashboard = ({
   loggedinUserId,
   role
 }: TDashboardProps): JSX.Element => {
-  const isEmployee = role === "employee";
+  const isEmployee = role === "member";
   return (
     <>
       <Header title="Dashboard" url="/employee/dashboard" />

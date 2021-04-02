@@ -16,7 +16,7 @@ const newUser = {
   email: "updateme1234@example.com",
   firstName: "Hello",
   lastName: "Goodbye",
-  role: "employee",
+  role: "member",
   token: createSignupToken(),
   registered
 };

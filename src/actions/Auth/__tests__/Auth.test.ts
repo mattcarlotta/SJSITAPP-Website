@@ -7,7 +7,7 @@ const user = {
   email: "t@t.com",
   firstName: "Example",
   lastName: "User",
-  role: "employee"
+  role: "member"
 };
 
 const token = "1348690";

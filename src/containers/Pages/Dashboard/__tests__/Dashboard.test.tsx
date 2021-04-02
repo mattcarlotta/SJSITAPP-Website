@@ -3,7 +3,7 @@ import { Dashboard } from "../index";
 
 const initProps = {
   loggedinUserId: "88",
-  role: "employee"
+  role: "member"
 };
 
 const wrapper = shallow(<Dashboard {...initProps} />);
