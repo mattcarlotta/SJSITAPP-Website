@@ -18,7 +18,7 @@ const requiresStaffCredentials = (
   const RequiresAuthentication = () => {
     const router = useRouter();
     const { email, role } = useSelector(({ auth }) => auth);
-    const accessRestricted = role && (role === "staff" || role === "member");
+    const accessRestricted = role && (role === "guest" || role === "member");
 
     React.useEffect(() => {
       if (accessRestricted) router.replace("/employee/login");
