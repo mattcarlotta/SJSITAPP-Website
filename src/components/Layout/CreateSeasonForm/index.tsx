@@ -103,14 +103,14 @@ export const CreateSeasonForm = (): JSX.Element => {
     <Card
       dataTestId="create-season-page"
       icon={<FaFolderPlus />}
-      title="Create Season"
-      subtitle="Add New Season Form"
+      title="Add A New Season"
+      subtitle="Create Season Form"
     >
       <Padding top="20px" left="50px" right="50px" bottom="50px">
         <FormTitle
           header="Create Season"
-          title="Create Season"
-          description="Please select start and end date fields below to create a new season."
+          title="New Season"
+          description="Please select a start and end date to create a new season."
         />
         <form
           css={css`

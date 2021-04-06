@@ -68,7 +68,7 @@ export const defaultFormat = `${fullyearFormat}-${monthdateFormat}-${fulldayForm
 /**
  * Formats moment dates with 2 digit month, 2 digit day, followed by 4 digit year : 03-01-2021
  */
-export const standardFormat = `${monthdateFormat}/${fulldayFormat}/${fullyearFormat}/`;
+export const standardFormat = `${monthdateFormat}/${fulldayFormat}/${fullyearFormat}`;
 
 /**
  * Formats moment dates with 4 digit year, 2 digit month and 2 digit day : 2021-03-01

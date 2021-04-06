@@ -5,7 +5,7 @@ import Paragraph from "~components/Layout/Paragraph";
 import Title from "~components/Layout/Title";
 
 export type TFormTitleProps = {
-  description: string;
+  description?: string;
   header: string;
   title: string;
 };
