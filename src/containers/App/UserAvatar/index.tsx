@@ -59,7 +59,7 @@ export const UserAvatar = ({
 
   const open = Boolean(anchorEl);
   const id = open ? "user-settings" : undefined;
-  const isEmployee = role === "member";
+  const isMember = role === "member";
 
   return (
     <>
@@ -139,7 +139,7 @@ export const UserAvatar = ({
                 Help
               </MenuLink>
             </MenuItem>
-            {isEmployee && (
+            {isMember && (
               <>
                 <MenuItem>
                   <MenuLink

@@ -20,7 +20,7 @@ const getEventDistribution = async (
 ): Promise<Response> => {
   try {
     const { startDate, endDate } = req.query;
-    if (!startDate || !endDate) throw String(missingDates);
+    if (!startDate || !endDate) throw missingDates;
 
     const members = await getUsers({
       match: {
@@ -33,7 +33,7 @@ const getEventDistribution = async (
       }
     });
     /* istanbul ignore next */
-    if (isEmpty(members)) return res.status(200).json([]);
+    if (isEmpty(members)) return res.status(200).send([]);
     const memberEventCounts = await Event.aggregate([
       {
         $match: {

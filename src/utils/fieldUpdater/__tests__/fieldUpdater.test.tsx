@@ -1,4 +1,4 @@
-import FieldUpdater from "../index";
+import fieldUpdater from "../index";
 
 const fields = [
   {
@@ -23,7 +23,7 @@ const fields = [
 
 describe("FieldUpdater", () => {
   it("it to update a field with a new value", () => {
-    const returnedValues = FieldUpdater(fields, "zipCode", "1");
+    const returnedValues = fieldUpdater(fields, "zipCode", "1");
     expect(returnedValues).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -40,7 +40,7 @@ describe("FieldUpdater", () => {
   });
   it("displays an error if fields are empty", () => {
     try {
-      expect(FieldUpdater([], "zipCode", "1"));
+      expect(fieldUpdater([], "zipCode", "1"));
     } catch (e) {
       expect(e.toString()).toEqual(
         "Error: You must supply a field array with a name of the field to update!"

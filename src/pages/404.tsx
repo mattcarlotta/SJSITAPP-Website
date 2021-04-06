@@ -18,7 +18,7 @@ const NotFound: NextPage = () => (
         data-testid="not-found-page"
         direction="column"
         justify="center"
-        style={{ height: "100vh" }}
+        height="100vh"
       >
         <PuckSpinner>
           <Center>

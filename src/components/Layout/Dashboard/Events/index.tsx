@@ -23,7 +23,7 @@ export type TDashboardEventsState = {
 };
 
 export type TDashboardEventsProps = {
-  isEmployee: boolean;
+  isMember: boolean;
   loggedinUserId: string;
 };
 
@@ -36,7 +36,7 @@ const initialState = {
 };
 
 export const Events = ({
-  isEmployee,
+  isMember,
   loggedinUserId
 }: TDashboardEventsProps): JSX.Element => {
   const [state, setState] = React.useState<TDashboardEventsState>(initialState);
@@ -103,7 +103,7 @@ export const Events = ({
         aria-label="event tabs"
       >
         <Tab dataTestId="today" index={0} tab={state.tab} label="today" />
-        {isEmployee && (
+        {isMember && (
           <Tab
             dataTestId="upcoming"
             index={1}

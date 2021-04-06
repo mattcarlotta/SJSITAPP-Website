@@ -1,4 +1,4 @@
-import moment from "~utils/momentWithTimezone";
+// import moment from "~utils/momentWithTimezone";
 import fieldValidator from "../index";
 
 describe("FieldValidator", () => {
@@ -51,15 +51,15 @@ describe("FieldValidator", () => {
         value: "",
         errors: "",
         required: true
-      },
-      {
-        name: "season",
-        label: "Season",
-        type: "range",
-        value: [],
-        errors: "",
-        required: true
       }
+      // {
+      //   name: "season",
+      //   label: "Season",
+      //   type: "range",
+      //   value: [],
+      //   errors: "",
+      //   required: true
+      // }
     ];
 
     const { validatedFields, errors } = fieldValidator(fields);
@@ -70,7 +70,7 @@ describe("FieldValidator", () => {
         })
       ])
     );
-    expect(errors).toEqual(3);
+    expect(errors).toEqual(2);
   });
 
   it("validates valid emails", () => {
@@ -119,28 +119,28 @@ describe("FieldValidator", () => {
     expect(errors).toEqual(1);
   });
 
-  it("validates date ranges", () => {
-    const fields = [
-      {
-        name: "date",
-        label: "Date",
-        type: "range",
-        value: [moment()],
-        errors: "",
-        required: true
-      }
-    ];
+  // it("validates date ranges", () => {
+  //   const fields = [
+  //     {
+  //       name: "date",
+  //       label: "Date",
+  //       type: "range",
+  //       value: [moment()],
+  //       errors: "",
+  //       required: true
+  //     }
+  //   ];
 
-    const { validatedFields, errors } = fieldValidator(fields);
-    expect(validatedFields).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          errors: "You must select a start and an end date."
-        })
-      ])
-    );
-    expect(errors).toEqual(1);
-  });
+  //   const { validatedFields, errors } = fieldValidator(fields);
+  //   expect(validatedFields).toEqual(
+  //     expect.arrayContaining([
+  //       expect.objectContaining({
+  //         errors: "You must select a start and an end date."
+  //       })
+  //     ])
+  //   );
+  //   expect(errors).toEqual(1);
+  // });
 
   // it("validates radiogroups", () => {
   //   const fields = [

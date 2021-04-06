@@ -28,12 +28,12 @@ const parseFields = <T>(fields: Array<TBaseFieldProps>): T => {
             acc[name] = value && moment.isMoment(value) ? value.format() : "";
             break;
           }
-          case "range": {
-            const values =
-              Array.isArray(value) && value.map(val => val.format());
-            acc[name] = values;
-            break;
-          }
+          // case "range": {
+          //   const values =
+          //     Array.isArray(value) && value.map(val => val.format());
+          //   acc[name] = values;
+          //   break;
+          // }
           case "radiogroup": {
             acc["responses"] = acc["responses"] || [];
             acc["responses"].push({ id: name, value, notes, updateEvent });

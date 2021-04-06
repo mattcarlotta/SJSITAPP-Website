@@ -1,27 +1,36 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Theme } from "@material-ui/core";
 import { DatePicker } from "@material-ui/pickers";
-import { DatePickerView, MaterialUiPickersDate } from "~types";
+import Errors from "~components/Forms/Errors";
+import Label from "~components/Forms/Label";
+import { standardFormat } from "~utils/dateFormats";
+import {
+  CSSProperties,
+  DatePickerView,
+  EventTarget,
+  Moment,
+  ReactNode
+} from "~types";
 
 export type TDatePickerProps = {
+  emptyLabel: string;
+  errors?: string;
+  format: string;
   name: string;
-  onChange: ({
-    name,
-    value
-  }: {
-    name: string;
-    value: MaterialUiPickersDate;
-  }) => void;
-  value: string;
+  label?: ReactNode;
+  onChange: ({ target: { name, value } }: EventTarget) => void;
+  style?: CSSProperties;
+  tooltip?: string;
+  value?: string;
   views?: Array<DatePickerView>;
 };
 
-const useStyles = makeStyles({
+const useStyles = makeStyles<Theme, { errors?: string }>({
   root: {
-    width: 125,
+    width: "100%",
     "& .MuiInput-input": {
       fontSize: 16,
       cursor: "pointer",
-      border: "1px solid #ccc",
+      border: ({ errors }) => (!errors ? "1px solid #ccc" : "1px solid red"),
       background: "#f7f7f7",
       borderRadius: 5,
       padding: 10,
@@ -36,6 +45,9 @@ const useStyles = makeStyles({
       borderColor: "#1e90ff",
       boxShadow: "0px 0px 14px -2px #a1cdf9"
     },
+    "& .MuiFormHelperText-root.Mui-error": {
+      display: "none"
+    },
     "& .MuiInput-underline:before, & .MuiInput-underline:after": {
       display: "none"
     }
@@ -43,19 +55,37 @@ const useStyles = makeStyles({
 });
 
 const DatePickerComponent = ({
+  emptyLabel,
+  errors,
+  format,
+  label,
   name,
   onChange,
+  style,
+  tooltip,
   value,
   views
 }: TDatePickerProps): JSX.Element => (
-  <DatePicker
-    name={name}
-    views={views}
-    format="MM/DD/YYYY"
-    className={useStyles().root}
-    value={value}
-    onChange={value => onChange({ name, value })}
-  />
+  <div style={{ width: 125, ...style }}>
+    {label && <Label name={name} label={label} tooltip={tooltip} />}
+    <DatePicker
+      name={name}
+      views={views}
+      format={format}
+      className={useStyles({ errors }).root}
+      value={value}
+      emptyLabel={emptyLabel}
+      onChange={value =>
+        onChange({ target: { name, value: (value as Moment).format() } })
+      }
+    />
+    {errors && <Errors data-testid="errors">{errors}</Errors>}
+  </div>
 );
+
+DatePickerComponent.defaultProps = {
+  format: standardFormat,
+  emptyLabel: "Please select a date..."
+};
 
 export default DatePickerComponent;

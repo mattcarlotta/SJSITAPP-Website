@@ -47,7 +47,7 @@ export const SettingsPage = (props: TSettingPageProps): JSX.Element => {
   const query = get(router, ["query", "tab"]);
   const [tab, setTab] = React.useState(0);
 
-  const isEmployee = role === "member";
+  const isMember = role === "member";
   const tabValue = TABS.findIndex(tab => tab === query);
 
   const handleTabChange = (_: ChangeEvent<any>, tab: number): void => {
@@ -82,7 +82,7 @@ export const SettingsPage = (props: TSettingPageProps): JSX.Element => {
               </>
             }
           />
-          {isEmployee && [
+          {isMember && [
             <Tab
               key="availability"
               index={1}

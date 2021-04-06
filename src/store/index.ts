@@ -21,3 +21,4 @@ export const makeStore: MakeStore<TRootState> = () => {
 };
 
 export const wrapper = createWrapper(makeStore, { debug: false });
+export const withRedux = wrapper.withRedux;

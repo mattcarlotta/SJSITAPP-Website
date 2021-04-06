@@ -20,7 +20,7 @@ const fieldValidator = (
 
     const validatedFields = fields.map(field => {
       let errors = "";
-      const { name, type, value, required } = field;
+      const { name, value, required } = field;
       if ((!value && required) || (isEmpty(value) && required)) {
         errors = "Required.";
       } else {
@@ -33,8 +33,8 @@ const fieldValidator = (
         if (name === "password" && value && (value as string).length < 5)
           errors = "Password too short.";
 
-        if (type === "range" && value && (value as string).length < 2)
-          errors = "You must select a start and an end date.";
+        // if (type === "range" && value && (value as string).length < 2)
+        //   errors = "You must select a start and an end date.";
 
         // if (type === "radiogroup" && !value)
         //   errors = "Please select an option above.";

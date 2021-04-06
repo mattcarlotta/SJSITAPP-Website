@@ -20,7 +20,7 @@ const ServerError: NextPage = () => (
         data-testid="server-error-page"
         direction="column"
         justify="center"
-        style={{ height: "90vh" }}
+        height="90vh"
       >
         <PuckSpinner>
           <Center>

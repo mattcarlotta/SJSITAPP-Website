@@ -57,7 +57,7 @@ class CustomDocument extends Document {
         />
         <link
           rel="preload"
-          href="/fonts/Karla-Regular.ttf"
+          href="/fonts/Karla.ttf"
           as="font"
           crossOrigin="anonymous"
         />

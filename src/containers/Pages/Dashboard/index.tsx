@@ -18,19 +18,19 @@ export const Dashboard = ({
   loggedinUserId,
   role
 }: TDashboardProps): JSX.Element => {
-  const isEmployee = role === "member";
+  const isMember = role === "member";
   return (
     <>
       <Header title="Dashboard" url="/employee/dashboard" />
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
-          <Events loggedinUserId={loggedinUserId} isEmployee={isEmployee} />
+          <Events loggedinUserId={loggedinUserId} isMember={isMember} />
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
           <Forms />
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
-          {isEmployee ? <Availability /> : <EmployeeAvailability />}
+          {isMember ? <Availability /> : <EmployeeAvailability />}
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <EventDistribution />

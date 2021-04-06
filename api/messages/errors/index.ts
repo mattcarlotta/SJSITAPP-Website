@@ -133,7 +133,7 @@ const notUniquePassword =
   "Your new password must not match your current password. Please try again.";
 
 const seasonAlreadyExists =
-  "That season already exists. Please edit the current season or choose a different start and end dates.";
+  "That season already exists. Please edit the current season or choose different start and end dates.";
 
 const teamAlreadyExists =
   "That team already exists. Please edit the current team or use a different team name.";

@@ -1,4 +1,5 @@
-import { mount, ReactWrapper } from "enzyme";
+import { ReactWrapper } from "enzyme";
+import withProviders from "~utils/withProviders";
 import FieldGenerator from "../index";
 
 const onChange = jest.fn();
@@ -56,17 +57,15 @@ const select = {
 // 	format: "l",
 // };
 
-// const date = {
-// 	type: "date",
-// 	name: "eventDate",
-// 	label: "Event Date",
-// 	placeholder: "Select a start date and time...",
-// 	value: null,
-// 	errors: "",
-// 	required: true,
-// 	format: "MM/DD/YYYY h:mm a",
-// 	showTime: { format: "h:mm a", use12Hours: true, minuteStep: 15 },
-// };
+const date = {
+  type: "date",
+  name: "eventDate",
+  label: "Event Date",
+  placeholder: "Select a start date and time...",
+  value: null,
+  errors: "",
+  required: true
+};
 
 // const time = {
 // 	type: "time",
@@ -138,7 +137,7 @@ const radiogroup = {
 describe("Field Generator", () => {
   let wrapper: ReactWrapper;
   beforeEach(() => {
-    wrapper = mount(<FieldGenerator {...initProps} />);
+    wrapper = withProviders(<FieldGenerator {...initProps} />);
   });
 
   // beforeAll(async () => {
@@ -194,19 +193,11 @@ describe("Field Generator", () => {
     expect(wrapper.find("Switch")).toExist();
   });
 
-  // it("returns a DatePicker when type is 'date'", () => {
-  // 	wrapper.setProps({ fields: [date] });
+  it("returns a DatePicker when type is 'date'", () => {
+    wrapper.setProps({ fields: [date] });
 
-  // 	wrapper.find(".ant-calendar-picker-input").simulate("click");
-
-  // 	wrapper.find(".ant-calendar-cell.ant-calendar-today").simulate("click");
-  // 	wrapper.find(".ant-calendar-ok-btn").simulate("click");
-
-  // 	expect(wrapper.find(DatePicker)).toExist();
-  // 	expect(onChange).toHaveBeenCalledWith({
-  // 		target: { name: "eventDate", value: expect.any(moment) },
-  // 	});
-  // });
+    expect(wrapper.find("DatePickerComponent")).toExist();
+  });
 
   // it("renders a QuillEditor when type is 'editor'", () => {
   // 	wrapper.setProps({ fields: [editor] });

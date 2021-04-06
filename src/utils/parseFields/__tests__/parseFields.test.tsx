@@ -64,13 +64,13 @@ describe("Parse Fields Helper", () => {
         value: "12345",
         required: true
       },
-      {
-        name: "seasonDuration",
-        label: "Call Time",
-        type: "range",
-        value: datesRanges,
-        required: true
-      },
+      // {
+      //   name: "seasonDuration",
+      //   label: "Call Time",
+      //   type: "range",
+      //   value: datesRanges,
+      //   required: true
+      // },
       {
         name: "expirationDate",
         label: "Expiration",
@@ -129,7 +129,7 @@ describe("Parse Fields Helper", () => {
       expect.objectContaining({
         email: "test@example.com",
         password: "12345",
-        seasonDuration: [datesRanges[0].format(), datesRanges[1].format()],
+        // seasonDuration: [datesRanges[0].format(), datesRanges[1].format()],
         expirationDate: datesRanges[0].format(),
         callTimes: [
           callTimes[0].format(),

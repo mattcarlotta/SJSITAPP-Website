@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+import isEmpty from "lodash.isempty";
 import { Season } from "~models";
 import { moment, sendError } from "~helpers";
 import { seasonAlreadyExists, unableToCreateNewSeason } from "~messages/errors";
@@ -13,7 +14,7 @@ import { seasonAlreadyExists, unableToCreateNewSeason } from "~messages/errors";
 const createSeason = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { seasonId, seasonDuration } = req.body;
-    if (!seasonId || !seasonDuration) throw unableToCreateNewSeason;
+    if (!seasonId || isEmpty(seasonDuration)) throw unableToCreateNewSeason;
 
     const seasonExists = await Season.findOne({ seasonId });
     if (seasonExists) throw seasonAlreadyExists;

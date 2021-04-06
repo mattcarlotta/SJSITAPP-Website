@@ -37,8 +37,8 @@ export type THelpPageProps = {
 
 export const HelpPage = ({ role }: THelpPageProps): JSX.Element => {
   const router = useRouter();
-  const isEmployee = role === "member";
-  const availableTopics = !isEmployee ? stafftopics : topics;
+  const isMember = role === "member";
+  const availableTopics = !isMember ? stafftopics : topics;
   const [basePath, hash] = router.asPath.split("#");
   const [state, setState] = React.useState<THelpPageState>({
     searchText: "",
@@ -114,7 +114,7 @@ export const HelpPage = ({ role }: THelpPageProps): JSX.Element => {
           <General id={id} />
           <FormAndAvailability id={id} />
           <EmployeeSchedule id={id} />
-          {!isEmployee && (
+          {!isMember && (
             <>
               <GettingStarted id={id} />
               <Events id={id} />

@@ -89,6 +89,11 @@ const InputComponent = ({
   </div>
 );
 
+/* istanbul ignore next */
+InputComponent.defaultProps = {
+  onChange: () => null
+};
+
 const Input = styled(InputComponent)`
   position: relative;
   display: inline-block;

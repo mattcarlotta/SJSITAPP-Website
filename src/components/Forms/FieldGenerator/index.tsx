@@ -1,4 +1,5 @@
 import * as React from "react";
+import DatePicker from "~components/Forms/DatePicker";
 import Input from "~components/Forms/Input";
 import Radio from "~components/Forms/Radio";
 import Select from "~components/Forms/Select";
@@ -43,6 +44,17 @@ const FieldGenerator = <
               key={name}
               name={name}
               type={type}
+              value={value as string}
+              onChange={onChange}
+            />
+          );
+        }
+        case "date": {
+          return (
+            <DatePicker
+              {...rest}
+              key={name}
+              name={name}
               value={value as string}
               onChange={onChange}
             />

@@ -14,7 +14,7 @@ import moment from "~utils/momentWithTimezone";
 import app from "~utils/axiosConfig";
 import { defaultFormat } from "~utils/dateFormats";
 import { parseData } from "~utils/parseResponse";
-import { MaterialUiPickersDate, TEventDistributionData } from "~types";
+import { EventTarget, TEventDistributionData } from "~types";
 
 export type TDashboardEventDistributionState = {
   endDate: string;
@@ -32,17 +32,11 @@ export const EventDistribution = (): JSX.Element => {
   });
   const { endDate, error, events, startDate } = state;
 
-  const handleDateChange = ({
-    name,
-    value
-  }: {
-    name: string;
-    value: MaterialUiPickersDate;
-  }): void => {
+  const handleDateChange = ({ target: { name, value } }: EventTarget): void => {
     setState(prevState => ({
       ...prevState,
       errors: false,
-      [name]: value.format(defaultFormat)
+      [name]: moment(value as string).format(defaultFormat)
     }));
   };
 

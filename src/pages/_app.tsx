@@ -1,4 +1,4 @@
 import AppContainer from "~containers/App/Container";
-import { wrapper } from "~store";
+import { withRedux } from "~store";
 
-export default wrapper.withRedux(AppContainer);
+export default withRedux(AppContainer);

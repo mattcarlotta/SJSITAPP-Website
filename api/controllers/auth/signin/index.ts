@@ -13,7 +13,7 @@ import { badCredentials, invalidStatus } from "~messages/errors";
 const signin = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { email, password } = req.body;
-    if (!email || !password) throw String(badCredentials);
+    if (!email || !password) throw badCredentials;
 
     const existingUser = await User.findOne({ email });
     if (!existingUser) throw badCredentials;

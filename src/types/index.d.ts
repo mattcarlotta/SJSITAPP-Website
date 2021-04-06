@@ -19,7 +19,7 @@ import {
   RefObject
 } from "react";
 import { Moment } from "moment-timezone";
-import { DatePickerView, MaterialUiPickersDate } from "@material-ui/pickers";
+import { DatePickerView } from "@material-ui/pickers";
 import { AnyAction, Store } from "redux";
 import { SagaIterator } from "redux-saga";
 import * as actions from "~actions/Users";
@@ -102,6 +102,13 @@ export type EventTarget = {
   };
 };
 
+export type EventTargetMoment = {
+  target: {
+    name: string;
+    value: Moment | null;
+  };
+};
+
 export type EventTargetDataset = {
   target: {
     dataset: {
@@ -116,7 +123,9 @@ export type TBaseFieldProps = {
   id?: string;
   containerStyle?: CSSProperties;
   disabled?: boolean;
+  emptyLabel?: string;
   errors?: string;
+  format?: string;
   icon?: TIconType;
   inputStyle?: CSSProperties;
   innerStyle?: CSSProperties;
@@ -135,7 +144,7 @@ export type TBaseFieldProps = {
   selectOptions?: Array<string>;
   type: string;
   tooltip?: string;
-  value?: string | Moment | Array<Moment> | boolean;
+  value?: string | Moment | Array<Moment> | Array<string> | boolean | null;
   updateEvent?: boolean;
 };
 
@@ -274,7 +283,6 @@ export {
   FC,
   FormEvent,
   KeyboardEvent,
-  MaterialUiPickersDate,
   MouseEvent,
   Moment,
   NextApiRequest,

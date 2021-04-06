@@ -15,7 +15,7 @@ import { Moment, TBaseFieldProps } from "~types";
 const fieldUpdater = (
   fields: Array<TBaseFieldProps>,
   name: string,
-  value?: string | Array<Moment> | boolean
+  value?: string | Moment | Array<Moment> | Array<string> | boolean
 ): Array<TBaseFieldProps> => {
   try {
     if (isEmpty(fields) || !name)
