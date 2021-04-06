@@ -195,7 +195,7 @@ const unableToLocateMembers =
   "Unable to locate any members. You need to create members before you can do that.";
 
 const unableToLocateSeason =
-  "Unable to locate that season. That season doesn't exist.";
+  "Unable to locate that season. That season doesn't appear to exist.";
 
 const unableToLocateToken =
   "Unable to locate that token. That authorization key doesn't exist.";

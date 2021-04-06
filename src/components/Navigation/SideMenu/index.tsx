@@ -32,7 +32,7 @@ const useStyles = makeStyles({
       background: "none"
     },
     "& .MuiTreeItem-content": {
-      padding: "3px 0 0 20px"
+      padding: "3px 0 3px 20px"
     },
     "& .MuiTreeItem-label:hover": {
       background: "none"

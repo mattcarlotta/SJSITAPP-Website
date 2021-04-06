@@ -16,7 +16,7 @@ import {
  */
 const updateSeason = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const { _id, endDate, seasonId, startDate } = req.body;
+    const { id: _id, endDate, seasonId, startDate } = req.body;
     if (!_id || !endDate || !seasonId || !startDate) throw unableToUpdateSeason;
 
     const existingSeason = await Season.findOne({ _id });

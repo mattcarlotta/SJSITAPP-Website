@@ -43,7 +43,7 @@ describe("Edit Season Controller", () => {
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
-        expect(res.body.season).toEqual({
+        expect(res.body).toEqual({
           _id: expect.any(String),
           endDate: expect.any(String),
           startDate: expect.any(String),

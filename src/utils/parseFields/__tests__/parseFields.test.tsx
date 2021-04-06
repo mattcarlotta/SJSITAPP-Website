@@ -75,7 +75,7 @@ describe("Parse Fields Helper", () => {
         name: "expirationDate",
         label: "Expiration",
         type: "date",
-        value: datesRanges[0],
+        value: datesRanges[0].toString(),
         required: true
       },
       {
@@ -130,7 +130,7 @@ describe("Parse Fields Helper", () => {
         email: "test@example.com",
         password: "12345",
         // seasonDuration: [datesRanges[0].format(), datesRanges[1].format()],
-        expirationDate: datesRanges[0].format(),
+        expirationDate: datesRanges[0].toString(),
         callTimes: [
           callTimes[0].format(),
           callTimes[1].format(),

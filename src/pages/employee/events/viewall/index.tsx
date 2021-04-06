@@ -1,5 +1,5 @@
-import requiresBasicCredentials from "~containers/App/requiresBasicCredentials";
+import requiresStaffCredentials from "~containers/App/requiresStaffCredentials";
 
 const ViewEvents = () => <div>View Events</div>;
 
-export default requiresBasicCredentials(ViewEvents);
+export default requiresStaffCredentials(ViewEvents);

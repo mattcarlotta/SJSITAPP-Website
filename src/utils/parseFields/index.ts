@@ -25,7 +25,7 @@ const parseFields = <T>(fields: Array<TBaseFieldProps>): T => {
             break;
           }
           case "date": {
-            acc[name] = value && moment.isMoment(value) ? value.format() : "";
+            acc[name] = value;
             break;
           }
           // case "range": {

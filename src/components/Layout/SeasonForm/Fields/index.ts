@@ -1,11 +1,11 @@
-import { TBaseFieldProps } from "~types";
+import { TBaseFieldProps, TSeasonData } from "~types";
 
-const Fields: Array<TBaseFieldProps> = [
+const Fields = (season?: TSeasonData): Array<TBaseFieldProps> => [
   {
     type: "date",
     name: "startDate",
     label: "Start Date",
-    value: null,
+    value: season ? season.startDate : null,
     errors: "",
     required: true,
     emptyLabel: "Click to select a season start date...",
@@ -15,7 +15,7 @@ const Fields: Array<TBaseFieldProps> = [
     type: "date",
     name: "endDate",
     label: "End Date",
-    value: null,
+    value: season ? season.endDate : null,
     errors: "",
     required: true,
     emptyLabel: "Click to select a season end date...",

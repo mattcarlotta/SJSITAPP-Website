@@ -61,6 +61,19 @@ export type TSignupData = {
   token: string;
 };
 
+export type TSeasonAPIQueryConfig = {
+  id?: string;
+  seasonId: string;
+  startDate: string;
+  endDate: string;
+};
+
+export type TSeasonData = {
+  seasonId: string;
+  startDate: string;
+  endDate: string;
+};
+
 export type TNewPasswordData = {
   password: string;
   token: string;

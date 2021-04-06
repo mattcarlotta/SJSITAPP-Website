@@ -30,6 +30,15 @@ import {
 
 const toMongooseId = mongoose.Types.ObjectId;
 
+/**
+ * Helper function to determine if a stringified id is a valid Mongo `_id`.
+ *
+ * @function isValidObjectId
+ * @param {string} _id - stringified Mongo id
+ * @returns {boolean} boolean
+ */
+const isValidObjectId = (_id: string): boolean => mongoose.isValidObjectId(_id);
+
 moment.tz.setDefault("America/Los_Angeles");
 
 const responseTypes = [
@@ -865,6 +874,7 @@ export {
   getMonthDateRange,
   getStartOfDay,
   getUsers,
+  isValidObjectId,
   moment,
   parseSession,
   sendError,
