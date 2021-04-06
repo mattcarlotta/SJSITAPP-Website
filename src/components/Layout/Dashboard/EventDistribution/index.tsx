@@ -91,6 +91,7 @@ export const EventDistribution = (): JSX.Element => {
           </PanelDescription>
           <FlexCenter justify="center" margin="5px 0 10px 0">
             <DatePicker
+              background="#f7f7f7"
               name="startDate"
               value={startDate}
               onChange={handleDateChange}
@@ -99,6 +100,7 @@ export const EventDistribution = (): JSX.Element => {
               to
             </Word>
             <DatePicker
+              background="#f7f7f7"
               name="endDate"
               value={endDate}
               onChange={handleDateChange}

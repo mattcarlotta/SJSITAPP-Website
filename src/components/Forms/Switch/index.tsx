@@ -8,7 +8,7 @@ export type TComponentProps = {
   className?: string;
   errors?: string;
   label?: ReactNode;
-  name?: string;
+  name: string;
   onChange: ({ target: { name, value: checked } }: EventTarget) => void;
   value?: boolean;
   style?: CSSProperties;
@@ -84,7 +84,7 @@ const SwitchComponent = ({
         name={name}
         color="primary"
         inputProps={{ "aria-label": `${name} checkbox` }}
-        onChange={({ target: { name, checked } }) =>
+        onChange={({ target: { checked } }) =>
           onChange({ target: { name, value: checked } })
         }
       />

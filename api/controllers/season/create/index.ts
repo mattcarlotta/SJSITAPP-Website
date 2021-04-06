@@ -1,5 +1,4 @@
 import type { Request, Response } from "express";
-import isEmpty from "lodash.isempty";
 import { Season } from "~models";
 import { moment, sendError } from "~helpers";
 import { seasonAlreadyExists, unableToCreateNewSeason } from "~messages/errors";
@@ -13,17 +12,20 @@ import { seasonAlreadyExists, unableToCreateNewSeason } from "~messages/errors";
  */
 const createSeason = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const { seasonId, seasonDuration } = req.body;
-    if (!seasonId || isEmpty(seasonDuration)) throw unableToCreateNewSeason;
+    const { endDate, seasonId, startDate } = req.body;
+    if (!endDate || !seasonId || !startDate) throw unableToCreateNewSeason;
 
     const seasonExists = await Season.findOne({ seasonId });
     if (seasonExists) throw seasonAlreadyExists;
 
-    const [startMonthDate, endMonthDate] = seasonDuration;
-    const startDate = moment(startMonthDate).startOf("day").toDate();
-    const endDate = moment(endMonthDate).endOf("day").toDate();
+    const seasonStartDate = moment(startDate).startOf("day").toDate();
+    const seasonEndDate = moment(endDate).endOf("day").toDate();
 
-    await Season.create({ seasonId, startDate, endDate });
+    await Season.create({
+      seasonId,
+      startDate: seasonStartDate,
+      endDate: seasonEndDate
+    });
 
     return res
       .status(201)

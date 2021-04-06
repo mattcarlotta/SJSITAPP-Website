@@ -1,11 +1,11 @@
 import * as React from "react";
 import get from "lodash.get";
 import { useRouter } from "next/router";
-import { css } from "@emotion/react";
 import toast from "~components/App/Toast";
 import FieldGenerator from "~components/Forms/FieldGenerator";
 import Card from "~components/Layout/Card";
 import Center from "~components/Layout/Center";
+import Form from "~components/Layout/Form";
 import FormatDate from "~components/Layout/FormatDate";
 import LoadingPanel from "~components/Layout/LoadingPanel";
 import Notes from "~components/Layout/Notes";
@@ -152,12 +152,10 @@ const APForm = (): JSX.Element => {
               height="1000px"
             />
           ) : (
-            <form
+            <Form
               data-testid="ap-form"
-              css={css`
-                margin: 0 auto 60px auto;
-                max-width: 625px;
-              `}
+              margin="0 auto 60px auto"
+              maxWidth="625px"
               onSubmit={handleSubmit}
             >
               <Center>
@@ -203,7 +201,7 @@ const APForm = (): JSX.Element => {
                   submitBtnStyle={{ minHeight: 60 }}
                 />
               </Center>
-            </form>
+            </Form>
           )}
         </Padding>
       </Card>

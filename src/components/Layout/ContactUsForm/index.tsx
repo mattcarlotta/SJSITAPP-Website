@@ -1,9 +1,9 @@
 import * as React from "react";
-import { css } from "@emotion/react";
 import toast from "~components/App/Toast";
 import FieldGenerator from "~components/Forms/FieldGenerator";
 import FormTitle from "~components/Forms/FormTitle";
 import Card from "~components/Layout/Card";
+import Form from "~components/Layout/Form";
 import Margin from "~components/Layout/Margin";
 import Padding from "~components/Layout/Padding";
 import SubmitButton from "~components/Layout/SubmitButton";
@@ -90,13 +90,7 @@ export const ContactUsForm = (): JSX.Element => {
           title="Contact Us"
           description="Please fill out the fields below to send us a message."
         />
-        <form
-          css={css`
-            max-width: 500px;
-            margin: 0 auto;
-          `}
-          onSubmit={handleSubmit}
-        >
+        <Form onSubmit={handleSubmit}>
           <FieldGenerator fields={state.fields} onChange={handleChange} />
           <SubmitButton
             isSubmitting={state.isSubmitting}
@@ -110,7 +104,7 @@ export const ContactUsForm = (): JSX.Element => {
             above will be generated and sent to one or many of the &quot;Send
             To&quot; addresses associated with the Sharks Ice Team.
           </Margin>
-        </form>
+        </Form>
       </Padding>
     </Card>
   );

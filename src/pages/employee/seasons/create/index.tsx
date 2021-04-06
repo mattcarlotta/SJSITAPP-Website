@@ -1,4 +1,4 @@
 import CreateSeasonForm from "~components/Layout/CreateSeasonForm";
-import requiresBasicCredentials from "~containers/App/requiresBasicCredentials";
+import requiresStaffCredentials from "~containers/App/requiresStaffCredentials";
 
-export default requiresBasicCredentials(CreateSeasonForm);
+export default requiresStaffCredentials(CreateSeasonForm);

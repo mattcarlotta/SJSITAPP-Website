@@ -17,7 +17,8 @@ const newSeason = {
 
 const updatedSeason = {
   seasonId: "20142015",
-  seasonDuration: [new Date(2014, 8, 26), new Date(2015, 5, 12)]
+  startDate: new Date(2014, 8, 26),
+  endDate: new Date(2015, 5, 12)
 };
 
 describe("Update Season Controller", () => {

@@ -1,11 +1,11 @@
 import * as React from "react";
-import { css } from "@emotion/react";
 import { useRouter } from "next/router";
 import toast from "~components/App/Toast";
 import FieldGenerator from "~components/Forms/FieldGenerator";
 import Input from "~components/Forms/Input";
 import FormTitle from "~components/Forms/FormTitle";
 import Card from "~components/Layout/Card";
+import Form from "~components/Layout/Form";
 import Padding from "~components/Layout/Padding";
 import SubmitButton from "~components/Layout/SubmitButton";
 import { FaFolderPlus } from "~icons";
@@ -39,18 +39,15 @@ export const CreateSeasonForm = (): JSX.Element => {
     isSubmitting: false,
     seasonId: ["", ""]
   });
-  const { errors, seasonId } = state;
+  const { errors, seasonId, isSubmitting } = state;
   const [startDate, endDate] = seasonId;
   const hasSeasonId = startDate && endDate;
 
   const createSeason = React.useCallback(async (): Promise<void> => {
     try {
-      const { startDate, endDate } = parseFields<TCreateSeasonParsedFields>(
-        state.fields
-      );
       const res = await app.post("season/create", {
         seasonId: state.seasonId.join(""),
-        seasonDuration: [startDate, endDate]
+        ...parseFields<TCreateSeasonParsedFields>(state.fields)
       });
       const message = parseMessage(res);
 
@@ -96,8 +93,8 @@ export const CreateSeasonForm = (): JSX.Element => {
   };
 
   React.useEffect(() => {
-    if (state.isSubmitting && !state.errors) createSeason();
-  }, [state.isSubmitting, state.errors]);
+    if (isSubmitting && !errors) createSeason();
+  }, [isSubmitting, errors]);
 
   return (
     <Card
@@ -112,13 +109,7 @@ export const CreateSeasonForm = (): JSX.Element => {
           title="New Season"
           description="Please select a start and end date to create a new season."
         />
-        <form
-          css={css`
-            max-width: 500px;
-            margin: 0 auto;
-          `}
-          onSubmit={handleSubmit}
-        >
+        <Form onSubmit={handleSubmit}>
           <Input
             disabled
             type="text"
@@ -136,7 +127,7 @@ export const CreateSeasonForm = (): JSX.Element => {
             maxWidth="500px"
             title="Create"
           />
-        </form>
+        </Form>
       </Padding>
     </Card>
   );

@@ -16,8 +16,8 @@ import {
  */
 const updateSeason = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const { _id, seasonId, seasonDuration } = req.body;
-    if (!_id || !seasonId || !seasonDuration) throw unableToUpdateSeason;
+    const { _id, endDate, seasonId, startDate } = req.body;
+    if (!_id || !endDate || !seasonId || !startDate) throw unableToUpdateSeason;
 
     const existingSeason = await Season.findOne({ _id });
     if (!existingSeason) throw unableToLocateSeason;
@@ -27,11 +27,14 @@ const updateSeason = async (req: Request, res: Response): Promise<Response> => {
       if (seasonInUse) throw seasonAlreadyExists;
     }
 
-    const [startMonthDate, endMonthDate] = seasonDuration;
-    const startDate = moment(startMonthDate).startOf("day").toDate();
-    const endDate = moment(endMonthDate).endOf("day").toDate();
+    const seasonStartDate = moment(startDate).startOf("day").toDate();
+    const seasonEndDate = moment(endDate).endOf("day").toDate();
 
-    await existingSeason.updateOne({ seasonId, startDate, endDate });
+    await existingSeason.updateOne({
+      seasonId,
+      startDate: seasonStartDate,
+      endDate: seasonEndDate
+    });
     await Event.updateMany({ seasonId: existingSeason.seasonId }, { seasonId });
     await Form.updateMany({ seasonId: existingSeason.seasonId }, { seasonId });
 

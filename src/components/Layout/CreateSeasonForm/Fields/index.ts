@@ -8,7 +8,7 @@ const Fields: Array<TBaseFieldProps> = [
     value: null,
     errors: "",
     required: true,
-    emptyLabel: "Select a season start date...",
+    emptyLabel: "Click to select a season start date...",
     style: { width: "100%", height: "100px" }
   },
   {
@@ -18,7 +18,7 @@ const Fields: Array<TBaseFieldProps> = [
     value: null,
     errors: "",
     required: true,
-    emptyLabel: "Select a season end date...",
+    emptyLabel: "Click to select a season end date...",
     style: { width: "100%", height: "100px" }
   }
 ];

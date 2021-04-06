@@ -6,7 +6,8 @@ import { staffSignIn } from "~test/utils/signIn";
 
 const newSeason = {
   seasonId: "20022003",
-  seasonDuration: [new Date(2002, 8, 26), new Date(2003, 5, 12)]
+  startDate: new Date(2002, 8, 26),
+  endDate: new Date(2003, 5, 12)
 };
 
 describe("Create Season Controller", () => {

@@ -12,6 +12,7 @@ import {
 } from "~types";
 
 export type TDatePickerProps = {
+  background?: string;
   emptyLabel: string;
   errors?: string;
   format: string;
@@ -24,14 +25,14 @@ export type TDatePickerProps = {
   views?: Array<DatePickerView>;
 };
 
-const useStyles = makeStyles<Theme, { errors?: string }>({
+const useStyles = makeStyles<Theme, { background?: string; errors?: string }>({
   root: {
     width: "100%",
     "& .MuiInput-input": {
       fontSize: 16,
       cursor: "pointer",
       border: ({ errors }) => (!errors ? "1px solid #ccc" : "1px solid red"),
-      background: "#f7f7f7",
+      background: ({ background }) => background || "#fff",
       borderRadius: 5,
       padding: 10,
       textAlign: "center",
@@ -55,6 +56,7 @@ const useStyles = makeStyles<Theme, { errors?: string }>({
 });
 
 const DatePickerComponent = ({
+  background,
   emptyLabel,
   errors,
   format,
@@ -72,7 +74,7 @@ const DatePickerComponent = ({
       name={name}
       views={views}
       format={format}
-      className={useStyles({ errors }).root}
+      className={useStyles({ background, errors }).root}
       value={value}
       emptyLabel={emptyLabel}
       onChange={value =>
