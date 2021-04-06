@@ -5,7 +5,7 @@ import mockApp from "~utils/mockAxios";
 import moment from "~utils/momentWithTimezone";
 import withProviders from "~utils/withProviders";
 import waitFor from "~utils/waitFor";
-import CreateSeasonForm from "../index";
+import EditSeasonForm from "../index";
 
 const startDate = moment().startOf("day");
 
@@ -52,11 +52,11 @@ mockApp
   .onPut(SAVESEASONURL)
   .reply(201, { message: "Successfully updated season!" }); // successfully submits form
 
-describe("CreateSeasonForm", () => {
+describe("EditSeasonForm", () => {
   let wrapper: ReactWrapper;
   let findById: (id: string) => ReactWrapper;
   beforeEach(() => {
-    wrapper = withProviders(<CreateSeasonForm />);
+    wrapper = withProviders(<EditSeasonForm />);
     findById = id => wrapper.find(`[data-testid='${id}']`);
   });
 
