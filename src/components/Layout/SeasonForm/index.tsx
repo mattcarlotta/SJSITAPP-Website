@@ -118,7 +118,7 @@ const SeasonForm = ({
   }, [isSubmitting, errors]);
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form data-testid="season-form" onSubmit={handleSubmit}>
       <Input
         disabled
         type="text"
