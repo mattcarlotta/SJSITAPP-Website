@@ -40,6 +40,7 @@ export interface StyledButtonProps {
   primary?: boolean;
   danger?: boolean;
   tertiary?: boolean;
+  alt?: boolean;
   uppercase?: boolean;
   lowercase?: boolean;
   capitalize?: boolean;
@@ -57,6 +58,7 @@ const Button = styled(StyledButton)<StyledButtonProps>`
   color: ${props => {
     if (props.primary || props.danger) return "#fff";
     if (props.tertiary) return "#e4e3e3";
+    if (props.alt) return "#2e7c8a";
     return "#fff";
   }};
   background: ${props => {
@@ -91,13 +93,14 @@ const Button = styled(StyledButton)<StyledButtonProps>`
   &:hover {
     color: ${props => {
       if (props.primary || props.danger) return "#e4e3e3";
-      if (props.tertiary) return "#fff";
+      if (props.tertiary || props.alt) return "#fff";
       return "#04515d";
     }};
     background: ${props => {
       if (props.primary) return "#006d76";
       if (props.danger) return "#e8502e";
       if (props.tertiary) return "#025f6d";
+      if (props.alt) return "#2e7c8a";
       return "transparent";
     }};
     border: 2px solid

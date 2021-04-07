@@ -3,7 +3,6 @@ import toast from "~components/App/Toast";
 import Card from "~components/Layout/Card";
 import Header from "~components/Navigation/Header";
 import FlexEnd from "~components/Layout/FlexEnd";
-import LoadingPanel from "~components/Layout/LoadingPanel";
 import Table from "~components/Layout/Table";
 import Link from "~components/Navigation/Link";
 // import QueryHandler from "~components/Navigation/QueryHandler";
@@ -77,15 +76,12 @@ export const ViewSeasons = (): JSX.Element => {
             &nbsp; New Season
           </Link>
         </FlexEnd>
-        {isLoading ? (
-          <LoadingPanel
-            data-testid="loading-events"
-            borderRadius="5px"
-            height="650px"
-          />
-        ) : (
-          <Table columns={columns} rows={data} totalDocs={totalDocs} />
-        )}
+        <Table
+          columns={columns}
+          isLoading={isLoading}
+          rows={data}
+          totalDocs={totalDocs}
+        />
       </Card>
     </>
   );

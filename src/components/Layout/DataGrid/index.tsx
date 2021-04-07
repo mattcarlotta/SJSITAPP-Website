@@ -66,12 +66,11 @@ const useStyles = makeStyles((theme: Theme) =>
       "& .MuiDataGrid-colCell:focus": {
         outline: 0
       },
+      "& .MuiDataGrid-row:hover": {
+        backgroundColor: "#fafafa"
+      },
       "& .MuiDataGrid-renderingZone": {
         borderLeft:
-          theme.palette.type === "light"
-            ? "1px solid #f0f0f0"
-            : "1px solid #1d1d1d",
-        borderRight:
           theme.palette.type === "light"
             ? "1px solid #f0f0f0"
             : "1px solid #1d1d1d"
@@ -85,6 +84,9 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       "& .MuiDataGrid-iconSeparator": {
         display: "none"
+      },
+      "& .MuiDataGrid-colCellTitleContainer": {
+        justifyContent: "center"
       },
       "& .MuiDataGrid-colCell, .MuiDataGrid-cell": {
         borderRight: `1px solid ${
@@ -100,7 +102,10 @@ const useStyles = makeStyles((theme: Theme) =>
         color:
           theme.palette.type === "light"
             ? "rgba(0,0,0,.85)"
-            : "rgba(255,255,255,0.65)"
+            : "rgba(255,255,255,0.65)",
+        display: "flex",
+        justifyContent: "center",
+        overflowX: "auto"
       },
       "& .MuiPaginationItem-root": {
         borderRadius: 0
