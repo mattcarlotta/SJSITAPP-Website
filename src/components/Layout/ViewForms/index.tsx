@@ -5,39 +5,39 @@ import FlexEnd from "~components/Layout/FlexEnd";
 import Table from "~components/Layout/Table";
 import Link from "~components/Navigation/Link";
 import QueryHandler from "~components/Navigation/QueryHandler";
-import { FaFolderPlus, FaKey } from "~icons";
+import { FaFileSignature, FaKey } from "~icons";
 import columns from "./Columns";
 
-export const ViewSeasons = (): JSX.Element => (
+export const ViewForms = (): JSX.Element => (
   <>
-    <Header title="View Seasons" url="/employee/seasons/viewall" />
+    <Header title="View Forms" url="/employee/forms/viewall" />
     <Card
-      dataTestId="view-seasons-page"
+      dataTestId="view-forms-page"
       icon={<FaKey />}
-      title="View Seasons"
-      subtitle="Past and Present Seasons"
+      title="View Forms"
+      subtitle="Past and Present Forms"
     >
       <FlexEnd>
         <Link
-          dataTestId="create-season-link"
+          dataTestId="create-form-link"
           alt
           hideShadow
           width="180px"
           margin="10px 10px 20px 0"
           padding="5px 10px"
-          href="/employee/seasons/create"
+          href="/employee/forms/create"
         >
-          <FaFolderPlus style={{ position: "relative", top: 2 }} />
-          &nbsp; New Season
+          <FaFileSignature style={{ position: "relative", top: 2 }} />
+          &nbsp; New Form
         </Link>
       </FlexEnd>
       <QueryHandler>
         {props => (
-          <Table {...props} API="seasons" edit="seasons" columns={columns} />
+          <Table {...props} API="forms" edit="forms" columns={columns} />
         )}
       </QueryHandler>
     </Card>
   </>
 );
 
-export default ViewSeasons;
+export default ViewForms;

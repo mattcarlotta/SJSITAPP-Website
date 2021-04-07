@@ -50,7 +50,7 @@ describe("Review Form Controller", () => {
 
   it("rejects requests where the form id is invalid", done => {
     app()
-      .get("/api/form/view/undefined")
+      .get("/api/forms/view/undefined")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -62,7 +62,7 @@ describe("Review Form Controller", () => {
 
   it("rejects requests where the form id doesn't exist", done => {
     app()
-      .get("/api/form/view/601dc43483adb35b1ca678ea")
+      .get("/api/forms/view/601dc43483adb35b1ca678ea")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -74,7 +74,7 @@ describe("Review Form Controller", () => {
 
   it("rejects requests to view a form that has already expired", done => {
     app()
-      .get(`/api/form/view/${form.id}`)
+      .get(`/api/forms/view/${form.id}`)
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -92,7 +92,7 @@ describe("Review Form Controller", () => {
 
   it("rejects requests to view a form that doesn't have any events", done => {
     app()
-      .get(`/api/form/view/${activeForm.id}`)
+      .get(`/api/forms/view/${activeForm.id}`)
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -111,7 +111,7 @@ describe("Review Form Controller", () => {
     const existingForm = await Form.findOne({ notes: "Todays Form" });
 
     app()
-      .get(`/api/form/view/${existingForm!._id}`)
+      .get(`/api/forms/view/${existingForm!._id}`)
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)

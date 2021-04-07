@@ -44,7 +44,7 @@ describe("Update AP Schedule Controller", () => {
 
   it("rejects requests where the event id and responses are missing", done => {
     app()
-      .put("/api/form/update/ap")
+      .put("/api/forms/update/ap")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -56,7 +56,7 @@ describe("Update AP Schedule Controller", () => {
 
   it("rejects requests where the form id is invalid", done => {
     app()
-      .put("/api/form/update/ap")
+      .put("/api/forms/update/ap")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({
@@ -72,7 +72,7 @@ describe("Update AP Schedule Controller", () => {
 
   it("accepts requests to insert events' employee responses", done => {
     app()
-      .put("/api/form/update/ap")
+      .put("/api/forms/update/ap")
       .set("Cookie", cookie)
       .send({
         id: form!._id,
@@ -90,7 +90,7 @@ describe("Update AP Schedule Controller", () => {
 
   it("accepts requests to update events' employee responses", done => {
     app()
-      .put("/api/form/update/ap")
+      .put("/api/forms/update/ap")
       .set("Cookie", cookie)
       .send({
         id: form!._id,

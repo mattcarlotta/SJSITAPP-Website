@@ -132,7 +132,7 @@ const Table = ({
               {
                 field: "actions",
                 headerName: "Actions",
-                flex: 0.4,
+                flex: 1,
                 renderCell: (params: GridValueGetterParams) =>
                   TableActions({ deleteRecord, params, ...rest })
               }

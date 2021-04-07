@@ -31,7 +31,7 @@ describe("Edit Form Controller", () => {
 
   it("rejects requests where the form id is invalid", done => {
     app()
-      .get("/api/form/edit/601dc43483adb35b1ca678ea")
+      .get("/api/forms/edit/601dc43483adb35b1ca678ea")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -43,7 +43,7 @@ describe("Edit Form Controller", () => {
 
   it("accepts requests to retrieve an form for editing", done => {
     app()
-      .get(`/api/form/edit/${form._id}`)
+      .get(`/api/forms/edit/${form._id}`)
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)

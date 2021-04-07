@@ -2,6 +2,7 @@ import * as React from "react";
 import get from "lodash.get";
 import { Dialog } from "@material-ui/core";
 import Button from "~components/Layout/Button";
+import Divider from "~components/Layout/Divider";
 import Title from "~components/Layout/Title";
 import Padding from "~components/Layout/Padding";
 import Link from "~components/Navigation/Link";
@@ -46,22 +47,31 @@ const TableActions = ({
         maxWidth="50px"
         onClick={handleClick}
       >
-        <FaTools style={{ position: "relative", top: 2 }} />
+        <FaTools style={{ position: "relative", top: 2, fontSize: 16 }} />
       </Button>
       <Dialog
         onClose={handleClose}
         aria-labelledby="actions-dialog"
         open={open}
       >
-        <Padding top="10px" left="10px" right="10px" bottom="20px">
-          <Title fontSize="20px">Available Actions</Title>
+        <Padding
+          top="10px"
+          left="10px"
+          right="10px"
+          bottom="20px"
+          style={{ minWidth: 200 }}
+        >
+          <Title centered fontSize="16px">
+            Available Actions
+          </Title>
+          <Divider />
           {edit && (
             <Link
               alt
-              hideShadow
               display="block"
               dataTestId="edit-record"
-              padding="7px"
+              padding="5px"
+              fontSize="16px"
               margin="5px 0"
               width="100%"
               href={`/employee/${edit}/edit/${id}`}
@@ -74,10 +84,12 @@ const TableActions = ({
           )}
           <Button
             danger
+            uppercase
             type="button"
             dataTestId="delete-record"
             padding="5px"
             margin="5px 0"
+            fontSize="16px"
             borderRadius="10px"
             onClick={handleDeleteClick}
           >

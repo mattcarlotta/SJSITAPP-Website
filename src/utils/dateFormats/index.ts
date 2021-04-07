@@ -1,31 +1,6 @@
 export const timestampFormat = "@ hh:mm a";
 
 /**
- * Formats year dates as 4 digits: 2020.
- */
-export const fullyearFormat = "YYYY";
-
-/**
- * Formats month dates as 2 digits: 04.
- */
-export const monthdateFormat = "MM";
-
-/**
- * Formats month dates as string months: April.
- */
-export const monthnameFormat = "MMMM";
-
-/**
- * Formats moment dates as abbreviated 3 digits months followed by day: Apr 21st
- */
-export const shortmonthFormat = "MMM Do";
-
-/**
- * Formats moment dates as 3 digits months, followed by day, 4 digit year, and time: April 21st 2020 @ 12:00pm.
- */
-export const dateTimeFormat = `${shortmonthFormat} ${fullyearFormat} ${timestampFormat}`;
-
-/**
  * Formats moment dates as 1 digits: 1
  */
 export const dayFormat = "D";
@@ -51,6 +26,36 @@ export const weekdayFormat = "ddd";
 export const fullweekdayFormat = "dddd";
 
 /**
+ * Formats year dates as 4 digits: 2020.
+ */
+export const fullyearFormat = "YYYY";
+
+/**
+ * Formats month dates as 2 digits: 04.
+ */
+export const monthdateFormat = "MM";
+
+/**
+ * Formats month dates as string months: Apr.
+ */
+export const shortMonthNameFormat = "MMM";
+
+/**
+ * Formats month dates as string months: April.
+ */
+export const monthnameFormat = "MMMM";
+
+/**
+ * Formats moment dates as abbreviated 3 digits months followed by day: Apr 21st
+ */
+export const shortmonthFormat = `${shortMonthNameFormat} ${daySuffix}`;
+
+/**
+ * Formats moment dates as 3 digits months, followed by day, 4 digit year, and time: April 21st 2020 @ 12:00pm.
+ */
+export const dateTimeFormat = `${shortmonthFormat} ${fullyearFormat} ${timestampFormat}`;
+
+/**
  * Formats moment dates as 3 digit weekday, month name, followed by day, and time: Sat, April 21st @ 12:00pm.
  */
 export const weekdateTimeFormat = `${weekdayFormat}, ${monthnameFormat} ${daySuffix} ${timestampFormat}`;
@@ -59,6 +64,11 @@ export const weekdateTimeFormat = `${weekdayFormat}, ${monthnameFormat} ${daySuf
  * Formats moment dates as month, followed by day, and 4 digit year: April 21st 2020.
  */
 export const calendarDateFormat = `${monthnameFormat} ${daySuffix} ${fullyearFormat}`;
+
+/**
+ * Formats moment dates as month, followed by day, and 4 digit year: Apr 21st, 2020.
+ */
+export const shortCalendarDateFormat = `${shortMonthNameFormat} ${daySuffix}, ${fullyearFormat}`;
 
 /**
  * Default moment formated dates: 2021-03-01T00:00:00Z

@@ -68,8 +68,8 @@ jest.mock("next/router", () => ({
     replace: mockReplace
   }));
 
-const APIURL = `form/view/88`;
-const SUBMISSIONAPI = "form/update/ap";
+const APIURL = `forms/view/88`;
+const SUBMISSIONAPI = "forms/update/ap";
 
 mockApp
   .onGet(APIURL)

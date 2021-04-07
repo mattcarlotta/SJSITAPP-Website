@@ -22,7 +22,7 @@ describe("Retrieve All Forms Controller", () => {
       .expect(200)
       .then(res => {
         expect(res.body).toEqual({
-          forms: expect.arrayContaining([
+          docs: expect.arrayContaining([
             expect.objectContaining({
               _id: expect.any(String),
               endMonth: expect.any(String),

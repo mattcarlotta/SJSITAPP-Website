@@ -65,6 +65,7 @@ export { FaSearchPlus } from "@react-icons/all-files/fa/FaSearchPlus";
 export { FaShareSquare } from "@react-icons/all-files/fa/FaShareSquare";
 export { FaSignInAlt } from "@react-icons/all-files/fa/FaSignInAlt";
 export { FaStickyNote } from "@react-icons/all-files/fa/FaStickyNote";
+export { FaStopwatch } from "@react-icons/all-files/fa/FaStopwatch";
 export { FaStreetView } from "@react-icons/all-files/fa/FaStreetView";
 export { FaTimesCircle } from "@react-icons/all-files/fa/FaTimesCircle";
 export { FaTimes } from "@react-icons/all-files/fa/FaTimes";

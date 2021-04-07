@@ -55,7 +55,10 @@ const customCheckbox = (theme: Theme) => ({
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      border: 0,
+      border:
+        theme.palette.type === "light"
+          ? "1px solid #f0f0f0"
+          : "1px solid #1d1d1d",
       color:
         theme.palette.type === "light"
           ? "rgba(0,0,0,.85)"
@@ -71,18 +74,18 @@ const useStyles = makeStyles((theme: Theme) =>
       "& .MuiDataGrid-row:hover": {
         backgroundColor: "#fafafa"
       },
-      "& .MuiDataGrid-renderingZone": {
-        borderLeft:
-          theme.palette.type === "light"
-            ? "1px solid #f0f0f0"
-            : "1px solid #1d1d1d"
-      },
+      // "& .MuiDataGrid-renderingZone": {
+      //   borderLeft:
+      //     theme.palette.type === "light"
+      //       ? "1px solid #f0f0f0"
+      //       : "1px solid #1d1d1d"
+      // },
       "& .MuiDataGrid-columnsContainer": {
-        backgroundColor: theme.palette.type === "light" ? "#fafafa" : "#1d1d1d",
-        border:
-          theme.palette.type === "light"
-            ? "1px solid #f0f0f0"
-            : "1px solid #1d1d1d"
+        backgroundColor: theme.palette.type === "light" ? "#fafafa" : "#1d1d1d"
+        // border:
+        //   theme.palette.type === "light"
+        //     ? "1px solid #f0f0f0"
+        //     : "1px solid #1d1d1d"
       },
       "& .MuiDataGrid-iconSeparator": {
         display: "none"

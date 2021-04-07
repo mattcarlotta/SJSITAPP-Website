@@ -26,10 +26,10 @@ const getAllForms = async (req: Request, res: Response): Promise<Response> => {
       }
     );
 
-    const forms = get(results, ["docs"]);
+    const docs = get(results, ["docs"]);
     const totalDocs = get(results, ["totalDocs"]);
 
-    return res.status(200).json({ forms, totalDocs });
+    return res.status(200).json({ docs, totalDocs });
   } catch (err) {
     /* istanbul ignore next */
     return sendError(err, 400, res);

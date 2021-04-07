@@ -57,7 +57,7 @@ describe("Update Form Controller", () => {
 
   it("rejects requests where the form properties are missing", done => {
     app()
-      .put("/api/form/update")
+      .put("/api/forms/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -69,7 +69,7 @@ describe("Update Form Controller", () => {
 
   it("rejects requests where the seasonId isn't valid", done => {
     app()
-      .put("/api/form/update")
+      .put("/api/forms/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({ ...updatedForm, _id: form!._id, seasonId: "0000000" })
@@ -82,7 +82,7 @@ describe("Update Form Controller", () => {
 
   it("rejects requests where the form id isn't valid", done => {
     app()
-      .put("/api/form/update")
+      .put("/api/forms/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({ ...updatedForm, _id: "a01dc43483adb35b1ca678ea" })
@@ -95,7 +95,7 @@ describe("Update Form Controller", () => {
 
   it("rejects requests where the form already exists", done => {
     app()
-      .put("/api/form/update")
+      .put("/api/forms/update")
       .set("Cookie", cookie)
       .send({ ...updatedForm, _id: form!._id, enrollMonth })
       .expect("Content-Type", /json/)
@@ -108,7 +108,7 @@ describe("Update Form Controller", () => {
 
   it("accepts requests to updates form while keeping the email sent status", done => {
     app()
-      .put("/api/form/update")
+      .put("/api/forms/update")
       .set("Cookie", cookie)
       .send({ ...updatedForm, _id: form!._id })
       .expect("Content-Type", /json/)
@@ -121,7 +121,7 @@ describe("Update Form Controller", () => {
 
   it("accepts requests to updates form while resetting the email sent status", done => {
     app()
-      .put("/api/form/update")
+      .put("/api/forms/update")
       .set("Cookie", cookie)
       .send({
         ...updatedForm,

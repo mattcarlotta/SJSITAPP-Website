@@ -36,7 +36,7 @@ describe("Create Form Controller", () => {
 
   it("rejects requests where the form fields are missing", done => {
     app()
-      .post("/api/form/create")
+      .post("/api/forms/create")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -48,7 +48,7 @@ describe("Create Form Controller", () => {
 
   it("rejects requests where the seasonId is valid", done => {
     app()
-      .post("/api/form/create")
+      .post("/api/forms/create")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({ ...newForm, seasonId: "10001001" })
@@ -61,7 +61,7 @@ describe("Create Form Controller", () => {
 
   it("rejects requests where the form already exists", done => {
     app()
-      .post("/api/form/create")
+      .post("/api/forms/create")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({
@@ -80,7 +80,7 @@ describe("Create Form Controller", () => {
 
   it("rejects requests where the form expiration date has already past", done => {
     app()
-      .post("/api/form/create")
+      .post("/api/forms/create")
       .set("Cookie", cookie)
       .send({ ...newForm, expirationDate: new Date(1800, 1, 1) })
       .expect("Content-Type", /json/)
@@ -93,7 +93,7 @@ describe("Create Form Controller", () => {
 
   it("rejects requests where the form expiration send emial date has already past", done => {
     app()
-      .post("/api/form/create")
+      .post("/api/forms/create")
       .set("Cookie", cookie)
       .send({ ...newForm, sendEmailNotificationsDate: new Date(1800, 1, 1) })
       .expect("Content-Type", /json/)
@@ -106,7 +106,7 @@ describe("Create Form Controller", () => {
 
   it("accepts requests to create an form", done => {
     app()
-      .post("/api/form/create")
+      .post("/api/forms/create")
       .set("Cookie", cookie)
       .send(newForm)
       .expect("Content-Type", /json/)

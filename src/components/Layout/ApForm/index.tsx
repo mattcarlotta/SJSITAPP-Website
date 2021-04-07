@@ -62,7 +62,7 @@ const APForm = (): JSX.Element => {
 
   const fetchAPForm = React.useCallback(async (): Promise<void> => {
     try {
-      const res = await app.get(`form/view/${id}`);
+      const res = await app.get(`forms/view/${id}`);
       const data = parseData<TAPFormData>(res);
       const fields = updateFormFields(data.events);
 
@@ -110,7 +110,7 @@ const APForm = (): JSX.Element => {
     try {
       const condensedFields = condenseFormFields(fields);
 
-      const res = await app.put("form/update/ap", {
+      const res = await app.put("forms/update/ap", {
         ...parseFields<TApParsedFields>(condensedFields),
         id
       });
