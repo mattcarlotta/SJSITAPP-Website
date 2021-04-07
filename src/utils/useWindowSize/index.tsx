@@ -1,6 +1,6 @@
 /* istanbul ignore file */
 import * as React from "react";
-import throttle from "lodash.throttle";
+import throttle from "lodash.debounce";
 
 const useWindowSize = (): number => {
   const [windowSize, setWindowSize] = React.useState(window.innerWidth);

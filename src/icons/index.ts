@@ -38,6 +38,7 @@ export { FaCloudUploadAlt } from "@react-icons/all-files/fa/FaCloudUploadAlt";
 export { FaCogs } from "@react-icons/all-files/fa/FaCogs";
 export { FaConciergeBell } from "@react-icons/all-files/fa/FaConciergeBell";
 export { FaCopyright } from "@react-icons/all-files/fa/FaCopyright";
+export { FaDatabase } from "@react-icons/all-files/fa/FaDatabase";
 export { FaEdit } from "@react-icons/all-files/fa/FaEdit";
 export { FaEnvelope } from "@react-icons/all-files/fa/FaEnvelope";
 export { FaExclamationTriangle } from "@react-icons/all-files/fa/FaExclamationTriangle";
@@ -101,6 +102,7 @@ export { MdSettingsInputComponent } from "@react-icons/all-files/md/MdSettingsIn
 
 // RI
 export { RiFileForbidLine } from "@react-icons/all-files/ri/RiFileForbidLine";
+export { RiLineChartLine } from "@react-icons/all-files/ri/RiLineChartLine";
 export { RiLogoutBoxLine } from "@react-icons/all-files/ri/RiLogoutBoxLine";
 export { RiMenuFoldLine } from "@react-icons/all-files/ri/RiMenuFoldLine";
 export { RiMenuUnfoldLine } from "@react-icons/all-files/ri/RiMenuUnfoldLine";

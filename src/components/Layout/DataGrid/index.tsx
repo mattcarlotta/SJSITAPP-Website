@@ -1,5 +1,6 @@
 import { DataGrid } from "@material-ui/data-grid";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
+import NoTableData from "~components/Layout/NoTableData";
 import { GridColumns, GridRowsProp, GridPageChangeParams } from "~types";
 
 export type TTableProps = {
@@ -129,6 +130,9 @@ const CustomDataGrid = ({
 }: TTableProps): JSX.Element => (
   <DataGrid
     className={useStyles().root}
+    components={{
+      NoRowsOverlay: NoTableData
+    }}
     checkboxSelection
     disableColumnMenu
     disableSelectionOnClick

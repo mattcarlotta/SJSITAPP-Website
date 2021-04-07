@@ -27,8 +27,10 @@ export const ViewForms = (): JSX.Element => (
           padding="5px 10px"
           href="/employee/forms/create"
         >
-          <FaFileSignature style={{ position: "relative", top: 2 }} />
-          &nbsp; New Form
+          <FaFileSignature
+            style={{ position: "relative", top: 2, marginRight: 5 }}
+          />
+          New Form
         </Link>
       </FlexEnd>
       <QueryHandler>

@@ -27,8 +27,10 @@ export const ViewSeasons = (): JSX.Element => (
           padding="5px 10px"
           href="/employee/seasons/create"
         >
-          <FaFolderPlus style={{ position: "relative", top: 2 }} />
-          &nbsp; New Season
+          <FaFolderPlus
+            style={{ position: "relative", top: 2, marginRight: 10 }}
+          />
+          New Season
         </Link>
       </FlexEnd>
       <QueryHandler>

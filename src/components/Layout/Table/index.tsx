@@ -53,8 +53,9 @@ const Table = ({
   ...rest
 }: TTableProps): JSX.Element => {
   const [state, setState] = React.useState<TTableState>(initalState);
-  const page = parseInt(get(queries, ["page"]), 10) - 1;
   const { data, isLoading, totalDocs } = state;
+  const page = parseInt(get(queries, ["page"]), 10) - 1;
+  const invalidPage = !isLoading && isEmpty(data) && totalDocs > 0;
 
   const fetchData = React.useCallback(async (): Promise<void> => {
     try {
@@ -97,17 +98,16 @@ const Table = ({
   }, [isLoading]);
 
   React.useEffect(() => {
-    fetchData();
+    if (!isLoading) fetchData();
   }, [queryString]);
 
   React.useEffect(() => {
-    if (!isLoading && isEmpty(data) && totalDocs > 0)
-      updateQuery({ page: Math.ceil(totalDocs / 10) });
-  }, [isLoading, data, totalDocs]);
+    if (invalidPage) updateQuery({ page: Math.ceil(totalDocs / 10) });
+  }, [invalidPage]);
 
   return (
     <Padding left="20px" top="20px" right="20px" bottom="40px">
-      {isLoading ? (
+      {isLoading || invalidPage ? (
         <FadeIn>
           <LoadingPanel
             data-testid="loading-data"
