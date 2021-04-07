@@ -1,8 +1,8 @@
 /* istanbul ignore file */
 import { NextApiRequest, NextApiResponse, NextPage } from "next";
-import { AxiosResponse } from "axios";
 import { NextRouter } from "next/router";
 import { AppProps } from "next/app";
+import { AxiosResponse } from "axios";
 import {
   ComponentType,
   ChangeEvent,
@@ -19,6 +19,11 @@ import {
   RefObject
 } from "react";
 import { Moment } from "moment-timezone";
+import {
+  GridColumns,
+  GridRowsProp,
+  GridValueGetterParams
+} from "@material-ui/data-grid";
 import { DatePickerView } from "@material-ui/pickers";
 import { AnyAction, Store } from "redux";
 import { SagaIterator } from "redux-saga";
@@ -130,6 +135,8 @@ export type EventTargetDataset = {
     };
   };
 };
+
+export type TURLQuery = Record<string, any>;
 
 /// COMPONENTS ///
 export type TBaseFieldProps = {
@@ -295,6 +302,9 @@ export {
   DatePickerView,
   FC,
   FormEvent,
+  GridColumns,
+  GridRowsProp,
+  GridValueGetterParams,
   KeyboardEvent,
   MouseEvent,
   Moment,
