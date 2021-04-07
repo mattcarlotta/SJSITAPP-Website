@@ -128,6 +128,7 @@ const CustomDataGrid = ({
     className={useStyles().root}
     checkboxSelection
     disableColumnMenu
+    disableSelectionOnClick
     columns={columns}
     getRowId={row => row._id}
     onPageChange={handlePageChange}

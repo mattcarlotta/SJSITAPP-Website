@@ -36,7 +36,7 @@ describe("Update Season Controller", () => {
 
   it("rejects requests where the season _id, seasonId, seasonDuration are missing", done => {
     app()
-      .put("/api/season/update")
+      .put("/api/seasons/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -48,9 +48,9 @@ describe("Update Season Controller", () => {
 
   it("rejects requests where the season _id is invalid", done => {
     app()
-      .put("/api/season/update")
+      .put("/api/seasons/update")
       .set("Cookie", cookie)
-      .send({ ...updatedSeason, _id: "601dc43483adb35b1ca678ea" })
+      .send({ ...updatedSeason, id: "601dc43483adb35b1ca678ea" })
       .expect("Content-Type", /json/)
       .expect(400)
       .then(res => {
@@ -61,9 +61,9 @@ describe("Update Season Controller", () => {
 
   it("rejects requests where the season are exists", done => {
     app()
-      .put("/api/season/update")
+      .put("/api/seasons/update")
       .set("Cookie", cookie)
-      .send({ ...updatedSeason, _id: season._id, seasonId: "20002001" })
+      .send({ ...updatedSeason, id: season._id, seasonId: "20002001" })
       .expect("Content-Type", /json/)
       .expect(400)
       .then(res => {
@@ -74,9 +74,9 @@ describe("Update Season Controller", () => {
 
   it("accepts requests to update a season", done => {
     app()
-      .put("/api/season/update")
+      .put("/api/seasons/update")
       .set("Cookie", cookie)
-      .send({ ...updatedSeason, _id: season._id })
+      .send({ ...updatedSeason, id: season._id })
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
@@ -87,12 +87,12 @@ describe("Update Season Controller", () => {
 
   it("accepts requests to update a season duration", done => {
     app()
-      .put("/api/season/update")
+      .put("/api/seasons/update")
       .set("Cookie", cookie)
       .send({
         ...updatedSeason,
         seasonDuration: [new Date(2014, 9, 26), new Date(2015, 6, 12)],
-        _id: season._id
+        id: season._id
       })
       .expect("Content-Type", /json/)
       .expect(200)

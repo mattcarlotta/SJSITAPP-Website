@@ -23,7 +23,7 @@ describe("Create Season Controller", () => {
 
   it("rejects requests where the season fields are missing", done => {
     app()
-      .post("/api/season/create")
+      .post("/api/seasons/create")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -35,7 +35,7 @@ describe("Create Season Controller", () => {
 
   it("rejects requests where the season id is already created", done => {
     app()
-      .post("/api/season/create")
+      .post("/api/seasons/create")
       .set("Cookie", cookie)
       .send({ ...newSeason, seasonId: "20002001" })
       .expect("Content-Type", /json/)
@@ -48,7 +48,7 @@ describe("Create Season Controller", () => {
 
   it("accepts requests to create a new season", done => {
     app()
-      .post("/api/season/create")
+      .post("/api/seasons/create")
       .set("Cookie", cookie)
       .send(newSeason)
       .expect("Content-Type", /json/)

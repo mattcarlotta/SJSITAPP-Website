@@ -86,7 +86,8 @@ const Link = styled(LinkComponent)<{
       return "#025f6d";
     }};
     color: #fff;
-    box-shadow: ${({ alt }) => {
+    box-shadow: ${({ alt, hideShadow }) => {
+      if (hideShadow) return "none";
       if (alt) return "0px 0px 14px -2px #14d3e2";
       return "0px 0px 14px -2px #14d3e2";
     }};

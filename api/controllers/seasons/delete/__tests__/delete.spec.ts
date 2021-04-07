@@ -1,17 +1,17 @@
 import mongoose from "mongoose";
 import { connectToDB } from "~database";
-import { unableToLocateSeason } from "~messages/errors";
+import { unableToDeleteSeason } from "~messages/errors";
 import Season, { ISeasonDocument } from "~models/season";
 import { staffSignIn } from "~test/utils/signIn";
 import app from "~test/utils/testServer";
 
 const newSeason = {
-  seasonId: "20102011",
-  startDate: new Date(2010, 8, 26),
-  endDate: new Date(20011, 5, 12)
+  seasonId: "20082009",
+  startDate: new Date(2008, 8, 26),
+  endDate: new Date(2009, 5, 12)
 };
 
-describe("Edit Season Controller", () => {
+describe("Delete Season Controller", () => {
   let cookie: string;
   let season: ISeasonDocument;
   beforeAll(async () => {
@@ -26,29 +26,25 @@ describe("Edit Season Controller", () => {
 
   it("rejects requests where the season id is invalid", done => {
     app()
-      .get("/api/season/edit/601dc43483adb35b1ca678ea")
+      .delete("/api/seasons/delete/601dc43483adb35b1ca678ea")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
       .then(res => {
-        expect(res.body.err).toEqual(unableToLocateSeason);
+        expect(res.body.err).toEqual(unableToDeleteSeason);
         done();
       });
   });
 
-  it("accepts requests to edit a season", done => {
+  it("accepts requests to delete a season", done => {
     app()
-      .get(`/api/season/edit/${season._id}`)
+      .delete(`/api/seasons/delete/${season._id}`)
       .set("Cookie", cookie)
+      .send(newSeason)
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
-        expect(res.body).toEqual({
-          _id: expect.any(String),
-          endDate: expect.any(String),
-          startDate: expect.any(String),
-          seasonId: expect.any(String)
-        });
+        expect(res.body.message).toEqual("Successfully deleted the season.");
         done();
       });
   });

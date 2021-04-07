@@ -35,8 +35,8 @@ jest.mock("next/router", () => ({
   })
 }));
 
-const FETCHURL = `season/edit/${id}`;
-const SAVESEASONURL = "season/update";
+const FETCHURL = `seasons/edit/${id}`;
+const SAVESEASONURL = "seasons/update";
 
 mockApp
   .onGet(FETCHURL)

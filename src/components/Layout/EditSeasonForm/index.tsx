@@ -28,7 +28,7 @@ export const EditSeasonForm = (): JSX.Element => {
 
   const fetchSeason = React.useCallback(async (): Promise<void> => {
     try {
-      const res = await app.get(`season/edit/${id}`);
+      const res = await app.get(`seasons/edit/${id}`);
       const data = parseData<TSeasonData>(res);
 
       setState(prevState => ({
@@ -43,7 +43,7 @@ export const EditSeasonForm = (): JSX.Element => {
   }, [app, id, parseData, router, toast]);
 
   const apiQuery = (config: TSeasonAPIQueryConfig): Promise<AxiosResponse> =>
-    app.put("season/update", config);
+    app.put("seasons/update", config);
 
   React.useEffect(() => {
     if (isLoading && id) fetchSeason();

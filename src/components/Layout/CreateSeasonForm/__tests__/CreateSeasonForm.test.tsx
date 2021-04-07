@@ -14,7 +14,7 @@ const { push } = useRouter();
 
 jest.mock("~components/App/Toast", () => jest.fn());
 
-const APIURL = `season/create`;
+const APIURL = `seasons/create`;
 
 mockApp
   .onPost(APIURL)

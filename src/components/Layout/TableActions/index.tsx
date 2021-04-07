@@ -1,23 +1,91 @@
 import * as React from "react";
-// import { Popover } from "@material-ui/core";
+import get from "lodash.get";
+import { Dialog } from "@material-ui/core";
 import Button from "~components/Layout/Button";
-import { FaTools } from "~icons";
-// import { ChangeEvent,GridValueGetterParams } from "~types";
+import Title from "~components/Layout/Title";
+import Padding from "~components/Layout/Padding";
+import Link from "~components/Navigation/Link";
+import { FaEdit, FaTools, FaTrash } from "~icons";
+import { GridValueGetterParams } from "~types";
 
-// params: GridValueGetterParams
-const TableActions = (): JSX.Element => {
+export type TTableActionsProps = {
+  deleteRecord: (id: string) => Promise<void>;
+  edit?: string;
+  params: GridValueGetterParams;
+};
+
+const TableActions = ({
+  deleteRecord,
+  edit,
+  params
+}: TTableActionsProps): JSX.Element => {
+  const [open, setOpen] = React.useState(false);
+  const id = get(params, ["id"]);
+
+  const handleClick = (): void => {
+    setOpen(true);
+  };
+
+  const handleClose = (): void => {
+    setOpen(false);
+  };
+
+  const handleDeleteClick = (): void => {
+    handleClose();
+    deleteRecord(id as string);
+  };
+
   return (
     <>
       <Button
-        alt
+        primary
         noGlow
         type="button"
         padding="3px"
         margin="0"
-        onClick={() => null}
+        maxWidth="50px"
+        onClick={handleClick}
       >
         <FaTools style={{ position: "relative", top: 2 }} />
       </Button>
+      <Dialog
+        onClose={handleClose}
+        aria-labelledby="actions-dialog"
+        open={open}
+      >
+        <Padding top="10px" left="10px" right="10px" bottom="20px">
+          <Title fontSize="20px">Available Actions</Title>
+          {edit && (
+            <Link
+              alt
+              hideShadow
+              display="block"
+              dataTestId="edit-record"
+              padding="7px"
+              margin="5px 0"
+              width="100%"
+              href={`/employee/${edit}/edit/${id}`}
+            >
+              <FaEdit
+                style={{ position: "relative", top: 2, marginRight: 5 }}
+              />
+              Edit
+            </Link>
+          )}
+          <Button
+            danger
+            type="button"
+            dataTestId="delete-record"
+            padding="5px"
+            margin="5px 0"
+            borderRadius="10px"
+            onClick={handleDeleteClick}
+          >
+            <FaTrash style={{ position: "relative", top: 2, marginRight: 5 }} />
+            Delete
+          </Button>
+        </Padding>
+      </Dialog>
     </>
   );
 };

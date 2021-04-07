@@ -8,13 +8,19 @@ import LoadingPanel from "~components/Layout/LoadingPanel";
 import Padding from "~components/Layout/Padding";
 import TableActions from "~components/Layout/TableActions";
 import app from "~utils/axiosConfig";
-import { parseData } from "~utils/parseResponse";
-import { GridColumns, GridPageChangeParams, TURLQuery } from "~types";
+import { parseData, parseMessage } from "~utils/parseResponse";
+import {
+  GridColumns,
+  GridPageChangeParams,
+  GridValueGetterParams,
+  TURLQuery
+} from "~types";
 
 export type TTableProps = {
   API: string;
   columns: GridColumns;
   clearFilters: () => void;
+  edit?: string;
   queries: TURLQuery;
   queryString: string;
   updateQuery: (nextQuery: TURLQuery) => void;
@@ -31,19 +37,22 @@ export type TTableData = {
   totalDocs: number;
 };
 
+const initalState = {
+  data: [],
+  isLoading: true,
+  totalDocs: 0
+};
+
 const Table = ({
   API,
   // clearFilters,
   columns,
   queries,
   queryString,
-  updateQuery
+  updateQuery,
+  ...rest
 }: TTableProps): JSX.Element => {
-  const [state, setState] = React.useState<TTableState>({
-    data: [],
-    isLoading: true,
-    totalDocs: 0
-  });
+  const [state, setState] = React.useState<TTableState>(initalState);
   const page = parseInt(get(queries, ["page"]), 10) - 1;
   const { data, isLoading, totalDocs } = state;
 
@@ -66,6 +75,22 @@ const Table = ({
   const handlePageChange = ({ page }: GridPageChangeParams): void => {
     updateQuery({ page: page + 1 });
   };
+
+  const deleteRecord = React.useCallback(
+    async (id: string): Promise<void> => {
+      try {
+        const res = await app.delete(`${API}/delete/${id}`);
+        const message = parseMessage(res);
+
+        toast({ type: "success", message });
+
+        setState(initalState);
+      } catch (err) {
+        toast({ type: "error", message: err.toString() });
+      }
+    },
+    [app, parseMessage, toast]
+  );
 
   React.useEffect(() => {
     if (isLoading) fetchData();
@@ -107,8 +132,9 @@ const Table = ({
               {
                 field: "actions",
                 headerName: "Actions",
-                flex: 0.25,
-                renderCell: TableActions
+                flex: 0.4,
+                renderCell: (params: GridValueGetterParams) =>
+                  TableActions({ deleteRecord, params, ...rest })
               }
             ]}
           />

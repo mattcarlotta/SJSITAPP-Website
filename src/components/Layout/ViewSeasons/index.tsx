@@ -36,7 +36,7 @@ export const ViewSeasons = (): JSX.Element => (
       <QueryHandler>
         {props => (
           <>
-            <Table {...props} API="seasons" columns={columns} />
+            <Table {...props} API="seasons" edit="seasons" columns={columns} />
           </>
         )}
       </QueryHandler>

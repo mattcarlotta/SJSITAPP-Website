@@ -17,6 +17,7 @@ const endDate = (params: GridValueGetterParams): JSX.Element => (
 );
 
 const Columns: GridColumns = [
+  { field: "_id", headerName: "Database Id", flex: 1 },
   { field: "seasonId", headerName: "Season Id", flex: 1 },
   {
     field: "startDate",

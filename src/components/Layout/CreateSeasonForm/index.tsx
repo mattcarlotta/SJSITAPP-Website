@@ -9,7 +9,7 @@ import { AxiosResponse, TSeasonAPIQueryConfig } from "~types";
 
 export const CreateSeasonForm = (): JSX.Element => {
   const apiQuery = (config: TSeasonAPIQueryConfig): Promise<AxiosResponse> =>
-    app.post("season/create", config);
+    app.post("seasons/create", config);
 
   return (
     <Card
