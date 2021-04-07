@@ -21,6 +21,7 @@ import {
 import { Moment } from "moment-timezone";
 import {
   GridColumns,
+  GridPageChangeParams,
   GridRowsProp,
   GridValueGetterParams
 } from "@material-ui/data-grid";
@@ -303,6 +304,7 @@ export {
   FC,
   FormEvent,
   GridColumns,
+  GridPageChangeParams,
   GridRowsProp,
   GridValueGetterParams,
   KeyboardEvent,

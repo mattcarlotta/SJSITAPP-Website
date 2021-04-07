@@ -1,11 +1,13 @@
 import { DataGrid } from "@material-ui/data-grid";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
-import { GridColumns, GridRowsProp } from "~types";
+import { GridColumns, GridRowsProp, GridPageChangeParams } from "~types";
 
 export type TTableProps = {
   columns: GridColumns;
+  page: number;
   rows: GridRowsProp;
   totalDocs: number;
+  handlePageChange: (params: GridPageChangeParams) => void;
 };
 
 const customCheckbox = (theme: Theme) => ({
@@ -117,6 +119,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const CustomDataGrid = ({
   columns,
+  handlePageChange,
+  page,
   rows,
   totalDocs
 }: TTableProps): JSX.Element => (
@@ -124,12 +128,15 @@ const CustomDataGrid = ({
     className={useStyles().root}
     checkboxSelection
     disableColumnMenu
+    columns={columns}
+    getRowId={row => row._id}
+    onPageChange={handlePageChange}
     pagination
+    page={page}
+    pageSize={10}
+    paginationMode="server"
     rows={rows}
     rowCount={totalDocs}
-    getRowId={row => row._id}
-    columns={columns}
-    pageSize={10}
   />
 );
 

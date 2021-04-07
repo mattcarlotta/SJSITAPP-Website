@@ -6,10 +6,12 @@ import { TURLQuery } from "~types";
 export type TQueryHandlerProps = {
   children: ({
     queries,
+    queryString,
     clearFilters,
     updateQuery
   }: {
     queries: TURLQuery;
+    queryString: string;
     clearFilters: () => void;
     updateQuery: (nextQuery: TURLQuery) => void;
   }) => JSX.Element;
@@ -17,7 +19,7 @@ export type TQueryHandlerProps = {
 
 export const QueryHandler = ({ children }: TQueryHandlerProps): JSX.Element => {
   const router = useRouter();
-  const [queries, setQueries] = React.useState(setQuery(router.query));
+  const [state, setState] = React.useState(setQuery(router.query));
 
   const pushToLocation = (query: string): void => {
     router.push(`${router.pathname}?${query}`);
@@ -26,7 +28,7 @@ export const QueryHandler = ({ children }: TQueryHandlerProps): JSX.Element => {
   const updateQuery = (nextQuery: TURLQuery): void => {
     pushToLocation(
       stringifyQuery({
-        ...queries,
+        ...state.queries,
         ...nextQuery
       })
     );
@@ -35,13 +37,13 @@ export const QueryHandler = ({ children }: TQueryHandlerProps): JSX.Element => {
   const clearFilters = () => pushToLocation("page=1");
 
   React.useEffect(() => {
-    setQueries(setQuery(router.query));
+    setState(setQuery(router.query));
   }, [router.query]);
 
   return (
     <>
       {children({
-        ...queries,
+        ...state,
         clearFilters,
         updateQuery
       })}

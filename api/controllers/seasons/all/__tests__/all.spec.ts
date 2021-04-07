@@ -22,7 +22,7 @@ describe("Retrieve All Season Controller", () => {
       .expect(200)
       .then(res => {
         expect(res.body).toEqual({
-          seasons: expect.arrayContaining([
+          docs: expect.arrayContaining([
             expect.objectContaining({
               _id: expect.any(String),
               endDate: expect.any(String),
