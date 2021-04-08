@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import * as React from "react";
 import get from "lodash.get";
 import isEmpty from "lodash.isempty";
@@ -11,6 +12,7 @@ import app from "~utils/axiosConfig";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import {
   GridColumns,
+  GridColDef,
   GridPageChangeParams,
   GridValueGetterParams,
   TURLQuery
@@ -93,6 +95,21 @@ const Table = ({
     [API, app, parseMessage, toast]
   );
 
+  const columnsWithActions = React.useMemo(
+    (): Array<GridColDef> => [
+      ...columns,
+      {
+        field: "actions",
+        headerName: "Actions",
+        width: 95,
+        renderCell: (params: GridValueGetterParams): JSX.Element => (
+          <TableActions deleteRecord={deleteRecord} params={params} {...rest} />
+        )
+      }
+    ],
+    [columns]
+  );
+
   React.useEffect(() => {
     if (isLoading) fetchData();
   }, [isLoading]);
@@ -127,16 +144,7 @@ const Table = ({
             totalDocs={totalDocs}
             handlePageChange={handlePageChange}
             page={page}
-            columns={[
-              ...columns,
-              {
-                field: "actions",
-                headerName: "Actions",
-                width: 95,
-                renderCell: (params: GridValueGetterParams) =>
-                  TableActions({ deleteRecord, params, ...rest })
-              }
-            ]}
+            columns={columnsWithActions}
           />
         </div>
       )}

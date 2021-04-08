@@ -20,6 +20,7 @@ import {
 } from "react";
 import { Moment } from "moment-timezone";
 import {
+  GridColDef,
   GridColumns,
   GridPageChangeParams,
   GridRowsProp,
@@ -304,6 +305,7 @@ export {
   DatePickerView,
   FC,
   FormEvent,
+  GridColDef,
   GridColumns,
   GridPageChangeParams,
   GridRowsProp,

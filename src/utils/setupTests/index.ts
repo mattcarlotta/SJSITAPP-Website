@@ -1,4 +1,3 @@
-/* eslint-disable */
 import * as React from "react";
 import { JSDOM } from "jsdom";
 import { configure } from "enzyme";
@@ -24,4 +23,3 @@ global.React = React;
 global.navigator = {
   userAgent: "node.js"
 };
-/* eslint-enable */

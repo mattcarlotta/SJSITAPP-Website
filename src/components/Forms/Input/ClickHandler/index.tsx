@@ -12,7 +12,6 @@ export interface IInputClickHandlerProps {
     handleBlur: (e: ChangeEvent<any>) => void;
     handleFocus: (e: ChangeEvent<any>) => void;
   }) => JSX.Element;
-  //   children: any;
 }
 
 export interface IInputClickHandlerState {
@@ -67,4 +66,3 @@ class ClickHandler extends React.Component<
 }
 
 export default ClickHandler;
-/* eslint-enable no-lonely-if */

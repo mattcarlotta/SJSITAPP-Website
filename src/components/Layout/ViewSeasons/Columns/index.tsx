@@ -1,20 +1,7 @@
+/* eslint-disable react/display-name */
 import FormatDate from "~components/Layout/FormatDate";
 import { standardFormat } from "~utils/dateFormats";
 import { GridColumns, GridValueGetterParams } from "~types";
-
-const startDate = (params: GridValueGetterParams): JSX.Element => (
-  <FormatDate
-    format={standardFormat}
-    date={params.getValue("startDate") as Date}
-  />
-);
-
-const endDate = (params: GridValueGetterParams): JSX.Element => (
-  <FormatDate
-    format={standardFormat}
-    date={params.getValue("endDate") as Date}
-  />
-);
 
 const Columns: GridColumns = [
   { field: "_id", headerName: "Database Id", flex: 1 },
@@ -23,13 +10,23 @@ const Columns: GridColumns = [
     field: "startDate",
     headerName: "Start Date",
     flex: 1,
-    renderCell: startDate
+    renderCell: (params: GridValueGetterParams): JSX.Element => (
+      <FormatDate
+        format={standardFormat}
+        date={params.getValue("startDate") as Date}
+      />
+    )
   },
   {
     field: "endDate",
     headerName: "End Date",
     flex: 1,
-    renderCell: endDate
+    renderCell: (params: GridValueGetterParams): JSX.Element => (
+      <FormatDate
+        format={standardFormat}
+        date={params.getValue("endDate") as Date}
+      />
+    )
   }
 ];
 

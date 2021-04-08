@@ -121,4 +121,3 @@ class ClickHandler extends React.Component<
 }
 
 export default ClickHandler;
-/* eslint-enable no-lonely-if */

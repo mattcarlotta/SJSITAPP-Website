@@ -34,4 +34,3 @@ const fieldUpdater = (
 };
 
 export default fieldUpdater;
-/* eslint-enable no-console */

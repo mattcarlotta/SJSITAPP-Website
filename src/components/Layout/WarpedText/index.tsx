@@ -365,4 +365,3 @@ const WarpedText = styled(WarpedTextComponent)`
 `;
 
 export default WarpedText;
-/* eslint-enable react/no-array-index-key */

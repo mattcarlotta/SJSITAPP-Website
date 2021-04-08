@@ -124,4 +124,3 @@ const Button = styled(StyledButton)<StyledButtonProps>`
 `;
 
 export default Button;
-/* eslint-enable react/button-has-type */
