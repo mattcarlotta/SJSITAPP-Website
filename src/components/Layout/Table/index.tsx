@@ -149,6 +149,7 @@ const Table = ({
         field: "actions",
         headerName: "Actions",
         width: 95,
+        sortable: false,
         renderCell: (params: GridValueGetterParams): JSX.Element => (
           <TableActions
             disableCheckbox={disableCheckbox}

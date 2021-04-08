@@ -52,14 +52,16 @@ const updateForm = async (req: Request, res: Response): Promise<Response> => {
     const { sentEmails } = formExists;
 
     // incoming email notification date
-    const incomingSendEmailsDate = createDate(
-      sendEmailNotificationsDate
-    ).format(format);
+    const incomingSendEmailsDate = createDate(sendEmailNotificationsDate)
+      .endOf("day")
+      .format(format);
 
     // current form email date
     const currentSendEmailsDate = createDate(
       formExists.sendEmailNotificationsDate
-    ).format(format);
+    )
+      .endOf("day")
+      .format(format);
 
     // resend emails if the dates don't match and they were already sent
     const emailNotificationStatus =

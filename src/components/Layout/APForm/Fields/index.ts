@@ -45,7 +45,7 @@ const Fields = (
     required: true,
     emptyLabel: "Click to select an expiration date...",
     tooltip:
-      "After the date specified below, employee responses will no longer be accepted nor editable.",
+      "After the date specified below, employee responses will no longer be accepted nor editable. By default, the expiration time will be automatically set to the end of the day (ex. 01/31/2000 @ 11:59pm).",
     style: { width: "100%", height: "100px" }
   },
   {
@@ -57,7 +57,7 @@ const Fields = (
     required: false,
     emptyLabel: "(Optional) Click to select an email notification date...",
     tooltip:
-      "Specify a date to send out email notifications. If left empty, emails will be sent out immediately.",
+      "Specify a date to send out email notifications. If left empty, emails will be sent out the same day. By default, the time will be automatically set to the end of the day (ex. 01/31/2000 @ 11:59pm).",
     style: { width: "100%", height: "100px" }
   },
   {

@@ -5,7 +5,6 @@ import toast from "~components/App/Toast";
 import APForm from "~components/Layout/APForm";
 import FormTitle from "~components/Forms/FormTitle";
 import Card from "~components/Layout/Card";
-import LoadingPanel from "~components/Layout/LoadingPanel";
 import Padding from "~components/Layout/Padding";
 import { FaEdit } from "~icons";
 import app from "~utils/axiosConfig";
@@ -62,20 +61,13 @@ export const EditAPForm = (): JSX.Element => {
           title="Edit AP Form"
           description="Please edit all the required fields to update the season."
         />
-        {isLoading ? (
-          <LoadingPanel
-            data-testid="loading-edit-form"
-            borderRadius="5px"
-            height="817px"
-          />
-        ) : (
-          <APForm
-            apiQuery={apiQuery}
-            id={id as string}
-            form={form}
-            submitText="Update"
-          />
-        )}
+        <APForm
+          apiQuery={apiQuery}
+          id={id as string}
+          form={form}
+          fetchingFormData={isLoading}
+          submitText="Update"
+        />
       </Padding>
     </Card>
   );

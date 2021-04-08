@@ -22,6 +22,7 @@ import {
 export type TAPFormProps = {
   apiQuery: (config: TFormAPIQueryConfig) => Promise<AxiosResponse>;
   id?: string;
+  fetchingFormData?: boolean;
   form?: TForm;
   submitText: string;
 };
@@ -42,6 +43,7 @@ export type TAPParsedFields = {
 const APForm = ({
   apiQuery,
   id,
+  fetchingFormData,
   form,
   submitText
 }: TAPFormProps): JSX.Element => {
@@ -114,8 +116,8 @@ const APForm = ({
   }, [isSubmitting, errors, saveForm]);
 
   React.useEffect(() => {
-    if (isLoading) initializeFields();
-  }, [isLoading, initializeFields]);
+    if (!fetchingFormData && isLoading) initializeFields();
+  }, [fetchingFormData, isLoading, initializeFields]);
 
   return isLoading ? (
     <LoadingPanel

@@ -44,7 +44,9 @@ const createForm = async (req: Request, res: Response): Promise<Response> => {
     });
     if (!isEmpty(existingForms)) throw formAlreadyExists;
 
-    const sendEmailsDate = createDate(sendEmailNotificationsDate).format();
+    const sendEmailsDate = createDate(sendEmailNotificationsDate)
+      .endOf("day")
+      .format();
     const currentDay = getStartOfDay();
 
     if (formExpirationDate < currentDay) throw invalidExpirationDate;
