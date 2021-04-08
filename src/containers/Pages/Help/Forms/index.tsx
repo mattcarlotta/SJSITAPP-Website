@@ -80,6 +80,7 @@ const Forms = ({ id }: { id: string }): JSX.Element => (
         width="50px"
         padding="4px"
         margin="0 3px"
+        borderRadius="10px"
       >
         <FaTools style={iconStyle} />
       </Button>
@@ -121,6 +122,7 @@ const Forms = ({ id }: { id: string }): JSX.Element => (
         width="50px"
         padding="4px"
         margin="0 3px"
+        borderRadius="10px"
       >
         <FaTools style={iconStyle} />
       </Button>
@@ -169,6 +171,7 @@ const Forms = ({ id }: { id: string }): JSX.Element => (
         width="50px"
         padding="4px"
         margin="0 3px"
+        borderRadius="10px"
       >
         <FaTools style={iconStyle} />
       </Button>

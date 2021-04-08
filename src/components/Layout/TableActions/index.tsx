@@ -52,6 +52,7 @@ const TableActions = ({
         padding="3px"
         margin="0"
         maxWidth="50px"
+        borderRadius="10px"
         onClick={handleClick}
       >
         <FaTools style={{ position: "relative", top: 2, fontSize: 16 }} />

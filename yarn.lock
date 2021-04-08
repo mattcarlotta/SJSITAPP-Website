@@ -3859,10 +3859,10 @@ csstype@^3.0.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.2.tgz#ee5ff8f208c8cd613b389f7b222c9801ca62b3f7"
   integrity sha512-ofovWglpqoqbfLNOTBNZLSbMuGrblAf1efvvArGKOZMBrIoJeu5UsAipQolkijtyQx5MtAzT/J9IHj/CEY1mJw==
 
-cypress@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-7.0.0.tgz#78b67a87bace1b530c123ba8d779899e676ed676"
-  integrity sha512-gri53gIGQPf/RoUknwvNS3alUjZwdmtp9BcKzLgyrwA/gBxJcpDLZ1t+MTvXy57ifRWEMxmEWzQe+iszCzJZqA==
+cypress@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/cypress/-/cypress-7.0.1.tgz#8603f84d828fd4c5462a856f55cef5642e4ce573"
+  integrity sha512-dMZmZDo+x3jslEQiXRGQlMmMVMhe4JpMHQ6g1unMGXTUsapU1EXlnubevmKmqZ1IQpntAlDKmx8dupOTd3oW+g==
   dependencies:
     "@cypress/listr-verbose-renderer" "^0.4.1"
     "@cypress/request" "^2.88.5"
@@ -10911,10 +10911,10 @@ typescript-tuple@^2.2.1:
   dependencies:
     typescript-compare "^0.0.2"
 
-typescript@^4.2.3:
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.2.3.tgz#39062d8019912d43726298f09493d598048c1ce3"
-  integrity sha512-qOcYwxaByStAWrBf4x0fibwZvMRG+r4cQoTjbPtUlrWjBHbmCAww1i448U0GJ+3cNNEtebDteo/cHOR3xJ4wEw==
+typescript@^4.2.4:
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.2.4.tgz#8610b59747de028fda898a8aef0e103f156d0961"
+  integrity sha512-V+evlYHZnQkaz8TRBuxTA92yZBPotr5H+WhQ7bD3hZUndx5tGOa1fuCgeSjxAzM1RiN5IzvadIXTVefuuwZCRg==
 
 unbox-primitive@^1.0.0:
   version "1.0.1"
@@ -11195,10 +11195,10 @@ victory-box-plot@^35.4.11:
     prop-types "^15.5.8"
     victory-core "^35.4.11"
 
-victory-brush-container@^35.4.12:
-  version "35.4.12"
-  resolved "https://registry.yarnpkg.com/victory-brush-container/-/victory-brush-container-35.4.12.tgz#de9b00601311285b7050f91a584b9fc926d2758c"
-  integrity sha512-FwQe0IuJasB6WGtyfc4LmwEHAIcZdMtgqf0DnkUWbwXosgTE/pjwVXUzX/HpOdCa979rrpj548Itesx1cO/Mdg==
+victory-brush-container@^35.5.0:
+  version "35.5.0"
+  resolved "https://registry.yarnpkg.com/victory-brush-container/-/victory-brush-container-35.5.0.tgz#1b010d02346de74195023e45a03a693e22045213"
+  integrity sha512-IcLaXzPJFlG0BTEI5Ru2rbd/HkbHlwEmm78cIEQvn5i/9AnrOdq2ST31YSi+p6PgjYVZVfYEvg2yNsa2xUTfxg==
   dependencies:
     lodash "^4.17.19"
     prop-types "^15.5.8"
@@ -11251,13 +11251,13 @@ victory-core@^35.4.11:
     prop-types "^15.5.8"
     react-fast-compare "^2.0.0"
 
-victory-create-container@^35.4.13:
-  version "35.4.13"
-  resolved "https://registry.yarnpkg.com/victory-create-container/-/victory-create-container-35.4.13.tgz#de06baff9480fd41d6500a191f472c1d9b783a48"
-  integrity sha512-3rnjoNr0XY0m45D4ITrWZMzFb4LVRnrUJKdxgmF963XTuncK+QFPfcHhfnrrFIoDwY/PnUAgGYEFPUka84xwbw==
+victory-create-container@^35.5.0:
+  version "35.5.0"
+  resolved "https://registry.yarnpkg.com/victory-create-container/-/victory-create-container-35.5.0.tgz#09d6178b97bf21a611f28b13b0e6fcc71e2c9878"
+  integrity sha512-Pyb1lq99GPx13k3/UNLa6YUacSVD8oOntg4UsS+qkJY4xgy1t4o0woo02l793Voj6TZJgu57ULVrMkHxXQILAg==
   dependencies:
     lodash "^4.17.19"
-    victory-brush-container "^35.4.12"
+    victory-brush-container "^35.5.0"
     victory-core "^35.4.11"
     victory-cursor-container "^35.4.11"
     victory-selection-container "^35.4.11"
@@ -11424,21 +11424,21 @@ victory-zoom-container@^35.4.11:
     prop-types "^15.5.8"
     victory-core "^35.4.11"
 
-victory@^35.4.13:
-  version "35.4.13"
-  resolved "https://registry.yarnpkg.com/victory/-/victory-35.4.13.tgz#b8d60c3e698f57e24e89ab9d840350486d9eb884"
-  integrity sha512-aFUV5WbF75dYBs9ChrHtUKoL/c42pnD1OY5x3qSmEg1VexQskRHUHpgpuzhKrPhSniv/qWVr/JhujzhOqnHDhA==
+victory@^35.5.0:
+  version "35.5.0"
+  resolved "https://registry.yarnpkg.com/victory/-/victory-35.5.0.tgz#4b93ee0462e38dc61479d7e7d7da96a76ff595fb"
+  integrity sha512-53ZPY7+G8CPlrX2UfQcImX5Xcl0l5ZlhPdeeXlIToSntRcxcBcaVbunV2+yqTuCwf07UUmDOjhYvAyTvjOkwwA==
   dependencies:
     victory-area "^35.4.11"
     victory-axis "^35.4.11"
     victory-bar "^35.4.11"
     victory-box-plot "^35.4.11"
-    victory-brush-container "^35.4.12"
+    victory-brush-container "^35.5.0"
     victory-brush-line "^35.4.11"
     victory-candlestick "^35.4.11"
     victory-chart "^35.4.11"
     victory-core "^35.4.11"
-    victory-create-container "^35.4.13"
+    victory-create-container "^35.5.0"
     victory-cursor-container "^35.4.11"
     victory-errorbar "^35.4.11"
     victory-group "^35.4.11"
@@ -11528,10 +11528,10 @@ webpack-sources@^2.1.1:
     source-list-map "^2.0.1"
     source-map "^0.6.1"
 
-webpack@^5.30.0:
-  version "5.30.0"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.30.0.tgz#07d87c182a060e0c2491062f3dc0edc85a29d884"
-  integrity sha512-Zr9NIri5yzpfmaMea2lSMV1UygbW0zQsSlGLMgKUm63ACXg6alhd1u4v5UBSBjzYKXJN6BNMGVM7w165e7NxYA==
+webpack@^5.31.0:
+  version "5.31.0"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.31.0.tgz#fab61d0be896feca4af87bdad5c18815c0d63455"
+  integrity sha512-3fUfZT/FUuThWSSyL32Fsh7weUUfYP/Fjc/cGSbla5KiSo0GtI1JMssCRUopJTvmLjrw05R2q7rlLtiKdSzkzQ==
   dependencies:
     "@types/eslint-scope" "^3.7.0"
     "@types/estree" "^0.0.46"
