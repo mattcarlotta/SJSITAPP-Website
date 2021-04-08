@@ -14,12 +14,15 @@ import {
   GridColumns,
   GridColDef,
   GridPageChangeParams,
+  GridRowId,
+  GridSelectionModelChangeParams,
   GridValueGetterParams,
   TURLQuery
 } from "~types";
 
 export type TTableProps = {
   API: string;
+  disableCheckbox?: boolean;
   columns: GridColumns;
   clearFilters: () => void;
   edit?: string;
@@ -32,6 +35,7 @@ export type TTableState = {
   data: Array<any>;
   isLoading: boolean;
   totalDocs: number;
+  selectedIds: Array<GridRowId>;
 };
 
 export type TTableData = {
@@ -42,21 +46,24 @@ export type TTableData = {
 const initalState = {
   data: [],
   isLoading: true,
-  totalDocs: 0
+  totalDocs: 0,
+  selectedIds: []
 };
 
 const Table = ({
   API,
   // clearFilters,
   columns,
+  disableCheckbox,
   queries,
   queryString,
   updateQuery,
   ...rest
 }: TTableProps): JSX.Element => {
   const [state, setState] = React.useState<TTableState>(initalState);
-  const { data, isLoading, totalDocs } = state;
-  const page = parseInt(get(queries, ["page"]), 10) - 1;
+  const { data, isLoading, selectedIds, totalDocs } = state;
+  const page = parseInt(get(queries, ["page"]), 10);
+  const currentPage = page && page < 0 ? page - 1 : 0;
   const invalidPage = !isLoading && isEmpty(data) && totalDocs > 0;
 
   const fetchData = React.useCallback(async (): Promise<void> => {
@@ -67,7 +74,8 @@ const Table = ({
       setState({
         data: data.docs,
         isLoading: false,
-        totalDocs: data.totalDocs
+        totalDocs: data.totalDocs,
+        selectedIds: []
       });
     } catch (err) {
       toast({ type: "error", message: err.toString() });
@@ -77,6 +85,12 @@ const Table = ({
 
   const handlePageChange = ({ page }: GridPageChangeParams): void => {
     updateQuery({ page: page + 1 });
+  };
+
+  const handleSelectionChange = ({
+    selectionModel
+  }: GridSelectionModelChangeParams): void => {
+    setState(prevState => ({ ...prevState, selectedIds: selectionModel }));
   };
 
   const deleteRecord = React.useCallback(
@@ -95,6 +109,21 @@ const Table = ({
     [API, app, parseMessage, toast]
   );
 
+  const deleteManyRecords = React.useCallback(async (): Promise<void> => {
+    try {
+      const res = await app.delete(`${API}/delete-many`, {
+        data: { ids: selectedIds }
+      });
+      const message = parseMessage(res);
+
+      toast({ type: "success", message });
+
+      setState(initalState);
+    } catch (err) {
+      toast({ type: "error", message: err.toString() });
+    }
+  }, [API, app, parseMessage, selectedIds, toast]);
+
   const columnsWithActions = React.useMemo(
     (): Array<GridColDef> => [
       ...columns,
@@ -103,11 +132,18 @@ const Table = ({
         headerName: "Actions",
         width: 95,
         renderCell: (params: GridValueGetterParams): JSX.Element => (
-          <TableActions deleteRecord={deleteRecord} params={params} {...rest} />
+          <TableActions
+            disableCheckbox={disableCheckbox}
+            deleteRecord={deleteRecord}
+            handleDeleteManyClick={deleteManyRecords}
+            params={params}
+            selectedIds={selectedIds}
+            {...rest}
+          />
         )
       }
     ],
-    [columns]
+    [columns, selectedIds]
   );
 
   React.useEffect(() => {
@@ -134,16 +170,19 @@ const Table = ({
         </FadeIn>
       ) : (
         <div
+          data-testid="table"
           style={{
             height: 645,
             width: "100%"
           }}
         >
           <DataGrid
+            disableCheckbox={disableCheckbox}
             rows={data}
             totalDocs={totalDocs}
             handlePageChange={handlePageChange}
-            page={page}
+            handleSelectionChange={handleSelectionChange}
+            page={currentPage}
             columns={columnsWithActions}
           />
         </div>

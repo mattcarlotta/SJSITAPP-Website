@@ -1,14 +1,21 @@
 import { DataGrid } from "@material-ui/data-grid";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import NoTableData from "~components/Layout/NoTableData";
-import { GridColumns, GridRowsProp, GridPageChangeParams } from "~types";
+import {
+  GridColumns,
+  GridRowsProp,
+  GridPageChangeParams,
+  GridSelectionModelChangeParams
+} from "~types";
 
 export type TTableProps = {
   columns: GridColumns;
+  disableCheckbox: boolean;
   page: number;
   rows: GridRowsProp;
   totalDocs: number;
   handlePageChange: (params: GridPageChangeParams) => void;
+  handleSelectionChange: (selection: GridSelectionModelChangeParams) => void;
 };
 
 const customCheckbox = (theme: Theme) => ({
@@ -112,8 +119,10 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const CustomDataGrid = ({
+  disableCheckbox,
   columns,
   handlePageChange,
+  handleSelectionChange,
   page,
   rows,
   totalDocs
@@ -124,12 +133,13 @@ const CustomDataGrid = ({
     components={{
       NoRowsOverlay: NoTableData
     }}
-    checkboxSelection
+    checkboxSelection={!disableCheckbox}
     disableColumnMenu
     disableSelectionOnClick
     columns={columns}
     getRowId={row => row._id}
     onPageChange={handlePageChange}
+    onSelectionModelChange={handleSelectionChange}
     pagination
     page={page}
     pageSize={10}
@@ -138,5 +148,9 @@ const CustomDataGrid = ({
     rowCount={totalDocs}
   />
 );
+
+CustomDataGrid.defaultProps = {
+  disableCheckbox: false
+};
 
 export default CustomDataGrid;

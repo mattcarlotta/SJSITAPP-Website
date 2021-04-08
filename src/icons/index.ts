@@ -29,6 +29,7 @@ export { FaCalendarPlus } from "@react-icons/all-files/fa/FaCalendarPlus";
 export { FaCalendarTimes } from "@react-icons/all-files/fa/FaCalendarTimes";
 export { FaChartArea } from "@react-icons/all-files/fa/FaChartArea";
 export { FaChartBar } from "@react-icons/all-files/fa/FaChartBar";
+export { FaCheckSquare } from "@react-icons/all-files/fa/FaCheckSquare";
 export { FaChevronLeft } from "@react-icons/all-files/fa/FaChevronLeft";
 export { FaChevronRight } from "@react-icons/all-files/fa/FaChevronRight";
 export { FaClipboardCheck } from "@react-icons/all-files/fa/FaClipboardCheck";

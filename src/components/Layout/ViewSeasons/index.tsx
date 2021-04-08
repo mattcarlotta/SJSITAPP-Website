@@ -35,7 +35,13 @@ export const ViewSeasons = (): JSX.Element => (
       </FlexEnd>
       <QueryHandler>
         {props => (
-          <Table {...props} API="seasons" edit="seasons" columns={columns} />
+          <Table
+            {...props}
+            disableCheckbox
+            API="seasons"
+            edit="seasons"
+            columns={columns}
+          />
         )}
       </QueryHandler>
     </Card>

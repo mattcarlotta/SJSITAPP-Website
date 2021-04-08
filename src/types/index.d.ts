@@ -23,7 +23,9 @@ import {
   GridColDef,
   GridColumns,
   GridPageChangeParams,
+  GridRowId,
   GridRowsProp,
+  GridSelectionModelChangeParams,
   GridValueGetterParams
 } from "@material-ui/data-grid";
 import { TransitionProps } from "@material-ui/core/transitions";
@@ -308,7 +310,9 @@ export {
   GridColDef,
   GridColumns,
   GridPageChangeParams,
+  GridRowId,
   GridRowsProp,
+  GridSelectionModelChangeParams,
   GridValueGetterParams,
   KeyboardEvent,
   MouseEvent,

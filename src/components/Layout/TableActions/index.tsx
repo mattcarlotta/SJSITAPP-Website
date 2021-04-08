@@ -1,18 +1,22 @@
 import * as React from "react";
 import get from "lodash.get";
+import isEmpty from "lodash.isempty";
 import { Dialog, Slide } from "@material-ui/core";
 import Button from "~components/Layout/Button";
 import Divider from "~components/Layout/Divider";
 import Title from "~components/Layout/Title";
 import Padding from "~components/Layout/Padding";
 import Link from "~components/Navigation/Link";
-import { IconContext, FaEdit, FaTools, FaTrash } from "~icons";
-import { GridValueGetterParams, TransitionProps } from "~types";
+import { IconContext, FaCheckSquare, FaEdit, FaTools, FaTrash } from "~icons";
+import { GridRowId, GridValueGetterParams, TransitionProps } from "~types";
 
 export type TTableActionsProps = {
   deleteRecord: (id: string) => Promise<void>;
+  disableCheckbox?: boolean;
+  handleDeleteManyClick: () => void;
   edit?: string;
   params: GridValueGetterParams;
+  selectedIds: Array<GridRowId>;
 };
 
 const Transition = React.forwardRef(function Transition(
@@ -24,8 +28,11 @@ const Transition = React.forwardRef(function Transition(
 
 const TableActions = ({
   deleteRecord,
+  disableCheckbox,
+  handleDeleteManyClick,
   edit,
-  params
+  params,
+  selectedIds
 }: TTableActionsProps): JSX.Element => {
   const [open, setOpen] = React.useState(false);
   const id = get(params, ["id"]);
@@ -68,7 +75,7 @@ const TableActions = ({
           left="20px"
           right="20px"
           bottom="20px"
-          style={{ minWidth: 250 }}
+          style={{ minWidth: 300 }}
         >
           <Title centered fontSize="18px">
             Available Actions
@@ -113,6 +120,22 @@ const TableActions = ({
                 <FaTrash />
                 Delete
               </Button>
+              {!disableCheckbox && !isEmpty(selectedIds) && (
+                <Button
+                  danger
+                  uppercase
+                  type="button"
+                  dataTestId="delete-many-records"
+                  padding="8px"
+                  margin="5px 0"
+                  fontSize="16px"
+                  borderRadius="10px"
+                  onClick={handleDeleteManyClick}
+                >
+                  <FaCheckSquare />
+                  Delete ({selectedIds.length} Items)
+                </Button>
+              )}
               <Button
                 tertiary
                 uppercase
