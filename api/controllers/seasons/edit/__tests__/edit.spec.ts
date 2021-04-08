@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { connectToDB } from "~database";
-import { unableToLocateSeason } from "~messages/errors";
+import { missingSeasonId, unableToLocateSeason } from "~messages/errors";
 import Season, { ISeasonDocument } from "~models/season";
 import { staffSignIn } from "~test/utils/signIn";
 import app from "~test/utils/testServer";
@@ -25,6 +25,18 @@ describe("Edit Season Controller", () => {
   });
 
   it("rejects requests where the season id is invalid", done => {
+    app()
+      .get("/api/seasons/edit/undefined")
+      .set("Cookie", cookie)
+      .expect("Content-Type", /json/)
+      .expect(400)
+      .then(res => {
+        expect(res.body.err).toEqual(missingSeasonId);
+        done();
+      });
+  });
+
+  it("rejects requests where the season id is non-existent", done => {
     app()
       .get("/api/seasons/edit/601dc43483adb35b1ca678ea")
       .set("Cookie", cookie)

@@ -88,7 +88,7 @@ export const Events = ({
 
   React.useEffect(() => {
     if (isLoading) fetchEvents(activeTab);
-  }, [activeTab, isLoading]);
+  }, [activeTab, isLoading, fetchEvents]);
 
   return (
     <Card

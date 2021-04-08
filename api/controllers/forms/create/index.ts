@@ -36,6 +36,7 @@ const createForm = async (req: Request, res: Response): Promise<Response> => {
 
     const formStartMonth = moment(startMonth).startOf("day").toDate();
     const formEndMonth = moment(endMonth).endOf("day").toDate();
+    const formExpirationDate = moment(expirationDate).endOf("day").format();
 
     const existingForms = await Form.find({
       startMonth: { $gte: formStartMonth },
@@ -46,14 +47,14 @@ const createForm = async (req: Request, res: Response): Promise<Response> => {
     const sendEmailsDate = createDate(sendEmailNotificationsDate).format();
     const currentDay = getStartOfDay();
 
-    if (expirationDate < currentDay) throw invalidExpirationDate;
+    if (formExpirationDate < currentDay) throw invalidExpirationDate;
     if (sendEmailsDate < currentDay) throw invalidSendEmailNoteDate;
 
     await Form.create({
       seasonId,
-      startMonth,
-      endMonth,
-      expirationDate,
+      startMonth: formStartMonth,
+      endMonth: formEndMonth,
+      expirationDate: formExpirationDate,
       notes,
       sendEmailNotificationsDate: sendEmailsDate
     });
