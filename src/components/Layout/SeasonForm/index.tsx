@@ -115,7 +115,7 @@ const SeasonForm = ({
 
   React.useEffect(() => {
     if (isSubmitting && !errors) saveSeason();
-  }, [isSubmitting, errors]);
+  }, [isSubmitting, errors, saveSeason]);
 
   return (
     <Form data-testid="season-form" onSubmit={handleSubmit}>

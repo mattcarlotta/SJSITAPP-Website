@@ -12,15 +12,13 @@ import { staffSignIn } from "~test/utils/signIn";
 import app from "~test/utils/testServer";
 
 const newForm = {
+  endMonth: "2000-01-30T07:00:00.000Z",
   expirationDate: moment().add(7, "days").toDate(),
-  enrollMonth: [
-    new Date("2000-06-01T07:00:00.000Z"),
-    new Date("2000-06-30T07:00:00.000Z")
-  ],
-  notes: "Old Form 123",
+  notes: "Old Form 123233234",
   seasonId: "20002001",
   sendEmailNotificationsDate: moment().add(7, "days").toDate(),
-  sentEmails: false
+  sentEmails: false,
+  startMonth: "2000-02-01T07:00:00.000Z"
 };
 
 describe("Create Form Controller", () => {
@@ -66,10 +64,8 @@ describe("Create Form Controller", () => {
       .expect("Content-Type", /json/)
       .send({
         ...newForm,
-        enrollMonth: [
-          new Date("2000-08-01T07:00:00.000Z"),
-          new Date("2000-08-31T07:00:00.000Z")
-        ]
+        startMonth: "2000-08-01T07:00:00.000Z",
+        endMonth: "2000-08-31T07:00:00.000Z"
       })
       .expect(400)
       .then(res => {
@@ -112,7 +108,7 @@ describe("Create Form Controller", () => {
       .expect("Content-Type", /json/)
       .expect(201)
       .then(res => {
-        expect(res.body.message).toEqual("Successfully created a new form!");
+        expect(res.body.message).toEqual("Successfully created a new AP form!");
         done();
       });
   });

@@ -122,7 +122,7 @@ const TableActions = ({
               </Button>
               {!disableCheckbox && !isEmpty(selectedIds) && (
                 <Button
-                  danger
+                  outline
                   uppercase
                   type="button"
                   dataTestId="delete-many-records"

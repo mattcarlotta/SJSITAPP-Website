@@ -20,26 +20,26 @@ import {
 const createForm = async (req: Request, res: Response): Promise<Response> => {
   try {
     const {
+      endMonth,
       expirationDate,
-      enrollMonth,
       notes,
       sendEmailNotificationsDate,
-      seasonId
+      seasonId,
+      startMonth
     } = req.body;
 
-    if (!seasonId || !expirationDate || !enrollMonth)
+    if (!seasonId || !endMonth || !expirationDate || !startMonth)
       throw unableToCreateNewForm;
 
     const seasonExists = await Season.findOne({ seasonId });
     if (!seasonExists) throw unableToLocateSeason;
 
-    const [startMonthDate, endMonthDate] = enrollMonth;
-    const startMonth = moment(startMonthDate).startOf("day").toDate();
-    const endMonth = moment(endMonthDate).endOf("day").toDate();
+    const formStartMonth = moment(startMonth).startOf("day").toDate();
+    const formEndMonth = moment(endMonth).endOf("day").toDate();
 
     const existingForms = await Form.find({
-      startMonth: { $gte: startMonth },
-      endMonth: { $lte: endMonth }
+      startMonth: { $gte: formStartMonth },
+      endMonth: { $lte: formEndMonth }
     });
     if (!isEmpty(existingForms)) throw formAlreadyExists;
 
@@ -60,7 +60,7 @@ const createForm = async (req: Request, res: Response): Promise<Response> => {
 
     return res
       .status(201)
-      .json({ message: "Successfully created a new form!" });
+      .json({ message: "Successfully created a new AP form!" });
   } catch (err) {
     return sendError(err, 400, res);
   }

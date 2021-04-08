@@ -31,7 +31,7 @@ import {
   TEventResponse
 } from "~types";
 
-export type TAPFormState = {
+export type TAPResponseFormState = {
   fields: Array<TBaseFieldProps>;
   form: TAPFormDetails;
   errors: boolean;
@@ -39,7 +39,7 @@ export type TAPFormState = {
   isSubmitting: boolean;
 };
 
-export type TApParsedFields = {
+export type TAPResponseFormParsedFields = {
   _id: string;
   responses: Array<TEventResponse>;
 };
@@ -54,10 +54,10 @@ const initialState = {
   isSubmitting: false
 };
 
-const APForm = (): JSX.Element => {
+const APResponseForm = (): JSX.Element => {
   const router = useRouter();
   const id = get(router, ["query", "id"]);
-  const [state, setState] = React.useState<TAPFormState>(initialState);
+  const [state, setState] = React.useState<TAPResponseFormState>(initialState);
   const { errors, fields, form, isSubmitting, isLoading } = state;
 
   const fetchAPForm = React.useCallback(async (): Promise<void> => {
@@ -111,7 +111,7 @@ const APForm = (): JSX.Element => {
       const condensedFields = condenseFormFields(fields);
 
       const res = await app.put("forms/update/ap", {
-        ...parseFields<TApParsedFields>(condensedFields),
+        ...parseFields<TAPResponseFormParsedFields>(condensedFields),
         id
       });
 
@@ -209,4 +209,4 @@ const APForm = (): JSX.Element => {
   );
 };
 
-export default APForm;
+export default APResponseForm;

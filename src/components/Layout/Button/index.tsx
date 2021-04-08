@@ -41,6 +41,7 @@ export interface StyledButtonProps {
   danger?: boolean;
   tertiary?: boolean;
   alt?: boolean;
+  outline?: boolean;
   uppercase?: boolean;
   lowercase?: boolean;
   capitalize?: boolean;
@@ -59,6 +60,7 @@ const Button = styled(StyledButton)<StyledButtonProps>`
     if (props.primary || props.danger) return "#fff";
     if (props.tertiary) return "#e4e3e3";
     if (props.alt) return "#2e7c8a";
+    if (props.outline) return "#0085ff";
     return "#fff";
   }};
   background: ${props => {
@@ -81,6 +83,7 @@ const Button = styled(StyledButton)<StyledButtonProps>`
       if (props.primary) return "#0d6472";
       if (props.danger) return "#ef512d";
       if (props.tertiary) return "#2e7c8a";
+      if (props.outline) return "#0085ff";
       return "transparent";
     }};
   width: ${({ width }) => width || "100%"};
@@ -94,6 +97,7 @@ const Button = styled(StyledButton)<StyledButtonProps>`
     color: ${props => {
       if (props.primary || props.danger) return "#e4e3e3";
       if (props.tertiary || props.alt) return "#fff";
+      if (props.outline) return "#006cd0";
       return "#04515d";
     }};
     background: ${props => {
@@ -108,6 +112,7 @@ const Button = styled(StyledButton)<StyledButtonProps>`
         if (props.primary) return "#006d76";
         if (props.danger) return "#e8502e";
         if (props.tertiary) return "#3794a5";
+        if (props.outline) return "#006cd0";
         return "transparent";
       }};
     box-shadow: ${({ noGlow, danger }) =>

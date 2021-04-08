@@ -61,7 +61,7 @@ export const HelpPage = ({ role }: THelpPageProps): JSX.Element => {
 
   React.useEffect(() => {
     router.push(nextPath, undefined, { shallow: true });
-  }, [id]);
+  }, [id, router.push]);
 
   return (
     <>

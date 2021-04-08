@@ -75,7 +75,7 @@ export const ContactUsForm = (): JSX.Element => {
 
   React.useEffect(() => {
     if (state.isSubmitting && !state.errors) sendMail();
-  }, [state.isSubmitting, state.errors]);
+  }, [state.isSubmitting, state.errors, sendMail]);
 
   return (
     <Card

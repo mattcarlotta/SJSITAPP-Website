@@ -63,7 +63,7 @@ const Table = ({
   const [state, setState] = React.useState<TTableState>(initalState);
   const { data, isLoading, selectedIds, totalDocs } = state;
   const page = parseInt(get(queries, ["page"]), 10);
-  const currentPage = page && page < 0 ? page - 1 : 0;
+  const currentPage = page && page > 0 ? page - 1 : 0;
   const invalidPage = !isLoading && isEmpty(data) && totalDocs > 0;
 
   const fetchData = React.useCallback(async (): Promise<void> => {
@@ -148,11 +148,11 @@ const Table = ({
 
   React.useEffect(() => {
     if (isLoading) fetchData();
-  }, [isLoading]);
+  }, [isLoading, fetchData]);
 
   React.useEffect(() => {
     if (!isLoading) fetchData();
-  }, [queryString]);
+  }, [queryString, fetchData]);
 
   React.useEffect(() => {
     if (invalidPage) updateQuery({ page: Math.ceil(totalDocs / 10) });

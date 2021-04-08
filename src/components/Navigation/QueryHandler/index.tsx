@@ -38,7 +38,7 @@ export const QueryHandler = ({ children }: TQueryHandlerProps): JSX.Element => {
 
   React.useEffect(() => {
     setState(setQuery(router.query));
-  }, [router.query]);
+  }, [router.query, setQuery]);
 
   return (
     <>

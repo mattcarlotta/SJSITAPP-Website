@@ -78,6 +78,8 @@ const FieldGenerator = <
               {...rest}
               key={name}
               name={name}
+              textAlign="center"
+              justifyContent="center"
               value={value as string}
               selectOptions={selectOptions as Array<string>}
               onChange={onChange}

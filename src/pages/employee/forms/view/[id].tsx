@@ -1,4 +1,4 @@
-import ApForm from "~components/Layout/ApForm";
+import APResponseForm from "~components/Layout/APResponseForm";
 import requiresBasicCredentials from "~containers/App/requiresBasicCredentials";
 
-export default requiresBasicCredentials(ApForm);
+export default requiresBasicCredentials(APResponseForm);

@@ -71,18 +71,13 @@ export type TSignupData = {
   token: string;
 };
 
-export type TSeasonAPIQueryConfig = {
-  id?: string;
-  seasonId: string;
-  startDate: string;
-  endDate: string;
-};
-
 export type TSeasonData = {
   seasonId: string;
   startDate: string;
   endDate: string;
 };
+
+export type TSeasonAPIQueryConfig = { id?: string } & TSeasonData;
 
 export type TNewPasswordData = {
   password: string;
@@ -196,6 +191,16 @@ export type TEventData = {
   }>;
 };
 
+export type TForm = {
+  endMonth: string;
+  expirationDate: string;
+  seasonId: string;
+  sentEmails: boolean;
+  startMonth: string;
+  sendEmailNotificationsDate: string;
+  notes?: string;
+};
+
 export type TFormData = {
   _id?: string;
   startMonth?: string;
@@ -203,6 +208,8 @@ export type TFormData = {
   expirationDate?: string;
   eventCounts?: number;
 };
+
+export type TFormAPIQueryConfig = { id?: string } & TForm;
 
 export type TEventEmployeeResponse = Array<{
   _id?: string;

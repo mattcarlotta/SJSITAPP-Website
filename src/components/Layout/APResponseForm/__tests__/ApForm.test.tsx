@@ -5,7 +5,7 @@ import { dateTimeFormat, calendarDateFormat } from "~utils/dateFormats";
 import mockApp from "~utils/mockAxios";
 import moment from "~utils/momentWithTimezone";
 import waitFor from "~utils/waitFor";
-import ApForm from "../index";
+import APResponseForm from "../index";
 
 const events = [
   {
@@ -89,11 +89,11 @@ mockApp
   .onPut(SUBMISSIONAPI)
   .reply(200, { message: "Successfully submitted AP form!" });
 
-describe("ApForm", () => {
+describe("APResponseForm", () => {
   let wrapper: ReactWrapper;
   let findById: (id: string) => ReactWrapper;
   beforeEach(() => {
-    wrapper = mount(<ApForm />);
+    wrapper = mount(<APResponseForm />);
     findById = id => wrapper.find(`[data-testid='${id}']`);
   });
 
