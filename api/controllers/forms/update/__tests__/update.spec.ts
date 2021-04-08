@@ -21,23 +21,19 @@ const newForm = {
   sentEmails: false
 };
 
-const enrollMonth = [
-  new Date("2001-12-01T07:00:00.000Z"),
-  new Date("2001-12-31T07:00:00.000Z")
-];
+const startMonth = "2001-12-01T07:00:00.000Z";
+const endMonth = "2001-12-31T07:00:00.000Z";
 
 const existingForm = {
   ...newForm,
-  startMonth: enrollMonth[0],
-  endMonth: enrollMonth[1]
+  startMonth,
+  endMonth
 };
 
 const updatedForm = {
   ...newForm,
-  enrollMonth: [
-    new Date("2001-01-01T07:00:00.000Z"),
-    new Date("2001-01-31T07:00:00.000Z")
-  ]
+  startDate: "2001-01-01T07:00:00.000Z",
+  endDate: "2001-01-31T07:00:00.000Z"
 };
 
 describe("Update Form Controller", () => {
@@ -72,7 +68,7 @@ describe("Update Form Controller", () => {
       .put("/api/forms/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
-      .send({ ...updatedForm, _id: form!._id, seasonId: "0000000" })
+      .send({ ...updatedForm, id: form!._id, seasonId: "0000000" })
       .expect(400)
       .then(res => {
         expect(res.body.err).toEqual(unableToLocateSeason);
@@ -85,7 +81,7 @@ describe("Update Form Controller", () => {
       .put("/api/forms/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
-      .send({ ...updatedForm, _id: "a01dc43483adb35b1ca678ea" })
+      .send({ ...updatedForm, id: "a01dc43483adb35b1ca678ea" })
       .expect(400)
       .then(res => {
         expect(res.body.err).toEqual(unableToLocateForm);
@@ -97,7 +93,7 @@ describe("Update Form Controller", () => {
     app()
       .put("/api/forms/update")
       .set("Cookie", cookie)
-      .send({ ...updatedForm, _id: form!._id, enrollMonth })
+      .send({ ...updatedForm, id: form!._id, startMonth, endMonth })
       .expect("Content-Type", /json/)
       .expect(400)
       .then(res => {
@@ -110,11 +106,11 @@ describe("Update Form Controller", () => {
     app()
       .put("/api/forms/update")
       .set("Cookie", cookie)
-      .send({ ...updatedForm, _id: form!._id })
+      .send({ ...updatedForm, id: form!._id })
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
-        expect(res.body.message).toEqual("Successfully updated the form!");
+        expect(res.body.message).toEqual("Successfully updated the AP form!");
         done();
       });
   });
@@ -125,13 +121,13 @@ describe("Update Form Controller", () => {
       .set("Cookie", cookie)
       .send({
         ...updatedForm,
-        _id: form!._id,
+        id: form!._id,
         sendEmailNotificationsDate: new Date("2001-01-07T07:00:00.000Z")
       })
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
-        expect(res.body.message).toEqual("Successfully updated the form!");
+        expect(res.body.message).toEqual("Successfully updated the AP form!");
         done();
       });
   });

@@ -20,7 +20,7 @@ const getFormForViewing = async (
     const existingForm = await Form.findOne({ _id }, { __v: 0 });
     if (!existingForm) throw unableToLocateForm;
 
-    return res.status(200).json({ form: existingForm });
+    return res.status(200).send(existingForm);
   } catch (err) {
     return sendError(err, 400, res);
   }

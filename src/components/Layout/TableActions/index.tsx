@@ -7,16 +7,27 @@ import Divider from "~components/Layout/Divider";
 import Title from "~components/Layout/Title";
 import Padding from "~components/Layout/Padding";
 import Link from "~components/Navigation/Link";
-import { IconContext, FaCheckSquare, FaEdit, FaTools, FaTrash } from "~icons";
+import {
+  IconContext,
+  FaCheckSquare,
+  FaEdit,
+  FaSearchPlus,
+  FaShareSquare,
+  FaTools,
+  FaTrash
+} from "~icons";
 import { GridRowId, GridValueGetterParams, TransitionProps } from "~types";
 
 export type TTableActionsProps = {
-  deleteRecord: (id: string) => Promise<void>;
   disableCheckbox?: boolean;
+  handleDeleteRecord: (id: string) => Promise<void>;
   handleDeleteManyClick: () => void;
+  handleResendMail: (id: string) => Promise<void>;
   edit?: string;
   params: GridValueGetterParams;
+  resend?: boolean;
   selectedIds: Array<GridRowId>;
+  view?: string;
 };
 
 const Transition = React.forwardRef(function Transition(
@@ -27,12 +38,15 @@ const Transition = React.forwardRef(function Transition(
 });
 
 const TableActions = ({
-  deleteRecord,
   disableCheckbox,
+  handleDeleteRecord,
   handleDeleteManyClick,
+  handleResendMail,
   edit,
   params,
-  selectedIds
+  resend,
+  selectedIds,
+  view
 }: TTableActionsProps): JSX.Element => {
   const [open, setOpen] = React.useState(false);
   const id = get(params, ["id"]);
@@ -47,7 +61,12 @@ const TableActions = ({
 
   const handleDeleteClick = (): void => {
     handleClose();
-    deleteRecord(id as string);
+    handleDeleteRecord(id as string);
+  };
+
+  const handleResendMailClick = (): void => {
+    handleClose();
+    handleResendMail(id as string);
   };
 
   return (
@@ -91,6 +110,21 @@ const TableActions = ({
             }}
           >
             <Padding top="5px" left="5px" right="5px" bottom="5px">
+              {view && (
+                <Link
+                  alt
+                  display="block"
+                  dataTestId="view-record"
+                  padding="8px"
+                  fontSize="16px"
+                  margin="5px 0"
+                  width="100%"
+                  href={`/employee/${view}/view/${id}`}
+                >
+                  <FaSearchPlus />
+                  View
+                </Link>
+              )}
               {edit && (
                 <Link
                   alt
@@ -105,6 +139,22 @@ const TableActions = ({
                   <FaEdit />
                   Edit
                 </Link>
+              )}
+              {resend && (
+                <Button
+                  primary
+                  uppercase
+                  type="button"
+                  dataTestId="resend-record"
+                  padding="8px"
+                  margin="5px 0"
+                  fontSize="16px"
+                  borderRadius="10px"
+                  onClick={handleResendMailClick}
+                >
+                  <FaShareSquare style={{ fontSize: 18 }} />
+                  Resend
+                </Button>
               )}
               <Button
                 danger

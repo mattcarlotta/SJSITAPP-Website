@@ -19,15 +19,16 @@ import {
 const updateForm = async (req: Request, res: Response): Promise<Response> => {
   try {
     const {
-      _id,
+      id: _id,
       expirationDate,
-      enrollMonth,
+      endMonth,
       notes,
       seasonId,
-      sendEmailNotificationsDate
+      sendEmailNotificationsDate,
+      startMonth
     } = req.body;
 
-    if (!_id || !seasonId || !expirationDate || !enrollMonth)
+    if (!_id || !seasonId || !endMonth || !expirationDate || !startMonth)
       throw unableToUpdateForm;
 
     const seasonExists = await Season.findOne({ seasonId });
@@ -36,14 +37,14 @@ const updateForm = async (req: Request, res: Response): Promise<Response> => {
     const formExists = await Form.findOne({ _id });
     if (!formExists) throw unableToLocateForm;
 
-    const [startMonthDate, endMonthDate] = enrollMonth;
-    const startMonth = moment(startMonthDate).startOf("day").toDate();
-    const endMonth = moment(endMonthDate).endOf("day").toDate();
+    const formStartMonth = moment(startMonth).startOf("day").toDate();
+    const formEndMonth = moment(endMonth).endOf("day").toDate();
+    const formExpirationDate = moment(expirationDate).endOf("day").toDate();
 
     const existingForms = await Form.find({
       _id: { $ne: formExists._id },
-      startMonth: { $gte: startMonth },
-      endMonth: { $lte: endMonth }
+      startMonth: { $gte: formStartMonth },
+      endMonth: { $lte: formEndMonth }
     });
     if (!isEmpty(existingForms)) throw formAlreadyExists;
 
@@ -66,15 +67,17 @@ const updateForm = async (req: Request, res: Response): Promise<Response> => {
 
     await formExists.updateOne({
       seasonId,
-      startMonth,
-      endMonth,
-      expirationDate,
+      startMonth: formStartMonth,
+      endMonth: formEndMonth,
+      expirationDate: formExpirationDate,
       notes,
       sendEmailNotificationsDate: incomingSendEmailsDate,
       sentEmails: emailNotificationStatus
     });
 
-    return res.status(200).json({ message: "Successfully updated the form!" });
+    return res
+      .status(200)
+      .json({ message: "Successfully updated the AP form!" });
   } catch (err) {
     return sendError(err, 400, res);
   }

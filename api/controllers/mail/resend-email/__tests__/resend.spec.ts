@@ -28,7 +28,7 @@ describe("Mail Resend Controller", () => {
 
   it("rejects requests where the mail id is invalid", done => {
     app()
-      .put("/api/mail/resend/a01dc43483adb35b1ca678ea")
+      .put("/api/mail/resend-email/a01dc43483adb35b1ca678ea")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -40,7 +40,7 @@ describe("Mail Resend Controller", () => {
 
   it("accepts requests to resend an email", done => {
     app()
-      .put(`/api/mail/resend/${email._id}`)
+      .put(`/api/mail/resend-email/${email._id}`)
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)

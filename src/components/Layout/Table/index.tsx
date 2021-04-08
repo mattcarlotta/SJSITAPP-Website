@@ -28,7 +28,9 @@ export type TTableProps = {
   edit?: string;
   queries: TURLQuery;
   queryString: string;
+  resend?: boolean;
   updateQuery: (nextQuery: TURLQuery) => void;
+  view?: string;
 };
 
 export type TTableState = {
@@ -124,6 +126,22 @@ const Table = ({
     }
   }, [API, app, parseMessage, selectedIds, toast]);
 
+  const resendRecordMail = React.useCallback(
+    async (id: string): Promise<void> => {
+      try {
+        const res = await app.put(`${API}/resend-email/${id}`);
+        const message = parseMessage(res);
+
+        toast({ type: "success", message });
+
+        setState(initalState);
+      } catch (err) {
+        toast({ type: "error", message: err.toString() });
+      }
+    },
+    [API, app, parseMessage, toast]
+  );
+
   const columnsWithActions = React.useMemo(
     (): Array<GridColDef> => [
       ...columns,
@@ -134,8 +152,9 @@ const Table = ({
         renderCell: (params: GridValueGetterParams): JSX.Element => (
           <TableActions
             disableCheckbox={disableCheckbox}
-            deleteRecord={deleteRecord}
+            handleDeleteRecord={deleteRecord}
             handleDeleteManyClick={deleteManyRecords}
+            handleResendMail={resendRecordMail}
             params={params}
             selectedIds={selectedIds}
             {...rest}

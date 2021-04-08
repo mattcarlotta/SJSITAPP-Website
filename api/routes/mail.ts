@@ -18,7 +18,7 @@ const mailRoutes = (router: Router): void => {
   router.delete("/mail/delete-many", requireStaffRole, deleteManyMails);
   router.delete("/mail/delete/:id", requireStaffRole, deleteMail);
   router.get("/mail/edit/:id", requireStaffRole, getMailForViewing);
-  router.put("/mail/resend/:id", requireStaffRole, resendMail);
+  router.put("/mail/resend-email/:id", requireStaffRole, resendMail);
   router.put("/mail/update", requireStaffRole, updateMail);
 };
 

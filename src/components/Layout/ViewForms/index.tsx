@@ -35,7 +35,14 @@ export const ViewForms = (): JSX.Element => (
       </FlexEnd>
       <QueryHandler>
         {props => (
-          <Table {...props} API="forms" edit="forms" columns={columns} />
+          <Table
+            {...props}
+            resend
+            API="forms"
+            edit="forms"
+            view="forms"
+            columns={columns}
+          />
         )}
       </QueryHandler>
     </Card>

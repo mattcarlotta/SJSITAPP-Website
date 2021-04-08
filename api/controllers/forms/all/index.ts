@@ -19,7 +19,7 @@ const getAllForms = async (req: Request, res: Response): Promise<Response> => {
     const results = await Form.paginate(
       { ...filters },
       {
-        sort: { startMonth: -1 },
+        sort: { seasonId: -1, startMonth: -1 },
         page: parseInt((page as string) || "1", 10),
         limit: 10,
         select: "-notes -__v"
