@@ -113,9 +113,6 @@ const useStyles = makeStyles((theme: Theme) =>
         justifyContent: "center",
         overflowX: "auto"
       },
-      "& .MuiPaginationItem-root": {
-        borderRadius: 0
-      },
       ...customCheckbox(theme)
     }
   })
@@ -129,6 +126,7 @@ const CustomDataGrid = ({
   totalDocs
 }: TTableProps): JSX.Element => (
   <DataGrid
+    autoHeight
     className={useStyles().root}
     components={{
       NoRowsOverlay: NoTableData

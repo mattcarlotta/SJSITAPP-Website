@@ -23,7 +23,7 @@ export const ViewForms = (): JSX.Element => (
           alt
           hideShadow
           width="180px"
-          margin="10px 10px 20px 0"
+          margin="20px 20px 10px 0"
           padding="5px 10px"
           href="/employee/forms/create"
         >

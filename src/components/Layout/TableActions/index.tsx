@@ -6,7 +6,7 @@ import Divider from "~components/Layout/Divider";
 import Title from "~components/Layout/Title";
 import Padding from "~components/Layout/Padding";
 import Link from "~components/Navigation/Link";
-import { FaEdit, FaTools, FaTrash } from "~icons";
+import { IconContext, FaEdit, FaTools, FaTrash, MdCancel } from "~icons";
 import { GridValueGetterParams } from "~types";
 
 export type TTableActionsProps = {
@@ -65,37 +65,60 @@ const TableActions = ({
             Available Actions
           </Title>
           <Divider />
-          {edit && (
-            <Link
-              alt
-              display="block"
-              dataTestId="edit-record"
-              padding="5px"
-              fontSize="16px"
-              margin="5px 0"
-              width="100%"
-              href={`/employee/${edit}/edit/${id}`}
-            >
-              <FaEdit
-                style={{ position: "relative", top: 2, marginRight: 5 }}
-              />
-              Edit
-            </Link>
-          )}
-          <Button
-            danger
-            uppercase
-            type="button"
-            dataTestId="delete-record"
-            padding="5px"
-            margin="5px 0"
-            fontSize="16px"
-            borderRadius="10px"
-            onClick={handleDeleteClick}
+          <IconContext.Provider
+            value={{
+              style: {
+                position: "relative",
+                top: 2,
+                marginRight: 5
+              }
+            }}
           >
-            <FaTrash style={{ position: "relative", top: 2, marginRight: 5 }} />
-            Delete
-          </Button>
+            {edit && (
+              <Link
+                alt
+                display="block"
+                dataTestId="edit-record"
+                padding="5px"
+                fontSize="16px"
+                margin="5px 0"
+                width="100%"
+                href={`/employee/${edit}/edit/${id}`}
+              >
+                <FaEdit />
+                Edit
+              </Link>
+            )}
+            <Button
+              danger
+              uppercase
+              type="button"
+              dataTestId="delete-record"
+              padding="5px"
+              margin="5px 0"
+              fontSize="16px"
+              borderRadius="10px"
+              onClick={handleDeleteClick}
+            >
+              <FaTrash />
+              Delete
+            </Button>
+            <Button
+              tertiary
+              uppercase
+              type="button"
+              dataTestId="delete-record"
+              padding="5px"
+              margin="5px 0"
+              fontSize="16px"
+              borderRadius="10px"
+              style={{ background: "#010404" }}
+              onClick={handleClose}
+            >
+              <MdCancel />
+              Cancel
+            </Button>
+          </IconContext.Provider>
         </Padding>
       </Dialog>
     </>
