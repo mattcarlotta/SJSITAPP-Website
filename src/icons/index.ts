@@ -89,7 +89,6 @@ export { FiPaperclip } from "@react-icons/all-files/fi/FiPaperclip";
 // MD
 export { MdAccessTime } from "@react-icons/all-files/md/MdAccessTime";
 export { MdAssignment } from "@react-icons/all-files/md/MdAssignment";
-export { MdCancel } from "@react-icons/all-files/md/MdCancel";
 export { MdChevronRight } from "@react-icons/all-files/md/MdChevronRight";
 export { MdDashboard } from "@react-icons/all-files/md/MdDashboard";
 export { MdExpandMore } from "@react-icons/all-files/md/MdExpandMore";

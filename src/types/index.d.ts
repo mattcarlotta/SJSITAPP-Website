@@ -25,6 +25,7 @@ import {
   GridRowsProp,
   GridValueGetterParams
 } from "@material-ui/data-grid";
+import { TransitionProps } from "@material-ui/core/transitions";
 import { DatePickerView } from "@material-ui/pickers";
 import { AnyAction, Store } from "redux";
 import { SagaIterator } from "redux-saga";
@@ -321,5 +322,6 @@ export {
   ReactText,
   RefObject,
   SagaIterator,
+  TransitionProps,
   TRootState
 };

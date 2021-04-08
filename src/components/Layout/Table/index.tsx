@@ -71,7 +71,7 @@ const Table = ({
       toast({ type: "error", message: err.toString() });
       setState(prevState => ({ ...prevState, isLoading: false }));
     }
-  }, [app, parseData, queryString]);
+  }, [API, app, parseData, queryString]);
 
   const handlePageChange = ({ page }: GridPageChangeParams): void => {
     updateQuery({ page: page + 1 });
@@ -90,7 +90,7 @@ const Table = ({
         toast({ type: "error", message: err.toString() });
       }
     },
-    [app, parseMessage, toast]
+    [API, app, parseMessage, toast]
   );
 
   React.useEffect(() => {

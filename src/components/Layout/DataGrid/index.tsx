@@ -75,18 +75,8 @@ const useStyles = makeStyles((theme: Theme) =>
       "& .MuiDataGrid-row:hover": {
         backgroundColor: "#fafafa"
       },
-      // "& .MuiDataGrid-renderingZone": {
-      //   borderLeft:
-      //     theme.palette.type === "light"
-      //       ? "1px solid #f0f0f0"
-      //       : "1px solid #1d1d1d"
-      // },
       "& .MuiDataGrid-columnsContainer": {
         backgroundColor: theme.palette.type === "light" ? "#fafafa" : "#1d1d1d"
-        // border:
-        //   theme.palette.type === "light"
-        //     ? "1px solid #f0f0f0"
-        //     : "1px solid #1d1d1d"
       },
       "& .MuiDataGrid-iconSeparator": {
         display: "none"
@@ -98,6 +88,9 @@ const useStyles = makeStyles((theme: Theme) =>
         borderRight: `1px solid ${
           theme.palette.type === "light" ? "#f0f0f0" : "#303030"
         }`
+      },
+      "& .MuiDataGrid-colCell:nth-last-child(2), .MuiDataGrid-cell:nth-last-child(2)": {
+        borderRight: 0
       },
       "& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell": {
         borderBottom: `1px solid ${
