@@ -27,7 +27,10 @@ const AppPageNotFound: NextPage = () => (
       <Head title="Page Not Found" />
       <Center>
         <Margin as="div" bottom="-30px">
-          <img src="/images/logo_192x192.png" alt="logo" />
+          <img
+            src={`${process.env.NEXT_PUBLIC_IMAGEAPI}/images/logo_192x192.png`}
+            alt="logo"
+          />
         </Margin>
         <ErrorStatus>Page Not Found</ErrorStatus>
         <ErrorMessage>

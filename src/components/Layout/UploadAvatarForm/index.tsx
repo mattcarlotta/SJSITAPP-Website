@@ -81,8 +81,11 @@ export const UploadAvatarForm = ({
   };
 
   React.useEffect(() => {
-    if (state.isSubmitting && serverError)
+    if (state.isSubmitting && serverError) {
+      /* istanbul ignore else */
+      if (imageRef && imageRef.current) imageRef.current.value = "";
       setState(prevState => ({ ...prevState, isSubmitting: false }));
+    }
   }, [serverError]);
 
   React.useEffect(() => {

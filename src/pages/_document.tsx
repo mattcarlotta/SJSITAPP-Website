@@ -9,6 +9,8 @@ import Document, {
 import { ServerStyleSheets } from "@material-ui/core/styles";
 import { version } from "../../package.json";
 
+const imageAPI = process.env.NEXT_PUBLIC_IMAGEAPI;
+
 class CustomDocument extends Document {
   static async getInitialProps(ctx: DocumentContext): Promise<any> {
     const sheets = new ServerStyleSheets();
@@ -44,7 +46,7 @@ class CustomDocument extends Document {
         <link
           rel="apple-touch-icon"
           sizes="192x192"
-          href="/images/logo_192x192.png"
+          href={`${imageAPI}/images/logo_192x192.png`}
         />
         <meta name="theme-color" content="#000000" />
         <meta name="msapplication-TileColor" content="#000000" />
@@ -53,7 +55,7 @@ class CustomDocument extends Document {
         <link
           rel="apple-touch-icon"
           sizes="192x192"
-          href="images/logo_192x192.png"
+          href={`${imageAPI}/images/logo_192x192.png`}
         />
         <link
           rel="preload"
@@ -61,7 +63,7 @@ class CustomDocument extends Document {
           as="font"
           crossOrigin="anonymous"
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href={`${imageAPI}/images/favicon.ico`} />
         <link rel="manifest" href="/manifest.json" />
         <meta name="build version" content={version} />
       </Head>

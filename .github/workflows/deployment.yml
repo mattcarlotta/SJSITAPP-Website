@@ -3,16 +3,19 @@ name: Deployment
 "on":
   push:
     branches:
-      - canary
+      - testbranch
+
+env:
+  REMOTE: ${{secrets.USERNAME}}@${{secrets.HOST}}
 
 jobs:
   deploy:
     if: "!contains(github.event.commits[0].message, '[skip-ci]')"
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
 
     services:
       mongodb:
-        image: mongo:4.2.6
+        image: mongo:3.6.8
         ports:
           - 27017:27017
 
@@ -22,17 +25,16 @@ jobs:
 
       - name: Yarn Cache Directory
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo '::set-output name=dir::$(yarn cache dir)'
 
       - name: Utilize Yarn Cache Directory
-        uses: actions/cache@v2
+        uses: actions/cache@v1
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-
       - name: Utilize Next Cache Directory
         uses: actions/cache@v2
         with:
@@ -44,15 +46,61 @@ jobs:
         run: yarn install
 
       - name: Run App Tests
-        id: app-tests
+        id: apptests
         run: yarn test
+        env:
+          APIPORT: 5000
+          CLIENT: http://localhost:3000
+          COOKIEKEY: THIS IS JUST A TEST
+          DATABASE: test-db
+          EMAIL: test.test@test.com
+          NEXT_PUBLIC_BASEURL: http://localhost:5000/api/
+          NEXT_PUBLIC_CLIENT: http://localhost:3000
+          NEXT_PUBLIC_IMAGEAPI: http://localhost:4000
+          PORT: 3000
 
       - name: Run API Tests
-        if: steps.build.app-tests == 0
-        id: api-tests
-        run: yarn test:api
+        if: steps.apptests.exit_code == 0
+        id: apitests
+        run: yarn test
+        env:
+          APIPORT: 5000
+          CLIENT: http://localhost:3000
+          COOKIEKEY: THIS IS JUST A TEST
+          DATABASE: test-db
+          EMAIL: test.test@test.com
+          NEXT_PUBLIC_BASEURL: http://localhost:5000/api/
+          NEXT_PUBLIC_CLIENT: http://localhost:3000
+          NEXT_PUBLIC_IMAGEAPI: http://localhost:4000
+          PORT: 3000
 
-      - name: Run E2E Tests
-        if: steps.build.api-tests == 0
+      - name: Create Local Build
+        if: steps.apitests.exit_code == 0
         id: build
-        run: yarn test:e2erun
+        run: yarn build:app
+        env:
+          APIPORT: ${{ secrets.APIPORT }}
+          CLIENT: ${{ secrets.CLIENT }}
+          COOKIEKEY: ${{ secrets.COOKIEKEY }}
+          DATABASE: ${{ secrets.DATABASE }}
+          DOMAIN: ${{ secrets.DOMAIN }}
+          NEXT_PUBLIC_BASEURL: ${{ secrets.BASEURL }}
+          NEXT_PUBLIC_CLIENT: ${{ secrets.CLIENT }}
+          NEXT_PUBLIC_IMAGEAPI: ${{ secrets.IMAGEAPI }}
+          PORT: ${{ secrets.PORT }}
+
+      - name: Deploy Build
+        if: steps.build.exit_code == 0
+        run: |
+          echo '${{secrets.DEPLOYKEY}}' > deploy_key
+          chmod 600 ./deploy_key
+          rsync -chav --delete --exclude prod.json --exclude .env.prod --exclude='$(yarn cache dir)' \
+            -e 'ssh -i ./deploy_key -o StrictHostKeyChecking=no' \
+            --exclude /deploy_key \
+            --exclude /.git/ \
+            --exclude /node_modules/ \
+            --exclude /prod.json/ \
+            --exclude '$(yarn cache dir)' \
+            ./ ${{env.REMOTE}}:${{secrets.DESTINATION}}
+      - name: Restart Application
+        run: ssh -i ./deploy_key -o 'StrictHostKeyChecking no' -v ${{env.REMOTE}} 'cd ${{secrets.DESTINATION}};yarn;pm2 restart 0'
