@@ -77,7 +77,7 @@ jobs:
       - name: Create Local Build
         if: steps.apitests.exit_code == 0
         id: build
-        run: yarn build:app
+        run: yarn build
         env:
           APIPORT: ${{ secrets.APIPORT }}
           CLIENT: ${{ secrets.CLIENT }}

@@ -59,12 +59,12 @@ class CustomDocument extends Document {
         />
         <link
           rel="preload"
-          href="/fonts/Karla.ttf"
+          href={`${imageAPI}/assets/Karla.ttf`}
           as="font"
           crossOrigin="anonymous"
         />
         <link rel="icon" href={`${imageAPI}/images/favicon.ico`} />
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href={`${imageAPI}/assets/manifest.json`} />
         <meta name="build version" content={version} />
       </Head>
       <body>
