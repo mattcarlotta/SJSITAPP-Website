@@ -12,7 +12,7 @@ import {
 import {
   getAllMembers,
   getMemberEventCounts,
-  getAllMemberNames
+  getAllMemberEmails
 } from "~controllers/members";
 import { requireAuth, requireStaffRole } from "~services/strategies";
 
@@ -35,7 +35,7 @@ const memberRoutes = (router: Router): void => {
     requireStaffRole,
     getMemberEventCounts
   );
-  router.get("/members/names", requireStaffRole, getAllMemberNames);
+  router.get("/members/emails", requireStaffRole, getAllMemberEmails);
 };
 
 export default memberRoutes;

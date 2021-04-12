@@ -14,21 +14,14 @@ describe("Retrieve All Members Names Controller", () => {
     await mongoose.connection.close();
   });
 
-  it("accepts requests to retrieve all members' names", done => {
+  it("accepts requests to retrieve all members' emails", done => {
     app()
-      .get("/api/members/names")
+      .get("/api/members/emails")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
-        expect(res.body).toEqual({
-          members: expect.arrayContaining([
-            expect.objectContaining({
-              _id: expect.any(String),
-              email: expect.any(String)
-            })
-          ])
-        });
+        expect(res.body).toEqual(expect.arrayContaining([expect.any(String)]));
         done();
       });
   });

@@ -51,7 +51,7 @@ const TextAreaComponent = ({
 );
 
 const TextArea = styled(TextAreaComponent)`
-  min-height: 265px;
+  min-height: 270px;
   margin-bottom: 15px;
 
   textarea {

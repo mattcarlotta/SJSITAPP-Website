@@ -5,7 +5,13 @@ import Radio from "~components/Forms/Radio";
 import Select from "~components/Forms/Select";
 import Switch from "~components/Forms/Switch";
 import TextArea from "~components/Forms/TextArea";
-import { ChangeEvent, EventTarget, TBaseFieldProps } from "~types";
+import TransferList from "~components/Forms/TransferList";
+import {
+  ChangeEvent,
+  EmailTransferList,
+  EventTarget,
+  TBaseFieldProps
+} from "~types";
 
 /**
  * Reusable function that converts an object of properties into a React form components.
@@ -33,89 +39,102 @@ const FieldGenerator = <
   onChange: K;
 }): JSX.Element => (
   <>
-    {fields.map(({ name, value, type, selectOptions, ...rest }) => {
-      switch (type) {
-        case "text":
-        case "email":
-        case "password": {
-          return (
-            <Input
-              {...rest}
-              key={name}
-              name={name}
-              type={type}
-              value={value as string}
-              onChange={onChange}
-            />
-          );
+    {fields.map(
+      ({ name, value, type, selectOptions, transferList, ...rest }) => {
+        switch (type) {
+          case "text":
+          case "email":
+          case "password": {
+            return (
+              <Input
+                {...rest}
+                key={name}
+                name={name}
+                type={type}
+                value={value as string}
+                onChange={onChange}
+              />
+            );
+          }
+          case "date": {
+            return (
+              <DatePicker
+                {...rest}
+                key={name}
+                name={name}
+                value={value as string}
+                onChange={onChange}
+              />
+            );
+          }
+          case "radiogroup": {
+            return (
+              <Radio
+                {...rest}
+                key={name}
+                name={name}
+                value={value as string}
+                selectOptions={selectOptions as Array<string>}
+                onChange={onChange}
+              />
+            );
+          }
+          case "select": {
+            return (
+              <Select
+                {...rest}
+                key={name}
+                name={name}
+                textAlign="center"
+                justifyContent="center"
+                value={value as string}
+                selectOptions={selectOptions as Array<string>}
+                onChange={onChange}
+              />
+            );
+          }
+          case "switch": {
+            return (
+              <Switch
+                {...rest}
+                key={name}
+                name={name}
+                onChange={onChange}
+                value={value as boolean}
+              />
+            );
+          }
+          case "textarea": {
+            return (
+              <TextArea
+                {...rest}
+                key={name}
+                name={name}
+                value={value as string}
+                onChange={onChange}
+              />
+            );
+          }
+          case "transfer": {
+            return (
+              <TransferList
+                {...rest}
+                key={name}
+                name={name}
+                transferList={transferList as EmailTransferList}
+                onChange={onChange}
+              />
+            );
+          }
+          default:
+            return (
+              <div key={name} data-testid="invalid-component">
+                Not a valid component
+              </div>
+            );
         }
-        case "date": {
-          return (
-            <DatePicker
-              {...rest}
-              key={name}
-              name={name}
-              value={value as string}
-              onChange={onChange}
-            />
-          );
-        }
-        case "radiogroup": {
-          return (
-            <Radio
-              {...rest}
-              key={name}
-              name={name}
-              value={value as string}
-              selectOptions={selectOptions as Array<string>}
-              onChange={onChange}
-            />
-          );
-        }
-        case "select": {
-          return (
-            <Select
-              {...rest}
-              key={name}
-              name={name}
-              textAlign="center"
-              justifyContent="center"
-              value={value as string}
-              selectOptions={selectOptions as Array<string>}
-              onChange={onChange}
-            />
-          );
-        }
-        case "switch": {
-          return (
-            <Switch
-              {...rest}
-              key={name}
-              name={name}
-              onChange={onChange}
-              value={value as boolean}
-            />
-          );
-        }
-        case "textarea": {
-          return (
-            <TextArea
-              {...rest}
-              key={name}
-              name={name}
-              value={value as string}
-              onChange={onChange}
-            />
-          );
-        }
-        default:
-          return (
-            <div key={name} data-testid="invalid-component">
-              Not a valid component
-            </div>
-          );
       }
-    })}
+    )}
   </>
 );
 

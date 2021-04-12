@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 import TooltipText from "~components/Layout/TooltipText";
-import { ReactNode } from "~types";
+import { CSSProperties, ReactNode } from "~types";
 
 const useClasses = makeStyles(() => ({
   arrow: {
@@ -30,27 +30,29 @@ export type TCustomTooltipProps = {
     | "top-end"
     | "top-start"
     | undefined;
-  title: string;
+  title: ReactNode;
+  styles?: CSSProperties;
 };
 
 const CustomTooltip = ({
   children,
   placement,
-  title
+  title,
+  styles
 }: TCustomTooltipProps): JSX.Element => {
   const classes = useClasses();
 
   return (
-    <span className="tooltip">
+    <div className="tooltip" style={{ display: "inline-block", ...styles }}>
       <Tooltip
         arrow
         classes={classes}
         placement={placement}
         title={<TooltipText>{title}</TooltipText>}
       >
-        <span>{children}</span>
+        <div>{children}</div>
       </Tooltip>
-    </span>
+    </div>
   );
 };
 

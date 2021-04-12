@@ -116,7 +116,7 @@ export type TIconType =
 export type EventTarget = {
   target: {
     name: string;
-    value: string | boolean;
+    value: string | boolean | Array<any>;
   };
 };
 
@@ -137,6 +137,8 @@ export type EventTargetDataset = {
 };
 
 export type TURLQuery = Record<string, any>;
+
+export type EmailTransferList = Array<string>;
 
 /// COMPONENTS ///
 export type TBaseFieldProps = {
@@ -164,6 +166,7 @@ export type TBaseFieldProps = {
   selectOptions?: Array<string>;
   type: string;
   tooltip?: string;
+  transferList?: EmailTransferList;
   value?: string | Moment | Array<Moment> | Array<string> | boolean | null;
   updateEvent?: boolean;
 };

@@ -1,4 +1,4 @@
-import EmailStatus from "~components/Layout/EmailStatus";
+import EmailReminders from "~components/Layout/EmailReminders";
 import FormatDate from "~components/Layout/FormatDate";
 import { dateTimeFormat, standardFormat } from "~utils/dateFormats";
 import { GridColumns, GridValueGetterParams } from "~types";
@@ -59,7 +59,7 @@ const Columns: GridColumns = [
     headerName: "Email Status",
     flex: 0.6,
     renderCell: (params: GridValueGetterParams): JSX.Element => (
-      <EmailStatus status={params.getValue("sentEmails") as boolean} />
+      <EmailReminders status={params.getValue("sentEmails") as boolean} />
     )
   }
 ];

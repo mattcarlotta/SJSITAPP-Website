@@ -22,7 +22,7 @@ describe("Retrieve All Mail Controller", () => {
       .expect(200)
       .then(res => {
         expect(res.body).toEqual({
-          mail: expect.arrayContaining([
+          docs: expect.arrayContaining([
             expect.objectContaining({
               _id: expect.any(String),
               message: expect.any(String),
