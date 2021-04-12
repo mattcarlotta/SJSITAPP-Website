@@ -1,11 +1,10 @@
-/* eslint-disable react/display-name */
 import EmailStatus from "~components/Layout/EmailStatus";
 import FormatDate from "~components/Layout/FormatDate";
 import { dateTimeFormat, standardFormat } from "~utils/dateFormats";
 import { GridColumns, GridValueGetterParams } from "~types";
 
 const Columns: GridColumns = [
-  { field: "_id", headerName: "Database Id", flex: 2 },
+  { field: "_id", headerName: "Database Id", flex: 2.25 },
   { field: "seasonId", headerName: "Season Id", width: 120 },
   {
     field: "startMonth",
@@ -15,17 +14,19 @@ const Columns: GridColumns = [
       <FormatDate
         format={standardFormat}
         date={params.getValue("startMonth") as Date}
+        style={{ width: "100%" }}
       />
     )
   },
   {
     field: "endMonth",
     headerName: "End Month",
-    flex: 1,
+    flex: 1.25,
     renderCell: (params: GridValueGetterParams): JSX.Element => (
       <FormatDate
         format={standardFormat}
         date={params.getValue("endMonth") as Date}
+        style={{ width: "100%" }}
       />
     )
   },
@@ -37,6 +38,7 @@ const Columns: GridColumns = [
       <FormatDate
         format={dateTimeFormat}
         date={params.getValue("expirationDate") as Date}
+        style={{ width: "100%" }}
       />
     )
   },
@@ -48,6 +50,7 @@ const Columns: GridColumns = [
       <FormatDate
         format={dateTimeFormat}
         date={params.getValue("sendEmailNotificationsDate") as Date}
+        style={{ width: "100%" }}
       />
     )
   },

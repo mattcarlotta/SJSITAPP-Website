@@ -1,3 +1,4 @@
+import * as React from "react";
 import Tooltip from "~components/Layout/Tooltip";
 import { IconContext, FaShareSquare, FaStopwatch } from "~icons";
 
@@ -23,4 +24,4 @@ const EmailReminders = ({ status }: { status: boolean }): JSX.Element => (
   </Tooltip>
 );
 
-export default EmailReminders;
+export default React.memo(EmailReminders);

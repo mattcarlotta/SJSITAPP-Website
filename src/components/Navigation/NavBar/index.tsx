@@ -23,7 +23,7 @@ const NavBar = ({
   const windowHeight = useWindowSize();
   const isMobile = windowHeight <= 1400;
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     if (isMobile && !collapsed) collapseSideNav();
   }, [pathname, isMobile]);
 

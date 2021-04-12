@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import FormatDate from "~components/Layout/FormatDate";
 import { standardFormat } from "~utils/dateFormats";
 import { GridColumns, GridValueGetterParams } from "~types";
@@ -14,6 +13,7 @@ const Columns: GridColumns = [
       <FormatDate
         format={standardFormat}
         date={params.getValue("startDate") as Date}
+        style={{ width: "100%" }}
       />
     )
   },
@@ -25,6 +25,7 @@ const Columns: GridColumns = [
       <FormatDate
         format={standardFormat}
         date={params.getValue("endDate") as Date}
+        style={{ width: "100%" }}
       />
     )
   }

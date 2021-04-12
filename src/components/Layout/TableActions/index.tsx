@@ -208,4 +208,4 @@ const TableActions = ({
   );
 };
 
-export default TableActions;
+export default React.memo(TableActions);

@@ -109,8 +109,9 @@ const useStyles = makeStyles((theme: Theme) =>
           theme.palette.type === "light"
             ? "rgba(0,0,0,.85)"
             : "rgba(255,255,255,0.65)",
-        display: "flex",
-        justifyContent: "center",
+        textAlign: "center",
+        // justifyContent: "center",
+        textOverflow: "unset",
         overflowX: "auto"
       },
       ...customCheckbox(theme)

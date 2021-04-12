@@ -1,3 +1,4 @@
+import * as React from "react";
 import moment from "~utils/momentWithTimezone";
 import { CSSProperties } from "~types";
 
@@ -13,4 +14,4 @@ const FormatDate = ({ date, format, style }: TFormatDateProps): JSX.Element => (
   </div>
 );
 
-export default FormatDate;
+export default React.memo(FormatDate);

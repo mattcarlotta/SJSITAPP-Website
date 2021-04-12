@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import * as React from "react";
 import get from "lodash.get";
 import isEmpty from "lodash.isempty";
