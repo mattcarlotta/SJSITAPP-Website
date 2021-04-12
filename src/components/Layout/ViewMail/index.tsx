@@ -5,7 +5,7 @@ import FlexEnd from "~components/Layout/FlexEnd";
 import Table from "~components/Layout/Table";
 import Link from "~components/Navigation/Link";
 import QueryHandler from "~components/Navigation/QueryHandler";
-import { FaMailBulk, FaPaperPlane } from "~icons";
+import { FaMailBulk, FaEdit } from "~icons";
 import columns from "./Columns";
 
 export const ViewMail = (): JSX.Element => (
@@ -27,9 +27,7 @@ export const ViewMail = (): JSX.Element => (
           padding="5px 10px"
           href="/employee/mail/create"
         >
-          <FaPaperPlane
-            style={{ position: "relative", top: 2, marginRight: 8 }}
-          />
+          <FaEdit style={{ position: "relative", top: 2, marginRight: 8 }} />
           Compose Mail
         </Link>
       </FlexEnd>

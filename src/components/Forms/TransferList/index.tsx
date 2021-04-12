@@ -187,7 +187,7 @@ const TransferList = ({
         alignItems="center"
         className={classes.root}
       >
-        <Grid item>{customList("Available", left)}</Grid>
+        <Grid item>{customList("Employees", left)}</Grid>
         <Grid item>
           <Grid container direction="column" alignItems="center">
             <Button
@@ -212,7 +212,7 @@ const TransferList = ({
             </Button>
           </Grid>
         </Grid>
-        <Grid item>{customList("Chosen", right)}</Grid>
+        <Grid item>{customList("Send To", right)}</Grid>
       </Grid>
       {errors && <Errors data-testid="errors">{errors}</Errors>}
     </div>

@@ -11,7 +11,7 @@ const Fields = (transferList?: EmailTransferList): Array<TBaseFieldProps> => [
     required: true,
     transferList,
     tooltip:
-      "Select at least one employee from the 'Available' list and move them to the 'Chosen' list."
+      "Select at least one employee from the 'Employees' list and move them to the 'Send To' list."
   },
   {
     name: "subject",

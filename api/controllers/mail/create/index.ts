@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
-import { Mail } from "~models";
-import { createDate, getStartOfDay, sendError } from "~helpers";
-import { invalidSendDate, unableToCreateNewMail } from "~messages/errors";
+import { Mail, User } from "~models";
+import { createDate, parseSession, sendError } from "~helpers";
+import { unableToCreateNewMail, unableToLocateMember } from "~messages/errors";
 
 /**
  * Creates a new mail.
@@ -12,26 +12,28 @@ import { invalidSendDate, unableToCreateNewMail } from "~messages/errors";
  */
 const createMail = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const { message, sendDate, sendFrom, sendTo, subject } = req.body;
-    if (!message || !sendTo || !sendFrom || !subject)
-      throw unableToCreateNewMail;
+    const _id = parseSession(req);
+    const { message, sendTo, subject } = req.body;
+    if (!message || !sendTo || !subject) throw unableToCreateNewMail;
 
-    const currentDay = getStartOfDay();
-    const sendEmailDate = createDate(sendDate);
-    if (sendEmailDate.format() < currentDay) throw invalidSendDate;
+    const existingMember = await User.findOne(
+      { _id },
+      { email: 1, firstName: 1, lastName: 1 }
+    );
+    /* istanbul ignore next */
+    if (!existingMember) throw unableToLocateMember;
+    const sendFrom = `${existingMember.firstName} ${existingMember.lastName} <${existingMember.email}>`;
 
     await Mail.create({
       message,
-      sendDate: sendEmailDate.format(),
+      sendDate: createDate().format(),
       sendFrom,
       sendTo,
       subject
     });
 
     return res.status(201).json({
-      message: `An email has been created and will be sent ${
-        sendDate ? sendEmailDate.format("MMMM Do YYYY @ hh:mm a") : "shortly"
-      }!`
+      message: "An email has been created and will be sent shortly!"
     });
   } catch (err) {
     return sendError(err, 400, res);

@@ -6,6 +6,7 @@ import {
   FaCogs,
   FaConciergeBell,
   FaCopyright,
+  FaEdit,
   FaEnvelope,
   FaFileAlt,
   FaFileSignature,
@@ -14,7 +15,6 @@ import {
   FaFolderPlus,
   FaKey,
   FaMailBulk,
-  FaPaperPlane,
   FaQuestionCircle,
   FaUserFriends,
   FaUserPlus,
@@ -138,7 +138,7 @@ export const StaffRoutes: TRoutes = [
     title: "Mail",
     submenu: [
       {
-        subicon: <FaPaperPlane />,
+        subicon: <FaEdit />,
         subnodeId: "mail/create",
         subhref: "mail/create",
         subtitle: "Create Mail",

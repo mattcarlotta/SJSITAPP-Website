@@ -24,7 +24,12 @@ const Columns: GridColumns = [
   {
     field: "sendFrom",
     headerName: "Send From",
-    flex: 1
+    flex: 1,
+    renderCell: (params: GridValueGetterParams): JSX.Element => (
+      <EmailSendToList
+        emails={[params.getValue("sendFrom")] as Array<string>}
+      />
+    )
   },
   {
     field: "sendDate",
