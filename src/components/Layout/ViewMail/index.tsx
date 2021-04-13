@@ -25,6 +25,7 @@ export const ViewMail = (): JSX.Element => (
           width="190px"
           margin="20px 20px 10px 0"
           padding="5px 10px"
+          borderRadius="5px"
           href="/employee/mail/create"
         >
           <FaEdit style={{ position: "relative", top: 2, marginRight: 8 }} />

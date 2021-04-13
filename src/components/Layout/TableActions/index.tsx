@@ -30,12 +30,12 @@ export type TTableActionsProps = {
   view?: string;
 };
 
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & { children?: React.ReactElement<any, any> },
-  ref: React.Ref<unknown>
-) {
-  return <Slide direction="down" ref={ref} {...props} />;
-});
+const Transition = React.forwardRef(
+  (
+    props: TransitionProps & { children?: React.ReactElement<any, any> },
+    ref: React.Ref<unknown>
+  ) => <Slide direction="down" ref={ref} {...props} />
+);
 
 const TableActions = ({
   disableCheckbox,

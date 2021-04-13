@@ -178,7 +178,7 @@ const Table = ({
   }, [invalidPage]);
 
   return (
-    <Padding left="20px" top="20px" right="20px" bottom="40px">
+    <Padding left="20px" top="0px" right="20px" bottom="40px">
       {isLoading || invalidPage ? (
         <FadeIn>
           <LoadingPanel

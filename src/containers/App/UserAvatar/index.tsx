@@ -48,11 +48,11 @@ export type TUserAvatarProps = PropsFromRedux & {
   role: string;
 };
 
-const useClasses = makeStyles(() => ({
+const useClasses = makeStyles({
   paper: {
     borderRadius: 5
   }
-}));
+});
 
 export const UserAvatar = ({
   avatar,

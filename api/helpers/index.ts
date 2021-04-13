@@ -427,7 +427,7 @@ interface Filters {
 interface Query {
   authorizedEmail?: { $regex: any; $options: string };
   email?: { $regex: any; $options: string };
-  endDate?: Date | string;
+  endDate?: any;
   eventDate?: Record<string, unknown>;
   endMonth?: Record<string, unknown>;
   eventType?: Record<string, unknown>;

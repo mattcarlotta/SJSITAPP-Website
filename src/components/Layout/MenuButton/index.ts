@@ -6,6 +6,7 @@ const MenuButton = styled.button<{
   padding?: string;
   margin?: string;
   primary?: boolean;
+  width?: string;
 }>`
   cursor: pointer;
   color: ${({ primary }) => (primary ? "#efefef" : "#025f6d")};
@@ -20,6 +21,7 @@ const MenuButton = styled.button<{
   display: flex;
   align-items: center;
   margin: ${({ margin }) => margin || "0px"};
+  width: ${({ width }) => width};
 
   :hover {
     ${Avatar} {

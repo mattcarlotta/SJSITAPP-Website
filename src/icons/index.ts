@@ -101,10 +101,12 @@ export { MdDashboard } from "@react-icons/all-files/md/MdDashboard";
 export { MdExpandMore } from "@react-icons/all-files/md/MdExpandMore";
 export { MdEvent } from "@react-icons/all-files/md/MdEvent";
 export { MdEventNote } from "@react-icons/all-files/md/MdEventNote";
+export { MdFilterList } from "@react-icons/all-files/md/MdFilterList";
 export { MdHelpOutline } from "@react-icons/all-files/md/MdHelpOutline";
 export { MdNoteAdd } from "@react-icons/all-files/md/MdNoteAdd";
 export { MdPersonPin } from "@react-icons/all-files/md/MdPersonPin";
 export { MdRefresh } from "@react-icons/all-files/md/MdRefresh";
+export { MdRemoveCircle } from "@react-icons/all-files/md/MdRemoveCircle";
 export { MdSettingsInputComponent } from "@react-icons/all-files/md/MdSettingsInputComponent";
 
 // RI
