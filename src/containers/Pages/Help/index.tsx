@@ -66,7 +66,7 @@ export const HelpPage = ({ role }: PropsFromRedux): JSX.Element => {
 
   React.useEffect(() => {
     router.push(nextPath, undefined, { shallow: true });
-  }, [id, router.push]);
+  }, [id]);
 
   return (
     <>

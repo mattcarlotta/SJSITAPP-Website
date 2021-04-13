@@ -70,7 +70,7 @@ const APForm = ({
       toast({ type: "error", message: err.toString() });
       router.replace("/employee/forms/viewall?page=1");
     }
-  }, [app, fields, form, parseData, toast]);
+  }, [app, fields, form, parseData, router, toast]);
 
   const saveForm = React.useCallback(async (): Promise<void> => {
     try {

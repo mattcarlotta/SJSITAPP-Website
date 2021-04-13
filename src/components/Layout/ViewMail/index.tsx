@@ -10,12 +10,12 @@ import columns from "./Columns";
 
 export const ViewMail = (): JSX.Element => (
   <>
-    <Header title="View Forms" url="/employee/mail/viewall" />
+    <Header title="View Mail" url="/employee/mail/viewall" />
     <Card
       dataTestId="view-mail-page"
       icon={<FaMailBulk />}
       title="View Mail"
-      subtitle="View All Emails"
+      subtitle="Find and View All Past and Present Emails"
     >
       <FlexEnd>
         <Link
