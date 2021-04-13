@@ -3,7 +3,8 @@ import { Dashboard } from "../index";
 
 const initProps = {
   loggedinUserId: "88",
-  role: "member"
+  role: "member",
+  dispatch: jest.fn()
 };
 
 const wrapper = shallow(<Dashboard {...initProps} />);

@@ -10,21 +10,36 @@ import TopBar from "~components/Navigation/TopBar";
 import { expandedIds, selectedTab } from "./Tabs";
 import {
   ChangeEvent,
+  ConnectedProps,
   ReactElement,
   TSideMenuNodeIds,
   TRootState
 } from "~types";
 
-export type TAppLayoutProps = {
+/* istanbul ignore next */
+const mapState = ({
+  auth,
+  sidemenu
+}: Pick<TRootState, "auth" | "sidemenu">) => ({
+  role: auth.role,
+  ...sidemenu
+});
+
+/* istanbul ignore next */
+const mapDispatch = {
+  ...actions
+};
+
+const connector = connect(mapState, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export type TAppLayoutProps = PropsFromRedux & {
   children?: ReactElement<any>;
   collapsed: boolean;
-  collapseSideNav: typeof actions.collapseSideNav;
   expandedNodeIds: TSideMenuNodeIds;
   role: string;
   selectedNodeIds: TSideMenuNodeIds;
-  toggleSideNav: typeof actions.toggleSideNav;
-  setSelectedTabs: typeof actions.setSelectedTabs;
-  setExpandedTabs: typeof actions.setExpandedTabs;
 };
 
 export const AppLayout = ({
@@ -67,18 +82,4 @@ export const AppLayout = ({
   );
 };
 
-/* istanbul ignore next */
-const mapStateToProps = ({
-  auth,
-  sidemenu
-}: Pick<TRootState, "auth" | "sidemenu">) => ({
-  role: auth.role,
-  ...sidemenu
-});
-
-/* istanbul ignore next */
-const mapDispatchToProps = {
-  ...actions
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AppLayout);
+export default connector(AppLayout);

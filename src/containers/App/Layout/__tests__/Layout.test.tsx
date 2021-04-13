@@ -6,6 +6,7 @@ const collapseSideNav = jest.fn();
 const setExpandedTabs = jest.fn();
 const setSelectedTabs = jest.fn();
 const toggleSideNav = jest.fn();
+const resetSideMenu = jest.fn();
 
 const initProps = {
   children: <p>Hello</p>,
@@ -13,6 +14,7 @@ const initProps = {
   collapseSideNav,
   expandedNodeIds: [],
   role: "staff",
+  resetSideMenu,
   selectedNodeIds: [],
   setExpandedTabs,
   setSelectedTabs,

@@ -31,6 +31,7 @@ import {
 import { TransitionProps } from "@material-ui/core/transitions";
 import { DatePickerView } from "@material-ui/pickers";
 import { AnyAction, Store } from "redux";
+import { ConnectedProps } from "react-redux";
 import { SagaIterator } from "redux-saga";
 import * as actions from "~actions/Users";
 import { TRootState } from "~reducers";
@@ -323,6 +324,7 @@ export {
   AxiosResponse,
   ChangeEvent,
   ComponentType,
+  ConnectedProps,
   CSSProperties,
   DatePickerView,
   FC,

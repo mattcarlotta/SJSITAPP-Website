@@ -21,9 +21,27 @@ import Title from "~components/Layout/Title";
 import Header from "~components/Navigation/Header";
 import { BsPeopleCircle, FaCogs, FaChartBar, FaReply } from "~icons";
 import capitalize from "~utils/capitalize";
-import { ChangeEvent, TRootState } from "~types";
+import { ChangeEvent, ConnectedProps, TRootState } from "~types";
 
-export type TSettingPageProps = {
+/* istanbul ignore next */
+const mapState = ({ auth, server }: Pick<TRootState, "auth" | "server">) => ({
+  ...auth,
+  serverError: server.error,
+  serverMessage: server.message
+});
+
+/* istanbul ignore next */
+const mapDispatch = {
+  deleteUserAvatar,
+  updateUserAvatar,
+  updateUserProfile
+};
+
+const connector = connect(mapState, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export type TSettingPageProps = PropsFromRedux & {
   id: string;
   avatar: string;
   email: string;
@@ -35,9 +53,6 @@ export type TSettingPageProps = {
   serverError?: string;
   serverMessage?: string;
   status: string;
-  deleteUserAvatar: typeof deleteUserAvatar;
-  updateUserAvatar: typeof updateUserAvatar;
-  updateUserProfile: typeof updateUserProfile;
 };
 const TABS = ["profile", "availability", "responses"];
 
@@ -131,21 +146,4 @@ export const SettingsPage = (props: TSettingPageProps): JSX.Element => {
   );
 };
 
-/* istanbul ignore next */
-const mapStateToProps = ({
-  auth,
-  server
-}: Pick<TRootState, "auth" | "server">) => ({
-  ...auth,
-  serverError: server.error,
-  serverMessage: server.message
-});
-
-/* istanbul ignore next */
-const mapDispatchToProps = {
-  deleteUserAvatar,
-  updateUserAvatar,
-  updateUserProfile
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage);
+export default connector(SettingsPage);

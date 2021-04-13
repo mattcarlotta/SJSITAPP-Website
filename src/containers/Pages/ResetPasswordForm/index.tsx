@@ -14,6 +14,7 @@ import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
 import fields from "./Fields";
 import {
+  ConnectedProps,
   EventTarget,
   FormEvent,
   TBaseFieldProps,
@@ -21,21 +22,30 @@ import {
   TRootState
 } from "~types";
 
+/* istanbul ignore next */
+const mapState = ({ server }: Pick<TRootState, "server">) => ({
+  serverError: server.error
+});
+
+/* istanbul ignore next */
+const mapDispatch = {
+  resetPassword
+};
+
+const connector = connect(mapState, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
 export type TSignupFormState = {
   fields: Array<TBaseFieldProps>;
   errors: boolean;
   isSubmitting: boolean;
 };
 
-export type TResetPasswordFormProps = {
-  serverError?: string;
-  resetPassword: typeof resetPassword;
-};
-
 export const ResetPasswordForm = ({
   resetPassword,
   serverError
-}: TResetPasswordFormProps): JSX.Element => {
+}: PropsFromRedux): JSX.Element => {
   const [state, setState] = React.useState<TSignupFormState>({
     fields,
     errors: false,
@@ -123,14 +133,4 @@ export const ResetPasswordForm = ({
   );
 };
 
-/* istanbul ignore next */
-const mapStateToProps = ({ server }: Pick<TRootState, "server">) => ({
-  serverError: server.error
-});
-
-/* istanbul ignore next */
-const mapDispatchToProps = {
-  resetPassword
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ResetPasswordForm);
+export default connector(ResetPasswordForm);

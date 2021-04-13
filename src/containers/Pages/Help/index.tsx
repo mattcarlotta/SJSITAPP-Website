@@ -24,18 +24,23 @@ import Mail from "./Mail";
 import Members from "./Members";
 import EmployeeScheduling from "./EmployeeScheduling";
 import Seasons from "./Seasons";
-import { EventTarget, TRootState } from "~types";
+import { ConnectedProps, EventTarget, TRootState } from "~types";
+
+/* istanbul ignore next */
+const mapState = ({ auth }: Pick<TRootState, "auth">) => ({
+  role: auth.role
+});
+
+const connector = connect(mapState);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
 export type THelpPageState = {
   searchText: string;
   id: string;
 };
 
-export type THelpPageProps = {
-  role: string;
-};
-
-export const HelpPage = ({ role }: THelpPageProps): JSX.Element => {
+export const HelpPage = ({ role }: PropsFromRedux): JSX.Element => {
   const router = useRouter();
   const isMember = role === "member";
   const availableTopics = !isMember ? stafftopics : topics;
@@ -132,9 +137,4 @@ export const HelpPage = ({ role }: THelpPageProps): JSX.Element => {
   );
 };
 
-/* istanbul ignore next */
-const mapStateToProps = ({ auth }: Pick<TRootState, "auth">) => ({
-  role: auth.role
-});
-
-export default connect(mapStateToProps)(HelpPage);
+export default connector(HelpPage);

@@ -70,12 +70,13 @@ export const ViewMail = (): JSX.Element => {
                 dataTestId="view-mail-link"
                 display="block"
                 margin="40px auto 10px auto"
-                maxWidth="200px"
+                padding="8px 18px"
+                maxWidth="150px"
                 href="/employee/mail/viewall?page=1"
               >
                 <FaChevronLeft
                   style={{ position: "relative", top: 3, marginRight: 5 }}
-                />{" "}
+                />
                 Go Back
               </Link>
             </div>

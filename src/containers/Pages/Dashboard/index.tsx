@@ -7,17 +7,22 @@ import Availability from "~components/Layout/Dashboard/Availability";
 import EmployeeAvailability from "~components/Layout/Dashboard/EmployeeAvailability";
 import EventDistribution from "~components/Layout/Dashboard/EventDistribution";
 import Header from "~components/Navigation/Header";
-import { TRootState } from "~types";
+import { ConnectedProps, TRootState } from "~types";
 
-export type TDashboardProps = {
-  loggedinUserId: string;
-  role: string;
-};
+/* istanbul ignore next */
+const mapState = ({ auth }: Pick<TRootState, "auth">) => ({
+  loggedinUserId: auth.id,
+  role: auth.role
+});
+
+const connector = connect(mapState);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
 export const Dashboard = ({
   loggedinUserId,
   role
-}: TDashboardProps): JSX.Element => {
+}: PropsFromRedux): JSX.Element => {
   const isMember = role === "member";
   return (
     <>
@@ -40,10 +45,4 @@ export const Dashboard = ({
   );
 };
 
-/* istanbul ignore next */
-const mapStateToProps = ({ auth }: Pick<TRootState, "auth">) => ({
-  loggedinUserId: auth.id,
-  role: auth.role
-});
-
-export default connect(mapStateToProps)(Dashboard);
+export default connector(Dashboard);

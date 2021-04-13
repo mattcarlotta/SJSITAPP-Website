@@ -14,11 +14,26 @@ import parseFields from "~utils/parseFields";
 import fields from "./Fields";
 import {
   EventTarget,
+  ConnectedProps,
   FormEvent,
   TBaseFieldProps,
   TNewPasswordData,
   TRootState
 } from "~types";
+
+/* istanbul ignore next */
+const mapState = ({ server }: Pick<TRootState, "server">) => ({
+  serverError: server.error
+});
+
+/* istanbul ignore next */
+const mapDispatch = {
+  updateUserPassword
+};
+
+const connector = connect(mapState, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
 export type ISignupFormState = {
   fields: Array<TBaseFieldProps>;
@@ -27,15 +42,10 @@ export type ISignupFormState = {
   isSubmitting: boolean;
 };
 
-export type TSignupFormProps = {
-  serverError?: string;
-  updateUserPassword: typeof updateUserPassword;
-};
-
 export const NewPasswordForm = ({
   serverError,
   updateUserPassword
-}: TSignupFormProps): JSX.Element => {
+}: PropsFromRedux): JSX.Element => {
   const router = useRouter();
   const token = get(router, ["query", "token"]);
   const [state, setState] = React.useState({
@@ -105,14 +115,4 @@ export const NewPasswordForm = ({
   );
 };
 
-/* istanbul ignore next */
-const mapStateToProps = ({ server }: Pick<TRootState, "server">) => ({
-  serverError: server.error
-});
-
-/* istanbul ignore next */
-const mapDispatchToProps = {
-  updateUserPassword
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(NewPasswordForm);
+export default connector(NewPasswordForm);

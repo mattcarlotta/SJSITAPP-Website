@@ -18,7 +18,7 @@ describe("Label", () => {
     const tooltip = "Testing a tooltip.";
     wrapper.setProps({ tooltip });
 
-    expect(wrapper.find("span.tooltip")).toExist();
+    expect(wrapper.find("div.tooltip")).toExist();
     expect(wrapper.find("GoQuestion")).toExist();
   });
 });

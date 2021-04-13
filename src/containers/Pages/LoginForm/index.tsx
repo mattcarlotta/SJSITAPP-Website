@@ -13,7 +13,27 @@ import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
 import fields from "./Fields";
-import { EventTarget, FormEvent, TLoginData, TRootState } from "~types";
+import {
+  ConnectedProps,
+  EventTarget,
+  FormEvent,
+  TLoginData,
+  TRootState
+} from "~types";
+
+/* istanbul ignore next */
+const mapState = ({ server }: Pick<TRootState, "server">) => ({
+  serverError: server.error
+});
+
+/* istanbul ignore next */
+const mapDispatch = {
+  signinUser
+};
+
+const connector = connect(mapState, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
 export type TLoginFormState = {
   fields: typeof fields;
@@ -21,15 +41,10 @@ export type TLoginFormState = {
   isSubmitting: boolean;
 };
 
-export type TLoginFormProps = {
-  serverError?: string;
-  signinUser: typeof signinUser;
-};
-
 export const LoginForm = ({
   serverError,
   signinUser
-}: TLoginFormProps): JSX.Element => {
+}: PropsFromRedux): JSX.Element => {
   const [state, setState] = React.useState<TLoginFormState>({
     fields,
     errors: false,
@@ -115,14 +130,4 @@ export const LoginForm = ({
   );
 };
 
-/* istanbul ignore next */
-const mapStateToProps = ({ server }: Pick<TRootState, "server">) => ({
-  serverError: server.error
-});
-
-/* istanbul ignore next */
-const mapDispatchToProps = {
-  signinUser
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default connector(LoginForm);

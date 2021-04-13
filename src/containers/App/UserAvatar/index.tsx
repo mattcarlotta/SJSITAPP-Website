@@ -22,14 +22,30 @@ import {
   MdHelpOutline,
   RiLogoutBoxLine
 } from "~icons";
-import { MouseEvent, TRootState } from "~types";
+import { ConnectedProps, MouseEvent, TRootState } from "~types";
 
-export type TUserAvatarProps = {
+/* istanbul ignore next */
+const mapState = ({ auth }: Pick<TRootState, "auth">) => ({
+  avatar: auth.avatar,
+  firstName: auth.firstName,
+  lastName: auth.lastName,
+  role: auth.role
+});
+
+/* istanbul ignore next */
+const mapDispatch = {
+  signoutUserSession
+};
+
+const connector = connect(mapState, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export type TUserAvatarProps = PropsFromRedux & {
   avatar?: string;
   firstName: string;
   lastName: string;
   role: string;
-  signoutUserSession: typeof signoutUserSession;
 };
 
 const useClasses = makeStyles(() => ({
@@ -190,17 +206,4 @@ export const UserAvatar = ({
   );
 };
 
-/* istanbul ignore next */
-const mapStateToProps = ({ auth }: Pick<TRootState, "auth">) => ({
-  avatar: auth.avatar,
-  firstName: auth.firstName,
-  lastName: auth.lastName,
-  role: auth.role
-});
-
-/* istanbul ignore next */
-const mapDispatchToProps = {
-  signoutUserSession
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserAvatar);
+export default connector(UserAvatar);

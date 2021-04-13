@@ -4,7 +4,8 @@ import waitFor from "~utils/waitFor";
 import { HelpPage } from "../index";
 
 const initProps = {
-  role: "staff"
+  role: "staff",
+  dispatch: jest.fn()
 };
 
 const mockPush = jest.fn();

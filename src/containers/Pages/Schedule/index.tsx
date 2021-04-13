@@ -4,17 +4,22 @@ import Card from "~components/Layout/Card";
 import EventCalendar from "~components/Layout/EventCalendar";
 import Header from "~components/Navigation/Header";
 import { FaCalendar } from "~icons";
-import { TRootState } from "~types";
+import { ConnectedProps, TRootState } from "~types";
 
-export type TScheduleProps = {
-  loggedinUserId: string;
-  role: string;
-};
+/* istanbul ignore next */
+const mapState = ({ auth }: Pick<TRootState, "auth">) => ({
+  loggedinUserId: auth.id,
+  role: auth.role
+});
+
+const connector = connect(mapState);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
 export const Schedule = ({
   loggedinUserId,
   role
-}: TScheduleProps): JSX.Element => (
+}: PropsFromRedux): JSX.Element => (
   <>
     <Header title="Schedule" url="/employee/schedule" />
     <Card
@@ -32,10 +37,4 @@ export const Schedule = ({
   </>
 );
 
-/* istanbul ignore next */
-const mapStateToProps = ({ auth }: Pick<TRootState, "auth">) => ({
-  loggedinUserId: auth.id,
-  role: auth.role
-});
-
-export default connect(mapStateToProps)(Schedule);
+export default connector(Schedule);

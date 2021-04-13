@@ -3,7 +3,8 @@ import { Schedule } from "../index";
 
 const initProps = {
   loggedinUserId: "88",
-  role: "member"
+  role: "member",
+  dispatch: jest.fn()
 };
 
 const wrapper = mount(<Schedule {...initProps} />);
