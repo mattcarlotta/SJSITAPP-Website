@@ -33,10 +33,9 @@ import { DatePickerView } from "@material-ui/pickers";
 import { AnyAction, Store } from "redux";
 import { ConnectedProps } from "react-redux";
 import { SagaIterator } from "redux-saga";
-import * as actions from "~actions/Users";
 import { TRootState } from "~reducers";
 
-/// ACTIONS ///
+export type PickReduxState<T> = Pick<TRootState, T>;
 
 export type TAvatarData = {
   form: FormData;
@@ -122,8 +121,6 @@ export type TIconType =
   | "usertag"
   | string;
 
-/// MISC ///
-
 export type EventTarget = {
   target: {
     name: string;
@@ -151,7 +148,6 @@ export type TURLQuery = Record<string, any>;
 
 export type EmailTransferList = Array<string>;
 
-/// COMPONENTS ///
 export type TBaseFieldProps = {
   id?: string;
   containerStyle?: CSSProperties;
@@ -294,25 +290,6 @@ export type TAvailabilityAggData = {
   memberResponseCount: Array<TEventResponseCount>;
   memberScheduleEvents: Array<TEventScheduledEvents>;
 };
-
-///
-
-export interface CardProps {
-  _id: string;
-  email?: string;
-  firstName?: string;
-  lastName?: string;
-  userName?: string;
-  backgroundInfo?: string;
-  address: any;
-  key: any;
-  className?: string;
-  idx: number;
-  handleEditClick: (id: string) => void;
-  deleteUser: (id: string) => ReturnType<typeof actions.deleteUser>;
-}
-
-/// REDUX + SAGAS ///
 
 export interface SagaStore extends Store {
   sagaTask: Task;

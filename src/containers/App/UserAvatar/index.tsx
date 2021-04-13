@@ -22,10 +22,10 @@ import {
   MdHelpOutline,
   RiLogoutBoxLine
 } from "~icons";
-import { ConnectedProps, MouseEvent, TRootState } from "~types";
+import { ConnectedProps, MouseEvent, PickReduxState } from "~types";
 
 /* istanbul ignore next */
-const mapState = ({ auth }: Pick<TRootState, "auth">) => ({
+const mapState = ({ auth }: PickReduxState<"auth">) => ({
   avatar: auth.avatar,
   firstName: auth.firstName,
   lastName: auth.lastName,

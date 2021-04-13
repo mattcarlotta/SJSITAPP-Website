@@ -4,10 +4,10 @@ import Card from "~components/Layout/Card";
 import EventCalendar from "~components/Layout/EventCalendar";
 import Header from "~components/Navigation/Header";
 import { FaCalendar } from "~icons";
-import { ConnectedProps, TRootState } from "~types";
+import { ConnectedProps, PickReduxState } from "~types";
 
 /* istanbul ignore next */
-const mapState = ({ auth }: Pick<TRootState, "auth">) => ({
+const mapState = ({ auth }: PickReduxState<"auth">) => ({
   loggedinUserId: auth.id,
   role: auth.role
 });

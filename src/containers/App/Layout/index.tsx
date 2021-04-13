@@ -13,14 +13,11 @@ import {
   ConnectedProps,
   ReactElement,
   TSideMenuNodeIds,
-  TRootState
+  PickReduxState
 } from "~types";
 
 /* istanbul ignore next */
-const mapState = ({
-  auth,
-  sidemenu
-}: Pick<TRootState, "auth" | "sidemenu">) => ({
+const mapState = ({ auth, sidemenu }: PickReduxState<"auth" | "sidemenu">) => ({
   role: auth.role,
   ...sidemenu
 });

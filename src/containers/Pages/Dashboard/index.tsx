@@ -7,10 +7,10 @@ import Availability from "~components/Layout/Dashboard/Availability";
 import EmployeeAvailability from "~components/Layout/Dashboard/EmployeeAvailability";
 import EventDistribution from "~components/Layout/Dashboard/EventDistribution";
 import Header from "~components/Navigation/Header";
-import { ConnectedProps, TRootState } from "~types";
+import { ConnectedProps, PickReduxState } from "~types";
 
 /* istanbul ignore next */
-const mapState = ({ auth }: Pick<TRootState, "auth">) => ({
+const mapState = ({ auth }: PickReduxState<"auth">) => ({
   loggedinUserId: auth.id,
   role: auth.role
 });

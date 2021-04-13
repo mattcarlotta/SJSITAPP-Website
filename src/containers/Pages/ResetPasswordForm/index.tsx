@@ -17,13 +17,13 @@ import {
   ConnectedProps,
   EventTarget,
   FormEvent,
+  PickReduxState,
   TBaseFieldProps,
-  TResetPasswordData,
-  TRootState
+  TResetPasswordData
 } from "~types";
 
 /* istanbul ignore next */
-const mapState = ({ server }: Pick<TRootState, "server">) => ({
+const mapState = ({ server }: PickReduxState<"server">) => ({
   serverError: server.error
 });
 

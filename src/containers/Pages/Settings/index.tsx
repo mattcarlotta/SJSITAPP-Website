@@ -21,10 +21,10 @@ import Title from "~components/Layout/Title";
 import Header from "~components/Navigation/Header";
 import { BsPeopleCircle, FaCogs, FaChartBar, FaReply } from "~icons";
 import capitalize from "~utils/capitalize";
-import { ChangeEvent, ConnectedProps, TRootState } from "~types";
+import { ChangeEvent, ConnectedProps, PickReduxState } from "~types";
 
 /* istanbul ignore next */
-const mapState = ({ auth, server }: Pick<TRootState, "auth" | "server">) => ({
+const mapState = ({ auth, server }: PickReduxState<"auth" | "server">) => ({
   ...auth,
   serverError: server.error,
   serverMessage: server.message

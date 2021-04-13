@@ -19,13 +19,13 @@ import {
   EventTarget,
   ConnectedProps,
   FormEvent,
+  PickReduxState,
   TBaseFieldProps,
-  TSignupData,
-  TRootState
+  TSignupData
 } from "~types";
 
 /* istanbul ignore next */
-const mapState = ({ server }: Pick<TRootState, "server">) => ({
+const mapState = ({ server }: PickReduxState<"server">) => ({
   serverError: server.error
 });
 

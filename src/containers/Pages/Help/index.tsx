@@ -24,10 +24,10 @@ import Mail from "./Mail";
 import Members from "./Members";
 import EmployeeScheduling from "./EmployeeScheduling";
 import Seasons from "./Seasons";
-import { ConnectedProps, EventTarget, TRootState } from "~types";
+import { ConnectedProps, EventTarget, PickReduxState } from "~types";
 
 /* istanbul ignore next */
-const mapState = ({ auth }: Pick<TRootState, "auth">) => ({
+const mapState = ({ auth }: PickReduxState<"auth">) => ({
   role: auth.role
 });
 
