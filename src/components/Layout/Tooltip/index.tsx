@@ -3,6 +3,21 @@ import Tooltip from "@material-ui/core/Tooltip";
 import TooltipText from "~components/Layout/TooltipText";
 import { CSSProperties, ReactNode } from "~types";
 
+export type TTooltipPlacement =
+  | "bottom"
+  | "left"
+  | "right"
+  | "top"
+  | "bottom-end"
+  | "bottom-start"
+  | "left-end"
+  | "left-start"
+  | "right-end"
+  | "right-start"
+  | "top-end"
+  | "top-start"
+  | undefined;
+
 const useClasses = makeStyles(() => ({
   arrow: {
     color: "#025f6d"
@@ -16,20 +31,7 @@ const useClasses = makeStyles(() => ({
 
 export type TCustomTooltipProps = {
   children: ReactNode;
-  placement:
-    | "bottom"
-    | "left"
-    | "right"
-    | "top"
-    | "bottom-end"
-    | "bottom-start"
-    | "left-end"
-    | "left-start"
-    | "right-end"
-    | "right-start"
-    | "top-end"
-    | "top-start"
-    | undefined;
+  placement: TTooltipPlacement;
   title: ReactNode;
   styles?: CSSProperties;
 };

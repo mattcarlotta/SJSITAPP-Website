@@ -20,7 +20,7 @@ const getMailForViewing = async (
     const existingEmail = await Mail.findOne({ _id }, { __v: 0 });
     if (!existingEmail) throw unableToLocateMail;
 
-    return res.status(200).json({ email: existingEmail });
+    return res.status(200).send(existingEmail);
   } catch (err) {
     return sendError(err, 400, res);
   }

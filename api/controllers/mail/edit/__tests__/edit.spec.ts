@@ -45,7 +45,7 @@ describe("Edit Mail Controller", () => {
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
-        expect(res.body.email).toEqual({
+        expect(res.body).toEqual({
           _id: expect.any(String),
           message: expect.any(String),
           sendTo: expect.arrayContaining([expect.any(String)]),

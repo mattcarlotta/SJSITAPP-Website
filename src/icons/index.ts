@@ -1,6 +1,9 @@
 /* istanbul ignore file */
 export { IconContext } from "@react-icons/all-files";
 
+// BI
+export { BiChevronDownSquare } from "@react-icons/all-files/bi/BiChevronDownSquare";
+
 // BS
 export { BsChatQuote } from "@react-icons/all-files/bs/BsChatQuote";
 export { BsCheckBox } from "@react-icons/all-files/bs/BsCheckBox";
@@ -16,6 +19,7 @@ export { BsThreeDots } from "@react-icons/all-files/bs/BsThreeDots";
 export { BsTrash } from "@react-icons/all-files/bs/BsTrash";
 
 // GO
+export { GoMailRead } from "@react-icons/all-files/go/GoMailRead";
 export { GoQuestion } from "@react-icons/all-files/go/GoQuestion";
 export { GoRadioTower } from "@react-icons/all-files/go/GoRadioTower";
 

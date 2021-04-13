@@ -63,6 +63,16 @@ export type TLoginData = {
   password: string;
 };
 
+export type TMailData = {
+  _id: string;
+  sendTo: Array<string>;
+  status: string;
+  sendFrom: string;
+  sendDate: string;
+  message: string;
+  subject: string;
+};
+
 export type TSignupData = {
   email: string;
   firstName: string;

@@ -1,27 +1,39 @@
 /* eslint-disable react/no-danger */
 import { css } from "@emotion/react";
 import isEmpty from "lodash.isempty";
+import Bold from "~components/Layout/Bold";
+import EmailStatus from "~components/Layout/EmailStatus";
+import EmailSendToList from "~components/Layout/EmailSendToList";
+import FormatDate from "~components/Layout/FormatDate";
+import { dateTimeFormat } from "~utils/dateFormats";
 
 const IMAGEAPI = process.env.NEXT_PUBLIC_IMAGEAPI;
 
 export type TEmailPreviewProps = {
   message: string;
+  sendDate?: string;
+  sendFrom?: string;
   subject: string;
   sendTo: Array<string>;
+  status?: string;
 };
 
 const EmailPreview = ({
   message,
+  sendFrom,
+  sendDate,
   sendTo,
-  subject
+  subject,
+  status
 }: TEmailPreviewProps): JSX.Element => (
   <div
     css={css`
       width: 100%;
       margin-top: 20px;
       padding: 20px;
-      border: 1px dashed #e4e2e2;
-      background-color: #fdfdfd;
+      border: 1px dashed #bbb;
+      border-radius: 5px;
+      background-color: #fbfbfb;
     `}
   >
     <h2 data-testid="email-subject">
@@ -36,14 +48,34 @@ const EmailPreview = ({
         </span>
       )}
     </h2>
-    <span
-      css={css`
-        font-weight: bold;
-        margin-right: 5px;
-      `}
-    >
-      Your Email Address
-    </span>
+    {status && (
+      <div>
+        <span>Status:&nbsp;</span>
+        <EmailStatus
+          status={status}
+          styles={{
+            textAlign: "left",
+            display: "inline-block",
+            width: "auto",
+            position: "relative",
+            marginLeft: 2,
+            top: 2
+          }}
+        />
+      </div>
+    )}
+    <div>
+      <span>Date:&nbsp;</span>
+      <Bold>
+        <FormatDate
+          date={sendDate}
+          format={dateTimeFormat}
+          style={{ display: "inline" }}
+        />
+      </Bold>
+    </div>
+    <span>From:&nbsp;</span>
+    <Bold>{sendFrom || "Your Email Address"}</Bold>
     <a
       css={css`
         color: #222;
@@ -67,7 +99,7 @@ const EmailPreview = ({
         font-size: 16px;
       `}
     >
-      <span>to&nbsp;</span>
+      <span>To:&nbsp;</span>
       <span
         css={css`
           font-weight: bold;
@@ -85,12 +117,15 @@ const EmailPreview = ({
           </span>
         ) : sendTo.length > 1 ? (
           <span data-testid="multiple-addresses">
-            multiple email addresses.
+            <EmailSendToList
+              withIcon
+              emails={sendTo}
+              placement="bottom"
+              styles={{ textAlign: "left", width: "auto" }}
+            />
           </span>
         ) : (
-          <span data-testid="single-address">
-            {sendTo[0].replace(/ <.*?>/g, ".")}
-          </span>
+          <span data-testid="single-address">{sendTo[0]}</span>
         )}
       </span>
     </div>
