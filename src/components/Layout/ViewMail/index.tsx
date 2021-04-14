@@ -31,7 +31,7 @@ export const ViewMail = (): JSX.Element => (
                   alt
                   hideShadow
                   width="190px"
-                  padding="5px 10px"
+                  padding="5.5px 10px"
                   borderRadius="5px"
                   href="/employee/mail/create"
                 >

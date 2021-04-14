@@ -84,6 +84,7 @@ const SideMenu = ({
                 href ? (
                   <NavLink
                     nounderline
+                    select="none"
                     padding="2px 0px"
                     marginRight="0px"
                     width="100%"
@@ -93,7 +94,7 @@ const SideMenu = ({
                     {title}
                   </NavLink>
                 ) : (
-                  <NavTitle>{title}</NavTitle>
+                  <NavTitle select="none">{title}</NavTitle>
                 )
               }
             >
@@ -107,6 +108,7 @@ const SideMenu = ({
                         label={
                           <NavLink
                             nounderline
+                            select="none"
                             padding="2px 0px"
                             marginRight="0px"
                             width="100%"

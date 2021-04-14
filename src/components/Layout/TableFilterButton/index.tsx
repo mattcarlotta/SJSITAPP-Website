@@ -18,6 +18,7 @@ import Flex from "~components/Layout/Flex";
 import FlexStart from "~components/Layout/FlexStart";
 import MenuButton from "~components/Layout/MenuButton";
 import MenuItem from "~components/Layout/MenuItem";
+import Padding from "~components/Layout/Padding";
 import { FaTimes, IconContext, RiFilterFill, RiFilterLine } from "~icons";
 import { ChangeEvent, EventTarget, TFilters, TURLQuery } from "~types";
 
@@ -65,6 +66,14 @@ const TableFilterButton = ({
   );
   const { isOpen, name, type, title, value } = state;
 
+  const handlePopoverOpen = (event: ChangeEvent<any>): void => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handlePopoverClose = (): void => {
+    setAnchorEl(null);
+  };
+
   const handleModalOpen = ({
     name,
     title,
@@ -81,7 +90,7 @@ const TableFilterButton = ({
       value: queries[name] || "",
       isOpen: true
     });
-    setAnchorEl(null);
+    handlePopoverClose();
   };
 
   const handleModalClose = () => {
@@ -93,10 +102,7 @@ const TableFilterButton = ({
 
   const handleModalClear = (name: string): void => {
     updateQuery({ [name]: null });
-    setState(prevState => ({
-      ...prevState,
-      isOpen: false
-    }));
+    handleModalClose();
   };
 
   const handleModalChange = ({ target: { value } }: EventTarget): void => {
@@ -117,14 +123,6 @@ const TableFilterButton = ({
     handleModalClose();
   };
 
-  const handlePopoverOpen = (event: ChangeEvent<any>): void => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handlePopoverClose = (): void => {
-    setAnchorEl(null);
-  };
-
   const popoverOpen = Boolean(anchorEl);
   const id = popoverOpen ? "filter-menu" : undefined;
 
@@ -143,32 +141,34 @@ const TableFilterButton = ({
         <Button
           primary
           uppercase
+          noGlow
           type="button"
           dataTestId="filter-button"
           padding="7px"
           fontSize="16px"
           margin="0 10px 0 0"
-          maxWidth="175px"
+          maxWidth="120px"
           borderRadius="5px"
           onClick={handlePopoverOpen}
         >
           <RiFilterFill />
-          Table Filters
+          Filters
         </Button>
         <Button
           danger
           uppercase
+          noGlow
           type="button"
           dataTestId="clear-filters-button"
           fontSize="16px"
           padding="7px"
           margin="0"
-          maxWidth="175px"
+          maxWidth="120px"
           borderRadius="5px"
           onClick={clearFilters}
         >
           <RiFilterLine />
-          Clear Filters
+          Clear
         </Button>
       </FlexStart>
       <Popover
@@ -225,98 +225,103 @@ const TableFilterButton = ({
         open={isOpen}
         aria-labelledby="filters-dialog-title"
       >
-        <DialogTitle id="filters-dialog-title">
-          Filter: {title}
-          <CloseModalButton
-            data-test-id="close-modal"
-            aria-label="close modal"
-            type="button"
-            style={{ position: "absolute", top: "10px", right: "20px" }}
-            onClick={handleModalClose}
-          >
-            <FaTimes style={{ margin: 0, fontSize: 20 }} />
-          </CloseModalButton>
-        </DialogTitle>
-        <DialogContent>
-          {(() => {
-            switch (type) {
-              case "date":
-                return (
-                  <DatePicker
-                    name={name}
-                    value={(value as string) || null}
-                    onChange={handleModalChange}
-                    style={{ width: "100%", marginBottom: 20 }}
-                  />
-                );
-              case "email":
-                return (
-                  <div style={{ height: 120 }}>
-                    <Select
+        <Padding right="10px" bottom="20px" left="10px">
+          <DialogTitle id="filters-dialog-title">
+            Filter: {title}
+            <CloseModalButton
+              data-test-id="close-modal"
+              aria-label="close modal"
+              type="button"
+              style={{ top: "10px", right: "20px" }}
+              onClick={handleModalClose}
+            >
+              <FaTimes style={{ margin: 0, fontSize: 20 }} />
+            </CloseModalButton>
+          </DialogTitle>
+          <DialogContent>
+            {(() => {
+              switch (type) {
+                case "date":
+                  return (
+                    <DatePicker
                       name={name}
-                      textAlign="center"
-                      justifyContent="center"
-                      value={value as string}
-                      selectOptions={["sent", "unsent"]}
+                      value={value || null}
                       onChange={handleModalChange}
+                      style={{ width: "100%", marginBottom: 20 }}
                     />
-                  </div>
-                );
-              case "text":
-                return (
-                  <Input
-                    name={name}
-                    type="text"
-                    value={value}
-                    onChange={handleModalChange}
-                    containerStyle={{ height: "auto" }}
-                    placeholder="Type here to filter..."
-                    inputStyle={{ padding: "8px 0 8px 17px", marginBottom: 20 }}
-                  />
-                );
-              default:
-                return <p>Not a valid component</p>;
-            }
-          })()}
-        </DialogContent>
-        <DialogActions>
-          <Button
-            dataTestId="modal-cancel"
-            uppercase
-            danger
-            type="button"
-            padding="6px 18px"
-            borderRadius="5px"
-            maxWidth="110px"
-            onClick={handleModalClose}
-          >
-            Cancel
-          </Button>
-          <Button
-            dataTestId="modal-clear"
-            uppercase
-            outline
-            type="button"
-            padding="6px 18px"
-            borderRadius="5px"
-            maxWidth="110px"
-            onClick={() => handleModalClear(name)}
-          >
-            Clear
-          </Button>
-          <Button
-            dataTestId="modal-submit"
-            uppercase
-            tertiary
-            type="button"
-            padding="6px 18px"
-            borderRadius="5px"
-            maxWidth="110px"
-            onClick={() => handleModalSubmit({ name, value })}
-          >
-            Filter
-          </Button>
-        </DialogActions>
+                  );
+                case "email":
+                  return (
+                    <div style={{ height: 120 }}>
+                      <Select
+                        name={name}
+                        textAlign="center"
+                        justifyContent="center"
+                        value={value as string}
+                        selectOptions={["sent", "unsent"]}
+                        onChange={handleModalChange}
+                      />
+                    </div>
+                  );
+                case "text":
+                  return (
+                    <Input
+                      name={name}
+                      type="text"
+                      value={value}
+                      onChange={handleModalChange}
+                      containerStyle={{ height: "auto" }}
+                      placeholder="Type here to filter..."
+                      inputStyle={{
+                        padding: "8px 0 8px 17px",
+                        marginBottom: 20
+                      }}
+                    />
+                  );
+                default:
+                  return <p>Not a valid component</p>;
+              }
+            })()}
+          </DialogContent>
+          <DialogActions>
+            <Button
+              dataTestId="modal-cancel"
+              uppercase
+              danger
+              type="button"
+              padding="6px 18px"
+              borderRadius="5px"
+              maxWidth="110px"
+              onClick={handleModalClose}
+            >
+              Cancel
+            </Button>
+            <Button
+              dataTestId="modal-clear"
+              uppercase
+              outline
+              type="button"
+              padding="6px 18px"
+              borderRadius="5px"
+              maxWidth="110px"
+              onClick={() => handleModalClear(name)}
+            >
+              Clear
+            </Button>
+            <Button
+              dataTestId="modal-submit"
+              uppercase
+              tertiary
+              type="button"
+              padding="6px 18px"
+              borderRadius="5px"
+              maxWidth="110px"
+              onClick={() => handleModalSubmit({ name, value })}
+            >
+              Filter
+            </Button>
+          </DialogActions>
+        </Padding>
       </Dialog>
     </IconContext.Provider>
   );

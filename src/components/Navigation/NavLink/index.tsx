@@ -35,10 +35,11 @@ const NavLink = styled(NavLinkComponent)<{
   blue?: boolean;
   display?: string;
   green?: boolean;
+  fontSize?: string;
   marginRight?: string;
   nounderline?: boolean;
   padding?: string;
-  fontSize?: string;
+  select?: string;
   width?: string;
 }>`
   color: ${({ blue, green }) => {
@@ -55,6 +56,7 @@ const NavLink = styled(NavLinkComponent)<{
   border-radius: 4px;
   font-size: ${({ fontSize }) => fontSize || "16px"};
   width: ${({ width }) => width || "auto"};
+  user-select: ${({ select }) => select};
 
   :hover {
     color: ${({ blue, green }) => {

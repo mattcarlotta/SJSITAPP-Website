@@ -31,7 +31,7 @@ export const ViewSeasons = (): JSX.Element => (
                   alt
                   hideShadow
                   width="180px"
-                  padding="5px 10px"
+                  padding="5.5px 10px"
                   borderRadius="5px"
                   href="/employee/seasons/create"
                 >
