@@ -5,9 +5,9 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  makeStyles,
   Popover
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import DatePicker from "~components/Forms/DatePicker";
 import Input from "~components/Forms/Input";
 import Select from "~components/Forms/Select";

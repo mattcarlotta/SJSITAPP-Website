@@ -1,6 +1,5 @@
-import { makeStyles } from "@material-ui/core/styles";
-import TreeView from "@material-ui/lab/TreeView";
-import TreeItem from "@material-ui/lab/TreeItem";
+import { makeStyles } from "@material-ui/core";
+import { TreeView, TreeItem } from "@material-ui/lab";
 import Divider from "~components/Layout/Divider";
 import FormatDate from "~components/Layout/FormatDate";
 import Legal from "~components/Layout/Legal";

@@ -1,7 +1,6 @@
 import * as React from "react";
 import { css } from "@emotion/react";
-import { Popover } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, Popover } from "@material-ui/core";
 import { connect } from "react-redux";
 import { signoutUserSession } from "~actions/Auth";
 import Avatar from "~components/Layout/Avatar";

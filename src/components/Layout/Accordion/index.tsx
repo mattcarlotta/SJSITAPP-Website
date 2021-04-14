@@ -2,9 +2,9 @@ import * as React from "react";
 import {
   Accordion,
   AccordionDetails,
-  AccordionSummary
+  AccordionSummary,
+  makeStyles
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import Paragraph from "~components/Layout/Paragraph";
 import SubHeader from "~components/Navigation/SubHeader";
 import { MdExpandMore } from "~icons";

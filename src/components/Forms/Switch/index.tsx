@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
-import { Switch as MuiSwitch } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, Switch as MuiSwitch } from "@material-ui/core";
 import Label from "~components/Forms/Label";
 import { EventTarget, CSSProperties, ReactNode } from "~types";
 

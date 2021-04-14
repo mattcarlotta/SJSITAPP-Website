@@ -1,5 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
-import Tooltip from "@material-ui/core/Tooltip";
+import { Tooltip, makeStyles } from "@material-ui/core";
 import TooltipText from "~components/Layout/TooltipText";
 import { CSSProperties, ReactNode } from "~types";
 

@@ -6,7 +6,7 @@ import Document, {
   Main,
   NextScript
 } from "next/document";
-import { ServerStyleSheets } from "@material-ui/core/styles";
+import { ServerStyleSheets } from "@material-ui/styles";
 import { version } from "../../package.json";
 
 const imageAPI = process.env.NEXT_PUBLIC_IMAGEAPI;

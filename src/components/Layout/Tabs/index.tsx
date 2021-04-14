@@ -1,5 +1,4 @@
-import { withStyles } from "@material-ui/core/styles";
-import { Tabs } from "@material-ui/core";
+import { Tabs, withStyles } from "@material-ui/core";
 import { ChangeEvent } from "~types";
 
 export type TAntTabsProps = {

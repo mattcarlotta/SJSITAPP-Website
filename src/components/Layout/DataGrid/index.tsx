@@ -1,5 +1,5 @@
 import { DataGrid } from "@material-ui/data-grid";
-import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
+import { createStyles, Theme, makeStyles } from "@material-ui/core";
 import NoTableData from "~components/Layout/NoTableData";
 import {
   GridColumns,
