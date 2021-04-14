@@ -2,10 +2,12 @@ import styled from "@emotion/styled";
 import Avatar from "~components/Layout/Avatar";
 
 const MenuButton = styled.button<{
+  display?: string;
   hoverable?: boolean;
   padding?: string;
-  margin?: string;
   primary?: boolean;
+  margin?: string;
+  textAlign?: string;
   width?: string;
 }>`
   cursor: pointer;
@@ -17,8 +19,8 @@ const MenuButton = styled.button<{
   border: 2px solid transparent;
   padding: ${({ padding }) => padding || "8px"};
   font-size: 15px;
-  text-align: left;
-  display: flex;
+  text-align: ${({ textAlign }) => textAlign || "left"};
+  display: ${({ display }) => display || "flex"};
   align-items: center;
   margin: ${({ margin }) => margin || "0px"};
   width: ${({ width }) => width};

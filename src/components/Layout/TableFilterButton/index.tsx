@@ -1,5 +1,5 @@
 import * as React from "react";
-// import { css } from "@emotion/react";
+import isEmpty from "lodash.isempty";
 import {
   Dialog,
   DialogActions,
@@ -8,16 +8,18 @@ import {
   Popover
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import DatePicker from "~components/Forms/DatePicker";
 import Input from "~components/Forms/Input";
+import Select from "~components/Forms/Select";
 import Button from "~components/Layout/Button";
-// import Divider from "~components/Layout/Divider";
+import Center from "~components/Layout/Center";
+import CloseModalButton from "~components/Layout/CloseModalButton";
 import Flex from "~components/Layout/Flex";
 import FlexStart from "~components/Layout/FlexStart";
 import MenuButton from "~components/Layout/MenuButton";
-// import Margin from "~components/Layout/Margin";
 import MenuItem from "~components/Layout/MenuItem";
-import { IconContext, MdFilterList, MdRemoveCircle } from "~icons";
-import { ChangeEvent, EventTarget, TURLQuery } from "~types";
+import { FaTimes, IconContext, RiFilterFill, RiFilterLine } from "~icons";
+import { ChangeEvent, EventTarget, TFilters, TURLQuery } from "~types";
 
 const useClasses = makeStyles({
   paper: {
@@ -26,13 +28,16 @@ const useClasses = makeStyles({
 });
 
 export type TTableFilterButtonModalState = {
+  name: string;
   title: string;
+  type: string;
   value: string;
   isOpen: boolean;
 };
 
 export type TTableFilterButtonProps = {
   clearFilters: () => void;
+  filters: TFilters;
   queries: TURLQuery;
   queryString: string;
   updateQuery: (nextQuery: TURLQuery) => void;
@@ -40,14 +45,16 @@ export type TTableFilterButtonProps = {
 
 const initalModalState = {
   isOpen: false,
+  name: "",
   title: "",
+  type: "",
   value: ""
 };
 
 const TableFilterButton = ({
   clearFilters,
+  filters,
   queries,
-  // queryString,
   updateQuery
 }: TTableFilterButtonProps): JSX.Element => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
@@ -56,18 +63,36 @@ const TableFilterButton = ({
   const [state, setState] = React.useState<TTableFilterButtonModalState>(
     initalModalState
   );
-  const { isOpen, title, value } = state;
+  const { isOpen, name, type, title, value } = state;
 
-  const handleModalOpen = (title: string): void => {
+  const handleModalOpen = ({
+    name,
+    title,
+    type
+  }: {
+    name: string;
+    title: string;
+    type: string;
+  }): void => {
     setState({
+      name,
       title,
-      value: queries[title] || "",
+      type,
+      value: queries[name] || "",
       isOpen: true
     });
     setAnchorEl(null);
   };
 
   const handleModalClose = () => {
+    setState(prevState => ({
+      ...prevState,
+      isOpen: false
+    }));
+  };
+
+  const handleModalClear = (name: string): void => {
+    updateQuery({ [name]: null });
     setState(prevState => ({
       ...prevState,
       isOpen: false
@@ -82,15 +107,14 @@ const TableFilterButton = ({
   };
 
   const handleModalSubmit = ({
-    title,
+    name,
     value
   }: {
-    title: string;
+    name: string;
     value: string | null;
   }): void => {
-    updateQuery({ [title]: value || null });
-    setState(initalModalState);
-    setAnchorEl(null);
+    updateQuery({ [name]: value || null });
+    handleModalClose();
   };
 
   const handlePopoverOpen = (event: ChangeEvent<any>): void => {
@@ -111,7 +135,7 @@ const TableFilterButton = ({
           position: "relative",
           top: 3,
           marginRight: 5,
-          fontSize: 18
+          fontSize: 17
         }
       }}
     >
@@ -124,25 +148,27 @@ const TableFilterButton = ({
           padding="7px"
           fontSize="16px"
           margin="0 10px 0 0"
-          maxWidth="120px"
+          maxWidth="175px"
           borderRadius="5px"
           onClick={handlePopoverOpen}
         >
-          <MdFilterList /> Filters
+          <RiFilterFill />
+          Table Filters
         </Button>
         <Button
-          primary
+          danger
           uppercase
           type="button"
           dataTestId="clear-filters-button"
           fontSize="16px"
           padding="7px"
           margin="0"
-          maxWidth="200px"
+          maxWidth="175px"
           borderRadius="5px"
           onClick={clearFilters}
         >
-          <MdRemoveCircle /> Clear Filters
+          <RiFilterLine />
+          Clear Filters
         </Button>
       </FlexStart>
       <Popover
@@ -162,65 +188,133 @@ const TableFilterButton = ({
       >
         <Flex
           data-testid="filters-menu"
-          width="120px"
+          width="175px"
           direction="column"
-          justify="start"
+          justify="center"
           style={{ borderBottom: "1px solid rgba(0, 0, 0, 0.1)" }}
         >
-          <MenuItem>
-            <MenuButton
-              data-test-id="season-id-filter"
-              width="100%"
-              onClick={() => handleModalOpen("seasonId")}
-            >
-              Season Id
-            </MenuButton>
-          </MenuItem>
-          <MenuItem>
-            <MenuButton
-              data-test-id="start-date-filter"
-              width="100%"
-              onClick={() => handleModalOpen("startDate")}
-            >
-              Start Date
-            </MenuButton>
-          </MenuItem>
+          <Center
+            style={{
+              padding: 10,
+              fontSize: 14,
+              borderBottom: "1px solid #ddd"
+            }}
+          >
+            Filter by:
+          </Center>
+          {!isEmpty(filters) &&
+            filters.map(props => (
+              <MenuItem justify="center" padding="0" key={props.title}>
+                <MenuButton
+                  display="block"
+                  data-test-id={`${props.title}-filter`}
+                  width="100%"
+                  padding="10px"
+                  textAlign="center"
+                  onClick={() => handleModalOpen(props)}
+                >
+                  {props.title}
+                </MenuButton>
+              </MenuItem>
+            ))}
         </Flex>
       </Popover>
       <Dialog
         fullWidth
         maxWidth="xs"
         open={isOpen}
-        aria-labelledby="form-dialog-title"
+        aria-labelledby="filters-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Filter by: {title}</DialogTitle>
+        <DialogTitle id="filters-dialog-title">
+          Filter: {title}
+          <CloseModalButton
+            data-test-id="close-modal"
+            aria-label="close modal"
+            type="button"
+            style={{ position: "absolute", top: "10px", right: "20px" }}
+            onClick={handleModalClose}
+          >
+            <FaTimes style={{ margin: 0, fontSize: 20 }} />
+          </CloseModalButton>
+        </DialogTitle>
         <DialogContent>
-          <Input
-            name={title}
-            type="text"
-            value={value}
-            onChange={handleModalChange}
-            containerStyle={{ height: "auto" }}
-          />
+          {(() => {
+            switch (type) {
+              case "date":
+                return (
+                  <DatePicker
+                    name={name}
+                    value={(value as string) || null}
+                    onChange={handleModalChange}
+                    style={{ width: "100%", marginBottom: 20 }}
+                  />
+                );
+              case "email":
+                return (
+                  <div style={{ height: 120 }}>
+                    <Select
+                      name={name}
+                      textAlign="center"
+                      justifyContent="center"
+                      value={value as string}
+                      selectOptions={["sent", "unsent"]}
+                      onChange={handleModalChange}
+                    />
+                  </div>
+                );
+              case "text":
+                return (
+                  <Input
+                    name={name}
+                    type="text"
+                    value={value}
+                    onChange={handleModalChange}
+                    containerStyle={{ height: "auto" }}
+                    placeholder="Type here to filter..."
+                    inputStyle={{ padding: "8px 0 8px 17px", marginBottom: 20 }}
+                  />
+                );
+              default:
+                return <p>Not a valid component</p>;
+            }
+          })()}
         </DialogContent>
         <DialogActions>
           <Button
             dataTestId="modal-cancel"
+            uppercase
             danger
             type="button"
+            padding="6px 18px"
             borderRadius="5px"
+            maxWidth="110px"
             onClick={handleModalClose}
           >
             Cancel
           </Button>
           <Button
+            dataTestId="modal-clear"
+            uppercase
+            outline
+            type="button"
+            padding="6px 18px"
+            borderRadius="5px"
+            maxWidth="110px"
+            onClick={() => handleModalClear(name)}
+          >
+            Clear
+          </Button>
+          <Button
             dataTestId="modal-submit"
+            uppercase
             tertiary
             type="button"
+            padding="6px 18px"
             borderRadius="5px"
-            onClick={() => handleModalSubmit({ title, value })}
+            maxWidth="110px"
+            onClick={() => handleModalSubmit({ name, value })}
           >
-            Submit
+            Filter
           </Button>
         </DialogActions>
       </Dialog>

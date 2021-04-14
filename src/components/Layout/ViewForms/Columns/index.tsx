@@ -44,7 +44,7 @@ const Columns: GridColumns = [
   },
   {
     field: "sendEmailNotificationsDate",
-    headerName: "Email Notifications Date",
+    headerName: "Email Date",
     flex: 2,
     renderCell: (params: GridValueGetterParams): JSX.Element => (
       <FormatDate

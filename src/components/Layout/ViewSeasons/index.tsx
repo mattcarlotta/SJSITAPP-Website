@@ -4,10 +4,12 @@ import Header from "~components/Navigation/Header";
 import CollapseFlex from "~components/Layout/CollapseFlex";
 import FlexEnd from "~components/Layout/FlexEnd";
 import Table from "~components/Layout/Table";
+import TableFilterButton from "~components/Layout/TableFilterButton";
 import Link from "~components/Navigation/Link";
 import QueryHandler from "~components/Navigation/QueryHandler";
 import { FaFolderPlus, FaKey } from "~icons";
 import columns from "./Columns";
+import filters from "./Filters";
 
 export const ViewSeasons = (): JSX.Element => (
   <>
@@ -22,6 +24,7 @@ export const ViewSeasons = (): JSX.Element => (
         {props => (
           <>
             <CollapseFlex>
+              <TableFilterButton filters={filters} {...props} />
               <FlexEnd>
                 <Link
                   dataTestId="create-season-link"

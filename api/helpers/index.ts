@@ -417,6 +417,7 @@ interface Filters {
   sendDate?: string;
   sentEmails?: any;
   sentEmailReminders?: any;
+  sendEmailNotificationsDate?: string;
   startDate?: Date | string;
   startMonth?: Date | string;
   status?: string;
@@ -437,6 +438,7 @@ interface Query {
   opponent?: { $regex: any; $options: string };
   seasonId?: { $regex: any; $options: string };
   sendDate?: Record<string, unknown>;
+  sendEmailNotificationsDate?: Record<string, unknown>;
   sentEmails?: any;
   sentEmailReminders?: any;
   startDate?: Record<string, unknown>;
@@ -445,7 +447,6 @@ interface Query {
   team?: { $regex: any; $options: string };
   type?: { $regex: any; $options: string };
 }
-const format = "MM-DD-YYYY";
 const generateFilters = (query: Filters): Query =>
   !isEmpty(query)
     ? Object.keys(query).reduce((acc, item) => {
@@ -459,22 +460,29 @@ const generateFilters = (query: Filters): Query =>
             break;
           }
           case "endDate": {
+            acc.endDate = {
+              $gte: moment(query[item]).startOf("day").toDate(),
+              $lte: moment(query[item]).endOf("day").toDate()
+            };
+            break;
+          }
+          case "eventDate": {
             acc.eventDate = {
-              ...acc.eventDate,
-              $lte: moment(query[item], format).endOf("day").format()
+              $gte: moment(query[item]).startOf("day").toDate(),
+              $lte: moment(query[item]).endOf("day").toDate()
             };
             break;
           }
           case "endMonth": {
             acc.endMonth = {
-              $lte: moment(query[item], format).endOf("day").format()
+              $lte: moment(query[item]).endOf("day").toDate()
             };
             break;
           }
           case "expirationDate": {
             acc.expirationDate = {
-              $gte: moment(query[item], format).startOf("day").format(),
-              $lte: moment(query[item], format).endOf("day").format()
+              $gte: moment(query[item]).startOf("day").toDate(),
+              $lte: moment(query[item]).endOf("day").toDate()
             };
             break;
           }
@@ -496,8 +504,8 @@ const generateFilters = (query: Filters): Query =>
           }
           case "sendDate": {
             acc.sendDate = {
-              $gte: moment(query[item], format).startOf("day").format(),
-              $lte: moment(query[item], format).endOf("day").format()
+              $gte: moment(query[item]).startOf("day").toDate(),
+              $lte: moment(query[item]).endOf("day").toDate()
             };
             break;
           }
@@ -505,20 +513,27 @@ const generateFilters = (query: Filters): Query =>
             acc.sentEmails = { $eq: query[item] === "sent" };
             break;
           }
+          case "sendEmailNotificationsDate": {
+            acc.sendEmailNotificationsDate = {
+              $gte: moment(query[item]).startOf("day").toDate(),
+              $lte: moment(query[item]).endOf("day").toDate()
+            };
+            break;
+          }
           case "sentEmailReminders": {
             acc.sentEmailReminders = { $eq: query[item] === "sent" };
             break;
           }
           case "startDate": {
-            acc.eventDate = {
-              ...acc.eventDate,
-              $gte: moment(query[item], format).startOf("day").format()
+            acc.startDate = {
+              $gte: moment(query[item]).startOf("day").toDate(),
+              $lte: moment(query[item]).endOf("day").toDate()
             };
             break;
           }
           case "startMonth": {
             acc.startMonth = {
-              $gte: moment(query[item], format).startOf("day").format()
+              $gte: moment(query[item]).startOf("day").toDate()
             };
             break;
           }

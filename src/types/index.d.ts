@@ -146,6 +146,8 @@ export type EventTargetDataset = {
 
 export type TURLQuery = Record<string, any>;
 
+export type TFilters = Array<{ name: string; title: string; type: string }>;
+
 export type EmailTransferList = Array<string>;
 
 export type TBaseFieldProps = {

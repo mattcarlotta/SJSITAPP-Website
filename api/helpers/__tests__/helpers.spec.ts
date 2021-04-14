@@ -229,9 +229,9 @@ describe("Helpers", () => {
 
   it("generates a list of mongo filters", () => {
     const format = "MM-DD-YYYY";
-    const date = "11-05-2020";
-    const startOfDay = moment(date, format).startOf("day").format();
-    const endOfDay = moment(date, format).endOf("day").format();
+    const date = moment("11-05-2020", format).format();
+    const startOfDay = moment(date).startOf("day").toDate();
+    const endOfDay = moment(date).endOf("day").toDate();
 
     const authorizedEmail = "test@test.com";
     const email = "a@a.com";
@@ -250,12 +250,14 @@ describe("Helpers", () => {
       email,
       endDate: date,
       endMonth: date,
+      eventDate: date,
       expirationDate: date,
       firstName,
       lastName,
       opponent,
       seasonId,
       sendDate: date,
+      sendEmailNotificationsDate: date,
       sentEmails,
       sentEmailReminders,
       startDate: date,
@@ -270,11 +272,9 @@ describe("Helpers", () => {
     expect(filters).toEqual({
       authorizedEmail: { $regex: "test@test.com", $options: "i" },
       email: { $regex: "a@a.com", $options: "i" },
-      eventDate: {
-        $lte: endOfDay,
-        $gte: startOfDay
-      },
+      endDate: { $gte: startOfDay, $lte: endOfDay },
       endMonth: { $lte: endOfDay },
+      eventDate: { $gte: startOfDay, $lte: endOfDay },
       expirationDate: {
         $gte: startOfDay,
         $lte: endOfDay
@@ -287,8 +287,13 @@ describe("Helpers", () => {
         $gte: startOfDay,
         $lte: endOfDay
       },
+      sendEmailNotificationsDate: {
+        $gte: startOfDay,
+        $lte: endOfDay
+      },
       sentEmails: { $eq: true },
       sentEmailReminders: { $eq: true },
+      startDate: { $gte: startOfDay, $lte: endOfDay },
       startMonth: { $gte: startOfDay },
       status: { $eq: "active" },
       team: { $regex: "sharks", $options: "i" },

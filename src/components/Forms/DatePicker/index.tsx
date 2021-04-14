@@ -21,7 +21,7 @@ export type TDatePickerProps = {
   onChange: ({ target: { name, value } }: EventTarget) => void;
   style?: CSSProperties;
   tooltip?: string;
-  value?: string;
+  value?: string | null;
   views?: Array<DatePickerView>;
 };
 

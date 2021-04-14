@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import get from "lodash.get";
 import { Season } from "~models";
-import { sendError } from "~helpers";
+import { generateFilters, sendError } from "~helpers";
 
 /**
  * Retrieves all seasons for ViewSeason page.
@@ -17,8 +17,10 @@ const getAllSeasons = async (
   try {
     const { page } = req.query;
 
+    const filters = generateFilters(req.query);
+
     const results = await Season.paginate(
-      {},
+      { ...filters },
       {
         sort: { startDate: -1 },
         page: parseInt((page as string) || "1", 10),
