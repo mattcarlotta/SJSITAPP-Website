@@ -172,4 +172,58 @@ describe("Styled Button", () => {
       }
     );
   });
+
+  it("displays an alt button when passed an 'alt' prop", () => {
+    wrapper.setProps({ alt: true });
+
+    const StyledButton = buttonNode();
+
+    expect(StyledButton).toHaveStyleRule("color", "#2e7c8a");
+    expect(StyledButton).toHaveStyleRule("background", "transparent");
+    expect(StyledButton).toHaveStyleRule("border", "2px solid transparent");
+
+    expect(StyledButton).toHaveStyleRule("color", "#fff", {
+      target: ":hover"
+    });
+    expect(StyledButton).toHaveStyleRule("border", "2px solid transparent", {
+      target: ":hover"
+    });
+    expect(StyledButton).toHaveStyleRule("background", "#2e7c8a", {
+      target: ":hover"
+    });
+    expect(StyledButton).toHaveStyleRule(
+      "box-shadow",
+      "0px 0px 14px -2px #14d3e2",
+      {
+        target: ":hover"
+      }
+    );
+  });
+
+  it("displays an outline button when passed an 'outline' prop", () => {
+    wrapper.setProps({ outline: true });
+
+    const StyledButton = buttonNode();
+
+    expect(StyledButton).toHaveStyleRule("color", "#0085ff");
+    expect(StyledButton).toHaveStyleRule("background", "transparent");
+    expect(StyledButton).toHaveStyleRule("border", "2px solid #0085ff");
+
+    expect(StyledButton).toHaveStyleRule("color", "#006cd0", {
+      target: ":hover"
+    });
+    expect(StyledButton).toHaveStyleRule("border", "2px solid #006cd0", {
+      target: ":hover"
+    });
+    expect(StyledButton).toHaveStyleRule("background", "transparent", {
+      target: ":hover"
+    });
+    expect(StyledButton).toHaveStyleRule(
+      "box-shadow",
+      "0px 0px 14px -2px #14d3e2",
+      {
+        target: ":hover"
+      }
+    );
+  });
 });

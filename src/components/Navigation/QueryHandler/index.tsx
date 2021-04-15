@@ -1,4 +1,5 @@
 import * as React from "react";
+import isEqual from "lodash.isequal";
 import { useRouter } from "next/router";
 import { setQuery, stringifyQuery } from "~utils/queryHelpers";
 import { TURLQuery } from "~types";
@@ -19,7 +20,8 @@ export type TQueryHandlerProps = {
 
 export const QueryHandler = ({ children }: TQueryHandlerProps): JSX.Element => {
   const router = useRouter();
-  const [state, setState] = React.useState(setQuery(router.query));
+  const { query } = router;
+  const [state, setState] = React.useState(setQuery(query));
 
   const pushToLocation = (query: string): void => {
     router.push(`${router.pathname}?${query}`);
@@ -37,8 +39,9 @@ export const QueryHandler = ({ children }: TQueryHandlerProps): JSX.Element => {
   const clearFilters = () => pushToLocation("page=1");
 
   React.useEffect(() => {
-    setState(setQuery(router.query));
-  }, [router.query, setQuery]);
+    /* istanbul ignore next */
+    if (!isEqual(query, state.queries)) setState(setQuery(query));
+  }, [query]);
 
   return (
     <>

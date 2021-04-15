@@ -103,36 +103,20 @@ const radiogroup = {
   ]
 };
 
-// const transfer = {
-// 	name: "sendTo",
-// 	type: "transfer",
-// 	label: "Send To",
-// 	tooltip:
-// 		"Select and transfer one or multiple members from the left box to the right box to include them on the mailing list.",
-// 	value: [],
-// 	errors: "",
-// 	required: true,
-// 	disabled: true,
-// 	dataSource: [
-// 		{
-// 			_id: "5d83d5b32bff0853d6539cb6",
-// 			email: "Bobby Axelrod <member10@example.com>",
-// 			key: "Bobby Axelrod <member10@example.com>",
-// 		},
-// 		{
-// 			_id: "5d83d5b32bff0853d6539cb7",
-// 			email: "Matt Polls <member11@example.com>",
-// 			key: "Matt Polls <member11@example.com>",
-// 		},
-// 	],
-// 	showSearch: true,
-// 	listStyle: {
-// 		width: 277,
-// 		height: 300,
-// 	},
-// 	rowKey: record => record.email,
-// 	render: item => item.email.replace(/ <.*?>/g, ""),
-// };
+const transfer = {
+  name: "sendTo",
+  type: "transfer",
+  label: "Send To",
+  tooltip:
+    "Select and transfer one or multiple members from the left box to the right box to include them on the mailing list.",
+  value: [],
+  errors: "",
+  required: true,
+  transferList: [
+    "Bobby Axelrod <member10@example.com>",
+    "Matt Polls <member11@example.com>"
+  ]
+};
 
 describe("Field Generator", () => {
   let wrapper: ReactWrapper;
@@ -265,30 +249,29 @@ describe("Field Generator", () => {
   // 	expect(wrapper.find("TimePicker")).toExist();
   // });
 
-  // it("returns a Transfer field when type is 'transfer'", () => {
-  // 	wrapper.setProps({ fields: [transfer] });
+  it("returns a Transfer field when type is 'transfer'", () => {
+    wrapper.setProps({ fields: [transfer] });
 
-  // 	expect(wrapper.find("Transfer")).toExist();
-  // 	expect(wrapper.find("Transfer").props().className).toEqual("");
+    expect(wrapper.find("TransferList")).toExist();
 
-  // 	wrapper.setProps({ fields: [{ ...transfer, errors: "Required. " }] });
-  // 	expect(wrapper.find("Transfer").props().className).toEqual("has-error");
-  // 	expect(wrapper.find("Errors")).toExist();
+    // 	wrapper.setProps({ fields: [{ ...transfer, errors: "Required. " }] });
+    // 	expect(wrapper.find("Transfer").props().className).toEqual("has-error");
+    // 	expect(wrapper.find("Errors")).toExist();
 
-  // 	wrapper
-  // 		.find("input.ant-transfer-list-search")
-  // 		.first()
-  // 		.simulate("change", { target: { value: "bobby" } });
+    // 	wrapper
+    // 		.find("input.ant-transfer-list-search")
+    // 		.first()
+    // 		.simulate("change", { target: { value: "bobby" } });
 
-  // 	expect(wrapper.find("ListItem")).toHaveLength(1);
+    // 	expect(wrapper.find("ListItem")).toHaveLength(1);
 
-  // 	wrapper.find(Transfer).instance().moveTo("right");
+    // 	wrapper.find(Transfer).instance().moveTo("right");
 
-  // 	expect(onChange).toHaveBeenCalledWith({
-  // 		target: {
-  // 			name: "sendTo",
-  // 			value: [],
-  // 		},
-  // 	});
-  // });
+    // 	expect(onChange).toHaveBeenCalledWith({
+    // 		target: {
+    // 			name: "sendTo",
+    // 			value: [],
+    // 		},
+    // 	});
+  });
 });

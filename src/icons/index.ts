@@ -93,6 +93,10 @@ export { FaUnlockAlt } from "@react-icons/all-files/fa/FaUnlockAlt";
 // FI
 export { FiPaperclip } from "@react-icons/all-files/fi/FiPaperclip";
 
+// IM
+export { ImCheckboxChecked } from "@react-icons/all-files/im/ImCheckboxChecked";
+export { ImCheckboxUnchecked } from "@react-icons/all-files/im/ImCheckboxUnchecked";
+
 // MD
 export { MdAccessTime } from "@react-icons/all-files/md/MdAccessTime";
 export { MdAssignment } from "@react-icons/all-files/md/MdAssignment";

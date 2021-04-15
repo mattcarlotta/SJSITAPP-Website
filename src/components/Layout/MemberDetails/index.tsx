@@ -1,4 +1,3 @@
-// import { css } from "@emotion/react";
 import DisabledInput from "~components/Layout/DisabledInput";
 import FormatDate from "~components/Layout/FormatDate";
 import Margin from "~components/Layout/Margin";
@@ -8,8 +7,8 @@ import { CSSProperties } from "~types";
 const activeUserStyle = {
   color: "green",
   position: "relative",
-  top: "2px",
-  marginRight: 8
+  top: 2,
+  marginRight: 15
 } as CSSProperties;
 
 const inactiveUserStyle = {
@@ -18,13 +17,13 @@ const inactiveUserStyle = {
   top: 5,
   left: 3,
   color: "red",
-  marginRight: 8
+  marginRight: 15
 } as CSSProperties;
 
 const iconStyles = {
   position: "relative",
   top: 3,
-  marginRight: 8,
+  marginRight: 15,
   color: "#888"
 } as CSSProperties;
 

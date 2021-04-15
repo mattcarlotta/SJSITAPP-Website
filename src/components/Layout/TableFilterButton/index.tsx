@@ -19,7 +19,14 @@ import FlexStart from "~components/Layout/FlexStart";
 import MenuButton from "~components/Layout/MenuButton";
 import MenuItem from "~components/Layout/MenuItem";
 import Padding from "~components/Layout/Padding";
-import { FaTimes, IconContext, RiFilterFill, RiFilterLine } from "~icons";
+import {
+  ImCheckboxChecked,
+  ImCheckboxUnchecked,
+  FaTimes,
+  IconContext,
+  RiFilterFill,
+  RiFilterLine
+} from "~icons";
 import { ChangeEvent, EventTarget, TFilters, TURLQuery } from "~types";
 
 const useClasses = makeStyles({
@@ -209,11 +216,21 @@ const TableFilterButton = ({
                   display="block"
                   data-test-id={`${props.title}-filter`}
                   width="100%"
-                  padding="10px"
-                  textAlign="center"
+                  padding="10px 12px"
                   onClick={() => handleModalOpen(props)}
                 >
-                  {props.title}
+                  <Flex align="center">
+                    <Flex justify="flex-start">{props.title}</Flex>
+                    <Flex justify="flex-end">
+                      {queries[props.name] ? (
+                        <ImCheckboxChecked
+                          style={{ top: 0, color: "#1890ff" }}
+                        />
+                      ) : (
+                        <ImCheckboxUnchecked style={{ top: 0 }} />
+                      )}
+                    </Flex>
+                  </Flex>
                 </MenuButton>
               </MenuItem>
             ))}
@@ -227,7 +244,7 @@ const TableFilterButton = ({
       >
         <Padding right="10px" bottom="20px" left="10px">
           <DialogTitle id="filters-dialog-title">
-            Filter: {title}
+            Filter by: {title}
             <CloseModalButton
               data-test-id="close-modal"
               aria-label="close modal"
@@ -257,7 +274,7 @@ const TableFilterButton = ({
                         name={name}
                         textAlign="center"
                         justifyContent="center"
-                        value={value as string}
+                        value={value}
                         selectOptions={["sent", "unsent"]}
                         onChange={handleModalChange}
                       />

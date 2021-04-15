@@ -139,21 +139,32 @@ const TransferList = ({
               numberOfChecked(items) !== 0
             }
             disabled={items.length === 0}
-            inputProps={{ "aria-label": "all items selected" }}
+            inputProps={{
+              "aria-label": "all items selected",
+              // @ts-ignore
+              "data-testid": `all-${title}-items`
+            }}
           />
         }
         title={title}
         subheader={`${numberOfChecked(items)}/${items.length} selected`}
       />
       <Divider />
-      <List className={classes.list} dense component="div" role="list">
+      <List
+        className={classes.list}
+        dense
+        component="div"
+        role="list"
+        data-testid={title}
+      >
         {items.map(email => {
-          const labelId = `transfer-list-all-item-${email}-label`;
+          const labelId = `transfer-list-item-${email}-label`;
 
           return (
             <ListItem
               key={email}
               role="listitem"
+              data-testid={email}
               button
               onClick={handleToggle(email)}
             >
@@ -162,7 +173,11 @@ const TransferList = ({
                   checked={checked.some(item => item === email)}
                   tabIndex={-1}
                   disableRipple
-                  inputProps={{ "aria-labelledby": labelId }}
+                  inputProps={{
+                    "aria-labelledby": labelId,
+                    // @ts-ignore
+                    "data-testid": email
+                  }}
                 />
               </ListItemIcon>
               <ListItemText
@@ -191,6 +206,7 @@ const TransferList = ({
         <Grid item>
           <Grid container direction="column" alignItems="center">
             <Button
+              data-testid="move-items-up"
               variant="outlined"
               size="small"
               className={classes.button}
@@ -201,6 +217,7 @@ const TransferList = ({
               <FaChevronUp />
             </Button>
             <Button
+              data-testid="move-items-down"
               variant="outlined"
               size="small"
               className={classes.button}

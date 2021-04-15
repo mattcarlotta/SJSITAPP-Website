@@ -28,6 +28,8 @@ const mockRouterOpts: NextRouter = {
 
 export const useRouter = (): NextRouter => mockRouterOpts;
 
+export const withRouter = jest.fn();
+
 jest.mock("next/router", () => ({
   __esModule: true,
   makePublicRouterInstance: jest.fn(),

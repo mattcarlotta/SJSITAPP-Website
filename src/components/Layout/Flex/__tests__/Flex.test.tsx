@@ -34,6 +34,11 @@ describe("Flex", () => {
     expect(wrapper).toHaveStyleRule("padding", "10px");
   });
 
+  it("sets color when passed a 'color' prop", () => {
+    wrapper.setProps({ color: "#fff" });
+    expect(wrapper).toHaveStyleRule("color", "#fff");
+  });
+
   it("sets background when passed a 'background' prop", () => {
     wrapper.setProps({ background: "#fff" });
     expect(wrapper).toHaveStyleRule("background", "#fff");
