@@ -68,7 +68,7 @@ describe("Contact Us Form", () => {
     (replace as jest.Mock).mockClear();
   });
 
-  it("renders a loading icon", async () => {
+  it("renders a loading placeholder", async () => {
     await waitFor(() => {
       wrapper.update();
       expect(findById("loading-ap-form")).toExist();

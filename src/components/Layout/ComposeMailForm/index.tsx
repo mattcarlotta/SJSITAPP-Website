@@ -127,15 +127,20 @@ export const ComposeMailForm = (): JSX.Element => {
           />
           {isLoading ? (
             <LoadingPanel
-              data-testid="loading-season"
+              data-testid="loading-mail-form"
               borderRadius="5px"
               height="1100px"
             />
           ) : (
-            <Form maxWidth="550px" onSubmit={handleSubmit}>
+            <Form
+              data-testid="compose-mail-form"
+              maxWidth="550px"
+              onSubmit={handleSubmit}
+            >
               <FieldGenerator fields={state.fields} onChange={handleChange} />
               <Button
                 primary
+                dataTestId="preview-email-button"
                 padding="8px 18px"
                 margin="10px auto"
                 maxWidth="500px"
@@ -156,7 +161,7 @@ export const ComposeMailForm = (): JSX.Element => {
       </Card>
       {!isLoading && (
         <Modal
-          dataTestId="preview-email"
+          dataTestId="email-preview-modal"
           isOpen={isOpen}
           onClick={handlePreview}
           maxWidth="1200px"

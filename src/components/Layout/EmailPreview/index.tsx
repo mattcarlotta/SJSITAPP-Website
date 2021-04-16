@@ -27,6 +27,7 @@ const EmailPreview = ({
   status
 }: TEmailPreviewProps): JSX.Element => (
   <div
+    data-testid="email-preview"
     css={css`
       width: 100%;
       margin-top: 20px;
