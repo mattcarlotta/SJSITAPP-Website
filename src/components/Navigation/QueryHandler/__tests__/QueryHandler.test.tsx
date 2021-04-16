@@ -33,13 +33,13 @@ const wrapper = mount(
           ))}
         </div>
         <button
-          className="update"
+          data-testid="update"
           type="button"
           onClick={() => props.updateQuery({ page: "2" })}
         >
           Update
         </button>
-        <button className="clear" type="button" onClick={props.clearFilters}>
+        <button data-testid="clear" type="button" onClick={props.clearFilters}>
           Clear
         </button>
       </>
@@ -60,12 +60,12 @@ describe("Query Handler", () => {
   });
 
   it("it handles 'updateQuery' calls", () => {
-    wrapper.find(".update").simulate("click");
+    findById("update").simulate("click");
     expect(mockPush).toHaveBeenCalledWith(`/?id=88&page=2`);
   });
 
   it("it handles 'clearFilters' calls", () => {
-    wrapper.find(".clear").simulate("click");
+    findById("clear").simulate("click");
     expect(mockPush).toHaveBeenCalledWith(`/?page=1`);
   });
 });

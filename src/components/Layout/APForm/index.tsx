@@ -121,7 +121,7 @@ const APForm = ({
 
   return isLoading ? (
     <LoadingPanel
-      data-testid="loading-form"
+      data-testid="loading-ap-form"
       borderRadius="5px"
       height="817px"
     />

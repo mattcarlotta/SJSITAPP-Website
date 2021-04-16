@@ -3,7 +3,7 @@ import { CSSProperties, ReactNode } from "~types";
 
 export type TOutsideLinkProps = {
   className?: string;
-  children: string | ReactNode;
+  children: ReactNode;
   dataTestId?: string;
   href: string;
   style?: CSSProperties;

@@ -57,6 +57,7 @@ const Selection = ({
     >
       {icon && <Icon dataTestId="select-icon" type={icon} />}
       <DisplayOption
+        data-testid={`${name}-selected-value`}
         padding={padding}
         justifyContent={justifyContent}
         icon={icon}
