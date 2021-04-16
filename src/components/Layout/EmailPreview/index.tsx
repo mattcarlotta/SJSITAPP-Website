@@ -67,7 +67,7 @@ const EmailPreview = ({
     )}
     <div>
       <span>Date:&nbsp;</span>
-      <Bold>
+      <Bold data-testid="email-send-date">
         <FormatDate
           date={sendDate}
           format={dateTimeFormat}
@@ -76,7 +76,9 @@ const EmailPreview = ({
       </Bold>
     </div>
     <span>From:&nbsp;</span>
-    <Bold>{sendFrom || "Your Email Address"}</Bold>
+    <Bold data-testid="send-from-address">
+      {sendFrom || "Your Email Address"}
+    </Bold>
     <a
       css={css`
         color: #222;
@@ -105,7 +107,7 @@ const EmailPreview = ({
         css={css`
           font-weight: bold;
         `}
-        data-test="sendto-address"
+        data-testid="send-to-address"
       >
         {isEmpty(sendTo) ? (
           <span
@@ -116,17 +118,13 @@ const EmailPreview = ({
           >
             Invalid Recipient Address.
           </span>
-        ) : sendTo.length > 1 ? (
-          <span data-testid="multiple-addresses">
-            <EmailSendToList
-              withIcon
-              emails={sendTo}
-              placement="bottom"
-              styles={{ textAlign: "left", width: "auto" }}
-            />
-          </span>
         ) : (
-          <span data-testid="single-address">{sendTo[0]}</span>
+          <EmailSendToList
+            withIcon
+            emails={sendTo}
+            placement="bottom"
+            styles={{ textAlign: "left", width: "auto" }}
+          />
         )}
       </span>
     </div>
