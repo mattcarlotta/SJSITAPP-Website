@@ -53,7 +53,6 @@ const initalState = {
 
 const Table = ({
   API,
-  // clearFilters,
   columns,
   disableCheckbox,
   queries,
@@ -169,16 +168,22 @@ const Table = ({
     if (isLoading) fetchData();
   }, [isLoading, fetchData]);
 
-  React.useEffect(() => {
-    if (!isLoading) fetchData();
-  }, [queryString, fetchData]);
+  // React.useEffect(() => {
+  //   if (!isLoading) fetchData();
+  // }, [queryString, fetchData]);
 
-  React.useEffect(() => {
-    if (invalidPage) updateQuery({ page: Math.ceil(totalDocs / 10) });
-  }, [invalidPage]);
+  // React.useEffect(() => {
+  //   if (invalidPage) updateQuery({ page: Math.ceil(totalDocs / 10) });
+  // }, [invalidPage]);
 
   return (
-    <Padding left="20px" top="0px" right="20px" bottom="40px">
+    <Padding
+      data-test-id="data-table-container"
+      left="20px"
+      top="0px"
+      right="20px"
+      bottom="40px"
+    >
       {isLoading || invalidPage ? (
         <FadeIn>
           <LoadingPanel
@@ -189,7 +194,7 @@ const Table = ({
         </FadeIn>
       ) : (
         <div
-          data-testid="table"
+          data-testid="data-table"
           style={{
             height: 645,
             width: "100%"

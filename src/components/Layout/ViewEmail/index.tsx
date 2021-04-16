@@ -40,11 +40,11 @@ export const ViewMail = (): JSX.Element => {
       toast({ type: "error", message: err.toString() });
       router.replace("/employee/mail/viewall?page=1");
     }
-  }, [app, parseData, router, toast]);
+  }, [app, id, parseData, router, toast]);
 
   React.useEffect(() => {
-    if (isLoading) fetchEmail();
-  }, [isLoading, fetchEmail]);
+    if (isLoading && id) fetchEmail();
+  }, [isLoading, id, fetchEmail]);
 
   return (
     <>
@@ -58,7 +58,7 @@ export const ViewMail = (): JSX.Element => {
         <Padding top="20px" left="50px" right="50px" bottom="50px">
           {isLoading ? (
             <LoadingPanel
-              data-testid="loading-season"
+              data-testid="loading-email"
               borderRadius="5px"
               height="1100px"
             />
