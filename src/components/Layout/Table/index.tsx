@@ -168,13 +168,13 @@ const Table = ({
     if (isLoading) fetchData();
   }, [isLoading, fetchData]);
 
-  // React.useEffect(() => {
-  //   if (!isLoading) fetchData();
-  // }, [queryString, fetchData]);
+  React.useEffect(() => {
+    if (!isLoading) fetchData();
+  }, [queryString, fetchData]);
 
-  // React.useEffect(() => {
-  //   if (invalidPage) updateQuery({ page: Math.ceil(totalDocs / 10) });
-  // }, [invalidPage]);
+  React.useEffect(() => {
+    if (invalidPage) updateQuery({ page: Math.ceil(totalDocs / 10) });
+  }, [invalidPage]);
 
   return (
     <Padding
@@ -187,7 +187,7 @@ const Table = ({
       {isLoading || invalidPage ? (
         <FadeIn>
           <LoadingPanel
-            data-testid="loading-data"
+            data-testid="data-table-loading"
             borderRadius="5px"
             height="645px"
           />

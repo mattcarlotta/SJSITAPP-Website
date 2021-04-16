@@ -8,7 +8,7 @@ import { act } from "react-dom/test-utils";
  * @param callback - a callback function to invoke after resolving promises
  * @returns promise
  */
-const waitFor = (callback: () => void): Promise<any> =>
+const waitFor = (callback: () => void, timeout = 1000): Promise<any> =>
   act(
     () =>
       new Promise((resolve, reject) => {
@@ -20,7 +20,7 @@ const waitFor = (callback: () => void): Promise<any> =>
               callback();
               resolve();
             } catch (err) {
-              if (Date.now() - startTime > 1000) {
+              if (Date.now() - startTime > timeout) {
                 reject(err);
               } else {
                 tick();
