@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme: Theme) =>
       "& .MuiDataGrid-cell:focus": {
         outline: 0
       },
-      "& .MuiDataGrid-colCell:focus": {
+      "& .MuiDataGrid-colCell:focus, .MuiDataGrid-cell:focus-within": {
         outline: 0
       },
       "& .MuiDataGrid-row:hover": {

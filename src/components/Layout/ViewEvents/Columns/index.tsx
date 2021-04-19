@@ -4,7 +4,7 @@ import EmailReminders from "~components/Layout/EmailReminders";
 import FormatDate from "~components/Layout/FormatDate";
 import ScheduledEmployees from "~components/Layout/ScheduledEmployees";
 import Team from "~components/Layout/Team";
-import { dateTimeFormat } from "~utils/dateFormats";
+import { shortDateTimeFormat } from "~utils/dateFormats";
 import {
   GridColumns,
   GridValueGetterParams,
@@ -13,31 +13,23 @@ import {
 } from "~types";
 
 const Columns: GridColumns = [
-  { field: "_id", headerName: "Database Id", flex: 2.25 },
-  { field: "seasonId", headerName: "Season Id", width: 110 },
+  { field: "_id", headerName: "Database Id", flex: 2.66 },
+  { field: "seasonId", headerName: "Season", width: 110 },
   {
     field: "team",
     headerName: "Team",
-    width: 60,
+    width: 80,
     renderCell: (params: GridValueGetterParams): ReactElement => (
-      <Team
-        team={params.getValue("team") as string}
-        size={30}
-        folder="calendar"
-      />
+      <Team team={params.getValue("team") as string} folder="lowres" />
     )
   },
   {
     field: "opponent",
     headerName: "Opponent",
-    width: 60,
+    width: 80,
     renderCell: (params: GridValueGetterParams): ReactElement =>
       params.getValue("opponent") ? (
-        <Team
-          team={params.getValue("opponent") as string}
-          size={30}
-          folder="calendar"
-        />
+        <Team team={params.getValue("opponent") as string} folder="lowres" />
       ) : (
         <span>-</span>
       )
@@ -50,15 +42,15 @@ const Columns: GridColumns = [
   {
     field: "uniform",
     headerName: "Uniform",
-    flex: 2.33
+    flex: 2
   },
   {
     field: "eventDate",
     headerName: "Event Date",
-    flex: 2,
+    flex: 2.33,
     renderCell: (params: GridValueGetterParams): ReactElement => (
       <FormatDate
-        format={dateTimeFormat}
+        format={shortDateTimeFormat}
         date={params.getValue("eventDate") as Date}
         style={{ width: "100%" }}
       />
@@ -75,7 +67,7 @@ const Columns: GridColumns = [
   {
     field: "employeeResponses",
     headerName: "Employee Responses",
-    width: 70,
+    flex: 1,
     renderCell: (params: GridValueGetterParams): ReactElement => (
       <Center style={{ width: "100%" }}>
         {(params.getValue("employeeResponses") as Array<any>).length}
@@ -85,7 +77,7 @@ const Columns: GridColumns = [
   {
     field: "scheduledIds",
     headerName: "Scheduled Employees",
-    width: 70,
+    flex: 1,
     renderCell: (params: GridValueGetterParams): ReactElement => (
       <ScheduledEmployees
         employees={params.getValue("scheduledIds") as TEmployeeIds}
@@ -95,7 +87,7 @@ const Columns: GridColumns = [
   {
     field: "sentEmailReminders",
     headerName: "Email Reminders",
-    flex: 0.6,
+    flex: 0.66,
     renderCell: (params: GridValueGetterParams): ReactElement => (
       <EmailReminders
         status={params.getValue("sentEmailReminders") as boolean}

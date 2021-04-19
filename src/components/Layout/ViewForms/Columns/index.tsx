@@ -4,7 +4,7 @@ import { dateTimeFormat, standardFormat } from "~utils/dateFormats";
 import { GridColumns, GridValueGetterParams, ReactElement } from "~types";
 
 const Columns: GridColumns = [
-  { field: "_id", headerName: "Database Id", flex: 2.25 },
+  { field: "_id", headerName: "Database Id", flex: 2.33 },
   { field: "seasonId", headerName: "Season Id", width: 120 },
   {
     field: "startMonth",

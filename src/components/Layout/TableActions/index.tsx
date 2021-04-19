@@ -84,7 +84,7 @@ const TableActions = ({
         noGlow
         type="button"
         padding="3px"
-        margin="0"
+        margin="0 auto"
         maxWidth="50px"
         borderRadius="10px"
         onClick={handleClick}
@@ -118,21 +118,6 @@ const TableActions = ({
             }}
           >
             <Padding top="5px" left="5px" right="5px" bottom="5px">
-              {schedule && (
-                <Link
-                  alt
-                  display="block"
-                  dataTestId="view-record"
-                  padding="8px"
-                  fontSize="16px"
-                  margin="5px 0"
-                  width="100%"
-                  href={`/employee/events/schedule/${id}`}
-                >
-                  <FaClipboardCheck />
-                  Schedule
-                </Link>
-              )}
               {view && (
                 <Link
                   alt
@@ -161,6 +146,21 @@ const TableActions = ({
                 >
                   <FaEdit />
                   Edit
+                </Link>
+              )}
+              {schedule && (
+                <Link
+                  alt
+                  display="block"
+                  dataTestId="view-record"
+                  padding="8px"
+                  fontSize="16px"
+                  margin="5px 0"
+                  width="100%"
+                  href={`/employee/events/schedule/${id}`}
+                >
+                  <FaClipboardCheck />
+                  Schedule
                 </Link>
               )}
               {resend && (

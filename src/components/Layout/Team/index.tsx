@@ -60,4 +60,4 @@ class DisplayTeam extends React.Component<
   };
 }
 
-export default DisplayTeam;
+export default React.memo(DisplayTeam);

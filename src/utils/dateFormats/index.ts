@@ -51,6 +51,11 @@ export const monthnameFormat = "MMMM";
 export const shortmonthFormat = `${shortMonthNameFormat} ${daySuffix}`;
 
 /**
+ * Formats moment dates as 3 digits months, followed by day and time: April 21st @ 12:00pm.
+ */
+export const shortDateTimeFormat = `${shortmonthFormat} @ ${timestampFormat}`;
+
+/**
  * Formats moment dates as 3 digits months, followed by day, 4 digit year, and time: April 21st 2020 @ 12:00pm.
  */
 export const dateTimeFormat = `${shortmonthFormat} ${fullyearFormat} @ ${timestampFormat}`;
