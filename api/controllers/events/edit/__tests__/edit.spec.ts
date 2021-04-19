@@ -6,8 +6,8 @@ import { staffSignIn } from "~test/utils/signIn";
 import app from "~test/utils/testServer";
 
 const newEvent = {
-  callTimes: [new Date(2001, 2, 1)],
-  eventDate: new Date(2001, 2, 1),
+  callTimes: [new Date(2001, 3, 1)],
+  eventDate: new Date(2001, 3, 1),
   eventType: "Game",
   location: "Any",
   notes: "",
@@ -17,7 +17,7 @@ const newEvent = {
   uniform: "Uniform"
 };
 
-describe("Delete Event Controller", () => {
+describe("Edit Event Controller", () => {
   let cookie: string;
   let game: IEventDocument;
   beforeAll(async () => {
@@ -32,7 +32,7 @@ describe("Delete Event Controller", () => {
 
   it("rejects requests where the event id is invalid", done => {
     app()
-      .delete("/api/event/delete/601dc43483adb35b1ca678ea")
+      .get("/api/events/edit/601dc43483adb35b1ca678ea")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -42,14 +42,29 @@ describe("Delete Event Controller", () => {
       });
   });
 
-  it("accepts requests to delete an event", done => {
+  it("accepts requests to retrieve an event for editing", done => {
     app()
-      .delete(`/api/event/delete/${game._id}`)
+      .get(`/api/events/edit/${game._id}`)
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
-        expect(res.body.message).toEqual("Successfully deleted the event.");
+        expect(res.body.event).toEqual({
+          _id: expect.any(String),
+          callTimes: expect.any(Array),
+          employeeResponses: expect.any(Array),
+          eventDate: expect.any(String),
+          eventType: expect.any(String),
+          location: expect.any(String),
+          notes: expect.any(String),
+          opponent: expect.any(String),
+          schedule: expect.any(Array),
+          scheduledIds: expect.any(Array),
+          seasonId: expect.any(String),
+          sentEmailReminders: expect.any(Boolean),
+          team: expect.any(String),
+          uniform: expect.any(String)
+        });
         done();
       });
   });

@@ -6,9 +6,7 @@ import {
   resendEventEmail,
   getEventForScheduling,
   updateEventSchedule,
-  updateEvent
-} from "~controllers/event";
-import {
+  updateEvent,
   getAllEvents,
   getMemberEventsAvailability,
   deleteManyEvents,
@@ -18,13 +16,13 @@ import {
 import { requireAuth, requireStaffRole } from "~services/strategies";
 
 const eventRoutes = (router: Router): void => {
-  router.post("/event/create", requireStaffRole, createEvent);
-  router.delete("/event/delete/:id", requireStaffRole, deleteEvent);
-  router.get("/event/edit/:id", requireStaffRole, getEventForViewing);
-  router.put("/event/resend-email/:id", requireStaffRole, resendEventEmail);
-  router.get("/event/review/:id", requireStaffRole, getEventForScheduling);
-  router.put("/event/update/schedule", requireStaffRole, updateEventSchedule);
-  router.put("/event/update", requireStaffRole, updateEvent);
+  router.post("/events/create", requireStaffRole, createEvent);
+  router.delete("/events/delete/:id", requireStaffRole, deleteEvent);
+  router.get("/events/edit/:id", requireStaffRole, getEventForViewing);
+  router.put("/events/resend-email/:id", requireStaffRole, resendEventEmail);
+  router.get("/events/review/:id", requireStaffRole, getEventForScheduling);
+  router.put("/events/update/schedule", requireStaffRole, updateEventSchedule);
+  router.put("/events/update", requireStaffRole, updateEvent);
 
   router.get("/events/viewall", requireStaffRole, getAllEvents);
   router.delete("/events/delete-many", requireStaffRole, deleteManyEvents);

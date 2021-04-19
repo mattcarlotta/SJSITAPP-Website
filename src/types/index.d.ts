@@ -148,6 +148,12 @@ export type TURLQuery = Record<string, any>;
 
 export type TFilters = Array<{ name: string; title: string; type: string }>;
 
+export type TEmployeeIds = Array<{
+  _id?: PropTypes.string;
+  firstName?: PropTypes.string;
+  lastName?: PropTypes.string;
+}>;
+
 export type EmailTransferList = Array<string>;
 
 export type TBaseFieldProps = {
@@ -195,11 +201,7 @@ export type TEventData = {
   schedule: Array<{
     _id: string;
     title?: string;
-    employeeIds: Array<{
-      _id?: PropTypes.string;
-      firstName?: PropTypes.string;
-      lastName?: PropTypes.string;
-    }>;
+    employeeIds: TEmployeeIds;
   }>;
 };
 

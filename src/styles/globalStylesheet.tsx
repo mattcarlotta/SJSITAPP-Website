@@ -120,15 +120,20 @@ export const GlobalStylesheet = (): ReactElement => (
         border: 0;
       }
 
-      ::-webkit-scrollbar {
-        display: none;
+      body {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        ::-webkit-scrollbar {
+          display: none;
+        }
+      }
+
+      body {
       }
 
       *,
       :after,
       :before {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
         font-family: "Karla", -apple-system, BlinkMacSystemFont, "Segoe UI",
           Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
           "Helvetica Neue", sans-serif;

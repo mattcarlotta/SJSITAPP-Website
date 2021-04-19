@@ -29,6 +29,7 @@ export type TTableProps = {
   queries: TURLQuery;
   queryString: string;
   resend?: boolean;
+  schedule?: boolean;
   updateQuery: (nextQuery: TURLQuery) => void;
   view?: string;
 };

@@ -33,7 +33,7 @@ describe("Event Resend Email Controller", () => {
 
   it("rejects requests where the event id is invalid", done => {
     app()
-      .put("/api/event/resend-email/a01dc43483adb35b1ca678ea")
+      .put("/api/events/resend-email/a01dc43483adb35b1ca678ea")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -45,7 +45,7 @@ describe("Event Resend Email Controller", () => {
 
   it("accepts requests to resend an event email", done => {
     app()
-      .put(`/api/event/resend-email/${game._id}`)
+      .put(`/api/events/resend-email/${game._id}`)
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)

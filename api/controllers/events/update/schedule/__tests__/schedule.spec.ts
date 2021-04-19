@@ -48,7 +48,7 @@ describe("Event Update Schedule Controller", () => {
 
   it("rejects requests where the event id and schedule are missing", done => {
     app()
-      .put("/api/event/update/schedule")
+      .put("/api/events/update/schedule")
       .set("Cookie", cookie)
       .send({ _id: "", schedule: [] })
       .expect("Content-Type", /json/)
@@ -61,7 +61,7 @@ describe("Event Update Schedule Controller", () => {
 
   it("rejects requests where the event id is invalid", done => {
     app()
-      .put("/api/event/update/schedule")
+      .put("/api/events/update/schedule")
       .set("Cookie", cookie)
       .send({ _id: "601dc43483adb35b1ca678ea", schedule })
       .expect("Content-Type", /json/)
@@ -74,7 +74,7 @@ describe("Event Update Schedule Controller", () => {
 
   it("accepts requests to update an event's scheduled ids", done => {
     app()
-      .put("/api/event/update/schedule")
+      .put("/api/events/update/schedule")
       .set("Cookie", cookie)
       .send({
         _id: game._id,

@@ -22,7 +22,7 @@ describe("Retrieve All Events Controller", () => {
       .expect(200)
       .then(res => {
         expect(res.body).toEqual({
-          events: expect.arrayContaining([
+          docs: expect.arrayContaining([
             expect.objectContaining({
               _id: expect.any(String),
               callTimes: expect.any(Array),
@@ -53,7 +53,7 @@ describe("Retrieve All Events Controller", () => {
       .expect(200)
       .then(res => {
         expect(res.body).toEqual({
-          events: expect.arrayContaining([
+          docs: expect.arrayContaining([
             expect.objectContaining({
               _id: expect.any(String),
               callTimes: expect.any(Array),

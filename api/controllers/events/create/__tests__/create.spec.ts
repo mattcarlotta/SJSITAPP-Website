@@ -36,7 +36,7 @@ describe("Create Event Controller", () => {
 
   it("rejects requests where the event fields are missing", done => {
     app()
-      .post("/api/event/create")
+      .post("/api/events/create")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -49,7 +49,7 @@ describe("Create Event Controller", () => {
   it("rejects requests where the callTimes aren't unique", done => {
     const today = createDate().format();
     app()
-      .post("/api/event/create")
+      .post("/api/events/create")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({ ...newEvent, callTimes: [today, today] })
@@ -62,7 +62,7 @@ describe("Create Event Controller", () => {
 
   it("rejects requests where the seasonId is invalid", done => {
     app()
-      .post("/api/event/create")
+      .post("/api/events/create")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({ ...newEvent, seasonId: "18001801" })
@@ -80,7 +80,7 @@ describe("Create Event Controller", () => {
     const seasonEnd = moment(seasonExists?.endDate, "L").format("L");
 
     await app()
-      .post("/api/event/create")
+      .post("/api/events/create")
       .set("Cookie", cookie)
       .send({ ...newEvent, eventDate: new Date(1800, 1, 1) })
       .expect("Content-Type", /json/)
@@ -95,7 +95,7 @@ describe("Create Event Controller", () => {
 
   it("accepts requests to create an event", done => {
     app()
-      .post("/api/event/create")
+      .post("/api/events/create")
       .set("Cookie", cookie)
       .send(newEvent)
       .expect("Content-Type", /json/)

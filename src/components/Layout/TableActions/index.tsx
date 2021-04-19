@@ -10,6 +10,7 @@ import Link from "~components/Navigation/Link";
 import {
   IconContext,
   FaCheckSquare,
+  FaClipboardCheck,
   FaEdit,
   FaSearchPlus,
   FaShareSquare,
@@ -31,6 +32,7 @@ export type TTableActionsProps = {
   edit?: string;
   params: GridValueGetterParams;
   resend?: boolean;
+  schedule?: boolean;
   selectedIds: Array<GridRowId>;
   view?: string;
 };
@@ -50,6 +52,7 @@ const TableActions = ({
   edit,
   params,
   resend,
+  schedule,
   selectedIds,
   view
 }: TTableActionsProps): ReactElement => {
@@ -115,6 +118,21 @@ const TableActions = ({
             }}
           >
             <Padding top="5px" left="5px" right="5px" bottom="5px">
+              {schedule && (
+                <Link
+                  alt
+                  display="block"
+                  dataTestId="view-record"
+                  padding="8px"
+                  fontSize="16px"
+                  margin="5px 0"
+                  width="100%"
+                  href={`/employee/events/schedule/${id}`}
+                >
+                  <FaClipboardCheck />
+                  Schedule
+                </Link>
+              )}
               {view && (
                 <Link
                   alt

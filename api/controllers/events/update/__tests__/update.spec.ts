@@ -45,7 +45,7 @@ describe("Event Update Controller", () => {
 
   it("rejects requests where the event properties are missing", done => {
     app()
-      .put("/api/event/update")
+      .put("/api/events/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -57,7 +57,7 @@ describe("Event Update Controller", () => {
 
   it("rejects requests where the callTimes aren't unique", done => {
     app()
-      .put("/api/event/update")
+      .put("/api/events/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({ ...updatedEvent, _id: game._id, callTimes: [today, today] })
@@ -70,7 +70,7 @@ describe("Event Update Controller", () => {
 
   it("rejects requests where the event id property is invalid", done => {
     app()
-      .put("/api/event/update")
+      .put("/api/events/update")
       .set("Cookie", cookie)
       .send({ ...updatedEvent, _id: "601dc43483adb35b1ca678ea" })
       .expect("Content-Type", /json/)
@@ -83,7 +83,7 @@ describe("Event Update Controller", () => {
 
   it("accepts requests to updates an event, but keeps the schedule intact", done => {
     app()
-      .put("/api/event/update")
+      .put("/api/events/update")
       .set("Cookie", cookie)
       .send({ ...updatedEvent, _id: game._id })
       .expect("Content-Type", /json/)
@@ -96,7 +96,7 @@ describe("Event Update Controller", () => {
 
   it("accepts requests to update an event, but overrides the schedule", done => {
     app()
-      .put("/api/event/update")
+      .put("/api/events/update")
       .set("Cookie", cookie)
       .send({
         ...game,

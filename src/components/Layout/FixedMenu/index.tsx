@@ -7,7 +7,6 @@ const FixedMenu = styled.aside<{
   top: 56px;
   z-index: 3;
   white-space: nowrap;
-  min-height: 100vh;
   height: 100vh;
   overflow-y: auto;
   transition: all 0.2s;

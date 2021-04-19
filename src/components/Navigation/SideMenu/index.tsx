@@ -20,6 +20,7 @@ export type TSideMenuProps = {
 
 const useStyles = makeStyles({
   root: {
+    background: "#0d6472",
     "& .MuiTreeItem-root": {
       padding: "3px 0",
       background: "none"

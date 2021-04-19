@@ -32,7 +32,7 @@ describe("Review Event Controller", () => {
 
   it("rejects requests where the event id is invalid", done => {
     app()
-      .get("/api/event/review/601dc43483adb35b1ca678ea")
+      .get("/api/events/review/601dc43483adb35b1ca678ea")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -44,7 +44,7 @@ describe("Review Event Controller", () => {
 
   it("accepts requests to retrieve an event for scheduling", done => {
     app()
-      .get(`/api/event/review/${game._id}`)
+      .get(`/api/events/review/${game._id}`)
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)
