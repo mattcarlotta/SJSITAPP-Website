@@ -128,7 +128,7 @@ const Forms = ({ id }: { id: string }): JSX.Element => (
       </Button>
       table actions buttons to open a menu, then click on the
       <Button
-        danger
+        primary
         display="inline-block"
         type="button"
         width="100px"
@@ -177,15 +177,15 @@ const Forms = ({ id }: { id: string }): JSX.Element => (
       </Button>
       table actions buttons to open a menu, then click on the
       <Button
-        danger
+        primary
         display="inline-block"
         type="button"
-        width="100px"
+        width="120px"
         padding="5px"
         margin="0 3px"
       >
         <FaShareSquare style={{ ...iconStyle, marginRight: 5 }} />
-        <span>Send</span>
+        <span>Resend</span>
       </Button>
       button. Please note that clicking this button will resend emails
       notifications immediately by overriding the A/P form&#39;s&nbsp;

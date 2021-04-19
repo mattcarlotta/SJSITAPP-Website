@@ -120,7 +120,7 @@ const Events = ({ id }: { id: string }): JSX.Element => (
       </Button>
       table actions buttons to open a menu, then click on the
       <Button
-        danger
+        primary
         display="inline-block"
         type="button"
         width="100px"
@@ -176,15 +176,15 @@ const Events = ({ id }: { id: string }): JSX.Element => (
       </Button>
       table actions buttons to open a menu, then click on the
       <Button
-        danger
+        primary
         display="inline-block"
         type="button"
-        width="100px"
+        width="120px"
         padding="5px"
         margin="0 3px"
       >
         <FaShareSquare style={{ ...iconStyle, marginRight: 5 }} />
-        <span>Send</span>
+        <span>Resend</span>
       </Button>
       button. If the event takes place within a day, the email reminders will be
       sent out immediately.
@@ -215,7 +215,7 @@ const Events = ({ id }: { id: string }): JSX.Element => (
       </Button>
       table actions buttons to open a menu, then click on the
       <Button
-        danger
+        primary
         display="inline-block"
         type="button"
         width="125px"
@@ -259,7 +259,7 @@ const Events = ({ id }: { id: string }): JSX.Element => (
         padding="4px"
         margin="0 3px"
       >
-        Submit Schedule
+        Save Schedule
       </Button>
       button to save your changes.
       <WarningText>

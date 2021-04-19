@@ -30,7 +30,7 @@ const EmployeeSchedule = ({ id }: { id: string }): JSX.Element => (
       on the button to view its details. Underneath one of the
       <strong>Scheduled:</strong> call times(
       <FaClock style={{ position: "relative", top: 2 }} />
-      ), you&#39;ll see your name highlighted
+      ), you&#39;ll see your name highlighted&nbsp;
       <strong
         style={{
           backgroundColor: "#006d75",

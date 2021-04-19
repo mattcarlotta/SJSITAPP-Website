@@ -183,7 +183,7 @@ const GettingStarted = ({ id }: { id: string }): JSX.Element => (
             padding="4px"
             margin="0 3px"
           >
-            Submit Schedule
+            Save Schedule
           </Button>
           button to save the event. According to the&nbsp;
           <strong>Event Date</strong>, email reminders will be automatically

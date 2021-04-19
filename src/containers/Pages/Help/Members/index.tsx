@@ -141,7 +141,7 @@ const Members = ({ id }: { id: string }): JSX.Element => (
       </Button>
       table actions buttons to open a menu, then click on the
       <Button
-        danger
+        primary
         display="inline-block"
         type="button"
         width="100px"
@@ -201,7 +201,7 @@ const Members = ({ id }: { id: string }): JSX.Element => (
       </Button>
       table actions buttons to open a menu, then click on the
       <Button
-        danger
+        primary
         display="inline-block"
         type="button"
         width="100px"
@@ -270,7 +270,7 @@ const Members = ({ id }: { id: string }): JSX.Element => (
       </Button>
       table actions buttons to open a menu, then click on the
       <Button
-        danger
+        primary
         display="inline-block"
         type="button"
         width="100px"

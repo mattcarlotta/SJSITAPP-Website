@@ -11,11 +11,6 @@ if (INDEVELOPMENT) setTimeout(() => open(CLIENT), 5000);
 module.exports = {
   webpack(config, { isServer }) {
     /* adds custom plugins to client and server */
-    config.module.rules.push({
-      test: /react-spring/,
-      sideEffects: true
-    });
-
     config.plugins.push(
       ...[
         new ContextReplacementPlugin(/moment[\/\\]locale/, /\b\B/),
