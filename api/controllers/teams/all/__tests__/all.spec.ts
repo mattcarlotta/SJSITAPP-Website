@@ -16,7 +16,7 @@ describe("Retrieve All Team Names Controller", () => {
 
   it("accepts requests to retrieve all team names", done => {
     app()
-      .get("/api/teams/viewall")
+      .get("/api/teams/all")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)

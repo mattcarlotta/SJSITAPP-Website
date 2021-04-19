@@ -1,5 +1,4 @@
+import CreateEventForm from "~components/Layout/CreateEventForm";
 import requiresStaffCredentials from "~containers/App/requiresStaffCredentials";
 
-const CreateEvent = () => <div>Create Event</div>;
-
-export default requiresStaffCredentials(CreateEvent);
+export default requiresStaffCredentials(CreateEventForm);

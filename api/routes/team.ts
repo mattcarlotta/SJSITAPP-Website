@@ -7,7 +7,7 @@ const teamRoutes = (router: Router): void => {
   router.post("/team/create", requireStaffRole, createTeam);
   router.delete("/team/delete/:id", requireStaffRole, deleteTeam);
 
-  router.get("/teams/viewall", requireStaffRole, getAllTeamNames);
+  router.get("/teams/all", requireStaffRole, getAllTeamNames);
   router.delete("/teams/delete-many", requireStaffRole, deleteManyTeams);
 };
 

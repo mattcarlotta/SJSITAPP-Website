@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import isEmpty from "lodash.isempty";
-import moment from "~utils/momentWithTimezone";
 import { TBaseFieldProps } from "~types";
 
 /**
@@ -20,8 +19,7 @@ const parseFields = <T>(fields: Array<TBaseFieldProps>): T => {
         switch (type) {
           case "time": {
             acc["callTimes"] = acc["callTimes"] || [];
-            if (value && moment.isMoment(value))
-              acc["callTimes"].push(value.format());
+            if (value) acc["callTimes"].push(value);
             break;
           }
           case "date": {

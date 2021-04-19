@@ -1,9 +1,11 @@
 import * as React from "react";
 import DatePicker from "~components/Forms/DatePicker";
+import DateTimePicker from "~components/Forms/DateTimePicker";
 import Input from "~components/Forms/Input";
 import Radio from "~components/Forms/Radio";
 import Select from "~components/Forms/Select";
 import Switch from "~components/Forms/Switch";
+import TimePicker from "~components/Forms/TimePicker";
 import TextArea from "~components/Forms/TextArea";
 import TransferList from "~components/Forms/TransferList";
 import {
@@ -68,6 +70,17 @@ const FieldGenerator = <
               />
             );
           }
+          case "datetime": {
+            return (
+              <DateTimePicker
+                {...rest}
+                key={name}
+                name={name}
+                value={value as string}
+                onChange={onChange}
+              />
+            );
+          }
           case "radiogroup": {
             return (
               <Radio
@@ -108,6 +121,17 @@ const FieldGenerator = <
           case "textarea": {
             return (
               <TextArea
+                {...rest}
+                key={name}
+                name={name}
+                value={value as string}
+                onChange={onChange}
+              />
+            );
+          }
+          case "time": {
+            return (
+              <TimePicker
                 {...rest}
                 key={name}
                 name={name}

@@ -166,10 +166,12 @@ export type TBaseFieldProps = {
   icon?: TIconType;
   inputStyle?: CSSProperties;
   innerStyle?: CSSProperties;
+  isSearchable?: boolean;
   label?: ReactNode;
   maxLength?: number;
   name: string;
   onChange?: (event: ChangeEvent<any>) => void;
+  onFieldRemove?: (name: string) => void;
   placeholder?: string;
   required: boolean;
   readOnly?: boolean;
@@ -185,6 +187,26 @@ export type TBaseFieldProps = {
   value?: string | Moment | Array<Moment> | Array<string> | boolean | null;
   updateEvent?: boolean;
 };
+
+export type TEvent = {
+  _id: string;
+  eventType: string;
+  team: string;
+  opponent?: string;
+  location: string;
+  callTimes: Array<string>;
+  uniform: string;
+  seasonId: string;
+  eventDate: string;
+  notes?: string;
+  employeeResponses: Array<{
+    _id: string;
+    response: string;
+    notes: string;
+  }>;
+};
+
+export type TEventAPIQueryConfig = { id?: string } & TEvent;
 
 export type TEventData = {
   _id: string;
