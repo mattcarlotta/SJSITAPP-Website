@@ -10,7 +10,7 @@ import PanelDescription from "~components/Layout/PanelDescription";
 import { FaUserClock } from "~icons";
 import app from "~utils/axiosConfig";
 import { parseData } from "~utils/parseResponse";
-import { TAvailabilityData } from "~types";
+import { ReactElement, TAvailabilityData } from "~types";
 
 export type TAvailabilityState = {
   availability: Array<TAvailabilityData>;
@@ -24,7 +24,7 @@ export type TAvailabilityResData = {
   months: Array<string>;
 };
 
-export const Availability = (): JSX.Element => {
+export const Availability = (): ReactElement => {
   const [state, setState] = React.useState<TAvailabilityState>({
     availability: [],
     error: false,

@@ -14,7 +14,7 @@ import moment from "~utils/momentWithTimezone";
 import app from "~utils/axiosConfig";
 import { defaultFormat } from "~utils/dateFormats";
 import { parseData } from "~utils/parseResponse";
-import { EventTarget, TEventDistributionData } from "~types";
+import { EventTarget, ReactElement, TEventDistributionData } from "~types";
 
 export type TDashboardEventDistributionState = {
   endDate: string;
@@ -23,7 +23,7 @@ export type TDashboardEventDistributionState = {
   startDate: string;
 };
 
-export const EventDistribution = (): JSX.Element => {
+export const EventDistribution = (): ReactElement => {
   const [state, setState] = React.useState<TDashboardEventDistributionState>({
     endDate: moment().endOf("month").format(defaultFormat),
     error: false,

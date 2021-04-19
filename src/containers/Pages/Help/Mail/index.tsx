@@ -13,14 +13,14 @@ import {
   FaTools,
   FaTrash
 } from "~icons";
-import { CSSProperties } from "~types";
+import { CSSProperties, ReactElement } from "~types";
 
 const iconStyle = {
   position: "relative",
   top: 2
 } as CSSProperties;
 
-const Mail = ({ id }: { id: string }): JSX.Element => (
+const Mail = ({ id }: { id: string }): ReactElement => (
   <>
     <Center>
       <Title margin="50px 0 0px 0">Mail</Title>

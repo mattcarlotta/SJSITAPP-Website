@@ -5,9 +5,9 @@ import Padding from "~components/Layout/Padding";
 import SeasonForm from "~components/Layout/SeasonForm";
 import { FaFolderPlus } from "~icons";
 import app from "~utils/axiosConfig";
-import { AxiosResponse, TSeasonAPIQueryConfig } from "~types";
+import { AxiosResponse, ReactElement, TSeasonAPIQueryConfig } from "~types";
 
-export const CreateSeasonForm = (): JSX.Element => {
+export const CreateSeasonForm = (): ReactElement => {
   const apiQuery = (config: TSeasonAPIQueryConfig): Promise<AxiosResponse> =>
     app.post("seasons/create", config);
 

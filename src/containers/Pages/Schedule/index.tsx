@@ -4,7 +4,7 @@ import Card from "~components/Layout/Card";
 import EventCalendar from "~components/Layout/EventCalendar";
 import Header from "~components/Navigation/Header";
 import { FaCalendar } from "~icons";
-import { ConnectedProps, PickReduxState } from "~types";
+import { ConnectedProps, PickReduxState, ReactElement } from "~types";
 
 /* istanbul ignore next */
 const mapState = ({ auth }: PickReduxState<"auth">) => ({
@@ -19,7 +19,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 export const Schedule = ({
   loggedinUserId,
   role
-}: PropsFromRedux): JSX.Element => (
+}: PropsFromRedux): ReactElement => (
   <>
     <Header title="Schedule" url="/employee/schedule" />
     <Card

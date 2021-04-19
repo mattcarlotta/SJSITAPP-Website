@@ -12,7 +12,7 @@ import Tabs from "~components/Layout/Tabs";
 import { MdEvent } from "~icons";
 import app from "~utils/axiosConfig";
 import { parseData } from "~utils/parseResponse";
-import { ChangeEvent, TEventData } from "~types";
+import { ChangeEvent, ReactElement, TEventData } from "~types";
 
 export type TDashboardEventsState = {
   activeTab: string;
@@ -38,7 +38,7 @@ const initialState = {
 export const Events = ({
   isMember,
   loggedinUserId
-}: TDashboardEventsProps): JSX.Element => {
+}: TDashboardEventsProps): ReactElement => {
   const [state, setState] = React.useState<TDashboardEventsState>(initialState);
   const { activeTab, error, events, isLoading } = state;
   const nextWeek = activeTab !== "today";

@@ -12,8 +12,9 @@ import UploadAvatarInstructions from "~components/Layout/UploadAvatarInstruction
 import WarningText from "~components/Layout/WarningText";
 import OutsideLink from "~components/Navigation/OutsideLink";
 import { FaCloudUploadAlt, FaTrash, RiLogoutBoxLine } from "~icons";
+import { ReactElement } from "~types";
 
-const General = ({ id }: { id: string }): JSX.Element => (
+const General = ({ id }: { id: string }): ReactElement => (
   <>
     <Center>
       <Title margin="50px 0 0px 0">General Questions</Title>

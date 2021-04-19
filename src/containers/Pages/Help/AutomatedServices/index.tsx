@@ -8,8 +8,9 @@ import Paragraph from "~components/Layout/Paragraph";
 import Title from "~components/Layout/Title";
 import WarningText from "~components/Layout/WarningText";
 import OutsideLink from "~components/Navigation/OutsideLink";
+import { ReactElement } from "~types";
 
-const AutomatedServices = ({ id }: { id: string }): JSX.Element => (
+const AutomatedServices = ({ id }: { id: string }): ReactElement => (
   <>
     <Center>
       <Title margin="50px 0 0 0">Automated Services</Title>

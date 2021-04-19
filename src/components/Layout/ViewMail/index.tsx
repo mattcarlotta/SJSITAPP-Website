@@ -10,8 +10,9 @@ import QueryHandler from "~components/Navigation/QueryHandler";
 import { FaMailBulk, FaEdit } from "~icons";
 import columns from "./Columns";
 import filters from "./Filters";
+import { ReactElement } from "~types";
 
-export const ViewMail = (): JSX.Element => (
+export const ViewMail = (): ReactElement => (
   <>
     <Header title="View Mail" url="/employee/mail/viewall" />
     <Card

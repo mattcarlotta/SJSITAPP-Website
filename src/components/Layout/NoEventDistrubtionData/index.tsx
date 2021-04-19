@@ -1,13 +1,13 @@
 import FlexCenter from "~components/Layout/FlexCenter";
 import Center from "~components/Layout/Center";
 import { FaChartBar } from "~icons";
-import { CSSProperties } from "~types";
+import { CSSProperties, ReactElement } from "~types";
 
 const iconStyle = {
   fontSize: 70
 } as CSSProperties;
 
-const NoEventDistribitionData = (): JSX.Element => (
+const NoEventDistribitionData = (): ReactElement => (
   <FlexCenter
     data-testid="no-event-distribution"
     height="635px"

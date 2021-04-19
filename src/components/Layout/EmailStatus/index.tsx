@@ -1,14 +1,14 @@
 import * as React from "react";
 import Tooltip from "~components/Layout/Tooltip";
 import { IconContext, FaStopwatch, FaShareSquare, FaTimes } from "~icons";
-import { CSSProperties } from "~types";
+import { CSSProperties, ReactElement } from "~types";
 
 export type TEmailStatusProps = {
   status: string;
   styles?: CSSProperties;
 };
 
-const EmailStatus = ({ status, styles }: TEmailStatusProps): JSX.Element => (
+const EmailStatus = ({ status, styles }: TEmailStatusProps): ReactElement => (
   <Tooltip
     title={status}
     placement="top"

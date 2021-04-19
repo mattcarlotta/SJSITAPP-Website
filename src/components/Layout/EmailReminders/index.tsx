@@ -1,8 +1,9 @@
 import * as React from "react";
 import Tooltip from "~components/Layout/Tooltip";
 import { IconContext, FaShareSquare, FaStopwatch } from "~icons";
+import { ReactElement } from "~types";
 
-const EmailReminders = ({ status }: { status: boolean }): JSX.Element => (
+const EmailReminders = ({ status }: { status: boolean }): ReactElement => (
   <Tooltip
     title={status ? "sent" : "unsent"}
     placement="top"

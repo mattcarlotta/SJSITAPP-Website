@@ -6,8 +6,9 @@ import Paragraph from "~components/Layout/Paragraph";
 import Title from "~components/Layout/Title";
 import OutsideLink from "~components/Navigation/OutsideLink";
 import { FaCalendarCheck, FaClock } from "~icons";
+import { ReactElement } from "~types";
 
-const EmployeeSchedule = ({ id }: { id: string }): JSX.Element => (
+const EmployeeSchedule = ({ id }: { id: string }): ReactElement => (
   <>
     <Center>
       <Title margin="50px 0 0px 0">Scheduling Questions</Title>

@@ -10,11 +10,11 @@ import ClickHandler from "./ClickHandler";
 import ModalContent from "./ModalContent";
 import ModalContainer from "./ModalContainer";
 import WindowContainer from "./WindowContainer";
-import { ReactPortal, ReactNode } from "~types";
+import { ReactElement, ReactPortal, ReactNode } from "~types";
 
 export interface IModalProps {
   background?: string;
-  children: JSX.Element | JSX.Element[];
+  children: ReactElement | Array<ReactElement>;
   dataTestId: string;
   disableClickHandler?: boolean;
   isOpen: boolean;
@@ -36,7 +36,7 @@ const Modal = ({
   isOpen,
   maxWidth,
   onClick
-}: IModalProps): JSX.Element => (
+}: IModalProps): ReactElement => (
   <>
     {isOpen &&
       render(

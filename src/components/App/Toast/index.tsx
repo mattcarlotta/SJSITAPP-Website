@@ -10,7 +10,7 @@ import {
 import AlertContainer from "./AlertContainer";
 import AlertMessage from "./AlertMessage";
 import AlertType from "./AlertType";
-import { ReactText } from "~types";
+import { ReactElement, ReactText } from "~types";
 
 export type TToastProps = {
   type: "success" | "info" | "error" | "warning";
@@ -21,7 +21,7 @@ export type TToastMessage = {
   ({ type, message }: TToastProps): ReactText;
 };
 
-export const displayIcon = (type?: string): JSX.Element => {
+export const displayIcon = (type?: string): ReactElement => {
   switch (type) {
     case "success":
       return <BsCheckBox />;

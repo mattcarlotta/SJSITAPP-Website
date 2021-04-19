@@ -5,9 +5,9 @@ import Card from "~components/Layout/Card";
 import Padding from "~components/Layout/Padding";
 import { FaFolderPlus } from "~icons";
 import app from "~utils/axiosConfig";
-import { AxiosResponse, TFormAPIQueryConfig } from "~types";
+import { AxiosResponse, ReactElement, TFormAPIQueryConfig } from "~types";
 
-export const CreateAPForm = (): JSX.Element => {
+export const CreateAPForm = (): ReactElement => {
   const apiQuery = (config: TFormAPIQueryConfig): Promise<AxiosResponse> =>
     app.post("forms/create", config);
 

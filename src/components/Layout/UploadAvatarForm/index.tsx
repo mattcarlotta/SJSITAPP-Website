@@ -8,6 +8,7 @@ import Margin from "~components/Layout/Margin";
 import SubmitButton from "~components/Layout/SubmitButton";
 import UploadAvatarInstructions from "~components/Layout/UploadAvatarInstructions";
 import { FaCloudUploadAlt, FaTimesCircle, FaTrash } from "~icons";
+import { ReactElement } from "~types";
 
 export type TUploadAvatarFormState = {
   isSubmitting: boolean;
@@ -35,7 +36,7 @@ export const UploadAvatarForm = ({
   serverError,
   serverMessage,
   updateUserAvatar
-}: TUploadAvatarFormProps): JSX.Element => {
+}: TUploadAvatarFormProps): ReactElement => {
   const imageRef = React.useRef<HTMLInputElement | null>(null);
   const [state, setState] = React.useState<TUploadAvatarFormState>(
     initialState

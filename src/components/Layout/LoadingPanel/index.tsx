@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import FadeIn from "~components/Layout/FadeIn";
-import { CSSProperties } from "~types";
+import { CSSProperties, ReactElement } from "~types";
 
 export type TLoadingPanelProps = {
   className?: string;
@@ -10,7 +10,7 @@ export type TLoadingPanelProps = {
 const LoadingPanel = ({
   className,
   style
-}: TLoadingPanelProps): JSX.Element => (
+}: TLoadingPanelProps): ReactElement => (
   <FadeIn timing="0.6s">
     <div data-testid="loading-panel" className={className} style={style} />
   </FadeIn>

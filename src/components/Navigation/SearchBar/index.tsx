@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Select from "~components/Forms/Select";
 import topics, { stafftopics } from "~containers/Pages/Help/Topics";
 import stripSpaces from "~utils/stripSpaces";
-import { EventTarget } from "~types";
+import { EventTarget, ReactElement } from "~types";
 
 export type TSearchBarProps = {
   role: string;
@@ -14,7 +14,7 @@ export type TSearchBarState = {
   id: string;
 };
 
-const SearchBar = ({ role }: TSearchBarProps): JSX.Element => {
+const SearchBar = ({ role }: TSearchBarProps): ReactElement => {
   const router = useRouter();
   const availableTopics = role !== "member" ? stafftopics : topics;
   const hash = router.asPath.split("#")[0];

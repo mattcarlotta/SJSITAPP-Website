@@ -1,6 +1,7 @@
 import { collapseSideNav, toggleSideNav } from "~actions/Sidemenu";
 import MenuButton from "~components/Layout/MenuButton";
 import { IconContext, RiMenuFoldLine, RiMenuUnfoldLine } from "~icons";
+import { ReactElement } from "~types";
 
 export type TMenuHamburgerProps = {
   collapsed: boolean;
@@ -12,7 +13,7 @@ const MenuHamburger = ({
   collapsed,
   onClick,
   primary
-}: TMenuHamburgerProps): JSX.Element => (
+}: TMenuHamburgerProps): ReactElement => (
   <MenuButton
     data-testid="hamburger-menu"
     primary={primary}

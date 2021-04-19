@@ -4,7 +4,7 @@ import get from "lodash.get";
 import isEmpty from "lodash.isempty";
 import { VictoryAxis, VictoryChart, VictoryBar, VictoryLabel } from "victory";
 import NoAvailability from "~components/Layout/NoAvailability";
-import { CSSProperties, TEventScheduledEvents } from "~types";
+import { CSSProperties, ReactElement, TEventScheduledEvents } from "~types";
 
 export type TAvailabilityResponseChartProps = {
   events: Array<TEventScheduledEvents>;
@@ -16,7 +16,7 @@ const COLORS = ["#66C2A5", "#FC8D62"];
 const EventScheduleChart = ({
   events,
   style
-}: TAvailabilityResponseChartProps): JSX.Element => {
+}: TAvailabilityResponseChartProps): ReactElement => {
   const largestValue = !isEmpty(events) ? get(events[1], "events") : 0;
 
   return (

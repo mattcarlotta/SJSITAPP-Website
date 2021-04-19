@@ -47,7 +47,7 @@ export const AppLayout = ({
   setSelectedTabs,
   toggleSideNav,
   ...rest
-}: TAppLayoutProps): JSX.Element => {
+}: TAppLayoutProps): ReactElement => {
   const { pathname } = useRouter();
 
   const handleToggle = (_: ChangeEvent<any>, nodeIds: TSideMenuNodeIds) => {

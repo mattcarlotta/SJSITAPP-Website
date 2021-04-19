@@ -17,7 +17,7 @@ import PanelDescription from "~components/Layout/PanelDescription";
 import { FaUserClock } from "~icons";
 import app from "~utils/axiosConfig";
 import { parseData } from "~utils/parseResponse";
-import { CSSProperties, TEmployeeAvailabilityData } from "~types";
+import { CSSProperties, ReactElement, TEmployeeAvailabilityData } from "~types";
 
 export type TEmployeeAvailabilityState = {
   availability: Array<TEmployeeAvailabilityData>;
@@ -40,7 +40,7 @@ const listStyle = {
   borderRadius: 5
 } as CSSProperties;
 
-export const EmployeeAvailability = (): JSX.Element => {
+export const EmployeeAvailability = (): ReactElement => {
   const [state, setState] = React.useState<TEmployeeAvailabilityState>({
     availability: [],
     error: false,

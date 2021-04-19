@@ -18,6 +18,7 @@ import {
   AxiosResponse,
   EventTarget,
   FormEvent,
+  ReactElement,
   TSeasonAPIQueryConfig,
   TSeasonData
 } from "~types";
@@ -46,7 +47,7 @@ const SeasonForm = ({
   id,
   season,
   submitText
-}: TSeasonFormProps): JSX.Element => {
+}: TSeasonFormProps): ReactElement => {
   const router = useRouter();
   const [state, setState] = React.useState<TSeasonFormState>({
     fields: fields(season),

@@ -31,7 +31,7 @@ import {
 import generateCalendarDays from "~utils/generateCalendarDays";
 import moment from "~utils/momentWithTimezone";
 import { parseData } from "~utils/parseResponse";
-import { EventTarget, TEventData } from "~types";
+import { EventTarget, ReactElement, TEventData } from "~types";
 
 export type TEventCalendarState = {
   days: Array<string>;
@@ -56,7 +56,7 @@ export const EventCalendar = ({
   APIURL,
   id,
   disableGames
-}: TEventCalendarProps): JSX.Element => {
+}: TEventCalendarProps): ReactElement => {
   const [state, setState] = React.useState<TEventCalendarState>({
     days: generateCalendarDays(
       moment().daysInMonth(),

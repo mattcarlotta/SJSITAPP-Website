@@ -124,7 +124,7 @@ const TransferList = ({
     onChange({ target: { name, value: chosenList } });
   };
 
-  const customList = (title: React.ReactNode, items: EmailTransferList) => (
+  const customList = (title: ReactNode, items: EmailTransferList) => (
     <Card className={classes.card}>
       <CardHeader
         className={classes.cardHeader}

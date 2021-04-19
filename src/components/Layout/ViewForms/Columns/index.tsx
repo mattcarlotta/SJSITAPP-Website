@@ -1,7 +1,7 @@
 import EmailReminders from "~components/Layout/EmailReminders";
 import FormatDate from "~components/Layout/FormatDate";
 import { dateTimeFormat, standardFormat } from "~utils/dateFormats";
-import { GridColumns, GridValueGetterParams } from "~types";
+import { GridColumns, GridValueGetterParams, ReactElement } from "~types";
 
 const Columns: GridColumns = [
   { field: "_id", headerName: "Database Id", flex: 2.25 },
@@ -10,7 +10,7 @@ const Columns: GridColumns = [
     field: "startMonth",
     headerName: "Start Month",
     flex: 1,
-    renderCell: (params: GridValueGetterParams): JSX.Element => (
+    renderCell: (params: GridValueGetterParams): ReactElement => (
       <FormatDate
         format={standardFormat}
         date={params.getValue("startMonth") as Date}
@@ -22,7 +22,7 @@ const Columns: GridColumns = [
     field: "endMonth",
     headerName: "End Month",
     flex: 1.25,
-    renderCell: (params: GridValueGetterParams): JSX.Element => (
+    renderCell: (params: GridValueGetterParams): ReactElement => (
       <FormatDate
         format={standardFormat}
         date={params.getValue("endMonth") as Date}
@@ -34,7 +34,7 @@ const Columns: GridColumns = [
     field: "expirationDate",
     headerName: "Expiration Date",
     flex: 2,
-    renderCell: (params: GridValueGetterParams): JSX.Element => (
+    renderCell: (params: GridValueGetterParams): ReactElement => (
       <FormatDate
         format={dateTimeFormat}
         date={params.getValue("expirationDate") as Date}
@@ -46,7 +46,7 @@ const Columns: GridColumns = [
     field: "sendEmailNotificationsDate",
     headerName: "Email Date",
     flex: 2,
-    renderCell: (params: GridValueGetterParams): JSX.Element => (
+    renderCell: (params: GridValueGetterParams): ReactElement => (
       <FormatDate
         format={dateTimeFormat}
         date={params.getValue("sendEmailNotificationsDate") as Date}
@@ -58,7 +58,7 @@ const Columns: GridColumns = [
     field: "sentEmails",
     headerName: "Email Status",
     flex: 0.6,
-    renderCell: (params: GridValueGetterParams): JSX.Element => (
+    renderCell: (params: GridValueGetterParams): ReactElement => (
       <EmailReminders status={params.getValue("sentEmails") as boolean} />
     )
   }

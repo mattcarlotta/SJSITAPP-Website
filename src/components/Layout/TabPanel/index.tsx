@@ -1,7 +1,8 @@
 import * as React from "react";
+import { ReactElement, ReactNode } from "~types";
 
 export type TTabelPanelProps = {
-  children?: React.ReactNode;
+  children?: ReactNode;
   index: number;
   value: number;
 };
@@ -11,19 +12,16 @@ const TabPanel = ({
   value,
   index,
   ...rest
-}: TTabelPanelProps): JSX.Element => (
-  <>
-    {value === index ? (
-      <div
-        role="tabpanel"
-        id={`tabpanel-${index}`}
-        aria-labelledby={`tab-${index}`}
-        {...rest}
-      >
-        {value === index && children}
-      </div>
-    ) : null}
-  </>
-);
+}: TTabelPanelProps): ReactElement | null =>
+  value === index ? (
+    <div
+      role="tabpanel"
+      id={`tabpanel-${index}`}
+      aria-labelledby={`tab-${index}`}
+      {...rest}
+    >
+      {value === index && children}
+    </div>
+  ) : null;
 
 export default TabPanel;

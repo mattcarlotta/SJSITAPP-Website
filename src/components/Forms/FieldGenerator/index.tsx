@@ -10,6 +10,7 @@ import {
   ChangeEvent,
   EmailTransferList,
   EventTarget,
+  ReactElement,
   TBaseFieldProps
 } from "~types";
 
@@ -26,7 +27,7 @@ import {
  *   required: true
  *  }]
  * @param {function} onChange - a function to update component state.
- * @returns {JSX.Element} a React component
+ * @returns {ReactElement} a React component
  */
 const FieldGenerator = <
   T extends Array<TBaseFieldProps>,
@@ -37,7 +38,7 @@ const FieldGenerator = <
 }: {
   fields: T;
   onChange: K;
-}): JSX.Element => (
+}): ReactElement => (
   <>
     {fields.map(
       ({ name, value, type, selectOptions, transferList, ...rest }) => {

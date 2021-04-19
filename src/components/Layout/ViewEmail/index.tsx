@@ -11,14 +11,14 @@ import Link from "~components/Navigation/Link";
 import { FaChevronLeft, GoMailRead } from "~icons";
 import app from "~utils/axiosConfig";
 import { parseData } from "~utils/parseResponse";
-import { TMailData } from "~types";
+import { ReactElement, TMailData } from "~types";
 
 export type TViewMailState = {
   email: TMailData;
   isLoading: boolean;
 };
 
-export const ViewMail = (): JSX.Element => {
+export const ViewMail = (): ReactElement => {
   const router = useRouter();
   const id = get(router, ["query", "id"]);
   const [state, setState] = React.useState<TViewMailState>({

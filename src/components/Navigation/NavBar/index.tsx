@@ -3,7 +3,7 @@ import * as actions from "~actions/Sidemenu";
 import Drawer from "~components/Navigation/Drawer";
 import FixedMenu from "~components/Layout/FixedMenu";
 import useWindowSize from "~utils/useWindowSize";
-import { ReactNode } from "~types";
+import { ReactElement, ReactNode } from "~types";
 
 export type TSideMenuProps = {
   children: ReactNode;
@@ -19,7 +19,7 @@ const NavBar = ({
   collapseSideNav,
   pathname,
   toggleSideNav
-}: TSideMenuProps): JSX.Element => {
+}: TSideMenuProps): ReactElement => {
   const windowHeight = useWindowSize();
   const isMobile = windowHeight <= 1400;
 

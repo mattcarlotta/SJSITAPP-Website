@@ -1,13 +1,13 @@
 import Center from "~components/Layout/Center";
 import FlexCenter from "~components/Layout/FlexCenter";
 import { MdAssignment } from "~icons";
-import { CSSProperties } from "~types";
+import { CSSProperties, ReactElement } from "~types";
 
 const iconStyle = {
   fontSize: 70
 } as CSSProperties;
 
-const NoForms = (): JSX.Element => (
+const NoForms = (): ReactElement => (
   <FlexCenter
     data-testid="no-forms"
     height="190px"

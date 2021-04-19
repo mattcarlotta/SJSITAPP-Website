@@ -10,8 +10,9 @@ import QueryHandler from "~components/Navigation/QueryHandler";
 import { FaFileSignature, FaKey } from "~icons";
 import columns from "./Columns";
 import filters from "./Filters";
+import { ReactElement } from "~types";
 
-export const ViewForms = (): JSX.Element => (
+export const ViewForms = (): ReactElement => (
   <>
     <Header title="View Forms" url="/employee/forms/viewall" />
     <Card

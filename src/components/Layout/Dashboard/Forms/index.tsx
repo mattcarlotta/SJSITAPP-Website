@@ -17,7 +17,7 @@ import app from "~utils/axiosConfig";
 import { dateTimeFormat } from "~utils/dateFormats";
 import moment from "~utils/momentWithTimezone";
 import { parseData } from "~utils/parseResponse";
-import { TFormData } from "~types";
+import { ReactElement, TFormData } from "~types";
 
 export type TDashboardEventsState = {
   error: boolean;
@@ -26,7 +26,7 @@ export type TDashboardEventsState = {
   isLoading: boolean;
 };
 
-export const Forms = (): JSX.Element => {
+export const Forms = (): ReactElement => {
   const [state, setState] = React.useState<TDashboardEventsState>({
     error: false,
     form: {},

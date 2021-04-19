@@ -24,7 +24,12 @@ import Mail from "./Mail";
 import Members from "./Members";
 import EmployeeScheduling from "./EmployeeScheduling";
 import Seasons from "./Seasons";
-import { ConnectedProps, EventTarget, PickReduxState } from "~types";
+import {
+  ConnectedProps,
+  EventTarget,
+  PickReduxState,
+  ReactElement
+} from "~types";
 
 /* istanbul ignore next */
 const mapState = ({ auth }: PickReduxState<"auth">) => ({
@@ -40,7 +45,7 @@ export type THelpPageState = {
   id: string;
 };
 
-export const HelpPage = ({ role }: PropsFromRedux): JSX.Element => {
+export const HelpPage = ({ role }: PropsFromRedux): ReactElement => {
   const router = useRouter();
   const isMember = role === "member";
   const availableTopics = !isMember ? stafftopics : topics;

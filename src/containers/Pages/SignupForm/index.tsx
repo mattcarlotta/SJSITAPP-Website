@@ -20,6 +20,7 @@ import {
   ConnectedProps,
   FormEvent,
   PickReduxState,
+  ReactElement,
   TBaseFieldProps,
   TSignupData
 } from "~types";
@@ -47,7 +48,7 @@ export type TSignupFormState = {
 export const SignupForm = ({
   serverError,
   signupUser
-}: PropsFromRedux): JSX.Element => {
+}: PropsFromRedux): ReactElement => {
   const router = useRouter();
   const token = get(router, ["query", "token"]);
   const [state, setState] = React.useState({

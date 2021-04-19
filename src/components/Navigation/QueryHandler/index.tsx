@@ -2,7 +2,7 @@ import * as React from "react";
 import isEqual from "lodash.isequal";
 import { useRouter } from "next/router";
 import { setQuery, stringifyQuery } from "~utils/queryHelpers";
-import { TURLQuery } from "~types";
+import { ReactElement, TURLQuery } from "~types";
 
 export type TQueryHandlerProps = {
   children: ({
@@ -15,10 +15,12 @@ export type TQueryHandlerProps = {
     queryString: string;
     clearFilters: () => void;
     updateQuery: (nextQuery: TURLQuery) => void;
-  }) => JSX.Element;
+  }) => ReactElement;
 };
 
-export const QueryHandler = ({ children }: TQueryHandlerProps): JSX.Element => {
+export const QueryHandler = ({
+  children
+}: TQueryHandlerProps): ReactElement => {
   const router = useRouter();
   const { query } = router;
   const [state, setState] = React.useState(setQuery(query));

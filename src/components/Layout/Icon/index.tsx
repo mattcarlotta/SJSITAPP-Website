@@ -18,7 +18,7 @@ import {
   FaUserCircle,
   MdPersonPin
 } from "~icons";
-import { ChangeEvent, CSSProperties, TIconType } from "~types";
+import { ChangeEvent, CSSProperties, ReactElement, TIconType } from "~types";
 
 export interface IIconProps {
   className?: string;
@@ -28,7 +28,7 @@ export interface IIconProps {
   style?: CSSProperties;
 }
 
-const icons = (type?: TIconType): JSX.Element => {
+const icons = (type?: TIconType): ReactElement => {
   switch (type) {
     case "calander": {
       return <FaCalendarAlt />;

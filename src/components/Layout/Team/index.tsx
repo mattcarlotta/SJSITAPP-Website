@@ -2,6 +2,7 @@
 import * as React from "react";
 import Tooltip from "~components/Layout/Tooltip";
 import LoadingImage from "./LoadingImage";
+import { ReactElement } from "~types";
 
 export type TDisplayTeamProps = {
   folder: string;
@@ -32,7 +33,7 @@ class DisplayTeam extends React.Component<
     if (!this.cancelLoad) this.setState({ isLoaded: true });
   };
 
-  render = (): JSX.Element => {
+  render = (): ReactElement => {
     const { isLoaded } = this.state;
     const { folder, size, opacity, team } = this.props;
 

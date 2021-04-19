@@ -27,7 +27,13 @@ import {
   RiFilterFill,
   RiFilterLine
 } from "~icons";
-import { ChangeEvent, EventTarget, TFilters, TURLQuery } from "~types";
+import {
+  ChangeEvent,
+  EventTarget,
+  ReactElement,
+  TFilters,
+  TURLQuery
+} from "~types";
 
 const useClasses = makeStyles({
   paper: {
@@ -64,7 +70,7 @@ const TableFilterButton = ({
   filters,
   queries,
   updateQuery
-}: TTableFilterButtonProps): JSX.Element => {
+}: TTableFilterButtonProps): ReactElement => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );

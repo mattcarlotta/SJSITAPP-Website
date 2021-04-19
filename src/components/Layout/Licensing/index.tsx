@@ -8,8 +8,9 @@ import Padding from "~components/Layout/Padding";
 import Title from "~components/Layout/Title";
 import Head from "~components/Navigation/Header";
 import { fullyearFormat } from "~utils/dateFormats";
+import { ReactElement } from "~types";
 
-const LicensingPage = (): JSX.Element => (
+const LicensingPage = (): ReactElement => (
   <>
     <Head title="Licensing" url="/employee/licensing" />
     <Card

@@ -21,7 +21,12 @@ import {
   MdHelpOutline,
   RiLogoutBoxLine
 } from "~icons";
-import { ConnectedProps, MouseEvent, PickReduxState } from "~types";
+import {
+  ConnectedProps,
+  MouseEvent,
+  PickReduxState,
+  ReactElement
+} from "~types";
 
 /* istanbul ignore next */
 const mapState = ({ auth }: PickReduxState<"auth">) => ({
@@ -59,7 +64,7 @@ export const UserAvatar = ({
   lastName,
   role,
   signoutUserSession
-}: TUserAvatarProps): JSX.Element => {
+}: TUserAvatarProps): ReactElement => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );

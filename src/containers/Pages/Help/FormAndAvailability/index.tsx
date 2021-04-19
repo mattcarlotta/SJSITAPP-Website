@@ -8,8 +8,9 @@ import Title from "~components/Layout/Title";
 import WarningText from "~components/Layout/WarningText";
 import OutsideLink from "~components/Navigation/OutsideLink";
 import { BsPencilSquare } from "~icons";
+import { ReactElement } from "~types";
 
-const FormAndAvailability = ({ id }: { id: string }): JSX.Element => (
+const FormAndAvailability = ({ id }: { id: string }): ReactElement => (
   <>
     <Center>
       <Title margin="50px 0 0 0">Forms and Availability Questions</Title>

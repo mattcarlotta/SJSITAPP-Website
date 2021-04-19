@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 import styled from "@emotion/styled";
-import { CSSProperties, ReactNode } from "~types";
+import { CSSProperties, ReactElement, ReactNode } from "~types";
 
 export interface ILinkProps {
   children: ReactNode;
@@ -20,7 +20,7 @@ export const LinkComponent = ({
   replace,
   shallow,
   style
-}: ILinkProps): JSX.Element => (
+}: ILinkProps): ReactElement => (
   <NextLink
     href={href}
     prefetch={false}

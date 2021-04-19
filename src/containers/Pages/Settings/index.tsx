@@ -21,7 +21,12 @@ import Title from "~components/Layout/Title";
 import Header from "~components/Navigation/Header";
 import { BsPeopleCircle, FaCogs, FaChartBar, FaReply } from "~icons";
 import capitalize from "~utils/capitalize";
-import { ChangeEvent, ConnectedProps, PickReduxState } from "~types";
+import {
+  ChangeEvent,
+  ConnectedProps,
+  PickReduxState,
+  ReactElement
+} from "~types";
 
 /* istanbul ignore next */
 const mapState = ({ auth, server }: PickReduxState<"auth" | "server">) => ({
@@ -56,7 +61,7 @@ export type TSettingPageProps = PropsFromRedux & {
 };
 const TABS = ["profile", "availability", "responses"];
 
-export const SettingsPage = (props: TSettingPageProps): JSX.Element => {
+export const SettingsPage = (props: TSettingPageProps): ReactElement => {
   const { role } = props;
   const router = useRouter();
   const query = get(router, ["query", "tab"]);

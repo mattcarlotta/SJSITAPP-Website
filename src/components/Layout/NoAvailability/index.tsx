@@ -1,14 +1,14 @@
 import Center from "~components/Layout/Center";
 import FlexCenter from "~components/Layout/FlexCenter";
 import { MdAccessTime } from "~icons";
-import { CSSProperties } from "~types";
+import { CSSProperties, ReactElement } from "~types";
 
 const iconStyle = {
   fontSize: 70,
   marginBottom: 5
 } as CSSProperties;
 
-const NoAvailability = ({ height }: { height?: string }): JSX.Element => (
+const NoAvailability = ({ height }: { height?: string }): ReactElement => (
   <FlexCenter
     data-testid="no-availability"
     height={height || "130px"}

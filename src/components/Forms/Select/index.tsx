@@ -5,7 +5,7 @@ import ClickHandler from "./ClickHandler";
 import Selection from "./Selection";
 import SelectContainer from "./SelectContainer";
 import Options from "./Options";
-import { EventTarget, ReactNode } from "~types";
+import { EventTarget, ReactElement, ReactNode } from "~types";
 
 export type TSelectProps = {
   background?: string;
@@ -47,7 +47,7 @@ const Select = ({
   value,
   width,
   ...props
-}: TSelectProps): JSX.Element => (
+}: TSelectProps): ReactElement => (
   <Container
     display={display}
     height={height}

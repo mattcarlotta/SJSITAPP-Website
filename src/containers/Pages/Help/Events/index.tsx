@@ -15,14 +15,14 @@ import {
   FaTools,
   FaTrash
 } from "~icons";
-import { CSSProperties } from "~types";
+import { CSSProperties, ReactElement } from "~types";
 
 const iconStyle = {
   position: "relative",
   top: 2
 } as CSSProperties;
 
-const Events = ({ id }: { id: string }): JSX.Element => (
+const Events = ({ id }: { id: string }): ReactElement => (
   <>
     <Center>
       <Title margin="50px 0 0 0">Events</Title>

@@ -9,14 +9,14 @@ import Paragraph from "~components/Layout/Paragraph";
 import Title from "~components/Layout/Title";
 import OutsideLink from "~components/Navigation/OutsideLink";
 import { FaClipboardCheck, FaTools } from "~icons";
-import { CSSProperties } from "~types";
+import { CSSProperties, ReactElement } from "~types";
 
 const iconStyle = {
   position: "relative",
   top: 2
 } as CSSProperties;
 
-const GettingStarted = ({ id }: { id: string }): JSX.Element => (
+const GettingStarted = ({ id }: { id: string }): ReactElement => (
   <>
     <Center>
       <Title margin="50px 0 0 0">Getting Started</Title>

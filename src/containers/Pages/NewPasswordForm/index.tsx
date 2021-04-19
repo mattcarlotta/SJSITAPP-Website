@@ -17,6 +17,7 @@ import {
   ConnectedProps,
   FormEvent,
   PickReduxState,
+  ReactElement,
   TBaseFieldProps,
   TNewPasswordData
 } from "~types";
@@ -45,7 +46,7 @@ export type ISignupFormState = {
 export const NewPasswordForm = ({
   serverError,
   updateUserPassword
-}: PropsFromRedux): JSX.Element => {
+}: PropsFromRedux): ReactElement => {
   const router = useRouter();
   const token = get(router, ["query", "token"]);
   const [state, setState] = React.useState({

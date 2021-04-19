@@ -5,7 +5,7 @@ import Padding from "~components/Layout/Padding";
 import Margin from "~components/Layout/Margin";
 import Team from "~components/Layout/Team";
 import { weekdateTimeFormat } from "~utils/dateFormats";
-import { CSSProperties } from "~types";
+import { CSSProperties, ReactElement } from "~types";
 
 export type TEventLabelProps = {
   eventDate: string;
@@ -21,7 +21,7 @@ const EventLabel = ({
   opponent,
   style,
   team
-}: TEventLabelProps): JSX.Element => (
+}: TEventLabelProps): ReactElement => (
   <Padding bottom="5px" style={style}>
     <div
       css={css`

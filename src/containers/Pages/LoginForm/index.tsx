@@ -18,6 +18,7 @@ import {
   EventTarget,
   FormEvent,
   PickReduxState,
+  ReactElement,
   TLoginData
 } from "~types";
 
@@ -44,7 +45,7 @@ export type TLoginFormState = {
 export const LoginForm = ({
   serverError,
   signinUser
-}: PropsFromRedux): JSX.Element => {
+}: PropsFromRedux): ReactElement => {
   const [state, setState] = React.useState<TLoginFormState>({
     fields,
     errors: false,

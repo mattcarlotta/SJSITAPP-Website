@@ -1,8 +1,9 @@
 import FlexCenter from "~components/Layout/FlexCenter";
 import Center from "~components/Layout/Center";
 import { RiFileForbidLine } from "~icons";
+import { ReactElement } from "~types";
 
-const APFormExpired = (): JSX.Element => (
+const APFormExpired = (): ReactElement => (
   <FlexCenter
     data-testid="expired-form"
     height="140px"

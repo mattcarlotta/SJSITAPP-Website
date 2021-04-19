@@ -6,8 +6,9 @@ import Paragraph from "~components/Layout/Paragraph";
 import Title from "~components/Layout/Title";
 import WarningText from "~components/Layout/WarningText";
 import OutsideLink from "~components/Navigation/OutsideLink";
+import { ReactElement } from "~types";
 
-const EmployeeScheduling = ({ id }: { id: string }): JSX.Element => (
+const EmployeeScheduling = ({ id }: { id: string }): ReactElement => (
   <>
     <Center>
       <Title margin="50px 0 0px 0">Employee Scheduling</Title>

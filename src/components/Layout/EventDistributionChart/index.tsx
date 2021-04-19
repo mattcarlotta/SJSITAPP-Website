@@ -4,7 +4,7 @@ import ReactResizeDetector from "react-resize-detector";
 import FadeIn from "~components/Layout/FadeIn";
 import Padding from "~components/Layout/Padding";
 import NoEventDistribitionData from "~components/Layout/NoEventDistrubtionData";
-import { RefObject, TEventDistributionData } from "~types";
+import { ReactElement, RefObject, TEventDistributionData } from "~types";
 
 export type TEventDistributionChartProps = {
   events: Array<TEventDistributionData>;
@@ -21,7 +21,7 @@ const COLORS = [
 
 const EventDistributionChart = ({
   events
-}: TEventDistributionChartProps): JSX.Element => {
+}: TEventDistributionChartProps): ReactElement => {
   const label = "name";
   const key = "Event Count";
   const [largestValue, largestNameLength] = !isEmpty(events)

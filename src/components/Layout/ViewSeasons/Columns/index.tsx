@@ -1,6 +1,6 @@
 import FormatDate from "~components/Layout/FormatDate";
 import { standardFormat } from "~utils/dateFormats";
-import { GridColumns, GridValueGetterParams } from "~types";
+import { GridColumns, GridValueGetterParams, ReactElement } from "~types";
 
 const Columns: GridColumns = [
   { field: "_id", headerName: "Database Id", flex: 1 },
@@ -9,7 +9,7 @@ const Columns: GridColumns = [
     field: "startDate",
     headerName: "Start Date",
     flex: 1,
-    renderCell: (params: GridValueGetterParams): JSX.Element => (
+    renderCell: (params: GridValueGetterParams): ReactElement => (
       <FormatDate
         format={standardFormat}
         date={params.getValue("startDate") as Date}
@@ -21,7 +21,7 @@ const Columns: GridColumns = [
     field: "endDate",
     headerName: "End Date",
     flex: 1,
-    renderCell: (params: GridValueGetterParams): JSX.Element => (
+    renderCell: (params: GridValueGetterParams): ReactElement => (
       <FormatDate
         format={standardFormat}
         date={params.getValue("endDate") as Date}

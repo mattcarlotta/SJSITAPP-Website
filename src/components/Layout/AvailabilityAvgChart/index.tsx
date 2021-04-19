@@ -5,7 +5,7 @@ import get from "lodash.get";
 import { VictoryPie } from "victory";
 import AvailabilityChartLabel from "~components/Layout/AvailabilityChartLabel";
 import NoAvailability from "~components/Layout/NoAvailability";
-import { CSSProperties, TAvailabilityData } from "~types";
+import { CSSProperties, ReactElement, TAvailabilityData } from "~types";
 
 const VALIDCOLORS = ["#0d6472", "#bbb"];
 const INVALIDCOLORS = ["#f04d4d", "#bbb"];
@@ -18,7 +18,7 @@ export type AvailabilityAvgChartProps = {
 const AvailabilityAvgChart = ({
   availability,
   style
-}: AvailabilityAvgChartProps): JSX.Element => {
+}: AvailabilityAvgChartProps): ReactElement => {
   const availabilityPercentage = get(availability[0], ["value"]) || 0;
 
   return (

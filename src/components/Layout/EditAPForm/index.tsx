@@ -9,14 +9,19 @@ import Padding from "~components/Layout/Padding";
 import { FaEdit } from "~icons";
 import app from "~utils/axiosConfig";
 import { parseData } from "~utils/parseResponse";
-import { AxiosResponse, TForm, TFormAPIQueryConfig } from "~types";
+import {
+  AxiosResponse,
+  ReactElement,
+  TForm,
+  TFormAPIQueryConfig
+} from "~types";
 
 export type TEditAPFormState = {
   form: TForm;
   isLoading: boolean;
 };
 
-export const EditAPForm = (): JSX.Element => {
+export const EditAPForm = (): ReactElement => {
   const router = useRouter();
   const id = get(router, ["query", "id"]);
   const [state, setState] = React.useState<TEditAPFormState>({

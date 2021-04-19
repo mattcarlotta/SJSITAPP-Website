@@ -9,6 +9,7 @@ import TeamLogo from "~components/Layout/TeamLogo";
 import MenuLink from "~components/Navigation/MenuLink";
 import SearchBar from "~components/Navigation/SearchBar";
 import UserAvatar from "~containers/App/UserAvatar";
+import { ReactElement } from "~types";
 
 export type TTopBarProps = {
   collapsed: boolean;
@@ -20,7 +21,7 @@ export const TopBar = ({
   collapsed,
   role,
   toggleSideNav
-}: TTopBarProps): JSX.Element => (
+}: TTopBarProps): ReactElement => (
   <Header>
     <Flex height="100%">
       <FlexStart breakpoint width="33.33%">

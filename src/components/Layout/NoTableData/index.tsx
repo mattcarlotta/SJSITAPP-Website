@@ -1,13 +1,13 @@
 import FlexCenter from "~components/Layout/FlexCenter";
 import { RiLineChartLine } from "~icons";
-import { CSSProperties } from "~types";
+import { CSSProperties, ReactElement } from "~types";
 
 const iconStyle = {
   fontSize: 70,
   marginBottom: 5
 } as CSSProperties;
 
-const NoTableData = (): JSX.Element => (
+const NoTableData = (): ReactElement => (
   <FlexCenter
     data-testid="no-table-data"
     margin="225px 0 0 0"

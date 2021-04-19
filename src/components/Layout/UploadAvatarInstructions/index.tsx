@@ -2,8 +2,9 @@ import { css } from "@emotion/react";
 import FlexCenter from "~components/Layout/FlexCenter";
 import Margin from "~components/Layout/Margin";
 import { FaCloudUploadAlt } from "~icons";
+import { ReactElement } from "~types";
 
-const UploadAvatarInstructions = (): JSX.Element => (
+const UploadAvatarInstructions = (): ReactElement => (
   <FlexCenter style={{ padding: 5, textAlign: "center" }} direction="column">
     <Margin as="div" top="0" right="auto" bottom="0" left="auto">
       <FaCloudUploadAlt style={{ fontSize: 80 }} />

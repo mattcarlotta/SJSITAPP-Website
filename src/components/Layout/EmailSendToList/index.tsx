@@ -1,7 +1,7 @@
 import * as React from "react";
 import Tooltip, { TTooltipPlacement } from "~components/Layout/Tooltip";
 import { BiChevronDownSquare } from "~icons";
-import { CSSProperties } from "~types";
+import { CSSProperties, ReactElement } from "~types";
 
 export type TEmailSendToListProps = {
   emails: Array<string>;
@@ -15,7 +15,7 @@ const EmailSendToList = ({
   placement,
   styles,
   withIcon
-}: TEmailSendToListProps): JSX.Element => (
+}: TEmailSendToListProps): ReactElement => (
   <Tooltip
     title={emails.map(user => (
       <span key={user} style={{ margin: 0, padding: 0 }}>

@@ -15,6 +15,7 @@ import {
   AxiosResponse,
   EventTarget,
   FormEvent,
+  ReactElement,
   TForm,
   TFormAPIQueryConfig
 } from "~types";
@@ -46,7 +47,7 @@ const APForm = ({
   fetchingFormData,
   form,
   submitText
-}: TAPFormProps): JSX.Element => {
+}: TAPFormProps): ReactElement => {
   const router = useRouter();
   const [state, setState] = React.useState<TAPFormState>({
     fields: [],

@@ -18,6 +18,7 @@ import {
   EventTarget,
   FormEvent,
   PickReduxState,
+  ReactElement,
   TBaseFieldProps,
   TResetPasswordData
 } from "~types";
@@ -45,7 +46,7 @@ export type TSignupFormState = {
 export const ResetPasswordForm = ({
   resetPassword,
   serverError
-}: PropsFromRedux): JSX.Element => {
+}: PropsFromRedux): ReactElement => {
   const [state, setState] = React.useState<TSignupFormState>({
     fields,
     errors: false,

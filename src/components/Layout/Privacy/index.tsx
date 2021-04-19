@@ -7,8 +7,9 @@ import Padding from "~components/Layout/Padding";
 import Title from "~components/Layout/Title";
 import Head from "~components/Navigation/Header";
 import Link from "~components/Navigation/NavLink";
+import { ReactElement } from "~types";
 
-const PrivacyPage = (): JSX.Element => (
+const PrivacyPage = (): ReactElement => (
   <>
     <Head title="Privacy & Warranty Policy" url="/employee/privacy" />
     <Card

@@ -1,6 +1,7 @@
 import { css, Global } from "@emotion/react";
+import { ReactElement } from "~types";
 
-export const GlobalStylesheet = (): JSX.Element => (
+export const GlobalStylesheet = (): ReactElement => (
   <Global
     styles={css`
       @font-face {

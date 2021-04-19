@@ -10,8 +10,9 @@ import QueryHandler from "~components/Navigation/QueryHandler";
 import { FaFolderPlus, FaKey } from "~icons";
 import columns from "./Columns";
 import filters from "./Filters";
+import { ReactElement } from "~types";
 
-export const ViewSeasons = (): JSX.Element => (
+export const ViewSeasons = (): ReactElement => (
   <>
     <Header title="View Seasons" url="/employee/seasons/viewall" />
     <Card

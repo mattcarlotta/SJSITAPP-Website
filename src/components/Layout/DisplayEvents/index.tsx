@@ -8,7 +8,7 @@ import Modal from "~components/Layout/Modal";
 import Margin from "~components/Layout/Margin";
 import NoEvents from "~components/Layout/NoEvents";
 import { FaCalendarCheck } from "~icons";
-import { CSSProperties, TEventData } from "~types";
+import { CSSProperties, ReactElement, TEventData } from "~types";
 
 const iconStyle = {
   position: "relative",
@@ -49,7 +49,7 @@ const DisplayEvents = ({
   scheduleIconStyle,
   spacing,
   width
-}: TDisplayEventProps): JSX.Element => {
+}: TDisplayEventProps): ReactElement => {
   const [state, setState] = React.useState({
     isVisible: false,
     modalContent: {}

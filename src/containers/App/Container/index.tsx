@@ -6,9 +6,9 @@ import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 import { checkForActiveSession } from "~actions/Auth";
 import GlobalStylesheet from "~styles/globalStylesheet";
-import { AppProps } from "~types";
+import { AppProps, ReactElement } from "~types";
 
-const Container = ({ Component, pageProps }: AppProps): JSX.Element => {
+const Container = ({ Component, pageProps }: AppProps): ReactElement => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {

@@ -5,7 +5,7 @@ import DisplayOption from "../DisplayOption";
 import Input from "../Input";
 import SelectionContainer from "../SelectionContainer";
 import SelectText from "../SelectText";
-import { ChangeEvent, CSSProperties, EventTarget } from "~types";
+import { ChangeEvent, CSSProperties, EventTarget, ReactElement } from "~types";
 
 const searchStyle = {
   position: "relative",
@@ -49,7 +49,7 @@ const Selection = ({
   name,
   searchText,
   value
-}: TSelectionProps): JSX.Element => (
+}: TSelectionProps): ReactElement => (
   <SelectionContainer tabIndex={0} data-testid={name} height={height}>
     <SelectText
       dataTestId="select-text"

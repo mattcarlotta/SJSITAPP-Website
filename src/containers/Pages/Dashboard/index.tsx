@@ -7,7 +7,7 @@ import Availability from "~components/Layout/Dashboard/Availability";
 import EmployeeAvailability from "~components/Layout/Dashboard/EmployeeAvailability";
 import EventDistribution from "~components/Layout/Dashboard/EventDistribution";
 import Header from "~components/Navigation/Header";
-import { ConnectedProps, PickReduxState } from "~types";
+import { ConnectedProps, PickReduxState, ReactElement } from "~types";
 
 /* istanbul ignore next */
 const mapState = ({ auth }: PickReduxState<"auth">) => ({
@@ -22,7 +22,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 export const Dashboard = ({
   loggedinUserId,
   role
-}: PropsFromRedux): JSX.Element => {
+}: PropsFromRedux): ReactElement => {
   const isMember = role === "member";
   return (
     <>

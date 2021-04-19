@@ -6,7 +6,12 @@ import DropContainer from "./DropContainer";
 import Option from "./Option";
 import OptionsContainer from "./OptionsContainer";
 import NoOptions from "./NoOptions";
-import { EventTarget, EventTargetDataset, KeyboardEvent } from "~types";
+import {
+  EventTarget,
+  EventTargetDataset,
+  KeyboardEvent,
+  ReactElement
+} from "~types";
 
 export interface SelectOptionsContainerProps {
   handleOptionSelect: (props: EventTarget) => void;
@@ -72,7 +77,7 @@ class SelectOptionsContainer extends React.Component<
     this.props.handleOptionSelect({ target: { name, value } });
   };
 
-  render = (): JSX.Element | null => {
+  render = (): ReactElement | null => {
     const { searchOptions } = this.state;
     const {
       name,

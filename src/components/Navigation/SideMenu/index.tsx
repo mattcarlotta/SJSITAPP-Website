@@ -9,7 +9,7 @@ import NavTitle from "~components/Navigation/NavTitle";
 import { fullyearFormat } from "~utils/dateFormats";
 import { MdExpandMore, MdChevronRight } from "~icons";
 import { EmployeeRoutes, StaffRoutes } from "./Tabs";
-import { ChangeEvent, TSideMenuNodeIds } from "~types";
+import { ChangeEvent, ReactElement, TSideMenuNodeIds } from "~types";
 
 export type TSideMenuProps = {
   expandedNodeIds: TSideMenuNodeIds;
@@ -58,7 +58,7 @@ const SideMenu = ({
   role,
   handleToggle,
   selectedNodeIds
-}: TSideMenuProps): JSX.Element => {
+}: TSideMenuProps): ReactElement => {
   const TABS = role !== "member" ? StaffRoutes : EmployeeRoutes;
 
   return (

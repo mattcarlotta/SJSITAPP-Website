@@ -10,14 +10,19 @@ import SeasonForm from "~components/Layout/SeasonForm";
 import { FaEdit } from "~icons";
 import app from "~utils/axiosConfig";
 import { parseData } from "~utils/parseResponse";
-import { AxiosResponse, TSeasonAPIQueryConfig, TSeasonData } from "~types";
+import {
+  AxiosResponse,
+  ReactElement,
+  TSeasonAPIQueryConfig,
+  TSeasonData
+} from "~types";
 
 export type TEditSeasonFormState = {
   season: TSeasonData;
   isLoading: boolean;
 };
 
-export const EditSeasonForm = (): JSX.Element => {
+export const EditSeasonForm = (): ReactElement => {
   const router = useRouter();
   const id = get(router, ["query", "id"]);
   const [state, setState] = React.useState<TEditSeasonFormState>({

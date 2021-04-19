@@ -16,6 +16,7 @@ import {
   GridRowId,
   GridSelectionModelChangeParams,
   GridValueGetterParams,
+  ReactElement,
   TURLQuery
 } from "~types";
 
@@ -59,7 +60,7 @@ const Table = ({
   queryString,
   updateQuery,
   ...rest
-}: TTableProps): JSX.Element => {
+}: TTableProps): ReactElement => {
   const [state, setState] = React.useState<TTableState>(initalState);
   const { data, isLoading, selectedIds, totalDocs } = state;
   const page = parseInt(get(queries, ["page"]), 10);
@@ -148,7 +149,7 @@ const Table = ({
         headerName: "Actions",
         width: 95,
         sortable: false,
-        renderCell: (params: GridValueGetterParams): JSX.Element => (
+        renderCell: (params: GridValueGetterParams): ReactElement => (
           <TableActions
             disableCheckbox={disableCheckbox}
             handleDeleteRecord={deleteRecord}

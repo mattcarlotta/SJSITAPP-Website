@@ -18,7 +18,7 @@ import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import fields from "./Fields";
-import { EventTarget, FormEvent } from "~types";
+import { EventTarget, FormEvent, ReactElement } from "~types";
 
 export type TComposeMailFormState = {
   fields: ReturnType<typeof fields>;
@@ -33,7 +33,7 @@ export type TParsedMailFormFields = {
   sendTo: Array<string>;
 };
 
-export const ComposeMailForm = (): JSX.Element => {
+export const ComposeMailForm = (): ReactElement => {
   const router = useRouter();
   const [state, setState] = React.useState<TComposeMailFormState>({
     fields: [],

@@ -16,7 +16,12 @@ import {
   FaTools,
   FaTrash
 } from "~icons";
-import { GridRowId, GridValueGetterParams, TransitionProps } from "~types";
+import {
+  GridRowId,
+  GridValueGetterParams,
+  ReactElement,
+  TransitionProps
+} from "~types";
 
 export type TTableActionsProps = {
   disableCheckbox?: boolean;
@@ -47,7 +52,7 @@ const TableActions = ({
   resend,
   selectedIds,
   view
-}: TTableActionsProps): JSX.Element => {
+}: TTableActionsProps): ReactElement => {
   const [open, setOpen] = React.useState(false);
   const id = get(params, ["id"]);
 

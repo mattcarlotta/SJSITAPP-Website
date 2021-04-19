@@ -3,6 +3,7 @@ import Head from "~components/Navigation/Header";
 import Center from "~components/Layout/Center";
 import Paragraph from "~components/Layout/Paragraph";
 import Title from "~components/Layout/Title";
+import { ReactElement } from "~types";
 
 export type TFormTitleProps = {
   description: string;
@@ -14,7 +15,7 @@ const FormTitle = ({
   description,
   header,
   title
-}: TFormTitleProps): JSX.Element => (
+}: TFormTitleProps): ReactElement => (
   <>
     <Head title={header} />
     <Center style={{ borderBottom: "1px solid #e8edf2", marginBottom: "25px" }}>

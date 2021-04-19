@@ -25,6 +25,7 @@ import condenseFormFields from "./CondenseFormFields";
 import {
   EventTarget,
   FormEvent,
+  ReactElement,
   TAPFormData,
   TAPFormDetails,
   TBaseFieldProps,
@@ -54,7 +55,7 @@ const initialState = {
   isSubmitting: false
 };
 
-const APResponseForm = (): JSX.Element => {
+const APResponseForm = (): ReactElement => {
   const router = useRouter();
   const id = get(router, ["query", "id"]);
   const [state, setState] = React.useState<TAPResponseFormState>(initialState);

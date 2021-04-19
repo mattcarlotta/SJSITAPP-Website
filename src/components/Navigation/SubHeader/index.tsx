@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import Link from "~components/Navigation/Link";
 import { FaLink } from "~icons";
 import stripSpaces from "~utils/stripSpaces";
+import { ReactElement } from "~types";
 
 export type TSubHeaderProps = {
   className?: string;
@@ -12,7 +13,7 @@ export type TSubHeaderProps = {
 const SubHeaderComponent = ({
   className,
   children
-}: TSubHeaderProps): JSX.Element => {
+}: TSubHeaderProps): ReactElement => {
   const router = useRouter();
   const basePath = router.asPath.split("#")[0];
   const id = stripSpaces(children);

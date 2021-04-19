@@ -9,6 +9,7 @@ import Paragraph from "~components/Layout/Paragraph";
 import SubHeader from "~components/Navigation/SubHeader";
 import { MdExpandMore } from "~icons";
 import stripSpaces from "~utils/stripSpaces";
+import { ReactElement } from "~types";
 
 export type TCustomAccordionProps = {
   children: any;
@@ -40,7 +41,7 @@ const CustomAccordion = ({
   children,
   expanded,
   title
-}: TCustomAccordionProps): JSX.Element => {
+}: TCustomAccordionProps): ReactElement => {
   const id = stripSpaces(title);
   const isExpanded = expanded === id;
   const [tabExpanded, setExpanded] = React.useState(isExpanded);

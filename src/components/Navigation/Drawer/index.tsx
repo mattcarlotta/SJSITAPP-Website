@@ -4,7 +4,7 @@ import FlexStart from "~components/Layout/FlexStart";
 import Margin from "~components/Layout/Margin";
 import MenuHamburger from "~components/Layout/MenuHamburger";
 import TeamLogo from "~components/Layout/TeamLogo";
-import { ReactNode } from "~types";
+import { ReactElement, ReactNode } from "~types";
 
 export type TDrawerProps = {
   children: ReactNode;
@@ -19,7 +19,11 @@ const useStyles = makeStyles({
   }
 });
 
-const SideDrawer = ({ children, onClose, open }: TDrawerProps): JSX.Element => (
+const SideDrawer = ({
+  children,
+  onClose,
+  open
+}: TDrawerProps): ReactElement => (
   <Drawer
     data-testid="drawer-sidemenu"
     anchor="left"

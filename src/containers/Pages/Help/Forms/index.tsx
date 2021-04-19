@@ -10,14 +10,14 @@ import Title from "~components/Layout/Title";
 import WarningText from "~components/Layout/WarningText";
 import OutsideLink from "~components/Navigation/OutsideLink";
 import { FaEdit, FaShareSquare, FaTools, FaTrash } from "~icons";
-import { CSSProperties } from "~types";
+import { CSSProperties, ReactElement } from "~types";
 
 const iconStyle = {
   position: "relative",
   top: 2
 } as CSSProperties;
 
-const Forms = ({ id }: { id: string }): JSX.Element => (
+const Forms = ({ id }: { id: string }): ReactElement => (
   <>
     <Center>
       <Title margin="50px 0 0px 0">Forms</Title>

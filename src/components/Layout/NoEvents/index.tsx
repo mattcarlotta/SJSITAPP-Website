@@ -1,7 +1,7 @@
 import FlexCenter from "~components/Layout/FlexCenter";
 import Center from "~components/Layout/Center";
 import { MdEvent, MdEventNote } from "~icons";
-import { CSSProperties } from "~types";
+import { CSSProperties, ReactElement } from "~types";
 
 export type TNoEventsProps = {
   today?: boolean;
@@ -11,7 +11,7 @@ const iconStyle = {
   fontSize: 70
 } as CSSProperties;
 
-const NoEvents = ({ today }: TNoEventsProps): JSX.Element => (
+const NoEvents = ({ today }: TNoEventsProps): ReactElement => (
   <FlexCenter
     data-testid="no-events"
     height="135px"

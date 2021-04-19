@@ -2,7 +2,7 @@ import React from "react";
 import Button from "~components/Layout/Button";
 import ButtonContainer from "~components/Layout/ButtonContainer";
 import Submitting from "~components/Layout/Submitting";
-import { CSSProperties } from "~types";
+import { CSSProperties, ReactElement } from "~types";
 
 export interface ISubmitButtonProps {
   disabled?: boolean;
@@ -20,7 +20,7 @@ const SubmitButton = ({
   title,
   style,
   submitBtnStyle
-}: ISubmitButtonProps): JSX.Element => (
+}: ISubmitButtonProps): ReactElement => (
   <ButtonContainer maxWidth={maxWidth} style={style}>
     {isSubmitting ? (
       <Submitting style={{ ...submitBtnStyle }} />

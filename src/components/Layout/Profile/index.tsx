@@ -7,10 +7,11 @@ import {
 import Center from "~components/Layout/Center";
 import EditMemberForm from "~components/Layout/EditMemberForm";
 import FlexCenter from "~components/Layout/FlexCenter";
+import PanelDescription from "~components/Layout/PanelDescription";
 import Title from "~components/Layout/Title";
 import UploadAvatarForm from "~components/Layout/UploadAvatarForm";
 import OutsideLink from "~components/Navigation/OutsideLink";
-import PanelDescription from "../PanelDescription";
+import { ReactElement } from "~types";
 
 export type TProfileProps = {
   id: string;
@@ -29,7 +30,7 @@ export type TProfileProps = {
   updateUserProfile: typeof updateUserProfile;
 };
 
-const Profile = (props: TProfileProps): JSX.Element => (
+const Profile = (props: TProfileProps): ReactElement => (
   <FlexCenter
     justify="center"
     direction="column"

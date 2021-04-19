@@ -5,7 +5,8 @@ import {
   GridColumns,
   GridRowsProp,
   GridPageChangeParams,
-  GridSelectionModelChangeParams
+  GridSelectionModelChangeParams,
+  ReactElement
 } from "~types";
 
 export type TTableProps = {
@@ -127,7 +128,7 @@ const CustomDataGrid = ({
   page,
   rows,
   totalDocs
-}: TTableProps): JSX.Element => (
+}: TTableProps): ReactElement => (
   <DataGrid
     autoHeight
     className={useStyles().root}
