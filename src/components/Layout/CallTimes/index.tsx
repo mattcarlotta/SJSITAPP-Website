@@ -12,15 +12,13 @@ const DisplayCallTimes = ({
 }): ReactElement => (
   <Tooltip
     title={
-      <>
-        {!isEmpty(times) ? (
-          times.map(time => (
-            <FormatDate key={time} date={time} format={timestampFormat} />
-          ))
-        ) : (
-          <span>(none)</span>
-        )}
-      </>
+      isEmpty(times) ? (
+        times.map(time => (
+          <FormatDate key={time} date={time} format={timestampFormat} />
+        ))
+      ) : (
+        <span>(none)</span>
+      )
     }
     placement="top"
     styles={{

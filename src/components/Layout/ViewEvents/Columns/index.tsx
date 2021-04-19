@@ -18,18 +18,26 @@ const Columns: GridColumns = [
   {
     field: "team",
     headerName: "Team",
-    width: 80,
+    flex: 0.9,
     renderCell: (params: GridValueGetterParams): ReactElement => (
-      <Team team={params.getValue("team") as string} folder="lowres" />
+      <Team
+        team={params.getValue("team") as string}
+        folder="lowres"
+        size={40}
+      />
     )
   },
   {
     field: "opponent",
     headerName: "Opponent",
-    width: 80,
+    flex: 0.9,
     renderCell: (params: GridValueGetterParams): ReactElement =>
       params.getValue("opponent") ? (
-        <Team team={params.getValue("opponent") as string} folder="lowres" />
+        <Team
+          team={params.getValue("opponent") as string}
+          folder="lowres"
+          size={40}
+        />
       ) : (
         <span>-</span>
       )
