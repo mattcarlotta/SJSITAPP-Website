@@ -14,6 +14,7 @@ import {
 } from "~types";
 
 export interface SelectOptionsContainerProps {
+  hideScrollbar?: boolean;
   handleOptionSelect: (props: EventTarget) => void;
   isVisible: boolean;
   name: string;
@@ -80,6 +81,8 @@ class SelectOptionsContainer extends React.Component<
   render = (): ReactElement | null => {
     const { searchOptions } = this.state;
     const {
+      hideScrollbar,
+      isVisible,
       name,
       padding,
       searchText,
@@ -92,9 +95,9 @@ class SelectOptionsContainer extends React.Component<
       ? selectOptions
       : searchOptions.search(searchText).map(({ item }) => item);
 
-    return this.props.isVisible ? (
+    return isVisible ? (
       <DropContainer>
-        <OptionsContainer>
+        <OptionsContainer hideScrollbar={hideScrollbar}>
           {!isEmpty(options) ? (
             options.map(value => (
               <Option

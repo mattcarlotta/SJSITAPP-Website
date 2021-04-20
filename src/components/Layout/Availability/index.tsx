@@ -118,6 +118,7 @@ const Availability = ({ id }: TAvailabilityProps): JSX.Element => {
         <Padding top="16px">
           <Select
             hideIcon
+            hideScrollbar
             hoverable
             height="auto"
             background="#f7f7f7"
@@ -136,6 +137,7 @@ const Availability = ({ id }: TAvailabilityProps): JSX.Element => {
           </Word>
           <Select
             hideIcon
+            hideScrollbar
             hoverable
             height="auto"
             background="#f7f7f7"

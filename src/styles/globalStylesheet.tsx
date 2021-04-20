@@ -21,6 +21,11 @@ export const GlobalStylesheet = (): ReactElement => (
         width: 100%;
         margin: 0;
         padding: 0;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        ::-webkit-scrollbar {
+          display: none;
+        }
       }
 
       body {
@@ -118,17 +123,6 @@ export const GlobalStylesheet = (): ReactElement => (
 
       ::-moz-focus-inner {
         border: 0;
-      }
-
-      body {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-        ::-webkit-scrollbar {
-          display: none;
-        }
-      }
-
-      body {
       }
 
       *,

@@ -14,6 +14,7 @@ export type TSelectProps = {
   errors?: string;
   height?: string;
   hoverable?: boolean;
+  hideScrollbar?: boolean;
   hideIcon?: boolean;
   isSearchable?: boolean;
   justifyContent?: string;
@@ -36,6 +37,7 @@ const Select = ({
   display,
   errors,
   height,
+  hideScrollbar,
   hoverable,
   label,
   margin,
@@ -77,6 +79,7 @@ const Select = ({
           />
           <Options
             {...handlers}
+            hideScrollbar={hideScrollbar}
             padding={padding}
             name={name}
             selectOptions={selectOptions}

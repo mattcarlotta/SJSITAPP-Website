@@ -202,6 +202,7 @@ export const EventCalendar = ({
                 <>
                   <Select
                     hideIcon
+                    hideScrollbar
                     hoverable
                     height="auto"
                     background="#f7f7f7"
@@ -221,11 +222,12 @@ export const EventCalendar = ({
               )}
               <Select
                 hideIcon
+                hideScrollbar
                 hoverable
                 height="auto"
                 background="#f7f7f7"
                 justifyContent="center"
-                width="115px"
+                width="120px"
                 padding="8px"
                 textAlign="center"
                 name="selectedMonth"
@@ -238,6 +240,7 @@ export const EventCalendar = ({
               </Word>
               <Select
                 hideIcon
+                hideScrollbar
                 hoverable
                 height="auto"
                 background="#f7f7f7"

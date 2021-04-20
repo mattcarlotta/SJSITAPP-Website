@@ -74,6 +74,9 @@ const useStyles = makeStyles((theme: Theme) =>
           : "rgba(255,255,255,0.85)",
       WebkitFontSmoothing: "auto",
       letterSpacing: "normal",
+      "& .MuiDataGrid-window": {
+        overflow: "hidden"
+      },
       "& .MuiDataGrid-cell:focus": {
         outline: 0
       },
