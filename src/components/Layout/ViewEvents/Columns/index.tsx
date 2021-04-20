@@ -18,7 +18,7 @@ const Columns: GridColumns = [
   {
     field: "team",
     headerName: "Team",
-    flex: 0.9,
+    width: 80,
     renderCell: (params: GridValueGetterParams): ReactElement => (
       <Team
         team={params.getValue("team") as string}
@@ -30,7 +30,7 @@ const Columns: GridColumns = [
   {
     field: "opponent",
     headerName: "Opponent",
-    flex: 0.9,
+    width: 80,
     renderCell: (params: GridValueGetterParams): ReactElement =>
       params.getValue("opponent") ? (
         <Team
@@ -39,12 +39,12 @@ const Columns: GridColumns = [
           size={40}
         />
       ) : (
-        <span>-</span>
+        <Center style={{ width: "100%" }}>-</Center>
       )
   },
   {
     field: "eventType",
-    headerName: "Event Type",
+    headerName: "Type",
     width: 80
   },
   {
@@ -54,7 +54,7 @@ const Columns: GridColumns = [
   },
   {
     field: "eventDate",
-    headerName: "Event Date",
+    headerName: "Date",
     flex: 2.33,
     renderCell: (params: GridValueGetterParams): ReactElement => (
       <FormatDate

@@ -60,7 +60,7 @@ describe("Event Update Controller", () => {
       .put("/api/events/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
-      .send({ ...updatedEvent, _id: game._id, callTimes: [today, today] })
+      .send({ ...updatedEvent, id: game._id, callTimes: [today, today] })
       .expect(400)
       .then(res => {
         expect(res.body.err).toEqual(mustContainUniqueCallTimes);
@@ -72,7 +72,7 @@ describe("Event Update Controller", () => {
     app()
       .put("/api/events/update")
       .set("Cookie", cookie)
-      .send({ ...updatedEvent, _id: "601dc43483adb35b1ca678ea" })
+      .send({ ...updatedEvent, id: "601dc43483adb35b1ca678ea" })
       .expect("Content-Type", /json/)
       .expect(400)
       .then(res => {
@@ -85,7 +85,7 @@ describe("Event Update Controller", () => {
     app()
       .put("/api/events/update")
       .set("Cookie", cookie)
-      .send({ ...updatedEvent, _id: game._id })
+      .send({ ...updatedEvent, id: game._id })
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
@@ -100,12 +100,15 @@ describe("Event Update Controller", () => {
       .set("Cookie", cookie)
       .send({
         ...game,
+        id: game._id,
         callTimes: [today]
       })
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
-        expect(res.body.message).toEqual("Successfully updated the event.");
+        expect(res.body.message).toEqual(
+          "Successfully updated the event. Please note that the call times were changed; therefore, any previous scheduling for the event has been removed and will need to be rescheduled."
+        );
         done();
       });
   });

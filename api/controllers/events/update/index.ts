@@ -19,7 +19,7 @@ import {
 const updateEvent = async (req: Request, res: Response): Promise<Response> => {
   try {
     const {
-      _id,
+      id: _id,
       callTimes,
       eventDate,
       eventType,
@@ -65,7 +65,13 @@ const updateEvent = async (req: Request, res: Response): Promise<Response> => {
       scheduledIds: scheduleUnchanged ? existingEvent.scheduledIds : []
     });
 
-    return res.status(200).json({ message: "Successfully updated the event." });
+    return res.status(200).json({
+      message: `Successfully updated the event.${
+        scheduleUnchanged
+          ? ""
+          : " Please note that the call times were changed; therefore, any previous scheduling for the event has been removed and will need to be rescheduled."
+      }`
+    });
   } catch (err) {
     return sendError(err, 400, res);
   }

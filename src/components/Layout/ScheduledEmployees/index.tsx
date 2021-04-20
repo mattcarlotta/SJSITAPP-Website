@@ -10,15 +10,20 @@ const ScheduledEmployees = ({
 }): ReactElement => (
   <Tooltip
     title={
-      !isEmpty(employees) ? (
-        employees.map(({ _id, firstName, lastName }) => (
-          <span key={_id} style={{ margin: 0, padding: 0 }}>
-            &#183; {firstName} {lastName}
-          </span>
-        ))
-      ) : (
-        <span>(none)</span>
-      )
+      <>
+        <div style={{ borderBottom: "1px solid #eee", marginBottom: 3 }}>
+          Scheduled Employees:
+        </div>
+        {!isEmpty(employees) ? (
+          employees.map(({ _id, firstName, lastName }) => (
+            <div key={_id}>
+              &#183; {firstName} {lastName}
+            </div>
+          ))
+        ) : (
+          <span>(none)</span>
+        )}
+      </>
     }
     placement="top"
     styles={{

@@ -20,7 +20,7 @@ const getEventForViewing = async (
     const existingEvent = await Event.findOne({ _id }, { __v: 0 }).lean();
     if (!existingEvent) throw unableToLocateEvent;
 
-    return res.status(200).json({ event: existingEvent });
+    return res.status(200).send(existingEvent);
   } catch (err) {
     return sendError(err, 400, res);
   }

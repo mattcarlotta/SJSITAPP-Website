@@ -58,6 +58,13 @@ const APForm = ({
   });
   const { errors, isLoading, isSubmitting } = state;
 
+  const handleRemoveField = (name: string): void => {
+    setState(prevState => ({
+      ...prevState,
+      fields: prevState.fields.filter(field => field.name !== name)
+    }));
+  };
+
   const initializeFields = React.useCallback(async (): Promise<void> => {
     try {
       let res = await app.get("seasons/all/ids");
@@ -68,7 +75,12 @@ const APForm = ({
 
       setState(prevState => ({
         ...prevState,
-        fields: fields(seasons.seasonIds, teams.names, event),
+        fields: fields(
+          seasons.seasonIds,
+          teams.names,
+          event,
+          handleRemoveField
+        ),
         isLoading: false
       }));
     } catch (err) {
@@ -101,13 +113,6 @@ const APForm = ({
     setState(prevState => ({
       ...prevState,
       fields: fieldUpdater(prevState.fields, name, value)
-    }));
-  };
-
-  const handleRemoveField = (name: string): void => {
-    setState(prevState => ({
-      ...prevState,
-      fields: prevState.fields.filter(field => field.name !== name)
     }));
   };
 

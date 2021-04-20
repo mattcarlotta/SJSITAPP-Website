@@ -49,7 +49,7 @@ describe("Edit Event Controller", () => {
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
-        expect(res.body.event).toEqual({
+        expect(res.body).toEqual({
           _id: expect.any(String),
           callTimes: expect.any(Array),
           employeeResponses: expect.any(Array),
