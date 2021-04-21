@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 
 const ListItem = styled.li<{
+  color?: string;
   display?: string;
   margin?: string;
   team?: string;

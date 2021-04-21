@@ -39,7 +39,7 @@ const ScheduleColumns = ({
     `}
   >
     <DragDropContext onDragEnd={handleDrag}>
-      <FlexCenter>
+      <FlexCenter breakpoint wrap="wrap">
         <Legend />
         <EventContainer>
           <div
@@ -68,23 +68,28 @@ const ScheduleColumns = ({
               </>
             )}
           </div>
-          <List style={{ padding: "0 5px", fontSize: 17 }}>
-            <ListItem>
-              <Bold>Event Date: </Bold>&nbsp;
+          <List>
+            <ListItem padding="0 5px">
+              <Bold>Event Date:</Bold>&nbsp;
               <FormatDate
                 date={event.eventDate}
                 format={shortDateTimeFormat}
-                style={{ display: "inline" }}
+                style={{ display: "inline", color: "#0d6472" }}
               />
             </ListItem>
-            <ListItem>
-              <Bold>Location: </Bold> {event.location}
+            <ListItem padding="0 5px">
+              <Bold>Location:</Bold>
+              <span style={{ color: "#0d6472" }}>{event.location}</span>
             </ListItem>
-            <ListItem>
-              <Bold>Uniform: </Bold> {event.uniform}
+            <ListItem padding="0 5px">
+              <Bold>Uniform:</Bold>
+              <span style={{ color: "#0d6472" }}>{event.uniform}</span>
             </ListItem>
-            <ListItem>
-              <Bold>Notes: </Bold> {event.notes || "(none)"}
+            <ListItem padding="0 5px">
+              <Bold>Notes:</Bold>
+              <span style={{ color: "#0d6472" }}>
+                {event.notes || "(none)"}
+              </span>
             </ListItem>
           </List>
         </EventContainer>

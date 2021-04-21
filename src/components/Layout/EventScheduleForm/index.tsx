@@ -182,24 +182,24 @@ const EventScheduleForm = (): ReactElement => {
       dataTestId="schedule-event-page"
       icon={<FaClipboardCheck />}
       title="Schedule Event"
-      subtitle="Assign Employees to Call Times"
+      subtitle="Assign Employees to an Event's Call Times"
     >
       <Padding top="20px" left="50px" right="50px" bottom="50px">
         <FormTitle
           header="Schedule Event"
           title="Schedule Event"
-          description="Please drag and drop users from the 'Employees' column to any call time column to schedule the event."
+          description="Drag and drop members from the 'EMPLOYEES' column to any call time column to schedule the event."
         />
         {isLoading ? (
           <LoadingPanel
             data-testid="loading-schedule-event-form"
             borderRadius="5px"
-            height="1139px"
+            height="1200px"
           />
         ) : (
           <Form
             data-testid="schedule-event-form"
-            maxWidth="auto"
+            maxWidth="none"
             onSubmit={handleSubmit}
           >
             <ScheduleColumns {...state} handleDrag={handleDragEnd} />

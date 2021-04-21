@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 const EventContainer = styled.div`
   @media (max-width: 1280px) {
     margin: 5px;
+    width: 98.5%;
   }
 
   flex: 1 0 auto;
@@ -12,7 +13,6 @@ const EventContainer = styled.div`
   padding: 10px;
   border-radius: 10px;
   height: 195px;
-}
 `;
 
 export default EventContainer;

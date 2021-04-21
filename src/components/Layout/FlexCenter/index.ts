@@ -6,6 +6,7 @@ const FlexCenter = styled.div<{
   height?: string;
   justify?: string;
   margin?: string;
+  wrap?: string;
 }>`
   ${({ breakpoint }) =>
     breakpoint &&
@@ -16,6 +17,7 @@ const FlexCenter = styled.div<{
   color: ${({ color }) => color || "inherit"};
   height: ${({ height }) => height || "auto"};
   flex-direction: ${({ direction }) => direction || "row"};
+  flex-wrap: ${({ wrap }) => wrap};
   margin: ${({ margin }) => margin || "0px"};
   display: flex;
   align-items: center;
