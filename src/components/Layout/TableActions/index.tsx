@@ -1,9 +1,10 @@
 import * as React from "react";
 import get from "lodash.get";
 import isEmpty from "lodash.isempty";
-import { Dialog, Slide } from "@material-ui/core";
+import { Dialog } from "@material-ui/core";
 import Button from "~components/Layout/Button";
 import Divider from "~components/Layout/Divider";
+import SlideTransition from "~components/Layout/SlideTransition";
 import Title from "~components/Layout/Title";
 import Padding from "~components/Layout/Padding";
 import Link from "~components/Navigation/Link";
@@ -17,12 +18,7 @@ import {
   FaTools,
   FaTrash
 } from "~icons";
-import {
-  GridRowId,
-  GridValueGetterParams,
-  ReactElement,
-  TransitionProps
-} from "~types";
+import { GridRowId, GridValueGetterParams, ReactElement } from "~types";
 
 export type TTableActionsProps = {
   disableCheckbox?: boolean;
@@ -36,13 +32,6 @@ export type TTableActionsProps = {
   selectedIds: Array<GridRowId>;
   view?: string;
 };
-
-const Transition = React.forwardRef(
-  (
-    props: TransitionProps & { children?: React.ReactElement<any, any> },
-    ref: React.Ref<unknown>
-  ) => <Slide direction="down" ref={ref} {...props} />
-);
 
 const TableActions = ({
   disableCheckbox,
@@ -95,7 +84,7 @@ const TableActions = ({
         open={open}
         onClose={handleClose}
         aria-labelledby="actions-dialog"
-        TransitionComponent={Transition}
+        TransitionComponent={SlideTransition}
       >
         <Padding
           top="10px"

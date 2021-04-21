@@ -28,7 +28,6 @@ const User = styled.div<{ isDragging?: boolean; response: string }>`
       : "0 1px 0 rgba(9,30,66,.25)"};
   color: ${({ isDragging }) => (isDragging ? "#fff" : "#fff")};
   padding: 10px;
-  cursor: pointer;
   border-radius: 3px;
   margin-bottom: 5px;
   text-align: center;

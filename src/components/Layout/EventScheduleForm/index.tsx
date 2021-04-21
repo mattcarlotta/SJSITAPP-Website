@@ -11,6 +11,7 @@ import SubmitButton from "~components/Layout/SubmitButton";
 import { FaClipboardCheck } from "~icons";
 import app from "~utils/axiosConfig";
 import { parseData, parseMessage } from "~utils/parseResponse";
+import EventDistributionOverlay from "./EventDistributionOverlay";
 import ScheduleColumns from "./ScheduleColumns";
 import {
   FormEvent,
@@ -182,13 +183,13 @@ const EventScheduleForm = (): ReactElement => {
       dataTestId="schedule-event-page"
       icon={<FaClipboardCheck />}
       title="Schedule Event"
-      subtitle="Assign Employees to an Event's Call Times"
+      subtitle="Assign Employees to an Event"
     >
       <Padding top="20px" left="50px" right="50px" bottom="50px">
         <FormTitle
           header="Schedule Event"
           title="Schedule Event"
-          description="Drag and drop members from the 'EMPLOYEES' column to any call time column to schedule the event."
+          description="Drag and drop members from the 'EMPLOYEES' column to any call time slot to schedule the event."
         />
         {isLoading ? (
           <LoadingPanel
@@ -197,18 +198,21 @@ const EventScheduleForm = (): ReactElement => {
             height="1200px"
           />
         ) : (
-          <Form
-            data-testid="schedule-event-form"
-            maxWidth="none"
-            onSubmit={handleSubmit}
-          >
-            <ScheduleColumns {...state} handleDrag={handleDragEnd} />
-            <SubmitButton
-              isSubmitting={isSubmitting}
-              maxWidth="500px"
-              title="Save Schedule"
-            />
-          </Form>
+          <>
+            <EventDistributionOverlay id={id as string} />
+            <Form
+              data-testid="schedule-event-form"
+              maxWidth="none"
+              onSubmit={handleSubmit}
+            >
+              <ScheduleColumns {...state} handleDrag={handleDragEnd} />
+              <SubmitButton
+                isSubmitting={isSubmitting}
+                maxWidth="500px"
+                title="Save Schedule"
+              />
+            </Form>
+          </>
         )}
       </Padding>
     </Card>

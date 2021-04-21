@@ -13,7 +13,7 @@ import {
 } from "~types";
 
 const Columns: GridColumns = [
-  { field: "_id", headerName: "Database Id", flex: 2.66 },
+  { field: "_id", headerName: "Database Id", flex: 1.5 },
   { field: "seasonId", headerName: "Season", width: 110 },
   {
     field: "team",

@@ -48,8 +48,8 @@ const getMemberEventCounts = async (
       {
         $match: {
           eventDate: {
-            $gte: startOfMonth,
-            $lte: endOfMonth
+            $gte: startOfMonth.toDate(),
+            $lte: endOfMonth.toDate()
           }
         }
       },
@@ -67,12 +67,12 @@ const getMemberEventCounts = async (
       }
     ]);
 
-    return res.status(200).json({
-      members: createMemberEventCount({
+    return res.status(200).send(
+      createMemberEventCount({
         members: activeMembers as TActiveMembers,
         memberEventCounts
       })
-    });
+    );
   } catch (err) {
     return sendError(err, 400, res);
   }

@@ -16,6 +16,7 @@ import {
   ReactNode,
   ReactPortal,
   ReactText,
+  Ref,
   RefObject
 } from "react";
 import { Moment } from "moment-timezone";
@@ -386,6 +387,7 @@ export {
   ReactNode,
   ReactPortal,
   ReactText,
+  Ref,
   RefObject,
   SagaIterator,
   TransitionProps,

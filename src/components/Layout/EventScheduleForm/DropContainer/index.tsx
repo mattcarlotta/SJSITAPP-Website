@@ -49,7 +49,7 @@ const DropContainer = ({
                   ) => (
                     <User
                       ref={innerRef}
-                      data-test={`${firstName} ${lastName}`}
+                      data-testid={`${firstName} ${lastName}`}
                       {...draggableProps}
                       {...eventHandlers}
                       isDragging={isDragging}

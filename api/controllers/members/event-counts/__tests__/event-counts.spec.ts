@@ -49,7 +49,7 @@ describe("Member Event Counts Controller", () => {
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
-        expect(res.body.members).toEqual(
+        expect(res.body).toEqual(
           expect.arrayContaining([
             expect.objectContaining({
               "Event Count": expect.any(Number),
