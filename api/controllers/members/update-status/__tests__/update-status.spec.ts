@@ -36,7 +36,7 @@ describe("Member Update Status Controller", () => {
 
   it("rejects requests where the submitted member updated _id and status are missing", done => {
     app()
-      .put("/api/member/update-status")
+      .put("/api/members/update-status")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -48,7 +48,7 @@ describe("Member Update Status Controller", () => {
 
   it("rejects requests where the submitted member update status contains an invalid id", done => {
     app()
-      .put("/api/member/update-status")
+      .put("/api/members/update-status")
       .set("Cookie", cookie)
       .send({ status: "active", _id: "601dc43483adb35b1ca678ea" })
       .expect("Content-Type", /json/)
@@ -61,7 +61,7 @@ describe("Member Update Status Controller", () => {
 
   it("accepts requests to deactivate an account", done => {
     app()
-      .put("/api/member/update-status")
+      .put("/api/members/update-status")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({ _id: user!._id, status: "active" })
@@ -74,7 +74,7 @@ describe("Member Update Status Controller", () => {
 
   it("accepts requests to deactivate an account", done => {
     app()
-      .put("/api/member/update-status")
+      .put("/api/members/update-status")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({ _id: user!._id, status: "suspend" })

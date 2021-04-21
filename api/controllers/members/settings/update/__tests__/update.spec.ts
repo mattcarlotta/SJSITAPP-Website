@@ -45,7 +45,7 @@ describe("Member Settings Update Controller", () => {
 
   it("rejects requests where the submitted settings are missing email, emailReminders, firstName, lastName", done => {
     app()
-      .put("/api/member/settings/update")
+      .put("/api/members/settings/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({
@@ -63,7 +63,7 @@ describe("Member Settings Update Controller", () => {
 
   it("rejects requests where the submitted settings contain another active email account", done => {
     app()
-      .put("/api/member/settings/update")
+      .put("/api/members/settings/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({
@@ -79,7 +79,7 @@ describe("Member Settings Update Controller", () => {
 
   it("rejects requests where the submitted settings contain another active user's name", done => {
     app()
-      .put("/api/member/settings/update")
+      .put("/api/members/settings/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({
@@ -96,7 +96,7 @@ describe("Member Settings Update Controller", () => {
 
   it("accepts requests where the submitted settings include changing the email", done => {
     app()
-      .put("/api/member/settings/update")
+      .put("/api/members/settings/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send(updatedSettings)
@@ -111,7 +111,7 @@ describe("Member Settings Update Controller", () => {
 
   it("accepts requests where the submitted settings don't include changing the email", done => {
     app()
-      .put("/api/member/settings/update")
+      .put("/api/members/settings/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send(updatedSettings)

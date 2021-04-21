@@ -5,17 +5,22 @@ import { Event } from "~models";
 import {
   createColumnSchedule,
   createUserSchedule,
+  isValidObjectId,
   getUsers,
   sendError
 } from "~helpers";
-import { unableToLocateEvent, unableToLocateMembers } from "~messages/errors";
+import {
+  missingEventId,
+  unableToLocateEvent,
+  unableToLocateMembers
+} from "~messages/errors";
 
 /**
  * Retrieves a single event for scheduling form.
  *
  * @function getEventForScheduling
  * @returns {Response}
- * schedule: {
+ * {
  *  columns: { _id: "employees", title: "Employees", employeeIds: array },
  *  event,
  *  users: { ...member, response: string, notes: string }
@@ -28,6 +33,7 @@ const getEventForScheduling = async (
 ): Promise<Response> => {
   try {
     const { id: _id } = req.params;
+    if (!isValidObjectId(_id)) throw missingEventId;
 
     const event = await Event.findOne({ _id }, { __v: 0 }).lean();
     if (!event) throw unableToLocateEvent;

@@ -34,10 +34,10 @@ const getAllTokens = async (req: Request, res: Response): Promise<Response> => {
       }
     );
 
-    const tokens = get(results, ["docs"]);
-    const totalDocs = get(results, ["totalDocs"]);
-
-    return res.status(200).json({ tokens, totalDocs });
+    return res.status(200).json({
+      docs: get(results, ["docs"]),
+      totalDocs: get(results, ["totalDocs"])
+    });
   } catch (err) {
     /* istanbul ignore next */
     return sendError(err, 400, res);

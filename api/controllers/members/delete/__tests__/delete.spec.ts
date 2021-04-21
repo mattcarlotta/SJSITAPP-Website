@@ -32,7 +32,7 @@ describe("Delete Member Controller", () => {
 
   it("rejects requests where the member id is invalid", done => {
     app()
-      .delete("/api/member/delete/601dc43483adb35b1ca678ea")
+      .delete("/api/members/delete/601dc43483adb35b1ca678ea")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -44,7 +44,7 @@ describe("Delete Member Controller", () => {
 
   it("accepts requests to delete an member", done => {
     app()
-      .delete(`/api/member/delete/${user._id}`)
+      .delete(`/api/members/delete/${user._id}`)
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)

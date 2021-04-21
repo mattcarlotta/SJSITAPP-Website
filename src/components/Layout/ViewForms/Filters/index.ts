@@ -29,7 +29,8 @@ const Filters: TFilters = [
   {
     name: "sentEmails",
     title: "Email Status",
-    type: "email"
+    selectType: "email",
+    type: "select"
   }
 ];
 

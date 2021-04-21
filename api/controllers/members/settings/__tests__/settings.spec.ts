@@ -1,38 +1,22 @@
 import mongoose from "mongoose";
 import { connectToDB } from "~database";
-import { unableToLocateMember } from "~messages/errors";
-import User, { IUserDocument } from "~models/user";
-import { staffSignIn } from "~test/utils/signIn";
+import { memberSignIn } from "~test/utils/signIn";
 import app from "~test/utils/testServer";
 
-describe("Member Events Controller", () => {
+describe("Member Settings Controller", () => {
   let cookie: string;
-  let user: IUserDocument | null;
   beforeAll(async () => {
     await connectToDB();
-    user = await User.findOne({ email: "scheduledmember@test.com" });
-    cookie = await staffSignIn();
+    cookie = await memberSignIn();
   });
 
   afterAll(async () => {
     await mongoose.connection.close();
   });
 
-  it("rejects requests where the member id is missing", done => {
+  it("accepts requests to retrieve logged in user settings", done => {
     app()
-      .get("/api/member/review/601dc43483adb35b1ca678ea")
-      .set("Cookie", cookie)
-      .expect("Content-Type", /json/)
-      .expect(400)
-      .then(res => {
-        expect(res.body.err).toEqual(unableToLocateMember);
-        done();
-      });
-  });
-
-  it("accepts requests to retrieve a member profile", done => {
-    app()
-      .get(`/api/member/review/${user!._id}`)
+      .get("/api/members/settings")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)

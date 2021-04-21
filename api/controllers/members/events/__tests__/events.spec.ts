@@ -20,7 +20,7 @@ describe("Member Events Controller", () => {
 
   it("rejects requests where the member id is missing", done => {
     app()
-      .get("/api/member/events")
+      .get("/api/members/events")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -32,7 +32,7 @@ describe("Member Events Controller", () => {
 
   it("rejects requests where the member id is invalid", done => {
     app()
-      .get("/api/member/events?id=601dc43483adb35b1ca678ea")
+      .get("/api/members/events?id=601dc43483adb35b1ca678ea")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -44,7 +44,7 @@ describe("Member Events Controller", () => {
 
   it("accepts requests to retrieve an event for scheduling", done => {
     app()
-      .get(`/api/member/events?id=${user!._id}`)
+      .get(`/api/members/events?id=${user!._id}`)
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)

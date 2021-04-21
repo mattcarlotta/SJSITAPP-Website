@@ -9,7 +9,8 @@ const Filters: TFilters = [
   {
     name: "status",
     title: "Email Status",
-    type: "email"
+    selectType: "email",
+    type: "select"
   }
 ];
 

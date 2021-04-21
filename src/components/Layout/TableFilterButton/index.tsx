@@ -43,6 +43,7 @@ const useClasses = makeStyles({
 
 export type TTableFilterButtonModalState = {
   name: string;
+  selectType?: string;
   title: string;
   type: string;
   value: string;
@@ -60,6 +61,7 @@ export type TTableFilterButtonProps = {
 const initalModalState = {
   isOpen: false,
   name: "",
+  selectType: "",
   title: "",
   type: "",
   value: ""
@@ -77,7 +79,7 @@ const TableFilterButton = ({
   const [state, setState] = React.useState<TTableFilterButtonModalState>(
     initalModalState
   );
-  const { isOpen, name, type, title, value } = state;
+  const { isOpen, name, selectType, type, title, value } = state;
 
   const handlePopoverOpen = (event: ChangeEvent<any>): void => {
     setAnchorEl(event.currentTarget);
@@ -90,16 +92,19 @@ const TableFilterButton = ({
   const handleModalOpen = ({
     name,
     title,
-    type
+    type,
+    selectType
   }: {
     name: string;
     title: string;
     type: string;
+    selectType?: string;
   }): void => {
     setState({
       name,
       title,
       type,
+      selectType,
       value: queries[name] || "",
       isOpen: true
     });
@@ -134,6 +139,17 @@ const TableFilterButton = ({
   }): void => {
     updateQuery({ [name]: value || null });
     handleModalClose();
+  };
+
+  const selectOptions = (type?: string): Array<string> => {
+    switch (type) {
+      case "email":
+        return ["sent", "unsent"];
+      case "role":
+        return ["staff", "member"];
+      default:
+        return ["active", "suspended"];
+    }
   };
 
   const popoverOpen = Boolean(anchorEl);
@@ -273,7 +289,7 @@ const TableFilterButton = ({
                       style={{ width: "100%", marginBottom: 20 }}
                     />
                   );
-                case "email":
+                case "select":
                   return (
                     <div style={{ height: 120 }}>
                       <Select
@@ -281,7 +297,7 @@ const TableFilterButton = ({
                         textAlign="center"
                         justifyContent="center"
                         value={value}
-                        selectOptions={["sent", "unsent"]}
+                        selectOptions={selectOptions(selectType)}
                         onChange={handleModalChange}
                       />
                     </div>
@@ -302,7 +318,11 @@ const TableFilterButton = ({
                     />
                   );
                 default:
-                  return <p>Not a valid component</p>;
+                  return (
+                    <div data-testid="not-a-valid-component">
+                      Not a valid component
+                    </div>
+                  );
               }
             })()}
           </DialogContent>

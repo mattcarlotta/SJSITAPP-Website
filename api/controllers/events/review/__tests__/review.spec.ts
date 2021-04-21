@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { connectToDB } from "~database";
-import { unableToLocateEvent } from "~messages/errors";
+import { missingEventId, unableToLocateEvent } from "~messages/errors";
 import Event, { IEventDocument } from "~models/event";
 import { moment } from "~helpers";
 import { staffSignIn } from "~test/utils/signIn";
@@ -32,6 +32,18 @@ describe("Review Event Controller", () => {
   });
 
   it("rejects requests where the event id is invalid", done => {
+    app()
+      .get("/api/events/review/123")
+      .set("Cookie", cookie)
+      .expect("Content-Type", /json/)
+      .expect(400)
+      .then(res => {
+        expect(res.body.err).toEqual(missingEventId);
+        done();
+      });
+  });
+
+  it("rejects requests where the event id is not a valid document", done => {
     app()
       .get("/api/events/review/601dc43483adb35b1ca678ea")
       .set("Cookie", cookie)

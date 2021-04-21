@@ -22,7 +22,7 @@ describe("Retrieve All Tokens Controller", () => {
       .expect(200)
       .then(res => {
         expect(res.body).toEqual({
-          tokens: expect.arrayContaining([
+          docs: expect.arrayContaining([
             expect.objectContaining({
               _id: expect.any(String),
               authorizedEmail: expect.any(String),
@@ -45,7 +45,7 @@ describe("Retrieve All Tokens Controller", () => {
       .expect(200)
       .then(res => {
         expect(res.body).toEqual({
-          tokens: expect.arrayContaining([
+          docs: expect.arrayContaining([
             expect.objectContaining({
               _id: expect.any(String),
               authorizedEmail: expect.any(String),
@@ -68,7 +68,7 @@ describe("Retrieve All Tokens Controller", () => {
       .expect(200)
       .then(res => {
         expect(res.body).toEqual({
-          tokens: expect.arrayContaining([
+          docs: expect.arrayContaining([
             expect.objectContaining({
               _id: expect.any(String),
               authorizedEmail: expect.any(String),

@@ -33,7 +33,7 @@ const getAllMembers = async (
     );
 
     return res.status(200).json({
-      members: get(results, ["docs"]),
+      docs: get(results, ["docs"]),
       totalDocs: get(results, ["totalDocs"])
     });
   } catch (err) {

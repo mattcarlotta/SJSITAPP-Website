@@ -147,7 +147,12 @@ export type EventTargetDataset = {
 
 export type TURLQuery = Record<string, any>;
 
-export type TFilters = Array<{ name: string; title: string; type: string }>;
+export type TFilters = Array<{
+  name: string;
+  selectType?: string;
+  title: string;
+  type: string;
+}>;
 
 export type TEmployeeIds = Array<{
   _id?: string;

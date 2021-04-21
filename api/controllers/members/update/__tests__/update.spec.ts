@@ -45,7 +45,7 @@ describe("Member Update Controller", () => {
 
   it("rejects requests where the submitted member updated _id, email, emailReminders, firstName, lastName, role fields are missing", done => {
     app()
-      .put("/api/member/update")
+      .put("/api/members/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -57,7 +57,7 @@ describe("Member Update Controller", () => {
 
   it("rejects requests where the submitted member updates contain an invalid id", done => {
     app()
-      .put("/api/member/update")
+      .put("/api/members/update")
       .set("Cookie", cookie)
       .send({ ...user, _id: "601dc43483adb35b1ca678ea" })
       .expect("Content-Type", /json/)
@@ -70,7 +70,7 @@ describe("Member Update Controller", () => {
 
   it("rejects requests where the submitted settings contain another active email account", done => {
     app()
-      .put("/api/member/update")
+      .put("/api/members/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({ ...user, email: "scheduledmember@test.com" })
@@ -83,7 +83,7 @@ describe("Member Update Controller", () => {
 
   it("rejects requests where the submitted settings contain another active user's name", done => {
     app()
-      .put("/api/member/update")
+      .put("/api/members/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({ ...user, firstName: "Scheduled", lastName: "Member" })
@@ -96,7 +96,7 @@ describe("Member Update Controller", () => {
 
   it("accepts requests to update the member", done => {
     app()
-      .put("/api/member/update")
+      .put("/api/members/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({ ...user, ...updatedSettings })
@@ -111,7 +111,7 @@ describe("Member Update Controller", () => {
 
   it("accepts requests to update the member's role", done => {
     app()
-      .put("/api/member/update")
+      .put("/api/members/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .send({ ...user, ...updatedSettings, role: "staff" })

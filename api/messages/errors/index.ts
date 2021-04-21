@@ -89,7 +89,7 @@ const missingDates = "You must supply a start date and end date.";
 const missingEmailCreds =
   "That email is not associated with an active account. Please make sure the email address is spelled correctly.";
 
-const missingEventId = "You must provide an event id.";
+const missingEventId = "You must provide a valid event id.";
 
 const missingFormId = "You must provide a valid form id.";
 

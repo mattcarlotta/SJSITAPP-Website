@@ -103,6 +103,7 @@ const EventDistributionOverlay = ({
         keepMounted
         maxWidth="lg"
         open={isOpen}
+        scroll="body"
         TransitionComponent={SlideTransition}
         onClose={handleClose}
         aria-labelledby="event-dialog-slide-title"
@@ -124,7 +125,7 @@ const EventDistributionOverlay = ({
             <LoadingPanel
               data-testid="loading-event-distribution"
               borderRadius="5px"
-              height="658px"
+              height="660px"
             />
           ) : (
             <DialogContent>

@@ -29,7 +29,8 @@ const Filters: TFilters = [
   {
     name: "sentEmailReminders",
     title: "Email Reminders",
-    type: "email"
+    selectType: "email",
+    type: "select"
   }
 ];
 
