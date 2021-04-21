@@ -149,9 +149,9 @@ export type TURLQuery = Record<string, any>;
 export type TFilters = Array<{ name: string; title: string; type: string }>;
 
 export type TEmployeeIds = Array<{
-  _id?: PropTypes.string;
-  firstName?: PropTypes.string;
-  lastName?: PropTypes.string;
+  _id?: string;
+  firstName?: string;
+  lastName?: string;
 }>;
 
 export type EmailTransferList = Array<string>;
@@ -206,7 +206,27 @@ export type TEvent = {
   }>;
 };
 
+export type TEventScheduleUserDrop = {
+  source?: {
+    index: number;
+    droppableId: string;
+  };
+  destination?: {
+    index: number;
+    droppableId: string;
+  };
+  draggableId?: string;
+};
+
 export type TEventAPIQueryConfig = { id?: string } & TEvent;
+
+export type TEventColumn = {
+  _id: string;
+  title: string;
+  employeeIds: Array<string>;
+};
+
+export type TEventColumns = Array<TEventColumn>;
 
 export type TEventData = {
   _id: string;
@@ -225,6 +245,21 @@ export type TEventData = {
     title?: string;
     employeeIds: TEmployeeIds;
   }>;
+};
+
+export type TEventUsers = Array<{
+  _id: string;
+  avatar?: string;
+  firstName: string;
+  lastName: string;
+  response: string;
+  notes?: string;
+}>;
+
+export type TEventSchedule = {
+  event: TEvent;
+  users: TEventUsers;
+  columns: TEventColumns;
 };
 
 export type TForm = {

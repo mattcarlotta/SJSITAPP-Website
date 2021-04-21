@@ -40,17 +40,15 @@ const getEventForScheduling = async (
     if (isEmpty(members)) throw unableToLocateMembers;
 
     return res.status(200).json({
-      schedule: {
-        columns: createColumnSchedule({
-          event,
-          members: members as Array<Record<"_id", Types.ObjectId>>
-        }),
+      columns: createColumnSchedule({
         event,
-        users: createUserSchedule({
-          event,
-          members: members as Array<Record<"_id", Types.ObjectId>>
-        })
-      }
+        members: members as Array<Record<"_id", Types.ObjectId>>
+      }),
+      event,
+      users: createUserSchedule({
+        event,
+        members: members as Array<Record<"_id", Types.ObjectId>>
+      })
     });
   } catch (err) {
     return sendError(err, 400, res);

@@ -6,14 +6,14 @@ import {
   unableToLocateEvent
 } from "~messages/errors";
 import Event, { IEventDocument } from "~models/event";
-import { createDate } from "~helpers";
+import { createDate, moment } from "~helpers";
 import app from "~test/utils/testServer";
 import { staffSignIn } from "~test/utils/signIn";
 
 const today = createDate().format();
 
 const newEvent = {
-  callTimes: ["2001-06-01T02:00:00.000+00:00"],
+  callTimes: [moment("06-01-2001 05:00pm", "MM-DD-YYYY hh:mma").format()],
   eventDate: new Date(2001, 7, 1),
   eventType: "Game",
   location: "Any",

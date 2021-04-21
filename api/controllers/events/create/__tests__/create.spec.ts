@@ -12,7 +12,7 @@ import app from "~test/utils/testServer";
 import { staffSignIn } from "~test/utils/signIn";
 
 const newEvent = {
-  callTimes: [new Date(2001, 1, 1)],
+  callTimes: [moment("01-01-2001 05:00pm", "MM-DD-YYYY hh:mma").format()],
   eventDate: new Date(2001, 1, 1),
   eventType: "Game",
   location: "Any",

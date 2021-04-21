@@ -2,11 +2,12 @@ import mongoose from "mongoose";
 import { connectToDB } from "~database";
 import { unableToLocateEvent } from "~messages/errors";
 import Event, { IEventDocument } from "~models/event";
+import { moment } from "~helpers";
 import { staffSignIn } from "~test/utils/signIn";
 import app from "~test/utils/testServer";
 
 const newEvent = {
-  callTimes: [new Date(2001, 5, 1)],
+  callTimes: [moment("05-01-2001 05:00pm", "MM-DD-YYYY hh:mma").format()],
   eventDate: new Date(2001, 5, 1),
   eventType: "Game",
   location: "Any",
@@ -49,7 +50,7 @@ describe("Review Event Controller", () => {
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
-        expect(res.body.schedule).toEqual({
+        expect(res.body).toEqual({
           columns: expect.arrayContaining([
             expect.objectContaining({
               _id: expect.any(String),

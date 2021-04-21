@@ -50,7 +50,7 @@ describe("Event Update Schedule Controller", () => {
     app()
       .put("/api/events/update/schedule")
       .set("Cookie", cookie)
-      .send({ _id: "", schedule: [] })
+      .send({ id: "", schedule: [] })
       .expect("Content-Type", /json/)
       .expect(400)
       .then(res => {
@@ -63,7 +63,7 @@ describe("Event Update Schedule Controller", () => {
     app()
       .put("/api/events/update/schedule")
       .set("Cookie", cookie)
-      .send({ _id: "601dc43483adb35b1ca678ea", schedule })
+      .send({ id: "601dc43483adb35b1ca678ea", schedule })
       .expect("Content-Type", /json/)
       .expect(400)
       .then(res => {
@@ -77,7 +77,7 @@ describe("Event Update Schedule Controller", () => {
       .put("/api/events/update/schedule")
       .set("Cookie", cookie)
       .send({
-        _id: game._id,
+        id: game._id,
         schedule: [
           { _id: game.callTimes[0], title: "Ok", employeeIds: [user!.id] }
         ]

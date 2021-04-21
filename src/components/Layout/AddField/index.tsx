@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import Padding from "~components/Layout/Padding";
-import { FaPlus } from "~icons";
+import { FaPlusCircle } from "~icons";
 
 export type TAddFieldProps = {
   className?: string;
@@ -14,11 +14,12 @@ const AddFieldComponent = ({
   text
 }: TAddFieldProps): JSX.Element => (
   <button type="button" className={className} onClick={onClick}>
-    <FaPlus
+    <FaPlusCircle
       style={{
         position: "relative",
         top: 3,
-        fontSize: 16
+        fontSize: 16,
+        marginRight: 3
       }}
     />
     <Padding as="span" left="5px">
@@ -38,14 +39,11 @@ const AddField = styled(AddFieldComponent)`
   transition: all 0.2s ease-in-out;
   margin-bottom: 20px;
   height: 42px;
-
-  & .text {
-    padding-left: 5px;
-  }
+  font-size: 16px;
 
   :hover {
-    color: #40a9ff;
-    border-color: #40a9ff;
+    color: #0075e0;
+    border-color: #0075e0;
   }
 `;
 

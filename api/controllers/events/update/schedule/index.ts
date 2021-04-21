@@ -19,7 +19,7 @@ const updateEventSchedule = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const { _id, schedule } = req.body;
+    const { id: _id, schedule } = req.body;
     if (!_id || isEmpty(schedule)) throw invalidUpdateEventRequest;
 
     const existingEvent = await Event.findOne({ _id });

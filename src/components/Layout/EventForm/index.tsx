@@ -164,7 +164,7 @@ const APForm = ({
   ) : (
     <Form data-testid="event-form" onSubmit={handleSubmit}>
       <FieldGenerator fields={state.fields} onChange={handleChange} />
-      <AddField onClick={handleAddField} text="Add Call Time Slot" />
+      <AddField onClick={handleAddField} text="Add a call time slot..." />
       <SubmitButton
         isSubmitting={isSubmitting}
         maxWidth="500px"

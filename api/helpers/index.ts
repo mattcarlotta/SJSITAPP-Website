@@ -233,7 +233,7 @@ const createColumnSchedule = ({
   },
   ...event.schedule.map(({ _id, employeeIds }) => ({
     _id,
-    title: moment(_id, "MM-DD-YYYY hh:mm a").format("MM-DD-YYYY hh:mm a"),
+    title: moment(_id).format("hh:mm a"),
     employeeIds
   }))
 ];
