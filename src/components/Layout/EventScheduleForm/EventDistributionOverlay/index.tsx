@@ -2,7 +2,6 @@ import * as React from "react";
 import isEmpty from "lodash.isempty";
 import { Dialog, DialogContent, DialogTitle } from "@material-ui/core";
 import Button from "~components/Layout/Button";
-import Center from "~components/Layout/Center";
 import CloseModalButton from "~components/Layout/CloseModalButton";
 import EventDistributionChart from "~components/Layout/EventDistributionChart";
 import FadeIn from "~components/Layout/FadeIn";
@@ -44,8 +43,8 @@ const EventDistributionOverlay = ({
 
       setState(prevState => ({
         ...prevState,
-        events: data,
         error: false,
+        events: data,
         isLoading: false
       }));
     } catch (err) {
@@ -101,10 +100,10 @@ const EventDistributionOverlay = ({
       </Button>
       <Dialog
         fullWidth
+        keepMounted
         maxWidth="lg"
         open={isOpen}
         TransitionComponent={SlideTransition}
-        keepMounted
         onClose={handleClose}
         aria-labelledby="event-dialog-slide-title"
         aria-describedby="event-dialog-slide-description"
@@ -123,22 +122,20 @@ const EventDistributionOverlay = ({
           </DialogTitle>
           {isLoading ? (
             <LoadingPanel
-              data-testid="loading-schedule-event-form"
+              data-testid="loading-event-distribution"
               borderRadius="5px"
-              height="750px"
+              height="658px"
             />
           ) : (
-            <Center style={{ height: "750px" }}>
-              <DialogContent>
-                {error ? (
-                  <FetchError height="650px" onClickReload={handleReload} />
-                ) : (
-                  <FadeIn timing="1s">
-                    <EventDistributionChart events={events} />
-                  </FadeIn>
-                )}
-              </DialogContent>
-            </Center>
+            <DialogContent>
+              {error ? (
+                <FetchError height="645px" onClickReload={handleReload} />
+              ) : (
+                <FadeIn timing="1s">
+                  <EventDistributionChart events={events} />
+                </FadeIn>
+              )}
+            </DialogContent>
           )}
         </Padding>
       </Dialog>
