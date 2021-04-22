@@ -11,7 +11,7 @@ describe("Parse Fields Helper", () => {
   });
 
   it("doesn't parse empty callTime values", () => {
-    const date = moment(new Date("2019-12-17T01:00:00"));
+    const date = moment(new Date("2019-12-17T01:00:00")).format();
     const fields = [
       {
         name: "callTime1",
@@ -32,7 +32,7 @@ describe("Parse Fields Helper", () => {
     const nextFields = parsedFields(fields);
     expect(nextFields).toEqual(
       expect.objectContaining({
-        callTimes: [date.format()]
+        callTimes: [date]
       })
     );
   });
@@ -44,9 +44,9 @@ describe("Parse Fields Helper", () => {
     ];
 
     const callTimes = [
-      moment(new Date("2019-12-17T01:00:00")),
-      moment(new Date("2019-12-17T02:00:00")),
-      moment(new Date("2019-12-17T03:00:00"))
+      moment(new Date("2019-12-17T01:00:00")).format(),
+      moment(new Date("2019-12-17T02:00:00")).format(),
+      moment(new Date("2019-12-17T03:00:00")).format()
     ];
 
     const fields = [
@@ -131,11 +131,7 @@ describe("Parse Fields Helper", () => {
         password: "12345",
         // seasonDuration: [datesRanges[0].format(), datesRanges[1].format()],
         expirationDate: datesRanges[0].toString(),
-        callTimes: [
-          callTimes[0].format(),
-          callTimes[1].format(),
-          callTimes[2].format()
-        ],
+        callTimes: [callTimes[0], callTimes[1], callTimes[2]],
         responses: [
           {
             id: "0123456789",

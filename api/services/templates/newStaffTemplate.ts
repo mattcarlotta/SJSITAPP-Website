@@ -10,7 +10,7 @@ const newStaffTemplate = (
     You have been invited to join the staff on the Sharks Ice Team!
   </h2>
   <p style="font-size: 16px; color: #000000;">
-    To register, please click the <strong>button below</strong>, or you may visit <a href="${CLIENT}/employee/signup" target="_blank" rel="noopener noreferrer">Sharks Ice Team Registration</a> and sign up with this Authorization Key:
+    To register, please click the <strong>button below</strong>, or you may visit <a href="${CLIENT}/employee/signup" target="_blank" rel="noopener noreferrer">Sharks Ice Team Registration</a> and sign up with this Authorization Token:
   </p>
   <p style="font-size:16px; margin-bottom:30px; color:#000000; padding:5px; border: 1px solid #9E9E9E; background: #ebebeb; text-align: center;">
     <strong>
@@ -18,7 +18,7 @@ const newStaffTemplate = (
     </strong>
   </p>
   <p style="font-size: 16px; color: #000000;">
-    Please note, that you will have until <strong>${expiration}</strong> end of day to register before the authorization key expires. If the key expires, you must contact the staff supervisor to issue a new one.
+    Please note, that you will have until <strong>${expiration}</strong> end of day to register before the authorization token expires. If the key expires, you must contact the staff supervisor to issue a new one.
   </p>
   <p style="font-size: 16px; margin-bottom: 30px; color: #000000;">
     Thank you,

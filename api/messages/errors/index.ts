@@ -16,7 +16,7 @@ const emailAlreadyTaken =
   "That email is already in use and is associated with an active account.";
 
 const emailAssociatedWithKey =
-  "That email is already associated with another authorization key. Please delete the old authorization key or use a different email.";
+  "That email is already associated with another authorization token. Please delete the old authorization token or use a different email.";
 
 const emptyPassword =
   "You must supply a new password in order to reset the old. Please try again.";
@@ -25,13 +25,13 @@ const expiredForm = (expirationDate: string): string =>
   `The window to view and update this form was closed on ${expirationDate}.`;
 
 const expiredToken =
-  "The authorization key that was provided has expired. Please contact the staff supervisor to issue a new key.";
+  "The authorization token that was provided has expired. Please contact the staff supervisor to issue a new token.";
 
 const formAlreadyExists =
   "The selected Enrollment Month dates have already been assigned to another A/P form. Please choose different dates.";
 
 const invalidAuthTokenRequest =
-  "You must supply an email, a role, and a season before you can create an authorization key.";
+  "You must supply an email, a role, and a season before you can create an authorization token.";
 
 const invalidContactUsRequest =
   "Unable to send your message. You must supply a message, subject, and a sendTo address in order to contact us.";
@@ -47,7 +47,7 @@ const invalidEventDate = (
   `The event date selected below falls outside of the ${seasonId} season. Please select a date within ${seasonStartDate} - ${seasonEndDate} or update the season's start and end date range.`;
 
 const invalidDeleteTokenRequest =
-  "Unable to delete the authorization key. The supplied authorization key does not exist.";
+  "Unable to delete the authorization token. The supplied authorization token does not exist.";
 
 const invalidEmail =
   "That email is not associated with an active account. Please make sure to supply a valid registered email in order to resend a verification!";
@@ -108,7 +108,7 @@ const missingPasswords =
 const missingSeasonId = "You must provide a season id.";
 
 const missingSignupCreds =
-  "Invalid sign up request. You must supply a valid: authorization key, authorized email, first name, last name and password.";
+  "Invalid sign up request. You must supply a valid: authorization token, authorized email, first name, last name and password.";
 
 const missingToken = "There was a problem authenticating your request.";
 
@@ -121,7 +121,7 @@ const missingUpdateMemberStatusParams =
   "You must provide a member id and status.";
 
 const missingUpdateTokenParams =
-  "You must supply a token id, an authorized email, a role, and a season id before you can update an existing authorization key.";
+  "You must supply a token id, an authorized email, a role, and a season id before you can update an existing authorization token.";
 
 const mustContainUniqueCallTimes =
   "One or more of the 'Scheduling Call Times' is a duplicate. Please remove the duplicate(s) before submitting the form again.";
@@ -139,7 +139,7 @@ const teamAlreadyExists =
   "That team already exists. Please edit the current team or use a different team name.";
 
 const tokenAlreadyUsed =
-  "The supplied authorization key has already been used and is associated with an active account. Please contact the webmaster if this error continues: carlotta.matt@gmail.com.";
+  "The supplied authorization token has already been used and is associated with an active account. Please contact the webmaster if this error continues: carlotta.matt@gmail.com.";
 
 const unableToCreateNewForm =
   "Unable to create a new form. You must provide the seasonId, startMonth, endMonth, and expirationDate fields.";
@@ -198,7 +198,7 @@ const unableToLocateSeason =
   "Unable to locate that season. That season doesn't appear to exist.";
 
 const unableToLocateToken =
-  "Unable to locate that token. That authorization key doesn't exist.";
+  "Unable to locate that token. That authorization token doesn't exist.";
 
 const unableToUpdateApForm =
   "Unable to update the A/P form. You must provide an id and all responses.";
@@ -213,7 +213,7 @@ const unableToUpdateSeason =
   "Unable to update the existing season. You must provide an id, season id, start date, and end date.";
 
 const unableToUpdateToken =
-  "Unable to update this authorization key. The key has already been used and is associated with an active account.";
+  "Unable to update this authorization token. The key has already been used and is associated with an active account.";
 
 const usernameAlreadyTaken =
   "The first and last name provided is already in use and is associated with an active account. In order to continue, please use a uniquely identifable name such as a middle name initial or a nickname.";

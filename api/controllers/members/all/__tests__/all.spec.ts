@@ -22,7 +22,7 @@ describe("Retrieve All Members Controller", () => {
       .expect(200)
       .then(res => {
         expect(res.body).toEqual({
-          members: expect.arrayContaining([
+          docs: expect.arrayContaining([
             expect.objectContaining({
               _id: expect.any(String),
               role: expect.any(String),
@@ -48,7 +48,7 @@ describe("Retrieve All Members Controller", () => {
       .expect(200)
       .then(res => {
         expect(res.body).toEqual({
-          members: expect.arrayContaining([
+          docs: expect.arrayContaining([
             expect.objectContaining({
               _id: expect.any(String),
               role: expect.any(String),

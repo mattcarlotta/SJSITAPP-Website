@@ -84,6 +84,7 @@ export { FaTshirt } from "@react-icons/all-files/fa/FaTshirt";
 export { FaUpload } from "@react-icons/all-files/fa/FaUpload";
 export { FaUser } from "@react-icons/all-files/fa/FaUser";
 export { FaUserAltSlash } from "@react-icons/all-files/fa/FaUserAltSlash";
+export { FaUserCheck } from "@react-icons/all-files/fa/FaUserCheck";
 export { FaUserClock } from "@react-icons/all-files/fa/FaUserClock";
 export { FaUserCircle } from "@react-icons/all-files/fa/FaUserCircle";
 export { FaUserFriends } from "@react-icons/all-files/fa/FaUserFriends";

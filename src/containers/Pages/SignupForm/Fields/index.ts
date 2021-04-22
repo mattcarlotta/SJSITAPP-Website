@@ -4,8 +4,9 @@ const Fields = (token?: string): Array<TBaseFieldProps> => [
   {
     name: "token",
     type: "text",
-    label: "Authorization Key",
-    tooltip: "The authorization key is supplied via email upon staff approval.",
+    label: "Authorization Token",
+    tooltip:
+      "The authorization token is supplied via email upon staff approval.",
     icon: "key",
     value: token || "",
     errors: "",

@@ -147,6 +147,8 @@ const TableFilterButton = ({
         return ["sent", "unsent"];
       case "role":
         return ["staff", "member"];
+      case "registration":
+        return ["registered", "unregistered"];
       default:
         return ["active", "suspended"];
     }

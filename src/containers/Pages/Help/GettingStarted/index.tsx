@@ -29,7 +29,33 @@ const GettingStarted = ({ id }: { id: string }): ReactElement => (
       To get started, please follow these steps in order:
       <List>
         <ListItem padding="20px 0 0 5px">
-          <strong>1.)</strong> Go to the
+          <strong>1.)</strong> Authorize new members (staff or employees) by
+          going to the
+          <OutsideLink
+            dataTestId="create-member-link"
+            href="/employee/members/create"
+          >
+            Create Member
+          </OutsideLink>
+          page and filling out the <strong>Role</strong> and&nbsp;
+          <strong>Authorized Email</strong> fields. Once completed, click the
+          <Button
+            tertiary
+            display="inline-block"
+            type="button"
+            width="200px"
+            padding="4px"
+            margin="0 3px"
+          >
+            Create Member
+          </Button>
+          button. New members will be emailed unique authorization tokens with a
+          link to the register to the website. Their registration must include
+          this authorization token and their email must match the authorized
+          email.
+        </ListItem>
+        <ListItem padding="20px 0 0 5px">
+          <strong>2.)</strong> Go to the
           <OutsideLink
             dataTestId="season-create-link"
             href="/employee/seasons/create"
@@ -53,28 +79,6 @@ const GettingStarted = ({ id }: { id: string }): ReactElement => (
           <strong>Season ID</strong>.
         </ListItem>
         <ListItem padding="20px 0 0 5px">
-          <strong>2.)</strong> Add members (staff or employees) by going to the
-          <OutsideLink
-            dataTestId="create-member-link"
-            href="/employee/members/create"
-          >
-            Create Member
-          </OutsideLink>
-          page and filling out the <strong>Role</strong> and&nbsp;
-          <strong>Authorized Email</strong> fields. Once completed, click the
-          <Button
-            tertiary
-            display="inline-block"
-            type="button"
-            width="200px"
-            padding="4px"
-            margin="0 3px"
-          >
-            Create Member
-          </Button>
-          button to add members.
-        </ListItem>
-        <ListItem padding="20px 0 0 5px">
           <strong>3.)</strong> Create events (games, promotionals, or misc.) by
           going to the
           <OutsideLink
@@ -84,12 +88,12 @@ const GettingStarted = ({ id }: { id: string }): ReactElement => (
             Create Event
           </OutsideLink>
           page and: Selecting the <strong>Season ID</strong> you&#39;ve created
-          in step 1, selecting the appropriate&nbsp;
+          in step 2, selecting the appropriate&nbsp;
           <strong>Event Type</strong>, <strong>Team</strong>,&nbsp;
           <strong>Opponent (if applicable)</strong>,&nbsp;
           <strong>Event Location</strong>, <strong>Event Date</strong>,&nbsp;
           <strong>Event Attire</strong>, and creating&nbsp;
-          <strong>Scheduling Call Times</strong>. Once completed, click the
+          <strong>Call Times</strong>. Once completed, click the
           <Button
             tertiary
             display="inline-block"
@@ -111,10 +115,12 @@ const GettingStarted = ({ id }: { id: string }): ReactElement => (
             Create Form
           </OutsideLink>
           page and: Selecting the <strong>Season ID</strong> you&#39;ve created
-          in step 1, selecting the appropriate&nbsp;
-          <strong>Enrollment Month</strong>, <strong>Expiration Date</strong>,
-          and the <strong>Send Email Notifications Date (optional)</strong>.
-          Once completed, click the
+          in step 2, selecting the appropriate&nbsp;
+          <strong>Enrollment Month</strong>, <strong>Start Month Date</strong>
+          ,&nbsp;
+          <strong>End Month Date</strong>, and the&nbsp;
+          <strong>Send Email Notifications Date (optional)</strong>. Once
+          completed, click the
           <Button
             tertiary
             display="inline-block"
@@ -168,7 +174,7 @@ const GettingStarted = ({ id }: { id: string }): ReactElement => (
             />
             <span>Schedule</span>
           </Button>
-          (View & Assign Schedule) button. When the&nbsp;
+          button. When the&nbsp;
           <strong>Event Scheduling</strong> form has loaded, scroll down the
           page until you see an <strong>Employees</strong> column followed by
           one or many call time columns. To assign an employee to a call time,

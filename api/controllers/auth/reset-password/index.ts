@@ -6,7 +6,7 @@ import { newPasswordTemplate } from "~services/templates";
 import { Mail, User } from "~models";
 
 /**
- * Emails a user a new authorization key to reset their password.
+ * Emails a user a new authorization token to reset their password.
  *
  * @function emailResetToken
  * @returns {string} - message

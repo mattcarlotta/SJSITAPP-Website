@@ -51,7 +51,8 @@ const Members = ({ id }: { id: string }): ReactElement => (
       <br />
       <br />
       The member will receive an email with a link that contains a special&nbsp;
-      <strong>Authorization Key</strong> that gives them access to use the&nbsp;
+      <strong>Authorization Token</strong> that gives them access to use
+      the&nbsp;
       <OutsideLink dataTestId="employee-signup-link" href="/employee/signup">
         Sign Up
       </OutsideLink>
@@ -69,7 +70,7 @@ const Members = ({ id }: { id: string }): ReactElement => (
       >
         Register
       </Button>
-      button, the authorization key will be automatically applied to the form,
+      button, the authorization token will be automatically applied to the form,
       otherwise they must manually include it. If successful, they will be
       redirected to the
       <OutsideLink dataTestId="employee-login-link" href="/employee/login">
@@ -238,9 +239,9 @@ const Members = ({ id }: { id: string }): ReactElement => (
       button to update the member&#39;s authorization.
       <br />
       For security reasons, updating the member&#39;s authorization will
-      generate and send a new authorization key.
+      generate and send a new authorization token.
       <WarningText>
-        Be advised that if the authorization key has already been used, then
+        Be advised that if the authorization token has already been used, then
         updating the member&#39;s authorization will not be possible.
       </WarningText>
     </Accordion>

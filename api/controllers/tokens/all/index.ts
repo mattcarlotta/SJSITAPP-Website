@@ -4,7 +4,7 @@ import { Token } from "~models";
 import { generateFilters, sendError } from "~helpers";
 
 /**
- * Retrieves all tokens (authorization keys) for ViewAuthorization page.
+ * Retrieves all tokens (authorization tokens) for ViewAuthorization page.
  *
  * @function getAllTokens
  * @returns {Response} - tokens and total token documents

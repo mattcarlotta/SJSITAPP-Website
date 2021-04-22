@@ -9,7 +9,7 @@ import { sendError } from "~helpers";
 import { User } from "~models";
 
 /**
- * Allows a user to update their password with an authorization key.
+ * Allows a user to update their password with an authorization token.
  *
  * @function updatePassword
  * @returns {string} - message

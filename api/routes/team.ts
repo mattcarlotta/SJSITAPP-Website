@@ -1,11 +1,15 @@
 import type { Router } from "express";
-import { createTeam, deleteTeam } from "~controllers/team";
-import { getAllTeamNames, deleteManyTeams } from "~controllers/teams";
+import {
+  createTeam,
+  deleteTeam,
+  getAllTeamNames,
+  deleteManyTeams
+} from "~controllers/teams";
 import { requireStaffRole } from "~services/strategies";
 
 const teamRoutes = (router: Router): void => {
-  router.post("/team/create", requireStaffRole, createTeam);
-  router.delete("/team/delete/:id", requireStaffRole, deleteTeam);
+  router.post("/teams/create", requireStaffRole, createTeam);
+  router.delete("/teams/delete/:id", requireStaffRole, deleteTeam);
 
   router.get("/teams/all", requireStaffRole, getAllTeamNames);
   router.delete("/teams/delete-many", requireStaffRole, deleteManyTeams);

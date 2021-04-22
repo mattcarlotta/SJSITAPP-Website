@@ -39,7 +39,7 @@ export const ViewMembers = (): ReactElement => (
                   <FaUserPlus
                     style={{ position: "relative", top: 2, marginRight: 8 }}
                   />
-                  Add Member
+                  Create Member
                 </Link>
               </FlexEnd>
             </CollapseFlex>

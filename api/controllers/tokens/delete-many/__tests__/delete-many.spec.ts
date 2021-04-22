@@ -56,7 +56,7 @@ describe("Delete Many Tokens Controller", () => {
       .expect(200)
       .then(res => {
         expect(res.body.message).toEqual(
-          "Successfully deleted the authorization keys."
+          "Successfully deleted the authorization tokens."
         );
         done();
       });

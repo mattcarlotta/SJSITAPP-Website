@@ -28,6 +28,7 @@ export const ContactUsForm = (): JSX.Element => {
     errors: false,
     isSubmitting: false
   });
+  const { errors, isSubmitting } = state;
 
   const sendMail = React.useCallback(async (): Promise<void> => {
     try {
@@ -51,15 +52,12 @@ export const ContactUsForm = (): JSX.Element => {
     }
   }, [app, parseFields, parseMessage, state.fields]);
 
-  const handleChange = React.useCallback(
-    ({ target: { name, value } }: EventTarget): void => {
-      setState(prevState => ({
-        ...prevState,
-        fields: fieldUpdater(prevState.fields, name, value)
-      }));
-    },
-    []
-  );
+  const handleChange = ({ target: { name, value } }: EventTarget): void => {
+    setState(prevState => ({
+      ...prevState,
+      fields: fieldUpdater(prevState.fields, name, value)
+    }));
+  };
 
   const handleSubmit = (e: FormEvent): void => {
     e.preventDefault();
@@ -74,8 +72,8 @@ export const ContactUsForm = (): JSX.Element => {
   };
 
   React.useEffect(() => {
-    if (state.isSubmitting && !state.errors) sendMail();
-  }, [state.isSubmitting, state.errors, sendMail]);
+    if (isSubmitting && !errors) sendMail();
+  }, [isSubmitting, errors, sendMail]);
 
   return (
     <Card

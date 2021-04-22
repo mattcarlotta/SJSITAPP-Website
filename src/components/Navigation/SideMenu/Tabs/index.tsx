@@ -167,8 +167,8 @@ export const StaffRoutes: TRoutes = [
       },
       {
         subicon: <FaKey />,
-        subnodeId: "authorizations/viewall",
-        subhref: "authorizations/viewall?page=1",
+        subnodeId: "members/authorizations/viewall",
+        subhref: "members/authorizations/viewall?page=1",
         subtitle: "View Authorizations",
         subtestId: "authorizations-viewall-link"
       },

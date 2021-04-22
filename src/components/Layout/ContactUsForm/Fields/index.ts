@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 import { TBaseFieldProps } from "~types";
 
 const Fields: Array<TBaseFieldProps> = [
