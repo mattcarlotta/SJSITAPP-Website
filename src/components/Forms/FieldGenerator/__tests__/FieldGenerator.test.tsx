@@ -3,7 +3,7 @@ import withProviders from "~utils/withProviders";
 import FieldGenerator from "../index";
 
 const onChange = jest.fn();
-// const onFieldRemove = jest.fn();
+const onFieldRemove = jest.fn();
 
 const input = {
   type: "text",
@@ -67,15 +67,25 @@ const date = {
   required: true
 };
 
-// const time = {
-// 	type: "time",
-// 	name: "callTime",
-// 	label: "Call Time",
-// 	value: moment(),
-// 	errors: "",
-// 	required: true,
-// 	disabled: true,
-// };
+const datetime = {
+  type: "datetime",
+  name: "eventDate",
+  label: "Event Date",
+  value: null,
+  errors: "",
+  required: true,
+  emptyLabel: "Click to select an event date and time..."
+};
+
+const time = {
+  type: "time",
+  name: "callTime",
+  label: "Call Time",
+  value: null,
+  errors: "",
+  required: true,
+  onFieldRemove
+};
 
 // const removetime = {
 // 	...time,
@@ -183,19 +193,11 @@ describe("Field Generator", () => {
     expect(wrapper.find("DatePickerComponent")).toExist();
   });
 
-  // it("renders a QuillEditor when type is 'editor'", () => {
-  // 	wrapper.setProps({ fields: [editor] });
-  //
-  // 	wrapper
-  // 		.find("#erase-message")
-  // 		.first()
-  // 		.simulate("click");
-  // 	expect(onChange).toHaveBeenCalledWith({
-  // 		target: { name: "message", value: "" },
-  // 	});
-  //
-  // 	expect(wrapper.find("LazyQuill")).toExist();
-  // });
+  it("returns a DateTimePicker when type is 'date'", () => {
+    wrapper.setProps({ fields: [datetime] });
+
+    expect(wrapper.find("DateTimePickerComponent")).toExist();
+  });
 
   // it("returns a RangePicker when type is 'range'", () => {
   // 	wrapper.setProps({ fields: [range] });
@@ -225,18 +227,12 @@ describe("Field Generator", () => {
   // 	expect(wrapper.find("Errors")).toExist();
   // });
 
-  // it("returns a TimePicker when type is 'time'", () => {
-  // 	wrapper.setProps({ fields: [time] });
+  it("returns a TimePicker when type is 'time'", () => {
+    wrapper.setProps({ fields: [time] });
 
-  // 	const value = moment("2000-01-01 00:00:00");
-  // 	wrapper.find(TimePicker).instance().handleChange(value);
-
-  // 	expect(wrapper.find("Label")).toExist();
-  // 	expect(wrapper.find("TimePicker")).toExist();
-  // 	expect(onChange).toHaveBeenCalledWith({
-  // 		target: { name: "callTime", value },
-  // 	});
-  // });
+    expect(wrapper.find("Label")).toExist();
+    expect(wrapper.find("TimePickerComponent")).toExist();
+  });
 
   // it("returns a removeable TimePicker field when a 'onFieldRemove' is present", () => {
   // 	wrapper.setProps({ fields: [removetime] });

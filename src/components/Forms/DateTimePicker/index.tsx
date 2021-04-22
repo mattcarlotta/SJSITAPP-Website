@@ -12,7 +12,6 @@ import {
 } from "~types";
 
 export type TDateTimePickerProps = {
-  background?: string;
   emptyLabel: string;
   errors?: string;
   format: string;
@@ -55,7 +54,7 @@ const useStyles = makeStyles<Theme, { errors?: string }>({
   }
 });
 
-const DatePickerComponent = ({
+const DateTimePickerComponent = ({
   emptyLabel,
   errors,
   label,
@@ -82,9 +81,9 @@ const DatePickerComponent = ({
   </div>
 );
 
-DatePickerComponent.defaultProps = {
+DateTimePickerComponent.defaultProps = {
   format: standardFormat,
   emptyLabel: "Please select a date..."
 };
 
-export default DatePickerComponent;
+export default DateTimePickerComponent;

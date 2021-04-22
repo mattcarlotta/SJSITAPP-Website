@@ -1,4 +1,3 @@
-import isEmpty from "lodash.isempty";
 import { TBaseFieldProps, TForm } from "~types";
 
 const Fields = (
@@ -13,7 +12,7 @@ const Fields = (
     errors: "",
     value: form ? form.seasonId : "",
     required: true,
-    selectOptions: !isEmpty(seasondIds) ? seasondIds : [],
+    selectOptions: seasondIds,
     style: { textAlign: "center" }
   },
   {

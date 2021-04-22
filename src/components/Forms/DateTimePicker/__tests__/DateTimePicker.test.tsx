@@ -1,6 +1,6 @@
 import { ReactWrapper } from "enzyme";
 import withProviders from "~utils/withProviders";
-import DatePicker from "../index";
+import DateTimePicker from "../index";
 
 const onChange = jest.fn();
 
@@ -16,10 +16,10 @@ const initProps = {
   value: ""
 };
 
-describe("DatePicker", () => {
+describe("DateTimePicker", () => {
   let wrapper: ReactWrapper;
   beforeEach(() => {
-    wrapper = withProviders(<DatePicker {...initProps} />);
+    wrapper = withProviders(<DateTimePicker {...initProps} />);
   });
 
   it("renders without errors", () => {
@@ -40,5 +40,16 @@ describe("DatePicker", () => {
     wrapper.setProps({ errors: "Required." });
 
     expect(wrapper.find("Errors").text()).toEqual("Required.");
+  });
+
+  it("calls onChange", () => {
+    wrapper.find("input").simulate("click");
+    wrapper
+      .find(".MuiDialogActions-spacing")
+      .find("button")
+      .at(1)
+      .simulate("click");
+
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 });

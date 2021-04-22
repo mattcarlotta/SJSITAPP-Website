@@ -1,8 +1,9 @@
 import { ReactWrapper } from "enzyme";
 import withProviders from "~utils/withProviders";
-import DatePicker from "../index";
+import TimePicker from "../index";
 
 const onChange = jest.fn();
+const onFieldRemove = jest.fn();
 
 const initProps = {
   emptyLabel: "",
@@ -11,15 +12,16 @@ const initProps = {
   name: "example",
   label: "",
   onChange,
+  onFieldRemove,
   style: {},
   tooltip: "",
   value: ""
 };
 
-describe("DatePicker", () => {
+describe("TimePicker", () => {
   let wrapper: ReactWrapper;
   beforeEach(() => {
-    wrapper = withProviders(<DatePicker {...initProps} />);
+    wrapper = withProviders(<TimePicker {...initProps} />);
   });
 
   it("renders without errors", () => {
@@ -40,5 +42,22 @@ describe("DatePicker", () => {
     wrapper.setProps({ errors: "Required." });
 
     expect(wrapper.find("Errors").text()).toEqual("Required.");
+  });
+
+  it("calls onFieldRemove", () => {
+    wrapper.find(".remove-time-slot").first().simulate("click");
+
+    expect(onFieldRemove).toHaveBeenCalledTimes(1);
+  });
+
+  it("calls onChange", () => {
+    wrapper.find("input").simulate("click");
+    wrapper
+      .find(".MuiDialogActions-spacing")
+      .find("button")
+      .at(1)
+      .simulate("click");
+
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 });
