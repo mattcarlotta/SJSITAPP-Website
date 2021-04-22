@@ -3,12 +3,12 @@ import { TFilters } from "~types";
 const Filters: TFilters = [
   {
     name: "email",
-    title: "Registration Status",
+    title: "Status",
     selectType: "registration",
     type: "select"
   },
   {
-    name: "email",
+    name: "authorizedEmail",
     title: "Email",
     type: "text"
   },
