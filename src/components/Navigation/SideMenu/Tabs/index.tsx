@@ -137,6 +137,13 @@ export const StaffRoutes: TRoutes = [
         subtestId: "create-mail-link"
       },
       {
+        subicon: <MdSettingsInputComponent />,
+        subnodeId: "mail/services",
+        subhref: "mail/services",
+        subtitle: "Mail Services",
+        subtestId: "mail-services-link"
+      },
+      {
         subicon: <FaMailBulk />,
         subnodeId: "mail/viewall",
         subhref: "mail/viewall?page=1",
@@ -198,13 +205,6 @@ export const StaffRoutes: TRoutes = [
         subtestId: "seasons-viewall-link"
       }
     ]
-  },
-  {
-    icon: <MdSettingsInputComponent />,
-    nodeId: "services",
-    href: "services",
-    title: "Services",
-    testId: "services-link"
   },
   ...sharedRoutes
 ];

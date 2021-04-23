@@ -87,7 +87,7 @@ export const ResetPasswordForm = ({
 
   return (
     <WhiteBackground>
-      <Modal dataTestId="reset-password-form" isOpen>
+      <Modal dataTestId="reset-password-form" isOpen maxWidth="450px">
         <FormTitle
           header="Reset Password"
           title="Reset Password"

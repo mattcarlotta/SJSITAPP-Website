@@ -54,10 +54,12 @@ const MemberProfile = ({ id }: { id: string }): ReactElement => {
   const setServerMessage = React.useCallback(
     (message: string): void => {
       toast({ type: "info", message });
+
       setState(prevState => ({
         ...prevState,
         serverMessage: message
       }));
+
       fetchMember();
     },
     [fetchMember, toast]
@@ -66,6 +68,7 @@ const MemberProfile = ({ id }: { id: string }): ReactElement => {
   const setServerError = React.useCallback(
     (err: Error): void => {
       toast({ type: "error", message: err.toString() });
+
       setState(prevState => ({
         ...prevState,
         serverError: err.toString()
@@ -78,6 +81,7 @@ const MemberProfile = ({ id }: { id: string }): ReactElement => {
     async (id: string): Promise<void> => {
       try {
         resetServerMessages();
+
         const res = await avatarAPI.delete(`delete/${id}`);
         const message = parseMessage(res);
 

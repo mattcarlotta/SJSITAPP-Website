@@ -115,8 +115,8 @@ const General = ({ id }: { id: string }): ReactElement => (
       >
         Settings
       </OutsideLink>
-      page and update the <strong>Email</strong> field with a new email address.
-      Once finished, click the
+      page and update the <strong>Account Email</strong> field with a new email
+      address. Once finished, click the
       <Button
         tertiary
         display="inline-block"
@@ -229,9 +229,9 @@ const General = ({ id }: { id: string }): ReactElement => (
       </Button>
       button to update the account&#39;s password.
       <WarningText>
-        Be advised that updating your email will log you out of the current
-        session. To proceed, please log in with your new email address and your
-        account password.
+        Be advised that updating your password will log you out of the current
+        session. To proceed, please log in with your current account email
+        address and new account password.
       </WarningText>
     </Accordion>
     <Accordion expanded={id} title="How do I log out of my current session?">

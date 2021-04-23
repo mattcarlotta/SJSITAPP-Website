@@ -28,10 +28,10 @@ const EmployeeSchedule = ({ id }: { id: string }): ReactElement => (
       If you&#39;ve been scheduled to work a game within the selected month and
       year, then you&#39;ll see a button with a scheduled (
       <FaCalendarCheck style={{ position: "relative", top: 2 }} />) icon. Click
-      on the button to view its details. Underneath one of the
-      <strong>Scheduled:</strong> call times(
+      on the button to view the event&#39;s details. Underneath the&nbsp;
+      <strong>Scheduled</strong> property, you&#39;ll see several call times(
       <FaClock style={{ position: "relative", top: 2 }} />
-      ), you&#39;ll see your name highlighted&nbsp;
+      ), in which one of them will show your name highlighted&nbsp;
       <strong
         style={{
           backgroundColor: "#006d75",
@@ -53,7 +53,7 @@ const EmployeeSchedule = ({ id }: { id: string }): ReactElement => (
       <OutsideLink dataTestId="dashboard-link" href="/employee/dashboard">
         Dashboard
       </OutsideLink>
-      page and, underneath the <strong>Events</strong> panel, change the
+      page and, underneath the <strong>Events</strong> panel, change the&nbsp;
       <strong>Today</strong> tab to the <strong>Upcoming</strong> tab.
     </Accordion>
     <Accordion expanded={id} title="How is scheduling determined?">

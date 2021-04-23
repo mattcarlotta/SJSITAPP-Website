@@ -57,12 +57,6 @@ class CustomDocument extends Document {
           sizes="192x192"
           href={`${imageAPI}/images/logo_192x192.png`}
         />
-        <link
-          rel="preload"
-          href={`${imageAPI}/assets/Karla.ttf`}
-          as="font"
-          crossOrigin="anonymous"
-        />
         <link rel="icon" href={`${imageAPI}/images/favicon.ico`} />
         <link rel="manifest" href={`${imageAPI}/assets/manifest.json`} />
         <meta name="build version" content={version} />

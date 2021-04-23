@@ -119,7 +119,7 @@ const FormAndAvailability = ({ id }: { id: string }): ReactElement => (
         />
         AP Form (# events)
       </Button>
-      button located underneath to the <strong>Forms</strong> panel. Add your
+      button located underneath the <strong>Forms</strong> panel. Add your
       responses accordingly and click the
       <Button
         tertiary
@@ -161,7 +161,7 @@ const FormAndAvailability = ({ id }: { id: string }): ReactElement => (
         />
         AP Form (# events)
       </Button>
-      button located underneath to the <strong>Forms</strong> panel. Update your
+      button located underneath the <strong>Forms</strong> panel. Update your
       previous responses accordingly and click the
       <Button
         tertiary

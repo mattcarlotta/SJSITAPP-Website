@@ -14,6 +14,7 @@ export const TABS = [
   "seasons/create",
   "seasons/viewall",
   "mail/create",
+  "mail/services",
   "mail/viewall",
   "settings",
   "help",
