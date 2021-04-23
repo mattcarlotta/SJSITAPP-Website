@@ -86,13 +86,14 @@ const MemberProfile = ({ id }: { id: string }): ReactElement => {
         setServerError(err);
       }
     },
-    [avatarAPI, parseMessage, resetServerMessages, toast]
+    [avatarAPI, parseMessage, resetServerMessages, setServerMessage]
   );
 
   const updateUserAvatar = React.useCallback(
     async ({ form, id }: { form: FormData; id: string }): Promise<void> => {
       try {
         resetServerMessages();
+
         const res = await avatarAPI.put(`update/${id}`, form);
         const message = parseMessage(res);
 
@@ -101,7 +102,7 @@ const MemberProfile = ({ id }: { id: string }): ReactElement => {
         setServerError(err);
       }
     },
-    [avatarAPI, parseMessage, resetServerMessages, toast]
+    [avatarAPI, parseMessage, resetServerMessages, setServerMessage]
   );
 
   const updateUserProfile = React.useCallback(
@@ -117,7 +118,7 @@ const MemberProfile = ({ id }: { id: string }): ReactElement => {
         setServerError(err);
       }
     },
-    [app, parseMessage, resetServerMessages, toast]
+    [app, parseMessage, resetServerMessages, setServerMessage]
   );
 
   const updateUserStatus = React.useCallback(
@@ -133,7 +134,7 @@ const MemberProfile = ({ id }: { id: string }): ReactElement => {
         setServerError(err);
       }
     },
-    [app, parseMessage, resetServerMessages, toast]
+    [app, parseMessage, resetServerMessages, setServerMessage]
   );
 
   React.useEffect(() => {
