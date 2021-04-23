@@ -18,7 +18,7 @@ export type TEditMemberFormState = {
 
 export type TEditMemberFormProps = {
   id: string;
-  avatar: string;
+  avatar?: string;
   email: string;
   emailReminders: boolean;
   editRole?: boolean;
@@ -29,7 +29,9 @@ export type TEditMemberFormProps = {
   serverError?: string;
   serverMessage?: string;
   status: string;
-  updateUserProfile: typeof updateUserProfile | (() => void);
+  updateUserProfile:
+    | typeof updateUserProfile
+    | ((payload: TAuthData) => Promise<void>);
 };
 
 export const EditMemberForm = ({
@@ -44,15 +46,12 @@ export const EditMemberForm = ({
     isSubmitting: false
   });
 
-  const handleChange = React.useCallback(
-    ({ target: { name, value } }: EventTarget): void => {
-      setState(prevState => ({
-        ...prevState,
-        fields: fieldUpdater(prevState.fields, name, value)
-      }));
-    },
-    []
-  );
+  const handleChange = ({ target: { name, value } }: EventTarget): void => {
+    setState(prevState => ({
+      ...prevState,
+      fields: fieldUpdater(prevState.fields, name, value)
+    }));
+  };
 
   const handleSubmit = (e: FormEvent): void => {
     e.preventDefault();

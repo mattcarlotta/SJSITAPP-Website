@@ -19,7 +19,7 @@ export const ViewMail = (): ReactElement => (
       dataTestId="view-mail-page"
       icon={<FaMailBulk />}
       title="View Mail"
-      subtitle="Find and View All Past and Present Emails"
+      subtitle="View All Past and Present Emails"
     >
       <QueryHandler>
         {props => (

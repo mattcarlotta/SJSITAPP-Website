@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { connectToDB } from "~database";
-import { unableToLocateMember } from "~messages/errors";
+import { missingMemberId, unableToLocateMember } from "~messages/errors";
 import User, { IUserDocument } from "~models/user";
 import { staffSignIn } from "~test/utils/signIn";
 import app from "~test/utils/testServer";
@@ -18,9 +18,21 @@ describe("Member Events Controller", () => {
     await mongoose.connection.close();
   });
 
-  it("rejects requests where the member id is missing", done => {
+  it("rejects requests where the member id is invalid", done => {
     app()
-      .get("/api/members/review/601dc43483adb35b1ca678ea")
+      .get("/api/members/view/123")
+      .set("Cookie", cookie)
+      .expect("Content-Type", /json/)
+      .expect(400)
+      .then(res => {
+        expect(res.body.err).toEqual(missingMemberId);
+        done();
+      });
+  });
+
+  it("rejects requests where the member id is non-existent", done => {
+    app()
+      .get("/api/members/view/606f28d674c497962d03a144")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(400)
@@ -32,12 +44,12 @@ describe("Member Events Controller", () => {
 
   it("accepts requests to retrieve a member profile", done => {
     app()
-      .get(`/api/members/review/${user!._id}`)
+      .get(`/api/members/view/${user!._id}`)
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
       .expect(200)
       .then(res => {
-        expect(res.body.member).toEqual({
+        expect(res.body).toEqual({
           _id: expect.any(String),
           avatar: expect.any(String),
           email: expect.any(String),

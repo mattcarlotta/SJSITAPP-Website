@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { Event, User } from "~models";
-import { sendError } from "~helpers";
+import { isValidObjectId, sendError } from "~helpers";
 import {
   emailAlreadyTaken,
   missingUpdateMemberParams,
@@ -9,7 +9,7 @@ import {
 } from "~messages/errors";
 
 /**
- * Updates an member's details.
+ * Updates a member's details.
  *
  * @function updateMember
  * @returns {Response} - message
@@ -17,9 +17,16 @@ import {
  */
 const updateMember = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const { _id, email, emailReminders, firstName, lastName, role } = req.body;
+    const {
+      id: _id,
+      email,
+      emailReminders,
+      firstName,
+      lastName,
+      role
+    } = req.body;
     if (
-      !_id ||
+      !isValidObjectId(_id) ||
       !email ||
       typeof emailReminders !== "boolean" ||
       !firstName ||

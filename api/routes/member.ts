@@ -17,7 +17,7 @@ import { requireAuth, requireStaffRole } from "~services/strategies";
 const memberRoutes = (router: Router): void => {
   router.delete("/members/delete/:id", requireStaffRole, deleteMember);
   router.get("/members/events", requireStaffRole, getMemberEvents);
-  router.get("/members/review/:id", requireStaffRole, getMember);
+  router.get("/members/view/:id", requireStaffRole, getMember);
 
   // loggedin members settings
   router.put("/members/settings/update", requireAuth, updateMemberSettings);

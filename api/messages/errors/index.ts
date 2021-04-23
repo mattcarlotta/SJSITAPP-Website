@@ -100,7 +100,7 @@ const missingIds =
 
 const missingMailId = "You must provide a mail id.";
 
-const missingMemberId = "You must provide a member id.";
+const missingMemberId = "You must provide a valid member id.";
 
 const missingPasswords =
   "You must supply both your current password and a new password.";

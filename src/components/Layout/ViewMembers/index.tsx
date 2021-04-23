@@ -19,7 +19,7 @@ export const ViewMembers = (): ReactElement => (
       dataTestId="view-members-page"
       icon={<FaUsers />}
       title="View Mail"
-      subtitle="Find and View Active and Suspended Members"
+      subtitle="View Active and Suspended Members"
     >
       <QueryHandler>
         {props => (

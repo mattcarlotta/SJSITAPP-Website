@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 export { default as deleteMember } from "./delete";
 export { default as getMemberEvents } from "./events";
-export { default as getMember } from "./review";
+export { default as getMember } from "./view";
 
 export { default as updateMemberSettings } from "./settings/update";
 export { default as getMemberSettings } from "./settings";

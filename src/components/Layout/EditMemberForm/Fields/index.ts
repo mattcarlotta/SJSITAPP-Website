@@ -3,7 +3,7 @@ import { TBaseFieldProps } from "~types";
 
 export type TFieldsProps = {
   id: string;
-  avatar: string;
+  avatar?: string;
   editRole?: boolean;
   email: string;
   emailReminders: boolean;
@@ -23,6 +23,8 @@ const Fields = (props: TFieldsProps): Array<TBaseFieldProps> =>
       value: props.role,
       errors: "",
       required: true,
+      justifyContent: "flex-start",
+      textAlign: "left",
       selectOptions: ["staff", "member"]
     },
     {

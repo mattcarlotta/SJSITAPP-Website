@@ -6,8 +6,8 @@ const Fields = (
   teams?: Array<string>,
   event?: TEvent,
   handleRemoveField?: (name: string) => void
-): Array<TBaseFieldProps> => {
-  const fields: Array<TBaseFieldProps> = [
+): Array<TBaseFieldProps> =>
+  [
     {
       name: "seasonId",
       type: "select",
@@ -16,7 +16,7 @@ const Fields = (
       value: event ? event.seasonId : "",
       errors: "",
       required: true,
-      selectOptions: !isEmpty(seasondIds) ? seasondIds : [],
+      selectOptions: seasondIds,
       style: { textAlign: "center" }
     },
     {
@@ -100,16 +100,13 @@ const Fields = (
       required: false,
       placeholder: "(Optional) Include any special event notes...",
       style: { width: "100%", height: "100px" }
-    }
-  ];
-
-  if (event && event.callTimes) {
-    event.callTimes.forEach((time, index) => {
-      fields.push({
+    },
+    ...(event && !isEmpty(event.callTimes) ? event.callTimes : [""]).map(
+      (time, index) => ({
         type: "time",
         name: index === 0 ? "callTime" : `callTime-${index}`,
         label: index === 0 ? "Event Call Times" : "",
-        value: time,
+        value: time || null,
         errors: "",
         required: index === 0,
         style: {
@@ -118,21 +115,8 @@ const Fields = (
           marginBottom: index === 0 ? 0 : 10
         },
         onFieldRemove: index !== 0 ? handleRemoveField : undefined
-      });
-    });
-  } else {
-    fields.push({
-      type: "time",
-      name: "callTime",
-      label: "Event Call Times",
-      value: null,
-      errors: "",
-      required: true,
-      style: { width: "100%", height: "100px" }
-    });
-  }
-
-  return fields;
-};
+      })
+    )
+  ].filter(Boolean) as Array<TBaseFieldProps>;
 
 export default Fields;

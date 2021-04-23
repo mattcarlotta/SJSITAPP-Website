@@ -25,6 +25,7 @@ export { GoRadioTower } from "@react-icons/all-files/go/GoRadioTower";
 
 // FA
 export { FaBalanceScale } from "@react-icons/all-files/fa/FaBalanceScale";
+export { FaBan } from "@react-icons/all-files/fa/FaBan";
 export { FaBug } from "@react-icons/all-files/fa/FaBug";
 export { FaCalendar } from "@react-icons/all-files/fa/FaCalendar";
 export { FaCalendarAlt } from "@react-icons/all-files/fa/FaCalendarAlt";
@@ -51,7 +52,6 @@ export { FaEnvelope } from "@react-icons/all-files/fa/FaEnvelope";
 export { FaExclamationTriangle } from "@react-icons/all-files/fa/FaExclamationTriangle";
 export { FaFileAlt } from "@react-icons/all-files/fa/FaFileAlt";
 export { FaFileSignature } from "@react-icons/all-files/fa/FaFileSignature";
-export { FaFolder } from "@react-icons/all-files/fa/FaFolder";
 export { FaFolderOpen } from "@react-icons/all-files/fa/FaFolderOpen";
 export { FaFolderPlus } from "@react-icons/all-files/fa/FaFolderPlus";
 export { FaHeartBroken } from "@react-icons/all-files/fa/FaHeartBroken";
@@ -87,7 +87,6 @@ export { FaUserAltSlash } from "@react-icons/all-files/fa/FaUserAltSlash";
 export { FaUserCheck } from "@react-icons/all-files/fa/FaUserCheck";
 export { FaUserClock } from "@react-icons/all-files/fa/FaUserClock";
 export { FaUserCircle } from "@react-icons/all-files/fa/FaUserCircle";
-export { FaUserFriends } from "@react-icons/all-files/fa/FaUserFriends";
 export { FaUserPlus } from "@react-icons/all-files/fa/FaUserPlus";
 export { FaUsers } from "@react-icons/all-files/fa/FaUsers";
 export { FaUserTimes } from "@react-icons/all-files/fa/FaUserTimes";

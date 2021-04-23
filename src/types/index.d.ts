@@ -59,6 +59,18 @@ export type TAuthData = {
   status?: string;
 };
 
+export type TUser = {
+  id: string;
+  avatar?: string;
+  email: string;
+  emailReminders: boolean;
+  firstName: string;
+  lastName: string;
+  registered: string;
+  role: string;
+  status: string;
+};
+
 export type TLoginData = {
   email: string;
   password: string;
@@ -174,6 +186,7 @@ export type TBaseFieldProps = {
   innerStyle?: CSSProperties;
   isSearchable?: boolean;
   label?: ReactNode;
+  justifyContent?: string;
   maxLength?: number;
   name: string;
   onChange?: (event: ChangeEvent<any>) => void;
@@ -187,6 +200,7 @@ export type TBaseFieldProps = {
   radioStyle?: CSSProperties;
   style?: CSSProperties;
   selectOptions?: Array<string>;
+  textAlign?: string;
   type: string;
   tooltip?: string;
   transferList?: EmailTransferList;

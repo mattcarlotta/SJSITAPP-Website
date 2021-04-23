@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { Event, User } from "~models";
-import { sendError } from "~helpers";
+import { isValidObjectId, sendError } from "~helpers";
 import {
   missingUpdateMemberStatusParams,
   unableToLocateMember
@@ -18,8 +18,8 @@ const updateMemberStatus = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const { _id, status } = req.body;
-    if (!_id || !status) throw missingUpdateMemberStatusParams;
+    const { id: _id, status } = req.body;
+    if (!isValidObjectId(_id) || !status) throw missingUpdateMemberStatusParams;
 
     const existingMember = await User.findOne({ _id });
     if (!existingMember) throw unableToLocateMember;

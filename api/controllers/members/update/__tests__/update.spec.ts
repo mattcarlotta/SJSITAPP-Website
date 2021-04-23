@@ -59,7 +59,7 @@ describe("Member Update Controller", () => {
     app()
       .put("/api/members/update")
       .set("Cookie", cookie)
-      .send({ ...user, _id: "601dc43483adb35b1ca678ea" })
+      .send({ ...user, id: "601dc43483adb35b1ca678ea" })
       .expect("Content-Type", /json/)
       .expect(400)
       .then(res => {
@@ -73,7 +73,7 @@ describe("Member Update Controller", () => {
       .put("/api/members/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
-      .send({ ...user, email: "scheduledmember@test.com" })
+      .send({ ...user, id: user._id, email: "scheduledmember@test.com" })
       .expect(400)
       .then(res => {
         expect(res.body.err).toEqual(emailAlreadyTaken);
@@ -86,7 +86,12 @@ describe("Member Update Controller", () => {
       .put("/api/members/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
-      .send({ ...user, firstName: "Scheduled", lastName: "Member" })
+      .send({
+        ...user,
+        id: user._id,
+        firstName: "Scheduled",
+        lastName: "Member"
+      })
       .expect(400)
       .then(res => {
         expect(res.body.err).toEqual(usernameAlreadyTaken);
@@ -99,7 +104,7 @@ describe("Member Update Controller", () => {
       .put("/api/members/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
-      .send({ ...user, ...updatedSettings })
+      .send({ ...user, ...updatedSettings, id: user._id })
       .expect(200)
       .then(res => {
         expect(res.body.message).toEqual(
@@ -114,7 +119,7 @@ describe("Member Update Controller", () => {
       .put("/api/members/update")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
-      .send({ ...user, ...updatedSettings, role: "staff" })
+      .send({ ...user, ...updatedSettings, id: user._id, role: "staff" })
       .expect(200)
       .then(res => {
         expect(res.body.message).toEqual(

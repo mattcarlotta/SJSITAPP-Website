@@ -17,11 +17,13 @@ export type TUploadAvatarFormState = {
 
 export type TUploadAvatarFormProps = {
   avatar?: string;
-  deleteUserAvatar: typeof deleteUserAvatar;
+  deleteUserAvatar: typeof deleteUserAvatar | ((id: string) => Promise<void>);
   id: string;
   serverError?: string;
   serverMessage?: string;
-  updateUserAvatar: typeof updateUserAvatar;
+  updateUserAvatar:
+    | typeof updateUserAvatar
+    | (({ form, id }: { form: FormData; id: string }) => Promise<void>);
 };
 
 const initialState = {

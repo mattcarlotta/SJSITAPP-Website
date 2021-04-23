@@ -43,7 +43,16 @@ const FieldGenerator = <
 }): ReactElement => (
   <>
     {fields.map(
-      ({ name, value, type, selectOptions, transferList, ...rest }) => {
+      ({
+        name,
+        justifyContent,
+        value,
+        type,
+        selectOptions,
+        transferList,
+        textAlign,
+        ...rest
+      }) => {
         switch (type) {
           case "text":
           case "email":
@@ -99,8 +108,8 @@ const FieldGenerator = <
                 {...rest}
                 key={name}
                 name={name}
-                textAlign="center"
-                justifyContent="center"
+                textAlign={textAlign || "center"}
+                justifyContent={justifyContent || "center"}
                 value={value as string}
                 selectOptions={selectOptions as Array<string>}
                 onChange={onChange}

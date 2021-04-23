@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { User } from "~models";
-import { sendError } from "~helpers";
-import { unableToLocateMember } from "~messages/errors";
+import { isValidObjectId, sendError } from "~helpers";
+import { missingMemberId, unableToLocateMember } from "~messages/errors";
 
 /**
  * Retrieves a single member for editing/viewing.
@@ -13,6 +13,7 @@ import { unableToLocateMember } from "~messages/errors";
 const getMember = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { id: _id } = req.params;
+    if (!isValidObjectId(_id)) throw missingMemberId;
 
     const existingMember = await User.findOne(
       { _id },
@@ -20,7 +21,7 @@ const getMember = async (req: Request, res: Response): Promise<Response> => {
     ).lean();
     if (!existingMember) throw unableToLocateMember;
 
-    return res.status(200).json({ member: existingMember });
+    return res.status(200).send(existingMember);
   } catch (err) {
     return sendError(err, 400, res);
   }

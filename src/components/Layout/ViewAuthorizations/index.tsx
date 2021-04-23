@@ -19,7 +19,7 @@ export const ViewAuthorizations = (): ReactElement => (
       dataTestId="view-authorizations-page"
       icon={<FaKey />}
       title="View Authorizations"
-      subtitle="Find and View Member Authorizations"
+      subtitle="View Member Authorizations"
     >
       <QueryHandler>
         {props => (

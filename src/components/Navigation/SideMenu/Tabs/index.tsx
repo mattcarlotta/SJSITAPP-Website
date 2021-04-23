@@ -7,20 +7,15 @@ import {
   FaConciergeBell,
   FaCopyright,
   FaEdit,
-  FaEnvelope,
   FaFileAlt,
-  FaFileSignature,
-  FaFolder,
   FaFolderOpen,
   FaFolderPlus,
   FaKey,
   FaMailBulk,
   FaQuestionCircle,
-  FaUserFriends,
   FaUserPlus,
   FaUsers,
   MdDashboard,
-  MdEvent,
   MdEventNote,
   MdNoteAdd,
   MdSettingsInputComponent
@@ -91,7 +86,6 @@ export const StaffRoutes: TRoutes = [
     testId: "dashboard-link"
   },
   {
-    icon: <MdEvent />,
     nodeId: "events",
     title: "Events",
     submenu: [
@@ -112,7 +106,6 @@ export const StaffRoutes: TRoutes = [
     ]
   },
   {
-    icon: <FaFileSignature />,
     nodeId: "forms",
     title: "Forms",
     submenu: [
@@ -133,7 +126,6 @@ export const StaffRoutes: TRoutes = [
     ]
   },
   {
-    icon: <FaEnvelope />,
     nodeId: "mail",
     title: "Mail",
     submenu: [
@@ -154,7 +146,6 @@ export const StaffRoutes: TRoutes = [
     ]
   },
   {
-    icon: <FaUserFriends />,
     nodeId: "members",
     title: "Members",
     submenu: [
@@ -189,7 +180,6 @@ export const StaffRoutes: TRoutes = [
     testId: "schedule-link"
   },
   {
-    icon: <FaFolder />,
     nodeId: "seasons",
     title: "Seasons",
     submenu: [

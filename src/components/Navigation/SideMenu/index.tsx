@@ -34,6 +34,9 @@ const useStyles = makeStyles({
     "& .MuiTreeItem-content": {
       padding: "3px 0 3px 20px"
     },
+    "& .MuiTreeItem-iconContainer": {
+      width: 20
+    },
     "& .MuiTreeItem-label:hover": {
       background: "none"
     },
@@ -66,8 +69,8 @@ const SideMenu = ({
     <Tree data-testid="sidemenu-tree">
       <TreeView
         className={useStyles().root}
-        defaultCollapseIcon={<MdExpandMore />}
-        defaultExpandIcon={<MdChevronRight />}
+        defaultCollapseIcon={<MdExpandMore style={{ fontSize: 20 }} />}
+        defaultExpandIcon={<MdChevronRight style={{ fontSize: 20 }} />}
         expanded={expandedNodeIds}
         selected={selectedNodeIds}
         onNodeToggle={handleToggle}

@@ -50,7 +50,7 @@ describe("Member Update Status Controller", () => {
     app()
       .put("/api/members/update-status")
       .set("Cookie", cookie)
-      .send({ status: "active", _id: "601dc43483adb35b1ca678ea" })
+      .send({ status: "active", id: "601dc43483adb35b1ca678ea" })
       .expect("Content-Type", /json/)
       .expect(400)
       .then(res => {
@@ -64,7 +64,7 @@ describe("Member Update Status Controller", () => {
       .put("/api/members/update-status")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
-      .send({ _id: user!._id, status: "active" })
+      .send({ id: user!._id, status: "active" })
       .expect(200)
       .then(res => {
         expect(res.body.message).toEqual("Member has been suspended.");
@@ -77,7 +77,7 @@ describe("Member Update Status Controller", () => {
       .put("/api/members/update-status")
       .set("Cookie", cookie)
       .expect("Content-Type", /json/)
-      .send({ _id: user!._id, status: "suspend" })
+      .send({ id: user!._id, status: "suspend" })
       .expect(200)
       .then(res => {
         expect(res.body.message).toEqual("Member has been reactivated.");
