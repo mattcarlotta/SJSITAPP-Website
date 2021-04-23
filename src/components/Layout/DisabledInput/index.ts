@@ -8,6 +8,8 @@ const DisabledInput = styled.div`
   padding: 8px 8px 8px 16px;
   border-radius: 5px;
   border: 1px solid #ccc;
+  white-space: nowrap;
+  overflow-x: auto;
 `;
 
 export default DisabledInput;

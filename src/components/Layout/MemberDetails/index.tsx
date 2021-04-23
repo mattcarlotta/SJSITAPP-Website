@@ -12,10 +12,9 @@ const activeUserStyle = {
 } as CSSProperties;
 
 const inactiveUserStyle = {
-  fontSize: 22,
+  fontSize: 17,
   position: "relative",
-  top: 5,
-  left: 3,
+  top: 3,
   color: "red",
   marginRight: 15
 } as CSSProperties;

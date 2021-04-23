@@ -24,7 +24,7 @@ const initialState = {
 const MemberProfile = ({ id }: { id: string }): ReactElement => {
   const router = useRouter();
   const [state, setState] = React.useState<TMemberProfileState>(initialState);
-  const { isLoading, user } = state;
+  const { isLoading, serverError, serverMessage, user } = state;
 
   const fetchMember = React.useCallback(async (): Promise<void> => {
     try {
@@ -43,97 +43,97 @@ const MemberProfile = ({ id }: { id: string }): ReactElement => {
     }
   }, [app, id, parseData, router, toast]);
 
-  const resetServerError = React.useCallback(() => {
+  const resetServerMessages = React.useCallback((): void => {
     setState(prevState => ({
       ...prevState,
-      serverError: ""
+      serverError: "",
+      serverMessage: ""
     }));
   }, []);
+
+  const setServerMessage = React.useCallback(
+    (message: string): void => {
+      toast({ type: "info", message });
+      setState(prevState => ({
+        ...prevState,
+        serverMessage: message
+      }));
+      fetchMember();
+    },
+    [fetchMember, toast]
+  );
+
+  const setServerError = React.useCallback(
+    (err: Error): void => {
+      toast({ type: "error", message: err.toString() });
+      setState(prevState => ({
+        ...prevState,
+        serverError: err.toString()
+      }));
+    },
+    [toast]
+  );
 
   const deleteUserAvatar = React.useCallback(
     async (id: string): Promise<void> => {
       try {
-        resetServerError();
+        resetServerMessages();
         const res = await avatarAPI.delete(`delete/${id}`);
         const message = parseMessage(res);
 
-        toast({ type: "info", message });
-
-        setState(initialState);
+        setServerMessage(message);
       } catch (err) {
-        toast({ type: "error", message: err.toString() });
-        setState(prevState => ({
-          ...prevState,
-          serverError: err.toString()
-        }));
+        setServerError(err);
       }
     },
-    [avatarAPI, parseMessage, resetServerError, toast]
+    [avatarAPI, parseMessage, resetServerMessages, toast]
   );
 
   const updateUserAvatar = React.useCallback(
     async ({ form, id }: { form: FormData; id: string }): Promise<void> => {
       try {
-        resetServerError();
+        resetServerMessages();
         const res = await avatarAPI.put(`update/${id}`, form);
         const message = parseMessage(res);
 
-        toast({ type: "info", message });
-
-        setState(initialState);
+        setServerMessage(message);
       } catch (err) {
-        toast({ type: "error", message: err.toString() });
-        setState(prevState => ({
-          ...prevState,
-          serverError: err.toString()
-        }));
+        setServerError(err);
       }
     },
-    [avatarAPI, parseMessage, resetServerError, toast]
+    [avatarAPI, parseMessage, resetServerMessages, toast]
   );
 
   const updateUserProfile = React.useCallback(
     async (payload: TAuthData): Promise<void> => {
       try {
-        resetServerError();
+        resetServerMessages();
 
         const res = await app.put("members/update", payload);
         const message = parseMessage(res);
 
-        toast({ type: "info", message });
-
-        setState(initialState);
+        setServerMessage(message);
       } catch (err) {
-        toast({ type: "error", message: err.toString() });
-        setState(prevState => ({
-          ...prevState,
-          serverError: err.toString()
-        }));
+        setServerError(err);
       }
     },
-    [app, parseMessage, resetServerError, toast]
+    [app, parseMessage, resetServerMessages, toast]
   );
 
   const updateUserStatus = React.useCallback(
     async (payload: { id: string; status: string }): Promise<void> => {
       try {
-        resetServerError();
+        resetServerMessages();
 
         const res = await app.put("members/update-status", payload);
         const message = parseMessage(res);
 
-        toast({ type: "info", message });
-
-        setState(initialState);
+        setServerMessage(message);
       } catch (err) {
-        toast({ type: "error", message: err.toString() });
-        setState(prevState => ({
-          ...prevState,
-          serverError: err.toString()
-        }));
+        setServerError(err);
       }
     },
-    [app, parseMessage, resetServerError, toast]
+    [app, parseMessage, resetServerMessages, toast]
   );
 
   React.useEffect(() => {
@@ -149,9 +149,10 @@ const MemberProfile = ({ id }: { id: string }): ReactElement => {
   ) : (
     <Profile
       {...user}
-      {...state}
       id={id}
       editRole
+      serverError={serverError}
+      serverMessage={serverMessage}
       deleteUserAvatar={deleteUserAvatar}
       updateUserAvatar={updateUserAvatar}
       updateUserProfile={updateUserProfile}

@@ -103,7 +103,6 @@ export const UploadAvatarForm = ({
     <Margin
       as="div"
       data-testid="upload-avatar-form-container"
-      right="20px"
       bottom="10px"
       style={{ maxWidth: 200, width: "100%" }}
     >
