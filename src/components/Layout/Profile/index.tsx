@@ -43,6 +43,7 @@ const Profile = ({
   ...props
 }: TProfileProps): ReactElement => (
   <FlexCenter
+    data-testid="member-profile"
     justify="center"
     direction="column"
     margin="20px auto"

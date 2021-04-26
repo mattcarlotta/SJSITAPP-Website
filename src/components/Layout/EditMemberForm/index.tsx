@@ -76,7 +76,7 @@ export const EditMemberForm = ({
         ...parseFields<TAuthData>(state.fields),
         id: rest.id
       });
-  }, [parseFields, updateUserProfile, state.isSubmitting, state.errors]);
+  }, [parseFields, state.isSubmitting, state.errors]);
 
   return (
     <div
@@ -92,7 +92,7 @@ export const EditMemberForm = ({
       `}
     >
       <MemberDetails {...rest} />
-      <form onSubmit={handleSubmit}>
+      <form data-testid="edit-member-form" onSubmit={handleSubmit}>
         <FieldGenerator fields={state.fields} onChange={handleChange} />
         <SubmitButton
           isSubmitting={state.isSubmitting}

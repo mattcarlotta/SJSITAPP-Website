@@ -90,7 +90,13 @@ const MemberProfile = ({ id }: { id: string }): ReactElement => {
         setServerError(err);
       }
     },
-    [avatarAPI, parseMessage, resetServerMessages, setServerMessage]
+    [
+      avatarAPI,
+      parseMessage,
+      resetServerMessages,
+      setServerMessage,
+      setServerError
+    ]
   );
 
   const updateUserAvatar = React.useCallback(
@@ -106,7 +112,13 @@ const MemberProfile = ({ id }: { id: string }): ReactElement => {
         setServerError(err);
       }
     },
-    [avatarAPI, parseMessage, resetServerMessages, setServerMessage]
+    [
+      avatarAPI,
+      parseMessage,
+      resetServerMessages,
+      setServerMessage,
+      setServerError
+    ]
   );
 
   const updateUserProfile = React.useCallback(
@@ -122,7 +134,7 @@ const MemberProfile = ({ id }: { id: string }): ReactElement => {
         setServerError(err);
       }
     },
-    [app, parseMessage, resetServerMessages, setServerMessage]
+    [app, parseMessage, resetServerMessages, setServerMessage, setServerError]
   );
 
   const updateUserStatus = React.useCallback(
@@ -138,16 +150,16 @@ const MemberProfile = ({ id }: { id: string }): ReactElement => {
         setServerError(err);
       }
     },
-    [app, parseMessage, resetServerMessages, setServerMessage]
+    [app, parseMessage, resetServerMessages, setServerMessage, setServerError]
   );
 
   React.useEffect(() => {
     if (isLoading && id) fetchMember();
-  }, [isLoading, id, fetchMember]);
+  }, [isLoading, id]);
 
   return isLoading ? (
     <LoadingPanel
-      data-testid="loading-email"
+      data-testid="loading-member"
       borderRadius="5px"
       height="1100px"
     />

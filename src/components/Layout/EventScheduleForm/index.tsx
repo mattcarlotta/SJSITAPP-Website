@@ -70,7 +70,7 @@ const EventScheduleForm = (): ReactElement => {
 
       toast({ type: "success", message });
 
-      router.push("/employee/events/viewall?page=1");
+      router.back();
     } catch (err) {
       toast({ type: "error", message: err.toString() });
       setState(prevState => ({

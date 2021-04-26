@@ -38,7 +38,7 @@ export const CreateMemberForm = (): JSX.Element => {
 
       toast({ type: "success", message });
 
-      router.push("/employee/authorizations/viewall?page=1");
+      router.push("/employee/members/authorizations/viewall?page=1");
     } catch (err) {
       toast({ type: "error", message: err.toString() });
       setState(prevState => ({

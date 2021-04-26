@@ -19,7 +19,7 @@ const NoForms = (): ReactElement => (
       <MdAssignment style={iconStyle} />
     </div>
     <Center data-testid="no-forms-message">
-      There aren&apos;t any forms for this month
+      There aren&#39;t any forms for this month
     </Center>
   </FlexCenter>
 );

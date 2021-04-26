@@ -1,28 +1,28 @@
 import { ReactWrapper } from "enzyme";
 import { useRouter } from "next/router";
 import toast from "~components/App/Toast";
-import moment from "~utils/momentWithTimezone";
 import mockApp from "~utils/mockAxios";
 import waitFor from "~utils/waitFor";
 import withProviders from "~utils/withProviders";
-import APForm from "../index";
+import EventForm from "../index";
 
-const startMonth = moment().startOf("month").startOf("day").format();
-const endMonth = moment().startOf("month").endOf("day").format();
-const expirationDate = moment()
-  .startOf("month")
-  .add(7, "days")
-  .startOf("day")
-  .format();
-
-const form = {
+const event = {
+  _id: "88",
   seasonId: "20202021",
-  startMonth,
-  endMonth,
-  expirationDate,
-  sendEmailNotificationsDate: startMonth,
-  notes: "Test",
-  sentEmails: false
+  eventType: "Game",
+  location: "Test Location",
+  callTimes: [
+    "2019-08-09T17:45:26-07:00",
+    "2019-08-09T18:15:26-07:00",
+    "2019-08-09T18:30:26-07:00",
+    "2019-08-09T19:00:26-07:00"
+  ],
+  uniform: "Teal Jersey",
+  team: "San Jose Sharks",
+  opponent: "Winnipeg Jets",
+  eventDate: "2019-02-10T02:30:31.834+00:00",
+  employeeResponses: [],
+  notes: "Test"
 };
 
 jest.mock("~components/App/Toast");
@@ -46,6 +46,8 @@ mockApp
   .onGet(APIURL)
   .reply(200, { seasonIds: ["20202021", "20192020"] });
 
+mockApp.onGet("teams/all").reply(200, { names: ["Some Team"] });
+
 const { push, replace } = useRouter();
 
 apiQuery
@@ -54,11 +56,11 @@ apiQuery
     Promise.resolve({ data: { message: mockSuccessMessage } })
   );
 
-describe("AP Form", () => {
+describe("Event Form", () => {
   let wrapper: ReactWrapper;
   let findById: (id: string) => ReactWrapper;
   beforeEach(() => {
-    wrapper = withProviders(<APForm {...initProps} />);
+    wrapper = withProviders(<EventForm {...initProps} />);
     findById = id => wrapper.find(`[data-testid='${id}']`);
   });
 
@@ -71,25 +73,25 @@ describe("AP Form", () => {
   it("renders a loading placeholder", async () => {
     await waitFor(() => {
       wrapper.update();
-      expect(findById("loading-ap-form")).toExist();
+      expect(findById("loading-event-form")).toExist();
     });
   });
 
-  it("pushes back to viewall forms page on failing to fetch season ids", async () => {
+  it("pushes back to viewall events page on failing to fetch season ids", async () => {
     await waitFor(() => {
       wrapper.update();
       expect(toast).toHaveBeenCalledWith({
         type: "error",
         message: "Request failed with status code 404"
       });
-      expect(replace).toHaveBeenCalledWith("/employee/forms/viewall?page=1");
+      expect(replace).toHaveBeenCalledWith("/employee/events/viewall?page=1");
     });
   });
 
   it("doesn't submit the form if form fields have errors", async () => {
     await waitFor(() => {
       wrapper.update();
-      expect(findById("ap-form")).toExist();
+      expect(findById("event-form")).toExist();
     });
 
     wrapper.find("form").simulate("submit");
@@ -100,26 +102,37 @@ describe("AP Form", () => {
     });
   });
 
-  it("initializes form fields with 'form' data", async () => {
-    wrapper = withProviders(<APForm {...initProps} form={form} />);
+  it("initializes form fields with 'event' data and add/removes call times", async () => {
+    wrapper = withProviders(<EventForm {...initProps} event={event} />);
 
     await waitFor(() => {
       wrapper.update();
-      expect(findById("ap-form")).toExist();
+      expect(findById("event-form")).toExist();
       expect(
         findById("seasonId-selected-value").first().prop("value")
       ).toBeDefined();
       expect(findById("notes").first().prop("value")).toBeDefined();
-      [
-        "startMonth",
-        "endMonth",
-        "expirationDate",
-        "sendEmailNotificationsDate"
-      ].forEach(field => {
+      ["eventDate", "callTime"].forEach(field => {
         expect(
           wrapper.find(`input[name='${field}']`).prop("value")
         ).toBeDefined();
       });
+    });
+
+    expect(findById("remove-time-slot")).toHaveLength(3);
+
+    findById("remove-time-slot").first().simulate("click");
+
+    await waitFor(() => {
+      wrapper.update();
+      expect(findById("remove-time-slot")).toHaveLength(2);
+    });
+
+    findById("add-calltime-field").first().simulate("click");
+
+    await waitFor(() => {
+      wrapper.update();
+      expect(findById("remove-time-slot")).toHaveLength(3);
     });
   });
 
@@ -127,7 +140,7 @@ describe("AP Form", () => {
     beforeEach(async () => {
       await waitFor(() => {
         wrapper.update();
-        expect(findById("ap-form")).toExist();
+        expect(findById("event-form")).toExist();
       });
 
       findById("seasonId")
@@ -136,6 +149,13 @@ describe("AP Form", () => {
         .simulate("click");
 
       findById("20202021").first().simulate("click");
+
+      findById("uniform")
+        .find("[data-testid='select-text']")
+        .first()
+        .simulate("click");
+
+      findById("Other").first().simulate("click");
 
       const setMUIDateField = async (
         field: string,
@@ -170,9 +190,8 @@ describe("AP Form", () => {
         });
       };
 
-      await setMUIDateField("startMonth", 0);
-      await setMUIDateField("endMonth", 1);
-      await setMUIDateField("expirationDate", 2);
+      await setMUIDateField("eventDate", 0);
+      await setMUIDateField("callTime", 1);
     });
 
     it("on submission error, falls back to the form", async () => {
@@ -205,7 +224,7 @@ describe("AP Form", () => {
           message: mockSuccessMessage,
           type: "success"
         });
-        expect(push).toHaveBeenCalledWith("/employee/forms/viewall?page=1");
+        expect(push).toHaveBeenCalledWith("/employee/events/viewall?page=1");
       });
     });
   });

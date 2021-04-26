@@ -50,7 +50,7 @@ const Fields = (
       errors: "",
       required: false,
       isSearchable: true,
-      selectOptions: !isEmpty(teams) ? teams : [],
+      selectOptions: teams,
       style: { textAlign: "center" }
     },
     {

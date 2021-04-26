@@ -146,7 +146,7 @@ const TableActions = ({
                   fontSize="16px"
                   margin="5px 0"
                   width="100%"
-                  href={`/employee/events/schedule/${id}`}
+                  href={`/employee/events/scheduling/${id}`}
                 >
                   <FaClipboardCheck />
                   Schedule

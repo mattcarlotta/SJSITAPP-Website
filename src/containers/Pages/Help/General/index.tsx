@@ -235,9 +235,9 @@ const General = ({ id }: { id: string }): ReactElement => (
       </WarningText>
     </Accordion>
     <Accordion expanded={id} title="How do I log out of my current session?">
-      By default, you&apos;ll stay logged into your current session for 30 days
-      from the time you&apos;ve first logged in. If you wish to manually log
-      out, simply click on your avatar <Avatar display="inline-block" />
+      By default, you&#39;ll stay logged into your current session for 30 days
+      from the time you&#39;ve first logged in. If you wish to manually log out,
+      simply click on your avatar <Avatar display="inline-block" />
       &nbsp; (located at the top right of this page). A drop down menu will
       open. Now click the
       <MenuButton

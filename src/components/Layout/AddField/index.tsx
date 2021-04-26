@@ -13,7 +13,12 @@ const AddFieldComponent = ({
   onClick,
   text
 }: TAddFieldProps): JSX.Element => (
-  <button type="button" className={className} onClick={onClick}>
+  <button
+    data-testid="add-calltime-field"
+    type="button"
+    className={className}
+    onClick={onClick}
+  >
     <FaPlusCircle
       style={{
         position: "relative",
