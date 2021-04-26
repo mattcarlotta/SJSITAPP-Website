@@ -100,7 +100,6 @@ const EventDistributionOverlay = ({
       </Button>
       <Dialog
         fullWidth
-        keepMounted
         maxWidth="lg"
         open={isOpen}
         scroll="body"
@@ -112,7 +111,7 @@ const EventDistributionOverlay = ({
         <Padding top="20px" bottom="30px" left="30px" right="30px">
           <DialogTitle id="event-dialog-slide-title">
             <CloseModalButton
-              data-test-id="close-modal"
+              data-testid="close-modal"
               aria-label="close modal"
               type="button"
               style={{ top: "15px", right: "25px" }}

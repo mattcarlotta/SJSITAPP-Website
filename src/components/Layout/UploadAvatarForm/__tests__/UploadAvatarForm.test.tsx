@@ -3,7 +3,7 @@ import toast from "~components/App/Toast";
 import waitFor from "~utils/waitFor";
 import UploadAvatarForm from "../index";
 
-jest.mock("~components/App/Toast", () => jest.fn());
+jest.mock("~components/App/Toast");
 
 const filePNG = new File(["(⌐□_□)"], "example.png", { type: "image/png" });
 const fileBMP = new File(["(⌐□_□)"], "example.png", { type: "image/bmp" });

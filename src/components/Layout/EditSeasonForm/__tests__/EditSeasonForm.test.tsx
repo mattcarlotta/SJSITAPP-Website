@@ -9,7 +9,7 @@ import EditSeasonForm from "../index";
 
 const startDate = moment().startOf("day");
 
-jest.mock("~components/App/Toast", () => jest.fn());
+jest.mock("~components/App/Toast");
 
 const id = "88";
 const mockPush = jest.fn();

@@ -12,7 +12,7 @@ const startDate = moment().startOf("day");
 
 const { push } = useRouter();
 
-jest.mock("~components/App/Toast", () => jest.fn());
+jest.mock("~components/App/Toast");
 
 const APIURL = `seasons/create`;
 

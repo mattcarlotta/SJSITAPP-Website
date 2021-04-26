@@ -7,7 +7,7 @@ import CreateMemberForm from "../index";
 
 const { push } = useRouter();
 
-jest.mock("~components/App/Toast", () => jest.fn());
+jest.mock("~components/App/Toast");
 
 const APIURL = "tokens/create";
 

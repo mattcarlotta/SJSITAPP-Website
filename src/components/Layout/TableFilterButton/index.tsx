@@ -238,7 +238,7 @@ const TableFilterButton = ({
               <MenuItem justify="center" padding="0" key={props.title}>
                 <MenuButton
                   display="block"
-                  data-test-id={`${props.title}-filter`}
+                  data-testid={`${props.title}-filter`}
                   width="100%"
                   padding="10px 12px"
                   onClick={() => handleModalOpen(props)}
@@ -270,7 +270,7 @@ const TableFilterButton = ({
           <DialogTitle id="filters-dialog-title">
             Filter by: {title}
             <CloseModalButton
-              data-test-id="close-modal"
+              data-testid="close-modal"
               aria-label="close modal"
               type="button"
               style={{ top: "10px", right: "20px" }}

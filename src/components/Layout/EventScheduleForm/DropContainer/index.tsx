@@ -28,7 +28,7 @@ const DropContainer = ({
     <Droppable droppableId={id}>
       {({ innerRef, placeholder }, { isDraggingOver }) => (
         <UserContainer
-          data-test={title}
+          data-testid={title}
           ref={innerRef}
           isDraggingOver={isDraggingOver}
         >
@@ -49,7 +49,7 @@ const DropContainer = ({
                   ) => (
                     <User
                       ref={innerRef}
-                      data-testid={`${firstName} ${lastName}`}
+                      data-testid="user"
                       {...draggableProps}
                       {...eventHandlers}
                       isDragging={isDragging}
@@ -64,6 +64,7 @@ const DropContainer = ({
                         }}
                       />
                       <div
+                        data-testid={`${firstName} ${lastName}`}
                         css={css`
                           display: inline-block;
                           margin-left: 8px;
@@ -92,6 +93,7 @@ const DropContainer = ({
             )
           ) : (
             <div
+              data-testid="no-employees"
               css={css`
                 text-align: center;
                 color: #bbb;

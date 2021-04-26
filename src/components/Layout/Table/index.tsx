@@ -180,7 +180,7 @@ const Table = ({
 
   return (
     <Padding
-      data-test-id="data-table-container"
+      data-testid="data-table-container"
       left="20px"
       top="0px"
       right="20px"

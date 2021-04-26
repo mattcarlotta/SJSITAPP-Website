@@ -43,7 +43,7 @@ const data = {
 const mockPush = jest.fn();
 const mockReplace = jest.fn();
 
-jest.mock("~components/App/Toast", () => jest.fn());
+jest.mock("~components/App/Toast");
 
 jest.mock("next/router", () => ({
   __esModule: true,
