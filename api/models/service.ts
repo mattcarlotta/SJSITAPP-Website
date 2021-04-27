@@ -1,7 +1,7 @@
 import { Document, Schema, model } from "mongoose";
 import { PaginateModel } from "./pagination";
 
-export interface IServiceModel extends Document {
+export interface IServiceDocument extends Document {
   // _id?: Types.ObjectId;
   automatedOnline: boolean;
   emailOnline: boolean;
@@ -19,10 +19,10 @@ export interface IServiceModel extends Document {
   scheduleTime: string;
 }
 
-export type TServiceModel = PaginateModel<IServiceModel>;
+export type TServiceModel = PaginateModel<IServiceDocument>;
 
 // current season year
-const serviceSchema = new Schema<IServiceModel>({
+const serviceSchema = new Schema<IServiceDocument>({
   automatedOnline: { type: Boolean, default: true },
   emailOnline: { type: Boolean, default: true },
   eventOnline: { type: Boolean, default: true },
@@ -39,7 +39,7 @@ const serviceSchema = new Schema<IServiceModel>({
   scheduleTime: { type: String, required: true }
 });
 
-const ServiceModel = model<IServiceModel, TServiceModel>(
+const ServiceModel = model<IServiceDocument, TServiceModel>(
   "Service",
   serviceSchema
 );

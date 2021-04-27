@@ -4,6 +4,7 @@ import Highlight from "~components/Layout/Highlight";
 import List from "~components/Layout/List";
 import ListItem from "~components/Layout/ListItem";
 import Status from "~components/Layout/Status";
+import { AiFillAlert } from "~icons";
 import { ReactElement } from "~types";
 
 export type TCurrentSettingsProps = {
@@ -48,14 +49,18 @@ const CurrentSettings = ({
     borderRadius="5px"
     style={{ maxWidth: 500, border: "1px solid #888" }}
   >
-    {!eventMonth && (
+    {typeof automatedOnline === "undefined" && (
       <ListItem
         background="red"
+        color="#fff"
         data-testid="no-services-message"
         padding="10px 20px"
       >
-        It appears that services haven&#39;t been created yet. Please edit and
-        save the settings to create services.
+        <AiFillAlert
+          style={{ fontSize: 20, position: "relative", top: 3, marginRight: 5 }}
+        />
+        It appears that services haven&#39;t been set up yet. Please edit and
+        save the settings to initalize the services.
       </ListItem>
     )}
     <ListItem padding="10px 20px">
@@ -85,7 +90,7 @@ const CurrentSettings = ({
         borderBottom: "1px solid #888"
       }}
     >
-      All services listed below update their run&nbsp;
+      All services below update their next run&nbsp;
       <Bold>
         <Highlight>month</Highlight>
       </Bold>

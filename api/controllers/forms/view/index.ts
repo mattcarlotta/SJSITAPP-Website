@@ -81,7 +81,7 @@ const viewApForm = async (req: Request, res: Response): Promise<Response> => {
       events
     });
   } catch (err) {
-    /* eslint-disable-next-line */
+    /* istanbul ignore next */
     return sendError(err, 400, res);
   }
 };

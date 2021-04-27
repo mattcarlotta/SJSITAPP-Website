@@ -18,6 +18,7 @@ const getServiceForViewing = async (
 
     return res.status(200).send(existingService);
   } catch (err) {
+    /* istanbul ignore next */
     return sendError(err, 400, res);
   }
 };

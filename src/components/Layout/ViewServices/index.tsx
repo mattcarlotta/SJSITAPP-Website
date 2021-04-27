@@ -95,7 +95,15 @@ export const ViewService = (): ReactElement => {
         isSubmitting: false
       }));
     }
-  }, [app, isEmpty, parseFields, parseMessage, state.fields, state.service]);
+  }, [
+    app,
+    isEmpty,
+    parseFields,
+    parseMessage,
+    state.fields,
+    state.service,
+    toast
+  ]);
 
   const handleChange = ({ target: { name, value } }: EventTarget): void => {
     setState(prevState => ({
@@ -142,7 +150,7 @@ export const ViewService = (): ReactElement => {
         <FormTitle
           header="Services Settings"
           title="Email & Automated Service Settings"
-          description="If changing settings, please fill out all the fields and click the 'Save' button to update them."
+          description="If changing settings, please fill out all of the fields and click the 'Save' button to update them."
         />
         <Center>
           <PanelDescription margin="5px 0 20px 0">

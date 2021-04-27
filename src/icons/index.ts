@@ -1,6 +1,9 @@
 /* istanbul ignore file */
 export { IconContext } from "@react-icons/all-files";
 
+// AI
+export { AiFillAlert } from "@react-icons/all-files/ai/AiFillAlert";
+
 // BI
 export { BiChevronDownSquare } from "@react-icons/all-files/bi/BiChevronDownSquare";
 
