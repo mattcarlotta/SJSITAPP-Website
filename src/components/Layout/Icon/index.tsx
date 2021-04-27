@@ -95,7 +95,7 @@ const IconComponent = ({
     data-testid={dataTestId}
     onClick={onClick}
     style={style}
-    tabIndex={0}
+    tabIndex={-1}
   >
     {icons(type)}
   </i>
