@@ -27,6 +27,7 @@ export function* checkForActiveSession(): SagaIterator {
 
     yield put(actions.signinSession(data));
   } catch (e) {
+    yield put(actions.signinSession({}));
     yield call(showError, e.toString());
   }
 }

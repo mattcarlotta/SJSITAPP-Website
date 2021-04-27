@@ -6,7 +6,7 @@ const open = require("opener");
 const { analyze, CLIENT, INDEVELOPMENT } = process.env;
 
 /* opens a browser window */
-if (INDEVELOPMENT) setTimeout(() => open(CLIENT), 5000);
+if (INDEVELOPMENT) setTimeout(() => open(CLIENT), 1000);
 
 module.exports = {
   webpack(config, { isServer }) {
