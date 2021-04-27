@@ -4,6 +4,7 @@ import toast from "~components/App/Toast";
 import Form from "~components/Layout/Form";
 import FormTitle from "~components/Forms/FormTitle";
 import FieldGenerator from "~components/Forms/FieldGenerator";
+import Button from "~components/Layout/Button";
 import Card from "~components/Layout/Card";
 import Center from "~components/Layout/Center";
 import LoadingPanel from "~components/Layout/LoadingPanel";
@@ -18,6 +19,7 @@ import { MdSettingsInputComponent } from "~icons";
 import app from "~utils/axiosConfig";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import fields from "./Fields";
+import ShowSettings from "./ShowSettings";
 import {
   AxiosResponse,
   EventTarget,
@@ -32,6 +34,7 @@ export type TViewServiceState = {
   isLoading: boolean;
   isSubmitting: boolean;
   service: TService;
+  showForm: boolean;
 };
 
 export const ViewService = (): ReactElement => {
@@ -40,9 +43,10 @@ export const ViewService = (): ReactElement => {
     errors: false,
     isLoading: true,
     isSubmitting: false,
-    service: {} as TService
+    service: {} as TService,
+    showForm: false
   });
-  const { errors, isLoading, isSubmitting } = state;
+  const { errors, isLoading, isSubmitting, service, showForm } = state;
 
   const fetchService = React.useCallback(async (): Promise<void> => {
     try {
@@ -84,7 +88,8 @@ export const ViewService = (): ReactElement => {
         ...prevState,
         errors: false,
         isSubmitting: false,
-        isLoading: true
+        isLoading: true,
+        showForm: false
       }));
     } catch (err) {
       toast({ type: "error", message: err.toString() });
@@ -99,6 +104,13 @@ export const ViewService = (): ReactElement => {
     setState(prevState => ({
       ...prevState,
       fields: fieldUpdater(prevState.fields, name, value)
+    }));
+  };
+
+  const toggleForm = () => {
+    setState(prevState => ({
+      ...prevState,
+      showForm: !prevState.showForm
     }));
   };
 
@@ -133,7 +145,7 @@ export const ViewService = (): ReactElement => {
         <FormTitle
           header="Services Settings"
           title="Email & Automated Service Settings"
-          description="Please fill out all the fields below to save and update the automated service settings."
+          description="If changing settings, please fill out all the fields to save and update them."
         />
         <Center>
           <PanelDescription margin="5px 0 20px 0">
@@ -151,11 +163,35 @@ export const ViewService = (): ReactElement => {
           <LoadingPanel
             data-testid="loading-service-form"
             borderRadius="5px"
-            height="1287px"
+            height="565px"
           />
+        ) : !showForm ? (
+          <>
+            <ShowSettings {...service} />
+            <Button
+              dataTestId="cancel-form"
+              primary
+              padding="9px 18px"
+              maxWidth="500px"
+              type="button"
+              onClick={toggleForm}
+            >
+              Edit Settings
+            </Button>
+          </>
         ) : (
           <Form data-testid="service-form" onSubmit={handleSubmit}>
             <FieldGenerator fields={state.fields} onChange={handleChange} />
+            <Button
+              dataTestId="cancel-form"
+              danger
+              margin="0 0 10px 0"
+              padding="9px 18px"
+              type="button"
+              onClick={toggleForm}
+            >
+              Cancel
+            </Button>
             <SubmitButton
               isSubmitting={isSubmitting}
               maxWidth="500px"

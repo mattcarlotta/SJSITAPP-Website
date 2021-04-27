@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 
 const ListItem = styled.li<{
+  background?: string;
   color?: string;
   display?: string;
   margin?: string;
@@ -10,14 +11,14 @@ const ListItem = styled.li<{
 }>`
   display: ${({ display }) => display || "block"};
   color: ${({ color }) => color || "#010404"};
-  background: ${({ team }) => {
+  background: ${({ background, team }) => {
     switch (team) {
       case "San Jose Sharks":
         return "#006d76";
       case "San Jose Barracuda":
         return "#ef512d";
       default:
-        return "transparent";
+        return background || "transparent";
     }
   }};
   margin: ${({ margin }) => margin || "5px 0"};

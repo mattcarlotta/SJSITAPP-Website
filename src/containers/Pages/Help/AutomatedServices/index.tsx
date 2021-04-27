@@ -30,10 +30,10 @@ const AutomatedServices = ({ id }: { id: string }): ReactElement => (
         <ListItem padding="20px 0 0 5px">
           - <Bold>Emailing Service</Bold>: This automated service, controlled
           via the&nbsp;
-          <Bold>Emailing Service Status</Bold>field, polls an internal database
-          for Mail documents every 30 seconds. If Mail documents are present and
-          haven&#39;t been sent, the service generates emails from these Mail
-          documents and hands them off to
+          <Bold>Emailing Service - Status</Bold>field, polls an internal
+          database for Mail documents every 30 seconds. If Mail documents are
+          present and haven&#39;t been sent, the service generates emails from
+          these Mail documents and hands them off to
           <OutsideLink data-testid="services-link" href="https://sendgrid.com/">
             Send Grid
           </OutsideLink>
@@ -42,11 +42,11 @@ const AutomatedServices = ({ id }: { id: string }): ReactElement => (
         <ListItem padding="20px 0 0 5px">
           - <Bold>A/P Form Email Reminders</Bold>: This automated service,
           controlled via the&nbsp;
-          <Bold>A/P Form Email Reminder Status (automated)</Bold>field, polls an
-          internal database for Form documents every month, via the
+          <Bold>A/P Form - Email Reminder Status (automated)</Bold>field, polls
+          an internal database for Form documents every month, via the
           determined&nbsp;
-          <Bold>A/P Form Email Reminder Day (automated)</Bold>and&nbsp;
-          <Bold>A/P Form Email Reminder Time (automated)</Bold>fields. It then
+          <Bold>A/P Form - Email Reminder Day (automated)</Bold>and&nbsp;
+          <Bold>A/P Form - Email Reminder Time (automated)</Bold>fields. It then
           determines if a Form&#39;s <Bold>Send Email Notifications Date</Bold>
           date has passed. If so, it generates Mail documents for individual
           members to remind them that an A/P form is about to expire.
@@ -54,8 +54,8 @@ const AutomatedServices = ({ id }: { id: string }): ReactElement => (
         <ListItem padding="20px 0 0 5px">
           - <Bold>Event & A/P Form Creation</Bold>: This automated service,
           controlled via the&nbsp;
-          <Bold>Event & A/P Form Creation Status (automated)</Bold>field, polls
-          the
+          <Bold>Event & A/P Form - Creation Status (automated)</Bold>field,
+          polls the
           <OutsideLink
             data-testid="services-link"
             href="https://gitlab.com/dword4/nhlapi/blob/master/stats-api.md"
@@ -63,8 +63,8 @@ const AutomatedServices = ({ id }: { id: string }): ReactElement => (
             NHL API
           </OutsideLink>
           once a month, via the determined&nbsp;
-          <Bold>Event & A/P Form Creation Day (automated)</Bold>and&nbsp;
-          <Bold>Event & A/P Form Creation Time (automated)</Bold>fields, for
+          <Bold>Event & A/P Form - Creation Day (automated)</Bold>and&nbsp;
+          <Bold>Event & A/P Form - Creation Time (automated)</Bold>fields, for
           Shark home games. If Shark home games are found, they are then saved
           as Event documents within an internal database; and, an A/P form is
           automatically created to encapsulate these new Events.
@@ -72,14 +72,14 @@ const AutomatedServices = ({ id }: { id: string }): ReactElement => (
         <ListItem padding="20px 0 0 5px">
           - <Bold>Schedule Creation</Bold>: This automated service, controlled
           via the&nbsp;
-          <Bold>Schedule Creation Status (automated)</Bold>field, polls an
+          <Bold>Schedule - Creation Status (automated)</Bold>field, polls an
           internal database for Form documents every month, via the
           determined&nbsp;
-          <Bold>Schedule Creation Day (automated)</Bold>and&nbsp;
-          <Bold>Schedule Creation Time (automated)</Bold>fields. If the creation
-          day and time has passed, it gathers up all the Event documents within
-          the Form and generates individual Mail documents containing individual
-          schedules for staff and members.
+          <Bold>Schedule - Creation Day (automated)</Bold>and&nbsp;
+          <Bold>Schedule - Creation Time (automated)</Bold>fields. If the
+          creation day and time has passed, it gathers up all the Event
+          documents within the Form and generates individual Mail documents
+          containing individual schedules for staff and members.
         </ListItem>
       </List>
       Unfortunately, Barracuda home games do not have a consumable API (like the

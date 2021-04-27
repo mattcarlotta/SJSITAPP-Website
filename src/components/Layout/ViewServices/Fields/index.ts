@@ -7,7 +7,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
   {
     name: "emailOnline",
     type: "switch",
-    label: "Emailing Service Status",
+    label: "Emailing Service - Status",
     errors: "",
     value: service ? service.emailOnline : true,
     tooltip:
@@ -17,7 +17,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
   {
     name: "automatedOnline",
     type: "switch",
-    label: "Automated Service Status",
+    label: "Automated Service - Status",
     errors: "",
     value: service ? service.automatedOnline : true,
     tooltip:
@@ -27,7 +27,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
   {
     name: "formReminderOnline",
     type: "switch",
-    label: "A/P Form Email Reminder Status (automated)",
+    label: "A/P Form - Email Reminder Status (automated)",
     errors: "",
     value: service ? service.formReminderOnline : true,
     tooltip:
@@ -37,7 +37,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
   {
     name: "formReminderDay",
     type: "select",
-    label: "A/P Form Email Reminder Day (automated)",
+    label: "A/P Form - Email Reminder Day (automated)",
     errors: "",
     value: service ? service.formReminderDay : "5th",
     tooltip:
@@ -48,7 +48,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
   {
     name: "formReminderTime",
     type: "time",
-    label: "A/P Form Email Reminder Time (automated)",
+    label: "A/P Form - Email Reminder Time (automated)",
     errors: "",
     value: service
       ? moment(service.formReminderTime, timestampFormat).format()
@@ -61,7 +61,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
   {
     name: "eventOnline",
     type: "switch",
-    label: "Event & A/P Form Creation Status (automated)",
+    label: "Event & A/P Form - Creation Status (automated)",
     errors: "",
     value: service ? service.eventOnline : true,
     tooltip:
@@ -71,7 +71,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
   {
     name: "eventDay",
     type: "select",
-    label: "Event & A/P Form Creation Day (automated)",
+    label: "Event & A/P Form - Creation Day (automated)",
     errors: "",
     value: service ? service.eventDay : "16th",
     tooltip:
@@ -82,7 +82,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
   {
     name: "eventTime",
     type: "time",
-    label: "Event & A/P Form Creation Time (automated)",
+    label: "Event & A/P Form - Creation Time (automated)",
     errors: "",
     value: service ? moment(service.eventTime, timestampFormat).format() : null,
     tooltip:
@@ -93,7 +93,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
   {
     name: "scheduleOnline",
     type: "switch",
-    label: "Schedule Creation Status (automated)",
+    label: "Schedule - Creation Status (automated)",
     errors: "",
     value: service ? service.scheduleOnline : true,
     tooltip:
@@ -103,7 +103,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
   {
     name: "scheduleDay",
     type: "select",
-    label: "Schedule Creation Day (automated)",
+    label: "Schedule - Creation Day (automated)",
     errors: "",
     value: service ? service.scheduleDay : "15th",
     tooltip:
@@ -114,7 +114,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
   {
     name: "scheduleTime",
     type: "time",
-    label: "Schedule Creation Time (automated)",
+    label: "Schedule - Creation Time (automated)",
     errors: "",
     value: service
       ? moment(service.scheduleTime, timestampFormat).format()
