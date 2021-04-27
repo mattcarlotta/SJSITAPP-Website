@@ -122,7 +122,7 @@ const APForm = ({
       fields: [
         ...prevState.fields,
         {
-          type: "time",
+          type: "calltime",
           name: `callTime-${Date.now()}`,
           label: "",
           value: null,

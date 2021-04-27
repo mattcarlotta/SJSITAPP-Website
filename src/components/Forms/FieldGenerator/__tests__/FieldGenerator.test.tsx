@@ -87,6 +87,11 @@ const time = {
   onFieldRemove
 };
 
+const calltime = {
+  ...time,
+  type: "calltime"
+};
+
 // const removetime = {
 // 	...time,
 // 	label: "",
@@ -229,6 +234,13 @@ describe("Field Generator", () => {
 
   it("returns a TimePicker when type is 'time'", () => {
     wrapper.setProps({ fields: [time] });
+
+    expect(wrapper.find("Label")).toExist();
+    expect(wrapper.find("TimePickerComponent")).toExist();
+  });
+
+  it("returns a TimePicker when type is 'calltime'", () => {
+    wrapper.setProps({ fields: [calltime] });
 
     expect(wrapper.find("Label")).toExist();
     expect(wrapper.find("TimePickerComponent")).toExist();

@@ -39,6 +39,8 @@ const toMongooseId = mongoose.Types.ObjectId;
  */
 const isValidObjectId = (_id: string): boolean => mongoose.isValidObjectId(_id);
 
+const isUndefined = (prop: unknown): boolean => typeof prop === undefined;
+
 moment.tz.setDefault("America/Los_Angeles");
 
 const responseTypes = [
@@ -890,6 +892,7 @@ export {
   getStartOfDay,
   getUsers,
   isValidObjectId,
+  isUndefined,
   moment,
   parseSession,
   sendError,

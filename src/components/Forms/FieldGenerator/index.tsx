@@ -138,6 +138,7 @@ const FieldGenerator = <
               />
             );
           }
+          case "calltime":
           case "time": {
             return (
               <TimePicker

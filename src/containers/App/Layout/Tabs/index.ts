@@ -17,6 +17,7 @@ export const TABS = [
   "mail/services",
   "mail/viewall",
   "settings",
+  "services",
   "help",
   "contact-us",
   "privacy",

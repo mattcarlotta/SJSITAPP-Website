@@ -1,5 +1,7 @@
 import isEmpty from "lodash.isempty";
 import { TBaseFieldProps } from "~types";
+import { timestampFormat } from "~utils/dateFormats";
+import moment from "~utils/momentWithTimezone";
 
 /**
  * Helper function to parse a fields' [name]: value from an array into an object.
@@ -16,9 +18,13 @@ const parseFields = <T>(fields: Array<TBaseFieldProps>): T => {
     const parsedFields = fields.reduce(
       (acc: any, { name, type, value, notes, updateEvent }) => {
         switch (type) {
-          case "time": {
+          case "calltime": {
             acc["callTimes"] = acc["callTimes"] || [];
             if (value) acc["callTimes"].push(value);
+            break;
+          }
+          case "time": {
+            acc[name] = moment(value as string).format(timestampFormat);
             break;
           }
           case "date": {

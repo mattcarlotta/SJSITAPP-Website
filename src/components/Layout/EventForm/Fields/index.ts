@@ -103,7 +103,7 @@ const Fields = (
     },
     ...(event && !isEmpty(event.callTimes) ? event.callTimes : [""]).map(
       (time, index) => ({
-        type: "time",
+        type: "calltime",
         name: index === 0 ? "callTime" : `callTime-${index}`,
         label: index === 0 ? "Event Call Times" : "",
         value: time || null,

@@ -102,6 +102,23 @@ export type TSeasonData = {
 
 export type TSeasonAPIQueryConfig = { id?: string } & TSeasonData;
 
+export type TService = {
+  automatedOnline: boolean;
+  emailOnline: boolean;
+  eventOnline: boolean;
+  eventDay: string;
+  eventMonth: string;
+  eventTime: string;
+  formReminderOnline: boolean;
+  formReminderDay: string;
+  formReminderMonth: string;
+  formReminderTime: string;
+  scheduleOnline: boolean;
+  scheduleDay: string;
+  scheduleMonth: string;
+  scheduleTime: string;
+};
+
 export type TNewPasswordData = {
   password: string;
   token: string;

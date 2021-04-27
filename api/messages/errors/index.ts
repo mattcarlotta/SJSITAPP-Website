@@ -150,6 +150,9 @@ const unableToCreateNewMail =
 const unableToCreateNewSeason =
   "Unable to create a new season. You must provide the seasonId, startDate, and endDate fields.";
 
+const unableToCreateNewService =
+  "Unable to create a new service. You must provide all the revelant fields.";
+
 const unableToCreateTeam =
   "Unable to create a new team. You must provide the league and team name fields.";
 
@@ -197,6 +200,9 @@ const unableToLocateMembers =
 const unableToLocateSeason =
   "Unable to locate that season. That season doesn't appear to exist.";
 
+const unableToLocateService =
+  "Unable to locate that service. That service doesn't appear to exist.";
+
 const unableToLocateToken =
   "Unable to locate that token. That authorization token doesn't exist.";
 
@@ -211,6 +217,9 @@ const unableToUpdateMail =
 
 const unableToUpdateSeason =
   "Unable to update the existing season. You must provide an id, season id, start date, and end date.";
+
+const unableToUpdateService =
+  "Unable to update the existing services. You must provide all the revelant fields.";
 
 const unableToUpdateToken =
   "Unable to update this authorization token. The key has already been used and is associated with an active account.";
@@ -271,6 +280,7 @@ export {
   unableToCreateNewForm,
   unableToCreateNewMail,
   unableToCreateNewSeason,
+  unableToCreateNewService,
   unableToCreateTeam,
   unableToDeleteEvent,
   unableToDeleteForm,
@@ -287,11 +297,13 @@ export {
   unableToLocateMail,
   unableToLocateMember,
   unableToLocateSeason,
+  unableToLocateService,
   unableToLocateToken,
   unableToUpdateApForm,
   unableToUpdateForm,
   unableToUpdateMail,
   unableToUpdateSeason,
+  unableToUpdateService,
   unableToUpdateToken,
   usernameAlreadyTaken
 };

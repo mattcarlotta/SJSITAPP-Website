@@ -27,6 +27,7 @@ export type TSelectProps = {
   placeholder?: string;
   selectOptions: Array<string>;
   textAlign?: string;
+  tooltip?: string;
   value: string;
   width?: string;
 };
@@ -46,6 +47,7 @@ const Select = ({
   padding,
   selectOptions,
   textAlign,
+  tooltip,
   value,
   width,
   ...props
@@ -57,7 +59,7 @@ const Select = ({
     maxWidth={maxWidth}
     width={width}
   >
-    <Label name={name} label={label} />
+    <Label name={name} label={label} tooltip={tooltip} />
     <ClickHandler disabled={disabled} onChange={props.onChange}>
       {handlers => (
         <SelectContainer
