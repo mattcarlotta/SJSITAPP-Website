@@ -242,7 +242,7 @@ const Forms = ({ id }: { id: string }): ReactElement => (
       See
       <OutsideLink
         dataTestId="automated-services-link"
-        href="/employee/help#how-do-the-automatic-services-work"
+        href="/employee/help#how-do-the-automated-services-work"
       >
         Automated Services
       </OutsideLink>

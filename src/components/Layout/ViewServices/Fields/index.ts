@@ -54,7 +54,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
       ? moment(service.formReminderTime, timestampFormat).format()
       : null,
     tooltip:
-      "This field determines what time the automated service sends A/P form email reminders. Ex: 5:00 pm",
+      "This field determines what time the automated service sends A/P form email reminders. Ex: At 5:00 pm of the current day.",
     required: true,
     style: { width: "100%", height: "100px" }
   },
@@ -86,7 +86,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
     errors: "",
     value: service ? moment(service.eventTime, timestampFormat).format() : null,
     tooltip:
-      "This field determines what time the automated service creates Sharks events and A/P forms. Ex: 7:59 am",
+      "This field determines what time the automated service creates Sharks events and A/P forms. Ex: At 7:59 am of the current day.",
     required: true,
     style: { width: "100%", height: "100px" }
   },
@@ -120,7 +120,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
       ? moment(service.scheduleTime, timestampFormat).format()
       : null,
     tooltip:
-      "This field determines what time the automated service generates monthly schedule emails for members and staff. Ex: 6:00pm",
+      "This field determines what time the automated service generates monthly schedule emails for members and staff. Ex: At 6:00 pm of the current day.",
     required: true,
     style: { width: "100%", height: "100px" }
   }

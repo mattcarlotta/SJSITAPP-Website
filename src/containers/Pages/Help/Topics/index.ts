@@ -49,7 +49,7 @@ export const stafftopics = [
   "How do I delete a season?",
   "How do I edit a season?",
   "How do I view all seasons?",
-  "How do the automatic services work?"
+  "How do the automated services work?"
 ];
 
 export default topics;

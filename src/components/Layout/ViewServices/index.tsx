@@ -5,9 +5,12 @@ import Form from "~components/Layout/Form";
 import FormTitle from "~components/Forms/FormTitle";
 import FieldGenerator from "~components/Forms/FieldGenerator";
 import Card from "~components/Layout/Card";
-import Padding from "~components/Layout/Padding";
+import Center from "~components/Layout/Center";
 import LoadingPanel from "~components/Layout/LoadingPanel";
+import Padding from "~components/Layout/Padding";
+import PanelDescription from "~components/Layout/PanelDescription";
 import SubmitButton from "~components/Layout/SubmitButton";
+import OutsideLink from "~components/Navigation/OutsideLink";
 import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
@@ -122,16 +125,28 @@ export const ViewService = (): ReactElement => {
   return (
     <Card
       dataTestId="automated-services-page"
-      title="Automated Services"
-      subtitle="Settings for the Automated Services"
+      title="Services Settings"
+      subtitle="Settings for the Email & Automated Services"
       icon={<MdSettingsInputComponent />}
     >
       <Padding top="20px" left="50px" right="50px" bottom="50px">
         <FormTitle
-          header="Automated Services"
-          title="Automated Service Settings"
+          header="Services Settings"
+          title="Email & Automated Service Settings"
           description="Please fill out all the fields below to save and update the automated service settings."
         />
+        <Center>
+          <PanelDescription margin="5px 0 20px 0">
+            Having trouble understanding the services? Click
+            <OutsideLink
+              dataTestId="help-automated-services-link"
+              href="/employee/help#how-do-the-automated-services-work"
+            >
+              here
+            </OutsideLink>
+            for help.
+          </PanelDescription>
+        </Center>
         {isLoading ? (
           <LoadingPanel
             data-testid="loading-service-form"
