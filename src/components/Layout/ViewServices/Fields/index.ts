@@ -7,11 +7,11 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
   {
     name: "emailOnline",
     type: "switch",
-    label: "Email Service Status",
+    label: "Emailing Service Status",
     errors: "",
     value: service ? service.emailOnline : true,
     tooltip:
-      "This field determines whether or not the email services are running.",
+      "This field determines whether or not the emailing service is running. This service is responsible for sending out emails regarding: Accounting (member registration, password resets, etc.), A/P Forms (new A/P forms & A/P form expiration reminders), Events (36hr pre-game reminders), and Schedules (individual schedules for members and staff).",
     required: false
   },
   {
@@ -21,7 +21,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
     errors: "",
     value: service ? service.automatedOnline : true,
     tooltip:
-      "This field is a master switch that overrides all of the automated services below. If this field is turned off, then all of the automated services below will not be ran.",
+      "This field is a master switch that overrides all of the automated services below. If this field is turned off, then all of the automated services below will be deactivated.",
     required: false
   },
   {
@@ -41,7 +41,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
     errors: "",
     value: service ? service.formReminderDay : "5th",
     tooltip:
-      "This field determines which day of the month the automated service sends A/P form email reminders. Ex: Every 5th day of each month.",
+      "This field determines which day of the month the automated service sends A/P form email reminders. Ex: Every 5th day of the current month.",
     required: true,
     selectOptions: Array.from({ length: 28 }, (_, i) => toOrdinal(i + 1))
   },
@@ -75,7 +75,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
     errors: "",
     value: service ? service.eventDay : "16th",
     tooltip:
-      "This field determines which day of the month the automated service creates Sharks events and A/P forms. Ex: Every 16th day of each month.",
+      "This field determines which day of the month the automated service creates Sharks events and A/P forms. Ex: Every 16th day of the current month.",
     required: true,
     selectOptions: Array.from({ length: 28 }, (_, i) => toOrdinal(i + 1))
   },
@@ -97,7 +97,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
     errors: "",
     value: service ? service.scheduleOnline : true,
     tooltip:
-      "This field determines whether or not the automated service generates individual monthly schedule emails for staff and members every month.",
+      "This field determines whether or not the automated service generates individual monthly schedule emails for members and staff every month.",
     required: false
   },
   {
@@ -107,7 +107,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
     errors: "",
     value: service ? service.scheduleDay : "15th",
     tooltip:
-      "This field determines which day of the month automated service generates monthly schedule emails for staff and members. Ex: Every 15th day of each month.",
+      "This field determines which day of the month automated service generates monthly schedule emails for members and staff. Ex: Every 15th day of the current month.",
     required: true,
     selectOptions: Array.from({ length: 28 }, (_, i) => toOrdinal(i + 1))
   },
@@ -120,7 +120,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
       ? moment(service.scheduleTime, timestampFormat).format()
       : null,
     tooltip:
-      "This field determines what time automated service generates monthly schedule emails for staff and members. Ex: 6:00pm",
+      "This field determines what time the automated service generates monthly schedule emails for members and staff. Ex: 6:00pm",
     required: true,
     style: { width: "100%", height: "100px" }
   }

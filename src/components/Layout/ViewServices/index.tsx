@@ -130,7 +130,7 @@ export const ViewService = (): ReactElement => {
         <FormTitle
           header="Automated Services"
           title="Automated Service Settings"
-          description="Please fill out all the fields below to save the automated service settings."
+          description="Please fill out all the fields below to save and update the automated service settings."
         />
         {isLoading ? (
           <LoadingPanel
