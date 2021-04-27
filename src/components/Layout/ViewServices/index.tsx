@@ -1,5 +1,6 @@
 import * as React from "react";
-import get from "lodash.get";
+import { useRouter } from "next/router";
+import isEmpty from "lodash.isempty";
 import toast from "~components/App/Toast";
 import Form from "~components/Layout/Form";
 import FormTitle from "~components/Forms/FormTitle";
@@ -38,6 +39,7 @@ export type TViewServiceState = {
 };
 
 export const ViewService = (): ReactElement => {
+  const router = useRouter();
   const [state, setState] = React.useState<TViewServiceState>({
     fields: [],
     errors: false,
@@ -61,21 +63,16 @@ export const ViewService = (): ReactElement => {
       }));
     } catch (err) {
       toast({ type: "error", message: err.toString() });
-      setState(prevState => ({
-        ...prevState,
-        isLoading: false
-      }));
+      router.replace("/employee/dashboard");
     }
-  }, []);
+  }, [app, parseData, router, toast]);
 
   const saveService = React.useCallback(async (): Promise<void> => {
     try {
-      const id = get(state.service, ["_id"]);
       let res: AxiosResponse;
-
-      if (id)
+      if (!isEmpty(state.service))
         res = await app.put("service/update", {
-          id,
+          id: state.service._id,
           ...parseFields(state.fields)
         });
       else res = await app.post("service/create", parseFields(state.fields));
@@ -98,7 +95,7 @@ export const ViewService = (): ReactElement => {
         isSubmitting: false
       }));
     }
-  }, [app, parseFields, parseMessage, state.fields, state.service]);
+  }, [app, isEmpty, parseFields, parseMessage, state.fields, state.service]);
 
   const handleChange = ({ target: { name, value } }: EventTarget): void => {
     setState(prevState => ({
@@ -132,7 +129,7 @@ export const ViewService = (): ReactElement => {
 
   React.useEffect(() => {
     if (isLoading) fetchService();
-  }, [isLoading]);
+  }, [isLoading, fetchService]);
 
   return (
     <Card
@@ -169,7 +166,7 @@ export const ViewService = (): ReactElement => {
           <CurrentSettings {...service} toggleForm={toggleForm} />
         ) : (
           <Form
-            data-testid="service-form"
+            data-testid="services-settings-form"
             onSubmit={handleSubmit}
             style={{
               background: "#ebebeb",

@@ -30,9 +30,9 @@ const AutomatedServices = ({ id }: { id: string }): ReactElement => (
         <ListItem padding="20px 0 0 5px">
           <Bold>Emailing Service</Bold>- This automated service, controlled via
           the&nbsp;
-          <Bold>Emailing Service - Status</Bold>field, polls an internal
-          database for Mail documents every 30 seconds. If Mail documents are
-          present and haven&#39;t been sent according to their&nbsp;
+          <Bold>Emailing Service</Bold>field, polls an internal database for
+          Mail documents every 30 seconds. If Mail documents are present and
+          haven&#39;t been sent according to their&nbsp;
           <Bold>Send Date</Bold>and <Bold>Status</Bold>fields, then the service
           generates emails from these Mail documents and hands them off to
           <OutsideLink data-testid="services-link" href="https://sendgrid.com/">
@@ -43,10 +43,10 @@ const AutomatedServices = ({ id }: { id: string }): ReactElement => (
         <ListItem padding="20px 0 0 5px">
           <Bold>Automated Services</Bold>- This is a master switch for the
           automated services listed below, controlled via the&nbsp;
-          <Bold>Automated Service - Status</Bold>field. If this switch is
-          active, then all the active automated services are run. If this switch
-          is deactivated, then all of the automated services are not ran
-          regardless of their status.
+          <Bold>Automated Service</Bold>field. If this switch is active, then
+          all the active automated services are run. If this switch is
+          deactivated, then all of the automated services are not ran regardless
+          of their status.
         </ListItem>
         <ListItem padding="20px 0 0 5px">
           <Bold>A/P Form Email Reminders</Bold>- This automated service,

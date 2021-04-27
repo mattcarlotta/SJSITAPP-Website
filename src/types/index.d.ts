@@ -103,6 +103,7 @@ export type TSeasonData = {
 export type TSeasonAPIQueryConfig = { id?: string } & TSeasonData;
 
 export type TService = {
+  _id: string;
   automatedOnline: boolean;
   emailOnline: boolean;
   eventOnline: boolean;

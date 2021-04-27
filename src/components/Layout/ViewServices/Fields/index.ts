@@ -7,17 +7,17 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
   {
     name: "emailOnline",
     type: "switch",
-    label: "Emailing Service - Status",
+    label: "Emailing Service",
     errors: "",
     value: service ? service.emailOnline : true,
     tooltip:
-      "This field determines whether or not the emailing service is running. This service is responsible for sending out emails regarding: Accounting (member registration, password resets, etc.), A/P Forms (new A/P forms & A/P form expiration reminders), Events (36hr pre-game reminders), and Schedules (individual schedules for members and staff).",
+      "This field determines whether or not the emailing service is running. This service is responsible for sending out emails regarding: Accounting (member registration, password resets, etc.), A/P Forms (new A/P forms & A/P form expiration reminders), Events (36hr pre-game reminders), and Schedules (sending individual schedules to members and staff).",
     required: false
   },
   {
     name: "automatedOnline",
     type: "switch",
-    label: "Automated Service - Status",
+    label: "Automated Services",
     errors: "",
     value: service ? service.automatedOnline : true,
     tooltip:

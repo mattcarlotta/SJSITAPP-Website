@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-const Margin = styled.div<{
+const Word = styled.div<{
   breakpoint?: boolean;
   bottom?: string;
   display?: string;
@@ -23,4 +23,4 @@ const Margin = styled.div<{
   word-wrap: break-word;
 `;
 
-export default Margin;
+export default Word;

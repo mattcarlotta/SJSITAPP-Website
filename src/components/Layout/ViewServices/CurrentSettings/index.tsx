@@ -48,6 +48,16 @@ const CurrentSettings = ({
     borderRadius="5px"
     style={{ maxWidth: 500, border: "1px solid #888" }}
   >
+    {!eventMonth && (
+      <ListItem
+        background="red"
+        data-testid="no-services-message"
+        padding="10px 20px"
+      >
+        It appears that services haven&#39;t been created yet. Please edit and
+        save the settings to create services.
+      </ListItem>
+    )}
     <ListItem padding="10px 20px">
       <Bold>Emailing Service</Bold>
       <Status status={emailOnline} />
@@ -75,9 +85,9 @@ const CurrentSettings = ({
         borderBottom: "1px solid #888"
       }}
     >
-      All services listed below update their&nbsp;
+      All services listed below update their run&nbsp;
       <Bold>
-        <Highlight>months</Highlight>
+        <Highlight>month</Highlight>
       </Bold>
       automatically.
     </ListItem>
@@ -146,7 +156,7 @@ const CurrentSettings = ({
     </ListItem>
     <ListItem padding="10px 20px">
       <Button
-        dataTestId="cancel-form"
+        dataTestId="edit-settings-button"
         primary
         padding="9px 18px"
         maxWidth="500px"
