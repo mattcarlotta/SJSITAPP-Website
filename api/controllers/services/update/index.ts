@@ -48,7 +48,7 @@ const updateService = async (
     const existingService = await Service.findOne({ _id });
     if (!existingService) throw unableToLocateService;
 
-    await existingService.update({
+    await existingService.updateOne({
       automatedOnline,
       emailOnline,
       eventOnline,
@@ -64,7 +64,7 @@ const updateService = async (
 
     return res
       .status(201)
-      .json({ message: "Successfully updated the emailing service!" });
+      .json({ message: "Successfully updated the services!" });
   } catch (err) {
     return sendError(err, 400, res);
   }

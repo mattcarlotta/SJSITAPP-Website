@@ -64,7 +64,7 @@ const createService = async (
 
     return res
       .status(201)
-      .json({ message: "Successfully created the emailing service!" });
+      .json({ message: "Successfully created the services!" });
   } catch (err) {
     return sendError(err, 400, res);
   }

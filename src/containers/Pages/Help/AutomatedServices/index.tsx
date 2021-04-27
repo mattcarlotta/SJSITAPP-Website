@@ -28,19 +28,28 @@ const AutomatedServices = ({ id }: { id: string }): ReactElement => (
       page:&nbsp;
       <List margin="0 0 20px 0">
         <ListItem padding="20px 0 0 5px">
-          - <Bold>Emailing Service</Bold>: This automated service, controlled
-          via the&nbsp;
+          <Bold>Emailing Service</Bold>- This automated service, controlled via
+          the&nbsp;
           <Bold>Emailing Service - Status</Bold>field, polls an internal
           database for Mail documents every 30 seconds. If Mail documents are
-          present and haven&#39;t been sent, the service generates emails from
-          these Mail documents and hands them off to
+          present and haven&#39;t been sent according to their&nbsp;
+          <Bold>Send Date</Bold>and <Bold>Status</Bold>fields, then the service
+          generates emails from these Mail documents and hands them off to
           <OutsideLink data-testid="services-link" href="https://sendgrid.com/">
             Send Grid
           </OutsideLink>
           , who then delivers them to the destined email address(es).
         </ListItem>
         <ListItem padding="20px 0 0 5px">
-          - <Bold>A/P Form Email Reminders</Bold>: This automated service,
+          <Bold>Automated Services</Bold>- This is a master switch for the
+          automated services listed below, controlled via the&nbsp;
+          <Bold>Automated Service - Status</Bold>field. If this switch is
+          active, then all the active automated services are run. If this switch
+          is deactivated, then all of the automated services are not ran
+          regardless of their status.
+        </ListItem>
+        <ListItem padding="20px 0 0 5px">
+          <Bold>A/P Form Email Reminders</Bold>- This automated service,
           controlled via the&nbsp;
           <Bold>A/P Form - Email Reminder Status (automated)</Bold>field, polls
           an internal database for Form documents every month, via the
@@ -52,7 +61,7 @@ const AutomatedServices = ({ id }: { id: string }): ReactElement => (
           members to remind them that an A/P form is about to expire.
         </ListItem>
         <ListItem padding="20px 0 0 5px">
-          - <Bold>Event & A/P Form Creation</Bold>: This automated service,
+          <Bold>Event & A/P Form Creation</Bold>- This automated service,
           controlled via the&nbsp;
           <Bold>Event & A/P Form - Creation Status (automated)</Bold>field,
           polls the
@@ -70,8 +79,8 @@ const AutomatedServices = ({ id }: { id: string }): ReactElement => (
           automatically created to encapsulate these new Events.
         </ListItem>
         <ListItem padding="20px 0 0 5px">
-          - <Bold>Schedule Creation</Bold>: This automated service, controlled
-          via the&nbsp;
+          <Bold>Schedule Creation</Bold>: This automated service, controlled via
+          the&nbsp;
           <Bold>Schedule - Creation Status (automated)</Bold>field, polls an
           internal database for Form documents every month, via the
           determined&nbsp;

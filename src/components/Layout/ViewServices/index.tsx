@@ -19,14 +19,14 @@ import { MdSettingsInputComponent } from "~icons";
 import app from "~utils/axiosConfig";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import fields from "./Fields";
-import ShowSettings from "./ShowSettings";
+import CurrentSettings from "./CurrentSettings";
 import {
   AxiosResponse,
   EventTarget,
   FormEvent,
   ReactElement,
   TService
-} from "~types"; //
+} from "~types";
 
 export type TViewServiceState = {
   fields: ReturnType<typeof fields>;
@@ -145,7 +145,7 @@ export const ViewService = (): ReactElement => {
         <FormTitle
           header="Services Settings"
           title="Email & Automated Service Settings"
-          description="If changing settings, please fill out all the fields to save and update them."
+          description="If changing settings, please fill out all the fields and click the 'Save' button to update them."
         />
         <Center>
           <PanelDescription margin="5px 0 20px 0">
@@ -163,30 +163,27 @@ export const ViewService = (): ReactElement => {
           <LoadingPanel
             data-testid="loading-service-form"
             borderRadius="5px"
-            height="565px"
+            height="829px"
           />
         ) : !showForm ? (
-          <>
-            <ShowSettings {...service} />
-            <Button
-              dataTestId="cancel-form"
-              primary
-              padding="9px 18px"
-              maxWidth="500px"
-              type="button"
-              onClick={toggleForm}
-            >
-              Edit Settings
-            </Button>
-          </>
+          <CurrentSettings {...service} toggleForm={toggleForm} />
         ) : (
-          <Form data-testid="service-form" onSubmit={handleSubmit}>
+          <Form
+            data-testid="service-form"
+            onSubmit={handleSubmit}
+            style={{
+              background: "#ebebeb",
+              border: "1px solid #888",
+              borderRadius: "5px",
+              padding: "10px"
+            }}
+          >
             <FieldGenerator fields={state.fields} onChange={handleChange} />
             <Button
               dataTestId="cancel-form"
               danger
               margin="0 0 10px 0"
-              padding="9px 18px"
+              padding="10.5px 18px"
               type="button"
               onClick={toggleForm}
             >
@@ -195,7 +192,7 @@ export const ViewService = (): ReactElement => {
             <SubmitButton
               isSubmitting={isSubmitting}
               maxWidth="500px"
-              title="Save"
+              title="Save Settings"
             />
           </Form>
         )}
