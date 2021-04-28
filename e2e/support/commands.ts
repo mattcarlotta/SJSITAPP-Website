@@ -45,3 +45,21 @@ Cypress.Commands.add(
       });
   }
 );
+
+Cypress.Commands.add("findByTestId", value =>
+  cy.get(`[data-testid='${value}']`)
+);
+
+Cypress.Commands.add("memberLogin", () =>
+  cy.request("POST", "http://localhost:5000/api/signin", {
+    email: "scheduledmember@test.com",
+    password: "password"
+  })
+);
+
+Cypress.Commands.add("staffLogin", () =>
+  cy.request("POST", "http://localhost:5000/api/signin", {
+    email: "staffmember@example.com",
+    password: "password"
+  })
+);

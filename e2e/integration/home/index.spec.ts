@@ -26,10 +26,7 @@ context("Home Page", () => {
   });
 
   it("changes the home page to have a 'Go To Dashboard' button when logged in", () => {
-    cy.request("POST", "http://localhost:5000/api/signin", {
-      email: "staffmember@example.com",
-      password: "password"
-    });
+    cy.staffLogin();
 
     cy.reload();
 

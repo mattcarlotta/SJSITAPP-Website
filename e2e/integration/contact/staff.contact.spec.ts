@@ -4,10 +4,7 @@ context("Staff Contact Us Page", () => {
   });
 
   beforeEach(() => {
-    cy.request("POST", "http://localhost:5000/api/signin", {
-      email: "staffmember@example.com",
-      password: "password"
-    });
+    cy.staffLogin();
     cy.reload();
     cy.visit("/employee/contact-us");
   });
@@ -17,38 +14,36 @@ context("Staff Contact Us Page", () => {
   });
 
   it("displays the contact-us page", () => {
-    cy.get("[data-testid='contact-us-page']")
-      .find("[data-testid='card-head-title']")
-      .contains("Contact Us");
+    cy.findByTestId("card-head-title").contains("Contact Us");
   });
 
   it("displays form errors if fields are empty", () => {
-    cy.get("[data-testid='submit-button']").click();
+    cy.findByTestId("submit-button").click();
 
-    cy.get("[data-testid='errors']").should("have.length", 3);
+    cy.findByTestId("errors").should("have.length", 3);
   });
 
   it("sends an email", () => {
-    cy.get("[data-testid='sendTo']")
+    cy.findByTestId("sendTo")
       .find("[data-testid='select-text']")
       .first()
       .click();
 
-    cy.get("[data-testid='Admin']").first().click();
+    cy.findByTestId("Admin").first().click();
 
     cy.get("input[name='subject']").type("Test Email");
 
     cy.get("textarea[name='message']").type("Hi. :)");
 
-    cy.get("[data-testid='submit-button']").click();
+    cy.findByTestId("submit-button").click();
 
-    cy.get("[data-testid='alert-message']")
-      .should("have.length", 1)
+    cy.findByTestId("alert-message")
+      .should("exist")
       .and(
         "have.text",
         "Thank you for contacting us. The admin has received your message. Expect a response within 24 hours."
       );
 
-    cy.get("[data-testid='alert-message']").click();
+    cy.findByTestId("alert-message").click();
   });
 });
