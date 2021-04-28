@@ -13,9 +13,9 @@ export const makeStore: MakeStore<TRootState> = () => {
   const store = createStore(
     rootReducer,
     composeWithDevTools(applyMiddleware(saga))
-  );
+  ) as SagaStore;
 
-  (store as SagaStore).sagaTask = saga.run(rootSaga);
+  store.sagaTask = saga.run(rootSaga);
 
   return store;
 };

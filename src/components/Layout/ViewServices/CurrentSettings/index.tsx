@@ -75,9 +75,9 @@ const CurrentSettings = ({
       <Bold>Automated Service</Bold>
       <Status status={automatedOnline} />
       <div>
-        This is a master switch to override all of the automated services&#39;
-        statuses listed below. If the switch is turned off, then all of
-        automated services are deactivated regardless of their current status.
+        This is a master switch to override all of the automated services listed
+        below. If the switch is turned off, then all of automated services are
+        deactivated regardless of their current status.
       </div>
     </ListItem>
     <ListItem

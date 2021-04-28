@@ -33,7 +33,7 @@ import { TransitionProps } from "@material-ui/core/transitions";
 import { DatePickerView } from "@material-ui/pickers";
 import { AnyAction, Store } from "redux";
 import { ConnectedProps } from "react-redux";
-import { SagaIterator } from "redux-saga";
+import { SagaIterator, Task } from "redux-saga";
 import { TRootState } from "~reducers";
 
 export type PickReduxState<T> = Pick<TRootState, T>;
