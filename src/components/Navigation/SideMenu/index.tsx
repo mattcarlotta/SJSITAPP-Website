@@ -97,7 +97,9 @@ const SideMenu = ({
                     {title}
                   </NavLink>
                 ) : (
-                  <NavTitle select="none">{title}</NavTitle>
+                  <NavTitle data-testid={title} select="none">
+                    {title}
+                  </NavTitle>
                 )
               }
             >

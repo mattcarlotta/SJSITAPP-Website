@@ -28,7 +28,10 @@ const NavBar = ({
   }, [pathname, isMobile]);
 
   return !isMobile ? (
-    <FixedMenu data-testid="fixed-sidemenu" collapsed={collapsed}>
+    <FixedMenu
+      data-testid={`fixed-sidemenu-${collapsed ? "closed" : "open"}`}
+      collapsed={collapsed}
+    >
       {children}
     </FixedMenu>
   ) : (

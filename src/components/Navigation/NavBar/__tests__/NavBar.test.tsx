@@ -38,6 +38,6 @@ describe("Navbar", () => {
     Object.assign(window, { innerWidth: 1500 });
     wrapper = mount(<Navbar {...initProps} />);
 
-    expect(findById("fixed-sidemenu")).toExist();
+    expect(findById("fixed-sidemenu-open")).toExist();
   });
 });

@@ -93,8 +93,8 @@ export const StaffRoutes: TRoutes = [
         subicon: <FaCalendarPlus />,
         subnodeId: "events/create",
         subhref: "events/create",
-        subtitle: "Create Events",
-        subtestId: "events-create-link"
+        subtitle: "Create Event",
+        subtestId: "create-event-link"
       },
       {
         subicon: <MdEventNote />,
@@ -113,8 +113,8 @@ export const StaffRoutes: TRoutes = [
         subicon: <MdNoteAdd />,
         subnodeId: "forms/create",
         subhref: "forms/create",
-        subtitle: "Create Forms",
-        subtestId: "create-forms-link"
+        subtitle: "Create Form",
+        subtestId: "create-form-link"
       },
       {
         subicon: <FaFileAlt />,
