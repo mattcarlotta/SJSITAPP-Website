@@ -97,7 +97,7 @@ export const NewPasswordForm = ({
 
   return (
     <WhiteBackground>
-      <Modal dataTestId="signup-form" isOpen>
+      <Modal dataTestId="new-password-form" isOpen>
         <FormTitle
           header="Update Password"
           title="Update Password"

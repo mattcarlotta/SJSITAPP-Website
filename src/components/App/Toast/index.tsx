@@ -38,9 +38,9 @@ export const displayIcon = (type?: string): ReactElement => {
 
 const ToastMessage = ({ type, message }: TToastProps): null => {
   toast[type](
-    <AlertContainer data-testid="modal-alert">
-      <AlertType data-testid="modal-alert-type">{displayIcon(type)}</AlertType>
-      <AlertMessage data-testid="modal-message">{message}</AlertMessage>
+    <AlertContainer data-testid="alert-container">
+      <AlertType data-testid="alert-type">{displayIcon(type)}</AlertType>
+      <AlertMessage data-testid="alert-message">{message}</AlertMessage>
     </AlertContainer>
   );
 

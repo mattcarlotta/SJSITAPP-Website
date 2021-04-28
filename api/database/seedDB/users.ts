@@ -243,6 +243,18 @@ export const seedUsers = async (): Promise<IUserDocument> => {
     status: "active"
   };
 
+  const resetPasswordMember = {
+    email: "reset.password@example.com",
+    password: memberPassword,
+    firstName: "Uncle",
+    lastName: "Rico",
+    role: "member",
+    token: "1234567890",
+    emailReminders: false,
+    registered,
+    status: "active"
+  };
+
   await User.insertMany([
     administrator,
     realMember,
@@ -262,7 +274,8 @@ export const seedUsers = async (): Promise<IUserDocument> => {
     member499,
     suspendedEmployee,
     deletedEmployee,
-    turnedOffReminders
+    turnedOffReminders,
+    resetPasswordMember
   ]);
 
   const scheduledUser = await User.findOne({

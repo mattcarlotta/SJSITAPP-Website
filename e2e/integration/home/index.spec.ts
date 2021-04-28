@@ -1,28 +1,42 @@
 context("Home Page", () => {
+  before(() => {
+    cy.exec("npm run seed:stage");
+  });
+
   beforeEach(() => {
     cy.visit("/");
   });
 
-  it("initially displays a welcome message", () => {
-    cy.get("[data-testid=modal-message]").should(
-      "have.text",
-      "Welcome to the NextJS SSR Kit!",
-    );
+  after(() => {
+    cy.exec("npm run drop:stage");
   });
 
-  it("initially displays a logo and with a  'See Example' link", () => {
-    cy.get("[data-testid=home-page]").find("img").should("have.length", 1);
+  it("initially displays a logo and an 'Employee Login' button", () => {
+    cy.get("[data-testid='spinner']").should("have.length", 1);
 
-    cy.get("[data-testid=link]")
+    cy.get("[data-testid='home-link']")
       .should("have.length", 1)
-      .and("have.attr", "href", "/users");
+      .should("have.text", "Employee Login");
   });
 
-  it("allows a user to navigate to the example page", () => {
-    cy.get("[data-testid=link]").click();
+  it("redirects unauthenticated users to the login page", () => {
+    cy.visit("/employee/dashboard");
 
-    cy.url().should("contain", "/users");
+    cy.url().should("contain", "/employee/login");
+  });
 
-    cy.get("[data-testid=users-page]").should("have.length", 1);
+  it("changes the home page to have a 'Go To Dashboard' button when logged in", () => {
+    cy.request("POST", "http://localhost:5000/api/signin", {
+      email: "staffmember@example.com",
+      password: "password"
+    });
+
+    cy.reload();
+
+    cy.get("[data-testid='home-link']").should("have.text", "View Dashboard");
+
+    cy.get("[data-testid='home-link']").click();
+
+    cy.url().should("contain", "/employee/dashboard");
   });
 });
