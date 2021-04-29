@@ -82,7 +82,12 @@ const TimePickerComponent = ({
       value={value}
       emptyLabel={emptyLabel}
       onChange={value =>
-        onChange({ target: { name, value: (value as Moment).format() } })
+        onChange({
+          target: {
+            name,
+            value: (value as Moment).seconds(0).milliseconds(0).format()
+          }
+        })
       }
     />
     {errors && <Errors data-testid="errors">{errors}</Errors>}

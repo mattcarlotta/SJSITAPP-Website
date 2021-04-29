@@ -99,7 +99,5 @@ describe("View Events", () => {
       wrapper.update();
       expect(wrapper.find("[data-testid='data-table']")).toExist();
     });
-
-    console.log(wrapper.debug());
   });
 });

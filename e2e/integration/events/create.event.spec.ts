@@ -1,4 +1,4 @@
-const moment = require("../../../src/utils/momentWithTZ");
+import moment from "../../../src/utils/momentWithTimezone";
 
 const currentYearDate = moment().format("YYYY");
 const nextYearDate = moment().add(1, "year").format("YYYY");
@@ -6,142 +6,173 @@ const nextYearDate = moment().add(1, "year").format("YYYY");
 const currentSeason = `${currentYearDate}${nextYearDate}`;
 
 context("Staff Create Event Page", () => {
-	before(() => {
-		cy.exec("npm run seed:stage");
-	});
+  let setMUIField: (id: string) => void;
+  before(() => {
+    cy.exec("npm run seed:stage");
+    setMUIField = id => {
+      cy.get(`input[name='${id}']`).click();
 
-	beforeEach(() => {
-		cy.request("POST", "/api/signin", {
-			email: "staffmember@example.com",
-			password: "password",
-		});
-		cy.reload();
-		cy.visit("/employee/events/create");
-	});
+      cy.get(".MuiDialogActions-spacing")
+        .find("button")
+        .eq(1)
+        .should("exist")
+        .click();
+    };
+  });
 
-	after(() => {
-		cy.exec("npm run drop:stage");
-	});
+  beforeEach(() => {
+    cy.staffLogin();
+    cy.reload();
+    cy.visit("/employee/events/create");
+  });
 
-	it("displays the create event form", () => {
-		cy.get("form").should("have.length", 1);
-	});
+  after(() => {
+    cy.exec("npm run drop:stage");
+  });
 
-	it("pushes back to viewall events page", () => {
-		cy.get("[data-test=go-back]").click();
+  it("displays the create event form", () => {
+    cy.findByTestId("create-event-page").should("exist");
+    cy.findByTestId("event-form").should("exist");
+  });
 
-		cy.url().should("contain", "/employee/events/viewall?page=1");
-	});
+  it("displays errors when form is submitted with empty fields", () => {
+    cy.findByTestId("event-form").should("exist");
 
-	it("displays errors if empty fields are submitted", () => {
-		cy.get("[data-test=submit-button]").click();
+    cy.findByTestId("submit-button").click();
 
-		cy.get("[data-test=errors]").should("have.length", 3);
-	});
+    cy.findByTestId("errors").should("have.length", 4);
+  });
 
-	it("creates a Sharks vs. Leafs game event", () => {
-		const clickDefaultTimeSlots = () => {
-			[0, 1, 2].map(key =>
-				cy
-					.get(".ant-time-picker-panel-select")
-					.eq(key)
-					.find("li[role=button]")
-					.first()
-					.click(),
-			);
-		};
+  it("displays an API call time error when call times aren't unique", () => {
+    cy.findByTestId("event-form").should("exist");
 
-		cy.get(".clickhandler").first().click();
+    cy.findByTestId("seasonId-selected-value").click();
 
-		cy.get("[data-name=seasonId]").first().click();
+    cy.findByTestId(currentSeason).first().click();
 
-		cy.get(
-			"input[placeholder='Search and select an opponent (if applicable)...']",
-		).type("Maple");
+    setMUIField("eventDate");
 
-		cy.get("[data-value='Toronto Maple Leafs']").click();
+    cy.findByTestId("uniform-selected-value").click();
 
-		cy.get("input[name=eventDate]").click();
+    cy.findByTestId("Sharks Teal Jersey").first().click();
 
-		cy.get(".ant-calendar-selected-day").first().click();
+    cy.findByTestId("add-calltime-field").click();
 
-		cy.get(".ant-calendar-ok-btn").first().click();
+    cy.get(`input[name='callTime']`).first().click();
 
-		cy.get("input[name=callTime]").click();
+    cy.get(".MuiPickersToolbarButton-toolbarBtn")
+      .first()
+      .should("exist")
+      .click();
 
-		clickDefaultTimeSlots();
+    cy.get(".MuiPickersClock-squareMask").click(250, 120); // set to 3 hours
+    cy.get(".MuiPickersClock-squareMask").click(250, 125); // set to 15 minutes
 
-		cy.get("[data-test=submit-button]").click();
+    cy.get(".MuiDialogActions-spacing")
+      .find("button")
+      .eq(1)
+      .should("exist")
+      .click();
 
-		cy.get("[data-test=toast-message]")
-			.should("have.length", 1)
-			.and(
-				"have.text",
-				`Successfully added a new event to the ${currentSeason} season.`,
-			);
+    cy.findByTestId("add-calltime-field").click();
 
-		cy.url().should("contain", "/employee/events/viewall?page=1");
+    cy.get(`input[name^='callTime-']`).first().click();
 
-		cy.get("#opponent").click();
+    cy.get(".MuiPickersToolbarButton-toolbarBtn")
+      .first()
+      .should("exist")
+      .click();
 
-		cy.get(".ant-select").click();
+    cy.get(".MuiPickersClock-squareMask").click(250, 120); // set to 3 hours
+    cy.get(".MuiPickersClock-squareMask").click(250, 125); // set to 15 minutes
 
-		cy.get(".ant-select-dropdown-menu-item").eq(53).click();
+    cy.get(".MuiDialogActions-spacing")
+      .find("button")
+      .eq(1)
+      .should("exist")
+      .click();
 
-		cy.get(".ant-table-fixed").first().click();
+    cy.findByTestId("submit-button").click();
 
-		cy.get(".ant-pagination-total-text").contains("1 items");
-	});
+    cy.findByTestId("alert-message")
+      .should("exist")
+      .and(
+        "have.text",
+        "One or more of the 'Scheduling Call Times' is a duplicate. Please remove the duplicate(s) before submitting the form again."
+      );
 
-	it("creates a Sharks promo event", () => {
-		const clickDefaultTimeSlots = () => {
-			[0, 1, 2].map(key =>
-				cy
-					.get(".ant-time-picker-panel-select")
-					.eq(key)
-					.find("li[role=button]")
-					.first()
-					.click(),
-			);
-		};
+    cy.findByTestId("alert-message").click();
+  });
 
-		cy.get(".clickhandler").first().click();
+  it("displays an API call event error when event falls outside of season", () => {
+    cy.findByTestId("event-form").should("exist");
 
-		cy.get("[data-name=seasonId]").first().click();
+    cy.findByTestId("seasonId-selected-value").click();
 
-		cy.get(".clickhandler").eq(1).click();
+    cy.findByTestId(currentSeason).first().click();
 
-		cy.get("[data-name=eventType]").eq(1).click();
+    cy.get(`input[name='eventDate']`).click();
 
-		cy.get("input[name=eventDate]").click();
+    cy.get(".MuiPickersToolbarButton-toolbarBtn")
+      .first()
+      .should("exist")
+      .click();
 
-		cy.get(".ant-calendar-selected-day").first().click();
+    cy.get(".MuiPickersYearSelection-container")
+      .find("div[role='button']")
+      .first()
+      .should("exist")
+      .click();
 
-		cy.get(".ant-calendar-ok-btn").first().click();
+    cy.get(".MuiDialogActions-spacing")
+      .find("button")
+      .eq(1)
+      .should("exist")
+      .click();
 
-		cy.get("input[name=callTime]").click();
+    cy.findByTestId("uniform-selected-value").click();
 
-		clickDefaultTimeSlots();
+    cy.findByTestId("Sharks Teal Jersey").first().click();
 
-		cy.get("[data-test=submit-button]").click();
+    setMUIField("callTime");
 
-		cy.get("[data-test=toast-message]")
-			.should("have.length", 1)
-			.and(
-				"have.text",
-				`Successfully added a new event to the ${currentSeason} season.`,
-			);
+    cy.findByTestId("submit-button").click();
 
-		cy.url().should("contain", "/employee/events/viewall?page=1");
+    cy.findByTestId("alert-message")
+      .should("exist")
+      .contains(
+        `The event date selected below falls outside of the ${currentSeason} season.`
+      );
 
-		cy.get("#event-type").click();
+    cy.findByTestId("alert-message").click();
+  });
 
-		cy.get(".ant-select").click();
+  it("creates an an event and redirects to viewall events page", () => {
+    cy.findByTestId("event-form").should("exist");
 
-		cy.get(".ant-select-dropdown-menu-item").eq(1).click();
+    cy.findByTestId("seasonId-selected-value").click();
 
-		cy.get(".ant-table-fixed").first().click();
+    cy.findByTestId(currentSeason).first().click();
 
-		cy.get(".ant-pagination-total-text").contains("1 items");
-	});
+    setMUIField("eventDate");
+
+    cy.findByTestId("uniform-selected-value").click();
+
+    cy.findByTestId("Sharks Teal Jersey").first().click();
+
+    setMUIField("callTime");
+
+    cy.findByTestId("submit-button").click();
+
+    cy.findByTestId("alert-message")
+      .should("exist")
+      .and(
+        "have.text",
+        `Successfully added a new event to the ${currentSeason} season.`
+      );
+
+    cy.findByTestId("alert-message").click();
+
+    cy.url().should("contain", "/employee/events/viewall?page=1");
+  });
 });

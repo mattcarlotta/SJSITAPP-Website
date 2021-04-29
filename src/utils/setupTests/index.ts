@@ -12,7 +12,7 @@ configure({ adapter: new Adapter() });
 /* THE BELOW ARE ACCESSIBLE AND PREDEFINED FOR ALL *.TEST.JS FILES */
 
 const { document } = new JSDOM(
-  "<!DOCTYPE html><body><div id='__next'></div></body>"
+  "<!DOCTYPE html><body><div id='root'></div></body>"
 ).window;
 global.document = document;
 global.window = document.defaultView;
