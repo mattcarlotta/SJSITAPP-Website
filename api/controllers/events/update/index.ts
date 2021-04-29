@@ -1,12 +1,14 @@
 import type { Request, Response } from "express";
 import isEmpty from "lodash.isempty";
 import isEqual from "lodash.isequal";
-import { Event } from "~models";
-import { createSchedule, sendError, uniqueArray } from "~helpers";
+import { Event, Season } from "~models";
+import { createSchedule, moment, sendError, uniqueArray } from "~helpers";
 import {
+  invalidEventDate,
   invalidUpdateEventRequest,
   mustContainUniqueCallTimes,
-  unableToLocateEvent
+  unableToLocateEvent,
+  unableToLocateSeason
 } from "~messages/errors";
 
 /**
@@ -47,6 +49,21 @@ const updateEvent = async (req: Request, res: Response): Promise<Response> => {
 
     const existingEvent = await Event.findOne({ _id });
     if (!existingEvent) throw unableToLocateEvent;
+
+    const existingSeason = await Season.findOne({ seasonId });
+    if (!existingSeason) throw unableToLocateSeason;
+
+    const eventDateStartTime = moment(eventDate);
+    const seasonStart = moment(existingSeason.startDate);
+    const seasonEnd = moment(existingSeason.endDate);
+
+    if (eventDateStartTime < seasonStart || eventDateStartTime > seasonEnd) {
+      throw invalidEventDate(
+        seasonId,
+        seasonStart.format("L"),
+        seasonEnd.format("L")
+      );
+    }
 
     const schedule = createSchedule(callTimes);
     const scheduleUnchanged = isEqual(existingEvent.callTimes, callTimes);

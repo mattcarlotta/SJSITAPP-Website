@@ -48,6 +48,11 @@ const Columns: GridColumns = [
     width: 80
   },
   {
+    field: "location",
+    headerName: "Location",
+    flex: 2
+  },
+  {
     field: "uniform",
     headerName: "Uniform",
     flex: 2

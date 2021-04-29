@@ -1,113 +1,125 @@
 context("Staff View Events Page", () => {
-	before(() => {
-		cy.exec("npm run seed:stage");
-	});
+  before(() => {
+    cy.exec("npm run seed:stage");
+  });
 
-	beforeEach(() => {
-		cy.request("POST", "/api/signin", {
-			email: "staffmember@example.com",
-			password: "password",
-		});
-		cy.reload();
-		cy.visit("/employee/events/viewall?page=1");
-	});
+  beforeEach(() => {
+    cy.staffLogin();
+    cy.reload();
+    cy.visit("/employee/events/viewall?page=1");
+  });
 
-	after(() => {
-		cy.exec("npm run drop:stage");
-	});
+  after(() => {
+    cy.exec("npm run drop:stage");
+  });
 
-	it("displays the events table", () => {
-		cy.get(".ant-table-wrapper").should("have.length", 1);
-	});
+  it("displays the events page and events table", () => {
+    cy.findByTestId("view-events-page").should("exist");
+    cy.findByTestId("data-table").should("exist");
+  });
 
-	it("filters the events table", () => {
-		cy.get(".ant-pagination-total-text").contains("15 items");
+  it("navigates to the Add Event page", () => {
+    cy.findByTestId("view-events-page")
+      .should("exist")
+      .find("[data-testid='create-event-link']")
+      .click();
 
-		cy.get("button#sent-emails").click();
-		cy.get(".ant-select").click();
-		cy.get("li[role=option]").eq(1).click();
+    cy.url().should("contain", "/employee/events/create");
 
-		cy.get(".ant-pagination-total-text").contains("9 items");
+    cy.findByTestId("create-event-page").should("exist");
+  });
 
-		cy.get("button#clear-filters").click();
-		cy.get(".ant-pagination-total-text").contains("15 items");
-	});
+  it("navigates to a scheduling event page", () => {
+    cy.findByTestId("data-table").should("exist");
 
-	it("resends event notifications", () => {
-		cy.get(".ant-table-row")
-			.eq(1)
-			.find("td")
-			.eq(11)
-			.find("[data-test=sent]")
-			.should("have.length", 1);
-		cy.get("[data-test=table-actions]").first().click({ force: true });
+    cy.findByTestId("table-actions").first().should("exist").click();
 
-		cy.get("[data-test=send-mail]").click();
+    cy.findByTestId("view-record").click();
 
-		cy.get("[data-test=toast-message]")
-			.should("have.length", 1)
-			.and(
-				"have.text",
-				"Email notifications for that event will be resent within 24 hours of the event date.",
-			);
+    cy.url().should("contain", "/employee/events/scheduling");
 
-		cy.get(".ant-table-row")
-			.first()
-			.find("td")
-			.eq(11)
-			.find("[data-test=unsent]")
-			.should("have.length", 1);
-	});
+    cy.findByTestId("schedule-event-page").should("exist");
+  });
 
-	it("deletes an event", () => {
-		cy.get("[data-test=table-actions]").eq(2).click({ force: true });
+  it("navigates to an edit event page", () => {
+    cy.findByTestId("data-table").should("exist");
 
-		cy.get("[data-test=delete-item]").click();
+    cy.findByTestId("table-actions").first().should("exist").click();
 
-		cy.get(".ant-popover-buttons").find("button").eq(1).click();
+    cy.findByTestId("edit-record").click();
 
-		cy.get("[data-test=toast-message]")
-			.should("have.length", 1)
-			.and("have.text", "Successfully deleted the event.");
-	});
+    cy.url().should("contain", "/employee/events/edit");
 
-	it("deletes multiple events", () => {
-		cy.get("input[type=checkbox]").then(e => {
-			const elements = e.map((_, el) => Cypress.$(el));
+    cy.findByTestId("edit-event-page").should("exist");
+  });
 
-			cy.wrap(elements[2]).click();
-			cy.wrap(elements[3]).click();
-		});
+  it("filters the events table", () => {
+    cy.findByTestId("data-table").should("exist");
 
-		cy.get("[data-test=table-actions]").eq(2).click({ force: true });
+    cy.get("[data-field='_id']").should("have.length", 11);
 
-		cy.get("[data-test=delete-many-items]").click();
+    cy.findByTestId("filter-button").click();
 
-		cy.get(".ant-popover-buttons").find("button").eq(1).click();
+    cy.findByTestId("Opponent-filter").click();
 
-		cy.get("[data-test=toast-message]")
-			.should("have.length", 1)
-			.and("have.text", "Successfully deleted the events.");
-	});
+    cy.findByTestId("opponent").type("Red Wings");
 
-	it("navigates to an Add Event page", () => {
-		cy.get(".add-event").click();
-		cy.url().should("contain", "/employee/events/create");
-	});
+    cy.findByTestId("modal-submit").click();
 
-	it("navigates to an Edit Event page", () => {
-		cy.get("[data-test=table-actions]").first().click({ force: true });
+    cy.get("[data-field='_id']").should("have.length", 2);
+  });
 
-		cy.get("[data-test=edit-location]").click();
+  it("resends event notifications", () => {
+    cy.findByTestId("data-table").should("exist");
+    cy.get("[data-field='sentEmailReminders']")
+      .eq(7)
+      .find("[data-testid='true']")
+      .should("exist");
 
-		cy.url().should("contain", "/employee/events/edit");
-	});
+    cy.findByTestId("table-actions").eq(6).should("exist").click();
 
-	it("navigates to a Schedule Event page", () => {
-		cy.get("[data-test=table-actions]").first().click({ force: true });
+    cy.findByTestId("resend-record").click();
 
-		cy.get("[data-test=assign-location]").click();
+    cy.findByTestId("alert-message")
+      .should("exist")
+      .and(
+        "have.text",
+        "Email notifications for that event will be resent within 24 hours of the event date."
+      );
 
-		cy.url().should("contain", "/employee/events/assign");
-	});
+    cy.findByTestId("alert-message").click();
+  });
+
+  it("deletes an event", () => {
+    cy.findByTestId("table-actions").eq(7).should("exist").click();
+
+    cy.findByTestId("delete-record").click();
+
+    cy.findByTestId("alert-message")
+      .should("exist")
+      .and("have.text", "Successfully deleted the event.");
+
+    cy.findByTestId("alert-message").click();
+  });
+
+  it("deletes multiple events", () => {
+    cy.findByTestId("data-table").should("exist");
+
+    cy.get("input[type=checkbox]").then(e => {
+      const elements = e.map((_, el) => Cypress.$(el));
+
+      cy.wrap(elements[9]).click();
+      cy.wrap(elements[10]).click();
+    });
+
+    cy.findByTestId("table-actions").first().click();
+
+    cy.findByTestId("delete-many-records").click();
+
+    cy.findByTestId("alert-message")
+      .should("exist")
+      .and("have.text", "Successfully deleted the events.");
+
+    cy.findByTestId("alert-message").click();
+  });
 });

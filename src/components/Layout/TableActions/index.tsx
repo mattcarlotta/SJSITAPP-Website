@@ -71,6 +71,7 @@ const TableActions = ({
       <Button
         primary
         noGlow
+        dataTestId="table-actions"
         type="button"
         padding="3px"
         margin="0 auto"
@@ -202,7 +203,7 @@ const TableActions = ({
                 tertiary
                 uppercase
                 type="button"
-                dataTestId="delete-record"
+                dataTestId="cancel-actions"
                 padding="8px"
                 margin="5px 0"
                 fontSize="16px"

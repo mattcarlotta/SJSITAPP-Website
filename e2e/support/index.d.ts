@@ -21,6 +21,12 @@ declare namespace Cypress {
     staffLogin(): Chainable<Cypress.Response>;
 
     /**
+     * Custom command to set a material UI field.
+     * @example cy.setMUIField("field")
+     */
+    setMUIField(field: string): void;
+
+    /**
      * Custom to attach a file to a request by file location and file type.
      * @example cy.attach_file("files/example.png", "image/png")
      */

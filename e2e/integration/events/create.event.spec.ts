@@ -6,18 +6,8 @@ const nextYearDate = moment().add(1, "year").format("YYYY");
 const currentSeason = `${currentYearDate}${nextYearDate}`;
 
 context("Staff Create Event Page", () => {
-  let setMUIField: (id: string) => void;
   before(() => {
     cy.exec("npm run seed:stage");
-    setMUIField = id => {
-      cy.get(`input[name='${id}']`).click();
-
-      cy.get(".MuiDialogActions-spacing")
-        .find("button")
-        .eq(1)
-        .should("exist")
-        .click();
-    };
   });
 
   beforeEach(() => {
@@ -50,7 +40,7 @@ context("Staff Create Event Page", () => {
 
     cy.findByTestId(currentSeason).first().click();
 
-    setMUIField("eventDate");
+    cy.setMUIField("eventDate");
 
     cy.findByTestId("uniform-selected-value").click();
 
@@ -134,7 +124,7 @@ context("Staff Create Event Page", () => {
 
     cy.findByTestId("Sharks Teal Jersey").first().click();
 
-    setMUIField("callTime");
+    cy.setMUIField("callTime");
 
     cy.findByTestId("submit-button").click();
 
@@ -154,13 +144,13 @@ context("Staff Create Event Page", () => {
 
     cy.findByTestId(currentSeason).first().click();
 
-    setMUIField("eventDate");
+    cy.setMUIField("eventDate");
 
     cy.findByTestId("uniform-selected-value").click();
 
     cy.findByTestId("Sharks Teal Jersey").first().click();
 
-    setMUIField("callTime");
+    cy.setMUIField("callTime");
 
     cy.findByTestId("submit-button").click();
 

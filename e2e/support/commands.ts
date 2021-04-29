@@ -63,3 +63,13 @@ Cypress.Commands.add("staffLogin", () =>
     password: "password"
   })
 );
+
+Cypress.Commands.add("setMUIField", id => {
+  cy.get(`input[name='${id}']`).click();
+
+  cy.get(".MuiDialogActions-spacing")
+    .find("button")
+    .eq(1)
+    .should("exist")
+    .click();
+});

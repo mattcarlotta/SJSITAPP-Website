@@ -3,23 +3,27 @@ import { connectToDB } from "~database";
 import {
   invalidUpdateEventRequest,
   mustContainUniqueCallTimes,
-  unableToLocateEvent
+  unableToLocateEvent,
+  unableToLocateSeason
 } from "~messages/errors";
 import Event, { IEventDocument } from "~models/event";
-import { createDate, moment } from "~helpers";
+import { moment } from "~helpers";
 import app from "~test/utils/testServer";
 import { staffSignIn } from "~test/utils/signIn";
 
-const today = createDate().format();
+const today = moment().format();
+const currentYear = moment().format("YYYY");
+const nextYear = moment().add(1, "year").format("YYYY");
+const seasonId = `${currentYear}${nextYear}`;
 
 const newEvent = {
   callTimes: [moment("06-01-2001 05:00pm", "MM-DD-YYYY hh:mma").format()],
-  eventDate: new Date(2001, 7, 1),
+  eventDate: new Date(parseInt(currentYear, 10), 7, 1),
   eventType: "Game",
   location: "Any",
   notes: "",
   opponent: "None",
-  seasonId: "20002001",
+  seasonId,
   team: "Yes",
   uniform: "Uniform"
 };
@@ -77,6 +81,45 @@ describe("Event Update Controller", () => {
       .expect(400)
       .then(res => {
         expect(res.body.err).toEqual(unableToLocateEvent);
+        done();
+      });
+  });
+
+  it("rejects requests where the seasonId is invalid", done => {
+    app()
+      .put("/api/events/update")
+      .set("Cookie", cookie)
+      .send({ ...updatedEvent, id: game._id, seasonId: "18001801" })
+      .expect(400)
+      .then(res => {
+        expect(res.body.err).toEqual(unableToLocateSeason);
+        done();
+      });
+  });
+
+  it("rejects requests where the eventDate falls outside of the season", done => {
+    app()
+      .put("/api/events/update")
+      .set("Cookie", cookie)
+      .send({ ...updatedEvent, id: game._id, eventDate: new Date(1800, 7, 1) })
+      .expect(400)
+      .then(res => {
+        expect(res.body.err).toContain(
+          `The event date selected below falls outside of the ${seasonId} season.`
+        );
+        done();
+      });
+  });
+
+  it("rejects requests where the callTimes aren't unique", done => {
+    app()
+      .post("/api/events/create")
+      .set("Cookie", cookie)
+      .expect("Content-Type", /json/)
+      .send({ ...newEvent, callTimes: [today, today] })
+      .expect(400)
+      .then(res => {
+        expect(res.body.err).toEqual(mustContainUniqueCallTimes);
         done();
       });
   });
