@@ -17,6 +17,17 @@ describe("Card", () => {
     expect(wrapper.find("[data-testid='test-card']")).toExist();
   });
 
+  it("sets media query when passed a 'breakpoint' prop", () => {
+    wrapper.setProps({ breakpoint: true });
+    expect(wrapper.find("[data-testid='test-card']")).toHaveStyleRule(
+      "display",
+      "none",
+      {
+        media: "(max-width: 400px)"
+      }
+    );
+  });
+
   it("sets margin when passed a 'margin' prop", () => {
     wrapper.setProps({ margin: "10px" });
     expect(wrapper.find("[data-testid='test-card']")).toHaveStyleRule(

@@ -1,8 +1,23 @@
-import Router from "next/router";
 import { mount, ReactWrapper } from "enzyme";
 import Modal from "../index";
 
 const onClick = jest.fn();
+const mockBack = jest.fn();
+const mockPush = jest.fn();
+const mockReplace = jest.fn();
+
+jest.mock("next/router", () => ({
+  __esModule: true,
+  useRouter: jest.fn(() => ({
+    route: "/",
+    pathname: "",
+    query: {},
+    asPath: "/",
+    push: mockPush,
+    replace: mockReplace,
+    back: mockBack
+  }))
+}));
 
 const initProps = {
   children: <h1>Example Modal Content</h1>,
@@ -32,7 +47,7 @@ describe("Modal", () => {
 
   it("redirects the user back to home if closed", () => {
     wrapper.find("[data-testid='close-modal']").first().simulate("click");
-    expect(Router.push).toHaveBeenCalledWith("/");
+    expect(mockPush).toHaveBeenCalledWith("/");
   });
 
   it("calls a passed in 'onClick' prop function", () => {

@@ -1,5 +1,4 @@
 import { ReactWrapper } from "enzyme";
-import { useRouter } from "next/router";
 import toast from "~components/App/Toast";
 import mockApp from "~utils/mockAxios";
 import waitFor from "~utils/waitFor";
@@ -7,6 +6,23 @@ import withProviders from "~utils/withProviders";
 import ComposeMailForm from "../index";
 
 jest.mock("~components/App/Toast");
+
+const mockBack = jest.fn();
+const mockPush = jest.fn();
+const mockReplace = jest.fn();
+
+jest.mock("next/router", () => ({
+  __esModule: true,
+  useRouter: jest.fn(() => ({
+    route: "/",
+    pathname: "",
+    query: {},
+    asPath: "/",
+    push: mockPush,
+    replace: mockReplace,
+    back: mockBack
+  }))
+}));
 
 const APIURL = "members/emails";
 const mockSuccessMessage = "Successfully created AP form!";
@@ -28,8 +44,6 @@ mockApp
   .onPost(CREATEAPIURL)
   .reply(200, { message: mockSuccessMessage });
 
-const { push, replace } = useRouter();
-
 describe("Compose Mail Form", () => {
   let wrapper: ReactWrapper;
   let findById: (id: string) => ReactWrapper;
@@ -40,9 +54,8 @@ describe("Compose Mail Form", () => {
 
   afterEach(() => {
     (toast as jest.Mock).mockClear();
-    (push as jest.Mock).mockClear();
-    (replace as jest.Mock).mockClear();
-    (toast as jest.Mock).mockClear();
+    mockPush.mockClear();
+    mockReplace.mockClear();
   });
 
   it("renders a loading placeholder", async () => {
@@ -59,7 +72,7 @@ describe("Compose Mail Form", () => {
         type: "error",
         message: "Request failed with status code 404"
       });
-      expect(replace).toHaveBeenCalledWith("/employee/mail/viewall?page=1");
+      expect(mockReplace).toHaveBeenCalledWith("/employee/mail/viewall?page=1");
     });
   });
 
@@ -142,7 +155,7 @@ describe("Compose Mail Form", () => {
           message: mockSuccessMessage,
           type: "success"
         });
-        expect(push).toHaveBeenCalledWith("/employee/mail/viewall?page=1");
+        expect(mockPush).toHaveBeenCalledWith("/employee/mail/viewall?page=1");
       });
     });
   });

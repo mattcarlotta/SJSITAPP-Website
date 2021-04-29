@@ -83,7 +83,7 @@ const Table = ({
       toast({ type: "error", message: err.toString() });
       setState(prevState => ({ ...prevState, isLoading: false }));
     }
-  }, [API, app, parseData, queryString]);
+  }, [API, app, queryString, parseData, toast]);
 
   const handlePageChange = ({ page }: GridPageChangeParams): void => {
     updateQuery({ page: page + 1 });

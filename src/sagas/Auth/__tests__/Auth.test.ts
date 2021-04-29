@@ -18,6 +18,8 @@ import {
   TSignupData
 } from "~types";
 
+jest.mock("next/router");
+
 const id = "0123456789";
 const password = "password";
 const email = "test@example.com";

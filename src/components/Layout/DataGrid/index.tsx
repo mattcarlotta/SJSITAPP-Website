@@ -1,5 +1,5 @@
 import { DataGrid } from "@material-ui/data-grid";
-import { createStyles, Theme, makeStyles } from "@material-ui/core";
+import { createStyles, makeStyles } from "@material-ui/core";
 import NoTableData from "~components/Layout/NoTableData";
 import {
   GridColumns,
@@ -19,17 +19,11 @@ export type TTableProps = {
   handleSelectionChange: (selection: GridSelectionModelChangeParams) => void;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
-      border:
-        theme.palette.type === "light"
-          ? "1px solid #f0f0f0"
-          : "1px solid #1d1d1d",
-      color:
-        theme.palette.type === "light"
-          ? "rgba(0,0,0,.85)"
-          : "rgba(255,255,255,0.85)",
+      border: "1px solid #f0f0f0",
+      color: "rgba(0,0,0,.85)",
       WebkitFontSmoothing: "auto",
       letterSpacing: "normal",
       "& .MuiDataGrid-window": {
@@ -45,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
         backgroundColor: "#fafafa"
       },
       "& .MuiDataGrid-columnsContainer": {
-        backgroundColor: theme.palette.type === "light" ? "#fafafa" : "#1d1d1d"
+        backgroundColor: "#fafafa"
       },
       "& .MuiDataGrid-iconSeparator": {
         display: "none"
@@ -54,23 +48,16 @@ const useStyles = makeStyles((theme: Theme) =>
         justifyContent: "center"
       },
       "& .MuiDataGrid-colCell, .MuiDataGrid-cell": {
-        borderRight: `1px solid ${
-          theme.palette.type === "light" ? "#f0f0f0" : "#303030"
-        }`
+        borderRight: "1px solid #f0f0f0"
       },
       "& .MuiDataGrid-colCell:nth-last-child(2), .MuiDataGrid-cell:nth-last-child(2)": {
         borderRight: 0
       },
       "& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell": {
-        borderBottom: `1px solid ${
-          theme.palette.type === "light" ? "#f0f0f0" : "#303030"
-        }`
+        borderBottom: "1px solid #f0f0f0"
       },
       "& .MuiDataGrid-cell": {
-        color:
-          theme.palette.type === "light"
-            ? "rgba(0,0,0,.85)"
-            : "rgba(255,255,255,0.65)",
+        color: "rgba(0,0,0,.85)",
         textAlign: "center",
         // justifyContent: "center",
         textOverflow: "unset",
@@ -80,9 +67,7 @@ const useStyles = makeStyles((theme: Theme) =>
         width: 16,
         height: 16,
         backgroundColor: "transparent",
-        border: `1px solid ${
-          theme.palette.type === "light" ? "#d9d9d9" : "rgb(67, 67, 67)"
-        }`,
+        border: "1px solid #d9d9d9",
         borderRadius: 2
       },
       "& .MuiCheckbox-root svg path": {

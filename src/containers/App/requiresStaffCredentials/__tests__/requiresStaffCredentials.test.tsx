@@ -1,12 +1,26 @@
 import { ReactWrapper } from "enzyme";
-import { useRouter } from "next/router";
 import withRedux, { store } from "~utils/withRedux";
 import { signinSession } from "~actions/Auth";
 import requiresStaffCredentials from "../index";
 
 const TestPage = () => <p data-testid="authenticated-page">Hello</p>;
 
-const { replace } = useRouter();
+const mockBack = jest.fn();
+const mockPush = jest.fn();
+const mockReplace = jest.fn();
+
+jest.mock("next/router", () => ({
+  __esModule: true,
+  useRouter: jest.fn(() => ({
+    route: "/",
+    pathname: "",
+    query: {},
+    asPath: "/",
+    push: mockPush,
+    replace: mockReplace,
+    back: mockBack
+  }))
+}));
 
 const WrappedComponent = requiresStaffCredentials(TestPage);
 
@@ -17,7 +31,7 @@ describe("Requires Basic Credentials", () => {
   });
 
   afterEach(() => {
-    (replace as jest.Mock).mockClear();
+    mockReplace.mockClear();
   });
 
   it("initially renders a spinner", () => {
@@ -28,7 +42,7 @@ describe("Requires Basic Credentials", () => {
     store.dispatch(signinSession({ role: "guest" }));
     wrapper.update();
 
-    expect(replace).toHaveBeenCalledWith("/employee/login");
+    expect(mockReplace).toHaveBeenCalledWith("/employee/login");
   });
 
   it("redirects members to the login page", () => {
@@ -37,7 +51,7 @@ describe("Requires Basic Credentials", () => {
     );
     wrapper.update();
 
-    expect(replace).toHaveBeenCalledWith("/employee/login");
+    expect(mockReplace).toHaveBeenCalledWith("/employee/login");
   });
 
   it("allows employees to view the authenticated page", () => {

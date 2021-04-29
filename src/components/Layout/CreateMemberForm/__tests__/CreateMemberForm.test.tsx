@@ -1,13 +1,27 @@
 import { mount, ReactWrapper } from "enzyme";
-import { useRouter } from "next/router";
 import toast from "~components/App/Toast";
 import mockApp from "~utils/mockAxios";
 import waitFor from "~utils/waitFor";
 import CreateMemberForm from "../index";
 
-const { push } = useRouter();
-
 jest.mock("~components/App/Toast");
+
+const mockBack = jest.fn();
+const mockPush = jest.fn();
+const mockReplace = jest.fn();
+
+jest.mock("next/router", () => ({
+  __esModule: true,
+  useRouter: jest.fn(() => ({
+    route: "/",
+    pathname: "",
+    query: {},
+    asPath: "/",
+    push: mockPush,
+    replace: mockReplace,
+    back: mockBack
+  }))
+}));
 
 const APIURL = "tokens/create";
 
@@ -26,7 +40,7 @@ describe("CreateMemberForm", () => {
   });
 
   afterEach(() => {
-    (push as jest.Mock).mockClear();
+    mockPush.mockClear();
     (toast as jest.Mock).mockClear();
   });
 
@@ -78,7 +92,7 @@ describe("CreateMemberForm", () => {
         type: "success",
         message: "Successfully created member!"
       });
-      expect(push).toHaveBeenCalledWith(
+      expect(mockPush).toHaveBeenCalledWith(
         "/employee/members/authorizations/viewall?page=1"
       );
     });

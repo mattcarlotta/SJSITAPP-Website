@@ -7,6 +7,23 @@ const initProps = {
   title: "Hello world"
 };
 
+const mockBack = jest.fn();
+const mockPush = jest.fn();
+const mockReplace = jest.fn();
+
+jest.mock("next/router", () => ({
+  __esModule: true,
+  useRouter: jest.fn(() => ({
+    route: "/",
+    pathname: "",
+    query: {},
+    asPath: "/",
+    push: mockPush,
+    replace: mockReplace,
+    back: mockBack
+  }))
+}));
+
 describe("Accordion", () => {
   let wrapper: ReactWrapper;
   beforeEach(() => {

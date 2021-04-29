@@ -1,8 +1,24 @@
 import { ReactWrapper } from "enzyme";
-import { useRouter } from "next/router";
 import withRedux, { store } from "~utils/withRedux";
 import { signinSession } from "~actions/Auth";
 import requiresBasicCredentials from "../index";
+
+const mockBack = jest.fn();
+const mockPush = jest.fn();
+const mockReplace = jest.fn();
+
+jest.mock("next/router", () => ({
+  __esModule: true,
+  useRouter: jest.fn(() => ({
+    route: "/",
+    pathname: "",
+    query: {},
+    asPath: "/",
+    push: mockPush,
+    replace: mockReplace,
+    back: mockBack
+  }))
+}));
 
 const TestPage = () => <p data-testid="authenticated-page">Hello</p>;
 
@@ -22,8 +38,7 @@ describe("Requires Basic Credentials", () => {
     store.dispatch(signinSession({ role: "guest" }));
     wrapper.update();
 
-    const { replace } = useRouter();
-    expect(replace).toHaveBeenCalledWith("/employee/login");
+    expect(mockReplace).toHaveBeenCalledWith("/employee/login");
   });
 
   it("allows employees to view the authenticated page", () => {

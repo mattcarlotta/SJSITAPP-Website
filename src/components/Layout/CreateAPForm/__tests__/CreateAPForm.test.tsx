@@ -1,5 +1,4 @@
 import { ReactWrapper } from "enzyme";
-import { useRouter } from "next/router";
 import toast from "~components/App/Toast";
 import mockApp from "~utils/mockAxios";
 import waitFor from "~utils/waitFor";
@@ -8,14 +7,29 @@ import CreateAPForm from "../index";
 
 jest.mock("~components/App/Toast");
 
+const mockBack = jest.fn();
+const mockPush = jest.fn();
+const mockReplace = jest.fn();
+
+jest.mock("next/router", () => ({
+  __esModule: true,
+  useRouter: jest.fn(() => ({
+    route: "/",
+    pathname: "",
+    query: {},
+    asPath: "/",
+    push: mockPush,
+    replace: mockReplace,
+    back: mockBack
+  }))
+}));
+
 const mockSuccessMessage = "Successfully created AP form!";
 mockApp
   .onGet("seasons/all/ids")
   .reply(200, { seasonIds: ["20202021", "20192020"] });
 
 mockApp.onPost("forms/create").reply(200, { message: mockSuccessMessage });
-
-const { push } = useRouter();
 
 describe("Create AP Form", () => {
   let wrapper: ReactWrapper;
@@ -27,7 +41,7 @@ describe("Create AP Form", () => {
 
   afterEach(() => {
     (toast as jest.Mock).mockClear();
-    (push as jest.Mock).mockClear();
+    mockPush.mockClear();
   });
 
   it("renders without errors", async () => {
@@ -99,7 +113,7 @@ describe("Create AP Form", () => {
         message: mockSuccessMessage,
         type: "success"
       });
-      expect(push).toHaveBeenCalledWith("/employee/forms/viewall?page=1");
+      expect(mockPush).toHaveBeenCalledWith("/employee/forms/viewall?page=1");
     });
   });
 });

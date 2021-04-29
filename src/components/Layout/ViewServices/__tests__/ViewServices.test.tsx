@@ -1,5 +1,4 @@
 import { ReactWrapper } from "enzyme";
-import { useRouter } from "next/router";
 import toast from "~components/App/Toast";
 import mockApp from "~utils/mockAxios";
 import waitFor from "~utils/waitFor";
@@ -25,6 +24,23 @@ const service = {
 };
 
 jest.mock("~components/App/Toast");
+
+const mockBack = jest.fn();
+const mockPush = jest.fn();
+const mockReplace = jest.fn();
+
+jest.mock("next/router", () => ({
+  __esModule: true,
+  useRouter: jest.fn(() => ({
+    route: "/",
+    pathname: "",
+    query: {},
+    asPath: "/",
+    push: mockPush,
+    replace: mockReplace,
+    back: mockBack
+  }))
+}));
 
 const APIURL = "service/view";
 mockApp
@@ -56,8 +72,6 @@ mockApp
   .replyOnce(404)
   .onPut(UPDATESERVICE)
   .reply(200, { message: successUpdateMessage });
-
-const { replace } = useRouter();
 
 describe("View Services", () => {
   let wrapper: ReactWrapper;
@@ -99,7 +113,7 @@ describe("View Services", () => {
 
   afterEach(() => {
     (toast as jest.Mock).mockClear();
-    (replace as jest.Mock).mockClear();
+    mockReplace.mockClear();
   });
 
   it("renders a loading placeholder", async () => {
@@ -116,7 +130,7 @@ describe("View Services", () => {
         type: "error",
         message: "Request failed with status code 404"
       });
-      expect(replace).toHaveBeenCalledWith("/employee/dashboard");
+      expect(mockReplace).toHaveBeenCalledWith("/employee/dashboard");
     });
   });
 

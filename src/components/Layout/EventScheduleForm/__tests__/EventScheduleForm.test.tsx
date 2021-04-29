@@ -1,5 +1,4 @@
 import { mount, ReactWrapper } from "enzyme";
-import { useRouter } from "next/router";
 import toast from "~components/App/Toast";
 import waitFor from "~utils/waitFor";
 import mockApp from "~utils/mockAxios";
@@ -13,6 +12,23 @@ window.ResizeObserver = jest.fn(() => ({
 }));
 
 jest.mock("~components/App/Toast");
+
+const mockBack = jest.fn();
+const mockPush = jest.fn();
+const mockReplace = jest.fn();
+
+jest.mock("next/router", () => ({
+  __esModule: true,
+  useRouter: jest.fn(() => ({
+    route: "/",
+    pathname: "",
+    query: { id: "88" },
+    asPath: "/",
+    push: mockPush,
+    replace: mockReplace,
+    back: mockBack
+  }))
+}));
 
 const draggableId = "5d72dffe65ec39141ae78553";
 
@@ -85,25 +101,6 @@ const members = [
     "Event Count": 1
   }
 ];
-
-const mockBack = jest.fn();
-const mockPush = jest.fn();
-const mockReplace = jest.fn();
-
-jest.mock("next/router", () => ({
-  __esModule: true,
-  useRouter: jest.fn()
-}));
-
-(useRouter as jest.Mock).mockImplementation(() => ({
-  route: "/",
-  pathname: "",
-  query: { id: "88" },
-  asPath: "/",
-  push: mockPush,
-  replace: mockReplace,
-  back: mockBack
-}));
 
 const APIURL = "events/review/88";
 mockApp

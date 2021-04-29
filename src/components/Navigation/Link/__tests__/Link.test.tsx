@@ -32,6 +32,23 @@ describe("Styled Link", () => {
     });
   });
 
+  it("sets secondary properties when passed a 'secondary' prop", () => {
+    wrapper.setProps({ secondary: true });
+
+    expect(wrapper).toHaveStyleRule("color", "#fff");
+    expect(wrapper).toHaveStyleRule("background", "#025f6d");
+    expect(wrapper).toHaveStyleRule("border", "2px solid #3794a5");
+    expect(wrapper).toHaveStyleRule("background", "#006d76", {
+      target: ":hover"
+    });
+    expect(wrapper).toHaveStyleRule("box-shadow", "0px 0px 14px -2px #14d3e2", {
+      target: ":hover"
+    });
+    expect(wrapper).toHaveStyleRule("border", "2px solid #3794a5", {
+      target: ":hover"
+    });
+  });
+
   it("sets color to #025f6d when passed a 'primary' prop", () => {
     wrapper.setProps({ primary: true });
     expect(wrapper).toHaveStyleRule("color", "#025f6d");

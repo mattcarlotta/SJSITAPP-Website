@@ -7,6 +7,23 @@ const initProps = {
   role: "member"
 };
 
+const mockBack = jest.fn();
+const mockPush = jest.fn();
+const mockReplace = jest.fn();
+
+jest.mock("next/router", () => ({
+  __esModule: true,
+  useRouter: jest.fn(() => ({
+    route: "/",
+    pathname: "",
+    query: {},
+    asPath: "/",
+    push: mockPush,
+    replace: mockReplace,
+    back: mockBack
+  }))
+}));
+
 describe("SearchBar", () => {
   let wrapper: ReactWrapper;
   beforeEach(() => {
@@ -25,7 +42,7 @@ describe("SearchBar", () => {
 
     await waitFor(() => {
       wrapper.update();
-      expect(useRouter().push).toHaveBeenCalledWith(
+      expect(mockPush).toHaveBeenCalledWith(
         "/employee/help#how-do-i-change-my-avatar"
       );
     });

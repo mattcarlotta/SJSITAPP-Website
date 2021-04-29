@@ -1,5 +1,4 @@
 import { ReactWrapper } from "enzyme";
-import { useRouter } from "next/router";
 import toast from "~components/App/Toast";
 import { standardFormat } from "~utils/dateFormats";
 import mockApp from "~utils/mockAxios";
@@ -10,9 +9,24 @@ import CreateSeasonForm from "../index";
 
 const startDate = moment().startOf("day");
 
-const { push } = useRouter();
-
 jest.mock("~components/App/Toast");
+
+const mockBack = jest.fn();
+const mockPush = jest.fn();
+const mockReplace = jest.fn();
+
+jest.mock("next/router", () => ({
+  __esModule: true,
+  useRouter: jest.fn(() => ({
+    route: "/",
+    pathname: "",
+    query: {},
+    asPath: "/",
+    push: mockPush,
+    replace: mockReplace,
+    back: mockBack
+  }))
+}));
 
 const APIURL = `seasons/create`;
 
@@ -31,8 +45,8 @@ describe("CreateSeasonForm", () => {
   });
 
   afterEach(() => {
-    (push as jest.Mock).mockClear();
     (toast as jest.Mock).mockClear();
+    mockPush.mockClear();
   });
 
   it("renders without errors", async () => {
@@ -129,7 +143,7 @@ describe("CreateSeasonForm", () => {
         type: "success",
         message: "Successfully created season!"
       });
-      expect(push).toHaveBeenCalledWith("/employee/seasons/viewall?page=1");
+      expect(mockPush).toHaveBeenCalledWith("/employee/seasons/viewall?page=1");
     });
   });
 });

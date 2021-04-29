@@ -1,5 +1,4 @@
 import { ReactWrapper } from "enzyme";
-import { useRouter } from "next/router";
 import toast from "~components/App/Toast";
 import moment from "~utils/momentWithTimezone";
 import mockApp from "~utils/mockAxios";
@@ -27,6 +26,23 @@ const form = {
 
 jest.mock("~components/App/Toast");
 
+const mockBack = jest.fn();
+const mockPush = jest.fn();
+const mockReplace = jest.fn();
+
+jest.mock("next/router", () => ({
+  __esModule: true,
+  useRouter: jest.fn(() => ({
+    route: "/",
+    pathname: "",
+    query: {},
+    asPath: "/",
+    push: mockPush,
+    replace: mockReplace,
+    back: mockBack
+  }))
+}));
+
 const apiQuery = jest.fn();
 
 const initProps = {
@@ -46,8 +62,6 @@ mockApp
   .onGet(APIURL)
   .reply(200, { seasonIds: ["20202021", "20192020"] });
 
-const { push, replace } = useRouter();
-
 apiQuery
   .mockImplementationOnce(() => Promise.reject(mockErrorMessage))
   .mockImplementationOnce(() =>
@@ -64,8 +78,8 @@ describe("AP Form", () => {
 
   afterEach(() => {
     (toast as jest.Mock).mockClear();
-    (push as jest.Mock).mockClear();
-    (replace as jest.Mock).mockClear();
+    mockPush.mockClear();
+    mockReplace.mockClear();
   });
 
   it("renders a loading placeholder", async () => {
@@ -82,7 +96,9 @@ describe("AP Form", () => {
         type: "error",
         message: "Request failed with status code 404"
       });
-      expect(replace).toHaveBeenCalledWith("/employee/forms/viewall?page=1");
+      expect(mockReplace).toHaveBeenCalledWith(
+        "/employee/forms/viewall?page=1"
+      );
     });
   });
 
@@ -205,7 +221,7 @@ describe("AP Form", () => {
           message: mockSuccessMessage,
           type: "success"
         });
-        expect(push).toHaveBeenCalledWith("/employee/forms/viewall?page=1");
+        expect(mockPush).toHaveBeenCalledWith("/employee/forms/viewall?page=1");
       });
     });
   });
