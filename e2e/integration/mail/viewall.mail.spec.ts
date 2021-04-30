@@ -1,105 +1,98 @@
-// context("Staff View Mail Page", () => {
-// 	before(() => {
-// 		cy.exec("npm run seed:stage");
-// 	});
+context("Staff View Mail Page", () => {
+  before(() => {
+    cy.exec("npm run seed:stage");
+  });
 
-// 	beforeEach(() => {
-// 		cy.request("POST", "/api/signin", {
-// 			email: "staffmember@example.com",
-// 			password: "password",
-// 		});
-// 		cy.reload();
-// 		cy.visit("/employee/mail/viewall?page=1");
-// 	});
+  beforeEach(() => {
+    cy.staffLogin();
+    cy.reload();
+    cy.visit("/employee/mail/viewall?page=1");
+  });
 
-// 	after(() => {
-// 		cy.exec("npm run drop:stage");
-// 	});
+  after(() => {
+    cy.exec("npm run drop:stage");
+  });
 
-// 	it("displays the mail table", () => {
-// 		cy.get(".ant-table-wrapper").should("have.length", 1);
-// 	});
+  it("displays the View Mail page and table", () => {
+    cy.findByTestId("view-mail-page").should("exist");
+    cy.findByTestId("data-table").should("exist");
+  });
 
-// 	it("filters the mail table", () => {
-// 		cy.get(".ant-pagination-total-text").contains("6 items");
+  it("filters the mail table", () => {
+    cy.findByTestId("data-table").should("exist");
 
-// 		cy.get("button#status").click();
+    cy.findByDataField("status").should("have.length", 7);
 
-// 		cy.get(".ant-select").click();
+    cy.findByTestId("filter-button").click();
 
-// 		cy.get("li[role=option]").eq(1).click();
+    cy.findByTestId("Email Status-filter").click();
 
-// 		cy.get(".ant-pagination-total-text").contains("3 items");
+    cy.findByTestId("status-selected-value").click();
 
-// 		cy.get("button#clear-filters").click();
+    cy.findByTestId("sent").click();
 
-// 		cy.get(".ant-pagination-total-text").contains("6 items");
-// 	});
+    cy.findByTestId("modal-submit").click();
 
-// 	it("deletes an email", () => {
-// 		cy.get("[data-test=table-actions]").eq(2).click({ force: true });
+    cy.findByDataField("status").should("have.length", 4);
+  });
 
-// 		cy.get("[data-test=delete-item]").click();
+  it("navigates to the Compose Mail page", () => {
+    cy.findByTestId("view-mail-page")
+      .should("exist")
+      .find("[data-testid='create-mail-link']")
+      .click();
 
-// 		cy.get(".ant-popover-buttons").find("button").eq(1).click();
+    cy.url().should("contain", "/employee/mail/create");
 
-// 		cy.get("[data-test=toast-message]")
-// 			.should("have.length", 1)
-// 			.and("have.text", "Successfully deleted the email.");
-// 	});
+    cy.findByTestId("compose-mail-page").should("exist");
+  });
 
-// 	it("resends an email", () => {
-// 		cy.get(".ant-table-row")
-// 			.eq(1)
-// 			.find("[data-status=sent]")
-// 			.should("have.length", 1);
+  it("navigates to a View Email page", () => {
+    cy.findByTestId("data-table").should("exist");
 
-// 		cy.get("[data-test=table-actions]").eq(1).click({ force: true });
+    cy.findByTestId("table-actions").first().should("exist").click();
 
-// 		cy.get("[data-test=send-mail]").click();
+    cy.findByTestId("view-record").click();
 
-// 		cy.get(".ant-table-row")
-// 			.eq(1)
-// 			.find("[data-status=unsent]")
-// 			.should("have.length", 1);
+    cy.url().should("contain", "/employee/mail/view");
 
-// 		cy.get("[data-test=toast-message]")
-// 			.should("have.length", 1)
-// 			.and("have.text", "That email will be resent shortly.");
-// 	});
+    cy.findByTestId("view-email-page").should("exist");
+  });
 
-// 	it("deletes multiple emails", () => {
-// 		cy.get("input[type=checkbox]").then(e => {
-// 			const elements = e.map((_, el) => Cypress.$(el));
+  it("resends email", () => {
+    cy.findByTestId("data-table").should("exist");
 
-// 			cy.wrap(elements[2]).click();
-// 			cy.wrap(elements[3]).click();
-// 		});
+    cy.findByTestId("table-actions").eq(4).should("exist").click();
 
-// 		cy.get("[data-test=table-actions]").eq(2).click({ force: true });
+    cy.findByTestId("resend-record").click();
 
-// 		cy.get("[data-test=delete-many-items]").click();
+    cy.alertExistsWith("That email will be resent shortly.");
+  });
 
-// 		cy.get(".ant-popover-buttons").find("button").eq(1).click();
+  it("deletes a mail", () => {
+    cy.findByTestId("data-table").should("exist");
 
-// 		cy.get("[data-test=toast-message]")
-// 			.should("have.length", 1)
-// 			.and("have.text", "Successfully deleted the mail.");
-// 	});
+    cy.findByTestId("table-actions").should("exist").last().click();
 
-// 	it("navigates to a Send Mail page", () => {
-// 		cy.get(".send-mail").click();
-// 		cy.url().should("contain", "/employee/mail/create");
-// 		cy.get("form").should("have.length", 1);
-// 	});
+    cy.findByTestId("delete-record").click();
 
-// 	it("navigates to an Edit Mail page", () => {
-// 		cy.get("[data-test=table-actions]").first().click({ force: true });
+    cy.alertExistsWith("Successfully deleted the email.");
+  });
 
-// 		cy.get("[data-test=edit-location]").click();
+  it("deletes multiple emails", () => {
+    cy.findByTestId("data-table").should("exist");
 
-// 		cy.url().should("contain", "/employee/mail/edit");
+    cy.get("input[type=checkbox]").then(e => {
+      const elements = e.map((_, el) => Cypress.$(el));
 
-// 		cy.get("form").should("have.length", 1);
-// 	});
-// });
+      cy.wrap(elements[2]).click();
+      cy.wrap(elements[3]).click();
+    });
+
+    cy.findByTestId("table-actions").first().click();
+
+    cy.findByTestId("delete-many-records").click();
+
+    cy.alertExistsWith("Successfully deleted the mail.");
+  });
+});

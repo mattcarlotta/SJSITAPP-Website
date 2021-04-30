@@ -50,7 +50,7 @@ export const ViewMail = (): ReactElement => {
     <>
       <Header title="View Email" url={router.asPath} />
       <Card
-        dataTestId="compose-mail-page"
+        dataTestId="view-email-page"
         icon={<GoMailRead />}
         title="View Email"
         subtitle="Review a previously created email"
