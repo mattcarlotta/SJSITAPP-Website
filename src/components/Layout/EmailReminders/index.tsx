@@ -9,7 +9,7 @@ const EmailReminders = ({ status }: { status: boolean }): ReactElement => (
     placement="top"
     styles={{ textAlign: "center", width: "100%" }}
   >
-    <span data-testid={status}>
+    <span data-testid={status ? "sent" : "unsent"}>
       <IconContext.Provider
         value={{
           style: {

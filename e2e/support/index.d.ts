@@ -27,6 +27,12 @@ declare namespace Cypress {
     clickPreviousMonth(): void;
 
     /**
+     * Custom command to click the year button a Material Dialog.
+     * @example cy.clickYear()
+     */
+    clickYear(): void;
+
+    /**
      * Custom command to select a DOM element by data-field attribute.
      * @example cy.findByDataField("example")
      */
@@ -76,6 +82,12 @@ declare namespace Cypress {
      * @example cy.selectLastDate()
      */
     selectLastDate(): void;
+
+    /**
+     * Custom command to select a Material UI year within a Material Dialog.
+     * @example cy.selectYear("2000")
+     */
+    selectYear(year: string): void;
 
     /**
      * Custom command to log a staff member into the application.

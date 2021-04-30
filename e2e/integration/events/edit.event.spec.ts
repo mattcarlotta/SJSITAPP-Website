@@ -1,7 +1,8 @@
 import moment from "../../../src/utils/momentWithTimezone";
+import { fullyearFormat } from "../../../src/utils/dateFormats";
 
-const currentYearDate = moment().format("YYYY");
-const nextYearDate = moment().add(1, "year").format("YYYY");
+const currentYearDate = moment().format(fullyearFormat);
+const nextYearDate = moment().add(1, "year").format(fullyearFormat);
 
 const currentSeason = `${currentYearDate}${nextYearDate}`;
 
@@ -73,18 +74,9 @@ context("Staff Edit Event Page", () => {
 
     cy.findElementByNameAttribute("input", "eventDate").first().click();
 
-    // open year selection
-    cy.get(".MuiPickersToolbarButton-toolbarBtn")
-      .first()
-      .should("exist")
-      .click();
+    cy.clickYear();
 
-    // select first year 1899
-    cy.get(".MuiPickersYearSelection-container")
-      .find("div[role='button']")
-      .first()
-      .should("exist")
-      .click();
+    cy.selectYear("1899");
 
     cy.clickOK();
 

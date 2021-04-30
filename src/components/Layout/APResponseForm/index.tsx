@@ -140,7 +140,7 @@ const APResponseForm = (): ReactElement => {
     <>
       <Header title="AP Form" url={router.asPath} />
       <Card
-        dataTestId="dashboard-availability"
+        dataTestId="ap-form-responses"
         icon={<FaFileSignature />}
         title={title}
         subtitle="Please select a response for all of the events below."

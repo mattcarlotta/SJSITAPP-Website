@@ -71,6 +71,10 @@ Cypress.Commands.add("clickPreviousMonth", () => {
     .click();
 });
 
+Cypress.Commands.add("clickYear", () => {
+  cy.get(".MuiPickersToolbarButton-toolbarBtn").first().should("exist").click();
+});
+
 Cypress.Commands.add("findByDataField", value =>
   cy.get(`[data-field='${value}']`)
 );
@@ -103,11 +107,19 @@ Cypress.Commands.add("selectDate", date => {
     .click();
 });
 
-Cypress.Commands.add("selectLastDate", date => {
+Cypress.Commands.add("selectLastDate", () => {
   cy.get(".MuiPickersCalendar-week")
     .should("exist")
     .find("button[tabIndex='0']")
     .last()
+    .should("exist")
+    .click();
+});
+
+Cypress.Commands.add("selectYear", year => {
+  cy.get(".MuiPickersYearSelection-container")
+    .find("div[role='button']")
+    .contains(year)
     .should("exist")
     .click();
 });

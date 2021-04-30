@@ -31,7 +31,7 @@ context("Schedule Page", () => {
   it("displays a calendar", () => {
     cy.findByTestId("calender-container").should("exist");
 
-    cy.findByTestId("upcoming-event").should("have.length", 2);
+    cy.findByTestId("upcoming-event").should("exist");
   });
 
   it("renders an event details", () => {
@@ -60,13 +60,13 @@ context("Schedule Page", () => {
   it("renders the previous month when 'previous-month-button' button is clicked", () => {
     cy.findByTestId("previous-month-button").should("exist").click();
 
-    cy.findByTestId("upcoming-event").should("have.length", 0);
+    cy.findByTestId("upcoming-event").should("not.exist");
   });
 
   it("renders the next month when 'next-month-button' button is clicked", () => {
     cy.findByTestId("next-month-button").should("exist").click();
 
-    cy.findByTestId("upcoming-event").should("have.length", 3);
+    cy.findByTestId("upcoming-event").should("exist");
   });
 
   it("renders the 'My Events' when 'selectedGames' button is clicked", () => {

@@ -18,6 +18,22 @@ context("Staff View Events Page", () => {
     cy.findByTestId("data-table").should("exist");
   });
 
+  it("filters the events table", () => {
+    cy.findByTestId("data-table").should("exist");
+
+    cy.findByDataField("_id").should("have.length", 11);
+
+    cy.findByTestId("filter-button").click();
+
+    cy.findByTestId("Opponent-filter").click();
+
+    cy.findByTestId("opponent").type("Red Wings");
+
+    cy.findByTestId("modal-submit").click();
+
+    cy.findByDataField("_id").should("have.length", 2);
+  });
+
   it("navigates to the Add Event page", () => {
     cy.findByTestId("view-events-page")
       .should("exist")
@@ -53,28 +69,12 @@ context("Staff View Events Page", () => {
     cy.findByTestId("edit-event-page").should("exist");
   });
 
-  it("filters the events table", () => {
-    cy.findByTestId("data-table").should("exist");
-
-    cy.findByDataField("_id").should("have.length", 11);
-
-    cy.findByTestId("filter-button").click();
-
-    cy.findByTestId("Opponent-filter").click();
-
-    cy.findByTestId("opponent").type("Red Wings");
-
-    cy.findByTestId("modal-submit").click();
-
-    cy.findByDataField("_id").should("have.length", 2);
-  });
-
   it("resends event notifications", () => {
     cy.findByTestId("data-table").should("exist");
 
     cy.findByDataField("sentEmailReminders")
       .eq(7)
-      .find("[data-testid='true']")
+      .find("[data-testid='sent']")
       .should("exist");
 
     cy.findByTestId("table-actions").eq(6).should("exist").click();
@@ -84,9 +84,16 @@ context("Staff View Events Page", () => {
     cy.alertExistsWith(
       "Email notifications for that event will be resent within 24 hours of the event date."
     );
+
+    cy.findByDataField("sentEmailReminders")
+      .eq(7)
+      .find("[data-testid='unsent']")
+      .should("exist");
   });
 
   it("deletes an event", () => {
+    cy.findByTestId("data-table").should("exist");
+
     cy.findByTestId("table-actions").eq(7).should("exist").click();
 
     cy.findByTestId("delete-record").click();
