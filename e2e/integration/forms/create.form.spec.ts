@@ -1,130 +1,192 @@
-// import moment from "../../../src/utils/momentWithTimezone";
+import moment from "../../../src/utils/momentWithTimezone";
 
-// const lastMonthStart = moment().subtract(1, "month").startOf("month");
-// const lastMonthEnd = moment().subtract(1, "month").endOf("month");
+const currentYearDate = moment().format("YYYY");
+const nextYearDate = moment().add(1, "year").format("YYYY");
 
-// context("Staff Create Form Page", () => {
-// 	before(() => {
-// 		cy.exec("npm run seed:stage");
-// 	});
+const currentSeason = `${currentYearDate}${nextYearDate}`;
 
-// 	beforeEach(() => {
-// 		cy.request("POST", "/api/signin", {
-// 			email: "staffmember@example.com",
-// 			password: "password",
-// 		});
-// 		cy.reload();
-// 		cy.visit("/employee/forms/create");
-// 	});
+context("Staff Create Form Page", () => {
+  before(() => {
+    cy.exec("npm run seed:stage");
+  });
 
-// 	after(() => {
-// 		cy.exec("npm run drop:stage");
-// 	});
+  beforeEach(() => {
+    cy.staffLogin();
+    cy.reload();
+    cy.visit("/employee/forms/create");
+  });
 
-// 	it("displays the Create AP Form form", () => {
-// 		cy.get("form").should("have.length", 1);
-// 	});
+  after(() => {
+    cy.exec("npm run drop:stage");
+  });
 
-// 	it("pushes back to viewall forms page", () => {
-// 		cy.get("[data-test=go-back]").click();
+  it("displays the Create AP Form page and New AP Form form", () => {
+    cy.findByTestId("create-form-page").should("exist");
+    cy.findByTestId("ap-form").should("exist");
+  });
 
-// 		cy.url().should("contain", "/employee/forms/viewall?page=1");
-// 	});
+  it("displays errors if empty fields are submitted", () => {
+    cy.findByTestId("ap-form").should("exist");
 
-// 	it("displays errors if empty fields are submitted", () => {
-// 		cy.get("[data-test=submit-button]").click();
+    cy.submitForm();
 
-// 		cy.get("[data-test=errors]").should("have.length", 2);
-// 	});
+    cy.formHasErrors(4);
+  });
 
-// 	it("rejects selecting an expired date", () => {
-// 		cy.get(".clickhandler").click();
+  it("rejects creating an A/P form that already exists", () => {
+    cy.findByTestId("ap-form").should("exist");
 
-// 		cy.get("[data-name=seasonId]").eq(3).click();
+    cy.findByTestId("seasonId-selected-value").click();
 
-// 		cy.get("input[placeholder='Start date']").click();
+    cy.findByTestId(currentSeason).first().click();
 
-// 		cy.get(".ant-calendar-prev-month-btn").click();
+    cy.findElementByNameAttribute("input", "startMonth").click();
 
-// 		cy.get(`[title='${lastMonthStart.format("MMMM D, YYYY")}']`).click();
+    cy.selectDate(1);
 
-// 		cy.get(`[title='${lastMonthEnd.format("MMMM D, YYYY")}']`)
-// 			.first()
-// 			.click();
+    cy.clickOK();
 
-// 		cy.get(".date-picker").find("input").first().click();
+    cy.findElementByNameAttribute("input", "endMonth").click();
 
-// 		cy.get(".ant-calendar-prev-month-btn").eq(1).click();
+    cy.selectLastDate();
 
-// 		cy.get("input[placeholder='Select a start date and time...']")
-// 			.eq(2)
-// 			.type("03/21/2020 5:00pm")
-// 			.type("{enter}");
+    cy.clickOK();
 
-// 		cy.get("[data-test=submit-button]").click();
+    cy.findElementByNameAttribute("input", "expirationDate").click();
 
-// 		cy.get("[data-test=toast-message]")
-// 			.should("have.length", 1)
-// 			.and(
-// 				"have.text",
-// 				"The selected 'Expiration Date' has already past. Please select a later date.",
-// 			);
+    cy.selectDate(7);
 
-// 		cy.get("[data-test=toast-message]").click();
-// 	});
+    cy.clickOK();
 
-// 	it("rejects creating a form that already exists", () => {
-// 		cy.get(".clickhandler").click();
+    cy.findByTestId("submit-button").click();
 
-// 		cy.get("[data-name=seasonId]").first().click();
+    cy.alertExistsWith(
+      "The selected Enrollment Month dates have already been assigned to another A/P form. Please choose different dates."
+    );
+  });
 
-// 		cy.get(".date-picker").find("input").first().click();
+  it("rejects creating a form that contains an expiration date that has already past", () => {
+    cy.findByTestId("ap-form").should("exist");
 
-// 		cy.get(".ant-calendar-selected-day").click();
+    cy.findByTestId("seasonId-selected-value").click();
 
-// 		cy.get(".ant-calendar-ok-btn").click();
+    cy.findByTestId(currentSeason).first().click();
 
-// 		cy.get("[data-test=submit-button]").click();
+    cy.findElementByNameAttribute("input", "startMonth").click();
 
-// 		cy.get("[data-test=toast-message]")
-// 			.should("have.length", 1)
-// 			.and(
-// 				"have.text",
-// 				"The selected Enrollment Month dates have already been assigned to another A/P form. Please choose different dates.",
-// 			);
+    cy.clickNextMonth();
 
-// 		cy.get("[data-test=toast-message]").click();
-// 	});
+    cy.selectDate(1);
 
-// 	it("creates a new form", () => {
-// 		cy.get(".clickhandler").click();
+    cy.clickOK();
 
-// 		cy.get("[data-name=seasonId]").eq(3).click();
+    cy.findElementByNameAttribute("input", "endMonth").click();
 
-// 		cy.get("input[placeholder='Start date']").click();
+    cy.clickNextMonth();
 
-// 		cy.get(".ant-calendar-prev-month-btn").click();
+    cy.selectDate(28);
 
-// 		cy.get(`[title='${lastMonthStart.format("MMMM D, YYYY")}']`).click();
+    cy.clickOK();
 
-// 		cy.get(`[title='${lastMonthEnd.format("MMMM D, YYYY")}']`)
-// 			.first()
-// 			.click();
+    cy.findElementByNameAttribute("input", "expirationDate").click();
 
-// 		cy.get(".date-picker").find("input").first().click();
+    cy.clickPreviousMonth();
 
-// 		cy.wait(500);
+    cy.selectDate(1);
 
-// 		cy.get(".ant-calendar-selected-day").click();
+    cy.clickOK();
 
-// 		cy.get(".ant-calendar-ok-btn").click();
+    cy.submitForm();
 
-// 		cy.get("[data-test=submit-button]").click();
+    cy.alertExistsWith(
+      "The selected 'Expiration Date' has already past. Please select a later date."
+    );
+  });
 
-// 		cy.get("[data-test=toast-message]")
-// 			.should("have.length", 1)
-// 			.and("have.text", "Successfully created a new form!");
+  it("rejects creating a form that contains an send date that has already past", () => {
+    cy.findByTestId("ap-form").should("exist");
 
-// 		cy.url().should("contain", "/employee/forms/viewall?page=1");
-// 	});
-// });
+    cy.findByTestId("seasonId-selected-value").click();
+
+    cy.findByTestId(currentSeason).first().click();
+
+    cy.findElementByNameAttribute("input", "startMonth").click();
+
+    cy.clickNextMonth();
+
+    cy.selectDate(1);
+
+    cy.clickOK();
+
+    cy.findElementByNameAttribute("input", "endMonth").click();
+
+    cy.clickNextMonth();
+
+    cy.selectDate(28);
+
+    cy.clickOK();
+
+    cy.findElementByNameAttribute("input", "expirationDate").click();
+
+    cy.clickNextMonth();
+
+    cy.selectDate(7);
+
+    cy.clickOK();
+
+    cy.findElementByNameAttribute(
+      "input",
+      "sendEmailNotificationsDate"
+    ).click();
+
+    cy.clickPreviousMonth();
+
+    cy.selectDate(1);
+
+    cy.clickOK();
+
+    cy.submitForm();
+
+    cy.alertExistsWith(
+      "The selected 'Send Email Notifications Date' has already past. Please select a later date."
+    );
+  });
+
+  it("creates a new A/P form", () => {
+    cy.findByTestId("ap-form").should("exist");
+
+    cy.findByTestId("seasonId-selected-value").click();
+
+    cy.findByTestId(currentSeason).first().click();
+
+    cy.findElementByNameAttribute("input", "startMonth").click();
+
+    cy.clickNextMonth();
+
+    cy.selectDate(1);
+
+    cy.clickOK();
+
+    cy.findElementByNameAttribute("input", "endMonth").click();
+
+    cy.clickNextMonth();
+
+    cy.selectDate(27);
+
+    cy.clickOK();
+
+    cy.findElementByNameAttribute("input", "expirationDate").click();
+
+    cy.clickNextMonth();
+
+    cy.selectDate(7);
+
+    cy.clickOK();
+
+    cy.submitForm();
+
+    cy.alertExistsWith("Successfully created a new AP form!");
+
+    cy.url().should("contain", "/employee/forms/viewall?page=1");
+  });
+});

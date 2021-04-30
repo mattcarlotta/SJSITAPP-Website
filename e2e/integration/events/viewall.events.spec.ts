@@ -56,7 +56,7 @@ context("Staff View Events Page", () => {
   it("filters the events table", () => {
     cy.findByTestId("data-table").should("exist");
 
-    cy.get("[data-field='_id']").should("have.length", 11);
+    cy.findByDataField("_id").should("have.length", 11);
 
     cy.findByTestId("filter-button").click();
 
@@ -66,12 +66,13 @@ context("Staff View Events Page", () => {
 
     cy.findByTestId("modal-submit").click();
 
-    cy.get("[data-field='_id']").should("have.length", 2);
+    cy.findByDataField("_id").should("have.length", 2);
   });
 
   it("resends event notifications", () => {
     cy.findByTestId("data-table").should("exist");
-    cy.get("[data-field='sentEmailReminders']")
+
+    cy.findByDataField("sentEmailReminders")
       .eq(7)
       .find("[data-testid='true']")
       .should("exist");
@@ -80,14 +81,9 @@ context("Staff View Events Page", () => {
 
     cy.findByTestId("resend-record").click();
 
-    cy.findByTestId("alert-message")
-      .should("exist")
-      .and(
-        "have.text",
-        "Email notifications for that event will be resent within 24 hours of the event date."
-      );
-
-    cy.findByTestId("alert-message").click();
+    cy.alertExistsWith(
+      "Email notifications for that event will be resent within 24 hours of the event date."
+    );
   });
 
   it("deletes an event", () => {
@@ -95,11 +91,7 @@ context("Staff View Events Page", () => {
 
     cy.findByTestId("delete-record").click();
 
-    cy.findByTestId("alert-message")
-      .should("exist")
-      .and("have.text", "Successfully deleted the event.");
-
-    cy.findByTestId("alert-message").click();
+    cy.alertExistsWith("Successfully deleted the event.");
   });
 
   it("deletes multiple events", () => {
@@ -116,10 +108,6 @@ context("Staff View Events Page", () => {
 
     cy.findByTestId("delete-many-records").click();
 
-    cy.findByTestId("alert-message")
-      .should("exist")
-      .and("have.text", "Successfully deleted the events.");
-
-    cy.findByTestId("alert-message").click();
+    cy.alertExistsWith("Successfully deleted the events.");
   });
 });

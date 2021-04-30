@@ -46,9 +46,46 @@ Cypress.Commands.add(
   }
 );
 
+Cypress.Commands.add("alertExistsWith", message => {
+  cy.get("[data-testid='alert-message']").should("exist").contains(message);
+
+  cy.get("[data-testid='alert-message']").click();
+});
+
+Cypress.Commands.add("clickOK", () => {
+  cy.get(".MuiDialogActions-spacing")
+    .find("button")
+    .eq(1)
+    .should("exist")
+    .click();
+});
+
+Cypress.Commands.add("clickNextMonth", () => {
+  cy.get(".MuiPickersCalendarHeader-switchHeader").find("button").eq(1).click();
+});
+
+Cypress.Commands.add("clickPreviousMonth", () => {
+  cy.get(".MuiPickersCalendarHeader-switchHeader")
+    .find("button")
+    .first()
+    .click();
+});
+
+Cypress.Commands.add("findByDataField", value =>
+  cy.get(`[data-field='${value}']`)
+);
+
+Cypress.Commands.add("findElementByNameAttribute", (element, name) =>
+  cy.get(`${element}[name='${name}']`)
+);
+
 Cypress.Commands.add("findByTestId", value =>
   cy.get(`[data-testid='${value}']`)
 );
+
+Cypress.Commands.add("formHasErrors", errors => {
+  cy.get("[data-testid='errors']").should("have.length", errors);
+});
 
 Cypress.Commands.add("memberLogin", () =>
   cy.request("POST", "http://localhost:5000/api/signin", {
@@ -57,12 +94,34 @@ Cypress.Commands.add("memberLogin", () =>
   })
 );
 
+Cypress.Commands.add("selectDate", date => {
+  cy.get(".MuiPickersCalendar-week")
+    .should("exist")
+    .find("button[tabIndex='0']")
+    .eq(date - 1)
+    .should("exist")
+    .click();
+});
+
+Cypress.Commands.add("selectLastDate", date => {
+  cy.get(".MuiPickersCalendar-week")
+    .should("exist")
+    .find("button[tabIndex='0']")
+    .last()
+    .should("exist")
+    .click();
+});
+
 Cypress.Commands.add("staffLogin", () =>
   cy.request("POST", "http://localhost:5000/api/signin", {
     email: "staffmember@example.com",
     password: "password"
   })
 );
+
+Cypress.Commands.add("submitForm", () => {
+  cy.get("[data-testid='submit-button']").should("exist").click();
+});
 
 Cypress.Commands.add("setMUIField", id => {
   cy.get(`input[name='${id}']`).click();

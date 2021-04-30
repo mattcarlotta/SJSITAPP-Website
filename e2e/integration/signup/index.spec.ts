@@ -32,9 +32,9 @@ context("Signup Page", () => {
   });
 
   it("displays required fields if the form is submitted with empty fields", () => {
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
-    cy.findByTestId("errors").should("have.length", 5);
+    cy.formHasErrors(5);
   });
 
   it("fills out all of the signup fields", () => {
@@ -56,16 +56,11 @@ context("Signup Page", () => {
         .should("have.value", value);
     });
 
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
-    cy.findByTestId("alert-message")
-      .should("exist")
-      .and(
-        "have.text",
-        "There was a problem authenticating your request. The authorized key that was supplied does not match the staff approved email."
-      );
-
-    cy.findByTestId("alert-message").click();
+    cy.alertExistsWith(
+      "There was a problem authenticating your request. The authorized key that was supplied does not match the staff approved email."
+    );
   });
 
   it("displays a success message if the form is submitted with valid fields and allows the member to sign in", () => {
@@ -77,16 +72,11 @@ context("Signup Page", () => {
         .should("have.value", value);
     });
 
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
-    cy.findByTestId("alert-message")
-      .should("exist")
-      .and(
-        "have.text",
-        "Thank you for registering, Static Member. Your account is ready to go! Feel free to sign in with your email and password in the login form below."
-      );
-
-    cy.findByTestId("alert-message").click();
+    cy.alertExistsWith(
+      "Thank you for registering, Static Member. Your account is ready to go! Feel free to sign in with your email and password in the login form below."
+    );
 
     cy.url().should("contain", "/employee/login");
 
@@ -96,7 +86,7 @@ context("Signup Page", () => {
 
     cy.findByTestId("password").eq(1).type(fields[4]);
 
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
     cy.url().should("contain", "/employee/dashboard");
   });

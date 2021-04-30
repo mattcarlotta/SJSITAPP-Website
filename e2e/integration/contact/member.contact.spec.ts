@@ -18,9 +18,9 @@ context("Member Contact Us Page", () => {
   });
 
   it("displays form errors if fields are empty", () => {
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
-    cy.findByTestId("errors").should("have.length", 3);
+    cy.formHasErrors(3);
   });
 
   it("sends an email", () => {
@@ -31,19 +31,14 @@ context("Member Contact Us Page", () => {
 
     cy.findByTestId("Staff").first().click();
 
-    cy.get("input[name='subject']").type("Test Email");
+    cy.findElementByNameAttribute("input", "subject").type("Test Email");
 
-    cy.get("textarea[name='message']").type("Hi. :)");
+    cy.findElementByNameAttribute("textarea", "message").type("Hi. :)");
 
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
-    cy.findByTestId("alert-message")
-      .should("exist")
-      .and(
-        "have.text",
-        "Thank you for contacting us. The staff has received your message. Expect a response within 24 hours."
-      );
-
-    cy.findByTestId("alert-message").click();
+    cy.alertExistsWith(
+      "Thank you for contacting us. The staff has received your message. Expect a response within 24 hours."
+    );
   });
 });

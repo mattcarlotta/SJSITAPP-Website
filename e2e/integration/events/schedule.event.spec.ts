@@ -26,7 +26,7 @@ context("Staff Schedule Event Page", () => {
   });
 
   it("schedules an event", () => {
-    cy.get("[data-field='scheduledIds']").eq(6).should("have.text", "0");
+    cy.findByDataField("scheduledIds").eq(6).should("have.text", "0");
 
     cy.findByTestId("table-actions").eq(5).should("exist").click();
 
@@ -47,16 +47,12 @@ context("Staff Schedule Event Page", () => {
       .trigger("keydown", { keyCode: 32, force: true })
       .wait(750);
 
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
-    cy.findByTestId("alert-message")
-      .should("exist")
-      .and("have.text", "Successfully updated the event's schedule.");
-
-    cy.findByTestId("alert-message").click();
+    cy.alertExistsWith("Successfully updated the event's schedule.");
 
     cy.url().should("contain", "/employee/events/viewall?page=1");
 
-    cy.get("[data-field='scheduledIds']").eq(6).should("have.text", "2");
+    cy.findByDataField("scheduledIds").eq(6).should("have.text", "2");
   });
 });

@@ -82,7 +82,7 @@ context("Member Dashboard Page", () => {
     cy.findByTestId("ap-form").should("exist");
 
     cy.findByTestId("radio-container")
-      .should("have.length", 3)
+      .should("exist")
       .find("button")
       .then(e => {
         const elements = e.map((_, el) => Cypress.$(el));
@@ -92,49 +92,33 @@ context("Member Dashboard Page", () => {
         cy.wrap(elements[11]).click();
       });
 
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
     cy.url().should("contain", "/employee/dashboard");
 
-    cy.findByTestId("alert-message")
-      .should("exist")
-      .and("have.text", "Successfully added your responses to the A/P form!");
+    cy.alertExistsWith("Successfully added your responses to the A/P form!");
 
-    cy.findByTestId("availability-avg").should("have.text", "0%");
-
-    cy.findByTestId("alert-message").click();
+    cy.findByTestId("availability-avg").should("not.contain", "100%");
   });
 
   it("updates the event-distribution chart", () => {
     cy.findByTestId("event-distribution-chart").should("exist");
 
-    cy.get("input[name='startDate']").click();
+    cy.findElementByNameAttribute("input", "startDate").click();
 
-    cy.get(".MuiPickersCalendarHeader-switchHeader")
-      .find("button")
-      .first()
-      .click();
+    cy.clickPreviousMonth();
 
-    cy.get(".MuiPickersCalendar-week").eq(1).find("button").first().click();
+    cy.selectDate(1);
 
-    cy.get(".MuiDialogActions-root.MuiDialogActions-spacing")
-      .find("button")
-      .eq(1)
-      .click();
+    cy.clickOK();
 
-    cy.get("input[name='endDate']").click();
+    cy.findElementByNameAttribute("input", "endDate").click();
 
-    cy.get(".MuiPickersCalendarHeader-switchHeader")
-      .find("button")
-      .first()
-      .click();
+    cy.clickPreviousMonth();
 
-    cy.get(".MuiPickersCalendar-week").eq(1).find("button").first().click();
+    cy.selectDate(28);
 
-    cy.get(".MuiDialogActions-root.MuiDialogActions-spacing")
-      .find("button")
-      .eq(1)
-      .click();
+    cy.clickOK();
 
     cy.findByTestId("no-event-distribution").should("exist");
   });

@@ -32,7 +32,7 @@ context("Staff Edit Event Page", () => {
 
     cy.findByTestId("edit-event-page").should("exist");
 
-    cy.get(`input[name='callTime']`).first().click();
+    cy.findElementByNameAttribute("input", "callTime").first().click();
 
     cy.get(".MuiPickersToolbarButton-toolbarBtn")
       .first()
@@ -42,11 +42,7 @@ context("Staff Edit Event Page", () => {
     cy.get(".MuiPickersClock-squareMask").click(250, 120); // set to 3 hours
     cy.get(".MuiPickersClock-squareMask").click(250, 125); // set to 15 minutes
 
-    cy.get(".MuiDialogActions-spacing")
-      .find("button")
-      .eq(1)
-      .should("exist")
-      .click();
+    cy.clickOK();
 
     cy.findByTestId("add-calltime-field").click();
 
@@ -60,22 +56,13 @@ context("Staff Edit Event Page", () => {
     cy.get(".MuiPickersClock-squareMask").click(250, 120); // set to 3 hours
     cy.get(".MuiPickersClock-squareMask").click(250, 125); // set to 15 minutes
 
-    cy.get(".MuiDialogActions-spacing")
-      .find("button")
-      .eq(1)
-      .should("exist")
-      .click();
+    cy.clickOK();
 
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
-    cy.findByTestId("alert-message")
-      .should("exist")
-      .and(
-        "have.text",
-        "One or more of the 'Scheduling Call Times' is a duplicate. Please remove the duplicate(s) before submitting the form again."
-      );
-
-    cy.findByTestId("alert-message").click();
+    cy.alertExistsWith(
+      "One or more of the 'Scheduling Call Times' is a duplicate. Please remove the duplicate(s) before submitting the form again."
+    );
   });
 
   it("displays an API call event error when event falls outside of season", () => {
@@ -84,43 +71,37 @@ context("Staff Edit Event Page", () => {
 
     cy.findByTestId("edit-event-page").should("exist");
 
-    cy.get(`input[name='eventDate']`).click();
+    cy.findElementByNameAttribute("input", "eventDate").first().click();
 
+    // open year selection
     cy.get(".MuiPickersToolbarButton-toolbarBtn")
       .first()
       .should("exist")
       .click();
 
+    // select first year 1899
     cy.get(".MuiPickersYearSelection-container")
       .find("div[role='button']")
       .first()
       .should("exist")
       .click();
 
-    cy.get(".MuiDialogActions-spacing")
-      .find("button")
-      .eq(1)
-      .should("exist")
-      .click();
+    cy.clickOK();
 
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
-    cy.findByTestId("alert-message")
-      .should("exist")
-      .contains(
-        `The event date selected below falls outside of the ${currentSeason} season.`
-      );
-
-    cy.findByTestId("alert-message").click();
+    cy.alertExistsWith(
+      `The event date selected below falls outside of the ${currentSeason} season.`
+    );
   });
 
   it("updates an event call times which resets scheduled members", () => {
-    cy.get("[data-field='scheduledIds']").eq(1).should("have.text", "1");
+    cy.findByDataField("scheduledIds").eq(1).should("have.text", "1");
 
     cy.findByTestId("table-actions").first().should("exist").click();
     cy.findByTestId("edit-record").first().should("exist").click();
 
-    cy.get(`input[name='callTime']`).first().click();
+    cy.findElementByNameAttribute("input", "callTime").first().click();
 
     cy.get(".MuiPickersToolbarButton-toolbarBtn")
       .first()
@@ -130,31 +111,22 @@ context("Staff Edit Event Page", () => {
     cy.get(".MuiPickersClock-squareMask").click(250, 120); // set to 3 hours
     cy.get(".MuiPickersClock-squareMask").click(250, 125); // set to 15 minutes
 
-    cy.get(".MuiDialogActions-spacing")
-      .find("button")
-      .eq(1)
-      .should("exist")
-      .click();
+    cy.clickOK();
 
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
-    cy.findByTestId("alert-message")
-      .should("exist")
-      .and(
-        "have.text",
-        "Successfully updated the event. Please note that the call times were changed; therefore, any previous scheduling for the event has been removed and will need to be rescheduled."
-      );
-
-    cy.findByTestId("alert-message").click();
+    cy.alertExistsWith(
+      "Successfully updated the event. Please note that the call times were changed; therefore, any previous scheduling for the event has been removed and will need to be rescheduled."
+    );
 
     cy.url().should("contain", "/employee/events/viewall?page=1");
 
-    cy.get("[data-field='scheduledIds']").eq(1).should("have.text", "0");
+    cy.findByDataField("scheduledIds").eq(1).should("have.text", "0");
   });
 
   it("updates event location which doesn't change scheduled members", () => {
-    cy.get("[data-field='scheduledIds']").eq(2).should("have.text", "1");
-    cy.get("[data-field='location']")
+    cy.findByDataField("scheduledIds").eq(2).should("have.text", "1");
+    cy.findByDataField("location")
       .eq(2)
       .should("have.text", "SAP Center at San Jose");
 
@@ -163,17 +135,13 @@ context("Staff Edit Event Page", () => {
 
     cy.findByTestId("location").should("exist").clear().type("N/A");
 
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
-    cy.findByTestId("alert-message")
-      .should("exist")
-      .and("have.text", "Successfully updated the event.");
-
-    cy.findByTestId("alert-message").click();
+    cy.alertExistsWith("Successfully updated the event.");
 
     cy.url().should("contain", "/employee/events/viewall?page=1");
 
-    cy.get("[data-field='scheduledIds']").eq(2).should("have.text", "1");
-    cy.get("[data-field='location']").eq(2).should("have.text", "N/A");
+    cy.findByDataField("scheduledIds").eq(2).should("have.text", "1");
+    cy.findByDataField("location").eq(2).should("have.text", "N/A");
   });
 });

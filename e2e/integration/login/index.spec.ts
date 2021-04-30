@@ -16,9 +16,9 @@ context("Login Page", () => {
   });
 
   it("displays required fields if the form is submitted with empty fields", () => {
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
-    cy.findByTestId("errors").should("have.length", 2);
+    cy.formHasErrors(2);
   });
 
   it("displays an error if the form is submitted with invalid fields", () => {
@@ -26,16 +26,11 @@ context("Login Page", () => {
 
     cy.findByTestId("password").eq(1).type("passw");
 
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
-    cy.findByTestId("alert-message")
-      .should("exist")
-      .and(
-        "have.text",
-        "There was a problem with your login credentials. Please make sure your username and password are correct."
-      );
-
-    cy.findByTestId("alert-message").click();
+    cy.alertExistsWith(
+      "There was a problem with your login credentials. Please make sure your username and password are correct."
+    );
   });
 
   it("rejects suspended users", () => {
@@ -43,16 +38,11 @@ context("Login Page", () => {
 
     cy.findByTestId("password").eq(1).type("password");
 
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
-    cy.findByTestId("alert-message")
-      .should("exist")
-      .and(
-        "have.text",
-        "Access to your account was revoked. The account you're trying to log into has been permanently suspended."
-      );
-
-    cy.findByTestId("alert-message").click();
+    cy.alertExistsWith(
+      "Access to your account was revoked. The account you're trying to log into has been permanently suspended."
+    );
   });
 
   it("logs the user in and redirects them to the dashboard", () => {
@@ -60,7 +50,7 @@ context("Login Page", () => {
 
     cy.findByTestId("password").eq(1).type("password");
 
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
     cy.url().should("contain", "/employee/dashboard");
   });

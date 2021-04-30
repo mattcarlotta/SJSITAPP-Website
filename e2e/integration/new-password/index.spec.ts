@@ -16,9 +16,9 @@ context("New Password Page", () => {
   });
 
   it("displays required fields if the form is submitted with empty fields", () => {
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
-    cy.findByTestId("errors").should("have.length", 1);
+    cy.formHasErrors(1);
   });
 
   it("displays an error if the form is submitted with the same password", () => {
@@ -27,16 +27,11 @@ context("New Password Page", () => {
       .type("password")
       .should("have.value", "password");
 
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
-    cy.findByTestId("alert-message")
-      .should("have.length", 1)
-      .and(
-        "have.text",
-        "Your new password must not match your current password. Please try again."
-      );
-
-    cy.findByTestId("alert-message").click();
+    cy.alertExistsWith(
+      "Your new password must not match your current password. Please try again."
+    );
   });
 
   it("displays a success message if the form is submitted with an valid password and redirects the user back to the login page", () => {
@@ -45,16 +40,11 @@ context("New Password Page", () => {
       .type("password2")
       .should("have.value", "password2");
 
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
-    cy.findByTestId("alert-message")
-      .should("have.length", 1)
-      .and(
-        "have.text",
-        "The password has been reset for reset.password@example.com. Please sign into your account with your new password."
-      );
-
-    cy.findByTestId("alert-message").click();
+    cy.alertExistsWith(
+      "The password has been reset for reset.password@example.com. Please sign into your account with your new password."
+    );
 
     cy.url().should("contain", "/employee/login");
 
@@ -64,7 +54,7 @@ context("New Password Page", () => {
 
     cy.findByTestId("password").eq(1).type("password2");
 
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
     cy.url().should("contain", "/employee/dashboard");
   });

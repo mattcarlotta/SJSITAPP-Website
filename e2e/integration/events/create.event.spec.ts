@@ -28,9 +28,9 @@ context("Staff Create Event Page", () => {
   it("displays errors when form is submitted with empty fields", () => {
     cy.findByTestId("event-form").should("exist");
 
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
-    cy.findByTestId("errors").should("have.length", 4);
+    cy.formHasErrors(4);
   });
 
   it("displays an API call time error when call times aren't unique", () => {
@@ -48,7 +48,7 @@ context("Staff Create Event Page", () => {
 
     cy.findByTestId("add-calltime-field").click();
 
-    cy.get(`input[name='callTime']`).first().click();
+    cy.findElementByNameAttribute("input", "callTime").first().click();
 
     cy.get(".MuiPickersToolbarButton-toolbarBtn")
       .first()
@@ -58,11 +58,7 @@ context("Staff Create Event Page", () => {
     cy.get(".MuiPickersClock-squareMask").click(250, 120); // set to 3 hours
     cy.get(".MuiPickersClock-squareMask").click(250, 125); // set to 15 minutes
 
-    cy.get(".MuiDialogActions-spacing")
-      .find("button")
-      .eq(1)
-      .should("exist")
-      .click();
+    cy.clickOK();
 
     cy.findByTestId("add-calltime-field").click();
 
@@ -76,22 +72,13 @@ context("Staff Create Event Page", () => {
     cy.get(".MuiPickersClock-squareMask").click(250, 120); // set to 3 hours
     cy.get(".MuiPickersClock-squareMask").click(250, 125); // set to 15 minutes
 
-    cy.get(".MuiDialogActions-spacing")
-      .find("button")
-      .eq(1)
-      .should("exist")
-      .click();
+    cy.clickOK();
 
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
-    cy.findByTestId("alert-message")
-      .should("exist")
-      .and(
-        "have.text",
-        "One or more of the 'Scheduling Call Times' is a duplicate. Please remove the duplicate(s) before submitting the form again."
-      );
-
-    cy.findByTestId("alert-message").click();
+    cy.alertExistsWith(
+      "One or more of the 'Scheduling Call Times' is a duplicate. Please remove the duplicate(s) before submitting the form again."
+    );
   });
 
   it("displays an API call event error when event falls outside of season", () => {
@@ -101,24 +88,22 @@ context("Staff Create Event Page", () => {
 
     cy.findByTestId(currentSeason).first().click();
 
-    cy.get(`input[name='eventDate']`).click();
+    cy.findElementByNameAttribute("input", "eventDate").click();
 
+    // open year selection
     cy.get(".MuiPickersToolbarButton-toolbarBtn")
       .first()
       .should("exist")
       .click();
 
+    // select first year 1899
     cy.get(".MuiPickersYearSelection-container")
       .find("div[role='button']")
       .first()
       .should("exist")
       .click();
 
-    cy.get(".MuiDialogActions-spacing")
-      .find("button")
-      .eq(1)
-      .should("exist")
-      .click();
+    cy.clickOK();
 
     cy.findByTestId("uniform-selected-value").click();
 
@@ -126,15 +111,11 @@ context("Staff Create Event Page", () => {
 
     cy.setMUIField("callTime");
 
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
-    cy.findByTestId("alert-message")
-      .should("exist")
-      .contains(
-        `The event date selected below falls outside of the ${currentSeason} season.`
-      );
-
-    cy.findByTestId("alert-message").click();
+    cy.alertExistsWith(
+      `The event date selected below falls outside of the ${currentSeason} season.`
+    );
   });
 
   it("creates an an event and redirects to viewall events page", () => {
@@ -152,16 +133,11 @@ context("Staff Create Event Page", () => {
 
     cy.setMUIField("callTime");
 
-    cy.findByTestId("submit-button").click();
+    cy.submitForm();
 
-    cy.findByTestId("alert-message")
-      .should("exist")
-      .and(
-        "have.text",
-        `Successfully added a new event to the ${currentSeason} season.`
-      );
-
-    cy.findByTestId("alert-message").click();
+    cy.alertExistsWith(
+      `Successfully added a new event to the ${currentSeason} season.`
+    );
 
     cy.url().should("contain", "/employee/events/viewall?page=1");
   });

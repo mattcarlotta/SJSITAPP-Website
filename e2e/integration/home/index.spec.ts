@@ -12,10 +12,10 @@ context("Home Page", () => {
   });
 
   it("initially displays a logo and an 'Employee Login' button", () => {
-    cy.get("[data-testid='spinner']").should("have.length", 1);
+    cy.findByTestId("spinner").should("exist");
 
-    cy.get("[data-testid='home-link']")
-      .should("have.length", 1)
+    cy.findByTestId("home-link")
+      .should("exist")
       .should("have.text", "Employee Login");
   });
 
@@ -30,9 +30,9 @@ context("Home Page", () => {
 
     cy.reload();
 
-    cy.get("[data-testid='home-link']").should("have.text", "View Dashboard");
+    cy.findByTestId("home-link").should("have.text", "View Dashboard");
 
-    cy.get("[data-testid='home-link']").click();
+    cy.findByTestId("home-link").click();
 
     cy.url().should("contain", "/employee/dashboard");
   });
