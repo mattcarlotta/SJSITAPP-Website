@@ -36,6 +36,11 @@ const teams = [
     name: "grand-rapids-griffins"
   },
   { team: "Hartford Wolf Pack", league: "AHL", name: "hartford-wolf-pack" },
+  {
+    team: "Henderson Silver Knights",
+    league: "AHL",
+    name: "henderson-silver-knights"
+  },
   { team: "Hershey Bears", league: "AHL", name: "hershey-bears" },
   { team: "Iowa Wild", league: "AHL", name: "iowa-wild" },
   { team: "Laval Rocket", league: "AHL", name: "laval-rocket" },

@@ -16,6 +16,7 @@ import Center from "~components/Layout/Center";
 import CloseModalButton from "~components/Layout/CloseModalButton";
 import Flex from "~components/Layout/Flex";
 import FlexStart from "~components/Layout/FlexStart";
+import Form from "~components/Layout/Form";
 import MenuButton from "~components/Layout/MenuButton";
 import MenuItem from "~components/Layout/MenuItem";
 import Padding from "~components/Layout/Padding";
@@ -30,6 +31,7 @@ import {
 import {
   ChangeEvent,
   EventTarget,
+  FormEvent,
   ReactElement,
   TFilters,
   TURLQuery
@@ -132,13 +134,8 @@ const TableFilterButton = ({
     }));
   };
 
-  const handleModalSubmit = ({
-    name,
-    value
-  }: {
-    name: string;
-    value: string | null;
-  }): void => {
+  const handleModalSubmit = (e: FormEvent): void => {
+    e.preventDefault();
     updateQuery({ [name]: value || null });
     handleModalClose();
   };
@@ -268,107 +265,108 @@ const TableFilterButton = ({
         open={isOpen}
         aria-labelledby="filters-dialog-title"
       >
-        <Padding right="10px" bottom="20px" left="10px">
-          <DialogTitle id="filters-dialog-title">
-            Filter by: {title}
-            <CloseModalButton
-              data-testid="close-modal"
-              aria-label="close modal"
-              type="button"
-              style={{ top: "10px", right: "20px" }}
-              onClick={handleModalClose}
-            >
-              <FaTimes style={{ margin: 0, fontSize: 20 }} />
-            </CloseModalButton>
-          </DialogTitle>
-          <DialogContent>
-            {(() => {
-              switch (type) {
-                case "date":
-                  return (
-                    <DatePicker
-                      name={name}
-                      value={value || null}
-                      onChange={handleModalChange}
-                      style={{ width: "100%", marginBottom: 20 }}
-                    />
-                  );
-                case "select":
-                  return (
-                    <div style={{ height: 120 }}>
-                      <Select
+        <Form maxWidth="none" margin="0" onSubmit={handleModalSubmit}>
+          <Padding right="10px" bottom="20px" left="10px">
+            <DialogTitle id="filters-dialog-title">
+              Filter by: {title}
+              <CloseModalButton
+                data-testid="close-modal"
+                aria-label="close modal"
+                type="button"
+                style={{ top: "10px", right: "20px" }}
+                onClick={handleModalClose}
+              >
+                <FaTimes style={{ margin: 0, fontSize: 20 }} />
+              </CloseModalButton>
+            </DialogTitle>
+            <DialogContent>
+              {(() => {
+                switch (type) {
+                  case "date":
+                    return (
+                      <DatePicker
                         name={name}
-                        textAlign="center"
-                        justifyContent="center"
-                        value={value}
-                        selectOptions={selectOptions(selectType)}
+                        value={value || null}
                         onChange={handleModalChange}
+                        style={{ width: "100%", marginBottom: 20 }}
                       />
-                    </div>
-                  );
-                case "text":
-                  return (
-                    <Input
-                      name={name}
-                      type="text"
-                      value={value}
-                      onChange={handleModalChange}
-                      containerStyle={{ height: "auto" }}
-                      placeholder="Type here to filter..."
-                      inputStyle={{
-                        padding: "8px 0 8px 17px",
-                        marginBottom: 20
-                      }}
-                    />
-                  );
-                default:
-                  return (
-                    <div data-testid="not-a-valid-component">
-                      Not a valid component
-                    </div>
-                  );
-              }
-            })()}
-          </DialogContent>
-          <DialogActions>
-            <Button
-              dataTestId="modal-cancel"
-              uppercase
-              danger
-              type="button"
-              padding="6px 18px"
-              borderRadius="5px"
-              maxWidth="110px"
-              onClick={handleModalClose}
-            >
-              Cancel
-            </Button>
-            <Button
-              dataTestId="modal-clear"
-              uppercase
-              outline
-              type="button"
-              padding="6px 18px"
-              borderRadius="5px"
-              maxWidth="110px"
-              onClick={() => handleModalClear(name)}
-            >
-              Clear
-            </Button>
-            <Button
-              dataTestId="modal-submit"
-              uppercase
-              tertiary
-              type="button"
-              padding="6px 18px"
-              borderRadius="5px"
-              maxWidth="110px"
-              onClick={() => handleModalSubmit({ name, value })}
-            >
-              Filter
-            </Button>
-          </DialogActions>
-        </Padding>
+                    );
+                  case "select":
+                    return (
+                      <div style={{ height: 120 }}>
+                        <Select
+                          name={name}
+                          textAlign="center"
+                          justifyContent="center"
+                          value={value}
+                          selectOptions={selectOptions(selectType)}
+                          onChange={handleModalChange}
+                        />
+                      </div>
+                    );
+                  case "text":
+                    return (
+                      <Input
+                        name={name}
+                        type="text"
+                        value={value}
+                        onChange={handleModalChange}
+                        containerStyle={{ height: "auto" }}
+                        placeholder="Type here to filter..."
+                        inputStyle={{
+                          padding: "8px 0 8px 17px",
+                          marginBottom: 20
+                        }}
+                      />
+                    );
+                  default:
+                    return (
+                      <div data-testid="not-a-valid-component">
+                        Not a valid component
+                      </div>
+                    );
+                }
+              })()}
+            </DialogContent>
+            <DialogActions>
+              <Button
+                dataTestId="modal-cancel"
+                uppercase
+                danger
+                type="button"
+                padding="6px 18px"
+                borderRadius="5px"
+                maxWidth="115px"
+                onClick={handleModalClose}
+              >
+                Cancel
+              </Button>
+              <Button
+                dataTestId="modal-clear"
+                uppercase
+                outline
+                type="button"
+                padding="6px 18px"
+                borderRadius="5px"
+                maxWidth="110px"
+                onClick={() => handleModalClear(name)}
+              >
+                Clear
+              </Button>
+              <Button
+                dataTestId="modal-submit"
+                uppercase
+                tertiary
+                type="submit"
+                padding="6px 18px"
+                borderRadius="5px"
+                maxWidth="110px"
+              >
+                Filter
+              </Button>
+            </DialogActions>
+          </Padding>
+        </Form>
       </Dialog>
     </IconContext.Provider>
   );

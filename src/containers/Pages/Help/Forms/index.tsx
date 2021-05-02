@@ -192,8 +192,14 @@ const Forms = ({ id }: { id: string }): ReactElement => (
       <strong>Send Email Notifications Date</strong>.
     </Accordion>
     <Accordion expanded={id} title="How do I send out monthly A/P form emails?">
-      In short, the automated emailing service handles this functionality. That
-      said, on the&nbsp;
+      In short, the
+      <OutsideLink
+        dataTestId="automated-services-link"
+        href="/employee/help#how-do-the-automated-services-work"
+      >
+        Automated Services
+      </OutsideLink>
+      handles this functionality. That said, on the&nbsp;
       <strong>16th</strong> of each month,&nbsp;
       <strong>2 months prior</strong> to month in question, an automated service
       will create events and an A/P form for you. The generated A/P form, by
@@ -234,20 +240,6 @@ const Forms = ({ id }: { id: string }): ReactElement => (
       </OutsideLink>
       page, create a new event, and that event will automatically be added to
       the A/P form.
-      <WarningText>
-        Be advised that this service is automated and only currently supports
-        creating Sharks home games. The Barracuda home games will need to be
-        manually created before the 1st of each prior month.
-      </WarningText>
-      See
-      <OutsideLink
-        dataTestId="automated-services-link"
-        href="/employee/help#how-do-the-automated-services-work"
-      >
-        Automated Services
-      </OutsideLink>
-      for additional information about how the services work and how to change
-      their settings.
     </Accordion>
     <Accordion expanded={id} title="How do I view all forms?">
       To view all forms (A/P forms), go to the

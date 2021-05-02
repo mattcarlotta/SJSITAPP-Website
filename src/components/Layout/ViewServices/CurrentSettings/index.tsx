@@ -134,8 +134,8 @@ const CurrentSettings = ({
         </strong>
       </div>
       <div>
-        This automated service creates Sharks events and an A/P form for the
-        upcoming month.
+        This automated service creates Sharks and Barracuda events and an A/P
+        form for the upcoming month.
       </div>
     </ListItem>
     <ListItem padding="10px 20px">

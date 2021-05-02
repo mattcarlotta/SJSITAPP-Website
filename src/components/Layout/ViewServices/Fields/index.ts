@@ -65,7 +65,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
     errors: "",
     value: service ? service.eventOnline : true,
     tooltip:
-      "This field determines whether or not the automated service generates Sharks events and A/P forms every month.",
+      "This field determines whether or not the automated service generates Sharks and Barracuda events and A/P forms every month.",
     required: false
   },
   {
@@ -75,7 +75,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
     errors: "",
     value: service ? service.eventDay : "16th",
     tooltip:
-      "This field determines which day of the month the automated service creates Sharks events and A/P forms. Ex: Every 16th day of the current month.",
+      "This field determines which day of the month the automated service creates Sharks and Barracuda events and A/P forms. Ex: Every 16th day of the current month.",
     required: true,
     selectOptions: Array.from({ length: 28 }, (_, i) => toOrdinal(i + 1))
   },
@@ -86,7 +86,7 @@ const Fields = (service?: TService): Array<TBaseFieldProps> => [
     errors: "",
     value: service ? moment(service.eventTime, timestampFormat).format() : null,
     tooltip:
-      "This field determines what time the automated service creates Sharks events and A/P forms. Ex: At 7:59 am of the current day.",
+      "This field determines what time the automated service creates Sharks and Barracuda events and A/P forms. Ex: At 7:59 am of the current day.",
     required: true,
     style: { width: "100%", height: "100px" }
   },

@@ -44,7 +44,7 @@ const AutomatedServices = ({ id }: { id: string }): ReactElement => (
           <Bold>Automated Services</Bold>- This is a master switch for the
           automated services listed below, controlled via the&nbsp;
           <Bold>Automated Service</Bold>field. If this switch is active, then
-          all the active automated services are run. If this switch is
+          all the active automated services are ran. If this switch is
           deactivated, then all of the automated services are not ran regardless
           of their status.
         </ListItem>
@@ -66,16 +66,23 @@ const AutomatedServices = ({ id }: { id: string }): ReactElement => (
           <Bold>Event & A/P Form - Creation Status (automated)</Bold>field,
           polls the
           <OutsideLink
-            data-testid="services-link"
+            data-testid="nhl-api-link"
             href="https://gitlab.com/dword4/nhlapi/blob/master/stats-api.md"
           >
             NHL API
           </OutsideLink>
+          and scrapes the
+          <OutsideLink
+            data-testid="barracuda-home-page-link"
+            href="http://www.sjbarracuda.com/games"
+          >
+            Barracuda Schedule
+          </OutsideLink>
           once a month, via the determined&nbsp;
           <Bold>Event & A/P Form - Creation Day (automated)</Bold>and&nbsp;
           <Bold>Event & A/P Form - Creation Time (automated)</Bold>fields, for
-          Shark home games. If Shark home games are found, they are then saved
-          as Event documents within an internal database; and, an A/P form is
+          home games. If home games are found, they are then saved as Event
+          documents within an internal database; and, an A/P form is
           automatically created to encapsulate these new Events.
         </ListItem>
         <ListItem padding="20px 0 0 5px">
@@ -88,15 +95,11 @@ const AutomatedServices = ({ id }: { id: string }): ReactElement => (
           <Bold>Schedule - Creation Time (automated)</Bold>fields. If the
           creation day and time has passed, it gathers up all the Event
           documents within the Form and generates individual Mail documents
-          containing individual schedules for staff and members.
+          containing individual schedules for staff and members. These Mail
+          documents are then handled/sent by the&nbsp;
+          <strong>Emailing Service</strong>.
         </ListItem>
       </List>
-      Unfortunately, Barracuda home games do not have a consumable API (like the
-      NHL API mentioned above) available to the public, so they&#39;ll need to
-      be manually created before the A/P form is sent out (before the 1st of
-      each month).
-      <br />
-      <br />
       Here&#39;s an example breakdown of how the automated services will
       function for the month of October:
       <List>
@@ -118,17 +121,15 @@ const AutomatedServices = ({ id }: { id: string }): ReactElement => (
           will be sent out to all active members.
         </ListItem>
         <ListItem padding="20px 0 0 5px">
-          - On October <strong>16th @ 7:59 am</strong>, Sharks home games for
-          the month of December will be created; as well as, an A/P form for
-          December 1st - December 31st.
+          - On October <strong>16th @ 7:59 am</strong>, Sharks and Barracuda
+          home games for the month of December will be created; as well as, an
+          A/P form for December 1st - December 31st.
         </ListItem>
         <WarningText>
           Be advised that these services are automated and expect the schedule
           to be completed by the Schedule&#39;s Creation Day and Creation Time
           of each month -- missing this deadline may result in
-          missing/incomplete schedules being emailed. Also, this service only
-          supports creating Sharks home games. Barracuda home games will need to
-          be manually created before this monthly Schedule deadline.
+          missing/incomplete schedules being emailed.
         </WarningText>
       </List>
     </Accordion>
