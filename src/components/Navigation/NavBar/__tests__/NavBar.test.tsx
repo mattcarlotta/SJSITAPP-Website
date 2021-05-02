@@ -34,6 +34,13 @@ describe("Navbar", () => {
     expect(toggleSideNav).toHaveBeenCalledTimes(1);
   });
 
+  it("collapsed the sidemenu", () => {
+    Object.assign(window, { innerWidth: 1500 });
+    wrapper = mount(<Navbar {...initProps} collapsed />);
+
+    expect(findById("fixed-sidemenu-closed")).toExist();
+  });
+
   it("renders the fixed side menu screens larger than 1400px", () => {
     Object.assign(window, { innerWidth: 1500 });
     wrapper = mount(<Navbar {...initProps} />);
