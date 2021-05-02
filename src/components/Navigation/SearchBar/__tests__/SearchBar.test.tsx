@@ -1,5 +1,4 @@
 import { mount, ReactWrapper } from "enzyme";
-import { useRouter } from "next/router";
 import waitFor from "~utils/waitFor";
 import SearchBar from "../index";
 

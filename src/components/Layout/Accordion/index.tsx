@@ -52,7 +52,7 @@ const CustomAccordion = ({
 
   React.useEffect(() => {
     setExpanded(isExpanded);
-  }, [expanded]);
+  }, [isExpanded, expanded]);
 
   return (
     <>

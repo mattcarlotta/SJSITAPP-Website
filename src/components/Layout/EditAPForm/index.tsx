@@ -44,10 +44,14 @@ export const EditAPForm = (): ReactElement => {
       toast({ type: "error", message: err.toString() });
       router.replace("/employee/forms/viewall?page=1");
     }
-  }, [app, id, parseData, router, toast]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [id]);
 
-  const apiQuery = (config: TFormAPIQueryConfig): Promise<AxiosResponse> =>
-    app.put("forms/update", config);
+  const apiQuery = React.useCallback(
+    (config: TFormAPIQueryConfig): Promise<AxiosResponse> =>
+      app.put("forms/update", config),
+    []
+  );
 
   React.useEffect(() => {
     if (isLoading && id) fetchSeason();

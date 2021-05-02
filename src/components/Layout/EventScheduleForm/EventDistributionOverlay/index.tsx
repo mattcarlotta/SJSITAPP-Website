@@ -54,7 +54,7 @@ const EventDistributionOverlay = ({
         isLoading: false
       }));
     }
-  }, [app, id, parseData]);
+  }, [id]);
 
   const handleOpen = (): void => {
     setState(prevState => ({

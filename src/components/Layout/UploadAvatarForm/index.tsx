@@ -76,7 +76,7 @@ export const UploadAvatarForm = ({
         });
       }
     },
-    [toast, updateUserAvatar]
+    [id, updateUserAvatar]
   );
 
   const toggleForm = (): void => {
@@ -89,10 +89,10 @@ export const UploadAvatarForm = ({
       if (imageRef && imageRef.current) imageRef.current.value = "";
       setState(prevState => ({ ...prevState, isSubmitting: false }));
     }
-  }, [serverError]);
+  }, [state.isSubmitting, serverError]);
 
   React.useEffect(() => {
-    if (state.isSubmitting && showForm) {
+    if (serverMessage) {
       /* istanbul ignore else */
       if (imageRef && imageRef.current) imageRef.current.value = "";
       setState(initialState);

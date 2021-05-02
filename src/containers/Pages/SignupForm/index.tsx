@@ -86,12 +86,12 @@ export const SignupForm = ({
   React.useEffect(() => {
     if (state.isSubmitting && serverError)
       setState(prevState => ({ ...prevState, isSubmitting: false }));
-  }, [serverError]);
+  }, [state.isSubmitting, serverError]);
 
   React.useEffect(() => {
     if (state.isSubmitting && !state.errors)
       signupUser(parseFields<TSignupData>(state.fields));
-  }, [parseFields, signupUser, state]);
+  }, [signupUser, state]);
 
   return (
     <WhiteBackground>

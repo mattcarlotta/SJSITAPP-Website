@@ -40,7 +40,8 @@ export const ViewMail = (): ReactElement => {
       toast({ type: "error", message: err.toString() });
       router.replace("/employee/mail/viewall?page=1");
     }
-  }, [app, id, parseData, router, toast]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [id]);
 
   React.useEffect(() => {
     if (isLoading && id) fetchEmail();

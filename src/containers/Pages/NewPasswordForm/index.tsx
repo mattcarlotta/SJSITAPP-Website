@@ -85,7 +85,7 @@ export const NewPasswordForm = ({
   React.useEffect(() => {
     if (state.isSubmitting && serverError)
       setState(prevState => ({ ...prevState, isSubmitting: false }));
-  }, [serverError]);
+  }, [state.isSubmitting, serverError]);
 
   React.useEffect(() => {
     if (state.isSubmitting && !state.errors)
@@ -93,7 +93,7 @@ export const NewPasswordForm = ({
         ...parseFields<Pick<TNewPasswordData, "password">>(state.fields),
         token: state.token
       });
-  }, [parseFields, updateUserPassword, state]);
+  }, [state, updateUserPassword]);
 
   return (
     <WhiteBackground>

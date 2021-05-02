@@ -83,7 +83,7 @@ const Table = ({
       toast({ type: "error", message: err.toString() });
       setState(prevState => ({ ...prevState, isLoading: false }));
     }
-  }, [API, app, queryString, parseData, toast]);
+  }, [API, queryString]);
 
   const handlePageChange = ({ page }: GridPageChangeParams): void => {
     updateQuery({ page: page + 1 });
@@ -108,7 +108,7 @@ const Table = ({
         toast({ type: "error", message: err.toString() });
       }
     },
-    [API, app, parseMessage, toast]
+    [API]
   );
 
   const deleteManyRecords = React.useCallback(async (): Promise<void> => {
@@ -124,7 +124,7 @@ const Table = ({
     } catch (err) {
       toast({ type: "error", message: err.toString() });
     }
-  }, [API, app, parseMessage, selectedIds, toast]);
+  }, [API, selectedIds]);
 
   const resendRecordMail = React.useCallback(
     async (id: string): Promise<void> => {
@@ -139,7 +139,7 @@ const Table = ({
         toast({ type: "error", message: err.toString() });
       }
     },
-    [API, app, parseMessage, toast]
+    [API]
   );
 
   const columnsWithActions = React.useMemo(
@@ -163,7 +163,15 @@ const Table = ({
         )
       }
     ],
-    [columns, selectedIds]
+    [
+      columns,
+      deleteRecord,
+      deleteManyRecords,
+      disableCheckbox,
+      selectedIds,
+      resendRecordMail,
+      rest
+    ]
   );
 
   React.useEffect(() => {
@@ -172,11 +180,11 @@ const Table = ({
 
   React.useEffect(() => {
     if (!isLoading) fetchData();
-  }, [queryString, fetchData]);
+  }, [isLoading, queryString, fetchData]);
 
   React.useEffect(() => {
     if (invalidPage) updateQuery({ page: Math.ceil(totalDocs / 10) });
-  }, [invalidPage]);
+  }, [invalidPage, updateQuery, totalDocs]);
 
   return (
     <Padding

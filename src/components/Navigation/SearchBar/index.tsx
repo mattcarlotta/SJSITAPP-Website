@@ -33,6 +33,7 @@ const SearchBar = ({ role }: TSearchBarProps): ReactElement => {
 
   React.useEffect(() => {
     if (searchText && id) router.push(`/employee/help#${id}`);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, [id]);
 
   return (

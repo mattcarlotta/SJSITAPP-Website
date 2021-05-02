@@ -1,5 +1,4 @@
 import * as React from "react";
-import isEqual from "lodash.isequal";
 import { useRouter } from "next/router";
 import { setQuery, stringifyQuery } from "~utils/queryHelpers";
 import { ReactElement, TURLQuery } from "~types";
@@ -23,27 +22,31 @@ export const QueryHandler = ({
 }: TQueryHandlerProps): ReactElement => {
   const router = useRouter();
   const { query } = router;
-  const [state, setState] = React.useState(setQuery(query));
+  const getQueries = React.useMemo(() => setQuery(query), [query]);
+  const [state, setState] = React.useState(getQueries);
 
-  const pushToLocation = (query: string): void => {
+  const pushToLocation = React.useCallback((query: string): void => {
     router.push(`${router.pathname}?${query}`);
-  };
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, []);
 
-  const updateQuery = (nextQuery: TURLQuery): void => {
-    pushToLocation(
-      stringifyQuery({
-        ...state.queries,
-        ...nextQuery
-      })
-    );
-  };
+  const updateQuery = React.useCallback(
+    (nextQuery: TURLQuery): void => {
+      pushToLocation(
+        stringifyQuery({
+          ...state.queries,
+          ...nextQuery
+        })
+      );
+    },
+    [state.queries, pushToLocation]
+  );
 
   const clearFilters = () => pushToLocation("page=1");
 
   React.useEffect(() => {
-    /* istanbul ignore next */
-    if (!isEqual(query, state.queries)) setState(setQuery(query));
-  }, [query]);
+    setState(getQueries);
+  }, [getQueries]);
 
   return (
     <>

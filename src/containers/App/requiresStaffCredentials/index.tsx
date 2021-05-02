@@ -22,6 +22,7 @@ const requiresStaffCredentials = (
 
     React.useEffect(() => {
       if (accessRestricted) router.replace("/employee/login");
+      /* eslint-disable-next-line react-hooks/exhaustive-deps */
     }, [accessRestricted]);
 
     return email && !accessRestricted ? (

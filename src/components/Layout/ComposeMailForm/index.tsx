@@ -58,7 +58,8 @@ export const ComposeMailForm = (): ReactElement => {
       toast({ type: "error", message: err.toString() });
       router.replace("/employee/mail/viewall?page=1");
     }
-  }, [app, parseData, router, toast]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, []);
 
   const createMail = React.useCallback(async (): Promise<void> => {
     try {
@@ -75,7 +76,8 @@ export const ComposeMailForm = (): ReactElement => {
         isSubmitting: false
       }));
     }
-  }, [app, router, parseFields, parseMessage, state.fields]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [state.fields]);
 
   const handleChange = React.useCallback(
     ({ target: { name, value } }: EventTarget): void => {

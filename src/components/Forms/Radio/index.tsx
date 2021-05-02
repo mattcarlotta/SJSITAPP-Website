@@ -33,7 +33,7 @@ const useGroupStyles = makeStyles({
   }
 });
 
-const useButtonStyles = makeStyles(() => ({
+const useButtonStyles = makeStyles({
   root: {
     color: "#010404",
     width: "100%",
@@ -48,7 +48,7 @@ const useButtonStyles = makeStyles(() => ({
   },
   disabled: {},
   label: {}
-}));
+});
 
 const RadioComponent = ({
   className,
@@ -63,66 +63,70 @@ const RadioComponent = ({
   radioStyle,
   selectOptions,
   value
-}: TRadioProps): JSX.Element => (
-  <div
-    data-testid="radio-container"
-    className={className}
-    style={radioContainerStyle}
-  >
-    <Label
-      name={name}
-      label={label}
-      tooltip={tooltip}
-      style={radioLabelStyle}
-    />
-    {notes && <Notes notes={notes} />}
-    <ToggleButtonGroup
-      orientation="vertical"
-      aria-label={`${name} group`}
-      classes={useGroupStyles()}
-      exclusive
-      onChange={(_, value) => onChange({ target: { name, value } })}
-      value={value}
+}: TRadioProps): JSX.Element => {
+  const classes = useButtonStyles();
+
+  return (
+    <div
+      data-testid="radio-container"
+      className={className}
+      style={radioContainerStyle}
     >
-      {!isEmpty(selectOptions) &&
-        selectOptions.map(value => (
-          <ToggleButton
-            key={value}
-            data-testid={value}
-            classes={useButtonStyles()}
-            aria-label={value}
-            style={radioStyle}
-            value={value}
-          >
-            <span className="radio-value">{value}</span>
-          </ToggleButton>
-        ))}
-    </ToggleButtonGroup>
-    {errors && (
-      <Padding
-        left="5px"
-        right="5px"
-        style={{ maxWidth: 410, margin: "0 auto" }}
+      <Label
+        name={name}
+        label={label}
+        tooltip={tooltip}
+        style={radioLabelStyle}
+      />
+      {notes && <Notes notes={notes} />}
+      <ToggleButtonGroup
+        orientation="vertical"
+        aria-label={`${name} group`}
+        classes={useGroupStyles()}
+        exclusive
+        onChange={(_, value) => onChange({ target: { name, value } })}
+        value={value}
       >
-        <Errors
-          data-testid="errors"
-          style={{
-            textAlign: "center",
-            padding: "11px",
-            border: "1px solid transparent",
-            background: "#d14023",
-            borderRadius: 50,
-            color: "#fff",
-            fontSize: 18,
-            textTransform: "uppercase"
-          }}
+        {!isEmpty(selectOptions) &&
+          selectOptions.map(value => (
+            <ToggleButton
+              key={value}
+              data-testid={value}
+              classes={classes}
+              aria-label={value}
+              style={radioStyle}
+              value={value}
+            >
+              <span className="radio-value">{value}</span>
+            </ToggleButton>
+          ))}
+      </ToggleButtonGroup>
+      {errors && (
+        <Padding
+          left="5px"
+          right="5px"
+          style={{ maxWidth: 410, margin: "0 auto" }}
         >
-          {errors}
-        </Errors>
-      </Padding>
-    )}
-  </div>
-);
+          <Errors
+            data-testid="errors"
+            style={{
+              textAlign: "center",
+              padding: "11px",
+              border: "1px solid transparent",
+              background: "#d14023",
+              borderRadius: 50,
+              color: "#fff",
+              fontSize: 18,
+              textTransform: "uppercase"
+            }}
+          >
+            {errors}
+          </Errors>
+        </Padding>
+      )}
+    </div>
+  );
+};
 
 const Radio = styled(RadioComponent)`
   background-color: #f5f5f5;

@@ -22,6 +22,7 @@ const requiresBasicCredentials = (
 
     React.useEffect(() => {
       if (isGuest) router.replace("/employee/login");
+      /* eslint-disable-next-line react-hooks/exhaustive-deps */
     }, [isGuest]);
 
     return email && !isGuest ? (

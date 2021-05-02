@@ -54,28 +54,25 @@ export const Events = ({
     }));
   };
 
-  const fetchEvents = React.useCallback(
-    async (tab: string): Promise<void> => {
-      try {
-        const res = await app.get(`dashboard/events/${tab}`);
-        const data = parseData<Array<TEventData>>(res);
+  const fetchEvents = React.useCallback(async (tab: string): Promise<void> => {
+    try {
+      const res = await app.get(`dashboard/events/${tab}`);
+      const data = parseData<Array<TEventData>>(res);
 
-        setState(prevState => ({
-          ...prevState,
-          error: false,
-          events: data,
-          isLoading: false
-        }));
-      } catch (err) {
-        setState(prevState => ({
-          ...prevState,
-          error: true,
-          isLoading: false
-        }));
-      }
-    },
-    [app, parseData]
-  );
+      setState(prevState => ({
+        ...prevState,
+        error: false,
+        events: data,
+        isLoading: false
+      }));
+    } catch (err) {
+      setState(prevState => ({
+        ...prevState,
+        error: true,
+        isLoading: false
+      }));
+    }
+  }, []);
 
   const handleReload = (): void => {
     setState(prevState => ({

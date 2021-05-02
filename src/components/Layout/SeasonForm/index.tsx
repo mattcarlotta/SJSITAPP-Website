@@ -9,7 +9,6 @@ import SubmitButton from "~components/Layout/SubmitButton";
 import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
-import app from "~utils/axiosConfig";
 import { parseMessage } from "~utils/parseResponse";
 import { fullyearFormat } from "~utils/dateFormats";
 import moment from "~utils/momentWithTimezone";
@@ -83,7 +82,8 @@ const SeasonForm = ({
         isSubmitting: false
       }));
     }
-  }, [app, id, parseFields, parseMessage, router, state, toast]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [apiQuery, id, state.seasonId, state.fields]);
 
   const handleChange = ({ target: { name, value } }: EventTarget): void => {
     setState(prevState => {

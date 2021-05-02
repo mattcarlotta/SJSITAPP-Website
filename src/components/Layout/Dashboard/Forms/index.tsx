@@ -56,7 +56,7 @@ export const Forms = (): ReactElement => {
         isLoading: false
       }));
     }
-  }, [app, parseData, moment]);
+  }, []);
 
   const handleReload = (): void => {
     setState({

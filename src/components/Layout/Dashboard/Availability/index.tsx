@@ -52,7 +52,7 @@ export const Availability = (): ReactElement => {
         isLoading: false
       }));
     }
-  }, [app, parseData]);
+  }, []);
 
   const handleReload = (): void => {
     setState({

@@ -68,7 +68,7 @@ export const EditMemberForm = ({
   React.useEffect(() => {
     if (state.isSubmitting && (serverError || serverMessage))
       setState(prevState => ({ ...prevState, isSubmitting: false }));
-  }, [serverError, serverMessage]);
+  }, [state.isSubmitting, serverError, serverMessage]);
 
   React.useEffect(() => {
     if (state.isSubmitting && !state.errors)
@@ -76,7 +76,13 @@ export const EditMemberForm = ({
         ...parseFields<TAuthData>(state.fields),
         id: rest.id
       });
-  }, [parseFields, state.isSubmitting, state.errors]);
+  }, [
+    rest.id,
+    state.fields,
+    state.isSubmitting,
+    state.errors,
+    updateUserProfile
+  ]);
 
   return (
     <div

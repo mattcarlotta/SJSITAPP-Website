@@ -25,7 +25,7 @@ const NavBar = ({
 
   React.useEffect(() => {
     if (isMobile && !collapsed) collapseSideNav();
-  }, [pathname, isMobile]);
+  }, [collapsed, collapseSideNav, pathname, isMobile]);
 
   return !isMobile ? (
     <FixedMenu

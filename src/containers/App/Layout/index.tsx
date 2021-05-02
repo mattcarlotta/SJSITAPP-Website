@@ -57,7 +57,7 @@ export const AppLayout = ({
   React.useLayoutEffect(() => {
     setExpandedTabs(expandedIds(pathname));
     setSelectedTabs(selectedTab(pathname));
-  }, []);
+  }, [pathname, setExpandedTabs, setSelectedTabs]);
 
   return (
     <AppContainer data-testid="app-layout" direction="column">

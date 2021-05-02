@@ -45,10 +45,14 @@ export const EditSeasonForm = (): ReactElement => {
       toast({ type: "error", message: err.toString() });
       router.replace("/employee/seasons/viewall?page=1");
     }
-  }, [app, id, parseData, router, toast]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [id]);
 
-  const apiQuery = (config: TSeasonAPIQueryConfig): Promise<AxiosResponse> =>
-    app.put("seasons/update", config);
+  const apiQuery = React.useCallback(
+    (config: TSeasonAPIQueryConfig): Promise<AxiosResponse> =>
+      app.put("seasons/update", config),
+    []
+  );
 
   React.useEffect(() => {
     if (isLoading && id) fetchSeason();

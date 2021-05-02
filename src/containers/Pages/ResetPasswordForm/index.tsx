@@ -78,12 +78,12 @@ export const ResetPasswordForm = ({
   React.useEffect(() => {
     if (state.isSubmitting && serverError)
       setState(prevState => ({ ...prevState, isSubmitting: false }));
-  }, [serverError]);
+  }, [state.isSubmitting, serverError]);
 
   React.useEffect(() => {
     if (state.isSubmitting && !state.errors)
       resetPassword(parseFields<TResetPasswordData>(state.fields));
-  }, [parseFields, resetPassword, state]);
+  }, [resetPassword, state]);
 
   return (
     <WhiteBackground>

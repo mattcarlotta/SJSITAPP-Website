@@ -50,7 +50,7 @@ export const ContactUsForm = (): JSX.Element => {
         isSubmitting: false
       }));
     }
-  }, [app, parseFields, parseMessage, state.fields]);
+  }, [state.fields]);
 
   const handleChange = ({ target: { name, value } }: EventTarget): void => {
     setState(prevState => ({

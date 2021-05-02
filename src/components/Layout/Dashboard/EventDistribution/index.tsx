@@ -60,7 +60,7 @@ export const EventDistribution = (): ReactElement => {
         }));
       }
     },
-    [app, parseData]
+    []
   );
 
   const handleReload = (): void => {

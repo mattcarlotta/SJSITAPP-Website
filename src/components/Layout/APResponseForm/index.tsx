@@ -77,7 +77,8 @@ const APResponseForm = (): ReactElement => {
       toast({ type: "error", message: err.toString() });
       router.replace("/employee/dashboard");
     }
-  }, [app, id, parseData, router, toast, updateFormFields]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [id]);
 
   const handleChange = React.useCallback(
     ({ target: { name, value } }: EventTarget): void => {
@@ -126,11 +127,12 @@ const APResponseForm = (): ReactElement => {
         isSubmitting: false
       }));
     }
-  }, [app, condenseFormFields, fields, parseFields, router, toast]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [id, fields]);
 
   React.useEffect(() => {
     if (isSubmitting && !errors) submitApForm();
-  }, [submitApForm, isSubmitting]);
+  }, [errors, submitApForm, isSubmitting]);
 
   React.useEffect(() => {
     if (isLoading && id) fetchAPForm();

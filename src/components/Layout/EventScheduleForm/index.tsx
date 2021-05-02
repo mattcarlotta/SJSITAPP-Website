@@ -58,7 +58,8 @@ const EventScheduleForm = (): ReactElement => {
       toast({ type: "error", message: err.toString() });
       router.replace("/employee/events/viewall?page=1");
     }
-  }, [app, id, parseData, router, toast]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [id]);
 
   const saveSchedule = React.useCallback(async (): Promise<void> => {
     try {
@@ -78,7 +79,8 @@ const EventScheduleForm = (): ReactElement => {
         isSubmitting: false
       }));
     }
-  }, [app, columns, id, parseMessage, router, toast]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [columns, id]);
 
   const handleDragEnd = ({
     source,

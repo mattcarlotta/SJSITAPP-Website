@@ -67,11 +67,13 @@ export const HelpPage = ({ role }: PropsFromRedux): ReactElement => {
   /* istanbul ignore next */
   React.useEffect(() => {
     if (hash !== id) setState(prevState => ({ ...prevState, id: hash }));
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, [hash]);
 
   React.useEffect(() => {
     router.push(nextPath, undefined, { shallow: true });
-  }, [id]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [nextPath]);
 
   return (
     <>

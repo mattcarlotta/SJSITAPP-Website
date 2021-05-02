@@ -73,6 +73,8 @@ const TableFilterButton = ({
   queries,
   updateQuery
 }: TTableFilterButtonProps): ReactElement => {
+  const classes = useClasses();
+
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
@@ -205,7 +207,7 @@ const TableFilterButton = ({
       <Popover
         id={id}
         open={popoverOpen}
-        classes={useClasses()}
+        classes={classes}
         anchorEl={anchorEl}
         onClose={handlePopoverClose}
         anchorOrigin={{

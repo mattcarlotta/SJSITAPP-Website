@@ -16,7 +16,7 @@ const Container = ({ Component, pageProps }: AppProps): ReactElement => {
 
     const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) jssStyles.parentElement?.removeChild(jssStyles);
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

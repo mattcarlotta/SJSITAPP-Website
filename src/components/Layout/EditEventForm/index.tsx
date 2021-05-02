@@ -44,10 +44,14 @@ export const EditEventForm = (): ReactElement => {
       toast({ type: "error", message: err.toString() });
       router.replace("/employee/events/viewall?page=1");
     }
-  }, [app, id, parseData, router, toast]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [id]);
 
-  const apiQuery = (config: TEventAPIQueryConfig): Promise<AxiosResponse> =>
-    app.put("events/update", config);
+  const apiQuery = React.useCallback(
+    (config: TEventAPIQueryConfig): Promise<AxiosResponse> =>
+      app.put("events/update", config),
+    []
+  );
 
   React.useEffect(() => {
     if (isLoading && id) fetchEvent();

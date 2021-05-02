@@ -65,7 +65,8 @@ export const ViewService = (): ReactElement => {
       toast({ type: "error", message: err.toString() });
       router.replace("/employee/dashboard");
     }
-  }, [app, parseData, router, toast]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, []);
 
   const saveService = React.useCallback(async (): Promise<void> => {
     try {
@@ -95,15 +96,7 @@ export const ViewService = (): ReactElement => {
         isSubmitting: false
       }));
     }
-  }, [
-    app,
-    isEmpty,
-    parseFields,
-    parseMessage,
-    state.fields,
-    state.service,
-    toast
-  ]);
+  }, [state.fields, state.service]);
 
   const handleChange = ({ target: { name, value } }: EventTarget): void => {
     setState(prevState => ({

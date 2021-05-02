@@ -46,7 +46,8 @@ export const CreateMemberForm = (): JSX.Element => {
         isSubmitting: false
       }));
     }
-  }, [app, parseFields, parseMessage, router, state.fields]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [state.fields]);
 
   const handleChange = ({ target: { name, value } }: EventTarget): void => {
     setState(prevState => ({

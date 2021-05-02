@@ -120,17 +120,7 @@ export const EventCalendar = ({
         isLoading: false
       }));
     }
-  }, [
-    app,
-    APIURL,
-    generateCalendarDays,
-    id,
-    moment,
-    parseData,
-    selectedGames,
-    selectedMonth,
-    selectedYear
-  ]);
+  }, [APIURL, id, selectedGames, selectedMonth, selectedYear]);
 
   const handleMonthChange = (days: number): void => {
     setState(prevState => ({

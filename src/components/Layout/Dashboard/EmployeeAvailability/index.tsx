@@ -68,7 +68,7 @@ export const EmployeeAvailability = (): ReactElement => {
         isLoading: false
       }));
     }
-  }, [app, parseData]);
+  }, []);
 
   const handleReload = (): void => {
     setState({

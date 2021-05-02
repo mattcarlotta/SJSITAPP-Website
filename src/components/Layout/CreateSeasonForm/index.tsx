@@ -8,8 +8,11 @@ import app from "~utils/axiosConfig";
 import { AxiosResponse, ReactElement, TSeasonAPIQueryConfig } from "~types";
 
 export const CreateSeasonForm = (): ReactElement => {
-  const apiQuery = (config: TSeasonAPIQueryConfig): Promise<AxiosResponse> =>
-    app.post("seasons/create", config);
+  const apiQuery = React.useCallback(
+    (config: TSeasonAPIQueryConfig): Promise<AxiosResponse> =>
+      app.post("seasons/create", config),
+    []
+  );
 
   return (
     <Card

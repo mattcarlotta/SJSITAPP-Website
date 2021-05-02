@@ -41,7 +41,8 @@ const MemberProfile = ({ id }: { id: string }): ReactElement => {
       toast({ type: "error", message: err.toString() });
       router.replace("/employee/members/viewall?page=1");
     }
-  }, [app, id, parseData, router, toast]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [id]);
 
   const resetServerMessages = React.useCallback((): void => {
     setState(prevState => ({
@@ -62,20 +63,17 @@ const MemberProfile = ({ id }: { id: string }): ReactElement => {
 
       fetchMember();
     },
-    [fetchMember, toast]
+    [fetchMember]
   );
 
-  const setServerError = React.useCallback(
-    (err: Error): void => {
-      toast({ type: "error", message: err.toString() });
+  const setServerError = React.useCallback((err: Error): void => {
+    toast({ type: "error", message: err.toString() });
 
-      setState(prevState => ({
-        ...prevState,
-        serverError: err.toString()
-      }));
-    },
-    [toast]
-  );
+    setState(prevState => ({
+      ...prevState,
+      serverError: err.toString()
+    }));
+  }, []);
 
   const deleteUserAvatar = React.useCallback(
     async (id: string): Promise<void> => {
@@ -90,13 +88,7 @@ const MemberProfile = ({ id }: { id: string }): ReactElement => {
         setServerError(err);
       }
     },
-    [
-      avatarAPI,
-      parseMessage,
-      resetServerMessages,
-      setServerMessage,
-      setServerError
-    ]
+    [resetServerMessages, setServerMessage, setServerError]
   );
 
   const updateUserAvatar = React.useCallback(
@@ -112,13 +104,7 @@ const MemberProfile = ({ id }: { id: string }): ReactElement => {
         setServerError(err);
       }
     },
-    [
-      avatarAPI,
-      parseMessage,
-      resetServerMessages,
-      setServerMessage,
-      setServerError
-    ]
+    [resetServerMessages, setServerMessage, setServerError]
   );
 
   const updateUserProfile = React.useCallback(
@@ -134,7 +120,7 @@ const MemberProfile = ({ id }: { id: string }): ReactElement => {
         setServerError(err);
       }
     },
-    [app, parseMessage, resetServerMessages, setServerMessage, setServerError]
+    [resetServerMessages, setServerError, setServerMessage]
   );
 
   const updateUserStatus = React.useCallback(
@@ -150,12 +136,12 @@ const MemberProfile = ({ id }: { id: string }): ReactElement => {
         setServerError(err);
       }
     },
-    [app, parseMessage, resetServerMessages, setServerMessage, setServerError]
+    [resetServerMessages, setServerMessage, setServerError]
   );
 
   React.useEffect(() => {
     if (isLoading && id) fetchMember();
-  }, [isLoading, id]);
+  }, [isLoading, id, fetchMember]);
 
   return isLoading ? (
     <LoadingPanel

@@ -71,7 +71,8 @@ const APForm = ({
       toast({ type: "error", message: err.toString() });
       router.replace("/employee/forms/viewall?page=1");
     }
-  }, [app, fields, form, parseData, router, toast]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [form]);
 
   const saveForm = React.useCallback(async (): Promise<void> => {
     try {
@@ -91,7 +92,8 @@ const APForm = ({
         isSubmitting: false
       }));
     }
-  }, [app, id, parseFields, parseMessage, router, state, toast]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [apiQuery, id, state.fields]);
 
   const handleChange = ({ target: { name, value } }: EventTarget): void => {
     setState(prevState => ({

@@ -77,12 +77,12 @@ export const LoginForm = ({
   React.useEffect(() => {
     if (state.isSubmitting && serverError)
       setState(prevState => ({ ...prevState, isSubmitting: false }));
-  }, [serverError]);
+  }, [state.isSubmitting, serverError]);
 
   React.useEffect(() => {
     if (state.isSubmitting && !state.errors)
       signinUser(parseFields<TLoginData>(state.fields));
-  }, [parseFields, signinUser, state]);
+  }, [state, signinUser]);
 
   return (
     <WhiteBackground>

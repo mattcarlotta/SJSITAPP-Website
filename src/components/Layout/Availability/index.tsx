@@ -86,7 +86,7 @@ const Availability = ({ id }: TAvailabilityProps): JSX.Element => {
         isLoading: false
       }));
     }
-  }, [app, parseData, id, selectedMonth, selectedYear, yearMonthFormat]);
+  }, [id, selectedMonth, selectedYear]);
 
   const handleDateChange = ({ target: { name, value } }: EventTarget): void => {
     setState(prevState => ({

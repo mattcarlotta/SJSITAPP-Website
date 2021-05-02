@@ -8,8 +8,11 @@ import app from "~utils/axiosConfig";
 import { AxiosResponse, ReactElement, TEventAPIQueryConfig } from "~types";
 
 export const CreateEventForm = (): ReactElement => {
-  const apiQuery = (config: TEventAPIQueryConfig): Promise<AxiosResponse> =>
-    app.post("events/create", config);
+  const apiQuery = React.useCallback(
+    (config: TEventAPIQueryConfig): Promise<AxiosResponse> =>
+      app.post("events/create", config),
+    []
+  );
 
   return (
     <Card
