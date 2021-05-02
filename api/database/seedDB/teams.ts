@@ -64,6 +64,7 @@ const teams = [
   { team: "San Diego Gulls", league: "AHL", name: "san-diego-gulls" },
   { team: "San Jose Barracuda", league: "AHL", name: "san-jose-barracuda" },
   { team: "San Jose Sharks", league: "NHL", name: "san-jose-sharks" },
+  { team: "Seattle Kraken", league: "NHL", name: "seattle-kraken" },
   {
     team: "Springfield Thunderbirds",
     league: "AHL",

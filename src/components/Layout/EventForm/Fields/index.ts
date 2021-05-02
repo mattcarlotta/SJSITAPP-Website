@@ -84,6 +84,7 @@ const Fields = (
       selectOptions: [
         "Sharks Teal Jersey",
         "Sharks Black Jersey",
+        "Sharks Heritage Jersey",
         "Sharks Jacket",
         "Barracuda Jacket",
         "Barracuda Jersey",
