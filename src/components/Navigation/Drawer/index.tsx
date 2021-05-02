@@ -1,15 +1,15 @@
 import { Drawer, makeStyles } from "@material-ui/core";
-import { toggleSideNav } from "~actions/Sidemenu";
 import FlexStart from "~components/Layout/FlexStart";
 import Margin from "~components/Layout/Margin";
 import MenuHamburger from "~components/Layout/MenuHamburger";
 import TeamLogo from "~components/Layout/TeamLogo";
+import type { TToggleSideNav } from "~actions/Sidemenu";
 import { ReactElement, ReactNode } from "~types";
 
 export type TDrawerProps = {
   children: ReactNode;
   open: boolean;
-  onClose: typeof toggleSideNav;
+  onClose: TToggleSideNav;
 };
 
 const useStyles = makeStyles({

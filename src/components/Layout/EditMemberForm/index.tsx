@@ -1,6 +1,5 @@
 import * as React from "react";
 import { css } from "@emotion/react";
-import { updateUserProfile } from "~actions/Auth";
 import FieldGenerator from "~components/Forms/FieldGenerator";
 import MemberDetails from "~components/Layout/MemberDetails";
 import SubmitButton from "~components/Layout/SubmitButton";
@@ -8,6 +7,7 @@ import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
 import fields from "./Fields";
+import type { TUpdateUserProfile } from "~actions/Auth";
 import { EventTarget, FormEvent, TAuthData, TBaseFieldProps } from "~types";
 
 export type TEditMemberFormState = {
@@ -30,7 +30,7 @@ export type TEditMemberFormProps = {
   serverMessage?: string;
   status: string;
   updateUserProfile:
-    | typeof updateUserProfile
+    | TUpdateUserProfile
     | ((payload: TAuthData) => Promise<void>);
 };
 

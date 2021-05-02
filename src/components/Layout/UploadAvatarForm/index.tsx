@@ -1,6 +1,5 @@
 import * as React from "react";
 import { css } from "@emotion/react";
-import { deleteUserAvatar, updateUserAvatar } from "~actions/Auth";
 import toast from "~components/App/Toast";
 import Avatar from "~components/Layout/Avatar";
 import Button from "~components/Layout/Button";
@@ -8,6 +7,7 @@ import Margin from "~components/Layout/Margin";
 import SubmitButton from "~components/Layout/SubmitButton";
 import UploadAvatarInstructions from "~components/Layout/UploadAvatarInstructions";
 import { FaCloudUploadAlt, FaTimesCircle, FaTrash } from "~icons";
+import type { TDeleteUserAvatar, TUpdateUserAvatar } from "~actions/Auth";
 import { ReactElement } from "~types";
 
 export type TUploadAvatarFormState = {
@@ -17,12 +17,12 @@ export type TUploadAvatarFormState = {
 
 export type TUploadAvatarFormProps = {
   avatar?: string;
-  deleteUserAvatar: typeof deleteUserAvatar | ((id: string) => Promise<void>);
+  deleteUserAvatar: TDeleteUserAvatar | ((id: string) => Promise<void>);
   id: string;
   serverError?: string;
   serverMessage?: string;
   updateUserAvatar:
-    | typeof updateUserAvatar
+    | TUpdateUserAvatar
     | (({ form, id }: { form: FormData; id: string }) => Promise<void>);
 };
 

@@ -7,6 +7,12 @@ import {
 } from "~constants";
 import { TSideMenuNodeIds } from "~types";
 
+export type TCollapseSideNav = typeof collapseSideNav;
+export type TSetExpandedTabs = typeof setExpandedTabs;
+export type TSetSelectedTabs = typeof setSelectedTabs;
+export type TResetSideMenu = typeof resetSideMenu;
+export type TToggleSideNav = typeof toggleSideNav;
+
 /**
  * Collapses the side menu.
  *

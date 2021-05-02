@@ -8,6 +8,15 @@ import app, { avatarAPI } from "~utils/axiosConfig";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import showError from "~utils/showError";
 import showMessage from "~utils/showMessage";
+import type {
+  TDeleteUserAvatar,
+  TResetPassword,
+  TSigninUser,
+  TSignupUser,
+  TUpdateUserAvatar,
+  TUpdateUserPassword,
+  TUpdateUserProfile
+} from "~actions/Auth";
 import { AxiosResponse, SagaIterator, TAuthData } from "~types";
 
 /**
@@ -69,7 +78,7 @@ export function* signoutUserSession(): SagaIterator {
  */
 export function* deleteUserAvatar({
   payload
-}: ReturnType<typeof actions.deleteUserAvatar>): SagaIterator {
+}: ReturnType<TDeleteUserAvatar>): SagaIterator {
   try {
     const res: AxiosResponse = yield call(
       avatarAPI.delete,
@@ -100,7 +109,7 @@ export function* deleteUserAvatar({
  */
 export function* resetPassword({
   payload
-}: ReturnType<typeof actions.resetPassword>): SagaIterator {
+}: ReturnType<TResetPassword>): SagaIterator {
   try {
     const res: AxiosResponse = yield call(app.put, "reset-password", payload);
     const message: string = yield call(parseMessage, res);
@@ -128,7 +137,7 @@ export function* resetPassword({
  */
 export function* signinUser({
   payload
-}: ReturnType<typeof actions.signinUser>): SagaIterator {
+}: ReturnType<TSigninUser>): SagaIterator {
   try {
     const res: AxiosResponse = yield call(app.post, "signin", payload);
     const data: TAuthData = yield call(parseData, res);
@@ -155,7 +164,7 @@ export function* signinUser({
  */
 export function* signupUser({
   payload
-}: ReturnType<typeof actions.signupUser>): SagaIterator {
+}: ReturnType<TSignupUser>): SagaIterator {
   try {
     const res: AxiosResponse = yield call(app.post, "signup", payload);
     const message: string = yield call(parseMessage, res);
@@ -182,7 +191,7 @@ export function* signupUser({
  */
 export function* updateUserAvatar({
   payload
-}: ReturnType<typeof actions.updateUserAvatar>): SagaIterator {
+}: ReturnType<TUpdateUserAvatar>): SagaIterator {
   try {
     const res: AxiosResponse = yield call(
       avatarAPI.put,
@@ -219,7 +228,7 @@ export function* updateUserAvatar({
  */
 export function* updateUserPassword({
   payload
-}: ReturnType<typeof actions.updateUserPassword>): SagaIterator {
+}: ReturnType<TUpdateUserPassword>): SagaIterator {
   try {
     const res: AxiosResponse = yield call(app.put, "new-password", payload);
     const message: string = yield call(parseMessage, res);
@@ -248,7 +257,7 @@ export function* updateUserPassword({
  */
 export function* updateUserProfile({
   payload
-}: ReturnType<typeof actions.updateUserProfile>): SagaIterator {
+}: ReturnType<TUpdateUserProfile>): SagaIterator {
   try {
     const res: AxiosResponse = yield call(
       app.put,

@@ -1,9 +1,4 @@
 import * as React from "react";
-import {
-  deleteUserAvatar,
-  updateUserAvatar,
-  updateUserProfile
-} from "~actions/Auth";
 import Button from "~components/Layout/Button";
 import Center from "~components/Layout/Center";
 import EditMemberForm from "~components/Layout/EditMemberForm";
@@ -13,6 +8,11 @@ import Title from "~components/Layout/Title";
 import UploadAvatarForm from "~components/Layout/UploadAvatarForm";
 import OutsideLink from "~components/Navigation/OutsideLink";
 import { FaBan, FaUserPlus } from "~icons";
+import type {
+  TDeleteUserAvatar,
+  TUpdateUserAvatar,
+  TUpdateUserProfile
+} from "~actions/Auth";
 import { ReactElement, TAuthData } from "~types";
 
 export type TProfileProps = {
@@ -28,12 +28,12 @@ export type TProfileProps = {
   serverError?: string;
   serverMessage?: string;
   status: string;
-  deleteUserAvatar: typeof deleteUserAvatar | ((id: string) => Promise<void>);
+  deleteUserAvatar: TDeleteUserAvatar | ((id: string) => Promise<void>);
   updateUserAvatar:
-    | typeof updateUserAvatar
+    | TUpdateUserAvatar
     | (({ form, id }: { form: FormData; id: string }) => Promise<void>);
   updateUserProfile:
-    | typeof updateUserProfile
+    | TUpdateUserProfile
     | ((paylaod: TAuthData) => Promise<void>);
   updateUserStatus?: (payload: { id: string; status: string }) => void;
 };

@@ -1,4 +1,3 @@
-import { toggleSideNav } from "~actions/Sidemenu";
 import Flex from "~components/Layout/Flex";
 import FlexEnd from "~components/Layout/FlexEnd";
 import FlexMiddle from "~components/Layout/FlexMiddle";
@@ -9,11 +8,12 @@ import TeamLogo from "~components/Layout/TeamLogo";
 import MenuLink from "~components/Navigation/MenuLink";
 import SearchBar from "~components/Navigation/SearchBar";
 import UserAvatar from "~containers/App/UserAvatar";
+import type { TToggleSideNav } from "~actions/Sidemenu";
 import { ReactElement } from "~types";
 
 export type TTopBarProps = {
   collapsed: boolean;
-  toggleSideNav: typeof toggleSideNav;
+  toggleSideNav: TToggleSideNav;
   role: string;
 };
 

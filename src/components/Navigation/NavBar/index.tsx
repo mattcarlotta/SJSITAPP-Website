@@ -1,15 +1,15 @@
 import * as React from "react";
-import * as actions from "~actions/Sidemenu";
 import Drawer from "~components/Navigation/Drawer";
 import FixedMenu from "~components/Layout/FixedMenu";
 import useWindowSize from "~utils/useWindowSize";
 import { ReactElement, ReactNode } from "~types";
+import type { TCollapseSideNav, TToggleSideNav } from "~actions/Sidemenu";
 
 export type TSideMenuProps = {
   children: ReactNode;
   collapsed: boolean;
-  collapseSideNav: typeof actions.collapseSideNav;
-  toggleSideNav: typeof actions.toggleSideNav;
+  collapseSideNav: TCollapseSideNav;
+  toggleSideNav: TToggleSideNav;
   pathname: string;
 };
 

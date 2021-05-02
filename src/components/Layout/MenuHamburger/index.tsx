@@ -1,11 +1,11 @@
-import { collapseSideNav, toggleSideNav } from "~actions/Sidemenu";
 import MenuButton from "~components/Layout/MenuButton";
 import { IconContext, RiMenuFoldLine, RiMenuUnfoldLine } from "~icons";
+import type { TCollapseSideNav, TToggleSideNav } from "~actions/Sidemenu";
 import { ReactElement } from "~types";
 
 export type TMenuHamburgerProps = {
   collapsed: boolean;
-  onClick: typeof toggleSideNav | typeof collapseSideNav;
+  onClick: TToggleSideNav | TCollapseSideNav;
   primary?: boolean;
 };
 

@@ -10,6 +10,19 @@ import {
   TSignupData
 } from "~types";
 
+export type TCheckForActiveSession = typeof checkForActiveSession;
+export type TDeleteUserAvatar = typeof deleteUserAvatar;
+export type TRemoveSession = typeof removeSession;
+export type TResetPassword = typeof resetPassword;
+export type TSetUserAvatar = typeof setUserAvatar;
+export type TSigninSession = typeof signinSession;
+export type TSigninUser = typeof signinUser;
+export type TSignoutUserSession = typeof signoutUserSession;
+export type TSignupUser = typeof signupUser;
+export type TUpdateUserAvatar = typeof updateUserAvatar;
+export type TUpdateUserPassword = typeof updateUserPassword;
+export type TUpdateUserProfile = typeof updateUserProfile;
+export type TUpdateUserSession = typeof updateUserSession;
 /**
  * Checks for an active session on initial app load.
  *
