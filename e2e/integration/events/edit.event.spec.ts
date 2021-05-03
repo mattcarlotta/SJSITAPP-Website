@@ -23,6 +23,9 @@ context("Staff Edit Event Page", () => {
   it("displays the Edit Event form", () => {
     cy.findByTestId("table-actions").first().should("exist").click();
     cy.findByTestId("edit-record").first().should("exist").click();
+
+    cy.url().should("contain", "/employee/events/edit");
+
     cy.findByTestId("edit-event-page").should("exist");
   });
 

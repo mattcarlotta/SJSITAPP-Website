@@ -28,6 +28,8 @@ context("Staff Edit Form Page", () => {
     cy.findByTestId("table-actions").last().click();
     cy.findByTestId("edit-record").click();
 
+    cy.url().should("contain", "/employee/forms/edit");
+
     cy.findByTestId("edit-apform-page").should("exist");
     cy.findByTestId("ap-form").should("exist");
   });

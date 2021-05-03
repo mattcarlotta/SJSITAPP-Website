@@ -1,130 +1,100 @@
-// const moment = require("../../../src/utils/momentWithTZ");
+import moment from "../../../src/utils/momentWithTimezone";
+import { fullyearFormat } from "../../../src/utils/dateFormats";
 
-// const findFloorYear = date => Math.floor(parseInt(date, 10) / 10) * 10;
+const currentYear = moment().format(fullyearFormat);
+const nextYear = moment().add(1, "year").format(fullyearFormat);
 
-// context("Staff Edit Season Page", () => {
-// 	before(() => {
-// 		cy.exec("npm run seed:stage");
-// 	});
+context("Staff Edit Season Page", () => {
+  before(() => {
+    cy.exec("npm run seed:stage");
+  });
 
-// 	beforeEach(() => {
-// 		cy.request("POST", "/api/signin", {
-// 			email: "staffmember@example.com",
-// 			password: "password",
-// 		});
-// 		cy.visit("/employee/seasons/viewall?page=1");
-// 		cy.get("[data-test=table-actions]").last().click();
-// 		cy.get("[data-test=edit-location]").click();
-// 	});
+  beforeEach(() => {
+    cy.staffLogin();
+    cy.visit("/employee/seasons/viewall?page=1");
+  });
 
-// 	after(() => {
-// 		cy.exec("npm run drop:stage");
-// 	});
+  after(() => {
+    cy.exec("npm run drop:stage");
+  });
 
-// 	it("displays the edit season form", () => {
-// 		cy.get("form").should("have.length", 1);
-// 	});
+  it("displays the Edit Season form", () => {
+    cy.findByTestId("data-table").should("exist");
 
-// 	it("pushes back to viewall seasons page", () => {
-// 		cy.get("[data-test=go-back]").click();
+    cy.findByTestId("table-actions").eq(3).should("exist").click();
 
-// 		cy.url().should("contain", "/employee/seasons/viewall?page=1");
-// 	});
+    cy.findByTestId("edit-record").click();
 
-// 	it("rejects creating a season that already exists", () => {
-// 		const thisYear = moment();
-// 		const nextYear = moment().add(1, "year");
-// 		const currentYearRounded = findFloorYear(thisYear.format("YYYY"));
-// 		const currentYearDate = thisYear.startOf("year");
-// 		const nextYearRounded = findFloorYear(nextYear.format("YYYY"));
-// 		const nextYearDate = nextYear.endOf("year");
+    cy.url().should("contain", "/employee/seasons/edit");
 
-// 		cy.get(".ant-calendar-picker").first().click();
+    cy.findByTestId("edit-season-page").should("exist");
+  });
 
-// 		cy.get(".ant-calendar-month-select").first().click();
+  it("rejects creating a season that already exists", () => {
+    cy.findByTestId("data-table").should("exist");
 
-// 		cy.get("td[title=Jan]").click();
+    cy.findByTestId("table-actions").eq(3).should("exist").click();
 
-// 		cy.get(".ant-calendar-year-select").first().click();
+    cy.findByTestId("edit-record").click();
 
-// 		cy.get(".ant-calendar-year-panel-decade-select").click();
+    cy.findByTestId("edit-season-page").should("exist");
 
-// 		cy.get(".ant-calendar-decade-panel-next-century-btn").click();
+    cy.findElementByNameAttribute("input", "startDate").click();
 
-// 		cy.get(".ant-calendar-decade-panel-cell")
-// 			.find("a")
-// 			.contains(`${currentYearRounded}`)
-// 			.click();
+    cy.clickYear();
 
-// 		cy.get(`td[title='${currentYearDate.format("YYYY")}']`).click();
+    cy.selectYear(currentYear);
 
-// 		cy.get(".ant-calendar-year-select").eq(1).click();
+    cy.clickOK();
 
-// 		cy.get(".ant-calendar-year-panel-decade-select").click();
+    cy.findElementByNameAttribute("input", "endDate").click();
 
-// 		cy.get(".ant-calendar-decade-panel-next-century-btn").click();
+    cy.clickYear();
 
-// 		cy.get(".ant-calendar-decade-panel-cell")
-// 			.find("a")
-// 			.contains(`${nextYearRounded}`)
-// 			.click();
+    cy.selectYear(nextYear);
 
-// 		cy.get(`td[title='${nextYearDate.format("YYYY")}']`).click();
+    cy.clickOK();
 
-// 		cy.get(".ant-calendar-month-select").eq(1).click();
+    cy.submitForm();
 
-// 		cy.get("td[title=Dec]").click();
+    cy.alertExistsWith(
+      "That season already exists. Please edit the current season or choose different start and end dates."
+    );
+  });
 
-// 		cy.get(`td[title='${currentYearDate.format("MMMM D, YYYY")}']`).click();
+  it("updates a season", () => {
+    cy.findByTestId("data-table").should("exist");
 
-// 		cy.get(`td[title='${nextYearDate.format("MMMM D, YYYY")}']`).click();
+    cy.findByDataField("seasonId").eq(4).contains("20002001");
 
-// 		cy.get("[data-test=submit-button]").click();
+    cy.findByTestId("table-actions").eq(3).should("exist").click();
 
-// 		cy.get("[data-test=toast-message]")
-// 			.should("have.length", 1)
-// 			.and(
-// 				"have.text",
-// 				"That season already exists. Please edit the current season or choose a different start and end dates.",
-// 			);
-// 	});
+    cy.findByTestId("edit-record").click();
 
-// 	it("updates a season", () => {
-// 		const startSeasonYear = moment("1980", "YYYY")
-// 			.add(1, "year")
-// 			.startOf("year");
-// 		const endSeasonYear = moment("1981", "YYYY").add(1, "year").endOf("year");
+    cy.findByTestId("edit-season-page").should("exist");
 
-// 		cy.get(".ant-calendar-picker").first().click();
+    cy.findElementByNameAttribute("input", "startDate").click();
 
-// 		cy.get(".ant-calendar-month-select").first().click();
+    cy.clickYear();
 
-// 		cy.get("td[title=Jan]").click();
+    cy.selectYear("1990");
 
-// 		cy.get(".ant-calendar-year-select").first().click();
+    cy.clickOK();
 
-// 		cy.get(`td[title='${startSeasonYear.format("YYYY")}']`).click();
+    cy.findElementByNameAttribute("input", "endDate").click();
 
-// 		cy.get(".ant-calendar-year-select").eq(1).click();
+    cy.clickYear();
 
-// 		cy.get(`td[title='${endSeasonYear.format("YYYY")}']`).click();
+    cy.selectYear("1991");
 
-// 		cy.get(".ant-calendar-month-select").eq(1).click();
+    cy.clickOK();
 
-// 		cy.get("td[title=Dec]").click();
+    cy.submitForm();
 
-// 		cy.get(`td[title='${startSeasonYear.format("MMMM D, YYYY")}']`).click();
+    cy.alertExistsWith("Successfully updated the season.");
 
-// 		cy.get(`td[title='${endSeasonYear.format("MMMM D, YYYY")}']`).click();
+    cy.url().should("contain", "/employee/seasons/viewall?page=1");
 
-// 		cy.get("[data-test=submit-button]").click();
-
-// 		cy.get("[data-test=toast-message]")
-// 			.should("have.length", 1)
-// 			.and("have.text", "Successfully updated the season.");
-
-// 		cy.url().should("contain", "/employee/seasons/viewall?page=1");
-
-// 		cy.get("td").contains("19811982");
-// 	});
-// });
+    cy.findByDataField("seasonId").eq(4).contains("19901991");
+  });
+});

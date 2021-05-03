@@ -1,104 +1,77 @@
-// const moment = require("../../../src/utils/momentWithTZ");
+import moment from "../../../src/utils/momentWithTimezone";
+import { fullyearFormat } from "../../../src/utils/dateFormats";
 
-// context("Staff Create Season Page", () => {
-// 	before(() => {
-// 		cy.exec("npm run seed:stage");
-// 	});
+const nextYear = moment().add(1, "year").format(fullyearFormat);
 
-// 	beforeEach(() => {
-// 		cy.request("POST", "/api/signin", {
-// 			email: "staffmember@example.com",
-// 			password: "password",
-// 		});
-// 		cy.visit("/employee/seasons/create");
-// 	});
+const twoYearsFromNow = moment().add(2, "year").format(fullyearFormat);
+const threeYearsFromNow = moment().add(3, "year").format(fullyearFormat);
 
-// 	after(() => {
-// 		cy.exec("npm run drop:stage");
-// 	});
+context("Staff Create Season Page", () => {
+  before(() => {
+    cy.exec("npm run seed:stage");
+  });
 
-// 	it("displays the create season form", () => {
-// 		cy.get("form").should("have.length", 1);
-// 	});
+  beforeEach(() => {
+    cy.staffLogin();
+    cy.visit("/employee/seasons/create");
+  });
 
-// 	it("displays errors if empty fields are submitted", () => {
-// 		cy.get("[data-test=submit-button]").click();
+  after(() => {
+    cy.exec("npm run drop:stage");
+  });
 
-// 		cy.get("[data-test=errors]").should("have.length", 2);
-// 	});
+  it("displays the Create Season form", () => {
+    cy.findByTestId("create-season-page").should("exist");
+    cy.findByTestId("season-form").should("exist");
+  });
 
-// 	it("pushes back to viewall seasons page", () => {
-// 		cy.get("[data-test=go-back]").click();
+  it("displays errors if empty fields are submitted", () => {
+    cy.submitForm();
 
-// 		cy.url().should("contain", "/employee/seasons/viewall?page=1");
-// 	});
+    cy.formHasErrors(3);
+  });
 
-// 	it("rejects creating a season that already exists", () => {
-// 		const currentYear = moment().startOf("year").format("MMMM D, YYYY");
-// 		const nextYear = moment()
-// 			.add(1, "year")
-// 			.endOf("year")
+  it("rejects creating a season that already exists", () => {
+    cy.findElementByNameAttribute("input", "startDate").click();
 
-// 		cy.get(".ant-calendar-picker").first().click();
+    cy.clickOK();
 
-// 		cy.get(".ant-calendar-month-select").first().click();
+    cy.findElementByNameAttribute("input", "endDate").click();
 
-// 		cy.get("td[title=Jan]").click();
+    cy.clickYear();
 
-// 		cy.get(`td[title='${currentYear}']`).click();
+    cy.selectYear(nextYear);
 
-// 		cy.get(".ant-calendar-month-select").eq(1).click();
+    cy.clickOK();
 
-// 		cy.get("td[title=Dec]").click();
+    cy.submitForm();
 
-// 		cy.get(".ant-calendar-year-select").eq(1).click();
+    cy.alertExistsWith(
+      "That season already exists. Please edit the current season or choose different start and end dates."
+    );
+  });
 
-// 		cy.get(`td[title='${nextYear.format("YYYY")}']`).click();
+  it("creates a new season", () => {
+    cy.findElementByNameAttribute("input", "startDate").click();
 
-// 		cy.get(`td[title='${nextYear.format("MMMM D, YYYY")}']`).click();
+    cy.clickYear();
 
-// 		cy.get("[data-test=submit-button]").click();
+    cy.selectYear(twoYearsFromNow);
 
-// 		cy.get("[data-test=toast-message]")
-// 			.should("have.length", 1)
-// 			.and(
-// 				"have.text",
-// 				"That season already exists. Please edit the current season or choose a different start and end dates.",
-// 			);
-// 	});
+    cy.clickOK();
 
-// 	it("creates a new season", () => {
-// 		const twoYearsFromNow = moment().add(2, "year").startOf("year");
-// 		const threeYearsFromNow = moment().add(3, "year").endOf("year");
+    cy.findElementByNameAttribute("input", "endDate").click();
 
-// 		cy.get(".ant-calendar-picker").first().click();
+    cy.clickYear();
 
-// 		cy.get(".ant-calendar-month-select").first().click();
+    cy.selectYear(threeYearsFromNow);
 
-// 		cy.get("td[title=Jan]").click();
+    cy.clickOK();
 
-// 		cy.get(".ant-calendar-year-select").first().click();
+    cy.submitForm();
 
-// 		cy.get(`td[title='${twoYearsFromNow.format("YYYY")}']`).click();
+    cy.alertExistsWith("Successfully created a new season!");
 
-// 		cy.get(".ant-calendar-year-select").eq(1).click();
-
-// 		cy.get(`td[title='${threeYearsFromNow.format("YYYY")}']`).click();
-
-// 		cy.get(".ant-calendar-month-select").eq(1).click();
-
-// 		cy.get("td[title=Dec]").click();
-
-// 		cy.get(`td[title='${twoYearsFromNow.format("MMMM D, YYYY")}']`).click();
-
-// 		cy.get(`td[title='${threeYearsFromNow.format("MMMM D, YYYY")}']`).click();
-
-// 		cy.get("[data-test=submit-button]").click();
-
-// 		cy.get("[data-test=toast-message]")
-// 			.should("have.length", 1)
-// 			.and("have.text", "Successfully created a new season!");
-
-// 		cy.url().should("contain", "/employee/seasons/viewall?page=1");
-// 	});
-// });
+    cy.url().should("contain", "/employee/seasons/viewall?page=1");
+  });
+});

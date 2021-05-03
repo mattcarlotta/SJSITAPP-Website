@@ -1,68 +1,66 @@
-// context("Staff View Seasons Page", () => {
-// 	before(() => {
-// 		cy.exec("npm run seed:stage");
-// 	});
+context("Staff View Seasons Page", () => {
+  before(() => {
+    cy.exec("npm run seed:stage");
+  });
 
-// 	beforeEach(() => {
-// 		cy.request("POST", "/api/signin", {
-// 			email: "staffmember@example.com",
-// 			password: "password",
-// 		});
-// 		cy.visit("/employee/seasons/viewall?page=1");
-// 	});
+  beforeEach(() => {
+    cy.staffLogin();
+    cy.visit("/employee/seasons/viewall?page=1");
+  });
 
-// 	after(() => {
-// 		cy.exec("npm run drop:stage");
-// 	});
+  after(() => {
+    cy.exec("npm run drop:stage");
+  });
 
-// 	it("displays the season table", () => {
-// 		cy.get(".ant-table-wrapper").should("have.length", 1);
-// 	});
+  it("displays the seasons page and seasons table", () => {
+    cy.findByTestId("view-seasons-page").should("exist");
+    cy.findByTestId("data-table").should("exist");
+  });
 
-// 	it("deletes a season", () => {
-// 		cy.get("[data-test=table-actions]").eq(2).click({ force: true });
+  it("filters the seasons table", () => {
+    cy.findByTestId("data-table").should("exist");
 
-// 		cy.get("[data-test=delete-item]").click();
+    cy.findByDataField("seasonId").should("have.length", 6);
 
-// 		cy.get(".ant-popover-buttons").find("button").eq(1).click();
+    cy.findByTestId("filter-button").click();
 
-// 		cy.get("[data-test=toast-message]")
-// 			.should("have.length", 1)
-// 			.and("have.text", "Successfully deleted the season.");
-// 	});
+    cy.findByTestId("Season Id-filter").click();
 
-// 	it("deletes multiple seasons", () => {
-// 		cy.get("input[type=checkbox]").then(e => {
-// 			const elements = e.map((_, el) => Cypress.$(el));
+    cy.findByTestId("seasonId").type("20052006");
 
-// 			cy.wrap(elements[2]).click();
-// 			cy.wrap(elements[3]).click();
-// 		});
+    cy.findByTestId("modal-submit").click();
 
-// 		cy.get("[data-test=table-actions]").eq(2).click({ force: true });
+    cy.findByDataField("seasonId").should("have.length", 2);
+  });
 
-// 		cy.get("[data-test=delete-many-items]").click();
+  it("navigates to the Create Season page", () => {
+    cy.findByTestId("view-seasons-page")
+      .should("exist")
+      .find("[data-testid='create-season-link']")
+      .click();
 
-// 		cy.get(".ant-popover-buttons").find("button").eq(1).click();
+    cy.url().should("contain", "/employee/seasons/create");
 
-// 		cy.get("[data-test=toast-message]")
-// 			.should("have.length", 1)
-// 			.and("have.text", "Successfully deleted the seasons.");
-// 	});
+    cy.findByTestId("create-season-page").should("exist");
+  });
 
-// 	it("navigates to a New Season page", () => {
-// 		cy.get("[data-test=nav-create-season]").click();
-// 		cy.url().should("contain", "/employee/seasons/create");
-// 		cy.get("form").should("have.length", 1);
-// 	});
+  it("navigates to an Edit Season page", () => {
+    cy.findByTestId("data-table").should("exist");
 
-// 	it("navigates to an Edit Season page", () => {
-// 		cy.get("[data-test=table-actions]").first().click({ force: true });
+    cy.findByTestId("table-actions").eq(3).should("exist").click();
 
-// 		cy.get("[data-test=edit-location]").click();
+    cy.findByTestId("edit-record").click();
 
-// 		cy.url().should("contain", "/employee/seasons/edit");
+    cy.url().should("contain", "/employee/seasons/edit");
 
-// 		cy.get("form").should("have.length", 1);
-// 	});
-// });
+    cy.findByTestId("edit-season-page").should("exist");
+  });
+
+  it("deletes a season", () => {
+    cy.findByTestId("data-table").should("exist");
+    cy.findByTestId("table-actions").eq(4).click();
+    cy.findByTestId("delete-record").click();
+
+    cy.alertExistsWith("Successfully deleted the season.");
+  });
+});
