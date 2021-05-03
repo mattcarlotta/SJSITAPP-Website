@@ -54,13 +54,11 @@ describe("Edit Member Form", () => {
   it("calls handleChange when a field is updated", () => {
     const value = "123@123.com";
 
-    findById("email")
-      .at(1)
-      .simulate("change", {
-        target: { name: "email", value }
-      });
+    findById("email").simulate("change", {
+      target: { name: "email", value }
+    });
 
-    expect(findById("email").at(1).prop("value")).toEqual(value);
+    expect(findById("email").prop("value")).toEqual(value);
   });
 
   describe("Form Submission", () => {

@@ -22,9 +22,9 @@ context("Login Page", () => {
   });
 
   it("displays an error if the form is submitted with invalid fields", () => {
-    cy.findByTestId("email").eq(1).type("staffmember@example.com");
+    cy.findByTestId("email").type("staffmember@example.com");
 
-    cy.findByTestId("password").eq(1).type("passw");
+    cy.findByTestId("password").type("passw");
 
     cy.submitForm();
 
@@ -34,9 +34,9 @@ context("Login Page", () => {
   });
 
   it("rejects suspended users", () => {
-    cy.findByTestId("email").eq(1).type("suspended.employee@example.com");
+    cy.findByTestId("email").type("suspended.employee@example.com");
 
-    cy.findByTestId("password").eq(1).type("password");
+    cy.findByTestId("password").type("password");
 
     cy.submitForm();
 
@@ -46,9 +46,9 @@ context("Login Page", () => {
   });
 
   it("logs the user in and redirects them to the dashboard", () => {
-    cy.findByTestId("email").eq(1).type("staffmember@example.com");
+    cy.findByTestId("email").type("staffmember@example.com");
 
-    cy.findByTestId("password").eq(1).type("password");
+    cy.findByTestId("password").type("password");
 
     cy.submitForm();
 

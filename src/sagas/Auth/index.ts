@@ -261,7 +261,7 @@ export function* updateUserProfile({
   try {
     const res: AxiosResponse = yield call(
       app.put,
-      "member/settings/update",
+      "members/settings/update",
       payload
     );
     const data: { message: string; user: TAuthData } = yield call(

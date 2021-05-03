@@ -1,25 +1,26 @@
-// context("Staff Settings Page", () => {
-// 	before(() => {
-// 		cy.exec("npm run seed:stage");
-// 	});
+context("Staff Settings Page", () => {
+  before(() => {
+    cy.exec("npm run seed:stage");
+  });
 
-// 	beforeEach(() => {
-// 		cy.request("POST", "/api/signin", {
-// 			email: "staffmember@example.com",
-// 			password: "password",
-// 		});
-// 		cy.visit("/employee/settings");
-// 	});
+  beforeEach(() => {
+    cy.staffLogin();
+    cy.visit("/employee/settings");
+  });
 
-// 	after(() => {
-// 		cy.exec("npm run drop:stage");
-// 	});
+  after(() => {
+    cy.exec("npm run drop:stage");
+  });
 
-// 	it("intially displays the profile tab", () => {
-// 		cy.get(".ant-tabs-tab-active").should("have.text", "Profile");
-// 	});
+  it("intially displays the profile tab", () => {
+    cy.findByTestId("settings-page").should("exist");
 
-// 	it("displays 2 disabled tabs", () => {
-// 		cy.get(".ant-tabs-tab-disabled").should("have.length", 2);
-// 	});
-// });
+    cy.findByTestId("member-profile").should("exist");
+  });
+
+  it("only displays a profile tab", () => {
+    cy.findByTestId("tab-profile").should("exist");
+    cy.findByTestId("tab-availability").should("not.exist");
+    cy.findByTestId("tab-responses").should("not.exist");
+  });
+});

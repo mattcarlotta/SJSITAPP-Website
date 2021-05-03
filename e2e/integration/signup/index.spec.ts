@@ -82,9 +82,9 @@ context("Signup Page", () => {
 
     cy.findByTestId("login-form").should("exist");
 
-    cy.findByTestId("email").eq(1).type(fields[1]);
+    cy.findByTestId("email").type(fields[1]);
 
-    cy.findByTestId("password").eq(1).type(fields[4]);
+    cy.findByTestId("password").type(fields[4]);
 
     cy.submitForm();
 

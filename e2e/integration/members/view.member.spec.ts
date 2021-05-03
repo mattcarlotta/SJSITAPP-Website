@@ -35,7 +35,7 @@ context("Staff View Member Page", () => {
     cy.findByTestId("member-profile").should("exist");
   });
 
-  it("displays the a member's details", () => {
+  it("displays a member's details", () => {
     cy.findByTestId("table-actions").should("exist").eq(4).click();
     cy.findByTestId("view-record").click();
 

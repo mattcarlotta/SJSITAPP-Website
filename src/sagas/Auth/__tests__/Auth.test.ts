@@ -461,7 +461,7 @@ describe("Auth Sagas", () => {
 
       testSaga(sagas.updateUserProfile, actions.updateUserProfile(payload))
         .next()
-        .call(app.put, "member/settings/update", payload)
+        .call(app.put, "members/settings/update", payload)
         .next(res)
         .call(parseData, res)
         .next(res.data)
@@ -478,7 +478,7 @@ describe("Auth Sagas", () => {
 
       testSaga(sagas.updateUserProfile, actions.updateUserProfile(payload))
         .next()
-        .call(app.put, "member/settings/update", payload)
+        .call(app.put, "members/settings/update", payload)
         .next(res)
         .call(parseData, res)
         .next(res.data)
@@ -492,7 +492,7 @@ describe("Auth Sagas", () => {
     it("successfully updates a member's settings", async () => {
       const message = "Successfully updated your settings.";
       mockApp
-        .onPut("member/settings/update")
+        .onPut("members/settings/update")
         .reply(200, { message, user: payload });
 
       return expectSaga(
@@ -506,7 +506,7 @@ describe("Auth Sagas", () => {
 
     it("if API call fails, it displays a message", async () => {
       const err = "Unable to update the member's settings.";
-      mockApp.onPut("member/settings/update").reply(404, { err });
+      mockApp.onPut("members/settings/update").reply(404, { err });
 
       return expectSaga(
         sagas.updateUserProfile,
