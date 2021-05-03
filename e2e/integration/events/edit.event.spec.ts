@@ -13,7 +13,6 @@ context("Staff Edit Event Page", () => {
 
   beforeEach(() => {
     cy.staffLogin();
-    cy.reload();
     cy.visit("/employee/events/viewall?page=1");
   });
 

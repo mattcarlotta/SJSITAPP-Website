@@ -5,7 +5,6 @@ context("Privacy Policy Page", () => {
 
   beforeEach(() => {
     cy.memberLogin();
-    cy.reload();
     cy.visit("/employee/privacy");
   });
 

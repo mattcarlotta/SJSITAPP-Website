@@ -5,7 +5,6 @@ context("Member Site Navigations", () => {
 
   beforeEach(() => {
     cy.memberLogin();
-    cy.reload();
     cy.visit("/employee/dashboard");
   });
 

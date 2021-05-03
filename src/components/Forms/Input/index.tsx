@@ -65,7 +65,7 @@ const InputComponent = ({
               align-items: center;
             `}
           >
-            {icon && <Icon dataTestId={name} type={icon} />}
+            {icon && <Icon dataTestId={`icon-${name}`} type={icon} />}
             <input
               aria-label={name}
               data-testid={name}

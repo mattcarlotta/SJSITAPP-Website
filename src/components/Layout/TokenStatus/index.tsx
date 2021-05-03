@@ -19,9 +19,9 @@ const TokenStatus = ({ email }: { email?: string }): ReactElement => (
     styles={{ textAlign: "center", width: "100%" }}
   >
     {email ? (
-      <FaUserCheck style={activeUserStyle} />
+      <FaUserCheck data-testid="registered" style={activeUserStyle} />
     ) : (
-      <FaUserClock style={inactiveUserStyle} />
+      <FaUserClock data-testid="unregistered" style={inactiveUserStyle} />
     )}
   </Tooltip>
 );

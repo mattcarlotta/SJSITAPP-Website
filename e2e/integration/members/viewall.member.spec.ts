@@ -1,79 +1,66 @@
-// context("Staff View Members Page", () => {
-// 	before(() => {
-// 		cy.exec("npm run seed:stage");
-// 	});
+context("Staff View Members Page", () => {
+  before(() => {
+    cy.exec("npm run seed:stage");
+  });
 
-// 	beforeEach(() => {
-// 		cy.request("POST", "/api/signin", {
-// 			email: "staffmember@example.com",
-// 			password: "password",
-// 		});
-// 		cy.reload();
-// 		cy.visit("/employee/members/viewall?page=1");
-// 	});
+  beforeEach(() => {
+    cy.staffLogin();
+    cy.visit("/employee/members/viewall?page=1");
+  });
 
-// 	after(() => {
-// 		cy.exec("npm run drop:stage");
-// 	});
+  after(() => {
+    cy.exec("npm run drop:stage");
+  });
 
-// 	it("displays the members table", () => {
-// 		cy.get(".ant-table-wrapper").should("have.length", 1);
-// 	});
+  it("displays the members page and members table", () => {
+    cy.findByTestId("view-members-page").should("exist");
+    cy.findByTestId("data-table").should("exist");
+  });
 
-// 	it("filters the member table", () => {
-// 		cy.get(".ant-pagination-total-text").contains("18 items");
+  it("filters the members table", () => {
+    cy.findByTestId("data-table").should("exist");
 
-// 		cy.get("button#status").click();
-// 		cy.get(".ant-select").click();
-// 		cy.get("li[role=option]").eq(1).click();
+    cy.findByDataField("email").should("have.length", 11);
 
-// 		cy.get(".ant-pagination-total-text").contains("3 items");
+    cy.findByTestId("filter-button").click();
 
-// 		cy.get("button#clear-filters").click();
-// 		cy.get(".ant-pagination-total-text").contains("18 items");
-// 	});
+    cy.findByTestId("Email-filter").click();
 
-// 	it("deletes a member", () => {
-// 		cy.get("[data-test=table-actions]").eq(1).click({ force: true });
+    cy.findByTestId("email").type("staffmember@example.com");
 
-// 		cy.get("[data-test=delete-item]").click();
+    cy.findByTestId("modal-submit").click();
 
-// 		cy.get(".ant-popover-buttons").find("button").eq(1).click();
+    cy.findByDataField("email").should("have.length", 2);
+  });
 
-// 		cy.get("[data-test=toast-message]")
-// 			.should("have.length", 1)
-// 			.and("have.text", "Successfully deleted the member.");
-// 	});
+  it("navigates to the Create Member page", () => {
+    cy.findByTestId("view-members-page")
+      .should("exist")
+      .find("[data-testid='add-member-link']")
+      .click();
 
-// 	// it("deletes multiple members", () => {
-// 	// 	cy.get("input[type=checkbox]").then(e => {
-// 	// 		const elements = e.map((_, el) => Cypress.$(el));
+    cy.url().should("contain", "/employee/members/create");
 
-// 	// 		cy.wrap(elements[8]).click();
-// 	// 		cy.wrap(elements[9]).click();
-// 	// 	});
+    cy.findByTestId("create-member-page").should("exist");
+  });
 
-// 	// 	cy.get("[data-test=table-actions]").eq(2).click({ force: true });
+  it("navigates to a View Member page", () => {
+    cy.findByTestId("data-table").should("exist");
+    cy.findByTestId("table-actions").eq(6).click();
+    cy.findByTestId("view-record").click();
 
-// 	// 	cy.get("[data-test=delete-many-items]").click();
+    cy.url().should("contain", "/employee/members/view");
 
-// 	// 	cy.get(".ant-popover-buttons").find("button").eq(1).click();
+    cy.findByTestId("member-settings-page").should("exist");
 
-// 	// 	cy.get("[data-test=toast-message]")
-// 	// 		.should("have.length", 1)
-// 	// 		.and("have.text", "Successfully deleted the members.");
-// 	// });
+    cy.findByTestId("member-profile").should("exist");
+  });
 
-// 	it("navigates to a Create Member page", () => {
-// 		cy.get(".add-member").click();
-// 		cy.url().should("contain", "/employee/members/create");
-// 		cy.get("form").should("have.length", 1);
-// 	});
+  it("deletes a member", () => {
+    cy.findByTestId("data-table").should("exist");
+    cy.findByTestId("table-actions").eq(6).click();
+    cy.findByTestId("delete-record").click();
 
-// 	it("navigates to a View Member page", () => {
-// 		cy.get("[data-test=table-actions]").eq(6).click({ force: true });
-// 		cy.get("[data-test=view-location]").click();
-// 		cy.url().should("contain", "/employee/members/view");
-// 		cy.get("form").should("have.length", 1);
-// 	});
-// });
+    cy.alertExistsWith("Successfully deleted the member.");
+  });
+});

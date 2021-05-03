@@ -5,7 +5,6 @@ context("Staff Dashboard Page", () => {
 
   beforeEach(() => {
     cy.staffLogin();
-    cy.reload();
     cy.visit("/employee/dashboard");
   });
 

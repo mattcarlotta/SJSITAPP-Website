@@ -17,7 +17,6 @@ context("Staff Edit Form Page", () => {
 
   beforeEach(() => {
     cy.staffLogin();
-    cy.reload();
     cy.visit("/employee/forms/viewall?page=1");
   });
 

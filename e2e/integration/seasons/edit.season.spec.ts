@@ -12,7 +12,6 @@
 // 			email: "staffmember@example.com",
 // 			password: "password",
 // 		});
-// 		cy.reload();
 // 		cy.visit("/employee/seasons/viewall?page=1");
 // 		cy.get("[data-test=table-actions]").last().click();
 // 		cy.get("[data-test=edit-location]").click();

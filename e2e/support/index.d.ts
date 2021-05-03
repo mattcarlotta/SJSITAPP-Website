@@ -9,6 +9,12 @@ declare namespace Cypress {
     alertExistsWith(message: string): void;
 
     /**
+     * Custom to attach a file to a request by file location and file type.
+     * @example cy.attach_file("files/example.png", "image/png")
+     */
+    attachFile(file: string, type: string): Chainable<Element>;
+
+    /**
      * Custom command to click the next month button of a Material UI Dialog.
      * @example cy.clickNextMonth()
      */
@@ -100,11 +106,5 @@ declare namespace Cypress {
      * @example cy.submitForm()
      */
     submitForm(): void;
-
-    /**
-     * Custom to attach a file to a request by file location and file type.
-     * @example cy.attach_file("files/example.png", "image/png")
-     */
-    attachFile(file: string, type: string): Chainable<Element>;
   }
 }

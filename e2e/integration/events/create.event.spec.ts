@@ -13,7 +13,6 @@ context("Staff Create Event Page", () => {
 
   beforeEach(() => {
     cy.staffLogin();
-    cy.reload();
     cy.visit("/employee/events/create");
   });
 

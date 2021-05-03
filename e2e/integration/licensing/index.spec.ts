@@ -5,7 +5,6 @@ context("Licensing Page", () => {
 
   beforeEach(() => {
     cy.memberLogin();
-    cy.reload();
     cy.visit("/employee/licensing");
   });
 

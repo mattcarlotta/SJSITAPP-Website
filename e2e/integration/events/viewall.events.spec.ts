@@ -5,7 +5,6 @@ context("Staff View Events Page", () => {
 
   beforeEach(() => {
     cy.staffLogin();
-    cy.reload();
     cy.visit("/employee/events/viewall?page=1");
   });
 

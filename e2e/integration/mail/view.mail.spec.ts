@@ -5,7 +5,6 @@ context("Staff View Mail Page", () => {
 
   beforeEach(() => {
     cy.staffLogin();
-    cy.reload();
     cy.visit("/employee/mail/viewall?page=1");
   });
 

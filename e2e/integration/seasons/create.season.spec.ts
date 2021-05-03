@@ -10,7 +10,6 @@
 // 			email: "staffmember@example.com",
 // 			password: "password",
 // 		});
-// 		cy.reload();
 // 		cy.visit("/employee/seasons/create");
 // 	});
 

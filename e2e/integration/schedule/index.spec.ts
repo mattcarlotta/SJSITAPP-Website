@@ -16,7 +16,6 @@ context("Schedule Page", () => {
 
   beforeEach(() => {
     cy.memberLogin();
-    cy.reload();
     cy.visit("/employee/schedule");
   });
 

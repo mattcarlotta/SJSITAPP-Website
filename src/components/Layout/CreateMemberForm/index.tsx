@@ -85,7 +85,7 @@ export const CreateMemberForm = (): JSX.Element => {
           title="Create Member"
           description="Please fill out the fields below to authorize a new member."
         />
-        <Form onSubmit={handleSubmit}>
+        <Form data-testid="create-member-form" onSubmit={handleSubmit}>
           <FieldGenerator fields={state.fields} onChange={handleChange} />
           <SubmitButton
             isSubmitting={state.isSubmitting}

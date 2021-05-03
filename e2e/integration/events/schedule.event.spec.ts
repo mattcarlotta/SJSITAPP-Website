@@ -5,7 +5,6 @@ context("Staff Schedule Event Page", () => {
 
   beforeEach(() => {
     cy.staffLogin();
-    cy.reload();
     cy.visit("/employee/events/viewall?page=1");
   });
 
@@ -20,9 +19,9 @@ context("Staff Schedule Event Page", () => {
 
     cy.url().should("contain", "/employee/events/scheduling");
 
-    cy.findByTestId("schedule-event-page").should("have.exist");
+    cy.findByTestId("schedule-event-page").should("exist");
 
-    cy.findByTestId("schedule-event-form").should("have.exist");
+    cy.findByTestId("schedule-event-form").should("exist");
   });
 
   it("schedules an event", () => {
@@ -32,7 +31,7 @@ context("Staff Schedule Event Page", () => {
 
     cy.findByTestId("view-record").click();
 
-    cy.findByTestId("schedule-event-form").should("have.exist");
+    cy.findByTestId("schedule-event-form").should("exist");
 
     cy.findByTestId("Member Member")
       .trigger("keydown", { keyCode: 32 })

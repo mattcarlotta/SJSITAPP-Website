@@ -5,7 +5,6 @@ context("Staff Contact Us Page", () => {
 
   beforeEach(() => {
     cy.staffLogin();
-    cy.reload();
     cy.visit("/employee/contact-us");
   });
 

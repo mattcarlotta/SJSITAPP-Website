@@ -25,8 +25,14 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 /// <reference types="cypress" />
 
+Cypress.Commands.add("alertExistsWith", message => {
+  cy.get("[data-testid='alert-message']").should("exist").contains(message);
+
+  cy.get("[data-testid='alert-message']").click();
+});
+
 Cypress.Commands.add(
-  "attach_file",
+  "attachFile",
   {
     prevSubject: "element"
   },
@@ -45,12 +51,6 @@ Cypress.Commands.add(
       });
   }
 );
-
-Cypress.Commands.add("alertExistsWith", message => {
-  cy.get("[data-testid='alert-message']").should("exist").contains(message);
-
-  cy.get("[data-testid='alert-message']").click();
-});
 
 Cypress.Commands.add("clickOK", () => {
   cy.get(".MuiDialogActions-spacing")

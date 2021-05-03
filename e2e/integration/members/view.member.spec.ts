@@ -1,125 +1,208 @@
-// context("Staff View Member Page", () => {
-// 	before(() => {
-// 		cy.exec("npm run seed:stage");
-// 	});
+import moment from "../../../src/utils/momentWithTimezone";
+import {
+  daySuffix,
+  fullyearFormat,
+  monthnameFormat
+} from "../../../src/utils/dateFormats";
 
-// 	beforeEach(() => {
-// 		cy.request("POST", "/api/signin", {
-// 			email: "staffmember@example.com",
-// 			password: "password",
-// 		});
-// 		cy.reload();
-// 		cy.visit("/employee/members/viewall?page=1");
-// 		cy.get("[data-test=table-actions]").eq(6).click({ force: true });
-// 		cy.get("[data-test=view-location]").click();
-// 	});
+const lastMonth = moment().subtract(1, "month").format(monthnameFormat);
+const today = moment().format(
+  `${monthnameFormat} ${daySuffix}, ${fullyearFormat}`
+);
 
-// 	after(() => {
-// 		cy.exec("npm run drop:stage");
-// 	});
+context("Staff View Member Page", () => {
+  before(() => {
+    cy.exec("npm run seed:stage");
+  });
 
-// 	it("intially displays the profile tab", () => {
-// 		cy.get(".ant-tabs-tab-active").should("have.text", "Profile");
-// 	});
+  beforeEach(() => {
+    cy.staffLogin();
+    cy.visit("/employee/members/viewall?page=1");
+  });
 
-// 	it("displays the availability tab", () => {
-// 		cy.get("[role=tab]").eq(1).click();
+  after(() => {
+    cy.exec("npm run drop:stage");
+  });
 
-// 		cy.get("[data-test=availability-pie]").should("have.length", 1);
-// 		cy.get("[data-test=availability-bar]").should("have.length", 1);
+  it("intially displays the profile tab", () => {
+    cy.findByTestId("table-actions").should("exist").eq(4).click();
+    cy.findByTestId("view-record").click();
 
-// 		cy.get(".ant-select-lg").first().click();
-// 		cy.get("body").type("{downarrow}").type("{downarrow}").type("{enter}");
+    cy.url().should("contain", "/employee/members/view");
 
-// 		cy.get(".ant-empty-image").should("have.length", 1);
-// 	});
+    cy.findByTestId("member-settings-page").should("exist");
 
-// 	it("displays the responses tab", () => {
-// 		cy.get("[role=tab]").eq(2).click();
+    cy.findByTestId("member-profile").should("exist");
+  });
 
-// 		cy.get("[data-test=upcoming-event").should("have.length", 0);
+  it("displays the a member's details", () => {
+    cy.findByTestId("table-actions").should("exist").eq(4).click();
+    cy.findByTestId("view-record").click();
 
-// 		cy.get(".ant-select-lg").first().click();
-// 		cy.get("body").type("{downarrow}").type("{enter}");
+    cy.url().should("contain", "/employee/members/view");
 
-// 		cy.get("[data-test=upcoming-event").should("have.length", 0);
-// 	});
+    cy.findByTestId("member-settings-page").should("exist");
 
-// 	it("displays the current user's details", () => {
-// 		cy.get("[data-test=user-name]").should("have.text", "Member2 Member2");
-// 		cy.get("[data-test=user-status]").should("have.text", "(active)");
-// 		cy.get("[data-test=user-registered]").should(e => {
-// 			const elements = e.map((_, el) => Cypress.$(el));
+    cy.findByTestId("member-profile").should("exist");
 
-// 			expect(elements[0].text()).to.be.a("string");
-// 		});
-// 		cy.get("[data-test=user-role]").should("have.text", "employee");
-// 	});
+    cy.findByTestId("member-status").contains("active");
+    cy.findByTestId("formatted-date").contains(today);
+    cy.findByTestId("role-selected-value").contains("member");
+    cy.findElementByNameAttribute("input", "emailReminders").should(
+      "be.checked"
+    );
+    cy.findByTestId("email").should("have.value", "scheduledmember@test.com");
+    cy.findByTestId("firstName").should("have.value", "Scheduled");
+    cy.findByTestId("lastName").should("have.value", "Member");
+  });
 
-// 	it("suspends and activates the selected user", () => {
-// 		cy.get("[data-test=change-member-status]").click();
+  it("updates and removes the selected user's avatar", () => {
+    cy.findByTestId("table-actions").should("exist").eq(4).click();
+    cy.findByTestId("view-record").click();
 
-// 		cy.get("[data-test=toast-message]")
-// 			.first()
-// 			.should("have.length", 1)
-// 			.and("have.text", "Member has been suspended.");
+    cy.url().should("contain", "/employee/members/view");
 
-// 		cy.get("[data-test=toast-alert]").click();
+    cy.findByTestId("member-settings-page").should("exist");
 
-// 		cy.wait(500);
+    cy.findByTestId("member-profile").should("exist");
 
-// 		cy.get("[data-test=change-member-status]").click();
+    cy.findByTestId("toggle-upload-form-button").click();
 
-// 		cy.get("[data-test=toast-message]")
-// 			.first()
-// 			.should("have.length", 1)
-// 			.and("have.text", "Member has been reactivated.");
-// 	});
+    cy.findByTestId("upload-avatar-input")
+      .attachFile("files/example.png", "image/png")
+      .trigger("change", { force: true });
 
-// 	it("updates the selected user's avatar", () => {
-// 		cy.get("[data-test=open-avatar-form").click();
+    cy.alertExistsWith("Successfully updated your current avatar.");
 
-// 		cy.get("[data-test=upload-avatar-input]")
-// 			.attach_file("files/example.png", "image/png")
-// 			.trigger("change", { force: true });
+    cy.wait(1000);
 
-// 		cy.wait(500);
+    cy.findByTestId("remove-avatar-button").click();
 
-// 		cy.get("[data-test=upload-avatar-form]").submit();
+    cy.alertExistsWith("Successfully removed your current avatar.");
+  });
 
-// 		cy.get("[data-test=toast-message]")
-// 			.first()
-// 			.should("have.length", 1)
-// 			.and("have.text", "Successfully updated your current avatar.");
+  it("suspends and activates a member", () => {
+    cy.findByTestId("table-actions").should("exist").eq(6).click();
+    cy.findByTestId("view-record").click();
 
-// 		cy.get("[data-test=delete-avatar]").click();
+    cy.url().should("contain", "/employee/members/view");
 
-// 		cy.get("[data-test=toast-message]")
-// 			.eq(1)
-// 			.should("have.length", 1)
-// 			.and("have.text", "Successfully removed your current avatar.");
-// 	});
+    cy.findByTestId("member-settings-page").should("exist");
 
-// 	it("updates the selected user's first and last name", () => {
-// 		cy.get("[name=firstName]").clear().type("John");
-// 		cy.get("[name=lastName]").clear().type("Smith");
+    cy.findByTestId("update-user-status").click();
 
-// 		cy.get("[data-test=submit-button]").click();
+    cy.alertExistsWith("Member has been suspended.");
 
-// 		cy.get("[data-test=toast-message]")
-// 			.should("have.length", 1)
-// 			.and("have.text", "Successfully updated the member profile.");
+    cy.findByTestId("member-status").contains("suspended");
 
-// 		cy.get("[data-test=user-name]").should("have.text", "John Smith");
-// 	});
+    cy.wait(1000);
 
-// 	it("updates the selected user's email and logs them out", () => {
-// 		cy.get("[name=email]").clear().type("john@smith.com");
+    cy.findByTestId("update-user-status").click();
 
-// 		cy.get("[data-test=submit-button]").click();
+    cy.findByTestId("member-status").contains("active");
 
-// 		cy.get("[data-test=toast-message]")
-// 			.should("have.length", 1)
-// 			.and("have.text", "Successfully updated the member profile.");
-// 	});
-// });
+    cy.alertExistsWith("Member has been reactivated.");
+  });
+
+  it("doesn't allow the member to update their email to an account that already exists", () => {
+    cy.findByTestId("table-actions").should("exist").eq(6).click();
+    cy.findByTestId("view-record").click();
+
+    cy.url().should("contain", "/employee/members/view");
+
+    cy.findByTestId("member-settings-page").should("exist");
+
+    cy.findByTestId("email").clear().type("scheduledmember@test.com");
+
+    cy.submitForm();
+
+    cy.alertExistsWith(
+      "That email is already in use and is associated with an active account."
+    );
+  });
+
+  it("doesn't allow the member to update their first and last name to an account that already exists", () => {
+    cy.findByTestId("table-actions").should("exist").eq(6).click();
+    cy.findByTestId("view-record").click();
+
+    cy.url().should("contain", "/employee/members/view");
+
+    cy.findByTestId("member-settings-page").should("exist");
+
+    cy.findByTestId("firstName").clear().type("Scheduled");
+    cy.findByTestId("lastName").clear().type("Member");
+
+    cy.submitForm();
+
+    cy.alertExistsWith(
+      "The first and last name provided is already in use and is associated with an active account. In order to continue, please use a uniquely identifable name such as a middle name initial or a nickname."
+    );
+  });
+
+  it("updates the member's details", () => {
+    cy.findByTestId("table-actions").should("exist").eq(6).click();
+    cy.findByTestId("view-record").click();
+
+    cy.url().should("contain", "/employee/members/view");
+
+    cy.findByTestId("member-settings-page").should("exist");
+
+    cy.findByTestId("role-selected-value").click();
+
+    cy.findByTestId("staff").should("exist").click();
+
+    cy.findElementByNameAttribute("input", "emailReminders").click();
+
+    cy.findByTestId("email").clear().type("janeturkdoe2@example.com");
+
+    cy.findByTestId("firstName").clear().type("Jane");
+    cy.findByTestId("lastName").clear().type("Turk-Doe");
+
+    cy.submitForm();
+
+    cy.alertExistsWith("Successfully updated the member profile.");
+
+    cy.findElementByNameAttribute("input", "emailReminders").should(
+      "not.be.checked"
+    );
+    cy.findByTestId("email").should("have.value", "janeturkdoe2@example.com");
+    cy.findByTestId("firstName").should("have.value", "Jane");
+    cy.findByTestId("lastName").should("have.value", "Turk-Doe");
+  });
+
+  it("displays the availability tab and updates availability", () => {
+    cy.findByTestId("table-actions").should("exist").eq(4).click();
+    cy.findByTestId("view-record").click();
+
+    cy.url().should("contain", "/employee/members/view");
+
+    cy.findByTestId("member-settings-page").should("exist");
+
+    cy.findByTestId("tab-availability").should("exist").click();
+
+    cy.findByTestId("my-availability").should("exist");
+
+    cy.findByTestId("selectedMonth-selected-value").click();
+
+    cy.findByTestId(lastMonth).click();
+
+    cy.findByTestId("no-availability").should("exist");
+  });
+
+  it("displays the responses tab and updates calendar", () => {
+    cy.findByTestId("table-actions").should("exist").eq(4).click();
+    cy.findByTestId("view-record").click();
+
+    cy.url().should("contain", "/employee/members/view");
+
+    cy.findByTestId("member-settings-page").should("exist");
+
+    cy.findByTestId("tab-responses").should("exist").click();
+
+    cy.findByTestId("upcoming-event").should("exist");
+
+    cy.findByTestId("previous-month-button").click();
+
+    cy.findByTestId("upcoming-event").should("not.exist");
+  });
+});

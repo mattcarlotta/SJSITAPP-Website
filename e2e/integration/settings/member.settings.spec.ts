@@ -8,7 +8,6 @@
 //       email: "member2@example.com",
 //       password: "password"
 //     });
-//     cy.reload();
 //     cy.visit("/employee/settings");
 //   });
 

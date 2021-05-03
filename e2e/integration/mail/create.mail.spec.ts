@@ -5,7 +5,6 @@ context("Staff Send Mail Page", () => {
 
   beforeEach(() => {
     cy.staffLogin();
-    cy.reload();
     cy.visit("/employee/mail/create");
   });
 

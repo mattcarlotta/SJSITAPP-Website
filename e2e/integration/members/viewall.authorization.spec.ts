@@ -1,95 +1,97 @@
-// context("Staff View Authorizations Page", () => {
-// 	before(() => {
-// 		cy.exec("npm run seed:stage");
-// 	});
+context("Staff View Authorizations Page", () => {
+  before(() => {
+    cy.exec("npm run seed:stage");
+  });
 
-// 	beforeEach(() => {
-// 		cy.request("POST", "/api/signin", {
-// 			email: "staffmember@example.com",
-// 			password: "password",
-// 		});
-// 		cy.reload();
-// 		cy.visit("/employee/members/authorizations/viewall?page=1");
-// 	});
+  beforeEach(() => {
+    cy.staffLogin();
+    cy.visit("/employee/members/authorizations/viewall?page=1");
+  });
 
-// 	after(() => {
-// 		cy.exec("npm run drop:stage");
-// 	});
+  after(() => {
+    cy.exec("npm run drop:stage");
+  });
 
-// 	it("displays the authorizations table", () => {
-// 		cy.get(".ant-table-wrapper").should("have.length", 1);
-// 	});
+  it("displays the authorizations page and authorizations table", () => {
+    cy.findByTestId("view-authorizations-page").should("exist");
+    cy.findByTestId("data-table").should("exist");
+  });
 
-// 	it("filters the authorization table", () => {
-// 		cy.get(".ant-pagination-total-text").contains("14 items");
+  it("filters the authorizations table", () => {
+    cy.findByTestId("data-table").should("exist");
 
-// 		cy.get("button#role").click();
-// 		cy.get(".ant-select").click();
-// 		cy.get("li[role=option]").first().click();
+    cy.findByDataField("email").should("have.length", 11);
 
-// 		cy.get(".ant-pagination-total-text").contains("1 items");
+    cy.findByTestId("filter-button").click();
 
-// 		cy.get("button#clear-filters").click();
-// 		cy.get(".ant-pagination-total-text").contains("14 items");
-// 	});
+    cy.findByTestId("Email-filter").click();
 
-// 	it("resends authorization emails", () => {
-// 		cy.get("[data-test=table-actions]").eq(6).click({ force: true });
+    cy.findByTestId("authorizedEmail").type("member@example.com");
 
-// 		cy.get("[data-test=send-mail]").click();
+    cy.findByTestId("modal-submit").click();
 
-// 		cy.get("[data-test=toast-message]")
-// 			.should("have.length", 1)
-// 			.and(
-// 				"have.text",
-// 				"An authorization key will be resent to member888@example.com shortly.",
-// 			);
-// 	});
+    cy.findByDataField("email").should("have.length", 2);
+  });
 
-// 	it("deletes an authorization", () => {
-// 		cy.get("[data-test=table-actions]").last().click({ force: true });
+  it("navigates to the Create Member page", () => {
+    cy.findByTestId("view-authorizations-page")
+      .should("exist")
+      .find("[data-testid='add-member-link']")
+      .click();
 
-// 		cy.get("[data-test=delete-item]").click();
+    cy.url().should("contain", "/employee/members/create");
 
-// 		cy.get(".ant-popover-buttons").find("button").eq(1).click();
+    cy.findByTestId("create-member-page").should("exist");
+  });
 
-// 		cy.get("[data-test=toast-message]")
-// 			.should("have.length", 1)
-// 			.and("have.text", "Successfully deleted the authorization key.");
-// 	});
+  it("rejects to resend authorization emails that have already been used", () => {
+    cy.findByTestId("data-table").should("exist");
 
-// 	it("deletes multiple authorizations", () => {
-// 		cy.get("input[type=checkbox]").then(e => {
-// 			const elements = e.map((_, el) => Cypress.$(el));
+    cy.findByTestId("table-actions").eq(1).should("exist").click();
 
-// 			cy.wrap(elements[4]).click();
-// 			cy.wrap(elements[5]).click();
-// 		});
+    cy.findByTestId("resend-record").click();
 
-// 		cy.get("[data-test=table-actions]").eq(2).click({ force: true });
+    cy.alertExistsWith(
+      "Unable to update this authorization token. The key has already been used and is associated with an active account."
+    );
+  });
 
-// 		cy.get("[data-test=delete-many-items]").click();
+  it("resends authorization emails", () => {
+    cy.findByTestId("data-table").should("exist");
 
-// 		cy.get(".ant-popover-buttons").find("button").eq(1).click();
+    cy.findByTestId("table-actions").eq(2).should("exist").click();
 
-// 		cy.get("[data-test=toast-message]")
-// 			.should("have.length", 1)
-// 			.and("have.text", "Successfully deleted the authorization keys.");
-// 	});
+    cy.findByTestId("resend-record").click();
 
-// 	it("navigates to a Create Member page", () => {
-// 		cy.get(".add-member").click();
-// 		cy.url().should("contain", "/employee/members/create");
-// 		cy.get("form").should("have.length", 1);
-// 	});
+    cy.alertExistsWith(
+      "An authorization token will be resent to member55@example.com shortly."
+    );
+  });
 
-// 	it("navigates to an Edit Authorization page", () => {
-// 		cy.get("[data-test=table-actions]").eq(5).click({ force: true });
+  it("deletes an authorization", () => {
+    cy.findByTestId("data-table").should("exist");
 
-// 		cy.get("[data-test=edit-location]").click();
+    cy.findByTestId("table-actions").eq(3).should("exist").click();
 
-// 		cy.url().should("contain", "/employee/members/authorizations/edit");
+    cy.findByTestId("delete-record").click();
 
-// 		cy.get("form").should("have.length", 1);
-// 	});
-// });
+    cy.alertExistsWith("Successfully deleted the authorization token.");
+  });
+
+  it("deletes multiple authorizations", () => {
+    cy.findByTestId("data-table").should("exist");
+
+    cy.get("input[type=checkbox]").then(e => {
+      const elements = e.map((_, el) => Cypress.$(el));
+
+      cy.wrap(elements[9]).click();
+      cy.wrap(elements[10]).click();
+    });
+
+    cy.findByTestId("table-actions").first().click();
+
+    cy.findByTestId("delete-many-records").click();
+
+    cy.alertExistsWith("Successfully deleted the authorization tokens.");
+  });
+});

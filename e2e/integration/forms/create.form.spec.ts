@@ -13,7 +13,6 @@ context("Staff Create Form Page", () => {
 
   beforeEach(() => {
     cy.staffLogin();
-    cy.reload();
     cy.visit("/employee/forms/create");
   });
 
