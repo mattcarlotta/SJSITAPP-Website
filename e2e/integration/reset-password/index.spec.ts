@@ -23,7 +23,6 @@ context("Reset Password Page", () => {
 
   it("displays an error if the form is submitted with an invalid email", () => {
     cy.findByTestId("email")
-      .eq(1)
       .type("emaildoesnotexist@example.com")
       .should("have.value", "emaildoesnotexist@example.com");
 
@@ -36,7 +35,6 @@ context("Reset Password Page", () => {
 
   it("displays a success message if the form is submitted with an valid email and redirects the member back to the login page", () => {
     cy.findByTestId("email")
-      .eq(1)
       .type("staffmember@example.com")
       .should("have.value", "staffmember@example.com");
 

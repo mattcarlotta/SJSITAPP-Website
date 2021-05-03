@@ -23,7 +23,6 @@ context("New Password Page", () => {
 
   it("displays an error if the form is submitted with the same password", () => {
     cy.findByTestId("password")
-      .eq(1)
       .type("password")
       .should("have.value", "password");
 
@@ -36,7 +35,6 @@ context("New Password Page", () => {
 
   it("displays a success message if the form is submitted with an valid password and redirects the user back to the login page", () => {
     cy.findByTestId("password")
-      .eq(1)
       .type("password2")
       .should("have.value", "password2");
 
@@ -50,9 +48,9 @@ context("New Password Page", () => {
 
     cy.findByTestId("login-form").should("exist");
 
-    cy.findByTestId("email").eq(1).type("reset.password@example.com");
+    cy.findByTestId("email").type("reset.password@example.com");
 
-    cy.findByTestId("password").eq(1).type("password2");
+    cy.findByTestId("password").type("password2");
 
     cy.submitForm();
 
