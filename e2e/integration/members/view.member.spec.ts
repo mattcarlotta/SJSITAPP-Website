@@ -95,7 +95,7 @@ context("Staff View Member Page", () => {
 
     cy.findByTestId("member-status").contains("suspended");
 
-    cy.wait(1000);
+    cy.wait(2000);
 
     cy.findByTestId("update-user-status").click();
 
