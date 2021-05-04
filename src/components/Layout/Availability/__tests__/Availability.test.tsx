@@ -43,7 +43,7 @@ const selectedYear = moment().format(fullyearFormat);
 const nextSelectedMonth = moment().add(1, "month").format(monthnameFormat);
 
 const getSelectedDate = (month: string): string =>
-  moment(`${selectedYear} ${month}`, yearMonthFormat).format();
+  moment(`${selectedYear}-${month}`, yearMonthFormat).format();
 
 const currentMonth = getSelectedDate(selectedMonth);
 const nextMonth = getSelectedDate(nextSelectedMonth);

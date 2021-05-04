@@ -91,7 +91,7 @@ export const EventCalendar = ({
   const fetchEvents = React.useCallback(async (): Promise<void> => {
     try {
       const selectedDate = moment(
-        `${selectedYear} ${selectedMonth}`,
+        `${selectedYear}-${selectedMonth}`,
         yearMonthFormat
       ).format();
 

@@ -64,7 +64,7 @@ const Availability = ({ id }: TAvailabilityProps): JSX.Element => {
   const fetchAvailability = React.useCallback(async (): Promise<void> => {
     try {
       const selectedDate = moment(
-        `${selectedYear} ${selectedMonth}`,
+        `${selectedYear}-${selectedMonth}`,
         yearMonthFormat
       ).format();
 
