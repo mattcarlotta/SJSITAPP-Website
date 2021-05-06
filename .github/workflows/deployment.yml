@@ -10,7 +10,7 @@ env:
 
 jobs:
   deploy:
-    if: "!contains(github.event.commits[0].message, '[skip-ci]')"
+    if: "!contains(toJSON(github.event.commits.*.message), '[skip ci]')"
     runs-on: ubuntu-20.04
 
     services:
@@ -28,7 +28,7 @@ jobs:
         run: echo '::set-output name=dir::$(yarn cache dir)'
 
       - name: Utilize Yarn Cache Directory
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}

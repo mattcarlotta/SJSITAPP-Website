@@ -274,7 +274,7 @@ export const seedEvents = async (
     uniform: "Barracuda Jacket",
     eventDate: moment().format(),
     notes: "Unscheduled game.",
-    opponent: "Chicago Wolves",
+    opponent: "Binghamton Devils",
     seasonId: currentSeason,
     team: "San Jose Barracuda",
     schedule: [
@@ -313,10 +313,15 @@ export const seedEvents = async (
     uniform: "Barracuda Jacket",
     eventDate: moment().add(1, "months").format(),
     notes: "Unscheduled game.",
-    opponent: "Chicago Wolves",
+    opponent: "Grand Rapids Griffins",
     seasonId: currentSeason,
     team: "San Jose Barracuda",
-    schedule: createSchedule(newEventCallTimes9),
+    schedule: [
+      {
+        _id: "2019-02-09T17:45:26-07:00",
+        employeeIds: [scheduledUser._id]
+      }
+    ],
     scheduledIds: [scheduledUser._id],
     sentEmailReminders: true,
     employeeResponses: [
@@ -335,11 +340,16 @@ export const seedEvents = async (
     uniform: "Barracuda Jacket",
     eventDate: moment().add(1, "months").format(),
     notes: "Delete this game.",
-    opponent: "Chicago Wolves",
+    opponent: "Laval Rocket",
     seasonId: currentSeason,
     team: "San Jose Barracuda",
-    schedule: createSchedule(newEventCallTimes9),
     scheduledIds: [scheduledUser._id],
+    schedule: [
+      {
+        _id: "2019-02-09T17:45:26-07:00",
+        employeeIds: [scheduledUser._id]
+      }
+    ],
     sentEmailReminders: true,
     employeeResponses: [
       {
