@@ -56,7 +56,6 @@ export type TTableFilterButtonProps = {
   clearFilters: () => void;
   filters: TFilters;
   queries: TURLQuery;
-  queryString: string;
   updateQuery: (nextQuery: TURLQuery) => void;
 };
 
@@ -265,7 +264,12 @@ const TableFilterButton = ({
         open={isOpen}
         aria-labelledby="filters-dialog-title"
       >
-        <Form maxWidth="none" margin="0" onSubmit={handleModalSubmit}>
+        <Form
+          data-testid="filters-form"
+          maxWidth="none"
+          margin="0"
+          onSubmit={handleModalSubmit}
+        >
           <Padding right="10px" bottom="20px" left="10px">
             <DialogTitle id="filters-dialog-title">
               Filter by: {title}
