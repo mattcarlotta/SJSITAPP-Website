@@ -1,13 +1,16 @@
 import * as React from "react";
 import isEmpty from "lodash.isempty";
+import { Dialog } from "@material-ui/core";
 import Button from "~components/Layout/Button";
-import Team from "~components/Layout/Team";
+import CloseModalButton from "~components/Layout/CloseModalButton";
 import EventDetails from "~components/Layout/EventDetails";
 import FlexSpaceAround from "~components/Layout/FlexSpaceAround";
-import Modal from "~components/Layout/Modal";
 import Margin from "~components/Layout/Margin";
 import NoEvents from "~components/Layout/NoEvents";
-import { FaCalendarCheck } from "~icons";
+import Padding from "~components/Layout/Padding";
+import SlideTransition from "~components/Layout/SlideTransition";
+import Team from "~components/Layout/Team";
+import { FaCalendarCheck, FaTimes } from "~icons";
 import { CSSProperties, ReactElement, TEventData } from "~types";
 
 const iconStyle = {
@@ -124,14 +127,26 @@ const DisplayEvents = ({
       ) : (
         <NoEvents today={!nextWeek} />
       )}
-      <Modal
-        dataTestId="event-events-modal"
-        isOpen={isVisible}
-        onClick={handleCloseModal}
-        maxWidth="500px"
+      <Dialog
+        open={isVisible}
+        fullWidth
+        maxWidth="sm"
+        TransitionComponent={SlideTransition}
+        onClose={handleCloseModal}
       >
-        <EventDetails event={modalContent as TEventData} id={id} />
-      </Modal>
+        <CloseModalButton
+          data-testid="close-modal"
+          aria-label="close modal"
+          type="button"
+          style={{ top: "15px", right: "25px" }}
+          onClick={handleCloseModal}
+        >
+          <FaTimes style={{ fontSize: 20 }} />
+        </CloseModalButton>
+        <Padding top="40px" right="40px" bottom="40px" left="40px">
+          <EventDetails event={modalContent as TEventData} id={id} />
+        </Padding>
+      </Dialog>
     </>
   );
 };

@@ -1,5 +1,5 @@
 import { mount, ReactWrapper } from "enzyme";
-import Modal from "~components/Layout/Modal";
+import waitFor from "~utils/waitFor";
 import Event from "../index";
 
 const initProps = {
@@ -77,10 +77,10 @@ describe("Event", () => {
 
   it("initially renders null", () => {
     expect(wrapper.find("[data-testid='upcoming-event']")).not.toExist();
-    expect(wrapper.find(Modal).props().isOpen).toBeFalsy();
+    // expect(wrapper.find(Modal).props().isOpen).toBeFalsy();
   });
 
-  it("renders a button that opens and closes the modal with game events", () => {
+  it("renders a button that opens and closes the modal with game events", async () => {
     wrapper.setProps({
       events: gameSchedule,
       folder: "lowres"
@@ -95,7 +95,11 @@ describe("Event", () => {
     expect(wrapper.find("List")).toExist();
 
     clickButton("close-modal");
-    expect(wrapper.find("List")).not.toExist();
+
+    await waitFor(() => {
+      wrapper.update();
+      expect(wrapper.find("List")).not.toExist();
+    });
   });
 
   it("renders a button with a schedule icon and logos for a game", () => {

@@ -101,6 +101,24 @@ describe("Compose Mail Form", () => {
     expect(findById("email-preview")).toExist();
   });
 
+  it("closes the preview modal", async () => {
+    await waitFor(() => {
+      wrapper.update();
+      expect(findById("compose-mail-form")).toExist();
+    });
+
+    findById("preview-email-button").simulate("click");
+
+    expect(findById("email-preview")).toExist();
+
+    findById("close-modal").first().simulate("click");
+
+    await waitFor(() => {
+      wrapper.update();
+      expect(findById("email-preview")).not.toExist();
+    });
+  });
+
   describe("Form Submission", () => {
     beforeEach(async () => {
       await waitFor(() => {

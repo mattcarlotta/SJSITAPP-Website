@@ -1,17 +1,19 @@
 import * as React from "react";
 import { useRouter } from "next/router";
+import { Dialog } from "@material-ui/core";
 import toast from "~components/App/Toast";
 import FormTitle from "~components/Forms/FormTitle";
 import FieldGenerator from "~components/Forms/FieldGenerator";
 import Button from "~components/Layout/Button";
 import Card from "~components/Layout/Card";
+import CloseModalButton from "~components/Layout/CloseModalButton";
 import EmailPreview from "~components/Layout/EmailPreview";
 import Form from "~components/Layout/Form";
 import LoadingPanel from "~components/Layout/LoadingPanel";
-import Modal from "~components/Layout/Modal";
 import Padding from "~components/Layout/Padding";
+import SlideTransition from "~components/Layout/SlideTransition";
 import SubmitButton from "~components/Layout/SubmitButton";
-import { FaEdit } from "~icons";
+import { FaEdit, FaTimes } from "~icons";
 import app from "~utils/axiosConfig";
 import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
@@ -162,14 +164,24 @@ export const ComposeMailForm = (): ReactElement => {
         </Padding>
       </Card>
       {!isLoading && (
-        <Modal
-          dataTestId="email-preview-modal"
-          isOpen={isOpen}
-          onClick={handlePreview}
-          maxWidth="1200px"
+        <Dialog
+          open={isOpen}
+          fullWidth
+          maxWidth="lg"
+          TransitionComponent={SlideTransition}
+          onClose={handlePreview}
         >
+          <CloseModalButton
+            data-testid="close-modal"
+            aria-label="close modal"
+            type="button"
+            style={{ top: "15px", right: "25px" }}
+            onClick={handlePreview}
+          >
+            <FaTimes style={{ fontSize: 20 }} />
+          </CloseModalButton>
           <EmailPreview {...parseFields<TParsedMailFormFields>(state.fields)} />
-        </Modal>
+        </Dialog>
       )}
     </>
   );

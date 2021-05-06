@@ -29,8 +29,8 @@ const EmailPreview = ({
   <div
     data-testid="email-preview"
     css={css`
-      width: 100%;
-      margin-top: 20px;
+      width: 93%;
+      margin: 50px auto;
       padding: 20px;
       border: 1px dashed #bbb;
       border-radius: 5px;
