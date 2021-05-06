@@ -53,16 +53,16 @@ const DisplayEvents = ({
   spacing,
   width
 }: TDisplayEventProps): ReactElement => {
-  const [state, setState] = React.useState({
+  const [state, setState] = React.useState<TDisplayEventState>({
     isVisible: false,
-    modalContent: {}
+    modalContent: {} as TEventData
   });
   const { isVisible, modalContent } = state;
 
   const handleCloseModal = (): void => {
     setState({
       isVisible: false,
-      modalContent: {}
+      modalContent: {} as TEventData
     });
   };
 
@@ -144,7 +144,7 @@ const DisplayEvents = ({
           <FaTimes style={{ fontSize: 20 }} />
         </CloseModalButton>
         <Padding top="40px" right="40px" bottom="40px" left="40px">
-          <EventDetails event={modalContent as TEventData} id={id} />
+          <EventDetails event={modalContent} id={id} />
         </Padding>
       </Dialog>
     </>
