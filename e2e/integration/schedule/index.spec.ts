@@ -42,7 +42,7 @@ context("Schedule Page", () => {
         const elements = e.map((_, el) => Cypress.$(el));
 
         expect(elements[0].text()).to.contain(
-          "San Jose Barracudavs.Chicago Wolves"
+          "San Jose Barracudavs.Binghamton Devils"
         );
         expect(elements[1].text()).to.be.a("string");
         expect(elements[2].text()).to.contain("Game");

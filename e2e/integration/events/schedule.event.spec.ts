@@ -15,7 +15,7 @@ context("Staff Schedule Event Page", () => {
   it("displays the schedule event page and form", () => {
     cy.findByTestId("table-actions").eq(5).should("exist").click();
 
-    cy.findByTestId("view-record").click();
+    cy.findByTestId("schedule-record").click();
 
     cy.url().should("contain", "/employee/events/scheduling");
 
@@ -29,7 +29,7 @@ context("Staff Schedule Event Page", () => {
 
     cy.findByTestId("table-actions").eq(5).should("exist").click();
 
-    cy.findByTestId("view-record").click();
+    cy.findByTestId("schedule-record").click();
 
     cy.findByTestId("schedule-event-form").should("exist");
 

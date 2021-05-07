@@ -88,6 +88,7 @@ const TableActions = ({
         TransitionComponent={SlideTransition}
       >
         <Padding
+          data-testid="actions-dialog-overlay"
           top="10px"
           left="20px"
           right="20px"
@@ -142,7 +143,7 @@ const TableActions = ({
                 <Link
                   alt
                   display="block"
-                  dataTestId="view-record"
+                  dataTestId="schedule-record"
                   padding="8px"
                   fontSize="16px"
                   margin="5px 0"

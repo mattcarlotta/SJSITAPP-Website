@@ -49,7 +49,7 @@ context("Staff View Events Page", () => {
 
     cy.findByTestId("table-actions").first().should("exist").click();
 
-    cy.findByTestId("view-record").click();
+    cy.findByTestId("schedule-record").click();
 
     cy.url().should("contain", "/employee/events/scheduling");
 
