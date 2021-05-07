@@ -11,7 +11,7 @@ describe("Parse Fields Helper", () => {
   });
 
   it("doesn't parse empty callTime values", () => {
-    const date = moment(new Date("2019-12-17T01:00:00")).format();
+    const date = moment("2019-12-17T01:00:00").format();
     const fields = [
       {
         name: "callTime1",
@@ -39,18 +39,14 @@ describe("Parse Fields Helper", () => {
 
   it("parses an array of fields", () => {
     const datesRanges = [
-      moment(new Date("2019-12-17T01:00:00")).tz("America/Los_Angeles"),
-      moment(new Date("2019-12-17T02:00:00")).tz("America/Los_Angeles")
+      moment("2019-12-17T01:00:00").format(),
+      moment("2019-12-17T02:00:00").format()
     ];
 
     const callTimes = [
-      moment(new Date("2019-12-17T01:00:00"))
-        .tz("America/Los_Angeles")
-        .format(),
-      moment(new Date("2019-12-17T02:00:00"))
-        .tz("America/Los_Angeles")
-        .format(),
-      moment(new Date("2019-12-17T03:00:00")).tz("America/Los_Angeles").format()
+      moment("2019-12-17T01:00:00").format(),
+      moment("2019-12-17T02:00:00").format(),
+      moment("2019-12-17T03:00:00").format()
     ];
 
     const fields = [
@@ -72,7 +68,7 @@ describe("Parse Fields Helper", () => {
         name: "expirationDate",
         label: "Expiration",
         type: "date",
-        value: datesRanges[0].toString(),
+        value: datesRanges[0],
         required: true
       },
       {
@@ -133,7 +129,7 @@ describe("Parse Fields Helper", () => {
       expect.objectContaining({
         email: "test@example.com",
         password: "12345",
-        expirationDate: datesRanges[0].toString(),
+        expirationDate: datesRanges[0],
         callTimes: [callTimes[0], callTimes[1], callTimes[2]],
         time: "03:00 am",
         responses: [
