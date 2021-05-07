@@ -39,14 +39,18 @@ describe("Parse Fields Helper", () => {
 
   it("parses an array of fields", () => {
     const datesRanges = [
-      moment(new Date("2019-12-17T01:00:00")),
-      moment(new Date("2019-12-17T02:00:00"))
+      moment(new Date("2019-12-17T01:00:00")).tz("America/Los_Angeles"),
+      moment(new Date("2019-12-17T02:00:00")).tz("America/Los_Angeles")
     ];
 
     const callTimes = [
-      moment(new Date("2019-12-17T01:00:00")).format(),
-      moment(new Date("2019-12-17T02:00:00")).format(),
-      moment(new Date("2019-12-17T03:00:00")).format()
+      moment(new Date("2019-12-17T01:00:00"))
+        .tz("America/Los_Angeles")
+        .format(),
+      moment(new Date("2019-12-17T02:00:00"))
+        .tz("America/Los_Angeles")
+        .format(),
+      moment(new Date("2019-12-17T03:00:00")).tz("America/Los_Angeles").format()
     ];
 
     const fields = [
