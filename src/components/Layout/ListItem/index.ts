@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 const ListItem = styled.li<{
   background?: string;
+  breakpoint?: boolean;
   color?: string;
   display?: string;
   margin?: string;
@@ -9,6 +10,14 @@ const ListItem = styled.li<{
   textAlign?: string;
   padding?: string;
 }>`
+  ${({ breakpoint }) =>
+    breakpoint &&
+    `@media (max-width: 500px) {
+      padding: 0px;
+      margin: 5px 0;
+    }
+  `};
+
   display: ${({ display }) => display || "block"};
   color: ${({ color }) => color || "#010404"};
   background: ${({ background, team }) => {
