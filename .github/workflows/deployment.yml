@@ -62,7 +62,7 @@ jobs:
       - name: Run API Tests
         if: steps.apptests.exit_code == 0
         id: apitests
-        run: yarn test
+        run: yarn test:api
         env:
           APIPORT: 5000
           CLIENT: http://localhost:3000
