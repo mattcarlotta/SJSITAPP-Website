@@ -146,12 +146,12 @@ const DisplayEvents = ({
           data-testid="close-modal"
           aria-label="close modal"
           type="button"
-          style={{ top: "15px", right: "25px" }}
+          style={{ top: "15px", right: "15px" }}
           onClick={handleCloseModal}
         >
           <FaTimes style={{ fontSize: 20 }} />
         </CloseModalButton>
-        <Padding top="40px" right="40px" bottom="40px" left="40px">
+        <Padding top="40px" right="25px" bottom="40px" left="25px">
           <EventDetails event={modalContent} id={id} />
         </Padding>
       </Dialog>
