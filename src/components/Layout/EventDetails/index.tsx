@@ -135,6 +135,7 @@ const EventDetails = ({ event, id }: TEventDetailsProps): JSX.Element => (
             {!isEmpty(employeeIds) ? (
               employeeIds.map(({ _id, firstName, lastName }) => (
                 <ListItem
+                  breakpoint
                   key={_id}
                   data-testid="employee"
                   margin="5px 0 5px 20px"
@@ -163,6 +164,7 @@ const EventDetails = ({ event, id }: TEventDetailsProps): JSX.Element => (
               ))
             ) : (
               <ListItem
+                breakpoint
                 data-testid="no-scheduled"
                 margin="5px 0 5px 20px"
                 padding="0 0 0 10px"

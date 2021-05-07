@@ -16,6 +16,16 @@ describe("ListItem", () => {
     expect(wrapper).toHaveStyleRule("padding", "0 10px");
   });
 
+  it("sets a media rule when passed a 'breakpoint' prop", () => {
+    wrapper.setProps({ breakpoint: "true" });
+    expect(wrapper).toHaveStyleRule("padding", "0px", {
+      media: "(max-width: 500px)"
+    });
+    expect(wrapper).toHaveStyleRule("margin", "5px 0", {
+      media: "(max-width: 500px)"
+    });
+  });
+
   it("sets display based upon 'display' prop", () => {
     wrapper.setProps({ display: "flex" });
     expect(wrapper).toHaveStyleRule("display", "flex");
