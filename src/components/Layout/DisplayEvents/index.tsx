@@ -60,10 +60,17 @@ const DisplayEvents = ({
   const { isVisible, modalContent } = state;
 
   const handleCloseModal = (): void => {
-    setState({
-      isVisible: false,
+    setState(prevState => ({
+      ...prevState,
+      isVisible: false
+    }));
+  };
+
+  const handleResetModalContent = (): void => {
+    setState(prevState => ({
+      ...prevState,
       modalContent: {} as TEventData
-    });
+    }));
   };
 
   const handleShowModal = (modalContent: TEventData): void => {
@@ -133,6 +140,7 @@ const DisplayEvents = ({
         maxWidth="sm"
         TransitionComponent={SlideTransition}
         onClose={handleCloseModal}
+        onExited={handleResetModalContent}
       >
         <CloseModalButton
           data-testid="close-modal"
