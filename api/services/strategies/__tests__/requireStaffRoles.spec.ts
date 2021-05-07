@@ -64,7 +64,7 @@ describe("Require Staff Authentication Middleware", () => {
 
   it("handles valid requests requiring staff privileges", async done => {
     const existingUser = await User.findOne({
-      email: "carlotta.matt@gmail.com"
+      email: "staffmember@example.com"
     });
 
     const session = {
