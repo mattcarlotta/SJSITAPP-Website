@@ -25,7 +25,8 @@ const NavBar = ({
 
   React.useEffect(() => {
     if (isMobile && !collapsed) collapseSideNav();
-  }, [collapsed, collapseSideNav, pathname, isMobile]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [collapseSideNav, pathname, isMobile]);
 
   return !isMobile ? (
     <FixedMenu
