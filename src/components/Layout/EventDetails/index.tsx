@@ -6,6 +6,7 @@ import FormatDate from "~components/Layout/FormatDate";
 import List from "~components/Layout/List";
 import ListItem from "~components/Layout/ListItem";
 import Margin from "~components/Layout/Margin";
+import Word from "~components/Layout/Word";
 import { FaClock, FaCalendarCheck } from "~icons";
 import { TEventData } from "~types";
 
@@ -16,6 +17,7 @@ export type TEventDetailsProps = {
 
 const EventDetails = ({ event, id }: TEventDetailsProps): JSX.Element => (
   <List
+    breakpoint
     data-testid="event-details-content"
     boxShadow="0px 1px 6px 1px rgba(0,0,0,0.25)"
     background="#ebebeb"
@@ -31,67 +33,90 @@ const EventDetails = ({ event, id }: TEventDetailsProps): JSX.Element => (
       padding="15px 10px"
     >
       <Bold>
-        {event.team}
+        <Word breakpoint>{event.team}</Word>
         {event.opponent && (
           <>
-            <Margin left="5px" right="5px">
+            <Word breakpoint left="5px" right="5px">
               vs.
-            </Margin>
-            {event.opponent}
+            </Word>
+            <Word breakpoint>{event.opponent}</Word>
           </>
         )}
       </Bold>
     </ListItem>
     <ListItem data-testid="event-date">
-      <Bold>Date:</Bold>
-      <FormatDate
-        style={{ display: "inline" }}
-        format="MMMM Do, YYYY @ h:mm a"
-        date={event.eventDate}
-      />
+      <Word breakpoint>
+        <Bold>Date:</Bold>
+      </Word>
+      <Word breakpoint>
+        <FormatDate
+          style={{ display: "inline" }}
+          format="MMMM Do, YYYY @ h:mm a"
+          date={event.eventDate}
+        />
+      </Word>
     </ListItem>
     <ListItem data-testid="event-type">
-      <Bold>Event Type:</Bold>
-      {event.eventType}
+      <Word breakpoint>
+        <Bold>Event Type:</Bold>
+      </Word>
+      <Word breakpoint>{event.eventType}</Word>
     </ListItem>
     {event.notes && (
       <ListItem data-testid="event-notes">
-        <Bold>Event Notes:</Bold>
-        {event.notes}
+        <Word breakpoint>
+          <Bold>Event Notes:</Bold>
+        </Word>
+        <Word breakpoint>{event.notes}</Word>
       </ListItem>
     )}
     <ListItem data-testid="event-location">
-      <Bold>Location:</Bold>
-      {event.location}
+      <Word breakpoint>
+        <Bold>Location:</Bold>
+      </Word>
+      <Word breakpoint>{event.location}</Word>
     </ListItem>
     {event.uniform && (
       <ListItem data-testid="event-uniform">
-        <Bold>Uniform:</Bold>
-        {event.uniform}
+        <Word breakpoint>
+          <Bold>Uniform:</Bold>
+        </Word>
+        <Word breakpoint>{event.uniform}</Word>
       </ListItem>
     )}
     {event.employeeResponse && (
       <ListItem data-testid="employee-response">
-        <Bold>My Response:</Bold>
-        <Badge
-          style={{ display: "inline-block" }}
-          response={event.employeeResponse}
-        >
-          {event.employeeResponse}
-        </Badge>
+        <Word breakpoint>
+          <Bold>My Response:</Bold>
+        </Word>
+        <Word breakpoint>
+          <Badge
+            style={{ display: "inline-block" }}
+            response={event.employeeResponse}
+          >
+            {event.employeeResponse}
+          </Badge>
+        </Word>
       </ListItem>
     )}
     {event.employeeNotes && (
       <ListItem data-testid="employee-notes">
-        <Bold>Employee Notes:</Bold>
-        {event.employeeNotes}
+        <Word breakpoint>
+          <Bold>Employee Notes:</Bold>
+        </Word>
+        <Word breakpoint>{event.employeeNotes}</Word>
       </ListItem>
     )}
     {!isEmpty(event.schedule) && (
       <ListItem data-testid="schedule-employees">
         <Bold>Schedule:</Bold>
         {event.schedule.map(({ _id, employeeIds }) => (
-          <List data-testid="call-time" style={{ marginTop: 5 }} key={_id}>
+          <List
+            breakpoint
+            data-testid="call-time"
+            style={{ marginTop: 10 }}
+            key={_id}
+          >
             <Bold style={{ paddingLeft: 10 }}>
               <FaClock
                 style={{

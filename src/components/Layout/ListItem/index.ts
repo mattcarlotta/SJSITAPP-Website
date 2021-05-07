@@ -21,7 +21,7 @@ const ListItem = styled.li<{
         return background || "transparent";
     }
   }};
-  margin: ${({ margin }) => margin || "5px 0"};
+  margin: ${({ margin }) => margin || "10px 0"};
   text-align: ${({ textAlign }) => textAlign || undefined};
   padding: ${({ padding }) => padding || "0 10px"};
 `;

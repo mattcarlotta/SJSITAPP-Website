@@ -4,10 +4,18 @@ const List = styled.ul<{
   background?: string;
   borderRadius?: string;
   boxShadow?: string;
+  breakpoint?: boolean;
   margin?: string;
   padding?: string;
   textAlign?: string;
 }>`
+  ${({ breakpoint }) =>
+    breakpoint &&
+    `@media (max-width: 500px) {
+      text-align: center;
+    }
+  `};
+
   box-shadow: ${({ boxShadow }) => boxShadow || "none"};
   background: ${({ background }) => background || "transparent"};
   border-radius: ${({ borderRadius }) => borderRadius || "0px"};

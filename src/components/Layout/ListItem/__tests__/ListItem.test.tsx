@@ -12,7 +12,7 @@ describe("ListItem", () => {
     expect(wrapper).toHaveStyleRule("display", "block");
     expect(wrapper).toHaveStyleRule("color", "#010404");
     expect(wrapper).toHaveStyleRule("background", "transparent");
-    expect(wrapper).toHaveStyleRule("margin", "5px 0");
+    expect(wrapper).toHaveStyleRule("margin", "10px 0");
     expect(wrapper).toHaveStyleRule("padding", "0 10px");
   });
 

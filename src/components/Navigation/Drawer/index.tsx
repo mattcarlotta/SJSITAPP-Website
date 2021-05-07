@@ -14,7 +14,7 @@ export type TDrawerProps = {
 
 const useStyles = makeStyles({
   paper: {
-    width: 300,
+    width: 250,
     background: "#0d6472"
   }
 });
@@ -35,7 +35,7 @@ const SideDrawer = ({
       padding="9px 0px"
       style={{ background: "#fff", color: "#025f6d", fontSize: 17 }}
     >
-      <Margin right="20px">
+      <Margin right="5px">
         <MenuHamburger collapsed={false} onClick={onClose} />
       </Margin>
       <TeamLogo />
