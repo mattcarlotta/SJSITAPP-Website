@@ -1,4 +1,3 @@
-import * as React from "react";
 import Center from "~components/Layout/Center";
 import ErrorMessage from "~components/Layout/ErrorMessage";
 import ErrorStatus from "~components/Layout/ErrorStatus";
@@ -13,7 +12,7 @@ import { FaHeartBroken } from "~icons";
 import { NextPage } from "~types";
 
 const ServerError: NextPage = () => (
-  <>
+  <main>
     <Head title="Server Error" />
     <WhiteBackground>
       <Flex
@@ -48,7 +47,7 @@ const ServerError: NextPage = () => (
         </PuckSpinner>
       </Flex>
     </WhiteBackground>
-  </>
+  </main>
 );
 
 export default ServerError;

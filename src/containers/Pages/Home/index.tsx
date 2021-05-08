@@ -18,34 +18,36 @@ const Home: NextPage = () => {
       }}
     >
       <Header title="Home" url="/" />
-      <PuckSpinner>
-        <Link
-          secondary
-          display="block"
-          dataTestId="home-link"
-          href={hasSession ? "/employee/dashboard" : "/employee/login"}
-          borderRadius="50px"
-          fontSize="18px"
-          padding="13px 18px"
-          width="260px"
-        >
-          {!role ? (
-            <Submitting
-              style={{ height: "25px", background: "#025f6d", border: 0 }}
-            />
-          ) : hasSession ? (
-            <>
-              <MdDashboard />
-              View Dashboard
-            </>
-          ) : (
-            <>
-              <FaSignInAlt />
-              Employee Login
-            </>
-          )}
-        </Link>
-      </PuckSpinner>
+      <main>
+        <PuckSpinner>
+          <Link
+            secondary
+            display="block"
+            dataTestId="home-link"
+            href={hasSession ? "/employee/dashboard" : "/employee/login"}
+            borderRadius="50px"
+            fontSize="18px"
+            padding="13px 18px"
+            width="260px"
+          >
+            {!role ? (
+              <Submitting
+                style={{ height: "25px", background: "#025f6d", border: 0 }}
+              />
+            ) : hasSession ? (
+              <>
+                <MdDashboard />
+                View Dashboard
+              </>
+            ) : (
+              <>
+                <FaSignInAlt />
+                Employee Login
+              </>
+            )}
+          </Link>
+        </PuckSpinner>
+      </main>
     </IconContext.Provider>
   );
 };

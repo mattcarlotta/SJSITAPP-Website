@@ -1,4 +1,3 @@
-import * as React from "react";
 import Center from "~components/Layout/Center";
 import ErrorMessage from "~components/Layout/ErrorMessage";
 import ErrorStatus from "~components/Layout/ErrorStatus";
@@ -11,7 +10,7 @@ import Link from "~components/Navigation/Link";
 import { NextPage } from "~types";
 
 const NotFound: NextPage = () => (
-  <>
+  <main>
     <Head title="Page Not Found" />
     <WhiteBackground>
       <Flex
@@ -40,7 +39,7 @@ const NotFound: NextPage = () => (
         </PuckSpinner>
       </Flex>
     </WhiteBackground>
-  </>
+  </main>
 );
 
 export default NotFound;

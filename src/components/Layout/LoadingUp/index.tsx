@@ -36,8 +36,9 @@ const LoadingUpComponent = ({
       `}
     >
       <img
-        src={`${process.env.NEXT_PUBLIC_IMAGEAPI}/images/logo_64x64.png`}
+        src={`${process.env.NEXT_PUBLIC_IMAGEAPI}/images/logo_48x48.png`}
         height="48px"
+        width="48px"
         alt="logo"
       />
     </div>
