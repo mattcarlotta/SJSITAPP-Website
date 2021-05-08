@@ -1,6 +1,6 @@
 {
   "name": "sjsitapp",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "An application for the Sharks Ice Team.",
   "repository": "https://github.com/mattcarlotta/SJITApp-Website",
   "sideEffects": false,

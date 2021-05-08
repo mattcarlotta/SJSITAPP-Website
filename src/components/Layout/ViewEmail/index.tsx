@@ -54,7 +54,7 @@ export const ViewMail = (): ReactElement => {
         dataTestId="view-email-page"
         icon={<GoMailRead />}
         title="View Email"
-        subtitle="Review a previously created email"
+        subtitle="Review a Previously Created Email"
       >
         <Padding top="20px" left="50px" right="50px" bottom="50px">
           {isLoading ? (
