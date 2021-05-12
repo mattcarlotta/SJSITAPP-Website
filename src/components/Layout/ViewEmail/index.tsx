@@ -2,12 +2,12 @@ import * as React from "react";
 import get from "lodash.get";
 import { useRouter } from "next/router";
 import toast from "~components/App/Toast";
+import Button from "~components/Layout/Button";
 import Card from "~components/Layout/Card";
 import EmailPreview from "~components/Layout/EmailPreview";
 import LoadingPanel from "~components/Layout/LoadingPanel";
 import Padding from "~components/Layout/Padding";
 import Header from "~components/Navigation/Header";
-import Link from "~components/Navigation/Link";
 import { FaChevronLeft, GoMailRead } from "~icons";
 import app from "~utils/axiosConfig";
 import { parseData } from "~utils/parseResponse";
@@ -66,20 +66,21 @@ export const ViewMail = (): ReactElement => {
           ) : (
             <div style={{ maxWidth: "900px", margin: "0 auto" }}>
               <EmailPreview {...email} />
-              <Link
-                alt
+              <Button
+                primary
+                type="button"
                 dataTestId="view-mail-link"
-                display="block"
                 margin="40px auto 10px auto"
                 padding="8px 18px"
                 maxWidth="150px"
-                href="/employee/mail/viewall?page=1"
+                borderRadius="10px"
+                onClick={() => router.back()}
               >
                 <FaChevronLeft
-                  style={{ position: "relative", top: 3, marginRight: 5 }}
+                  style={{ position: "relative", top: 3, marginRight: 8 }}
                 />
                 Go Back
-              </Link>
+              </Button>
             </div>
           )}
         </Padding>

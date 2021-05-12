@@ -24,6 +24,7 @@ const form = {
   sentEmails: false
 };
 
+const mockBack = jest.fn();
 const mockReplace = jest.fn();
 
 jest.mock("~components/App/Toast");
@@ -38,7 +39,8 @@ jest.mock("next/router", () => ({
   pathname: "",
   query: { id: "88" },
   asPath: "/",
-  replace: mockReplace
+  replace: mockReplace,
+  back: mockBack
 }));
 
 const APIURL = "mail/edit/88";
@@ -61,6 +63,7 @@ describe("View Email", () => {
   afterEach(() => {
     (toast as jest.Mock).mockClear();
     mockReplace.mockClear();
+    mockBack.mockClear();
   });
 
   it("renders a loading placeholder", async () => {
@@ -86,5 +89,16 @@ describe("View Email", () => {
       wrapper.update();
       expect(findById("email-preview")).toExist();
     });
+  });
+
+  it("navigates back to the previous page", async () => {
+    await waitFor(() => {
+      wrapper.update();
+      expect(findById("email-preview")).toExist();
+    });
+
+    findById("view-mail-link").simulate("click");
+
+    expect(mockBack).toHaveBeenCalledTimes(1);
   });
 });

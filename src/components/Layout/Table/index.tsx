@@ -180,7 +180,8 @@ const Table = ({
 
   React.useEffect(() => {
     if (!isLoading) fetchData();
-  }, [isLoading, queryString, fetchData]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [queryString, fetchData]);
 
   React.useEffect(() => {
     if (invalidPage) updateQuery({ page: Math.ceil(totalDocs / 10) });
