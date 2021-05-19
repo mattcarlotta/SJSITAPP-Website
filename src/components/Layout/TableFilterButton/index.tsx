@@ -76,12 +76,10 @@ const TableFilterButton = ({
 }: TTableFilterButtonProps): ReactElement => {
   const classes = useClasses();
 
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
-    null
-  );
-  const [state, setState] = React.useState<TTableFilterButtonModalState>(
-    initalModalState
-  );
+  const [anchorEl, setAnchorEl] =
+    React.useState<HTMLButtonElement | null>(null);
+  const [state, setState] =
+    React.useState<TTableFilterButtonModalState>(initalModalState);
   const { isOpen, name, selectType, type, title, value } = state;
 
   const handlePopoverOpen = (event: ChangeEvent<any>): void => {

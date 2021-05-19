@@ -10,7 +10,7 @@ const Columns: GridColumns = [
     headerName: "Status",
     width: 90,
     renderCell: (params: GridValueGetterParams): ReactElement => (
-      <AccountStatus status={params.getValue("status") as string} />
+      <AccountStatus status={params.getValue(params.id, "status") as string} />
     )
   },
   {
@@ -40,7 +40,7 @@ const Columns: GridColumns = [
     renderCell: (params: GridValueGetterParams): ReactElement => (
       <FormatDate
         format={dateTimeFormat}
-        date={params.getValue("registered") as Date}
+        date={params.getValue(params.id, "registered") as Date}
         style={{ width: "100%" }}
       />
     )
@@ -50,7 +50,9 @@ const Columns: GridColumns = [
     headerName: "Email Reminders",
     flex: 0.66,
     renderCell: (params: GridValueGetterParams): ReactElement => (
-      <EmailReminders status={params.getValue("emailReminders") as boolean} />
+      <EmailReminders
+        status={params.getValue(params.id, "emailReminders") as boolean}
+      />
     )
   }
 ];

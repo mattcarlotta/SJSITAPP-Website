@@ -28,9 +28,10 @@ const useStyles = makeStyles({
     "& .MuiTreeItem-root:hover": {
       background: "none"
     },
-    "& .MuiTreeItem-root.Mui-selected > .MuiTreeItem-content .MuiTreeItem-label": {
-      background: "none"
-    },
+    "& .MuiTreeItem-root.Mui-selected > .MuiTreeItem-content .MuiTreeItem-label":
+      {
+        background: "none"
+      },
     "& .MuiTreeItem-content": {
       padding: "3px 0 3px 20px"
     },

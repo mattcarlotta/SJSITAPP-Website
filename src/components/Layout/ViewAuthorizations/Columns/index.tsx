@@ -9,7 +9,7 @@ const Columns: GridColumns = [
     headerName: "Status",
     width: 90,
     renderCell: (params: GridValueGetterParams): ReactElement => (
-      <TokenStatus email={params.getValue("email") as string} />
+      <TokenStatus email={params.getValue(params.id, "email") as string} />
     )
   },
   {
@@ -34,7 +34,7 @@ const Columns: GridColumns = [
     renderCell: (params: GridValueGetterParams): ReactElement => (
       <FormatDate
         format={dateTimeFormat}
-        date={params.getValue("expiration") as Date}
+        date={params.getValue(params.id, "expiration") as Date}
         style={{ width: "100%" }}
       />
     )

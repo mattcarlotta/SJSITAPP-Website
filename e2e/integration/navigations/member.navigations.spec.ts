@@ -21,6 +21,8 @@ context("Member Site Navigations", () => {
 
     cy.findByTestId("hamburger-menu").click();
 
+    cy.wait(2000);
+
     cy.findByTestId("fixed-sidemenu-open").should("exist");
   });
 
@@ -39,6 +41,8 @@ context("Member Site Navigations", () => {
     cy.url().should("contain", "/employee/contact-us");
 
     cy.findByTestId("fixed-sidemenu-closed").should("exist");
+
+    cy.wait(2000);
   });
 
   it("top-left logo redirects to dashboard", () => {

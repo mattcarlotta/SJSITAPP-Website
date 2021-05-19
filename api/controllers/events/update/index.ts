@@ -1,6 +1,6 @@
-import type { Request, Response } from "express";
 import isEmpty from "lodash.isempty";
 import isEqual from "lodash.isequal";
+import type { Request, Response } from "express";
 import { Event, Season } from "~models";
 import { createSchedule, moment, sendError, uniqueArray } from "~helpers";
 import {

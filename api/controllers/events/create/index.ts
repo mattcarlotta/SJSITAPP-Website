@@ -1,5 +1,5 @@
-import type { Request, Response } from "express";
 import isEmpty from "lodash.isempty";
+import type { Request, Response } from "express";
 import { Event, Season } from "~models";
 import { moment, sendError, uniqueArray } from "~helpers";
 import {

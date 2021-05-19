@@ -12,7 +12,7 @@ const Columns: GridColumns = [
     renderCell: (params: GridValueGetterParams): ReactElement => (
       <FormatDate
         format={standardFormat}
-        date={params.getValue("startDate") as Date}
+        date={params.getValue(params.id, "startDate") as Date}
         style={{ width: "100%" }}
       />
     )
@@ -24,7 +24,7 @@ const Columns: GridColumns = [
     renderCell: (params: GridValueGetterParams): ReactElement => (
       <FormatDate
         format={standardFormat}
-        date={params.getValue("endDate") as Date}
+        date={params.getValue(params.id, "endDate") as Date}
         style={{ width: "100%" }}
       />
     )

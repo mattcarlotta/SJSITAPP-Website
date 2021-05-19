@@ -13,7 +13,7 @@ const Columns: GridColumns = [
     renderCell: (params: GridValueGetterParams): ReactElement => (
       <FormatDate
         format={standardFormat}
-        date={params.getValue("startMonth") as Date}
+        date={params.getValue(params.id, "startMonth") as Date}
         style={{ width: "100%" }}
       />
     )
@@ -25,7 +25,7 @@ const Columns: GridColumns = [
     renderCell: (params: GridValueGetterParams): ReactElement => (
       <FormatDate
         format={standardFormat}
-        date={params.getValue("endMonth") as Date}
+        date={params.getValue(params.id, "endMonth") as Date}
         style={{ width: "100%" }}
       />
     )
@@ -37,7 +37,7 @@ const Columns: GridColumns = [
     renderCell: (params: GridValueGetterParams): ReactElement => (
       <FormatDate
         format={dateTimeFormat}
-        date={params.getValue("expirationDate") as Date}
+        date={params.getValue(params.id, "expirationDate") as Date}
         style={{ width: "100%" }}
       />
     )
@@ -49,7 +49,7 @@ const Columns: GridColumns = [
     renderCell: (params: GridValueGetterParams): ReactElement => (
       <FormatDate
         format={dateTimeFormat}
-        date={params.getValue("sendEmailNotificationsDate") as Date}
+        date={params.getValue(params.id, "sendEmailNotificationsDate") as Date}
         style={{ width: "100%" }}
       />
     )
@@ -59,7 +59,9 @@ const Columns: GridColumns = [
     headerName: "Email Status",
     flex: 0.6,
     renderCell: (params: GridValueGetterParams): ReactElement => (
-      <EmailReminders status={params.getValue("sentEmails") as boolean} />
+      <EmailReminders
+        status={params.getValue(params.id, "sentEmails") as boolean}
+      />
     )
   }
 ];

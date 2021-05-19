@@ -40,9 +40,8 @@ export const UploadAvatarForm = ({
   updateUserAvatar
 }: TUploadAvatarFormProps): ReactElement => {
   const imageRef = React.useRef<HTMLInputElement | null>(null);
-  const [state, setState] = React.useState<TUploadAvatarFormState>(
-    initialState
-  );
+  const [state, setState] =
+    React.useState<TUploadAvatarFormState>(initialState);
   const { isSubmitting, showForm } = state;
 
   const handleChange = React.useCallback(
