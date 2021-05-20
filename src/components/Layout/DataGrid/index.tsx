@@ -50,9 +50,10 @@ const useStyles = makeStyles(() =>
       "& .MuiDataGrid-colCell, .MuiDataGrid-cell": {
         borderRight: "1px solid #f0f0f0"
       },
-      "& .MuiDataGrid-colCell:nth-last-child(2), .MuiDataGrid-cell:nth-last-child(2)": {
-        borderRight: 0
-      },
+      "& .MuiDataGrid-colCell:nth-last-child(2), .MuiDataGrid-cell:nth-last-child(2)":
+        {
+          borderRight: 0
+        },
       "& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell": {
         borderBottom: "1px solid #f0f0f0"
       },
@@ -92,14 +93,15 @@ const useStyles = makeStyles(() =>
         width: 5.71428571,
         height: 9.14285714
       },
-      "& .MuiCheckbox-root.MuiCheckbox-indeterminate .MuiIconButton-label:after": {
-        width: 8,
-        height: 8,
-        backgroundColor: "#1890ff",
-        transform: "none",
-        top: "39%",
-        border: 0
-      }
+      "& .MuiCheckbox-root.MuiCheckbox-indeterminate .MuiIconButton-label:after":
+        {
+          width: 8,
+          height: 8,
+          backgroundColor: "#1890ff",
+          transform: "none",
+          top: "39%",
+          border: 0
+        }
     }
   })
 );
