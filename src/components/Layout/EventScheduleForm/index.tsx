@@ -94,10 +94,8 @@ const EventScheduleForm = (): ReactElement => {
         const { index: sourceIndex, droppableId: sourceId } = source;
 
         // destination container index and id
-        const {
-          index: destinationIndex,
-          droppableId: destinationId
-        } = destination;
+        const { index: destinationIndex, droppableId: destinationId } =
+          destination;
 
         // source container object
         const sourceContainer = prevState.columns.find(

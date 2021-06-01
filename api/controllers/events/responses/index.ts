@@ -1,5 +1,5 @@
-import type { Request, Response } from "express";
 import get from "lodash.get";
+import type { Request, Response } from "express";
 import { User } from "~models";
 import { findMemberEvents, sendError } from "~helpers";
 import { missingMemberId, unableToLocateMember } from "~messages/errors";

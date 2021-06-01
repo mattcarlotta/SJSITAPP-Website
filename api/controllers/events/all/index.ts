@@ -1,5 +1,5 @@
-import type { Request, Response } from "express";
 import get from "lodash.get";
+import type { Request, Response } from "express";
 import { Event } from "~models";
 import {
   generateFilters,

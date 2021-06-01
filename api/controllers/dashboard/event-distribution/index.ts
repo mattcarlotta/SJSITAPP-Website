@@ -1,5 +1,5 @@
-import type { Request, Response } from "express";
 import isEmpty from "lodash.isempty";
+import type { Request, Response } from "express";
 import { Event } from "~models";
 import { createMemberEventCount, getUsers, moment, sendError } from "~helpers";
 import { missingDates } from "~messages/errors";

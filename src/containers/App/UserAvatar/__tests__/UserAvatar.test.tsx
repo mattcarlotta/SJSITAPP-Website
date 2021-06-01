@@ -3,8 +3,11 @@ import withProviders from "~utils/withProviders";
 import { ReactNode } from "~types";
 import { UserAvatar } from "../index";
 
-jest.mock("next/link", () => ({ children }: { children: ReactNode }) =>
-  children
+jest.mock(
+  "next/link",
+  () =>
+    ({ children }: { children: ReactNode }) =>
+      children
 );
 
 const signoutUserSession = jest.fn();

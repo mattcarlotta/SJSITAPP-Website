@@ -10,7 +10,7 @@ const Columns: GridColumns = [
     headerName: "Status",
     width: 100,
     renderCell: (params: GridValueGetterParams): ReactElement => (
-      <EmailStatus status={params.getValue("status") as string} />
+      <EmailStatus status={params.getValue(params.id, "status") as string} />
     )
   },
   {
@@ -18,7 +18,9 @@ const Columns: GridColumns = [
     headerName: "Send To",
     flex: 1,
     renderCell: (params: GridValueGetterParams): ReactElement => (
-      <EmailSendToList emails={params.getValue("sendTo") as Array<string>} />
+      <EmailSendToList
+        emails={params.getValue(params.id, "sendTo") as Array<string>}
+      />
     )
   },
   {
@@ -27,7 +29,7 @@ const Columns: GridColumns = [
     flex: 1,
     renderCell: (params: GridValueGetterParams): ReactElement => (
       <EmailSendToList
-        emails={[params.getValue("sendFrom")] as Array<string>}
+        emails={[params.getValue(params.id, "sendFrom")] as Array<string>}
       />
     )
   },
@@ -38,7 +40,7 @@ const Columns: GridColumns = [
     renderCell: (params: GridValueGetterParams): ReactElement => (
       <FormatDate
         format={dateTimeFormat}
-        date={params.getValue("sendDate") as Date}
+        date={params.getValue(params.id, "sendDate") as Date}
         style={{ width: "100%" }}
       />
     )

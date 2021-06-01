@@ -1,5 +1,5 @@
-import type { Request, Response } from "express";
 import isEmpty from "lodash.isempty";
+import type { Request, Response } from "express";
 import { Event, Form, Season } from "~models";
 import { sendError } from "~helpers";
 import { missingIds, unableToDeleteSeasons } from "~messages/errors";

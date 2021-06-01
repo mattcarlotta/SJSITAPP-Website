@@ -3,16 +3,17 @@ import { standardFormat } from "~utils/dateFormats";
 import { GridColumns, GridValueGetterParams, ReactElement } from "~types";
 
 const Columns: GridColumns = [
-  { field: "_id", headerName: "Database Id", flex: 1 },
-  { field: "seasonId", headerName: "Season Id", flex: 1 },
+  { field: "_id", headerName: "Database Id", sortable: false, flex: 1 },
+  { field: "seasonId", headerName: "Season Id", sortable: false, flex: 1 },
   {
     field: "startDate",
     headerName: "Start Date",
+    sortable: false,
     flex: 1,
     renderCell: (params: GridValueGetterParams): ReactElement => (
       <FormatDate
         format={standardFormat}
-        date={params.getValue("startDate") as Date}
+        date={params.getValue(params.id, "startDate") as Date}
         style={{ width: "100%" }}
       />
     )
@@ -20,11 +21,12 @@ const Columns: GridColumns = [
   {
     field: "endDate",
     headerName: "End Date",
+    sortable: false,
     flex: 1,
     renderCell: (params: GridValueGetterParams): ReactElement => (
       <FormatDate
         format={standardFormat}
-        date={params.getValue("endDate") as Date}
+        date={params.getValue(params.id, "endDate") as Date}
         style={{ width: "100%" }}
       />
     )

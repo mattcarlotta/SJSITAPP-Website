@@ -3,14 +3,13 @@ import "snackables";
 import mongoose from "mongoose";
 import { connectToDB, createConnectionToDatabase } from "../index";
 import { logErrorMessage, logInfoMessage } from "../../../logger";
-import User from "../../models/user";
 import seedEvents from "./events";
 import seedForms from "./forms";
 import seedMail from "./mail";
 import seedSeasons from "./seasons";
 import seedTeams from "./teams";
 import seedTokens from "./tokens";
-import seedUsers, { admin } from "./users";
+import seedUsers from "./users";
 
 const { DATABASE, EXIT, SEED } = process.env;
 
@@ -26,8 +25,7 @@ const seedDB = async (): Promise<any> => {
     await connectToDB();
     const db = await createConnectionToDatabase();
 
-    const databaseExists = User.findOne({ email: admin.email });
-    if (databaseExists) await db.dropDatabase();
+    await db.dropDatabase();
 
     const currentSeason = await seedSeasons();
 
