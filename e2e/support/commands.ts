@@ -25,6 +25,12 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 /// <reference types="cypress" />
 
+Cypress.on("uncaught:exception", err => {
+  /* returning false here prevents Cypress from failing on unhandled Window Observer animation frames */
+  if (/^[^(ResizeObserver loop limit exceeded)]/.test(err.message))
+    return false;
+});
+
 Cypress.Commands.add("alertExistsWith", message => {
   cy.get("[data-testid='alert-message']").should("exist").contains(message);
 

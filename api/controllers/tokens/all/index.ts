@@ -1,5 +1,5 @@
-import type { Request, Response } from "express";
 import get from "lodash.get";
+import type { Request, Response } from "express";
 import { Token } from "~models";
 import { generateFilters, sendError } from "~helpers";
 

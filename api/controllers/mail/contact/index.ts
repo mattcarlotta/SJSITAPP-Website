@@ -1,6 +1,6 @@
-import type { Request, Response } from "express";
 import isEmpty from "lodash.isempty";
 import get from "lodash.get";
+import type { Request, Response } from "express";
 import { Mail } from "~models";
 import { createDate, getUsers, sendError } from "~helpers";
 import {

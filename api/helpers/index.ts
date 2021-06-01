@@ -1,10 +1,10 @@
-import type { Request, Response } from "express";
 import get from "lodash.get";
 import isEmpty from "lodash.isempty";
 import random from "lodash.random";
 import sortBy from "lodash.sortby";
 import mongoose from "mongoose";
 import moment from "moment-timezone";
+import type { Request, Response } from "express";
 import Event, {
   IEvent,
   IEventDocument,

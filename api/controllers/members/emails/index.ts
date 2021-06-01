@@ -1,6 +1,6 @@
-import type { Request, Response } from "express";
 import isEmpty from "lodash.isempty";
-import User from "~models/user";
+import type { Request, Response } from "express";
+import { User } from "~models";
 import { sendError } from "~helpers";
 import { unableToLocateMembers } from "~messages/errors";
 

@@ -50,25 +50,26 @@ export const EmployeeAvailability = (): ReactElement => {
 
   const { error, availability, isLoading, months } = state;
 
-  const fetchMembersAvailability = React.useCallback(async (): Promise<void> => {
-    try {
-      const res = await app.get("dashboard/members-availability");
-      const data = parseData<TEmployeeAvailabilityResData>(res);
+  const fetchMembersAvailability =
+    React.useCallback(async (): Promise<void> => {
+      try {
+        const res = await app.get("dashboard/members-availability");
+        const data = parseData<TEmployeeAvailabilityResData>(res);
 
-      setState({
-        availability: data.membersAvailability,
-        error: false,
-        isLoading: false,
-        months: data.months
-      });
-    } catch (err) {
-      setState(prevState => ({
-        ...prevState,
-        error: true,
-        isLoading: false
-      }));
-    }
-  }, []);
+        setState({
+          availability: data.membersAvailability,
+          error: false,
+          isLoading: false,
+          months: data.months
+        });
+      } catch (err) {
+        setState(prevState => ({
+          ...prevState,
+          error: true,
+          isLoading: false
+        }));
+      }
+    }, []);
 
   const handleReload = (): void => {
     setState({

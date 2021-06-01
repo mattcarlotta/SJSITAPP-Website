@@ -1,5 +1,5 @@
-import type { Request, Response } from "express";
 import { FilterQuery } from "mongoose";
+import type { Request, Response } from "express";
 import { Form } from "~models";
 import Event, { TEventResponse } from "~models/event";
 import { parseSession, sendError } from "~helpers";
