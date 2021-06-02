@@ -1,8 +1,8 @@
 import { mount, ReactWrapper } from "enzyme";
 import { useRouter } from "next/router";
+import waitFor from "@noshot/utils/waitForAct";
 import toast from "~components/App/Toast";
 import moment from "~utils/momentWithTimezone";
-import waitFor from "~utils/waitFor";
 import mockApp, { mockAPI } from "~utils/mockAxios";
 import MemberProfile from "../index";
 

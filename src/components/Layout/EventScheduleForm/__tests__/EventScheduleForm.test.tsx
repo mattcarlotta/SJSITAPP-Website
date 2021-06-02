@@ -1,6 +1,6 @@
 import { mount, ReactWrapper } from "enzyme";
+import waitFor from "@noshot/utils/waitForAct";
 import toast from "~components/App/Toast";
-import waitFor from "~utils/waitFor";
 import mockApp from "~utils/mockAxios";
 import EventScheduleForm from "../index";
 

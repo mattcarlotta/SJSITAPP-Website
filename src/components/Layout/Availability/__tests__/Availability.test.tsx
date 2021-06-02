@@ -1,4 +1,5 @@
 import { mount, ReactWrapper } from "enzyme";
+import waitFor from "@noshot/utils/waitForAct";
 import {
   fullyearFormat,
   monthnameFormat,
@@ -6,7 +7,6 @@ import {
 } from "~utils/dateFormats";
 import mockApp from "~utils/mockAxios";
 import moment from "~utils/momentWithTimezone";
-import waitFor from "~utils/waitFor";
 import Availability from "../index";
 
 const id = "88";

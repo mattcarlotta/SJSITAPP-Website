@@ -1,10 +1,10 @@
 import { mount, ReactWrapper } from "enzyme";
 import { useRouter } from "next/router";
+import waitFor from "@noshot/utils/waitForAct";
 import toast from "~components/App/Toast";
 import { dateTimeFormat, calendarDateFormat } from "~utils/dateFormats";
 import mockApp from "~utils/mockAxios";
 import moment from "~utils/momentWithTimezone";
-import waitFor from "~utils/waitFor";
 import APResponseForm from "../index";
 
 const events = [

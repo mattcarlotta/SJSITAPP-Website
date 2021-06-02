@@ -1,5 +1,5 @@
 import { ReactWrapper } from "enzyme";
-import waitFor from "~utils/waitFor";
+import waitFor from "@noshot/utils/waitForAct";
 import withProviders from "~utils/withProviders";
 import TableFilterButton from "../index";
 import { TFilters } from "~types";
