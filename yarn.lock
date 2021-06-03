@@ -1456,10 +1456,10 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@noshot/utils@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@noshot/utils/-/utils-1.0.0.tgz#fa2b63ff4f02e67255314ab6ea94e479a87768f3"
-  integrity sha512-CVeewAwMF6biVZ08E1OkKq6ztE4f21OHI0aBU7/08RC1Ahf9eolvqEBH0L7rCU45EkSf9BcQ3GznF3P0GAvHxw==
+"@noshot/utils@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@noshot/utils/-/utils-1.0.1.tgz#5f7c063a047b4970858007efb0ea04293ff81f96"
+  integrity sha512-D9FxZP90kPVXUyME+R/Vl8rNBd9OlsznR4quYL5vQZ5q0hF1R4UdBzo/HKtVExvp9mRFwH37nR72JaA/qJhQtQ==
   dependencies:
     rimraf "^3.0.2"
     terser "^5.7.0"
@@ -1963,10 +1963,10 @@
     "@types/mongodb" "*"
     "@types/node" "*"
 
-"@types/mongoose@^5.11.51":
-  version "5.11.51"
-  resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-5.11.51.tgz#93e5cc9af13f3d46e112f8b4f69c1a38e8b41822"
-  integrity sha512-RNYuHDsBbtzqc/brRSNv/0TWuYcycsFoRIJS2SZvht6dSmLqngOF6plunUBL8+ccpw17RKZpp083dyYZnXGeMA==
+"@types/mongoose@^5.11.53":
+  version "5.11.53"
+  resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-5.11.53.tgz#5410acfccc7c333f3e969648b05537f844d32a2d"
+  integrity sha512-EflgnnV6jUS6GmCpBRp5WuL6zTtpmoZX5mwz/YQnd/ryHd/BGSuSizmoU50VUsriKbZaABT+zJ1JpEBzDCyzmA==
   dependencies:
     mongoose "*"
 
