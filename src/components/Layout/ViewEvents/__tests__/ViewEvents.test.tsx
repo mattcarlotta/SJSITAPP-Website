@@ -1,5 +1,5 @@
+import waitFor from "@noshot/utils/waitForAct";
 import mockApp from "~utils/mockAxios";
-import waitFor from "~utils/waitFor";
 import withProviders from "~utils/withProviders";
 import ViewEvents from "../index";
 

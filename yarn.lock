@@ -1456,6 +1456,14 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
+"@noshot/utils@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@noshot/utils/-/utils-1.0.1.tgz#5f7c063a047b4970858007efb0ea04293ff81f96"
+  integrity sha512-D9FxZP90kPVXUyME+R/Vl8rNBd9OlsznR4quYL5vQZ5q0hF1R4UdBzo/HKtVExvp9mRFwH37nR72JaA/qJhQtQ==
+  dependencies:
+    rimraf "^3.0.2"
+    terser "^5.7.0"
+
 "@opentelemetry/api@0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@opentelemetry/api/-/api-0.14.0.tgz#4e17d8d2f1da72b19374efa7b6526aa001267cae"
@@ -1940,28 +1948,27 @@
     "@types/bson" "*"
     "@types/node" "*"
 
-"@types/mongoose-paginate-v2@^1.3.9":
-  version "1.3.9"
-  resolved "https://registry.yarnpkg.com/@types/mongoose-paginate-v2/-/mongoose-paginate-v2-1.3.9.tgz#a211bf0da49473e9e1f1a65d3aacbd5d5ff0408c"
-  integrity sha512-NHqTgOZRmi7gd/IkRJ2VXo88m0efKatLFrG63VEcAB98nO6nzbeRaXPUUgEFJ2Le6vleTE0WqvAuL0gO5IQF5A==
+"@types/mongoose-paginate-v2@^1.3.10":
+  version "1.3.10"
+  resolved "https://registry.yarnpkg.com/@types/mongoose-paginate-v2/-/mongoose-paginate-v2-1.3.10.tgz#fbd5987a559b8d5e2cfb9cb7164a1bcb262479d6"
+  integrity sha512-YKagPxOjDTV5PupJvQPzpMpNGyB0d5g3Z/+6K7j5jFQyE9zz1LLWN79dy0vi4VFNwIbCREqA4SSb6xN6HNOtdw==
   dependencies:
-    "@types/mongoose" "*"
+    "@types/mongoose" "5.10.5"
 
-"@types/mongoose@*":
-  version "5.10.3"
-  resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-5.10.3.tgz#3bc6787245aa8ebbff4ed61da18f4775e0ec52cd"
-  integrity sha512-VfdnaFImXEJZZiuL2ID/ysZs4inOIjxwrAnUgkr5eum2O2BLhFkiSI0i87AwignVva1qWTJ3H3DyM0Rf4USJ4A==
-  dependencies:
-    "@types/mongodb" "*"
-    "@types/node" "*"
-
-"@types/mongoose@^5.10.5":
+"@types/mongoose@5.10.5":
   version "5.10.5"
   resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-5.10.5.tgz#0f4fb0440e8cf0213caec1e5c7b163dbd9847c56"
   integrity sha512-37QMIA954T3n+HSksSNLlxZsqF8fMJu5S4dyPBod6gRxGtsXlQ9jUtL8BE8Seimv99u79eLXI3bggoCnSQ/fxQ==
   dependencies:
     "@types/mongodb" "*"
     "@types/node" "*"
+
+"@types/mongoose@^5.11.53":
+  version "5.11.53"
+  resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-5.11.53.tgz#5410acfccc7c333f3e969648b05537f844d32a2d"
+  integrity sha512-EflgnnV6jUS6GmCpBRp5WuL6zTtpmoZX5mwz/YQnd/ryHd/BGSuSizmoU50VUsriKbZaABT+zJ1JpEBzDCyzmA==
+  dependencies:
+    mongoose "*"
 
 "@types/morgan@^1.9.2":
   version "1.9.2"
@@ -1979,6 +1986,11 @@
   version "14.14.37"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.37.tgz#a3dd8da4eb84a996c36e331df98d82abd76b516e"
   integrity sha512-XYmBiy+ohOR4Lh5jE379fV2IU+6Jn4g5qASinhitfyO71b/sCo6MKsMLF5tc7Zf2CE8hViVQyYSobJNke8OvUw==
+
+"@types/node@^15.9.0":
+  version "15.9.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-15.9.0.tgz#0b7f6c33ca5618fe329a9d832b478b4964d325a8"
+  integrity sha512-AR1Vq1Ei1GaA5FjKL5PBqblTZsL5M+monvGSZwe6sSIdGiuu7Xr/pNwWJY+0ZQuN8AapD/XMB5IzBAyYRFbocA==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -2022,10 +2034,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-dom@^17.0.5":
-  version "17.0.5"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.5.tgz#df44eed5b8d9e0b13bb0cd38e0ea6572a1231227"
-  integrity sha512-ikqukEhH4H9gr4iJCmQVNzTB307kROe3XFfHAOTxOXPOw7lAoEXnM5KWTkzeANGL5Ce6ABfiMl/zJBYNi7ObmQ==
+"@types/react-dom@^17.0.6":
+  version "17.0.6"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.6.tgz#c158325cf91b196270bc0f4af73463f149e7eafe"
+  integrity sha512-MGTI+TudxAnGTj8aco8mogaPSJGK2Whje7OZh1CxNLRyhJpTZg/pGQpIbCT0eCVFQyH7UFpdvCqQEThHIp/gsA==
   dependencies:
     "@types/react" "*"
 
@@ -8275,6 +8287,19 @@ mongodb@3.6.3:
   optionalDependencies:
     saslprep "^1.0.0"
 
+mongodb@3.6.8:
+  version "3.6.8"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.6.8.tgz#3e2632af81915b3ff99b7681121ca0895e8ed407"
+  integrity sha512-sDjJvI73WjON1vapcbyBD3Ao9/VN3TKYY8/QX9EPbs22KaCSrQ5rXo5ZZd44tWJ3wl3FlnrFZ+KyUtNH6+1ZPQ==
+  dependencies:
+    bl "^2.2.1"
+    bson "^1.1.4"
+    denque "^1.4.1"
+    optional-require "^1.0.3"
+    safe-buffer "^5.1.2"
+  optionalDependencies:
+    saslprep "^1.0.0"
+
 mongoose-legacy-pluralize@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
@@ -8284,6 +8309,24 @@ mongoose-paginate-v2@^1.3.18:
   version "1.3.18"
   resolved "https://registry.yarnpkg.com/mongoose-paginate-v2/-/mongoose-paginate-v2-1.3.18.tgz#714631a94afd0136c77e8af6cfcaad3ed37026bd"
   integrity sha512-MTEyXvQmUNlXyPGophxILHTYQQ80r3uMtgdnKVr+4qgWLM6JxHbWsFpCmaJJ7ofuV7bhkfBTGx3EDoJo+bIKFw==
+
+mongoose@*:
+  version "5.12.12"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.12.12.tgz#7da29c7d7924ad1fb07b5c5fc0acde2f4aaff4f9"
+  integrity sha512-n+ZmGApaL5x/r92w6S4pb+c075i+YKzg1F9YWkznSzQMtvetj/2dSjj2cqsITpd6z60k3K7ZaosIl6hzHwUA9g==
+  dependencies:
+    "@types/mongodb" "^3.5.27"
+    bson "^1.1.4"
+    kareem "2.3.2"
+    mongodb "3.6.8"
+    mongoose-legacy-pluralize "1.0.2"
+    mpath "0.8.3"
+    mquery "3.2.5"
+    ms "2.1.2"
+    regexp-clone "1.0.0"
+    safe-buffer "5.2.1"
+    sift "13.5.2"
+    sliced "1.0.1"
 
 mongoose@5.11.15:
   version "5.11.15"
@@ -8328,6 +8371,17 @@ mquery@3.2.3:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/mquery/-/mquery-3.2.3.tgz#bcf54fdfe3baf57b6a22f9b62b1ad5fa18ffe96a"
   integrity sha512-cIfbP4TyMYX+SkaQ2MntD+F2XbqaBHUYWk3j+kqdDztPWok3tgyssOZxMHMtzbV1w9DaSlvEea0Iocuro41A4g==
+  dependencies:
+    bluebird "3.5.1"
+    debug "3.1.0"
+    regexp-clone "^1.0.0"
+    safe-buffer "5.1.2"
+    sliced "1.0.1"
+
+mquery@3.2.5:
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/mquery/-/mquery-3.2.5.tgz#8f2305632e4bb197f68f60c0cffa21aaf4060c51"
+  integrity sha512-VjOKHHgU84wij7IUoZzFRU07IAxd5kWJaDmyUzQlbjHjyoeK5TNeeo8ZsFDtTYnSgpW6n/nMNIHvE3u8Lbrf4A==
   dependencies:
     bluebird "3.5.1"
     debug "3.1.0"
@@ -8846,6 +8900,11 @@ opener@^1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/opener/-/opener-1.5.2.tgz#5d37e1f35077b9dcac4301372271afdeb2a13598"
   integrity sha512-ur5UIdyw5Y7yEj9wLzhqXiy6GZ3Mwx0yGI+5sMn2r0N0v3cKJvUmFH5yPP+WXh9e0xfyzyJX95D8l088DNFj7A==
+
+optional-require@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/optional-require/-/optional-require-1.0.3.tgz#275b8e9df1dc6a17ad155369c2422a440f89cb07"
+  integrity sha512-RV2Zp2MY2aeYK5G+B/Sps8lW5NHAzE5QClbFP15j+PWmP+T9PxlJXBOOLoSAdgwFvS4t0aMR4vpedMkbHfh0nA==
 
 optionator@^0.8.1:
   version "0.8.3"
@@ -10222,6 +10281,11 @@ side-channel@^1.0.4:
     get-intrinsic "^1.0.2"
     object-inspect "^1.9.0"
 
+sift@13.5.2:
+  version "13.5.2"
+  resolved "https://registry.yarnpkg.com/sift/-/sift-13.5.2.tgz#24a715e13c617b086166cd04917d204a591c9da6"
+  integrity sha512-+gxdEOMA2J+AI+fVsCqeNn7Tgx3M9ZN9jdi95939l1IJ8cZsqS8sqpJyOkic2SJk+1+98Uwryt/gL6XDaV+UZA==
+
 sift@7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/sift/-/sift-7.0.1.tgz#47d62c50b159d316f1372f8b53f9c10cd21a4b08"
@@ -10854,6 +10918,15 @@ terser@^5.5.1:
   version "5.6.0"
   resolved "https://registry.yarnpkg.com/terser/-/terser-5.6.0.tgz#138cdf21c5e3100b1b3ddfddf720962f88badcd2"
   integrity sha512-vyqLMoqadC1uR0vywqOZzriDYzgEkNJFK4q9GeyOBHIbiECHiWLKcWfbQWAUaPfxkjDhapSlZB9f7fkMrvkVjA==
+  dependencies:
+    commander "^2.20.0"
+    source-map "~0.7.2"
+    source-map-support "~0.5.19"
+
+terser@^5.7.0:
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-5.7.0.tgz#a761eeec206bc87b605ab13029876ead938ae693"
+  integrity sha512-HP5/9hp2UaZt5fYkuhNBR8YyRcT8juw8+uFbAme53iN9hblvKnLUTKkmwJG6ocWpIKf8UK4DoeWG4ty0J6S6/g==
   dependencies:
     commander "^2.20.0"
     source-map "~0.7.2"
@@ -11540,17 +11613,17 @@ victory-core@^35.8.1:
     prop-types "^15.5.8"
     react-fast-compare "^2.0.0"
 
-victory-create-container@^35.8.1:
-  version "35.8.1"
-  resolved "https://registry.yarnpkg.com/victory-create-container/-/victory-create-container-35.8.1.tgz#934f7bd663e0426b9247a16afb1c191697b55af3"
-  integrity sha512-6LkeywunlDxToyLhChHJ5kiSFcllQsJMjc7xpzHuT0JCfJruETWEXaXzySjsKoFUV8ogwx1I4OcRyFANqsrxXA==
+victory-create-container@^35.8.4:
+  version "35.8.4"
+  resolved "https://registry.yarnpkg.com/victory-create-container/-/victory-create-container-35.8.4.tgz#a5a99bbd7838ff86d18151d7483e25f0ff954e7a"
+  integrity sha512-HZuVeF3KfAXQBkikKeRFr8Tr5BLEJv2IpNyyUQhTFiSp61Qo9YMzc/ototkQebpwRBaxQqc0h208Fhq6qsDa0A==
   dependencies:
     lodash "^4.17.19"
     victory-brush-container "^35.8.1"
     victory-core "^35.8.1"
     victory-cursor-container "^35.8.1"
     victory-selection-container "^35.8.1"
-    victory-voronoi-container "^35.8.1"
+    victory-voronoi-container "^35.8.4"
     victory-zoom-container "^35.8.1"
 
 victory-cursor-container@^35.8.1:
@@ -11682,10 +11755,10 @@ victory-tooltip@^35.8.1:
     prop-types "^15.5.8"
     victory-core "^35.8.1"
 
-victory-voronoi-container@^35.8.1:
-  version "35.8.1"
-  resolved "https://registry.yarnpkg.com/victory-voronoi-container/-/victory-voronoi-container-35.8.1.tgz#710547f407a9a12b46719ac07f11ad231d19db46"
-  integrity sha512-rRSdRDiVM4ihtWcq6R+p5HUJ1e3WeEUahRyIttoJxdaH7EqMa09O8eGetWnwRPdC0x/NFfa4QgcTzNsFoohInA==
+victory-voronoi-container@^35.8.4:
+  version "35.8.4"
+  resolved "https://registry.yarnpkg.com/victory-voronoi-container/-/victory-voronoi-container-35.8.4.tgz#11957a97f80a2363c64c06089ae6eb2c0372886b"
+  integrity sha512-2wBZfyIpBv2dftWRZi1vZCmB3pjpigULj+xtoavVWSqK/E3cLeczV/bcA+sjEulqIh/AGVkhF8B3DlNO6NnGFQ==
   dependencies:
     delaunay-find "0.0.6"
     lodash "^4.17.19"
@@ -11713,10 +11786,10 @@ victory-zoom-container@^35.8.1:
     prop-types "^15.5.8"
     victory-core "^35.8.1"
 
-victory@^35.8.0:
-  version "35.8.3"
-  resolved "https://registry.yarnpkg.com/victory/-/victory-35.8.3.tgz#304fd20694515572b0f1cdb96f6a1ec66885877c"
-  integrity sha512-HYRyviFKh8etFL3Efl3sSEi5H5PV+K+EPYlwvTv0TPOsrC/33d2Ei8sLzhvx9EH99fmyxOg8k1z8Yt0tUhVT5Q==
+victory@^35.8.4:
+  version "35.8.4"
+  resolved "https://registry.yarnpkg.com/victory/-/victory-35.8.4.tgz#de0871489251613f9169a1770f348a66df96a0fc"
+  integrity sha512-DZRFy924BscJciVkEteBy9gqIZIhrsFN2yRP3FbMtcUwHQG5zyBjdUidgTnOlpdQqxLldcREpCxPQh8Q5fqqUw==
   dependencies:
     victory-area "^35.8.2"
     victory-axis "^35.8.3"
@@ -11727,7 +11800,7 @@ victory@^35.8.0:
     victory-candlestick "^35.8.1"
     victory-chart "^35.8.3"
     victory-core "^35.8.1"
-    victory-create-container "^35.8.1"
+    victory-create-container "^35.8.4"
     victory-cursor-container "^35.8.1"
     victory-errorbar "^35.8.1"
     victory-group "^35.8.1"
@@ -11742,7 +11815,7 @@ victory@^35.8.0:
     victory-stack "^35.8.1"
     victory-tooltip "^35.8.1"
     victory-voronoi "^35.8.1"
-    victory-voronoi-container "^35.8.1"
+    victory-voronoi-container "^35.8.4"
     victory-zoom-container "^35.8.1"
 
 vm-browserify@1.1.2, vm-browserify@^1.0.1:

@@ -1,6 +1,6 @@
 import { mount, ReactWrapper } from "enzyme";
+import waitFor from "@noshot/utils/waitForAct";
 import { GridValueGetterParams } from "~types";
-import waitFor from "~utils/waitFor";
 import TableFilterButton from "../index";
 
 const handleDeleteRecord = jest.fn();

@@ -1,6 +1,6 @@
 import { mount, ReactWrapper } from "enzyme";
+import waitFor from "@noshot/utils/waitForAct";
 import moment from "~utils/momentWithTimezone";
-import waitFor from "~utils/waitFor";
 import EditMemberForm from "../index";
 
 const updateUserProfile = jest.fn();

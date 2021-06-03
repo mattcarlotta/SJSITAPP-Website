@@ -1,7 +1,7 @@
 import { mount, ReactWrapper } from "enzyme";
 import { useRouter } from "next/router";
+import waitFor from "@noshot/utils/waitForAct";
 import moment from "~utils/momentWithTimezone";
-import waitFor from "~utils/waitFor";
 import { SettingsPage } from "../index";
 
 const mockPush = jest.fn();

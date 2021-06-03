@@ -1,5 +1,5 @@
 import { ReactWrapper } from "enzyme";
-import waitFor from "~utils/waitFor";
+import waitFor from "@noshot/utils/waitForAct";
 import mockApp from "~utils/mockAxios";
 import moment from "~utils/momentWithTimezone";
 import { defaultFormat } from "~utils/dateFormats";

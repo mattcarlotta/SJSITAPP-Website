@@ -1,5 +1,5 @@
 import { mount, ReactWrapper } from "enzyme";
-import waitFor from "~utils/waitFor";
+import waitFor from "@noshot/utils/waitForAct";
 import SearchBar from "../index";
 
 const initProps = {

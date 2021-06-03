@@ -1,10 +1,10 @@
 import { ReactWrapper } from "enzyme";
+import waitFor from "@noshot/utils/waitForAct";
 import toast from "~components/App/Toast";
 import { standardFormat, fullyearFormat } from "~utils/dateFormats";
 import mockApp from "~utils/mockAxios";
 import moment from "~utils/momentWithTimezone";
 import withProviders from "~utils/withProviders";
-import waitFor from "~utils/waitFor";
 import EditSeasonForm from "../index";
 
 const startDate = moment().startOf("day");

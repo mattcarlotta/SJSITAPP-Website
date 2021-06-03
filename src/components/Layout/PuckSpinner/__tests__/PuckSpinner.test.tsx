@@ -1,5 +1,5 @@
 import { mount } from "enzyme";
-import waitFor from "~utils/waitFor";
+import waitFor from "@noshot/utils/waitForAct";
 import PuckSpinner from "../index";
 
 const wrapper = mount(<PuckSpinner />);

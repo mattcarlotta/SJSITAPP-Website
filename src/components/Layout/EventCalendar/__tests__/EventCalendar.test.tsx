@@ -1,6 +1,6 @@
 import { mount, ReactWrapper } from "enzyme";
+import waitFor from "@noshot/utils/waitForAct";
 import { eventFormat, monthnameFormat } from "~utils/dateFormats";
-import waitFor from "~utils/waitFor";
 import mockApp from "~utils/mockAxios";
 import moment from "~utils/momentWithTimezone";
 import EventCalendar from "../index";

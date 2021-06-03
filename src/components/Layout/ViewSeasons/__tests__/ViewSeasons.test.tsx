@@ -1,6 +1,6 @@
 import { mount } from "enzyme";
+import waitFor from "@noshot/utils/waitForAct";
 import mockApp from "~utils/mockAxios";
-import waitFor from "~utils/waitFor";
 import ViewSeasons from "../index";
 
 const mockBack = jest.fn();

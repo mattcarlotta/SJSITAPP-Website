@@ -1,5 +1,5 @@
 import { mount, ReactWrapper } from "enzyme";
-import waitFor from "~utils/waitFor";
+import waitFor from "@noshot/utils/waitForAct";
 import Accordion from "../index";
 
 const initProps = {

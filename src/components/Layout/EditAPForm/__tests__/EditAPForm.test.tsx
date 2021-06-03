@@ -1,9 +1,9 @@
 import { ReactWrapper } from "enzyme";
 import { useRouter } from "next/router";
+import waitFor from "@noshot/utils/waitForAct";
 import toast from "~components/App/Toast";
 import moment from "~utils/momentWithTimezone";
 import mockApp from "~utils/mockAxios";
-import waitFor from "~utils/waitFor";
 import withProviders from "~utils/withProviders";
 import EditAPForm from "../index";
 
