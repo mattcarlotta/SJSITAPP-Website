@@ -1,6 +1,6 @@
 // Since this is being utilized by "jest.json", paths must be relative
 
-import "snackables";
+import "@noshot/env";
 import mongoose from "mongoose";
 import { connectToDB, createConnectionToDatabase } from "../index";
 import { logErrorMessage, logInfoMessage } from "../../../logger";
