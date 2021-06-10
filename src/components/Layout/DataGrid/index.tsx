@@ -29,7 +29,7 @@ const useStyles = makeStyles(() =>
       "& .MuiDataGrid-window": {
         overflow: "hidden"
       },
-      "& .MuiDataGrid-columnHeaderTitleContainer": {
+      "& .MuiDataGrid-columnHeaderTitleContainer, ": {
         justifyContent: "center"
       },
       "& .MuiDataGrid-cell:focus": {
@@ -66,6 +66,9 @@ const useStyles = makeStyles(() =>
         // justifyContent: "center",
         textOverflow: "unset",
         overflowX: "auto"
+      },
+      "& .MuiDataGrid-cellLeft.MuiDataGrid-cellWithRenderer": {
+        justifyContent: "center"
       },
       "& .MuiCheckbox-root svg": {
         width: 16,
