@@ -26,50 +26,54 @@ const updateApForm = async (req: Request, res: Response): Promise<Response> => {
     const userId = parseSession(req);
 
     await Event.bulkWrite(
-      responses.map((response): {
-        updateOne: {
-          update: FilterQuery<any>;
-          filter: {
-            _id: string;
-            "employeeResponses._id"?: string;
-          };
-        };
-      } => {
-        const { id: eventId, value, notes, updateEvent } = response;
-
-        const filter = updateEvent
-          ? {
-              _id: eventId,
-              "employeeResponses._id": userId
-            }
-          : {
-              _id: eventId
+      responses.map(
+        (
+          response
+        ): {
+          updateOne: {
+            update: FilterQuery<any>;
+            filter: {
+              _id: string;
+              "employeeResponses._id"?: string;
             };
+          };
+        } => {
+          const { id: eventId, value, notes, updateEvent } = response;
 
-        const update = updateEvent
-          ? {
-              $set: {
-                "employeeResponses.$.response": value,
-                "employeeResponses.$.notes": notes
+          const filter = updateEvent
+            ? {
+                _id: eventId,
+                "employeeResponses._id": userId
               }
-            }
-          : {
-              $push: {
-                employeeResponses: {
-                  _id: userId,
-                  response: value,
-                  notes
+            : {
+                _id: eventId
+              };
+
+          const update = updateEvent
+            ? {
+                $set: {
+                  "employeeResponses.$.response": value,
+                  "employeeResponses.$.notes": notes
                 }
               }
-            };
+            : {
+                $push: {
+                  employeeResponses: {
+                    _id: userId,
+                    response: value,
+                    notes
+                  }
+                }
+              };
 
-        return {
-          updateOne: {
-            filter,
-            update
-          }
-        };
-      })
+          return {
+            updateOne: {
+              filter,
+              update
+            }
+          };
+        }
+      )
     );
 
     return res
