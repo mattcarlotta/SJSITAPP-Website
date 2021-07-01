@@ -69,7 +69,7 @@ declare namespace Cypress {
      * Custom command to log a regular member into the application.
      * @example cy.memberLogin()
      */
-    memberLogin(): Chainable<Cypress.Response>;
+    memberLogin(): Chainable<Cypress.Response<any>>;
 
     /**
      * Custom command to open and quickly set a Material UI date/time field by clicking a Material Dialog "OK" button.
@@ -99,7 +99,7 @@ declare namespace Cypress {
      * Custom command to log a staff member into the application.
      * @example cy.staffLogin()
      */
-    staffLogin(): Chainable<Cypress.Response>;
+    staffLogin(): Chainable<Cypress.Response<any>>;
 
     /**
      * Custom command to click a submit button within a form.
