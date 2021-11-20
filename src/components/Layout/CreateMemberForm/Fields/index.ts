@@ -6,10 +6,10 @@ const Fields: Array<TBaseFieldProps> = [
     type: "select",
     label: "Role",
     placeholder: "Select a role...",
-    value: "Member",
+    value: "member",
     errors: "",
     required: true,
-    selectOptions: ["Member", "Staff"]
+    selectOptions: ["member", "staff"]
   },
   {
     name: "authorizedEmail",
