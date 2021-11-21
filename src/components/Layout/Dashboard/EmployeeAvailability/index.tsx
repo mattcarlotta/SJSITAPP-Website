@@ -114,6 +114,7 @@ export const EmployeeAvailability = (): ReactElement => {
                     key={id}
                     display="flex"
                     padding="0 0 0 5px"
+                    margin="0px"
                     style={{
                       backgroundColor: key % 2 ? "#d8d8d8" : "transparent"
                     }}
